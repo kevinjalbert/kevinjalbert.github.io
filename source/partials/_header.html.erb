@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+
+    <title><%= page_title %></title>
+
+    <% if page_description %>
+      <meta name="description" content="<%= page_description %>">
+    <% end %>
+
+    <%= stylesheet_link_tag :app %>
+    <%= feed_tag :atom, "/feed.xml", title: "Posts — Kevin Jalbert" %>
+  </head>
+
+  <body>

@@ -1,12 +1,11 @@
 activate :blog do |blog|
   blog.calendar_template = 'calendar.html'
   blog.default_extension = '.md'
-  #blog.generate_day_pages = false
 
-  blog.permalink = '{year}/{month}/{day}/{title}.html'
+  blog.permalink = '{title}'
 
-  blog.sources = 'posts/{year}-{month}-{day}-{title}.html'
-  blog.layout = 'post'
+  blog.sources = 'articles/{year}-{month}-{day}-{title}.html'
+  blog.layout = 'article'
   blog.tag_template = 'tag.html'
 
   blog.paginate = true

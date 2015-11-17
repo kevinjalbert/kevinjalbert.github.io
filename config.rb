@@ -23,7 +23,7 @@ set :markdown, fenced_code_blocks: true, smartypants: true
 
 activate :automatic_image_sizes
 activate :directory_indexes
-activate :syntax, line_numbers: true
+activate :syntax
 activate :livereload
 
 configure :build do

@@ -1,0 +1,13 @@
+.pagination {
+  margin: 0% 17.5%;
+
+  ul {
+    @include no-underline-links;
+    list-style: none;
+    padding-top: $banner-font-size - $navigation-font-size;
+
+    li {
+      display: inline-block;
+    }
+  }
+}

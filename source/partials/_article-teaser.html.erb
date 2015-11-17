@@ -1,5 +1,15 @@
-<article>
-  <header>
+<div class="article-teaser">
+  <div>
     <h1><%= link_to article.title, article %></h1>
-  </header>
-</article>
+
+    <p class="article-teaser__text"><%= article.data.teaser %></p>
+
+    <% if article.tags.size > 0 %>
+      <span>
+        <% article.tags.each_with_index do |tag, index| %>
+          <%= link_to tag, tag_path(tag) %><% if index != article.tags.size - 1 %>, <% end %>
+        <% end %>
+      </span>
+    <% end %>
+  </div>
+</div>

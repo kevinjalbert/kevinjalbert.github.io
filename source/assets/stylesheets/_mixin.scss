@@ -1,0 +1,20 @@
+$blog-background-color: #eceff4;
+
+$content-background-colour: #fff;
+$content-border-colour: #e2e7ee;
+$content-margins: 0% 17.5%;
+
+$font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$font-color: #8b9dbc;
+$hover-font-color: #2d73bf;
+
+@mixin no-underline-links {
+  a {
+    color: $font-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $hover-font-color;
+    }
+  }
+}

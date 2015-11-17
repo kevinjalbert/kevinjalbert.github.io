@@ -1,0 +1,9 @@
+.article-teaser {
+  margin: $content-margins;
+
+  .article-teaser__text {
+    font-family: $font-family;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+}

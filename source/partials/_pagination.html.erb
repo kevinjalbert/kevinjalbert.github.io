@@ -1,15 +1,17 @@
 <% if prev_page || next_page %>
-  <ul>
-    <% if prev_page %>
-      <li>
-        <%= link_to 'Previous page', prev_page %>
-      </li>
-    <% end %>
+  <div class="pagination">
+    <ul>
+      <% if prev_page %>
+        <li>
+          <%= link_to 'Previous page', prev_page %>
+        </li>
+      <% end %>
 
-    <% if next_page %>
-      <li>
-        <%= link_to 'Next page', next_page %>
-      </li>
-    <% end %>
-  </ul>
+      <% if next_page %>
+        <li>
+          <%= link_to 'Next page', next_page %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

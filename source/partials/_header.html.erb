@@ -14,7 +14,9 @@
     <%= feed_tag :atom, "/feed.xml", title: "Posts — Kevin Jalbert" %>
   </head>
 
+  <div class="header">
+    <%= partial :banner %>
+    <%= partial :navigation %>
+  </div>
+
   <body>
-    <header>
-      <%= partial :navigation %>
-    </header>

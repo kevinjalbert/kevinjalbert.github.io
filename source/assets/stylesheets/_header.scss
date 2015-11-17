@@ -1,0 +1,29 @@
+$banner-font-size: 25px;
+$navigation-font-size: 18px;
+
+.header {
+  font-family: $font-family;
+  margin: $content-margins;
+}
+
+.navigation {
+  text-align: right;
+
+  ul {
+    @include no-underline-links;
+    font-size: $navigation-font-size;
+    list-style: none;
+    padding-top: $banner-font-size - $navigation-font-size;
+
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+.banner {
+  @include no-underline-links;
+  float: left;
+  font-size: $banner-font-size;
+}
+

@@ -1,2 +1,9 @@
-@import 'base/syntax';
-@import 'base/base';
+@import 'mixin';
+
+@import 'base';
+
+@import 'syntax';
+@import 'article';
+@import 'article-teaser';
+@import 'header';
+@import 'pagination';

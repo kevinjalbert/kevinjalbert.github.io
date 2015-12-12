@@ -5,8 +5,10 @@ body {
     background: $content-background-colour;
     border: 1px solid $content-border-colour;
     border-radius: 3px;
-    box-shadow: rgba(195, 202, 212, .1) 0 1px 1px;
-    margin: 0% 17.5%;
+    margin: $content-margins;
+    margin-top: 40px;
+    max-width: $content-max-width;
+    padding: 0 10px;
   }
 }
 

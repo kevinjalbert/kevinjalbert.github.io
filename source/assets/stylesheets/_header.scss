@@ -2,8 +2,11 @@ $banner-font-size: 25px;
 $navigation-font-size: 18px;
 
 .header {
+  border-bottom: 1px solid $content-border-colour;
   font-family: $font-family;
   margin: $content-margins;
+  min-height: 40px;
+  padding: 0 40px;
 }
 
 .navigation {
@@ -17,6 +20,7 @@ $navigation-font-size: 18px;
 
     li {
       display: inline-block;
+      padding-left: 25px;
     }
   }
 }

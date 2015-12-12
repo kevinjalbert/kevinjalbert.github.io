@@ -2,7 +2,7 @@
   <h1 class="article-teaser__title"><%= link_to article.title, article %></h1>
 
     <div class="article-teaser__date"><%= article.date.strftime('%B %e, %Y') %> </div>
-    <div class="article-teaser__read-time">10 minutes</div>
+    <div class="article-teaser__read-time"><%= markdown_file_read_time(article.source_file) %></div>
 
     <% if article.tags.size > 0 %>
       <div class="article-teaser__tags">

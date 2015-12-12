@@ -1,4 +1,4 @@
-module MetaHelpers
+module MetaHelper
   def current_type
     if @current_tag
       :tag

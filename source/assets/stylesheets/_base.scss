@@ -1,5 +1,8 @@
 body {
   background: $blog-background-color;
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
 
   .content {
     background: $content-background-colour;

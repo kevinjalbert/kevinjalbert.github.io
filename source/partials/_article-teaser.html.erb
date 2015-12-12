@@ -1,15 +1,16 @@
 <div class="article-teaser">
-  <div>
-    <h1><%= link_to article.title, article %></h1>
+  <h1 class="article-teaser__title"><%= link_to article.title, article %></h1>
 
-    <p class="article-teaser__text"><%= article.data.teaser %></p>
+    <div class="article-teaser__date"><%= article.date.strftime('%B %e, %Y') %> </div>
+    <div class="article-teaser__read-time">10 minutes</div>
 
     <% if article.tags.size > 0 %>
-      <span>
-        <% article.tags.each_with_index do |tag, index| %>
-          <%= link_to tag, tag_path(tag) %><% if index != article.tags.size - 1 %>, <% end %>
+      <div class="article-teaser__tags">
+        <% article.tags.each do |tag| %>
+          <%= link_to tag, tag_path(tag) %>
         <% end %>
-      </span>
+      </div>
     <% end %>
-  </div>
+
+  <p class="article-teaser__text"><%= article.data.teaser %></p>
 </div>

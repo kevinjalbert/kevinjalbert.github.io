@@ -1,10 +1,39 @@
 .article-teaser {
   margin: $content-margins;
-  padding: 10px 10px;
+  padding: 10px;
+
+  .article-teaser__title {
+    margin: 5px 0;
+  }
+
+  .article-teaser__tags {
+    display: inline-block;
+    float: right;
+    margin: 0 auto;
+    text-align: right;
+
+    a {
+      background: #eceff4;
+      border: 1px solid #eceff4;
+      border-radius: 3px;
+      padding: 2px;
+      margin: 2px;
+    }
+  }
+
+  .article-teaser__read-time {
+    color: #9a9a9a;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0 15px;
+  }
+
+  .article-teaser__date {
+    display: inline-block;
+    font-size: 14px;
+  }
 
   .article-teaser__text {
-    font-family: $font-family;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
+    font-size: 16px;
   }
 }

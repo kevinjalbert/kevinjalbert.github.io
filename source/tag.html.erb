@@ -1,25 +1,19 @@
 ---
 pageable: true
-per_page: 12
+per_page: 10
 ---
-<h1>Articles tagged '<%= tagname %>'</h1>
+<h2 class="tags__title">Articles about '<%= tagname %>'</h2>
 
-<% if paginate && num_pages > 1 %>
-  <p>Page <%= page_number %> of <%= num_pages %></p>
+<div class="article-teaser__separator"></div>
 
-  <% if prev_page %>
-    <p><%= link_to 'Previous page', prev_page %></p>
+<% page_articles.each_with_index do |article, i| %>
+  <%= partial 'article-teaser', locals: { article: article } %>
+
+  <% if i != page_articles.size - 1 %>
+    <div class="article-teaser__separator"></div>
   <% end %>
 <% end %>
 
-<ul>
-  <% page_articles.each_with_index do |article, i| %>
-    <li><%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span></li>
-  <% end %>
-</ul>
-
 <% if paginate %>
-  <% if next_page %>
-    <p><%= link_to 'Next page', next_page %></p>
-  <% end %>
+  <%= partial :pagination, locals: { prev_page: prev_page, next_page: next_page } %>
 <% end %>

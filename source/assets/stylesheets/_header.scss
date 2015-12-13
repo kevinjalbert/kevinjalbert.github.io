@@ -25,7 +25,6 @@ $navigation-font-size: 18px;
 }
 
 .banner {
-  @include no-underline-links;
   float: left;
   font-size: $banner-font-size;
 }

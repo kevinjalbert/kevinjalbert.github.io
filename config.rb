@@ -13,6 +13,11 @@ end
 
 page '/feed.xml', layout: false
 
+# Add bower's directory to sprockets asset path
+after_configuration do
+  sprockets.append_path File.join "#{root}", 'bower_components'
+end
+
 set :css_dir, 'assets/stylesheets'
 set :js_dir, 'assets/javascripts'
 set :images_dir, 'assets/images'

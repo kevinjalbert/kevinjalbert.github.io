@@ -2,17 +2,19 @@ $banner-font-size: 25px;
 $navigation-font-size: 18px;
 
 .header {
+  @include no-underline-links;
+
   border-bottom: 1px solid $content-border-colour;
   margin: $content-margins;
   min-height: 40px;
-  padding: 0 40px;
+  padding-bottom: 50px;
 }
 
 .navigation {
+  @include no-underline-links;
   text-align: right;
 
   ul {
-    @include no-underline-links;
     font-size: $navigation-font-size;
     list-style: none;
     padding-top: $banner-font-size - $navigation-font-size;
@@ -25,6 +27,5 @@ $navigation-font-size: 18px;
 }
 
 .banner {
-  float: left;
   font-size: $banner-font-size;
 }

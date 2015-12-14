@@ -1,16 +1,25 @@
 <div class="article-teaser">
   <h1 class="article-teaser__title"><%= link_to article.title, article %></h1>
 
-    <div class="article-teaser__date"><%= article.date.strftime('%B %e, %Y') %> </div>
-    <div class="article-teaser__read-time"><%= markdown_file_read_time(article.source_file) %></div>
+    <div class="row article-teaser__meta-info">
+      <div class="col-xs-3 col-md-3">
+        <div class="article-teaser__date"><%= article.date.strftime('%B %e, %Y') %> </div>
+      </div>
 
-    <% if article.tags.size > 0 %>
-      <div class="article-teaser__tags">
-        <% article.tags.each do |tag| %>
-          <%= link_to tag, tag_path(tag) %>
+      <div class="col-xs-3 col-md-3">
+        <div class="article-teaser__read-time"><%= markdown_file_read_time(article.source_file) %></div>
+      </div>
+
+      <div class="col-xs-6 col-md-6">
+        <% if article.tags.size > 0 %>
+          <div class="article-teaser__tags">
+            <% article.tags.each do |tag| %>
+              <%= link_to tag, tag_path(tag) %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    <% end %>
+    </div>
 
-  <p class="article-teaser__text"><%= article.data.teaser %></p>
+  <p><%= article.data.teaser %></p>
 </div>

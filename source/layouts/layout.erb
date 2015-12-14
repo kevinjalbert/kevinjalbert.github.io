@@ -1,7 +1,11 @@
 <%= partial :header %>
 
-<div class="content">
-  <%= yield %>
+<div class="container content">
+  <div class="row">
+    <div class="col-md-12">
+      <%= yield %>
+    </div>
+  </div>
 </div>
 
 <%= partial :footer %>

@@ -1,18 +1,15 @@
 .article {
-  background: $content-background-colour;
-  border: 1px solid $content-border-colour;
-  border-radius: 3px;
-  box-shadow: rgba(195, 202, 212, .1) 0 1px 1px;
-  margin: $content-margins;
+  @include no-underline-links;
 
   .article__title {
     margin: 5px 0;
   }
 
+  .article__meta-info {
+    padding: 5px 0;
+  }
+
   .article__tags {
-    display: inline-block;
-    float: right;
-    margin: 0 auto;
     text-align: right;
 
     a {
@@ -26,18 +23,16 @@
 
   .article__read-time {
     color: #9a9a9a;
-    display: inline-block;
     font-size: 14px;
     padding: 0 15px;
   }
 
   .article__date {
-    display: inline-block;
     font-size: 14px;
   }
 
   .article__separator {
     border-bottom: 1px solid $content-border-colour;
-    padding-top: 20px;
+    margin: 10px 0;
   }
 }

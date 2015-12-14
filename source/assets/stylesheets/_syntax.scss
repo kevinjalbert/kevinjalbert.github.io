@@ -6,10 +6,14 @@ $block: '.highlight';
   line-height: 1.5;
   margin-left: -15px;
   margin-right: -15px;
-  margin-top: 15px;
-  overflow: auto;
-  padding: 0 10px;
-  word-wrap: normal;
+  overflow: auto !important;
+  padding: 0 15px;
+  border: 0 !important;
+  word-wrap: normal !important;
+}
+
+#{$block} code {
+  white-space: pre !important;
 }
 
 #{$block} table td.code {

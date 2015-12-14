@@ -1,22 +1,35 @@
 <%= partial :header %>
 
-<div class="content article">
-  <h1 class="article__title"><%= current_page.data.title %> </h1>
+<div class="container content article">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="article__title"><%= current_page.data.title %> </h1>
 
-  <div class="article__date"><%= current_page.date.strftime('%B %e, %Y') %> </div>
-  <div class="article__read-time"><%= markdown_file_read_time(current_page.source_file) %></div>
+      <div class="row article__meta-info">
+        <div class="col-xs-3 col-md-3">
+          <div class="article__date"><%= current_page.date.strftime('%B %e, %Y') %> </div>
+        </div>
 
-  <% if current_page.tags.size > 0 %>
-    <div class="article__tags">
-      <% current_page.tags.each do |tag| %>
-        <%= link_to tag, tag_path(tag) %>
-      <% end %>
+        <div class="col-xs-3 col-md-3">
+          <div class="article__read-time"><%= markdown_file_read_time(current_page.source_file) %></div>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          <% if current_page.tags.size > 0 %>
+            <div class="article__tags">
+              <% current_page.tags.each do |tag| %>
+                <%= link_to tag, tag_path(tag) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="article__separator"></div>
+
+      <%= yield %>
     </div>
-  <% end %>
-
-  <div class="article__separator"></div>
-
-  <%= yield %>
+  </div>
 </div>
 
 <%= partial :footer %>

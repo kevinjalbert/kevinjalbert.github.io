@@ -11,6 +11,17 @@ activate :blog do |blog|
   blog.paginate = true
 end
 
+activate :search do |search|
+  search.resources = ['articles/']
+  search.index_path = 'search/lunr-index.json' # defaults to `search.json`
+  search.fields = {
+    title:   { boost: 100, store: true, required: true },
+    content: { boost: 50 },
+    url:     { index: false, store: true },
+    author:  { boost: 30 }
+  }
+end
+
 page '/feed.xml', layout: false
 
 # Add bower's directory to sprockets asset path

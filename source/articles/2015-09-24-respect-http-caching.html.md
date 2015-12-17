@@ -46,10 +46,10 @@ API Consumers can take on different forms such as a browser or desktop/mobile/we
 Modern browsers have no problem handling HTTP caching. It is also easy to verify that they are respecting HTTP caching by using their *Developer Tools* interface. The following image shows two requests made to the same API endpoint (https://api.github.com/users/kevinjalbert) in Google Chrome's Network Tab of the Developer Tools:
 
 First API request results in a 200 status code (standard success response):
-![First Request results in a Status Code 200]({% asset_path 2015-09-22-respect-http-caching/200-status-code-chrome.png %})
+![First Request results in a Status Code 200](/images/2015-09-24-respect-http-caching/200-status-code-chrome.png)
 
 Second API request results in a 304 status code (resource has not been modified since the last request, no body is returned in response):
-![Second Request results in a Status Code 304]({% asset_path 2015-09-22-respect-http-caching/304-status-code-chrome.png %})
+![Second Request results in a Status Code 304](/images/2015-09-24-respect-http-caching/304-status-code-chrome.png)
 
 ### Mobile Applications
 Android and iOS have native mechanisms in place that developers can use to handle HTTP caching on any outbound requests. On iOS there is [NSURLCache](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLCache_Class/index.html#//apple_ref/occ/cl/NSURLCache) and on Android there is [HttpResponseCache](http://developer.android.com/reference/android/net/http/HttpResponseCache.html). If possible all HTTP requests made from mobile devices should be using the caching mechanisms.

@@ -1,5 +1,4 @@
 activate :blog do |blog|
-  blog.calendar_template = 'calendar.html'
   blog.default_extension = '.md'
 
   blog.permalink = '{title}'
@@ -29,9 +28,9 @@ after_configuration do
   sprockets.append_path File.join "#{root}", 'bower_components'
 end
 
-set :css_dir, 'assets/stylesheets'
-set :js_dir, 'assets/javascripts'
-set :images_dir, 'assets/images'
+set :css_dir, 'stylesheets'
+set :js_dir, 'javascripts'
+set :images_dir, 'images'
 set :partials_dir, 'partials'
 
 set :markdown_engine, :redcarpet

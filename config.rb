@@ -47,9 +47,20 @@ set :markdown, fenced_code_blocks: true, smartypants: true
 activate :automatic_image_sizes
 activate :directory_indexes
 activate :syntax
-activate :livereload
+
+configure :development do
+  set :root_url, 'http://kevinjalbert.dev'
+
+  activate :livereload
+
+  activate :disqus do |d|
+    d.shortname = 'kevinjalbert-test'
+  end
+end
 
 configure :build do
+  set :root_url, 'http://kevinjalbert.com'
+
   activate :asset_hash
   activate :asset_host
   activate :gzip
@@ -65,5 +76,9 @@ configure :build do
     options.threads = true
     options.pngout = false
     options.svgo = false
+  end
+
+  activate :disqus do |d|
+    d.shortname = 'kevinjalbert'
   end
 end

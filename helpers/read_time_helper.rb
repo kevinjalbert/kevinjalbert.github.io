@@ -1,12 +1,12 @@
 module ReadTimeHelper
   WORDS_PER_MINUTE = 180
+  MINUTE_READ_LABEL = ' min read'.freeze
 
   # Over estimate time by splitting on spaces (may include non-words, i.e., markup tags)
   def text_read_time(input)
     words = input.split.count
     minutes = (words / WORDS_PER_MINUTE).floor
-    minutes_label = (minutes == 1) ? ' minute' : ' minutes'
-    minutes > 0 ? "#{minutes} #{minutes_label}" : '< 1 minute'
+    minutes > 0 ? "#{minutes} #{MINUTE_READ_LABEL}" : "< 1 #{MINUTE_READ_LABEL}"
   end
 
   # Better estimate of time by removing code blocks

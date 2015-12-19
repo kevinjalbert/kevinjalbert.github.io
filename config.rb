@@ -26,7 +26,7 @@ activate :google_analytics do |ga|
   ga.domain_name = 'kevinjalbert.com'
   ga.development = false
   ga.minify = true
-  ga.output = :js
+  ga.output = :html
 end
 
 page '/feed.xml', layout: false

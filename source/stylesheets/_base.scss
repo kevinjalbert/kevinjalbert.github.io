@@ -10,6 +10,14 @@ body {
     border-radius: 3px;
     margin-top: 20px;
   }
+
+  img {
+    display: block;
+    height: auto;
+    margin: 10px 0;
+    max-width: 100%;
+    width: auto;
+  }
 }
 
 @include no-underline-links;

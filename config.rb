@@ -21,6 +21,14 @@ activate :search do |search|
   }
 end
 
+activate :google_analytics do |ga|
+  ga.tracking_id = 'UA-16620161-5'
+  ga.domain_name = 'kevinjalbert.com'
+  ga.development = false
+  ga.minify = true
+  ga.output = :js
+end
+
 page '/feed.xml', layout: false
 
 # Add bower's directory to sprockets asset path

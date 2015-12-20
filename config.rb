@@ -61,9 +61,11 @@ end
 configure :build do
   set :root_url, 'https://kevinjalbert.com'
 
-  activate :asset_hash
+  # Not really useful when serving from Github Pages
+  #activate :gzip
+  #activate :asset_hash
+
   activate :asset_host
-  activate :gzip
   activate :minify_css
   activate :minify_html
   activate :minify_javascript

@@ -59,7 +59,7 @@ configure :development do
 end
 
 configure :build do
-  set :root_url, 'http://kevinjalbert.com'
+  set :root_url, 'https://kevinjalbert.com'
 
   activate :asset_hash
   activate :asset_host

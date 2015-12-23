@@ -6,7 +6,7 @@ gem 'middleman-livereload', '~> 3.4.3'
 gem 'middleman-minify-html', '~> 3.4.1'
 gem 'middleman-imageoptim', '~> 0.2.1'
 gem 'middleman-syntax', '~> 2.0.0'
-gem 'middleman-search', '~> 0.4.0'
+gem 'middleman-search', '~> 0.5.0'
 gem 'middleman-google-analytics', '~> 2.0'
 gem 'middleman-disqus', '~> 1.1.0'
 

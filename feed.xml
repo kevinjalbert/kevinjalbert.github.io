@@ -12,7 +12,7 @@
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2015-12-24T10:06:51-05:00</updated>
+    <updated>2015-12-24T10:08:55-05:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -164,7 +164,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2015-12-24T10:06:51-05:00</updated>
+    <updated>2015-12-24T10:08:55-05:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -327,7 +327,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2015-12-24T10:06:51-05:00</updated>
+    <updated>2015-12-24T10:08:55-05:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -427,7 +427,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2015-12-24T10:06:51-05:00</updated>
+    <updated>2015-12-24T10:08:55-05:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

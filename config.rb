@@ -72,7 +72,7 @@ configure :build do
   activate :relative_assets
 
   activate :imageoptim do |options|
-    options.manifest = true
+    options.manifest = false
     options.skip_missing_workers = true
     options.nice = true
     options.threads = true

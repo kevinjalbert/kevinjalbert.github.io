@@ -1,0 +1,1 @@
+"kevinjalbert.com"==window.location.host&&"https:"!=window.location.protocol&&(window.location.protocol="https:");

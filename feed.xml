@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Kevin Jalbert</title>
+  <link href="http://kevinjalbert.com"/>
+  <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
+  <updated>2015-09-23T20:00:00-04:00</updated>
+  <author>
+    <name>Kevin Jalbert</name>
+  </author>
+  <id>http://kevinjalbert.com</id>
+  <entry>
+    <title>Respect HTTP Caching</title>
+    <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
+    <id>http://kevinjalbert.com/respect-http-caching/</id>
+    <updated>2015-12-24T10:06:51-05:00</updated>
+    <published>2015-09-23T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;API developers place plenty of consideration on how to handle scaling. A few techniques and approaches: Application caching, sharding, larger/more servers, background queues, HTTP caching, and Content Delivery Networks (CDNs). A well architected API employs a combination of these solutions to achieve the desired scalability. Of the scaling solutions, very few are actually exposed to the consumers of an API. One strategy in which the end-users actively participate in is &lt;em&gt;HTTP Caching&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;By respecting HTTP caching on a client&amp;rsquo;s application, network communications complete quicker and in some cases are unnecessary. Network response payloads are sometimes omitted due to a 304 HTTP response. Finally if you use HTTP caching, application servers will love you.&lt;/p&gt;
+
+&lt;h2&gt;HTTP Caching&lt;/h2&gt;
+
+&lt;p&gt;If an endpoint is to be hit repeatedly, HTTP caching can dramatically reduce the load on the server. There are a number of ways one can use HTTP caching. Similar to other scaling techniques some of these can be used in tandem.&lt;/p&gt;
+
+&lt;h3&gt;Cache-Control&lt;/h3&gt;
+
+&lt;p&gt;On an HTTP response a &lt;code&gt;cache-control&lt;/code&gt; header may present. This header provides the client insight on how they should approach making similar requests. For example:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Cache-Control: max-age=60, must-revalidate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;max-age=60&lt;/code&gt; specifies that the request should be cached and used locally for a maximum duration of one minute. The &lt;code&gt;must-revalidate&lt;/code&gt; forces subsequent requests to still communicate to the server to respect the &lt;em&gt;freshness&lt;/em&gt; of the response (i.e., information which indicates that the content of the response has updated). These two simple cache-control headers provide both &lt;em&gt;non-stale&lt;/em&gt; responses with reduced payload, provided the endpoint is respecting the max-age (i.e., not changing frequently).&lt;/p&gt;
+
+&lt;p&gt;To better understand cache-controls, our coworker at theScore, Thuva Tharam, has an &lt;a href="http://techblog.thescore.com/2014/11/19/are-your-cache-control-directives-doing-what-they-are-supposed-to-do/"&gt;excellent blog post&lt;/a&gt; written on the subject. The individual cache-control directives and their effects are described. Suggestions and examples are provided to illustrate how to use cache-control effectively.&lt;/p&gt;
+
+&lt;h3&gt;Last-Modified&lt;/h3&gt;
+
+&lt;p&gt;As previously mentioned, it is possible for a cached request to &lt;code&gt;re-validate&lt;/code&gt; with the server to check for &lt;em&gt;freshness&lt;/em&gt;. Subsequent requests have an additional &lt;code&gt;If-Modified-Since&lt;/code&gt; which contains the value of the response&amp;rsquo;s &lt;code&gt;Last-Modified&lt;/code&gt; header. This allows the server to compare the provided time on subsequent requests against the responses and return the full response or simply a &lt;em&gt;304 status code&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;When a server returns a full response it takes more time to compute/collect the necessary information along with rendering time for the response. With the correct &lt;code&gt;cache-control&lt;/code&gt; along with a &lt;code&gt;Last-Modified&lt;/code&gt;, a server spends less time constructing the response. A &lt;em&gt;304 status code&lt;/em&gt; response is quick, and has a small payload size compared to a normal full response.&lt;/p&gt;
+
+&lt;h3&gt;ETags&lt;/h3&gt;
+
+&lt;p&gt;Even when the &lt;code&gt;Last-Modified&lt;/code&gt; value has changed, the actual content might still be the same. If the server takes advantage of ETags then there will be an &lt;code&gt;ETag&lt;/code&gt; header on the response. The benefit of using ETags shines on requests that do not change often. ETag caching does not expire based on time like the previous two caching mechanisms, and is instead a function of the response&amp;rsquo;s content. This form of caching is ideal as it provides caching while still allowing for freshness of updates to the content.&lt;/p&gt;
+
+&lt;p&gt;When a subsequent request is made a &lt;code&gt;If-None-Match&lt;/code&gt; header is sent along with the previous request&amp;rsquo;s ETag. The server will then use the &lt;em&gt;ETag&lt;/em&gt; to determine &lt;em&gt;freshness&lt;/em&gt;. If the ETag of the request match the that of the server&amp;rsquo;s response a &lt;em&gt;304 status code&lt;/em&gt; is returned.&lt;/p&gt;
+
+&lt;h2&gt;Respecting HTTP Caching for API Consumers&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;API Consumers &amp;ndash; Client applications that makes more than one HTTP request to an external web service&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;API Consumers can take on different forms such as a browser or desktop/mobile/web application.&lt;/p&gt;
+
+&lt;h3&gt;Browsers&lt;/h3&gt;
+
+&lt;p&gt;Modern browsers have no problem handling HTTP caching. It is also easy to verify that they are respecting HTTP caching by using their &lt;em&gt;Developer Tools&lt;/em&gt; interface. The following image shows two requests made to the same API endpoint (https://api.github.com/users/kevinjalbert) in Google Chrome&amp;rsquo;s Network Tab of the Developer Tools:&lt;/p&gt;
+
+&lt;p&gt;First API request results in a 200 status code (standard success response):
+&lt;img alt="First Request results in a Status Code 200" width="1366" height="164" src="../images/2015-09-24-respect-http-caching/200-status-code-chrome.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Second API request results in a 304 status code (resource has not been modified since the last request, no body is returned in response):
+&lt;img alt="Second Request results in a Status Code 304" width="1366" height="152" src="../images/2015-09-24-respect-http-caching/304-status-code-chrome.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Mobile Applications&lt;/h3&gt;
+
+&lt;p&gt;Android and iOS have native mechanisms in place that developers can use to handle HTTP caching on any outbound requests. On iOS there is &lt;a href="https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLCache_Class/index.html#//apple_ref/occ/cl/NSURLCache"&gt;NSURLCache&lt;/a&gt; and on Android there is &lt;a href="http://developer.android.com/reference/android/net/http/HttpResponseCache.html"&gt;HttpResponseCache&lt;/a&gt;. If possible all HTTP requests made from mobile devices should be using the caching mechanisms.&lt;/p&gt;
+
+&lt;h3&gt;Desktop Applications&lt;/h3&gt;
+
+&lt;p&gt;Many programming languages can be used when creating desktop applications. In these cases it is best to check whether there is a built HTTP request caching mechanism akin to what Android and iOS have.&lt;/p&gt;
+
+&lt;h3&gt;Web Applications&lt;/h3&gt;
+
+&lt;p&gt;It is not uncommon to have web services talking to other web services through a defined API. In these situations there might not be a defined networking layer to push API requests through. For example, within a Ruby/Rails application one might use &lt;a href="https://github.com/lostisland/faraday"&gt;Faraday&lt;/a&gt; to handle network connections. HTTP caching is not enabled by default on Faraday and is instead an opt-in option.&lt;/p&gt;
+
+&lt;p&gt;The following is an example of using Faraday with &lt;a href="https://github.com/plataformatec/faraday-http-cache"&gt;Faraday::HttpCache&lt;/a&gt; middleware to handle HTTP caching.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'active_support'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'faraday'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'faraday-http-cache'&lt;/span&gt;
+
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;ApiConsumer&lt;/span&gt;
+  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Requester&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;cached: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="vi"&gt;@connection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Faraday&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://api.github.com/'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;cached&lt;/span&gt;
+          &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt; &lt;span class="no"&gt;Faraday&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HttpCache&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                   &lt;span class="ss"&gt;logger: &lt;/span&gt;&lt;span class="no"&gt;Logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;STDOUT&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                   &lt;span class="ss"&gt;instrumenter: &lt;/span&gt;&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Notifications&lt;/span&gt;
+        &lt;span class="k"&gt;end&lt;/span&gt;
+        &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;adapter&lt;/span&gt; &lt;span class="no"&gt;Faraday&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_adapter&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;method&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;
+      &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;
+
+      &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+        &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;method&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+
+      &lt;span class="n"&gt;time_taken_ms&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
+      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Time Taken: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;time_taken_ms&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; ms"&lt;/span&gt;
+
+      &lt;span class="n"&gt;response&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Subscribes to all Faraday::HttpCache events&lt;/span&gt;
+&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Notifications&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscribe&lt;/span&gt; &lt;span class="s2"&gt;"http_cache.faraday"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Notifications&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Cache Status: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:cache_status&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Faraday with HTTP Caching"&lt;/span&gt;
+&lt;span class="n"&gt;api_requester&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ApiConsumer&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;cached: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;api_requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'users/kevinjalbert'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
+
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Faraday without HTTP Caching"&lt;/span&gt;
+&lt;span class="n"&gt;api_requester&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ApiConsumer&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;cached: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;api_requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'users/kevinjalbert'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Executing the above example produces the following log statements. With caching the time taken per request decreases tremendously on subsequent requests. By respecting the HTTP cache-controls of the API, the subsequent request can be used until the cache-control directives say otherwise (i.e., ETag/Last-Modified changes, or the cache expires exceeding the max-age).&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Faraday with HTTP Caching
+D, [2015-09-20T23:06:27.570751 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] miss, store
+Cache Status: miss
+Time Taken: 1396.139 ms
+D, [2015-09-20T23:06:29.577798 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
+Cache Status: fresh
+Time Taken: 1.857 ms
+D, [2015-09-20T23:06:31.580719 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
+Cache Status: fresh
+Time Taken: 0.971 ms
+D, [2015-09-20T23:06:33.585455 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
+Cache Status: fresh
+Time Taken: 1.139 ms
+D, [2015-09-20T23:06:35.587833 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
+Cache Status: fresh
+Time Taken: 1.133 ms
+
+Faraday without HTTP Caching
+Time Taken: 807.486 ms
+Time Taken: 277.589 ms
+Time Taken: 186.115 ms
+Time Taken: 475.249 ms
+Time Taken: 1130.691 ms
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Faster RSpec Regression Testing</title>
+    <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
+    <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
+    <updated>2015-12-24T10:06:51-05:00</updated>
+    <published>2015-09-20T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;h2&gt;Testing Approaches&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Immediately&lt;/em&gt; on the code that is being developed to help guide development. Generally using a &lt;em&gt;subset&lt;/em&gt; of the test suite.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Afterwards&lt;/em&gt; on the complete codebase to ensure no regressions appear. This is always done using the &lt;em&gt;complete&lt;/em&gt; test suite.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In an ideal environment, the complete test suite is run after every meaningful code change. This approach works for a small project, but it can grow into a time consuming process. Developers may only run a subset of tests that exercise the modified source code. Faster test execution allows for tighter feedback loops between testing and developing.&lt;/p&gt;
+
+&lt;p&gt;Eventually the active development stops as the feature is completed. A developer wants to have a high-level of confidence in the code that they wrote before committing the changes. By running the complete test suite, one can have a certain level of assurance that the code to be committed will not cause issues. Ideally this second phase of testing is carried out locally by the developer, but also on a continuous integration server to prevent regressions.&lt;/p&gt;
+
+&lt;h2&gt;RSpecing &lt;code&gt;it&lt;/code&gt; up&lt;/h2&gt;
+
+&lt;p&gt;RSpec tests are executed using the &lt;code&gt;it&lt;/code&gt; method. The code within the &lt;code&gt;it&lt;/code&gt; block is executed after applying context using &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;before&lt;/code&gt;, which can be seen as the pre-amble of the test. In other words, for every &lt;code&gt;it&lt;/code&gt; block the test will execute the required pre-amble before the actual &lt;code&gt;it&lt;/code&gt; block.&lt;/p&gt;
+
+&lt;h3&gt;Many &lt;code&gt;it&lt;/code&gt; blocks&lt;/h3&gt;
+
+&lt;p&gt;During development it is useful to use the following technique to understand as much detail of failing tests:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="c1"&gt;# A trivial example to show the verification of&lt;/span&gt;
+  &lt;span class="c1"&gt;# multiple conditions using many 'it' blocks&lt;/span&gt;
+  &lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'test with many it blocks'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'B'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'C'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failures:
+
+  1) test with many it blocks should eq "B"
+     Failure/Error: it { expect('b'.upcase).to eq('B') }
+
+       expected: "B"
+            got: "C"
+
+  2) test with many it blocks should eq "C"
+     Failure/Error: it { expect('b'.upcase).to eq('C') }
+
+       expected: "C"
+            got: "B"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The results of the testing present all of the failures. This approach is important during iterative development as fixing one test might cause others to fail.&lt;/p&gt;
+
+&lt;h3&gt;Combining &lt;code&gt;it&lt;/code&gt; blocks&lt;/h3&gt;
+
+&lt;p&gt;Another approach that can be used with RSpec is to combine the many &lt;code&gt;it&lt;/code&gt; blocks into one:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="c1"&gt;# A trivial example to show the verification of&lt;/span&gt;
+  &lt;span class="c1"&gt;# multiple conditions using a combined 'it' block&lt;/span&gt;
+  &lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'test with a combined it block'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'B'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'C'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failures:
+
+  1) test with a combined it block should eq "B"
+     Failure/Error: expect('c'.upcase).to eq('B')
+
+       expected: "B"
+            got: "C"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time the results present &lt;em&gt;only the first&lt;/em&gt; failure, even though two assertions are incorrect. This approach provides less information than the first example. Although there is a different benefit, it runs less examples (tests and their complete pre-amble). This approach leads to quicker test executions, with the loss of the complete listing of failures. Arguably this approach is better suited when a feature is complete and the tests remain present to detect regressions.&lt;/p&gt;
+
+&lt;h2&gt;Performance Impact&lt;/h2&gt;
+
+&lt;p&gt;In the previous section, two styles of using RSpec&amp;rsquo;s &lt;code&gt;it&lt;/code&gt; blocks were illustrated. The next example showcases both approaches to understand how the testing performance changes. To simulate some pre-amble (i.e., database interactions, setting up objects) sleeps are used when accessing the values from their &lt;code&gt;let&lt;/code&gt; blocks.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec'&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;AttributeObject&lt;/span&gt;
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:value1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:value2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:value3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:value4&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@value1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value1&lt;/span&gt;
+    &lt;span class="vi"&gt;@value2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value2&lt;/span&gt;
+    &lt;span class="vi"&gt;@value3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value3&lt;/span&gt;
+    &lt;span class="vi"&gt;@value4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value4&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'performance using `it` blocks'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;AttributeObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'slow tests due to many `it` blocks'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'faster tests due to a combined `it` block'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For this example it is possible to use both testing approaches. There are two criteria that must be satisfied to allow this transformation. For each &lt;code&gt;it&lt;/code&gt; block:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;pre-amble is the same&lt;/strong&gt;. In the example they are all instantiating the &lt;code&gt;AttributeObject&lt;/code&gt; with the four value arguments.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;contents are not mutating the environment in a different way from each other&lt;/strong&gt;. If an &lt;code&gt;it&lt;/code&gt; block mutates the environment then the many &lt;code&gt;it&lt;/code&gt; block approach might have unexpected results. In the example each &lt;code&gt;it&lt;/code&gt; block contains only a single assertion.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Many 'it' blocks
+Finished in 1.67 seconds (files took 0.09327 seconds to load)
+4 examples, 0 failures
+
+# Combined 'it' block
+Finished in 0.41675 seconds (files took 0.09545 seconds to load)
+1 example, 0 failures
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is clear to see that the combined &lt;code&gt;it&lt;/code&gt; block executes less examples and therefore requires less time. Both of these approaches are testing the &lt;em&gt;exact same thing&lt;/em&gt;, however one does so more quickly than the other. There is still the loss of the precise failure reporting per &lt;code&gt;it&lt;/code&gt; block. It can be argued that it is not a huge loss given the code under test has been developed and the tests are for regressions.&lt;/p&gt;
+
+&lt;h3&gt;Larger Scale Test Suite&lt;/h3&gt;
+
+&lt;p&gt;To better illustrate the benefits of using combined &lt;code&gt;it&lt;/code&gt; blocks when possible, I have applied this technique to a larger project. The conversion between the two approaches was straight-forward and the results are satisfying. It was possible to consolidated many &lt;code&gt;it&lt;/code&gt; blocks (300 less test examples), reducing the run time by 38%.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Before
+Finished in 3 minutes 6.3 seconds (files took 10.06 seconds to load)
+1506 examples, 0 failures
+
+# After
+Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
+1206 examples, 0 failures
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The results are going to differ between projects and testing styles, although in most cases there will be some performance improvements.&lt;/p&gt;
+
+&lt;h2&gt;Suggested Testing Workflow&lt;/h2&gt;
+
+&lt;p&gt;The following workflow is the one I follow as it provides the best of both worlds:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Iteratively develop feature using many &lt;code&gt;it&lt;/code&gt; blocks for feedback locally&lt;/li&gt;
+&lt;li&gt;Complete feature&lt;/li&gt;
+&lt;li&gt;Convert many &lt;code&gt;it&lt;/code&gt; blocks into a combined &lt;code&gt;it&lt;/code&gt; block for regressions&lt;/li&gt;
+&lt;li&gt;Merge feature into master&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Eventually some issue may come up and a regression might be found. If more work is involved to fix and understand the issue at hand I might split the combined &lt;code&gt;it&lt;/code&gt; block to provide more feedback on failures. At this point I would go back to following the workflow from the start.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Share Your Bag of Tricks</title>
+    <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
+    <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
+    <updated>2015-12-24T10:06:51-05:00</updated>
+    <published>2015-04-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;Everyone has specific tips and shortcuts that they have picked up from various sources, including the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Trial &amp;amp; error or self-discovery&lt;/li&gt;
+&lt;li&gt;From a friend or colleague&lt;/li&gt;
+&lt;li&gt;Reading books, blog posts, articles&lt;/li&gt;
+&lt;li&gt;Watching videos, conferences&lt;/li&gt;
+&lt;li&gt;Formal education&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Regardless of how one has gained these skills, it is obvious that they increase their effectiveness and efficiency at tasks. With enough exposure and time, one can amass an impressive assortment of skills, tips and shortcuts. We tend to call these people &lt;em&gt;veterans&lt;/em&gt;/&lt;em&gt;experts&lt;/em&gt;/&lt;em&gt;experienced&lt;/em&gt;/&lt;em&gt;seniors&lt;/em&gt;, amongst other words of praise and respect.&lt;/p&gt;
+
+&lt;p&gt;This post is not directed towards a specific group of individuals, as the overarching message applies to everyone. It is common to find large visible gaps with respect to skills and/or experience. For example, within a workplace environment a more experienced colleague might have customized and automated parts of their daily workflow to increase their effectiveness and efficiency.&lt;/p&gt;
+
+&lt;h2&gt;The Bag of Tricks&lt;/h2&gt;
+
+&lt;p&gt;In general the following is true:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Experienced individuals have something which sets them apart from the less-experienced.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let us ignore the common qualities that account for uniqueness such as personality, and focus solely on ones skills and experience. Then, it&amp;rsquo;s possible to identify their &lt;em&gt;bag of tricks&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;A bag of tricks is really a simple concept. Often it is a set of small tips and shortcuts used to make certain tasks easier than they normally would be.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Bag of Tricks&lt;/strong&gt; &lt;em&gt;| bag əv triks |&lt;/em&gt;
+noun&lt;/p&gt;
+
+&lt;p&gt;1 &lt;em&gt;informal&lt;/em&gt; a set of ingenious plans, techniques, or resources: &lt;em&gt;I better pull something out of my &lt;b&gt;bag of tricks&lt;/b&gt; to finish this task quickly&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In some cases the holder of the bag of tricks clearly knows what resides in their bag. In other cases they might be forgetting some items, which occurs over time as the holder has completely integrated it into their normal repertoire.&lt;/p&gt;
+
+&lt;h2&gt;Sharing the Bag&lt;/h2&gt;
+
+&lt;p&gt;Often in workplaces we have various levels of experience such as: &lt;em&gt;Junior&lt;/em&gt;, &lt;em&gt;Intermediate&lt;/em&gt;, &lt;em&gt;Senior&lt;/em&gt;. In our societies we have accepted the following model:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Experienced individuals can &lt;em&gt;mentor&lt;/em&gt; the less experienced &lt;em&gt;pupils&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is a very simple learning model, and it works. It can be seen in many industries and professions as they promote formal mentorship/apprenticeship programs. These formal programs often have a cost associated with them, although that typically correlates with the quality received. Informal approaches are often executed between colleagues with little structure.&lt;/p&gt;
+
+&lt;p&gt;Everyone has something worth showing. Someone will be interested in learning it, or improving upon it. Levels of experience does not guarantee one will always be teaching or learning. In a symbiotic relationship everyone will be sharing their bag of tricks.&lt;/p&gt;
+
+&lt;h3&gt;Pupil&amp;rsquo;s Perspective&lt;/h3&gt;
+
+&lt;p&gt;Getting a peek at someone&amp;rsquo;s bag of tricks is of great benefit for the pupil. If someone offers advice, there should be no hesitation to accept it. A pupil, or anyone for that matter, should always accept the offer of advice since there is no downside to hearing it out. Even if the pupil has already known about the provided advice, the act of hearing it again reinforces it. It might also be possible for the pupil to give back immediately to the mentor.&lt;/p&gt;
+
+&lt;p&gt;The best thing a pupil can do is to provide feedback and appreciation. By questioning the mentor and asking for additional details, it forces the mentor to inspect and reflect on their bag of tricks. In some situation the tides can change and the mentor will learn from the pupil.&lt;/p&gt;
+
+&lt;h3&gt;Mentor&amp;rsquo;s Perspective&lt;/h3&gt;
+
+&lt;p&gt;Mentors are encouraged to share their bag of tricks, and most are willing to do so. Sharing knowledge has many benefits:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Joy in helping someone&lt;/li&gt;
+&lt;li&gt;Gained respect from pupil and others&lt;/li&gt;
+&lt;li&gt;Self-improvement by going over specifics&lt;/li&gt;
+&lt;li&gt;Constructive criticism&lt;/li&gt;
+&lt;li&gt;Encouraging similar behaviour&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sharing and helping can bring much joy to a mentor, which in turn leads to gaining respect from the pupil and others. As previously mentioned, a mentor may not necessarily know of the content of their bag of tricks. A pupil can probe and inquire on specifics to the point where new light is shone on the bag of tricks. By mentoring a pupil, it encourages others to do the same when they have amassed their own bag of tricks.&lt;/p&gt;
+
+&lt;h2&gt;To Share, or Not to Share?&lt;/h2&gt;
+
+&lt;p&gt;There might be situations where an individual does not want to share their bag of tricks. One strong reason for this is that they would lose their &lt;em&gt;edge&lt;/em&gt; over their colleagues. This is understandable, although if the environment is amenable to learning then there is no real reason to hold back.&lt;/p&gt;
+
+&lt;p&gt;If everyone in an environment is holding back on knowledge, it does not sound like a place of growth. Furthermore, if everyone is scared of losing their edge, there are probably greater issues in that environment. If there is no sharing of knowledge between colleagues, everyone is at a disadvantage compared to the alternative.&lt;/p&gt;
+
+&lt;h2&gt;Means of Sharing&lt;/h2&gt;
+
+&lt;p&gt;It is clear that sharing is a win-win situation. In a workplace environment sharing knowledge is simple and commonplace. Either the pupil asks for help, or the mentor decides to impart knowledge. If the environment is pro-learning then this behaviour will be encouraged and valued. There might even be an explicit mentoring process in place or less informal opportunities such as &lt;em&gt;lunch and learns&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;As mentioned before, anyone can mentor regardless of their skill and experience levels. Everyone should take every opportunity to share something from their bag of tricks. Not only will this immediately benefit others, but what goes around comes around. Sharing can take many forms, including the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Blog Posts, Public Notes, Documentation&lt;/li&gt;
+&lt;li&gt;Mentoring, Pairing Sessions&lt;/li&gt;
+&lt;li&gt;Talks, Presentations, Demonstrations&lt;/li&gt;
+&lt;li&gt;Video/Audio Recordings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The best way is to reach a broad audience, so that everyone can benefit from it. Thankfully the Internet is an amazing medium to communicate to the masses.&lt;/p&gt;
+
+&lt;p&gt;Take pride and share your bag of tricks!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>No Excuses: Verifying RSpec Test Doubles</title>
+    <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
+    <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
+    <updated>2015-12-24T10:06:51-05:00</updated>
+    <published>2015-04-27T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;Tests which utilize external services or interact with the database are typically the culprits of long-running tests. We want to keep our tests quick. It is possible to mock/stub out long running database and/or external services calls. This reduces the time a test suite takes to execute.&lt;/p&gt;
+
+&lt;h2&gt;Unsheathe the Double&lt;/h2&gt;
+
+&lt;p&gt;In Ruby, one approach to mocking is by completely replacing the object of interest with a lightweight &lt;a href="http://www.rubydoc.info/gems/rspec-mocks/frames#Test_Doubles"&gt;double&lt;/a&gt; using &lt;a href="http://rspec.info/"&gt;RSpec&lt;/a&gt;. Proper usage of a &lt;em&gt;double&lt;/em&gt; can prevent tests from interacting with external services, such as a database (i.e., &lt;code&gt;ActiveRecord&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;With respect to RSpec, a &lt;em&gt;double&lt;/em&gt; is created by providing a classname or object, along with a hash of messages and their responses. A &lt;em&gt;double&lt;/em&gt; can only respond using the provided responses to their defined messages (technically there are other messages that a &lt;em&gt;double&lt;/em&gt; can respond to, but for our purpose we do not have to worry about them).&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;  &lt;span class="c1"&gt;#=&amp;gt; "Woof"&lt;/span&gt;
+&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;walk&lt;/span&gt;  &lt;span class="c1"&gt;#=&amp;gt; Double "Dog" received unexpected message :walk with (no args)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the above example, a &lt;code&gt;&amp;#39;Dog&amp;#39;&lt;/code&gt; &lt;em&gt;double&lt;/em&gt; is created that only knows &lt;code&gt;#talk&lt;/code&gt;. When it receives an unknown message like &lt;code&gt;#walk&lt;/code&gt; an appropriate exception is raised.&lt;/p&gt;
+
+&lt;h2&gt;Double-Edge Double&lt;/h2&gt;
+
+&lt;p&gt;A &lt;em&gt;double&lt;/em&gt; aims to abstract away from the concrete concepts that they are &lt;em&gt;standing in for&lt;/em&gt; (i.e., defined classes/methods/attributes/associations and their implementations). This can simplify tests by only dealing with the immediate concerns in a restricted scope. Using &lt;em&gt;doubles&lt;/em&gt; has its perks, but a problem can arise if changes occur to the underlying concrete concepts.&lt;/p&gt;
+
+&lt;p&gt;Lets examine the following scenario:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;We have an existing class with multiple defined methods. This class and its methods primarily interact with external services. This class and its methods are used within our test suite, in where we have mocked it out using a &lt;em&gt;double&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;We decided to modify a method definition on the described class. Our tests continue to pass.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Given this scenario we would hope that by modifying the method definition that our existing tests which depend on said method definition to fail. Our tests are using a &lt;em&gt;double&lt;/em&gt; in which the method definition it has defined is still valid, even when the actual method definition has been altered.&lt;/p&gt;
+
+&lt;p&gt;The consequences of not seeing any failing tests can be serious. Even with minor cosmetic changes, that do not alter functionality, it is still a misleading test. Identifying these tests after the fact can be challenging, as they initially appear to be in fine working order.&lt;/p&gt;
+
+&lt;p&gt;It is important to always remember to check the usage of &lt;em&gt;doubles&lt;/em&gt; whose underlying concepts are changed. A gem called &lt;a href="https://github.com/xaviershay/rspec-fire"&gt;rspec-fire&lt;/a&gt; was created to alleviate this task. This gem would verify that a &lt;em&gt;double&lt;/em&gt; is actually mocking an actual method defined on the concrete object. As of RSpec 3.0, &lt;em&gt;rspec-fire&lt;/em&gt; is now obsolete as RSpec has a set of new &lt;a href="https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles"&gt;verifying doubles&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Dance of the Double&lt;/h2&gt;
+
+&lt;p&gt;A simple example best illustrates the downside of using the original RSpec &lt;em&gt;doubles&lt;/em&gt;. In this example we also show how to replace the &lt;em&gt;double&lt;/em&gt; with the new and improved verifying &lt;em&gt;doubles&lt;/em&gt;, along with their benefits.&lt;/p&gt;
+
+&lt;p&gt;For this example we are not dealing with a database, although the idea is easily extendable. We can imagine that our test is creating actual entries in the database, thus incurring the performance hit.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;First we define an &lt;code&gt;Owner&lt;/code&gt; that has a &lt;code&gt;Dog&lt;/code&gt;. The &lt;code&gt;Dog&lt;/code&gt; responds to &lt;code&gt;#talk&lt;/code&gt;. In addition we have a corresponding test that uses a &lt;em&gt;double&lt;/em&gt; to mock out the &lt;code&gt;Dog&lt;/code&gt; which responds to &lt;code&gt;#talk&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;talk&lt;/span&gt;
+    &lt;span class="s1"&gt;'Woof'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 1 example, 0 failures&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;We decide to change &lt;code&gt;Dog#talk&lt;/code&gt; to &lt;code&gt;Dog#bark&lt;/code&gt;, but forget to update the test.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bark&lt;/span&gt;
+    &lt;span class="s1"&gt;'Woof'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 1 example, 0 failures&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From our test&amp;rsquo;s perspective everything is still fine, since our &lt;em&gt;double&lt;/em&gt; still responds to &lt;code&gt;#talk&lt;/code&gt;. Ideally we would want our test here to fail since it is not accurately matching the interface defined by an actual &lt;code&gt;Dog&lt;/code&gt; instance.&lt;/p&gt;
+
+&lt;p&gt;This is a problem. It is possible to completely &lt;em&gt;forget&lt;/em&gt; about fixing the test, since it technically passed.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;This time we use a verifying &lt;em&gt;double&lt;/em&gt; that RSpec provides such as an &lt;code&gt;instance_double&lt;/code&gt;. This ensures that the messages the &lt;em&gt;double&lt;/em&gt; receives are verified against the interface defined by the concrete object.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec'&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bark&lt;/span&gt;
+    &lt;span class="s1"&gt;'Woof'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Failure/Error: let(:dog) { instance_double('Dog', talk: 'Fake Woof') }&lt;/span&gt;
+&lt;span class="c1"&gt;#   Dog does not implement: talk&lt;/span&gt;
+&lt;span class="c1"&gt;# 1 example, 1 failure&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we have a failing test! This is what we expect to happen as our &lt;em&gt;double&lt;/em&gt; is attempting to using an unimplemented method. This feedback allows us to take the corrective action on our tests to ensure that they are not forgotten and invalid.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;We now decide to change the number of arguments on &lt;code&gt;Dog#bark&lt;/code&gt;. Again with the old non-verifying &lt;em&gt;double&lt;/em&gt; our test would again simply pass. The verifying &lt;em&gt;doubles&lt;/em&gt; also check that the number of arguments match the defined interface&amp;rsquo;s number of arguments.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec'&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
+  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loud&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;loud&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="s1"&gt;'Woof'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Woof!!'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Failure/Error: let(:dog) { instance_double('Dog', talk: 'Fake Woof') }&lt;/span&gt;
+&lt;span class="c1"&gt;#   Wrong number of arguments. Expected 1, got 0.&lt;/span&gt;
+&lt;span class="c1"&gt;# 1 example, 1 failure&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Double Development&lt;/h2&gt;
+
+&lt;p&gt;If the underlying class is loaded &lt;code&gt;instance_double&lt;/code&gt; will do the verifying on the class. In the situation where the class is not loaded than it acts as a normal &lt;em&gt;double&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;During development an &lt;code&gt;instance_double&lt;/code&gt; allows one to develop in isolation if the class you are mocking out does not yet exist. Eventually when the test is more-or-less complete, it is possible to simply &lt;em&gt;load&lt;/em&gt; the class and the &lt;code&gt;instance_double&lt;/code&gt; will start to verify on the loaded class.&lt;/p&gt;
+
+&lt;p&gt;In addition, during development you can use &lt;a href="https://github.com/nevir/rubocop-rspec/blob/master/lib/rubocop/cop/rspec/verified_doubles.rb"&gt;&lt;code&gt;rubocop-rspec&lt;/code&gt;&lt;/a&gt; to ensure you always verify your &lt;em&gt;doubles&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Concluding Double&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR &amp;ndash; There are no excuses, verify your RSpec test doubles.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Verifying your RSpec test &lt;em&gt;doubles&lt;/em&gt; can, and will, save you from many headaches down the road. In most cases the change required to use verifying &lt;em&gt;doubles&lt;/em&gt; is relatively easy. The benefits are clear, worthwhile and your test suite will thank you.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

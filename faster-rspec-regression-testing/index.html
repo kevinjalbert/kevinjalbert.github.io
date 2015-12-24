@@ -1,0 +1,108 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <title>Faster RSpec Regression Testing — Kevin Jalbert</title> <link href="../stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Posts — Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-4 col-md-4 banner"> <a href="/">Kevin Jalbert</a> </div> <div class="col-xs-8 col-md-8 navigation"> <ul> <li><input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on></li> <li><a href="/about/">About</a></li> <li><a href="/now/">Now</a></li> </ul> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title>Faster RSpec Regression Testing </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class=article__date>September 21, 2015 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>4 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/faster-rspec-regression-testing/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/rspec/">rspec</a> <a href="/tags/testing/">testing</a> </div> </div> </div> <div class=article__separator></div> <h2>Testing Approaches</h2> <ol> <li><em>Immediately</em> on the code that is being developed to help guide development. Generally using a <em>subset</em> of the test suite.</li> <li><em>Afterwards</em> on the complete codebase to ensure no regressions appear. This is always done using the <em>complete</em> test suite.</li> </ol> <p>In an ideal environment, the complete test suite is run after every meaningful code change. This approach works for a small project, but it can grow into a time consuming process. Developers may only run a subset of tests that exercise the modified source code. Faster test execution allows for tighter feedback loops between testing and developing.</p> <p>Eventually the active development stops as the feature is completed. A developer wants to have a high-level of confidence in the code that they wrote before committing the changes. By running the complete test suite, one can have a certain level of assurance that the code to be committed will not cause issues. Ideally this second phase of testing is carried out locally by the developer, but also on a continuous integration server to prevent regressions.</p> <h2>RSpecing <code>it</code> up</h2> <p>RSpec tests are executed using the <code>it</code> method. The code within the <code>it</code> block is executed after applying context using <code>let</code> and <code>before</code>, which can be seen as the pre-amble of the test. In other words, for every <code>it</code> block the test will execute the required pre-amble before the actual <code>it</code> block.</p> <h3>Many <code>it</code> blocks</h3> <p>During development it is useful to use the following technique to understand as much detail of failing tests:</p> <pre class="highlight ruby"><code>  <span class="c1"># A trivial example to show the verification of</span>
+  <span class="c1"># multiple conditions using many 'it' blocks</span>
+  <span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="s1">'test with many it blocks'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="s1">'a'</span><span class="p">.</span><span class="nf">upcase</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="s1">'c'</span><span class="p">.</span><span class="nf">upcase</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'B'</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="s1">'b'</span><span class="p">.</span><span class="nf">upcase</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'C'</span><span class="p">)</span> <span class="p">}</span>
+  <span class="k">end</span>
+</code></pre> <pre class="highlight plaintext"><code>Failures:
+
+  1) test with many it blocks should eq "B"
+     Failure/Error: it { expect('b'.upcase).to eq('B') }
+
+       expected: "B"
+            got: "C"
+
+  2) test with many it blocks should eq "C"
+     Failure/Error: it { expect('b'.upcase).to eq('C') }
+
+       expected: "C"
+            got: "B"
+</code></pre> <p>The results of the testing present all of the failures. This approach is important during iterative development as fixing one test might cause others to fail.</p> <h3>Combining <code>it</code> blocks</h3> <p>Another approach that can be used with RSpec is to combine the many <code>it</code> blocks into one:</p> <pre class="highlight ruby"><code>  <span class="c1"># A trivial example to show the verification of</span>
+  <span class="c1"># multiple conditions using a combined 'it' block</span>
+  <span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="s1">'test with a combined it block'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="s1">'a'</span><span class="p">.</span><span class="nf">upcase</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="s1">'c'</span><span class="p">.</span><span class="nf">upcase</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'B'</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="s1">'b'</span><span class="p">.</span><span class="nf">upcase</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="s1">'C'</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre> <pre class="highlight plaintext"><code>Failures:
+
+  1) test with a combined it block should eq "B"
+     Failure/Error: expect('c'.upcase).to eq('B')
+
+       expected: "B"
+            got: "C"
+</code></pre> <p>This time the results present <em>only the first</em> failure, even though two assertions are incorrect. This approach provides less information than the first example. Although there is a different benefit, it runs less examples (tests and their complete pre-amble). This approach leads to quicker test executions, with the loss of the complete listing of failures. Arguably this approach is better suited when a feature is complete and the tests remain present to detect regressions.</p> <h2>Performance Impact</h2> <p>In the previous section, two styles of using RSpec&rsquo;s <code>it</code> blocks were illustrated. The next example showcases both approaches to understand how the testing performance changes. To simulate some pre-amble (i.e., database interactions, setting up objects) sleeps are used when accessing the values from their <code>let</code> blocks.</p> <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'rspec'</span>
+
+<span class="k">class</span> <span class="nc">AttributeObject</span>
+  <span class="kp">attr_reader</span> <span class="ss">:value1</span><span class="p">,</span> <span class="ss">:value2</span><span class="p">,</span> <span class="ss">:value3</span><span class="p">,</span> <span class="ss">:value4</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">,</span> <span class="n">value3</span><span class="p">,</span> <span class="n">value4</span><span class="p">)</span>
+    <span class="vi">@value1</span> <span class="o">=</span> <span class="n">value1</span>
+    <span class="vi">@value2</span> <span class="o">=</span> <span class="n">value2</span>
+    <span class="vi">@value3</span> <span class="o">=</span> <span class="n">value3</span>
+    <span class="vi">@value4</span> <span class="o">=</span> <span class="n">value4</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">RSpec</span><span class="p">.</span><span class="nf">describe</span> <span class="s1">'performance using `it` blocks'</span> <span class="k">do</span>
+  <span class="n">subject</span> <span class="p">{</span> <span class="no">AttributeObject</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">,</span> <span class="n">value3</span><span class="p">,</span> <span class="n">value4</span><span class="p">)</span> <span class="p">}</span>
+
+  <span class="n">let</span><span class="p">(</span><span class="ss">:value1</span><span class="p">)</span> <span class="p">{</span> <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">;</span> <span class="mi">1</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:value2</span><span class="p">)</span> <span class="p">{</span> <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:value3</span><span class="p">)</span> <span class="p">{</span> <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">;</span> <span class="mi">3</span> <span class="p">}</span>
+  <span class="n">let</span><span class="p">(</span><span class="ss">:value4</span><span class="p">)</span> <span class="p">{</span> <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">;</span> <span class="mi">4</span> <span class="p">}</span>
+
+  <span class="n">context</span> <span class="s1">'slow tests due to many `it` blocks'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value1</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value2</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value3</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value3</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value4</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value4</span><span class="p">)</span> <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s1">'faster tests due to a combined `it` block'</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="k">do</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value1</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value2</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value3</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value3</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">subject</span><span class="p">.</span><span class="nf">value4</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="n">value4</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>For this example it is possible to use both testing approaches. There are two criteria that must be satisfied to allow this transformation. For each <code>it</code> block:</p> <ul> <li>The <strong>pre-amble is the same</strong>. In the example they are all instantiating the <code>AttributeObject</code> with the four value arguments.</li> <li>The <strong>contents are not mutating the environment in a different way from each other</strong>. If an <code>it</code> block mutates the environment then the many <code>it</code> block approach might have unexpected results. In the example each <code>it</code> block contains only a single assertion.</li> </ul> <pre class="highlight plaintext"><code># Many 'it' blocks
+Finished in 1.67 seconds (files took 0.09327 seconds to load)
+4 examples, 0 failures
+
+# Combined 'it' block
+Finished in 0.41675 seconds (files took 0.09545 seconds to load)
+1 example, 0 failures
+</code></pre> <p>It is clear to see that the combined <code>it</code> block executes less examples and therefore requires less time. Both of these approaches are testing the <em>exact same thing</em>, however one does so more quickly than the other. There is still the loss of the precise failure reporting per <code>it</code> block. It can be argued that it is not a huge loss given the code under test has been developed and the tests are for regressions.</p> <h3>Larger Scale Test Suite</h3> <p>To better illustrate the benefits of using combined <code>it</code> blocks when possible, I have applied this technique to a larger project. The conversion between the two approaches was straight-forward and the results are satisfying. It was possible to consolidated many <code>it</code> blocks (300 less test examples), reducing the run time by 38%.</p> <pre class="highlight plaintext"><code># Before
+Finished in 3 minutes 6.3 seconds (files took 10.06 seconds to load)
+1506 examples, 0 failures
+
+# After
+Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
+1206 examples, 0 failures
+</code></pre> <p>The results are going to differ between projects and testing styles, although in most cases there will be some performance improvements.</p> <h2>Suggested Testing Workflow</h2> <p>The following workflow is the one I follow as it provides the best of both worlds:</p> <ol> <li>Iteratively develop feature using many <code>it</code> blocks for feedback locally</li> <li>Complete feature</li> <li>Convert many <code>it</code> blocks into a combined <code>it</code> block for regressions</li> <li>Merge feature into master</li> </ol> <p>Eventually some issue may come up and a regression might be found. If more work is involved to fix and understand the issue at hand I might split the combined <code>it</code> block to provide more feedback on failures. At this point I would go back to following the workflow from the start.</p> <div id=disqus_thread></div> <script>
+//<![CDATA[
+                  var disqus_shortname = 'kevinjalbert';
+          
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+//]]>
+</script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> <a href="http://disqus.com" class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </div> </div> </div> </body> <div class="col-md-12 footer__copywrite"> &copy; 2015 Kevin Jalbert </div> </html> <script src="../javascripts/app.js"></script> <script>!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-16620161-5","kevinjalbert.com"),ga("send","pageview");</script>

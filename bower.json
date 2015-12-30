@@ -1,7 +1,7 @@
 {
   "name": "kevinjalbert",
   "dependencies": {
-    "bootstrap": "3.3.5",
+    "bootstrap": "3.3.6",
     "jquery": "2.1.4",
     "jquery-ui": "1.11.4",
     "lunr.js": "0.6.0",

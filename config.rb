@@ -34,6 +34,12 @@ page '/feed.xml', layout: false
 # Add bower's directory to sprockets asset path
 after_configuration do
   sprockets.append_path File.join "#{root}", 'bower_components'
+
+  Dir.glob('./bower_components/bootstrap/fonts/**/*').each do |file|
+    sprockets.import_asset(file.split('/')[2..-1].join('/')) do |logical_path|
+      Pathname.new('fonts') + logical_path.split.last
+    end
+  end
 end
 
 set :css_dir, 'stylesheets'

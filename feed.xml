@@ -12,7 +12,7 @@
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2015-12-24T10:21:15-05:00</updated>
+    <updated>2015-12-30T13:08:00-05:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -60,10 +60,10 @@
 &lt;p&gt;Modern browsers have no problem handling HTTP caching. It is also easy to verify that they are respecting HTTP caching by using their &lt;em&gt;Developer Tools&lt;/em&gt; interface. The following image shows two requests made to the same API endpoint (https://api.github.com/users/kevinjalbert) in Google Chrome&amp;rsquo;s Network Tab of the Developer Tools:&lt;/p&gt;
 
 &lt;p&gt;First API request results in a 200 status code (standard success response):
-&lt;img alt="First Request results in a Status Code 200" width="1366" height="164" src="../images/2015-09-24-respect-http-caching/200-status-code-chrome.png" /&gt;&lt;/p&gt;
+&lt;img alt="First Request results in a Status Code 200" width="1366" height="164" src="images/2015-09-24-respect-http-caching/200-status-code-chrome.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;Second API request results in a 304 status code (resource has not been modified since the last request, no body is returned in response):
-&lt;img alt="Second Request results in a Status Code 304" width="1366" height="152" src="../images/2015-09-24-respect-http-caching/304-status-code-chrome.png" /&gt;&lt;/p&gt;
+&lt;img alt="Second Request results in a Status Code 304" width="1366" height="152" src="images/2015-09-24-respect-http-caching/304-status-code-chrome.png" /&gt;&lt;/p&gt;
 
 &lt;h3&gt;Mobile Applications&lt;/h3&gt;
 
@@ -164,7 +164,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2015-12-24T10:21:15-05:00</updated>
+    <updated>2015-12-30T13:08:00-05:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -327,7 +327,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2015-12-24T10:21:15-05:00</updated>
+    <updated>2015-12-30T13:08:00-05:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -427,7 +427,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2015-12-24T10:21:15-05:00</updated>
+    <updated>2016-01-23T18:53:38-05:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -462,7 +462,7 @@ noun&lt;/p&gt;
 
 &lt;p&gt;The consequences of not seeing any failing tests can be serious. Even with minor cosmetic changes, that do not alter functionality, it is still a misleading test. Identifying these tests after the fact can be challenging, as they initially appear to be in fine working order.&lt;/p&gt;
 
-&lt;p&gt;It is important to always remember to check the usage of &lt;em&gt;doubles&lt;/em&gt; whose underlying concepts are changed. A gem called &lt;a href="https://github.com/xaviershay/rspec-fire"&gt;rspec-fire&lt;/a&gt; was created to alleviate this task. This gem would verify that a &lt;em&gt;double&lt;/em&gt; is actually mocking an actual method defined on the concrete object. As of RSpec 3.0, &lt;em&gt;rspec-fire&lt;/em&gt; is now obsolete as RSpec has a set of new &lt;a href="https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles"&gt;verifying doubles&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It is important to always remember to check the usage of &lt;em&gt;doubles&lt;/em&gt; whose underlying concepts are changed. A gem called &lt;a href="https://github.com/xaviershay/rspec-fire"&gt;rspec-fire&lt;/a&gt; was created to alleviate this task. This gem would verify that a &lt;em&gt;double&lt;/em&gt; is actually mocking an actual method defined on the concrete object. As of &lt;a href="http://rspec.info/blog/2014/05/notable-changes-in-rspec-3"&gt;RSpec 3.0&lt;/a&gt;, &lt;em&gt;rspec-fire&lt;/em&gt; is now obsolete as RSpec has a set of new &lt;a href="https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles"&gt;verifying doubles&lt;/a&gt;. With the release of &lt;a href="http://rspec.info/blog/2015/02/rspec-3-2-has-been-released"&gt;RSpec 3.2&lt;/a&gt;, &lt;code&gt;instance_double&lt;/code&gt; now support dynamic column methods defined by ActiveRecord.&lt;/p&gt;
 
 &lt;h2&gt;Dance of the Double&lt;/h2&gt;
 

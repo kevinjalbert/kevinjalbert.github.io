@@ -9,6 +9,12 @@ teaser:
 tags:
 - rspec
 - testing
+
+notes:
+-
+  date: 2016-01-23
+  type: add
+  content: Mention of RSpec 3.2's support for dynamic column methods defined by ActiveRecord in the context of `instance_double`.
 ---
 
 Tests which utilize external services or interact with the database are typically the culprits of long-running tests. We want to keep our tests quick. It is possible to mock/stub out long running database and/or external services calls. This reduces the time a test suite takes to execute.
@@ -40,7 +46,7 @@ Given this scenario we would hope that by modifying the method definition that o
 
 The consequences of not seeing any failing tests can be serious. Even with minor cosmetic changes, that do not alter functionality, it is still a misleading test. Identifying these tests after the fact can be challenging, as they initially appear to be in fine working order.
 
-It is important to always remember to check the usage of *doubles* whose underlying concepts are changed. A gem called [rspec-fire](https://github.com/xaviershay/rspec-fire) was created to alleviate this task. This gem would verify that a *double* is actually mocking an actual method defined on the concrete object. As of RSpec 3.0, *rspec-fire* is now obsolete as RSpec has a set of new [verifying doubles](https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles).
+It is important to always remember to check the usage of *doubles* whose underlying concepts are changed. A gem called [rspec-fire](https://github.com/xaviershay/rspec-fire) was created to alleviate this task. This gem would verify that a *double* is actually mocking an actual method defined on the concrete object. As of [RSpec 3.0](http://rspec.info/blog/2014/05/notable-changes-in-rspec-3), *rspec-fire* is now obsolete as RSpec has a set of new [verifying doubles](https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles). With the release of [RSpec 3.2](http://rspec.info/blog/2015/02/rspec-3-2-has-been-released), `instance_double` now support dynamic column methods defined by ActiveRecord.
 
 ## Dance of the Double
 

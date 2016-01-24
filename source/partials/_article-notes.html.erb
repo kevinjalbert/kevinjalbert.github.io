@@ -1,0 +1,32 @@
+<% if current_page.data.notes && current_page.data.notes.size > 0 %>
+  <div class="article__notes">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#notesCollapse">
+          Notes Since Publication
+        </h4>
+      </div>
+
+      <div id="notesCollapse" class="panel-collapse collapse">
+        <div class="panel-body">
+          <% current_page.data.notes.each_with_index do |note, index| %>
+            <div class="row">
+              <div class="article__notes-type col-xs-6 col-md-6">
+                <%= note.type.upcase %>
+              </div>
+              <div class="article__notes-date col-xs-6 col-md-6">
+                <%= note.date.strftime('%B %e, %Y') %>
+              </div>
+              <div class="article__notes-content col-xs-12 col-md-12">
+                <%= markdown(note.content) %>
+              </div>
+            </div>
+            <% if index + 1 < current_page.data.notes.size %>
+              <br/>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

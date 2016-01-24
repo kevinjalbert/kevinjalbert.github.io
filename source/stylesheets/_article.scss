@@ -26,6 +26,37 @@
     }
   }
 
+  .article__notes {
+    .panel-title {
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .panel-heading {
+      padding: 5px 5px;
+    }
+
+    .panel-title.accordion-toggle:after {
+      font-family: 'Glyphicons Halflings';
+      content: "\e114";
+      float: right;
+      color: grey;
+    }
+
+    .panel-title.accordion-toggle.collapsed:after {
+      content: "\e080";
+    }
+  }
+
+  .article__notes-date {
+    text-align: right;
+  }
+
+  .article__notes-type {
+    text-align: left;
+  }
+
   .article__read-time {
     text-align: center;
     color: #9a9a9a;

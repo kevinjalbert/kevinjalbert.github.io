@@ -75,7 +75,6 @@ configure :build do
   activate :minify_css
   activate :minify_html
   activate :minify_javascript
-  activate :relative_assets
 
   activate :imageoptim do |options|
     options.manifest = false

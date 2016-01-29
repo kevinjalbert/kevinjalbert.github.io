@@ -3,16 +3,52 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2015-09-23T20:00:00-04:00</updated>
+  <updated>2016-01-27T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Project-Wide Search and Replace with Vim</title>
+    <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
+    <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
+    <updated>2016-01-28T21:23:25-05:00</updated>
+    <published>2016-01-27T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;There are many instances where you might want to perform a mass search and replace in Vim. The following are two commands that can help out with such a task.&lt;/p&gt;
+
+&lt;h2&gt;List of Files&lt;/h2&gt;
+
+&lt;p&gt;First you need to acquire a list of files in which you want to perform search and replaces on. The following Vim command &lt;code&gt;args&lt;/code&gt; allows you to store a set of file names to act on later.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:args `&amp;lt;command which generates a file list&amp;gt;`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thus we can use the following to store a list of files which match the &lt;code&gt;&amp;#39;Base::Lol::&amp;#39; .&lt;/code&gt; pattern.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:args `ag -l 'Base::Lol::' .`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If matches were not found you&amp;rsquo;ll get back something like the following &lt;em&gt;E79: Cannot expand wildcards&lt;/em&gt;. If at least one match was found the current buffer will change to one of the found files.&lt;/p&gt;
+
+&lt;h2&gt;Act on Files&lt;/h2&gt;
+
+&lt;p&gt;Now that you have the list of files that you want to act on, we are ready to perform our search and replace on them. The following Vim command &lt;code&gt;argdo&lt;/code&gt; allows us to specify a command to run against each of the files stored from the &lt;code&gt;args&lt;/code&gt; command.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:argdo &amp;lt;command to perform on each file stored from args&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In our running example we can replace every instance of the search we performed with a new string. We use the &lt;code&gt;%s&lt;/code&gt; command to perform this substitution (&lt;code&gt;%s/&amp;lt;original&amp;gt;/&amp;lt;new&amp;gt;&lt;/code&gt;). The &lt;code&gt;/g&lt;/code&gt; specifies that this substitution should be applied globally to the file. Finally we have &lt;code&gt;| w&lt;/code&gt; which saves the file after the substitution has been applied.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:argdo %s/Base::Lol::/Lol::Base::/g | w
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You are not only restricted to to using substitution here. Other resources indicated using macros.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-01-23T21:25:35-05:00</updated>
+    <updated>2016-01-27T22:09:07-05:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -164,7 +200,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-01-23T21:25:35-05:00</updated>
+    <updated>2016-01-27T22:09:07-05:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -327,7 +363,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-01-23T21:25:35-05:00</updated>
+    <updated>2016-01-27T22:09:07-05:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -427,7 +463,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-01-23T21:25:35-05:00</updated>
+    <updated>2016-01-27T22:09:07-05:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

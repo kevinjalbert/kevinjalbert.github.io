@@ -10,6 +10,12 @@ teaser:
 tags:
 - rspec
 - testing
+
+notes:
+-
+  date: 2016-02-25
+  type: add
+  content: Mention of RSpec 3.3's support for `aggregate_failures` feature, which combines the best of both testing approaches.
 ---
 
 ## Testing Approaches
@@ -165,3 +171,24 @@ The following workflow is the one I follow as it provides the best of both world
 4. Merge feature into master
 
 Eventually some issue may come up and a regression might be found. If more work is involved to fix and understand the issue at hand I might split the combined `it` block to provide more feedback on failures. At this point I would go back to following the workflow from the start.
+
+### Best of Both Worlds with RSpec 3.3 `aggregate_failures`
+With [RSpec 3.3](http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/) a new feature `aggregate_failures` was introduced. This feature is specific to RSpec, and offers the best of both worlds with respect to the testing disscused earlier (many `it` blocks vs. single `it` block).
+
+In summary it is possible to wrap the asserts within a combined `it` block with `agregate_failiures`. This allows all the assertions to execute with a single setup similar to the combined `it` block approach, yet any failed asserts are individually reported should they occur similar to the many `it` block approach.
+
+The following is a code snippet from the [RSpec 3.3](http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/) release notes where additional ways of usage are described.
+
+```ruby
+RSpec.describe Client do
+  it "returns a successful JSON response" do
+    response = Client.make_request
+
+    aggregate_failures "testing response" do
+      expect(response.status).to eq(200)
+      expect(response.headers).to include("Content-Type" => "application/json")
+      expect(response.body).to eq('{"message":"Success"}')
+    end
+  end
+end
+```

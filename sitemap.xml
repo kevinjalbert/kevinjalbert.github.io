@@ -19,6 +19,9 @@
     <loc>https://kevinjalbert.com/project-wide-search-and-replace-with-vim/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/</loc>
   </url>
   <url>
@@ -41,5 +44,8 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/vim/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/page/2/</loc>
   </url>
 </urlset>

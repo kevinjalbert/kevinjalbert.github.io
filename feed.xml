@@ -3,16 +3,70 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-01-27T19:00:00-05:00</updated>
+  <updated>2016-02-28T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Vim Substitution Feedback Using `vim-over`</title>
+    <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
+    <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
+    <updated>2016-02-29T19:39:56-05:00</updated>
+    <published>2016-02-28T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;It is common while in vim to perform substitution tasks over the text you are editing. This is often accomplished using the following command:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:%s/&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;%s&lt;/code&gt; command will perform substitution over every line within the buffer. The &lt;code&gt;/&amp;lt;find&amp;gt;/&amp;lt;replace&amp;gt;&lt;/code&gt; specifies the substitution to perform. Finally the &lt;code&gt;/g&lt;/code&gt; indicates that this should apply to multiple occurrences if they are present on the same line.&lt;/p&gt;
+
+&lt;p&gt;This works great, although there is little affordance in determining whether the specified &lt;code&gt;&amp;lt;find&amp;gt;&lt;/code&gt; will hit the matches you are interested in. The aforementioned command is a &lt;em&gt;all-or-nothing&lt;/em&gt; with respect to execution, there is no &lt;em&gt;visual feedback&lt;/em&gt; until you execute the command.&lt;/p&gt;
+
+&lt;h1&gt;Visual Feedback via vim-over&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href="https://github.com/osyo-manga/vim-over"&gt;vim-over&lt;/a&gt; plugin provides a dynamic approach for visual feedback while performing substitutions. It is extremely useful while crafting specific &lt;code&gt;&amp;lt;find&amp;gt;&lt;/code&gt; patterns.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Visual Feedback Demo" width="440" height="320" src="/images/2016-02-29-vim-substitution-feedback-using-vim-over/visual-feedback-demo.gif" /&gt;&lt;/p&gt;
+
+&lt;h1&gt;Tips and Tricks&lt;/h1&gt;
+
+&lt;p&gt;I have three vim maps that I use to simplify and enhance my substitutions.&lt;/p&gt;
+
+&lt;h2&gt;#1 - Substitute Word&lt;/h2&gt;
+
+&lt;p&gt;This mapping (&lt;code&gt;&amp;lt;leader&amp;gt;s&lt;/code&gt;) will find and replace the text under the cursor using &lt;code&gt;vim-over&lt;/code&gt; for visual feedback. After the mapping has been executed you are left where you simply type the &lt;code&gt;&amp;lt;replacement&amp;gt;/g&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;nnoremap &amp;lt;leader&amp;gt;s :OverCommandLine&amp;lt;CR&amp;gt; %s/&amp;lt;C-r&amp;gt;&amp;lt;C-w&amp;gt;/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;#2 - Global Substitution&lt;/h2&gt;
+
+&lt;p&gt;This mapping (&lt;code&gt;&amp;lt;leader&amp;gt;v&lt;/code&gt;) will perform a global substitution using &lt;code&gt;vim-over&lt;/code&gt; for visual feedback. After the mapping has been executed you are left where you type the &lt;code&gt;&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;function! VisualFindAndReplace()
+    :OverCommandLine %s/
+    :noh
+endfunction
+nnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplace()&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;#3 - Visual Substitution&lt;/h2&gt;
+
+&lt;p&gt;This mapping (&lt;code&gt;&amp;lt;leader&amp;gt;v&lt;/code&gt; while in visual mode) will perform a substitution only within the visually selected text using &lt;code&gt;vim-over&lt;/code&gt; for visual feedback. After the mapping has been executed you are left where you type the &lt;code&gt;&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;function! VisualFindAndReplaceWithSelection() range
+    :'&amp;lt;,'&amp;gt;OverCommandLine s/
+    :noh
+endfunction
+xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;lt;CR&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
+  <entry>
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-01-30T15:36:15-05:00</updated>
+    <updated>2016-02-25T20:39:14-05:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -48,7 +102,7 @@
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-01-30T15:36:15-05:00</updated>
+    <updated>2016-02-25T20:39:14-05:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -200,7 +254,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-02-25T20:35:56-05:00</updated>
+    <updated>2016-02-25T20:39:14-05:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -383,7 +437,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-01-30T15:36:15-05:00</updated>
+    <updated>2016-02-25T20:39:14-05:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -483,7 +537,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-01-30T15:36:15-05:00</updated>
+    <updated>2016-02-25T20:39:14-05:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

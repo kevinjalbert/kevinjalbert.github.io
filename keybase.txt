@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/kevinjalbert
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://kevinjalbert.com
+  * I am kevinjalbert (https://keybase.io/kevinjalbert) on keybase.
+  * I have a public key ASBaI00PzCjfm33W097j1OlZBBHZahbLTV3TXXSnFT7Jsgo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01205a234d0fcc28df9b7dd6d3dee3d4e9590411d96a16cb4d5dd35d74a7153ec9b20a",
+            "host": "keybase.io",
+            "kid": "01205a234d0fcc28df9b7dd6d3dee3d4e9590411d96a16cb4d5dd35d74a7153ec9b20a",
+            "uid": "291c63e3fe6b079d28b49c4224eca919",
+            "username": "kevinjalbert"
+        },
+        "service": {
+            "hostname": "kevinjalbert.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.14"
+    },
+    "ctime": 1461633102,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1461632636,
+        "hash": "dae468328ab528e3970ae66c42fe541eb5dd5b47747420888908470b8417cca07d45593d8a1f62656018b1b6affacd7c6326151c8838271c4663294e36048f3d",
+        "seqno": 451030
+    },
+    "prev": "c354f4475382e37cf1455d99c8a7573fdf496477c317505b3b73260498d31aef",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+g6Rib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgWiNND8wo35t91tPe49TpWQQR2WoWy01d0110pxU+ybIKp3BheWxvYWTFAv17ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwNWEyMzRkMGZjYzI4ZGY5YjdkZDZkM2RlZTNkNGU5NTkwNDExZDk2YTE2Y2I0ZDVkZDM1ZDc0YTcxNTNlYzliMjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwNWEyMzRkMGZjYzI4ZGY5YjdkZDZkM2RlZTNkNGU5NTkwNDExZDk2YTE2Y2I0ZDVkZDM1ZDc0YTcxNTNlYzliMjBhIiwidWlkIjoiMjkxYzYzZTNmZTZiMDc5ZDI4YjQ5YzQyMjRlY2E5MTkiLCJ1c2VybmFtZSI6ImtldmluamFsYmVydCJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoia2V2aW5qYWxiZXJ0LmNvbSIsInByb3RvY29sIjoiaHR0cHM6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjE0In0sImN0aW1lIjoxNDYxNjMzMTAyLCJleHBpcmVfaW4iOjUwNDU3NjAwMCwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE0NjE2MzI2MzYsImhhc2giOiJkYWU0NjgzMjhhYjUyOGUzOTcwYWU2NmM0MmZlNTQxZWI1ZGQ1YjQ3NzQ3NDIwODg4OTA4NDcwYjg0MTdjY2EwN2Q0NTU5M2Q4YTFmNjI2NTYwMThiMWI2YWZmYWNkN2M2MzI2MTUxYzg4MzgyNzFjNDY2MzI5NGUzNjA0OGYzZCIsInNlcW5vIjo0NTEwMzB9LCJwcmV2IjoiYzM1NGY0NDc1MzgyZTM3Y2YxNDU1ZDk5YzhhNzU3M2ZkZjQ5NjQ3N2MzMTc1MDViM2I3MzI2MDQ5OGQzMWFlZiIsInNlcW5vIjoxMCwidGFnIjoic2lnbmF0dXJlIn2jc2lnxEC753MLLBpV8McemNJuFc0tKf2nB5myY31El/aNvHi0jtqHwkP3/JtjQUHnzBB7if2Uo6yGP2cxh3zfXUCrXPUFqHNpZ190eXBlIKN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kevinjalbert
+
+==================================================================

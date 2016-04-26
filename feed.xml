@@ -12,7 +12,7 @@
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-03-21T20:54:19-04:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -232,7 +232,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-02-29T19:42:36-05:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -286,7 +286,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-02-29T19:42:36-05:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -322,7 +322,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-02-29T19:42:36-05:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -474,7 +474,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-02-29T19:42:36-05:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -657,7 +657,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-02-29T19:42:36-05:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -757,7 +757,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-02-29T19:42:36-05:00</updated>
+    <updated>2016-04-25T21:13:09-04:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

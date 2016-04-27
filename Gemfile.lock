@@ -95,11 +95,6 @@ GEM
       tilt (~> 1.4.1, < 2.0)
     middleman-disqus (1.1.0)
       middleman-core (~> 3.3)
-    middleman-google-analytics (2.0.1)
-      activesupport (~> 4.1)
-      erubis
-      middleman-core (>= 3.4)
-      uglifier (~> 2.6)
     middleman-imageoptim (0.2.1)
       image_optim (~> 0.20.2)
       image_optim_pack (~> 0.2.1)
@@ -183,7 +178,6 @@ DEPENDENCIES
   middleman (~> 3.4.0)
   middleman-blog (~> 3.5.3)
   middleman-disqus (~> 1.1.0)
-  middleman-google-analytics (~> 2.0)
   middleman-imageoptim (~> 0.2.1)
   middleman-livereload (~> 3.4.3)
   middleman-minify-html (~> 3.4.1)
@@ -192,4 +186,4 @@ DEPENDENCIES
   redcarpet (~> 3.3.3)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

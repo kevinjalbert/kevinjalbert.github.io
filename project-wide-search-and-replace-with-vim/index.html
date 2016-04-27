@@ -22,4 +22,21 @@
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 //]]>
-</script> </div> </div> </div> </body> <div class="col-md-12 footer__copywrite"> &copy; 2015 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script> <script>!function(e,a,n,t,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(n),s=a.getElementsByTagName(n)[0],o.async=1,o.src=t,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-16620161-5","kevinjalbert.com"),ga("send","pageview");</script>
+</script> </div> </div> </div> </body> <div class="col-md-12 footer__copywrite"> &copy; 2015 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script> <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16620161-5']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout(function() {
+      window.onscroll = function() {
+        window.onscroll = null; // Only track the event once
+        _gaq.push(['_trackEvent', 'scroll', 'read']);
+      }
+    }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>

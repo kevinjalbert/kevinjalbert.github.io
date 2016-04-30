@@ -3,16 +3,122 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-03-20T20:00:00-04:00</updated>
+  <updated>2016-04-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Enhanced Vim Searching</title>
+    <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
+    <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
+    <updated>2016-04-30T16:26:54-04:00</updated>
+    <published>2016-04-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;h2&gt;Basic Searching&lt;/h2&gt;
+
+&lt;p&gt;Vim provides rather simple searching capabilities using the following keys while in normal mode:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/&lt;/code&gt; performs a &lt;em&gt;forward&lt;/em&gt; search of the provided pattern&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;/code&gt; performs a &lt;em&gt;backward&lt;/em&gt; search of the provided pattern&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;*&lt;/code&gt; performs a &lt;em&gt;forward&lt;/em&gt; search of the word under the cursor&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#&lt;/code&gt; performs a &lt;em&gt;backward&lt;/em&gt; search of the word under the cursor&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt; navigates to the &lt;em&gt;next&lt;/em&gt; search occurrence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;N&lt;/code&gt; navigates to the &lt;em&gt;previous&lt;/em&gt; search occurrence&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These commands alone are vital to anyone working with text in Vim. Without any customization these search commands perform simple&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Basic Searching" width="906" height="626" src="/images/2016-04-30-enhanced-vim-searching/basic-searching.gif" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Better Searching&lt;/h2&gt;
+
+&lt;p&gt;Personally, I always apply the following to make my searching slightly more responsive with visual feedback:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="k"&gt;set&lt;/span&gt; hlsearch
+&lt;span class="k"&gt;set&lt;/span&gt; incsearch
+
+&lt;span class="c"&gt;" This unsets the 'last search pattern' register by hitting ;&lt;/span&gt;
+nnoremap ; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;noh&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;:&amp;lt;&lt;/span&gt;backspace&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This allows our searches to &lt;em&gt;incrementally&lt;/em&gt; highlight the first match, providing visual feedback on our pattern matching. In addition, when proceeding with the search all the matches of the pattern are highlighted to visually indicate possible next matches.&lt;/p&gt;
+
+&lt;p&gt;As searching is a frequently used motion, I have added a map to &lt;code&gt;;&lt;/code&gt; to clear any highlighting from the searches.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Better Searching" width="910" height="630" src="/images/2016-04-30-enhanced-vim-searching/better-searching.gif" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Enhance Searching&lt;/h2&gt;
+
+&lt;p&gt;We can do better! Using a mixture of two vim plugins we can achieve an enhanced form of searching within vim:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" All around better searching (via Vundle's plugin manager)&lt;/span&gt;
+Bundle &lt;span class="s1"&gt;'haya14busa/incsearch.vim'&lt;/span&gt;
+Bundle &lt;span class="s1"&gt;'osyo-manga/vim-anzu'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First, we have a bunch of maps and settings to incorporate &lt;a href="https://github.com/haya14busa/incsearch.vim"&gt;&lt;code&gt;incsearch.vim&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://github.com/osyo-manga/vim-anzu"&gt;&lt;code&gt;vim-anzu&lt;/code&gt;&lt;/a&gt; together:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" Use incsearch.vim for all search functions (with anzu for indication)&lt;/span&gt;
+map /  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;forward&lt;span class="p"&gt;)&lt;/span&gt;
+map ?  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;backward&lt;span class="p"&gt;)&lt;/span&gt;
+map &lt;span class="k"&gt;g&lt;/span&gt;/ &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;stay&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;g:incsearch&lt;/span&gt;#auto_nohlsearch &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt; hlsearch
+map &lt;span class="k"&gt;n&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;n&lt;/span&gt;&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
+map N &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;N&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
+map * &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;star&lt;/span&gt;&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
+map # &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;sharp&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;g:anzu_status_format&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"%p(%i/%l) %w"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By using &lt;code&gt;incsearch.vim&lt;/code&gt; we not only gain access to other perks that it brings in it&amp;rsquo;s toolkit, but it also handles our highlighting issue. Anytime the cursor moves after a search motion it &lt;code&gt;incsearch.vim&lt;/code&gt; will automatically remove the highlighting, which saves us from using the previously mentioned &lt;code&gt;;&lt;/code&gt; map for manually clearing the search highlighting. Secondly we have &lt;code&gt;vim-anzu&lt;/code&gt; which indicates the current &lt;em&gt;index&lt;/em&gt; of the search occurrence that you are at, it also indicates when you wrap around the bottom/top of the buffer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Enhanced Searching" width="942" height="628" src="/images/2016-04-30-enhanced-vim-searching/enhanced-searching.gif" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;&lt;em&gt;tap tap tap&lt;/em&gt; Enhance&amp;hellip; &lt;em&gt;tap tap tap&lt;/em&gt; Enhance Searching&lt;/h2&gt;
+
+&lt;p&gt;We can go even further to &lt;em&gt;enhance&lt;/em&gt; our searching by making use of another vim plugin, &lt;a href="https://github.com/Lokaltog/vim-easymotion"&gt;&lt;code&gt;vim-easymotion&lt;/code&gt;&lt;/a&gt; for better targeting our searches:&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" Targeting our searching (via Vundle's plugin manager)&lt;/span&gt;
+Bundle &lt;span class="s1"&gt;'Lokaltog/vim-easymotion'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default &lt;code&gt;vim-easymotion&lt;/code&gt; could be used on the common &lt;code&gt;/&lt;/code&gt; searches to provide an intelligent way to &lt;em&gt;target&lt;/em&gt; our searches. Although, this tramples over our previous work, and we lose the simplicity of our common &lt;code&gt;/&lt;/code&gt; searches. The following function and augmentations allow &lt;code&gt;vim-easymotion&lt;/code&gt; to be triggered off of a &lt;code&gt;/&lt;/code&gt; search by hooking into the search by &lt;code&gt;incsearch.vim&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" Integrate incsearch and easymotion&lt;/span&gt;
+&lt;span class="c"&gt;" https://github.com/Lokaltog/vim-easymotion/issues/146#issuecomment-75443473&lt;/span&gt;
+&lt;span class="c"&gt;" Can use / for 'normal searching', at anytime its possible to use &amp;lt;space&amp;gt; to&lt;/span&gt;
+&lt;span class="c"&gt;" pass search over to easymotion. To use spaces in search you need to apply&lt;/span&gt;
+&lt;span class="c"&gt;" them via the regex approach \s.&lt;/span&gt;
+augroup incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion
+  autocmd&lt;span class="p"&gt;!&lt;/span&gt;
+  autocmd &lt;span class="nb"&gt;User&lt;/span&gt; IncSearchEnter autocmd&lt;span class="p"&gt;!&lt;/span&gt; incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion&lt;span class="p"&gt;-&lt;/span&gt;impl
+augroup END
+augroup incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion&lt;span class="p"&gt;-&lt;/span&gt;impl
+  autocmd&lt;span class="p"&gt;!&lt;/span&gt;
+augroup END
+&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; IncsearchEasyMotion&lt;span class="p"&gt;()&lt;/span&gt; abort
+  autocmd incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion&lt;span class="p"&gt;-&lt;/span&gt;impl &lt;span class="nb"&gt;User&lt;/span&gt; IncSearchExecute &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;silent&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; &lt;span class="k"&gt;call&lt;/span&gt; EasyMotion#Search&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"\&amp;lt;CR&amp;gt;"&lt;/span&gt;
+&lt;span class="k"&gt;endfunction&lt;/span&gt;
+&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;g:incsearch_cli_key_mappings&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="se"&gt;\&lt;/span&gt;   &lt;span class="s2"&gt;"\&amp;lt;Space&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="se"&gt;\&lt;/span&gt;       &lt;span class="s1"&gt;'key'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'IncsearchEasyMotion()'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="se"&gt;\&lt;/span&gt;       &lt;span class="s1"&gt;'noremap'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="se"&gt;\&lt;/span&gt;       &lt;span class="s1"&gt;'expr'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="se"&gt;\&lt;/span&gt;   &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="se"&gt;\&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img alt="Targeted Searching" width="938" height="630" src="/images/2016-04-30-enhanced-vim-searching/targeted-searching.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We finally have all-around better vim searching, by configuring three search related plugins to play nice with each other!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -232,7 +338,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -286,7 +392,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -322,7 +428,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -474,7 +580,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -657,7 +763,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -757,7 +863,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-04-25T21:13:57-04:00</updated>
+    <updated>2016-04-26T21:10:01-04:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

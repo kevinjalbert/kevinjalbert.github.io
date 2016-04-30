@@ -8,6 +8,7 @@ activate :blog do |blog|
   blog.tag_template = 'tag.html'
 
   blog.paginate = true
+  blog.per_page = 5
 end
 
 activate :search do |search|

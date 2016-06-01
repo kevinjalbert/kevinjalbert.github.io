@@ -3,16 +3,85 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-04-29T20:00:00-04:00</updated>
+  <updated>2016-05-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Keep on Learning, but don't Forget to Remember</title>
+    <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
+    <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
+    <updated>2016-05-31T20:47:15-04:00</updated>
+    <published>2016-05-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;Learning is a way of life for a developer. Frequently we are exposed to techniques and tips such as: keybindings, shell commands, utilities, new functions/methods, new applications. While learning, we want to keep on remembering the previous techniques and tips that we&amp;rsquo;ve learned so that we can keep them &lt;em&gt;fresh&lt;/em&gt; and on our tool belt. It is not uncommon to forget some learned knowledge if you don&amp;rsquo;t use it often.&lt;/p&gt;
+
+&lt;p&gt;I would like to present my own problem and solution surrounding this idea.&lt;/p&gt;
+
+&lt;h2&gt;Problem: Customization of vim/zsh&lt;/h2&gt;
+
+&lt;p&gt;Vim and zsh are my editor and shell of choice, both decisions I made early in my career. I have since spent countless hours using both and each are indispensable to my development process. As typical of any developer I am always looking for ways to improve my process. Near the beginning of my career I discovered that both &lt;a href="http://vimawesome.com/"&gt;vim&lt;/a&gt; and &lt;a href="https://github.com/unixorn/awesome-zsh-plugins"&gt;zsh&lt;/a&gt; have thriving plugin communities.&lt;/p&gt;
+
+&lt;p&gt;I saw that there were &lt;a href="https://github.com/spf13/spf13-vim"&gt;popular&lt;/a&gt; vim &lt;a href="https://github.com/carlhuda/janus"&gt;distributions&lt;/a&gt; that come pre-packaged with opinionated set of keybindings, plugins and themes. I originally used one of these and immediately felt overwhelmed with the added functionality. I eventually came to terms with the error of my ways, and went back to vanilla vim. Learning from my mistake I decided to slowly incorporate features I felt were useful as I came to need them.&lt;/p&gt;
+
+&lt;p&gt;I continue to stumble upon new plugins that simplifies tasks. I add custom keybindings to perform certain motions. I create custom vim functions. While observing colleagues I take mental notes of vim motions that I have yet to take advantage of. I occasionally look through my setup and notice features and keybindings that I have not used in a while. Sometimes I remove them, but other times I&amp;rsquo;ll keep it and make a try and use it.&lt;/p&gt;
+
+&lt;p&gt;My use of zsh is nearly an identical story to that of my use with vim. In either case I routinely accumulate and pruning tips that I find useful. My largest gripe is &lt;em&gt;forgetting&lt;/em&gt; about new tips that I want to make part of my normal tool set. In most cases these have yet to become habit and common knowledge to me through repetitive exposure and use.&lt;/p&gt;
+
+&lt;h2&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;I decided to write my accumulation of tips down as one-liners in &lt;code&gt;tips.txt&lt;/code&gt; files, while using directories under &lt;code&gt;~/.tips&lt;/code&gt; for categorization:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;~/.tips❯ tree
+.
+├── ruby
+│   └── rspec
+│       └── tips.txt
+├── vim
+│   ├── plugins
+│   │   ├── ctrlp
+│   │   │   └── tips.txt
+│   │   └── nerdtree
+│   │       └── tips.txt
+│   └── vanilla
+│       └── tips.txt
+└── zsh
+    └── tips.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ultimately my goal is to be presented with a random tip when I open a new shell. To accomplish this the following code snippet is placed near the start of my &lt;code&gt;.zshrc&lt;/code&gt; (also works in a &lt;code&gt;.bashrc&lt;/code&gt;):&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Displays a random tip from the .tips directory when opening the shell
+# Requires gshuf (brew install coreutils)
+(
+  TIP_PATH=$(find ~/.tips -type f -name tips.txt | gshuf -n1)    # Pick a random tips.txt file
+  TIP_TILE=${TIP_PATH#"$HOME/.tips/"}                            # i.e., ~/.tips/vim/vanilla/tips.txt  ---&amp;gt;  vim/vanilla/tips.txt
+  echo "From ${TIP_TILE%.txt}:"                                  # i.e., "From vim/vanilla/tips:"
+  gshuf -n1 &amp;lt; "$TIP_PATH"                                        # Displays a random line from the tip file
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now throughout the day when I open many new shells, I am presented with a random recorded tip:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;From vim/plugins/nerdtree/tips:
+`&amp;lt;f2&amp;gt;` toggles nerdtree open/close
+~/.tips❯
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;From zsh/tips:
+`j` allows you to jump to marked directories (via `jump`)
+~/.tips❯
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Don&amp;rsquo;t Forget to Remember&lt;/h2&gt;
+
+&lt;p&gt;As I continue to learn new things I&amp;rsquo;ll be added them to the appropriate &lt;code&gt;tips.txt&lt;/code&gt; within my &lt;code&gt;.tips&lt;/code&gt; directory. If I am presented with a tip that is no longer relevant I can simply remove it. Overall this seems like a great solution for recollecting tips.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -118,7 +187,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -338,7 +407,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -392,7 +461,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -428,7 +497,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -580,7 +649,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -763,7 +832,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -863,7 +932,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-04-30T16:31:34-04:00</updated>
+    <updated>2016-04-30T17:00:33-04:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

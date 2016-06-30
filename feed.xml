@@ -3,16 +3,114 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-05-30T20:00:00-04:00</updated>
+  <updated>2016-06-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>More Shell History</title>
+    <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
+    <id>http://kevinjalbert.com/more-shell-history/</id>
+    <updated>2016-06-29T22:01:49-04:00</updated>
+    <published>2016-06-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell&amp;rsquo;s history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to &lt;em&gt;reverse search&lt;/em&gt; through it via &lt;code&gt;ctrl-r&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Increasing History&lt;/h1&gt;
+
+&lt;p&gt;First thing regardless of what shell try these commands and make note of their values:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$HISTSIZE&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$SAVEHIST&lt;/span&gt; &lt;span class="c"&gt;# or $HISTFILESIZE for bash&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$HISTFILE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Across both zsh and bash these three environment variables determine the location and size of your shell history (&lt;a href="http://zsh.sourceforge.net/Guide/zshguide02.html#l17"&gt;zsh guide on setting history up&lt;/a&gt;):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HISTSIZE&lt;/code&gt; indicates how many commands from your history file are loaded into the shell&amp;rsquo;s memory&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SAVEHIST&lt;/code&gt;/&lt;code&gt;HISTFILESIZE&lt;/code&gt; indicates how many commands your history file can hold (you want this equal or larger than &lt;code&gt;HISTSIZE&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HISTFILE&lt;/code&gt; indicates the history file itself which houses your previous commands&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Its possible you might have already set some configurations related to the shell&amp;rsquo;s history, or maybe a plugin has set it for you like &lt;a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/history.zsh#L2-L7"&gt;oh-my-zsh&lt;/a&gt;. You should be aware of your history file and its size at the very least. This would also be a great opportunity to change it if you have not yet.&lt;/p&gt;
+
+&lt;p&gt;In the default zsh configuration only &lt;code&gt;HISTSIZE&lt;/code&gt; is set, and it is tiny at only 30. No history file it set, which means no history is persisted. Default bash configuration has defaults history file and sizes of 500. Both of these are both small with respect to the amount of commands one might use.&lt;/p&gt;
+
+&lt;p&gt;Recall that the effective reverse search (&lt;code&gt;ctrl-r&lt;/code&gt;) is based off of what is in your history. You don&amp;rsquo;t really want to lose anything right? So set something high!&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+
+&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.zhistory &lt;span class="c"&gt;# Don't forget to to set this also&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From what I&amp;rsquo;ve witnessed the major downside to a large history is pretty negligible. When the shell starts it&amp;rsquo;ll read in your history file and store an amount defined by &lt;code&gt;$HISTSIZE&lt;/code&gt; in memory. More history simply means slower shell startup, although it is not that significant. In addition there might be some shell plugins which reach into your history, these can also cause slow downs (i.e., &lt;a href="https://github.com/zsh-users/zsh-history-substring-search"&gt;zsh-history-substring-search&lt;/a&gt; significantly slows down with a large history).&lt;/p&gt;
+
+&lt;h1&gt;Cleaning History&lt;/h1&gt;
+
+&lt;p&gt;Now we have a larger history, which by itself is a huge win. Now we want a &lt;em&gt;cleaner&lt;/em&gt; history if possible. The main benefit of a cleaner history is that stepping through your history with UP and DOWN keys will not show duplicates.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ignoredups
+
+&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
+setopt HIST_FIND_NO_DUPS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you wanted you could go even further and actually prevent duplicates from being saved in your history file with the following:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;erasedups
+
+&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
+setopt HIST_IGNORE_ALL_DUPS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;Sharing History&lt;/h1&gt;
+
+&lt;p&gt;If you end up using multiple shells at a time (i.e., opening multiple zsh or bash), you might want to &lt;em&gt;share history&lt;/em&gt; between them. By default the history files are written when the shell closes. With the following you can allow the shells to write and read from the history file after each command:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
+&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histappend
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"history -a; history -c; history -r; &lt;/span&gt;&lt;span class="nv"&gt;$PROMPT_COMMAND&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
+setopt inc_append_history
+setopt share_history
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;Putting it Together &amp;ndash; TL;DR&lt;/h1&gt;
+
+&lt;p&gt;If you want more history use the following:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ignoredups
+
+&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histappend
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"history -a; history -c; history -r; &lt;/span&gt;&lt;span class="nv"&gt;$PROMPT_COMMAND&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.zhistory
+
+setopt HIST_FIND_NO_DUPS
+
+setopt inc_append_history
+setopt share_history
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
+  <entry>
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-05-31T20:47:15-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -81,7 +179,7 @@
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -187,7 +285,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -407,7 +505,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -461,7 +559,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -497,7 +595,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -649,7 +747,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -832,7 +930,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -932,7 +1030,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-04-30T17:00:33-04:00</updated>
+    <updated>2016-05-31T20:49:01-04:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

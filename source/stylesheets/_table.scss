@@ -1,0 +1,36 @@
+$table-row-colour: #fff;
+$table-row-off-colour: #f8f8f8;
+
+table {
+  border: 1px solid $content-border-colour;
+  border-collapse: collapse;
+
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+  overflow: auto;
+  width: 100%;
+  word-break: keep-all;
+
+  th {
+    border: 1px solid $content-border-colour;
+    font-weight: bold;
+    padding: 5px 15px;
+  }
+
+  tr {
+    background-color: $table-row-colour;
+    border: 1px solid $content-border-colour;
+  }
+
+  tr:nth-child(2n) {
+    background-color: $table-row-off-colour;
+    border: 1px solid $content-border-colour;
+  }
+
+  td {
+    border: 1px solid $content-border-colour;
+    padding: 5px 15px;
+  }
+}
+

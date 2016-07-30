@@ -41,7 +41,7 @@ set :images_dir, 'images'
 set :partials_dir, 'partials'
 
 set :markdown_engine, :redcarpet
-set :markdown, fenced_code_blocks: true, smartypants: true
+set :markdown, fenced_code_blocks: true, smartypants: true, tables: true
 
 activate :automatic_image_sizes
 activate :directory_indexes

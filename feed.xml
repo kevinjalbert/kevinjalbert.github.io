@@ -3,16 +3,121 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-06-29T20:00:00-04:00</updated>
+  <updated>2016-07-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Port Mapping Development Servers</title>
+    <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
+    <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
+    <updated>2016-07-30T15:21:07-04:00</updated>
+    <published>2016-07-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of &lt;code&gt;localhost&lt;/code&gt; is a cumbersome and error prone issue. &lt;a href="https://github.com/kevinjalbert/port_map"&gt;port_map&lt;/a&gt; is a ruby utility that provides a simple and almost automatic solution to this problem.&lt;/p&gt;
+
+&lt;p&gt;I developed this utility gem to solve a personal problem of mine while dealing with multiple web servers during development. The next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;port_map&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/port_map#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Example Scenario&lt;/h2&gt;
+
+&lt;p&gt;You are developing a service that uses multiple web servers. You have two rails applications and one ember application.&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Application&lt;/th&gt;
+&lt;th&gt;Directory&lt;/th&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Local URL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Rails API&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/api/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rails server&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;http://localhost:3000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rails Background Jobs&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/jobs/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rails server --port 3001&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;http://localhost:3001&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ember Application&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/ember/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ember server&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;http://localhost:4200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h3&gt;The Problem&lt;/h3&gt;
+
+&lt;p&gt;In each of these applications there is some configuration work required to ensure that they communicate on the correct ports. There are two issues here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As we add more web servers we have to avoid clashing on existing ports.&lt;/li&gt;
+&lt;li&gt;You have to make sure that you correctly start each server with the right port number.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;&lt;code&gt;port_map&lt;/code&gt; to the Rescue!&lt;/h3&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to transform this unwieldy scenario into an organized and easy to manage one using &lt;code&gt;port_map&lt;/code&gt;.&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Application&lt;/th&gt;
+&lt;th&gt;Directory&lt;/th&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Local URL&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Rails API&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/api/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;port_map rails server&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;http://api.dev&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rails Background Jobs&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/jobs/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;port_map rails server&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;http://jobs.dev&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ember Application&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/ember/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;port_map ember server&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;http://ember.dev&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;The domain names can be configured with environment variables, but by default they are based on the directory&amp;rsquo;s name.&lt;/p&gt;
+
+&lt;p&gt;You can close and restart each web server multiple times and they will continue to use the same domain names. &lt;code&gt;port_map&lt;/code&gt; provides an easy way to logically name each web server, as well as remove the need of specifying ports.&lt;/p&gt;
+
+&lt;h2&gt;Putting it to the Test&lt;/h2&gt;
+
+&lt;p&gt;I have been using &lt;code&gt;port_map&lt;/code&gt; for a little over 6 months (as of writing this), and it has served me quite well. The beauty of &lt;code&gt;port_map&lt;/code&gt; is that it works on any shell command that accepts a &lt;code&gt;--port &amp;lt;number&amp;gt;&lt;/code&gt; or &lt;code&gt;-p &amp;lt;number&amp;gt;&lt;/code&gt; flag. I enjoy finding new uses for &lt;code&gt;port_map&lt;/code&gt; in other web servers like &lt;a href="https://middlemanapp.com"&gt;middleman&lt;/a&gt; and &lt;a href="https://jekyllrb.com"&gt;jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There was one issue that I have hit, although its not a deal breaker &lt;a href="https://github.com/kevinjalbert/port_map/issues/7"&gt;kevinjalbert/port_map#7&lt;/a&gt;, although I suspect I can fix this eventually.&lt;/p&gt;
+
+&lt;p&gt;As &lt;code&gt;port_map&lt;/code&gt; is a wrapper around the command there are interesting issues that can arise. I use &lt;a href="http://www.zsh.org/"&gt;Zsh&lt;/a&gt; as my shell along with a bunch of aliases it was necessary for &lt;code&gt;port_map&lt;/code&gt; to support running commands that contain aliases. I recently moved to &lt;a href="https://zplug.sh/"&gt;zplug&lt;/a&gt; as my Zsh plugin framework, where I encountered the following issue &lt;a href="https://github.com/zplug/zplug/issues/209"&gt;zplug/zplug#209&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;One last inconvenience is that &lt;code&gt;port_map&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;port_map&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;port_map&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;port_map&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
+
+&lt;h2&gt;The Future&lt;/h2&gt;
+
+&lt;p&gt;I will continue to use &lt;code&gt;port_map&lt;/code&gt; until I can spend some time to dig deeper into &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; and &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;. These two technologies isolate and containerize environments (web services). I can see the benefits in such technologies as they are not dependant on the host environment, which in my case is my laptop.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-06-29T22:01:49-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -110,7 +215,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -179,7 +284,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -285,7 +390,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -505,7 +610,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -559,7 +664,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -595,7 +700,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -747,7 +852,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -930,7 +1035,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1030,7 +1135,7 @@ noun&lt;/p&gt;
     <title>No Excuses: Verifying RSpec Test Doubles</title>
     <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
     <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-05-31T20:49:01-04:00</updated>
+    <updated>2016-06-30T18:27:53-04:00</updated>
     <published>2015-04-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

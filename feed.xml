@@ -3,16 +3,142 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-07-29T20:00:00-04:00</updated>
+  <updated>2016-08-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Git Evolution: How did we get Here?</title>
+    <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
+    <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
+    <updated>2016-08-31T17:39:54-04:00</updated>
+    <published>2016-08-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;As a developer its not uncommon to want a little more context surrounding the code snippet you are dealing with. You might have found yourself in these situations and reached for &lt;code&gt;git blame&lt;/code&gt; to get some initial context in why the code is like it is. This only scratches the surface and you might want a more context which &lt;code&gt;git log&lt;/code&gt; can provide to you. You are mostly interested in how the code evolved to this point, and really want you want is &lt;code&gt;git evolution&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I developed &lt;a href="https://github.com/kevinjalbert/git_evolution"&gt;git_evolution&lt;/a&gt; to solve a personal problem of mine while spelunking in a git repository trying to find more reasons to why the code might have evolved in this way.&lt;/p&gt;
+
+&lt;p&gt;To best describe what and how git evolution can be used the next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;git_evolution&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/git_evolution#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Example Scenario&lt;/h2&gt;
+
+&lt;p&gt;If we were interesting in the source code evolution that lead to &lt;a href="https://github.com/rails/rails/blob/7ba3a48/activesupport/lib/active_support/core_ext/array/access.rb#L70-L75"&gt;rails&amp;rsquo;s Array#forty_two&lt;/a&gt;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git_evolution --range 70:75 ./rails/activesupport/lib/active_support/core_ext/array/access.rb
+
+Commits:
+utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; (Thu Oct 31 23:20:15 2013 +0900) - 3f79d8423078f0671c8aa505ae199608d451663d
+Add Rdoc document for Array#forty_two
+
+Jeremy Kemper &amp;lt;jeremy@bitsweat.net&amp;gt; (Sat Mar 21 03:26:09 2009 -0700) - 83fd1ae122cf1ee4ea2c52e0bd963462163516ca
+Convert array extension modules to class reopens
+
+David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; (Fri Nov 21 09:06:46 2008 +0100) - e50530ca3ab5db53ebc74314c54b62b91b932389
+Reduced the number of literal aliases to the range that has actually seen personal use. With the massive savings in overhead, I was able to fit Array#forty_two
+
+Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; (Sun Oct 5 22:16:26 2008 +0100) - a2932784bb71e72a78c32819ebd7ed2bed551e3e
+Merge docrails
+
+Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; (Mon Jul 28 12:26:59 2008 +0100) - 6e754551254a8cc64e034163f5d0dc155b450388
+Merge docrails changes
+
+David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; (Tue Jun 17 13:37:57 2008 -0500) - 22af62cf486721ee2e45bb720c42ac2f4121faf4
+Added Array#second through Array#tenth as aliases for Array#[1] through Array#[9] [DHH]
+
+David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; (Tue Nov 27 19:42:30 2007 +0000) - 4d177ae0d6d9f60c4000f45fb6f6df27317afbff
+Added Array#from and Array#to that behaves just from String#from and String#to [DHH]
+
+--------------------------------------------------------------------------------
+
+Ownership (Commits):
+David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; - 3/7 (42.86%)
+Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; - 2/7 (28.57%)
+Jeremy Kemper &amp;lt;jeremy@bitsweat.net&amp;gt; - 1/7 (14.29%)
+utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; - 1/7 (14.29%)
+
+Ownership (Changes):
+David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; - 53/84 (63.1%)
+Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; - 20/84 (23.81%)
+Jeremy Kemper &amp;lt;jeremy@bitsweat.net&amp;gt; - 9/84 (10.71%)
+utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; - 2/84 (2.38%)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;GitEvolution&lt;/code&gt; provides a succinct output of the commits which contains any changes which lead to the current state. Its quick to see that &lt;a href="https://github.com/rails/rails/commit/e50530ca3ab5db53ebc74314c54b62b91b932389"&gt;e50530ca3ab5db53ebc74314c54b62b91b932389&lt;/a&gt; was the introduction point for &lt;code&gt;Array#forty_two&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In addition we have some &lt;em&gt;ownership&lt;/em&gt; information with respect to commits and changes. The ownership information can be used to identify &lt;em&gt;who&lt;/em&gt; to follow up with for additional context. In time new metrics and analysis could be attached to the output (i.e., factoring in time for ownership, types of changes, identifying file modifications such as movement or renames, etc&amp;hellip;)&lt;/p&gt;
+
+&lt;h2&gt;The Other (Hard) Way&lt;/h2&gt;
+
+&lt;p&gt;If we were to identify the commit which introduced &lt;code&gt;Array#forty_two&lt;/code&gt; we have two main options &lt;code&gt;git blame&lt;/code&gt; and &lt;code&gt;git log&lt;/code&gt;:&lt;/p&gt;
+
+&lt;h3&gt;Using &lt;code&gt;git blame&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;I highly advise against this approach as it involves a lot of manual work. You essentially use &lt;code&gt;git blame&lt;/code&gt; to identify the previous commit which effects a line of concern within the area you are looking in.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git blame --follow ./activesupport/lib/active_support/core_ext/array/access.rb
+
+...
+83fd1ae1 (Jeremy Kemper            2009-03-21 03:26:09 -0700 70)   # Equal to &amp;lt;tt&amp;gt;self[41]&amp;lt;/tt&amp;gt;. Also known as accessing "the reddit".
+3f79d842 (utenmiki                 2013-10-31 23:20:15 +0900 71)   #
+3f79d842 (utenmiki                 2013-10-31 23:20:15 +0900 72)   #   (1..42).to_a.forty_two # =&amp;gt; 42
+83fd1ae1 (Jeremy Kemper            2009-03-21 03:26:09 -0700 73)   def forty_two
+83fd1ae1 (Jeremy Kemper            2009-03-21 03:26:09 -0700 74)     self[41]
+4d177ae0 (David Heinemeier Hansson 2007-11-27 19:42:30 +0000 75)   end
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can then use a similar command to blame the parent git revision at that point.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git blame --follow 83fd1ae1^ -- ./activesupport/lib/active_support/core_ext/array/access.rb
+
+...
+e50530ca (David Heinemeier Hansson 2008-11-21 09:06:46 +0100 46)         # Equal to &amp;lt;tt&amp;gt;self[41]&amp;lt;/tt&amp;gt;. Also known as accessing "the reddit".
+e50530ca (David Heinemeier Hansson 2008-11-21 09:06:46 +0100 47)         def forty_two
+e50530ca (David Heinemeier Hansson 2008-11-21 09:06:46 +0100 48)           self[41]
+22af62cf (David Heinemeier Hansson 2008-06-17 13:37:57 -0500 49)         end
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All the while you occasionally want to inspect the commit in more detail using &lt;code&gt;git show &amp;lt;commit-sha&amp;gt;&lt;/code&gt;. Eventually you will end up where you want to be.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git show e50530ca
+
+commit e50530ca3ab5db53ebc74314c54b62b91b932389
+Author: David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt;
+Date:   Fri Nov 21 09:06:46 2008 +0100
+
+    Reduced the number of literal aliases to the range that has actually seen personal use. With the massive savings in overhead, I was able to fit Array#forty_two
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Using &lt;code&gt;git log&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The following &lt;code&gt;git log&lt;/code&gt; command presents the entire file history (26 commits):&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git log --follow ./activesupport/lib/active_support/core_ext/array/access.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This works, but it is a lot more information to sift through.&lt;/p&gt;
+
+&lt;p&gt;A better approach (which is what &lt;code&gt;GitEvolution&lt;/code&gt; uses under the hood) presents the file history for only the concerned portion (7 commits):&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git log -L70,75:./activesupport/lib/active_support/core_ext/array/access.rb --follow ./activesupport/lib/active_support/core_ext/array/access.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output isn&amp;rsquo;t succinct, nor does it have ownership information. The command is also more verbose.&lt;/p&gt;
+
+&lt;h2&gt;Advance Usage&lt;/h2&gt;
+
+&lt;p&gt;I personally use Vim for all my editing needs, especially while editing code. As most of the projects I&amp;rsquo;m working in are version controlled with Git I made a &lt;a href="https://github.com/kevinjalbert/dotfiles/blob/eaca550/vim/vim/functions.vim#L1-L16"&gt;Vim function&lt;/a&gt; that allows me to visually select and call &lt;code&gt;git_evolution&lt;/code&gt; using &lt;code&gt;ge&lt;/code&gt; on the selected lines. This opens the output in a new buffer which I can then look through and yank commit SHAs if needed.&lt;/p&gt;
+
+&lt;h2&gt;The Future&lt;/h2&gt;
+
+&lt;p&gt;Similar to what I mentioned in my &lt;a href="https://kevinjalbert.com/port-mapping-development-servers/"&gt;last post about &lt;code&gt;port_map&lt;/code&gt;&lt;/a&gt;, &lt;code&gt;git_evolution&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;git_evolution&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;git_evolution&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;git_evolution&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
+
+&lt;p&gt;I do want to expand on the &lt;em&gt;ownership&lt;/em&gt; aspect of &lt;code&gt;git_evolution&lt;/code&gt; as I think it&amp;rsquo;ll help quicker identify &lt;em&gt;who&lt;/em&gt; could be contacted for additional context. Currently it is simply looking at commits and change totals. Ideally there would be a better algorithm to determine ownership of selected lines.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-07-30T15:21:07-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -117,7 +243,7 @@
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -215,7 +341,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -284,7 +410,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -390,7 +516,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -610,7 +736,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -664,7 +790,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -700,7 +826,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -852,7 +978,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1035,7 +1161,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
     <title>Share Your Bag of Tricks</title>
     <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
     <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
+    <updated>2016-07-30T15:24:26-04:00</updated>
     <published>2015-04-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1129,186 +1255,6 @@ noun&lt;/p&gt;
 &lt;p&gt;The best way is to reach a broad audience, so that everyone can benefit from it. Thankfully the Internet is an amazing medium to communicate to the masses.&lt;/p&gt;
 
 &lt;p&gt;Take pride and share your bag of tricks!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>No Excuses: Verifying RSpec Test Doubles</title>
-    <link rel="alternate" href="http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/"/>
-    <id>http://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</id>
-    <updated>2016-06-30T18:27:53-04:00</updated>
-    <published>2015-04-27T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <content type="html">&lt;p&gt;Tests which utilize external services or interact with the database are typically the culprits of long-running tests. We want to keep our tests quick. It is possible to mock/stub out long running database and/or external services calls. This reduces the time a test suite takes to execute.&lt;/p&gt;
-
-&lt;h2&gt;Unsheathe the Double&lt;/h2&gt;
-
-&lt;p&gt;In Ruby, one approach to mocking is by completely replacing the object of interest with a lightweight &lt;a href="http://www.rubydoc.info/gems/rspec-mocks/frames#Test_Doubles"&gt;double&lt;/a&gt; using &lt;a href="http://rspec.info/"&gt;RSpec&lt;/a&gt;. Proper usage of a &lt;em&gt;double&lt;/em&gt; can prevent tests from interacting with external services, such as a database (i.e., &lt;code&gt;ActiveRecord&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;With respect to RSpec, a &lt;em&gt;double&lt;/em&gt; is created by providing a classname or object, along with a hash of messages and their responses. A &lt;em&gt;double&lt;/em&gt; can only respond using the provided responses to their defined messages (technically there are other messages that a &lt;em&gt;double&lt;/em&gt; can respond to, but for our purpose we do not have to worry about them).&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;  &lt;span class="c1"&gt;#=&amp;gt; "Woof"&lt;/span&gt;
-&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;walk&lt;/span&gt;  &lt;span class="c1"&gt;#=&amp;gt; Double "Dog" received unexpected message :walk with (no args)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In the above example, a &lt;code&gt;&amp;#39;Dog&amp;#39;&lt;/code&gt; &lt;em&gt;double&lt;/em&gt; is created that only knows &lt;code&gt;#talk&lt;/code&gt;. When it receives an unknown message like &lt;code&gt;#walk&lt;/code&gt; an appropriate exception is raised.&lt;/p&gt;
-
-&lt;h2&gt;Double-Edge Double&lt;/h2&gt;
-
-&lt;p&gt;A &lt;em&gt;double&lt;/em&gt; aims to abstract away from the concrete concepts that they are &lt;em&gt;standing in for&lt;/em&gt; (i.e., defined classes/methods/attributes/associations and their implementations). This can simplify tests by only dealing with the immediate concerns in a restricted scope. Using &lt;em&gt;doubles&lt;/em&gt; has its perks, but a problem can arise if changes occur to the underlying concrete concepts.&lt;/p&gt;
-
-&lt;p&gt;Lets examine the following scenario:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;We have an existing class with multiple defined methods. This class and its methods primarily interact with external services. This class and its methods are used within our test suite, in where we have mocked it out using a &lt;em&gt;double&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;We decided to modify a method definition on the described class. Our tests continue to pass.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Given this scenario we would hope that by modifying the method definition that our existing tests which depend on said method definition to fail. Our tests are using a &lt;em&gt;double&lt;/em&gt; in which the method definition it has defined is still valid, even when the actual method definition has been altered.&lt;/p&gt;
-
-&lt;p&gt;The consequences of not seeing any failing tests can be serious. Even with minor cosmetic changes, that do not alter functionality, it is still a misleading test. Identifying these tests after the fact can be challenging, as they initially appear to be in fine working order.&lt;/p&gt;
-
-&lt;p&gt;It is important to always remember to check the usage of &lt;em&gt;doubles&lt;/em&gt; whose underlying concepts are changed. A gem called &lt;a href="https://github.com/xaviershay/rspec-fire"&gt;rspec-fire&lt;/a&gt; was created to alleviate this task. This gem would verify that a &lt;em&gt;double&lt;/em&gt; is actually mocking an actual method defined on the concrete object. As of &lt;a href="http://rspec.info/blog/2014/05/notable-changes-in-rspec-3"&gt;RSpec 3.0&lt;/a&gt;, &lt;em&gt;rspec-fire&lt;/em&gt; is now obsolete as RSpec has a set of new &lt;a href="https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles"&gt;verifying doubles&lt;/a&gt;. With the release of &lt;a href="http://rspec.info/blog/2015/02/rspec-3-2-has-been-released"&gt;RSpec 3.2&lt;/a&gt;, &lt;code&gt;instance_double&lt;/code&gt; now support dynamic column methods defined by ActiveRecord.&lt;/p&gt;
-
-&lt;h2&gt;Dance of the Double&lt;/h2&gt;
-
-&lt;p&gt;A simple example best illustrates the downside of using the original RSpec &lt;em&gt;doubles&lt;/em&gt;. In this example we also show how to replace the &lt;em&gt;double&lt;/em&gt; with the new and improved verifying &lt;em&gt;doubles&lt;/em&gt;, along with their benefits.&lt;/p&gt;
-
-&lt;p&gt;For this example we are not dealing with a database, although the idea is easily extendable. We can imagine that our test is creating actual entries in the database, thus incurring the performance hit.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;p&gt;First we define an &lt;code&gt;Owner&lt;/code&gt; that has a &lt;code&gt;Dog&lt;/code&gt;. The &lt;code&gt;Dog&lt;/code&gt; responds to &lt;code&gt;#talk&lt;/code&gt;. In addition we have a corresponding test that uses a &lt;em&gt;double&lt;/em&gt; to mock out the &lt;code&gt;Dog&lt;/code&gt; which responds to &lt;code&gt;#talk&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
-  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;talk&lt;/span&gt;
-    &lt;span class="s1"&gt;'Woof'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# 1 example, 0 failures&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr&gt;
-
-&lt;p&gt;We decide to change &lt;code&gt;Dog#talk&lt;/code&gt; to &lt;code&gt;Dog#bark&lt;/code&gt;, but forget to update the test.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
-  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bark&lt;/span&gt;
-    &lt;span class="s1"&gt;'Woof'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# 1 example, 0 failures&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;From our test&amp;rsquo;s perspective everything is still fine, since our &lt;em&gt;double&lt;/em&gt; still responds to &lt;code&gt;#talk&lt;/code&gt;. Ideally we would want our test here to fail since it is not accurately matching the interface defined by an actual &lt;code&gt;Dog&lt;/code&gt; instance.&lt;/p&gt;
-
-&lt;p&gt;This is a problem. It is possible to completely &lt;em&gt;forget&lt;/em&gt; about fixing the test, since it technically passed.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;p&gt;This time we use a verifying &lt;em&gt;double&lt;/em&gt; that RSpec provides such as an &lt;code&gt;instance_double&lt;/code&gt;. This ensures that the messages the &lt;em&gt;double&lt;/em&gt; receives are verified against the interface defined by the concrete object.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec'&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
-  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bark&lt;/span&gt;
-    &lt;span class="s1"&gt;'Woof'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Failure/Error: let(:dog) { instance_double('Dog', talk: 'Fake Woof') }&lt;/span&gt;
-&lt;span class="c1"&gt;#   Dog does not implement: talk&lt;/span&gt;
-&lt;span class="c1"&gt;# 1 example, 1 failure&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now we have a failing test! This is what we expect to happen as our &lt;em&gt;double&lt;/em&gt; is attempting to using an unimplemented method. This feedback allows us to take the corrective action on our tests to ensure that they are not forgotten and invalid.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;p&gt;We now decide to change the number of arguments on &lt;code&gt;Dog#bark&lt;/code&gt;. Again with the old non-verifying &lt;em&gt;double&lt;/em&gt; our test would again simply pass. The verifying &lt;em&gt;doubles&lt;/em&gt; also check that the number of arguments match the defined interface&amp;rsquo;s number of arguments.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec'&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Owner&lt;/span&gt;
-  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:dog&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@dog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dog&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Dog&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loud&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;loud&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="s1"&gt;'Woof'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Woof!!'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;Owner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:dog&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;instance_double&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dog'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;talk: &lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;talk&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fake Woof'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Failure/Error: let(:dog) { instance_double('Dog', talk: 'Fake Woof') }&lt;/span&gt;
-&lt;span class="c1"&gt;#   Wrong number of arguments. Expected 1, got 0.&lt;/span&gt;
-&lt;span class="c1"&gt;# 1 example, 1 failure&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;Double Development&lt;/h2&gt;
-
-&lt;p&gt;If the underlying class is loaded &lt;code&gt;instance_double&lt;/code&gt; will do the verifying on the class. In the situation where the class is not loaded than it acts as a normal &lt;em&gt;double&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;During development an &lt;code&gt;instance_double&lt;/code&gt; allows one to develop in isolation if the class you are mocking out does not yet exist. Eventually when the test is more-or-less complete, it is possible to simply &lt;em&gt;load&lt;/em&gt; the class and the &lt;code&gt;instance_double&lt;/code&gt; will start to verify on the loaded class.&lt;/p&gt;
-
-&lt;p&gt;In addition, during development you can use &lt;a href="https://github.com/nevir/rubocop-rspec/blob/master/lib/rubocop/cop/rspec/verified_doubles.rb"&gt;&lt;code&gt;rubocop-rspec&lt;/code&gt;&lt;/a&gt; to ensure you always verify your &lt;em&gt;doubles&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Concluding Double&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;TL;DR &amp;ndash; There are no excuses, verify your RSpec test doubles.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Verifying your RSpec test &lt;em&gt;doubles&lt;/em&gt; can, and will, save you from many headaches down the road. In most cases the change required to use verifying &lt;em&gt;doubles&lt;/em&gt; is relatively easy. The benefits are clear, worthwhile and your test suite will thank you.&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -1,0 +1,127 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <title>Let's `pry` into Ruby Objects — Kevin Jalbert</title> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Posts — Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-4 col-md-4 banner"> <a href="/">Kevin Jalbert</a> </div> <div class="col-xs-8 col-md-8 navigation"> <ul> <li><input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on></li> <li><a href="/about/">About</a></li> <li><a href="/now/">Now</a></li> </ul> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Let&#39;s <code>pry</code> into Ruby Objects</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class=article__date>September 30, 2016 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>3 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/lets-pry-into-ruby-objects/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/pry/">pry</a> <a href="/tags/ruby/">ruby</a> <a href="/tags/rails/">rails</a> </div> </div> </div> <div class=article__separator></div> <h2>Where is my <code>pry</code>bar?</h2> <p>You are probably already familiar with <code>irb</code>, an <em>interactive Ruby</em> shell. It is pretty powerful and can help you poke around Ruby. In Rails, you might have had access to <code>byebug</code> and used it for debugging purposes. This is great and is standard with Rails projects. I do, however, recommend looking at <code>pry</code>, which is just a bit more powerful in what it can do. We&rsquo;re just going to scratch the surface here.</p> <pre class="highlight plaintext"><code>gem install pry
+</code></pre> <p>The <code>pry</code> <a href="https://github.com/pry/pry/wiki">wiki</a> is quite detailed with a lot of accompanying resources.</p> <h2>Adventure Time! Using <code>pry</code> to Open Objects</h2> <p>We&rsquo;ll use a shortened example that I recently encountered. I was pretty deep in Rails and was dealing with <code>ActiveSupport::Callbacks::CallbackChain</code> (lets not ask why ;P). I wanted to verify if we have any <code>around_perform</code> <em>callbacks</em> set on a particular class. With my trusty <code>pry</code>, I can inspect what I&rsquo;m working with in more detail.</p> <pre class="highlight plaintext"><code>pry(main)&gt; RandomClass_perform_callbacks
+=&gt; #&lt;ActiveSupport::Callbacks::CallbackChain:0x007fdcdddb5b20 @callbacks=nil, @chain=[], @config={:scope=&gt;[:kind]}, @mutex=#&lt;Thread::Mutex:0x007fdcdddb53c8&gt;, @name=:perform&gt;
+</code></pre> <p>At this point we have <code>ActiveSupport::Callbacks</code> included in our <code>RandomClass</code>. We also have an empty callback chain.</p> <p>I eventually included in a module <code>MagicCallbacks</code> which defines our <code>around_perform</code> upon being included. If we were to re-inspect the class, we would see that we have a callback present.</p> <pre class="highlight plaintext"><code>pry(main)&gt; RandomClass.include(MagicCallbacks)
+=&gt; RandomClass
+
+pry(main)&gt; RandomClass._perform_callbacks
+=&gt; #&lt;ActiveSupport::Callbacks::CallbackChain:0x007fdce2a22b70
+ @callbacks=nil,
+ @chain=
+  [#&lt;ActiveSupport::Callbacks::Callback:0x007fdce2a22cd8
+    @chain_config={:scope=&gt;[:kind]},
+    @filter=#&lt;Proc:0x007fdce2a22eb8@/Users/jalbert/Projects/example-rails/app/models/concerns/magic_callbacks.rb:7&gt;,
+    @if=[],
+    @key=70293335906140,
+    @kind=:around,
+    @name=:perform,
+    @unless=[]&gt;],
+ @config={:scope=&gt;[:kind]},
+ @mutex=#&lt;Thread::Mutex:0x007fdce2a22b20&gt;,
+ @name=:perform&gt;
+</code></pre> <p>We can now see that we have a callback within the <code>@chain</code> array! Back to the problem at hand, I was interested in programmatically determining if the class had any callbacks defined.</p> <p>As I was working with an unfamiliar object, I reached for my trusty <code>pry</code>. I can use <code>ls</code> on <em>any</em> object and see a listing of methods and where they come from.</p> <pre class="highlight plaintext"><code>pry(main)&gt; ls RandomClass._perform_callbacks
+Enumerable#methods:
+  all?     chunk        collect_concat  detect      each_cons   each_with_index   exclude?  find_index  grep      include?  lazy   max      min     minmax_by  partition  reverse_each  slice_before  sort_by  take_while  to_json                                 to_set
+  any?     chunk_while  count           drop        each_entry  each_with_object  find      first       grep_v    index_by  many?  max_by   min_by  none?      reduce     select        slice_when    sum      to_a        to_json_with_active_support_encoder     zip
+  as_json  collect      cycle           drop_while  each_slice  entries           find_all  flat_map    group_by  inject    map    member?  minmax  one?       reject     slice_after   sort          take     to_h        to_json_without_active_support_encoder
+ActiveSupport::Callbacks::CallbackChain#methods: append  clear  compile  config  delete  each  empty?  index  insert  name  prepend
+instance variables: @callbacks  @chain  @config  @mutex  @name
+</code></pre> <p>There is a lot of information here, but the key points to take away are:</p> <ul> <li>Classes/Module/Variables headers are shown in the order of <code>#ancestors</code>. <ul> <li>Sent messages travel up from the bottom to the top until something can <code>#respond_to?</code> it</li> </ul></li> <li>Method and variable names are listed under their owner. <ul> <li>This can quickly help you identify methods of interest.</li> </ul></li> <li>If a method is redefined in a lower level, it is only shown on the lowest level. <ul> <li>For example, a parent class and child class define same method.</li> </ul></li> </ul> <p>You can also modify the <code>ls</code> commnd with modifiers which you can learn more with <code>ls -h</code>.</p> <p>So we can see here that we have an <code>#empty?</code> defined under <code>ActiveSupport::Callbacks::CallbackChain#methods</code>. This sounds great, and my first thoughts is I can use <code>#empty?</code>. My only concern is what it&rsquo;s <em>actually</em> checking. Again, <code>pry</code> to the rescue with <code>show-source</code>.</p> <pre class="highlight plaintext"><code>pry(main)&gt; show-source ActiveSupport::Callbacks::CallbackChain#empty?
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/callbacks.rb @ line 529:
+Owner: ActiveSupport::Callbacks::CallbackChain
+Visibility: public
+Number of lines: 1
+
+def empty?;       @chain.empty?; end
+</code></pre> <p>So we can see the implementation of <code>#empty?</code> is a one-liner, where it&rsquo;s just calling <code>@chain.empty?</code>. Sounds legit, but let&rsquo;s go further to verify this.</p> <pre class="highlight plaintext"><code>pry(main)&gt; show-source ActiveSupport::Callbacks::CallbackChain
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/callbacks.rb @ line 512:
+Class name: ActiveSupport::Callbacks::CallbackChain
+Number of lines: 80
+
+class CallbackChain #:nodoc:#
+  include Enumerable
+
+  attr_reader :name, :config
+
+  def initialize(name, config)
+    @name = name
+    @config = {
+      :scope =&gt; [ :kind ]
+    }.merge!(config)
+    @chain = []
+    @callbacks = nil
+    @mutex = Mutex.new
+  end
+  ...
+  def append(*callbacks)
+    callbacks.each { |c| append_one(c) }
+  end
+  ...
+  def append_one(callback)
+    @callbacks = nil
+    remove_duplicates(callback)
+    @chain.push(callback)
+  end
+end
+</code></pre> <p>Yep! Just what I wanted to see. <code>@chain</code> is just an array to which all the callbacks are appended. So now we can do our check for any callbacks on our class by using <code>!RandomClass._perform_callbacks.empty?</code>.</p> <pre class="highlight plaintext"><code>pry(main)&gt; RandomClass._perform_callbacks.empty?
+=&gt; false
+</code></pre> <p>A colleague of mine suggested the use of <code>#present?</code> instead a negative conditional with <code>#empty?</code>. This is a fair point &ndash; I personally like to avoid negatives in my conditionals. Again, I want to verify it all works as expected with this change.</p> <pre class="highlight plaintext"><code>pry(main)&gt; show-source ActiveSupport::Callbacks::CallbackChain#present?
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/core_ext/object/blank.rb @ line 23:
+Owner: Object
+Visibility: public
+Number of lines: 3
+
+def present?
+  !blank?
+end
+</code></pre> <p>I can see that <code>#present?</code> calls <code>!blank?</code>. Now let&rsquo;s now follow <code>#blank?</code>.</p> <pre class="highlight plaintext"><code>pry(main)&gt; show-source ActiveSupport::Callbacks::CallbackChain#blank?
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/core_ext/object/blank.rb @ line 16:
+Owner: Object
+Visibility: public
+Number of lines: 3
+
+def blank?
+  respond_to?(:empty?) ? !!empty? : !self
+end
+</code></pre> <p>Yep! That works like I suspected it would &ndash; that method chain winds up calling <code>ActiveSupport::Callbacks::CallbackChain#empty?</code> in the ending.</p> <h1>Wrapping up</h1> <p>So if you are not using <code>pry</code>, I highly recommend it. I <em>barely</em> scratched the surface on what it can do for you. It is a powerful tool that can help in debugging and further digging around your codebase.</p> <div id=disqus_thread></div> <script>
+//<![CDATA[
+                  var disqus_shortname = 'kevinjalbert';
+          
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+//]]>
+</script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> <a href="http://disqus.com" class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </div> </div> </div> </body> <div class="col-md-12 footer__copywrite"> &copy; 2016 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script> <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16620161-5']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout(function() {
+      window.onscroll = function() {
+        window.onscroll = null; // Only track the event once
+        _gaq.push(['_trackEvent', 'scroll', 'read']);
+      }
+    }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>

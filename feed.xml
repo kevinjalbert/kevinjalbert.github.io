@@ -3,16 +3,180 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-08-30T20:00:00-04:00</updated>
+  <updated>2016-09-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Let's `pry` into Ruby Objects</title>
+    <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
+    <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
+    <updated>2016-09-30T21:59:39-04:00</updated>
+    <published>2016-09-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;h2&gt;Where is my &lt;code&gt;pry&lt;/code&gt;bar?&lt;/h2&gt;
+
+&lt;p&gt;You are probably already familiar with &lt;code&gt;irb&lt;/code&gt;, an &lt;em&gt;interactive Ruby&lt;/em&gt; shell. It is pretty powerful and can help you poke around Ruby. In Rails, you might have had access to &lt;code&gt;byebug&lt;/code&gt; and used it for debugging purposes. This is great and is standard with Rails projects. I do, however, recommend looking at &lt;code&gt;pry&lt;/code&gt;, which is just a bit more powerful in what it can do. We&amp;rsquo;re just going to scratch the surface here.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;gem install pry
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;pry&lt;/code&gt; &lt;a href="https://github.com/pry/pry/wiki"&gt;wiki&lt;/a&gt; is quite detailed with a lot of accompanying resources.&lt;/p&gt;
+
+&lt;h2&gt;Adventure Time! Using &lt;code&gt;pry&lt;/code&gt; to Open Objects&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;ll use a shortened example that I recently encountered. I was pretty deep in Rails and was dealing with &lt;code&gt;ActiveSupport::Callbacks::CallbackChain&lt;/code&gt; (lets not ask why ;P). I wanted to verify if we have any &lt;code&gt;around_perform&lt;/code&gt; &lt;em&gt;callbacks&lt;/em&gt; set on a particular class. With my trusty &lt;code&gt;pry&lt;/code&gt;, I can inspect what I&amp;rsquo;m working with in more detail.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; RandomClass_perform_callbacks
+=&amp;gt; #&amp;lt;ActiveSupport::Callbacks::CallbackChain:0x007fdcdddb5b20 @callbacks=nil, @chain=[], @config={:scope=&amp;gt;[:kind]}, @mutex=#&amp;lt;Thread::Mutex:0x007fdcdddb53c8&amp;gt;, @name=:perform&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point we have &lt;code&gt;ActiveSupport::Callbacks&lt;/code&gt; included in our &lt;code&gt;RandomClass&lt;/code&gt;. We also have an empty callback chain.&lt;/p&gt;
+
+&lt;p&gt;I eventually included in a module &lt;code&gt;MagicCallbacks&lt;/code&gt; which defines our &lt;code&gt;around_perform&lt;/code&gt; upon being included. If we were to re-inspect the class, we would see that we have a callback present.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; RandomClass.include(MagicCallbacks)
+=&amp;gt; RandomClass
+
+pry(main)&amp;gt; RandomClass._perform_callbacks
+=&amp;gt; #&amp;lt;ActiveSupport::Callbacks::CallbackChain:0x007fdce2a22b70
+ @callbacks=nil,
+ @chain=
+  [#&amp;lt;ActiveSupport::Callbacks::Callback:0x007fdce2a22cd8
+    @chain_config={:scope=&amp;gt;[:kind]},
+    @filter=#&amp;lt;Proc:0x007fdce2a22eb8@/Users/jalbert/Projects/example-rails/app/models/concerns/magic_callbacks.rb:7&amp;gt;,
+    @if=[],
+    @key=70293335906140,
+    @kind=:around,
+    @name=:perform,
+    @unless=[]&amp;gt;],
+ @config={:scope=&amp;gt;[:kind]},
+ @mutex=#&amp;lt;Thread::Mutex:0x007fdce2a22b20&amp;gt;,
+ @name=:perform&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now see that we have a callback within the &lt;code&gt;@chain&lt;/code&gt; array! Back to the problem at hand, I was interested in programmatically determining if the class had any callbacks defined.&lt;/p&gt;
+
+&lt;p&gt;As I was working with an unfamiliar object, I reached for my trusty &lt;code&gt;pry&lt;/code&gt;. I can use &lt;code&gt;ls&lt;/code&gt; on &lt;em&gt;any&lt;/em&gt; object and see a listing of methods and where they come from.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; ls RandomClass._perform_callbacks
+Enumerable#methods:
+  all?     chunk        collect_concat  detect      each_cons   each_with_index   exclude?  find_index  grep      include?  lazy   max      min     minmax_by  partition  reverse_each  slice_before  sort_by  take_while  to_json                                 to_set
+  any?     chunk_while  count           drop        each_entry  each_with_object  find      first       grep_v    index_by  many?  max_by   min_by  none?      reduce     select        slice_when    sum      to_a        to_json_with_active_support_encoder     zip
+  as_json  collect      cycle           drop_while  each_slice  entries           find_all  flat_map    group_by  inject    map    member?  minmax  one?       reject     slice_after   sort          take     to_h        to_json_without_active_support_encoder
+ActiveSupport::Callbacks::CallbackChain#methods: append  clear  compile  config  delete  each  empty?  index  insert  name  prepend
+instance variables: @callbacks  @chain  @config  @mutex  @name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is a lot of information here, but the key points to take away are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Classes/Module/Variables headers are shown in the order of &lt;code&gt;#ancestors&lt;/code&gt;.
+
+&lt;ul&gt;
+&lt;li&gt;Sent messages travel up from the bottom to the top until something can &lt;code&gt;#respond_to?&lt;/code&gt; it&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Method and variable names are listed under their owner.
+
+&lt;ul&gt;
+&lt;li&gt;This can quickly help you identify methods of interest.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If a method is redefined in a lower level, it is only shown on the lowest level.
+
+&lt;ul&gt;
+&lt;li&gt;For example, a parent class and child class define same method.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can also modify the &lt;code&gt;ls&lt;/code&gt; commnd with modifiers which you can learn more with &lt;code&gt;ls -h&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;So we can see here that we have an &lt;code&gt;#empty?&lt;/code&gt; defined under &lt;code&gt;ActiveSupport::Callbacks::CallbackChain#methods&lt;/code&gt;. This sounds great, and my first thoughts is I can use &lt;code&gt;#empty?&lt;/code&gt;. My only concern is what it&amp;rsquo;s &lt;em&gt;actually&lt;/em&gt; checking. Again, &lt;code&gt;pry&lt;/code&gt; to the rescue with &lt;code&gt;show-source&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; show-source ActiveSupport::Callbacks::CallbackChain#empty?
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/callbacks.rb @ line 529:
+Owner: ActiveSupport::Callbacks::CallbackChain
+Visibility: public
+Number of lines: 1
+
+def empty?;       @chain.empty?; end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So we can see the implementation of &lt;code&gt;#empty?&lt;/code&gt; is a one-liner, where it&amp;rsquo;s just calling &lt;code&gt;@chain.empty?&lt;/code&gt;. Sounds legit, but let&amp;rsquo;s go further to verify this.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; show-source ActiveSupport::Callbacks::CallbackChain
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/callbacks.rb @ line 512:
+Class name: ActiveSupport::Callbacks::CallbackChain
+Number of lines: 80
+
+class CallbackChain #:nodoc:#
+  include Enumerable
+
+  attr_reader :name, :config
+
+  def initialize(name, config)
+    @name = name
+    @config = {
+      :scope =&amp;gt; [ :kind ]
+    }.merge!(config)
+    @chain = []
+    @callbacks = nil
+    @mutex = Mutex.new
+  end
+  ...
+  def append(*callbacks)
+    callbacks.each { |c| append_one(c) }
+  end
+  ...
+  def append_one(callback)
+    @callbacks = nil
+    remove_duplicates(callback)
+    @chain.push(callback)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yep! Just what I wanted to see. &lt;code&gt;@chain&lt;/code&gt; is just an array to which all the callbacks are appended. So now we can do our check for any callbacks on our class by using &lt;code&gt;!RandomClass._perform_callbacks.empty?&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; RandomClass._perform_callbacks.empty?
+=&amp;gt; false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A colleague of mine suggested the use of &lt;code&gt;#present?&lt;/code&gt; instead a negative conditional with &lt;code&gt;#empty?&lt;/code&gt;. This is a fair point &amp;ndash; I personally like to avoid negatives in my conditionals. Again, I want to verify it all works as expected with this change.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; show-source ActiveSupport::Callbacks::CallbackChain#present?
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/core_ext/object/blank.rb @ line 23:
+Owner: Object
+Visibility: public
+Number of lines: 3
+
+def present?
+  !blank?
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I can see that &lt;code&gt;#present?&lt;/code&gt; calls &lt;code&gt;!blank?&lt;/code&gt;. Now let&amp;rsquo;s now follow &lt;code&gt;#blank?&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; show-source ActiveSupport::Callbacks::CallbackChain#blank?
+
+From: /Users/jalbert/.rvm/gems/ruby-2.3.0/gems/activesupport-4.2.7.1/lib/active_support/core_ext/object/blank.rb @ line 16:
+Owner: Object
+Visibility: public
+Number of lines: 3
+
+def blank?
+  respond_to?(:empty?) ? !!empty? : !self
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yep! That works like I suspected it would &amp;ndash; that method chain winds up calling &lt;code&gt;ActiveSupport::Callbacks::CallbackChain#empty?&lt;/code&gt; in the ending.&lt;/p&gt;
+
+&lt;h1&gt;Wrapping up&lt;/h1&gt;
+
+&lt;p&gt;So if you are not using &lt;code&gt;pry&lt;/code&gt;, I highly recommend it. I &lt;em&gt;barely&lt;/em&gt; scratched the surface on what it can do for you. It is a powerful tool that can help in debugging and further digging around your codebase.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2016-08-31T17:39:54-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -138,7 +302,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -243,7 +407,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -341,7 +505,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -410,7 +574,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -516,7 +680,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -736,7 +900,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -790,7 +954,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -826,7 +990,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -978,7 +1142,7 @@ Time Taken: 1130.691 ms
     <title>Faster RSpec Regression Testing</title>
     <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
     <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
+    <updated>2016-08-31T17:41:22-04:00</updated>
     <published>2015-09-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1155,106 +1319,6 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Share Your Bag of Tricks</title>
-    <link rel="alternate" href="http://kevinjalbert.com/share-your-bag-of-tricks/"/>
-    <id>http://kevinjalbert.com/share-your-bag-of-tricks/</id>
-    <updated>2016-07-30T15:24:26-04:00</updated>
-    <published>2015-04-30T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <content type="html">&lt;p&gt;Everyone has specific tips and shortcuts that they have picked up from various sources, including the following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Trial &amp;amp; error or self-discovery&lt;/li&gt;
-&lt;li&gt;From a friend or colleague&lt;/li&gt;
-&lt;li&gt;Reading books, blog posts, articles&lt;/li&gt;
-&lt;li&gt;Watching videos, conferences&lt;/li&gt;
-&lt;li&gt;Formal education&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Regardless of how one has gained these skills, it is obvious that they increase their effectiveness and efficiency at tasks. With enough exposure and time, one can amass an impressive assortment of skills, tips and shortcuts. We tend to call these people &lt;em&gt;veterans&lt;/em&gt;/&lt;em&gt;experts&lt;/em&gt;/&lt;em&gt;experienced&lt;/em&gt;/&lt;em&gt;seniors&lt;/em&gt;, amongst other words of praise and respect.&lt;/p&gt;
-
-&lt;p&gt;This post is not directed towards a specific group of individuals, as the overarching message applies to everyone. It is common to find large visible gaps with respect to skills and/or experience. For example, within a workplace environment a more experienced colleague might have customized and automated parts of their daily workflow to increase their effectiveness and efficiency.&lt;/p&gt;
-
-&lt;h2&gt;The Bag of Tricks&lt;/h2&gt;
-
-&lt;p&gt;In general the following is true:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Experienced individuals have something which sets them apart from the less-experienced.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Let us ignore the common qualities that account for uniqueness such as personality, and focus solely on ones skills and experience. Then, it&amp;rsquo;s possible to identify their &lt;em&gt;bag of tricks&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;A bag of tricks is really a simple concept. Often it is a set of small tips and shortcuts used to make certain tasks easier than they normally would be.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Bag of Tricks&lt;/strong&gt; &lt;em&gt;| bag əv triks |&lt;/em&gt;
-noun&lt;/p&gt;
-
-&lt;p&gt;1 &lt;em&gt;informal&lt;/em&gt; a set of ingenious plans, techniques, or resources: &lt;em&gt;I better pull something out of my &lt;b&gt;bag of tricks&lt;/b&gt; to finish this task quickly&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;In some cases the holder of the bag of tricks clearly knows what resides in their bag. In other cases they might be forgetting some items, which occurs over time as the holder has completely integrated it into their normal repertoire.&lt;/p&gt;
-
-&lt;h2&gt;Sharing the Bag&lt;/h2&gt;
-
-&lt;p&gt;Often in workplaces we have various levels of experience such as: &lt;em&gt;Junior&lt;/em&gt;, &lt;em&gt;Intermediate&lt;/em&gt;, &lt;em&gt;Senior&lt;/em&gt;. In our societies we have accepted the following model:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Experienced individuals can &lt;em&gt;mentor&lt;/em&gt; the less experienced &lt;em&gt;pupils&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This is a very simple learning model, and it works. It can be seen in many industries and professions as they promote formal mentorship/apprenticeship programs. These formal programs often have a cost associated with them, although that typically correlates with the quality received. Informal approaches are often executed between colleagues with little structure.&lt;/p&gt;
-
-&lt;p&gt;Everyone has something worth showing. Someone will be interested in learning it, or improving upon it. Levels of experience does not guarantee one will always be teaching or learning. In a symbiotic relationship everyone will be sharing their bag of tricks.&lt;/p&gt;
-
-&lt;h3&gt;Pupil&amp;rsquo;s Perspective&lt;/h3&gt;
-
-&lt;p&gt;Getting a peek at someone&amp;rsquo;s bag of tricks is of great benefit for the pupil. If someone offers advice, there should be no hesitation to accept it. A pupil, or anyone for that matter, should always accept the offer of advice since there is no downside to hearing it out. Even if the pupil has already known about the provided advice, the act of hearing it again reinforces it. It might also be possible for the pupil to give back immediately to the mentor.&lt;/p&gt;
-
-&lt;p&gt;The best thing a pupil can do is to provide feedback and appreciation. By questioning the mentor and asking for additional details, it forces the mentor to inspect and reflect on their bag of tricks. In some situation the tides can change and the mentor will learn from the pupil.&lt;/p&gt;
-
-&lt;h3&gt;Mentor&amp;rsquo;s Perspective&lt;/h3&gt;
-
-&lt;p&gt;Mentors are encouraged to share their bag of tricks, and most are willing to do so. Sharing knowledge has many benefits:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Joy in helping someone&lt;/li&gt;
-&lt;li&gt;Gained respect from pupil and others&lt;/li&gt;
-&lt;li&gt;Self-improvement by going over specifics&lt;/li&gt;
-&lt;li&gt;Constructive criticism&lt;/li&gt;
-&lt;li&gt;Encouraging similar behaviour&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Sharing and helping can bring much joy to a mentor, which in turn leads to gaining respect from the pupil and others. As previously mentioned, a mentor may not necessarily know of the content of their bag of tricks. A pupil can probe and inquire on specifics to the point where new light is shone on the bag of tricks. By mentoring a pupil, it encourages others to do the same when they have amassed their own bag of tricks.&lt;/p&gt;
-
-&lt;h2&gt;To Share, or Not to Share?&lt;/h2&gt;
-
-&lt;p&gt;There might be situations where an individual does not want to share their bag of tricks. One strong reason for this is that they would lose their &lt;em&gt;edge&lt;/em&gt; over their colleagues. This is understandable, although if the environment is amenable to learning then there is no real reason to hold back.&lt;/p&gt;
-
-&lt;p&gt;If everyone in an environment is holding back on knowledge, it does not sound like a place of growth. Furthermore, if everyone is scared of losing their edge, there are probably greater issues in that environment. If there is no sharing of knowledge between colleagues, everyone is at a disadvantage compared to the alternative.&lt;/p&gt;
-
-&lt;h2&gt;Means of Sharing&lt;/h2&gt;
-
-&lt;p&gt;It is clear that sharing is a win-win situation. In a workplace environment sharing knowledge is simple and commonplace. Either the pupil asks for help, or the mentor decides to impart knowledge. If the environment is pro-learning then this behaviour will be encouraged and valued. There might even be an explicit mentoring process in place or less informal opportunities such as &lt;em&gt;lunch and learns&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;As mentioned before, anyone can mentor regardless of their skill and experience levels. Everyone should take every opportunity to share something from their bag of tricks. Not only will this immediately benefit others, but what goes around comes around. Sharing can take many forms, including the following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Blog Posts, Public Notes, Documentation&lt;/li&gt;
-&lt;li&gt;Mentoring, Pairing Sessions&lt;/li&gt;
-&lt;li&gt;Talks, Presentations, Demonstrations&lt;/li&gt;
-&lt;li&gt;Video/Audio Recordings&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The best way is to reach a broad audience, so that everyone can benefit from it. Thankfully the Internet is an amazing medium to communicate to the masses.&lt;/p&gt;
-
-&lt;p&gt;Take pride and share your bag of tricks!&lt;/p&gt;
 </content>
   </entry>
 </feed>

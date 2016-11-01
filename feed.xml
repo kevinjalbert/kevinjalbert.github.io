@@ -3,16 +3,193 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-09-29T20:00:00-04:00</updated>
+  <updated>2016-10-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Sidekiq: Contained Callbacks</title>
+    <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
+    <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
+    <updated>2016-10-31T21:48:58-04:00</updated>
+    <published>2016-10-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;h2&gt;ActiveSupport Callbacks&lt;/h2&gt;
+
+&lt;p&gt;In my &lt;a href="/lets-pry-into-ruby-objects/"&gt;last post&lt;/a&gt; I touched on &lt;code&gt;pry&lt;/code&gt; and how it helped me verify that my class had &lt;code&gt;around_perform&lt;/code&gt; ActiveSupport Callbacks attached to it. In this post I will delve further into &lt;em&gt;what&lt;/em&gt; I was trying to accomplish.&lt;/p&gt;
+
+&lt;h2&gt;[ActiveJob, Sidekiq] - [ActiveJob]&lt;/h2&gt;
+
+&lt;p&gt;I was working on a Rails 4.2.x project that had background job processing. We used &lt;a href="https://github.com/rails/rails/tree/4-2-stable/activejob"&gt;ActiveJob&lt;/a&gt; as our adapter to our background jobs. Behind the scenes, we were using the &lt;a href="http://sidekiq.org/"&gt;Sidekiq&lt;/a&gt; gem.&lt;/p&gt;
+
+&lt;p&gt;We eventually needed specifics that only native Sidekiq can provide through its &lt;code&gt;sidekiq_options&lt;/code&gt;. These options that Sidekiq provides were something that we didn&amp;rsquo;t need initially. As mentioned in the &lt;a href="https://github.com/mperham/sidekiq/wiki/Active-Job#active-job-introductio://github.com/mperham/sidekiq/wiki/Active-Job#active-job-introduction"&gt;Sidekiq Wiki&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note that more advanced Sidekiq features (&lt;code&gt;sidekiq_options&lt;/code&gt;) cannot be controlled or configured via ActiveJob, e.g. saving backtraces.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The time has come to take advantage of powerful sidekiq gems and options, thus we have to switch from ActiveJob to native Sidekiq.&lt;/p&gt;
+
+&lt;h1&gt;ActiveJob&amp;rsquo;s Free Perks&lt;/h1&gt;
+
+&lt;p&gt;ActiveJob provided certain features automatically such as using &lt;a href="http://guides.rubyonrails.org/active_job_basics.html#globalid"&gt;GlobalID&lt;/a&gt; and setting up &lt;a href="http://guides.rubyonrails.org/active_job_basics.html#callbacks"&gt;Callbacks&lt;/a&gt;, amongst others. With a native Sidekiq approach we lose those &lt;em&gt;free&lt;/em&gt; perks.&lt;/p&gt;
+
+&lt;p&gt;The biggest thing we missed was the callbacks, specifically &lt;code&gt;around_perform&lt;/code&gt;. We had several modules that were mixed in to our job classes, with the single responsibility of augmenting the class with callbacks.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;JobMetrics&lt;/span&gt;
+  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
+
+  &lt;span class="n"&gt;included&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;around_perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_job&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;MetricsLogger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timing&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;metrics_logger_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;metrics_logger_key&lt;/span&gt;
+      &lt;span class="vi"&gt;@metrics_logger_key&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;underscore&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This module is wrapping the actual job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt; in a &lt;code&gt;MetricsLogger.timing&lt;/code&gt;. In a future post, I might go into further details about &lt;code&gt;MetricsLogger&lt;/code&gt;, but at its core it records a key/value and sends it off to a log aggregator. The benifit we get from this module is the ability to know timing metrics for jobs based on an identifying signature.&lt;/p&gt;
+
+&lt;p&gt;Moving away from ActiveJob, we need another way to accomplish the same thing (&lt;em&gt;contained callbacks&lt;/em&gt;) with just Sidekiq.&lt;/p&gt;
+
+&lt;h2&gt;Contained Callbacks&lt;/h2&gt;
+
+&lt;p&gt;The goal is to have contained callbacks, which is just a seperate module that can be included on jobs that deifne the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.&lt;/p&gt;
+
+&lt;h3&gt;Prepend a Proxy&lt;/h3&gt;
+
+&lt;p&gt;I found out that to make use of &lt;code&gt;ActiveSupport::Callbacks&lt;/code&gt; you have to modify the executed method, which in our case would be the job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+  &lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;perform&lt;/span&gt;
+    &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="c1"&gt;# Actual perform's content here&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t want to modify the &lt;code&gt;#perform&lt;/code&gt; method definitions for all the jobs. So I came up with the solution of using &lt;code&gt;prepend&lt;/code&gt; to slot a proxy in front of the jobs&amp;rsquo; &lt;code&gt;#perform&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;SidekiqCallbacks&lt;/span&gt;
+  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This module then can be prepended into the Sidekiq job classes and the callbacks will be executed &amp;ndash; if they are present. The next task is to support the &lt;code&gt;around_perform&lt;/code&gt; callback.&lt;/p&gt;
+
+&lt;h3&gt;Support Setting and Running Callbacks&lt;/h3&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"active_support/callbacks"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Following approach used by ActiveJob&lt;/span&gt;
+&lt;span class="c1"&gt;# https://github.com/rails/rails/blob/93c9534c9871d4adad4bc33b5edc355672b59c61/activejob/lib/active_job/callbacks.rb&lt;/span&gt;
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;SidekiqCallbacks&lt;/span&gt;
+  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:run_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;ClassMethods&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;around_perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;set_callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:perform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:around&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now &lt;code&gt;SidekiqCallbacks&lt;/code&gt; defines the ability to add callbacks, and they will be executed before &lt;code&gt;#perform&lt;/code&gt; if defined.&lt;/p&gt;
+
+&lt;h3&gt;Wrapping it up&lt;/h3&gt;
+
+&lt;p&gt;The last thing I want to do is to encapsulate this Sidekiq callback logic in its own module that defines the actual callback (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). To do this, we need to further modify &lt;code&gt;SidekiqCallbacks&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"active_support/callbacks"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Following approach used by ActiveJob&lt;/span&gt;
+&lt;span class="c1"&gt;# https://github.com/rails/rails/blob/93c9534c9871d4adad4bc33b5edc355672b59c61/activejob/lib/active_job/callbacks.rb&lt;/span&gt;
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;SidekiqCallbacks&lt;/span&gt;
+  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;prepended&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Check to see if we already have any callbacks for :perform&lt;/span&gt;
+    &lt;span class="c1"&gt;# Prevents overwritting callbacks if we already included this module (and defined callbacks)&lt;/span&gt;
+    &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;define_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:_perform_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;_perform_callbacks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
+
+    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;
+      &lt;span class="n"&gt;prepend&lt;/span&gt; &lt;span class="no"&gt;ClassMethods&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:run_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;ClassMethods&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;after_perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;set_callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:perform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We had to include the &lt;code&gt;self.prepended&lt;/code&gt; so that the job class will have access to the defined methods through the contained callback module. The main thing to note here is that we are including &lt;code&gt;ActiveSupport::Callbacks&lt;/code&gt; on the base object that is prepending this module. We also have to ensure that the callbacks are only defined once (this is where in my &lt;a href="/lets-pry-into-ruby-objects/"&gt;last post&lt;/a&gt; I was using &lt;code&gt;pry&lt;/code&gt; figure why not all my callbacks were defined).&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;JobMetrics&lt;/span&gt;
+  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
+
+  &lt;span class="n"&gt;included&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;prepend&lt;/span&gt; &lt;span class="no"&gt;SidekiqCallbacks&lt;/span&gt;
+
+    &lt;span class="n"&gt;around_perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_job&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;MetricsLogger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timing&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;metrics_logger_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;metrics_logger_key&lt;/span&gt;
+      &lt;span class="vi"&gt;@metrics_logger_key&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;underscore&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, we can see how &lt;code&gt;JobMetrics&lt;/code&gt; has a new &lt;code&gt;prepend SidekiqCallbacks&lt;/code&gt; and that pulls in all the required &lt;code&gt;ActiveSupport::Callback&lt;/code&gt; logic that allows for callbacks to be defined and executed.&lt;/p&gt;
+
+&lt;h3&gt;The Win&lt;/h3&gt;
+
+&lt;p&gt;With this approach, the benifit is that the callback implementation is completely contained within the &lt;code&gt;JobMetrics&lt;/code&gt; module. The &lt;code&gt;SidekiqCallbacks&lt;/code&gt; module provides the missing ActiveJob callback support for &lt;code&gt;around_perform&lt;/code&gt;. It is also possible to add the missing ActiveJob callbacks using this approach.&lt;/p&gt;
+
+&lt;p&gt;In the ending, the concrete job classes just &lt;code&gt;include&lt;/code&gt; the contained callback module (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). &lt;code&gt;SidekiqCallbacks&lt;/code&gt; is designed to accomodate multiple contained callback modules being included on a single concrete job class.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2016-09-30T21:59:39-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -176,7 +353,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -302,7 +479,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -407,7 +584,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -505,7 +682,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -574,7 +751,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -680,7 +857,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -900,7 +1077,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -954,7 +1131,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-09-30T22:01:30-04:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -990,7 +1167,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Respect HTTP Caching</title>
     <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
     <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
+    <updated>2016-10-22T22:41:34-04:00</updated>
     <published>2015-09-23T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1135,189 +1312,6 @@ Time Taken: 277.589 ms
 Time Taken: 186.115 ms
 Time Taken: 475.249 ms
 Time Taken: 1130.691 ms
-&lt;/code&gt;&lt;/pre&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Faster RSpec Regression Testing</title>
-    <link rel="alternate" href="http://kevinjalbert.com/faster-rspec-regression-testing/"/>
-    <id>http://kevinjalbert.com/faster-rspec-regression-testing/</id>
-    <updated>2016-08-31T17:41:22-04:00</updated>
-    <published>2015-09-20T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <content type="html">&lt;h2&gt;Testing Approaches&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;em&gt;Immediately&lt;/em&gt; on the code that is being developed to help guide development. Generally using a &lt;em&gt;subset&lt;/em&gt; of the test suite.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Afterwards&lt;/em&gt; on the complete codebase to ensure no regressions appear. This is always done using the &lt;em&gt;complete&lt;/em&gt; test suite.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In an ideal environment, the complete test suite is run after every meaningful code change. This approach works for a small project, but it can grow into a time consuming process. Developers may only run a subset of tests that exercise the modified source code. Faster test execution allows for tighter feedback loops between testing and developing.&lt;/p&gt;
-
-&lt;p&gt;Eventually the active development stops as the feature is completed. A developer wants to have a high-level of confidence in the code that they wrote before committing the changes. By running the complete test suite, one can have a certain level of assurance that the code to be committed will not cause issues. Ideally this second phase of testing is carried out locally by the developer, but also on a continuous integration server to prevent regressions.&lt;/p&gt;
-
-&lt;h2&gt;RSpecing &lt;code&gt;it&lt;/code&gt; up&lt;/h2&gt;
-
-&lt;p&gt;RSpec tests are executed using the &lt;code&gt;it&lt;/code&gt; method. The code within the &lt;code&gt;it&lt;/code&gt; block is executed after applying context using &lt;code&gt;let&lt;/code&gt; and &lt;code&gt;before&lt;/code&gt;, which can be seen as the pre-amble of the test. In other words, for every &lt;code&gt;it&lt;/code&gt; block the test will execute the required pre-amble before the actual &lt;code&gt;it&lt;/code&gt; block.&lt;/p&gt;
-
-&lt;h3&gt;Many &lt;code&gt;it&lt;/code&gt; blocks&lt;/h3&gt;
-
-&lt;p&gt;During development it is useful to use the following technique to understand as much detail of failing tests:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="c1"&gt;# A trivial example to show the verification of&lt;/span&gt;
-  &lt;span class="c1"&gt;# multiple conditions using many 'it' blocks&lt;/span&gt;
-  &lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'test with many it blocks'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'B'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'C'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failures:
-
-  1) test with many it blocks should eq "B"
-     Failure/Error: it { expect('b'.upcase).to eq('B') }
-
-       expected: "B"
-            got: "C"
-
-  2) test with many it blocks should eq "C"
-     Failure/Error: it { expect('b'.upcase).to eq('C') }
-
-       expected: "C"
-            got: "B"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The results of the testing present all of the failures. This approach is important during iterative development as fixing one test might cause others to fail.&lt;/p&gt;
-
-&lt;h3&gt;Combining &lt;code&gt;it&lt;/code&gt; blocks&lt;/h3&gt;
-
-&lt;p&gt;Another approach that can be used with RSpec is to combine the many &lt;code&gt;it&lt;/code&gt; blocks into one:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;  &lt;span class="c1"&gt;# A trivial example to show the verification of&lt;/span&gt;
-  &lt;span class="c1"&gt;# multiple conditions using a combined 'it' block&lt;/span&gt;
-  &lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'test with a combined it block'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'a'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'c'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'B'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'b'&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;upcase&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'C'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Failures:
-
-  1) test with a combined it block should eq "B"
-     Failure/Error: expect('c'.upcase).to eq('B')
-
-       expected: "B"
-            got: "C"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This time the results present &lt;em&gt;only the first&lt;/em&gt; failure, even though two assertions are incorrect. This approach provides less information than the first example. Although there is a different benefit, it runs less examples (tests and their complete pre-amble). This approach leads to quicker test executions, with the loss of the complete listing of failures. Arguably this approach is better suited when a feature is complete and the tests remain present to detect regressions.&lt;/p&gt;
-
-&lt;h2&gt;Performance Impact&lt;/h2&gt;
-
-&lt;p&gt;In the previous section, two styles of using RSpec&amp;rsquo;s &lt;code&gt;it&lt;/code&gt; blocks were illustrated. The next example showcases both approaches to understand how the testing performance changes. To simulate some pre-amble (i.e., database interactions, setting up objects) sleeps are used when accessing the values from their &lt;code&gt;let&lt;/code&gt; blocks.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rspec'&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;AttributeObject&lt;/span&gt;
-  &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:value1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:value2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:value3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:value4&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@value1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value1&lt;/span&gt;
-    &lt;span class="vi"&gt;@value2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value2&lt;/span&gt;
-    &lt;span class="vi"&gt;@value3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value3&lt;/span&gt;
-    &lt;span class="vi"&gt;@value4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value4&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="s1"&gt;'performance using `it` blocks'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="no"&gt;AttributeObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'slow tests due to many `it` blocks'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s1"&gt;'faster tests due to a combined `it` block'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For this example it is possible to use both testing approaches. There are two criteria that must be satisfied to allow this transformation. For each &lt;code&gt;it&lt;/code&gt; block:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;strong&gt;pre-amble is the same&lt;/strong&gt;. In the example they are all instantiating the &lt;code&gt;AttributeObject&lt;/code&gt; with the four value arguments.&lt;/li&gt;
-&lt;li&gt;The &lt;strong&gt;contents are not mutating the environment in a different way from each other&lt;/strong&gt;. If an &lt;code&gt;it&lt;/code&gt; block mutates the environment then the many &lt;code&gt;it&lt;/code&gt; block approach might have unexpected results. In the example each &lt;code&gt;it&lt;/code&gt; block contains only a single assertion.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Many 'it' blocks
-Finished in 1.67 seconds (files took 0.09327 seconds to load)
-4 examples, 0 failures
-
-# Combined 'it' block
-Finished in 0.41675 seconds (files took 0.09545 seconds to load)
-1 example, 0 failures
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;It is clear to see that the combined &lt;code&gt;it&lt;/code&gt; block executes less examples and therefore requires less time. Both of these approaches are testing the &lt;em&gt;exact same thing&lt;/em&gt;, however one does so more quickly than the other. There is still the loss of the precise failure reporting per &lt;code&gt;it&lt;/code&gt; block. It can be argued that it is not a huge loss given the code under test has been developed and the tests are for regressions.&lt;/p&gt;
-
-&lt;h3&gt;Larger Scale Test Suite&lt;/h3&gt;
-
-&lt;p&gt;To better illustrate the benefits of using combined &lt;code&gt;it&lt;/code&gt; blocks when possible, I have applied this technique to a larger project. The conversion between the two approaches was straight-forward and the results are satisfying. It was possible to consolidated many &lt;code&gt;it&lt;/code&gt; blocks (300 less test examples), reducing the run time by 38%.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Before
-Finished in 3 minutes 6.3 seconds (files took 10.06 seconds to load)
-1506 examples, 0 failures
-
-# After
-Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
-1206 examples, 0 failures
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The results are going to differ between projects and testing styles, although in most cases there will be some performance improvements.&lt;/p&gt;
-
-&lt;h2&gt;Suggested Testing Workflow&lt;/h2&gt;
-
-&lt;p&gt;The following workflow is the one I follow as it provides the best of both worlds:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Iteratively develop feature using many &lt;code&gt;it&lt;/code&gt; blocks for feedback locally&lt;/li&gt;
-&lt;li&gt;Complete feature&lt;/li&gt;
-&lt;li&gt;Convert many &lt;code&gt;it&lt;/code&gt; blocks into a combined &lt;code&gt;it&lt;/code&gt; block for regressions&lt;/li&gt;
-&lt;li&gt;Merge feature into master&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Eventually some issue may come up and a regression might be found. If more work is involved to fix and understand the issue at hand I might split the combined &lt;code&gt;it&lt;/code&gt; block to provide more feedback on failures. At this point I would go back to following the workflow from the start.&lt;/p&gt;
-
-&lt;h3&gt;Best of Both Worlds with RSpec 3.3 &lt;code&gt;aggregate_failures&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;With &lt;a href="http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/"&gt;RSpec 3.3&lt;/a&gt; a new feature &lt;code&gt;aggregate_failures&lt;/code&gt; was introduced. This feature is specific to RSpec, and offers the best of both worlds with respect to the testing disscused earlier (many &lt;code&gt;it&lt;/code&gt; blocks vs. single &lt;code&gt;it&lt;/code&gt; block).&lt;/p&gt;
-
-&lt;p&gt;In summary it is possible to wrap the asserts within a combined &lt;code&gt;it&lt;/code&gt; block with &lt;code&gt;agregate_failiures&lt;/code&gt;. This allows all the assertions to execute with a single setup similar to the combined &lt;code&gt;it&lt;/code&gt; block approach, yet any failed asserts are individually reported should they occur similar to the many &lt;code&gt;it&lt;/code&gt; block approach.&lt;/p&gt;
-
-&lt;p&gt;The following is a code snippet from the &lt;a href="http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/"&gt;RSpec 3.3&lt;/a&gt; release notes where additional ways of usage are described.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;RSpec&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;Client&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;"returns a successful JSON response"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Client&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;make_request&lt;/span&gt;
-
-    &lt;span class="n"&gt;aggregate_failures&lt;/span&gt; &lt;span class="s2"&gt;"testing response"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;status&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="kp"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Content-Type"&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"application/json"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;body&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;to&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'{"message":"Success"}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 </content>
   </entry>

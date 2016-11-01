@@ -43,6 +43,9 @@
     <loc>https://kevinjalbert.com/lets-pry-into-ruby-objects/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/sidekiq-contained-callbacks/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/</loc>
   </url>
   <url>
@@ -86,6 +89,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/pry/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/sidekiq/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/2/</loc>

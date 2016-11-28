@@ -3,16 +3,132 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-10-30T20:00:00-04:00</updated>
+  <updated>2016-11-27T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Deploying my Website to GitHub Pages</title>
+    <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
+    <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
+    <updated>2016-11-28T16:15:58-05:00</updated>
+    <published>2016-11-27T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;h2&gt;History of my Website&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look back at my website back in early &lt;a href="https://web.archive.org/web/20120122125850/http://kevinjalbert.com/"&gt;2012&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It was built using &lt;a href="http://nanoc.ws/"&gt;nanoc&lt;/a&gt; as I was learning and enjoying using ruby. This static site generator seemed like a great tool when I started. It gave me a lot of control as I was able to write &lt;a href="https://github.com/kevinjalbert/website/blob/master/lib/helpers/custom_helper.rb"&gt;custom ruby helpers&lt;/a&gt; to assist in generating the website.&lt;/li&gt;
+&lt;li&gt;It was focused on showcasing my academic accomplishments such as publications/posters/presentations and projects as I was still in the education system and going down the academia career track.&lt;/li&gt;
+&lt;li&gt;The original &lt;a href="https://github.com/kevinjalbert/website"&gt;GitHub repository&lt;/a&gt; for this version of the website still exists, if you were interested in looking at it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After finishing my M.Sc degree I decided to work in industry instead of pursuing a Ph.D. I continued to update the website with minor changes, but for the most part it stagnated over time.&lt;/p&gt;
+
+&lt;h2&gt;Deciding on Middleman&lt;/h2&gt;
+
+&lt;p&gt;I eventually wanted to revamp my website to be more &lt;em&gt;relevant&lt;/em&gt; and decided going with a blog to document my technical endeavors and musings. I retired the old website and built up the new blog from scratch. I look through the &lt;a href="https://www.ruby-toolbox.com/categories/static_website_generation"&gt;Ruby Toolbox&lt;/a&gt; to see the alternatives to nanoc. Top pick seems to be &lt;a href="https://github.com/jekyll/jekyll"&gt;Jekyll&lt;/a&gt;, which is likely contributed to its painless integration with &lt;a href="https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;My two main concerns with Jekyll were:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The use of &lt;a href="https://jekyllrb.com/docs/templates/"&gt;Liquid Templating&lt;/a&gt; - I was personally not a fan of it.&lt;/li&gt;
+&lt;li&gt;To benefit from the tight integration with GitHub, you are restricted to certain &lt;a href="https://pages.github.com/versions/"&gt;Jekyll plugin gems&lt;/a&gt; and no custom plugins.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The second contender is &lt;a href="https://middlemanapp.com/"&gt;Middleman&lt;/a&gt;. Its offering was very similar to nanoc. I decided to give Middleman a spin as it was new and different from nanoc. For hosting I could figure it out later, although I was still leaning towards a manual usage of GitHub Pages as it was a free hosting solution.&lt;/p&gt;
+
+&lt;h2&gt;Deployment Approach&lt;/h2&gt;
+
+&lt;p&gt;With the initial work on the new blog being completed, it was time to handle the deployment of it. As previously mentioned I was still going to use GitHub pages due to its free offering. All the work can be seen in the &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io"&gt;kevinjalbert/kevinjalbert.github.io repository&lt;/a&gt;. A few things to note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;User GitHub Pages at the time was only deployable from the &lt;code&gt;master&lt;/code&gt; branch of the github repository.&lt;/li&gt;
+&lt;li&gt;If the website used Jekyll then GitHub would automatically generate the static site and deploy it appropriately.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To accommodate this I decided to treat &lt;code&gt;master&lt;/code&gt; as the holding ground for the generated Middleman output. With respect to where to place the actual Middleman code, I placed everything in a new branch &lt;code&gt;real-master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After a quick setup on GitHub, anything in the &lt;code&gt;master&lt;/code&gt; branch would be deployed to the public.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="GitHub Configuration" width="1940" height="740" src="/images/2016-11-28-deploying-my-website-to-github-pages/github-configuration.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;To reduce friction in deploying new changes, I created the following &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/424c42a5bd65cefb083a01e49f94cbc2e3a73e82/deploy.rb"&gt;ruby deploy script&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'tmpdir'&lt;/span&gt;
+
+&lt;span class="sb"&gt;`git checkout real-master`&lt;/span&gt;
+
+&lt;span class="n"&gt;current_sha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sb"&gt;`git rev-parse --short HEAD`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;
+
+&lt;span class="sb"&gt;`rm -R -f ./bower_components`&lt;/span&gt;
+&lt;span class="sb"&gt;`rm -R -f ./build`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`git add -f -A`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`git commit -m "Temp commit"`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`bundle install`&lt;/span&gt;
+&lt;span class="sb"&gt;`bower install`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`bundle exec middleman build`&lt;/span&gt;
+
+&lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;mktmpdir&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="sb"&gt;`mv ./build/* &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/`&lt;/span&gt;
+
+  &lt;span class="sb"&gt;`git checkout master`&lt;/span&gt;
+
+  &lt;span class="sb"&gt;`cp CNAME &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/`&lt;/span&gt;
+  &lt;span class="sb"&gt;`cp README.md &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+
+  &lt;span class="sb"&gt;`rm -R -f *`&lt;/span&gt;
+
+  &lt;span class="sb"&gt;`cp -r &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/* ./`&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="sb"&gt;`git add -f -A`&lt;/span&gt;
+&lt;span class="sb"&gt;`git commit -m "Update site @ &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt; with &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;current_sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;"`&lt;/span&gt;
+&lt;span class="sb"&gt;`git push`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`git checkout real-master`&lt;/span&gt;
+&lt;span class="sb"&gt;`git clean -df`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`git reset --soft HEAD~1`&lt;/span&gt;
+&lt;span class="sb"&gt;`git reset`&lt;/span&gt;
+
+&lt;span class="sb"&gt;`bower install`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, when everything is committed on &lt;code&gt;real-master&lt;/code&gt; and I&amp;rsquo;m ready to deploy I just run &lt;code&gt;ruby deploy.rb&lt;/code&gt;. The following is then carried out:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Ensure that I&amp;rsquo;m on the &lt;code&gt;real-master&lt;/code&gt; git branch&lt;/li&gt;
+&lt;li&gt;Remove all the generated directories&lt;/li&gt;
+&lt;li&gt;Add everything to a temporary commit&lt;/li&gt;
+&lt;li&gt;Install all dependencies needed and build the Middleman website&lt;/li&gt;
+&lt;li&gt;Create a temporary directory and put the built website in it along with the &lt;em&gt;CNAME and README.md&lt;/em&gt; files&lt;/li&gt;
+&lt;li&gt;Clear the current directory and put everything from the temporary directory (i.e., the build website) into the current directory&lt;/li&gt;
+&lt;li&gt;Add everything to git and make a new commit with the current timestamp and git SHA that was used to generate the website&lt;/li&gt;
+&lt;li&gt;Push new website changes to &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Checkout &lt;code&gt;real-master&lt;/code&gt; again, clean everything, and reset that temporary commit&lt;/li&gt;
+&lt;li&gt;Reinstall dependencies so we are back in a good state&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This results in a &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io/commits/master"&gt;formatted commit log&lt;/a&gt; on &lt;code&gt;master&lt;/code&gt; that has snapshots of each deployment of the website.&lt;/p&gt;
+
+&lt;h2&gt;That&amp;rsquo;s All Folks&lt;/h2&gt;
+
+&lt;p&gt;This approach is working well for me at the current moment. I&amp;rsquo;ll probably keep using Middleman for the foreseeable future. I am sure I will go through another phase of redesigning this process, in which I will document yet again.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2016-10-31T21:48:58-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -189,7 +305,7 @@
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -353,7 +469,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -479,7 +595,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -584,7 +700,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -682,7 +798,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -751,7 +867,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -857,7 +973,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1077,7 +1193,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1131,7 +1247,7 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
     <title>Project-Wide Search and Replace with Vim</title>
     <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
     <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-09-30T22:01:30-04:00</updated>
+    <updated>2016-11-28T16:15:58-05:00</updated>
     <published>2016-01-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1161,158 +1277,6 @@ xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;l
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You are not only restricted to to using substitution here. Other resources indicated using macros.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Respect HTTP Caching</title>
-    <link rel="alternate" href="http://kevinjalbert.com/respect-http-caching/"/>
-    <id>http://kevinjalbert.com/respect-http-caching/</id>
-    <updated>2016-10-22T22:41:34-04:00</updated>
-    <published>2015-09-23T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <content type="html">&lt;p&gt;API developers place plenty of consideration on how to handle scaling. A few techniques and approaches: Application caching, sharding, larger/more servers, background queues, HTTP caching, and Content Delivery Networks (CDNs). A well architected API employs a combination of these solutions to achieve the desired scalability. Of the scaling solutions, very few are actually exposed to the consumers of an API. One strategy in which the end-users actively participate in is &lt;em&gt;HTTP Caching&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;By respecting HTTP caching on a client&amp;rsquo;s application, network communications complete quicker and in some cases are unnecessary. Network response payloads are sometimes omitted due to a 304 HTTP response. Finally if you use HTTP caching, application servers will love you.&lt;/p&gt;
-
-&lt;h2&gt;HTTP Caching&lt;/h2&gt;
-
-&lt;p&gt;If an endpoint is to be hit repeatedly, HTTP caching can dramatically reduce the load on the server. There are a number of ways one can use HTTP caching. Similar to other scaling techniques some of these can be used in tandem.&lt;/p&gt;
-
-&lt;h3&gt;Cache-Control&lt;/h3&gt;
-
-&lt;p&gt;On an HTTP response a &lt;code&gt;cache-control&lt;/code&gt; header may present. This header provides the client insight on how they should approach making similar requests. For example:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Cache-Control: max-age=60, must-revalidate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;max-age=60&lt;/code&gt; specifies that the request should be cached and used locally for a maximum duration of one minute. The &lt;code&gt;must-revalidate&lt;/code&gt; forces subsequent requests to still communicate to the server to respect the &lt;em&gt;freshness&lt;/em&gt; of the response (i.e., information which indicates that the content of the response has updated). These two simple cache-control headers provide both &lt;em&gt;non-stale&lt;/em&gt; responses with reduced payload, provided the endpoint is respecting the max-age (i.e., not changing frequently).&lt;/p&gt;
-
-&lt;p&gt;To better understand cache-controls, our coworker at theScore, Thuva Tharam, has an &lt;a href="http://techblog.thescore.com/2014/11/19/are-your-cache-control-directives-doing-what-they-are-supposed-to-do/"&gt;excellent blog post&lt;/a&gt; written on the subject. The individual cache-control directives and their effects are described. Suggestions and examples are provided to illustrate how to use cache-control effectively.&lt;/p&gt;
-
-&lt;h3&gt;Last-Modified&lt;/h3&gt;
-
-&lt;p&gt;As previously mentioned, it is possible for a cached request to &lt;code&gt;re-validate&lt;/code&gt; with the server to check for &lt;em&gt;freshness&lt;/em&gt;. Subsequent requests have an additional &lt;code&gt;If-Modified-Since&lt;/code&gt; which contains the value of the response&amp;rsquo;s &lt;code&gt;Last-Modified&lt;/code&gt; header. This allows the server to compare the provided time on subsequent requests against the responses and return the full response or simply a &lt;em&gt;304 status code&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;When a server returns a full response it takes more time to compute/collect the necessary information along with rendering time for the response. With the correct &lt;code&gt;cache-control&lt;/code&gt; along with a &lt;code&gt;Last-Modified&lt;/code&gt;, a server spends less time constructing the response. A &lt;em&gt;304 status code&lt;/em&gt; response is quick, and has a small payload size compared to a normal full response.&lt;/p&gt;
-
-&lt;h3&gt;ETags&lt;/h3&gt;
-
-&lt;p&gt;Even when the &lt;code&gt;Last-Modified&lt;/code&gt; value has changed, the actual content might still be the same. If the server takes advantage of ETags then there will be an &lt;code&gt;ETag&lt;/code&gt; header on the response. The benefit of using ETags shines on requests that do not change often. ETag caching does not expire based on time like the previous two caching mechanisms, and is instead a function of the response&amp;rsquo;s content. This form of caching is ideal as it provides caching while still allowing for freshness of updates to the content.&lt;/p&gt;
-
-&lt;p&gt;When a subsequent request is made a &lt;code&gt;If-None-Match&lt;/code&gt; header is sent along with the previous request&amp;rsquo;s ETag. The server will then use the &lt;em&gt;ETag&lt;/em&gt; to determine &lt;em&gt;freshness&lt;/em&gt;. If the ETag of the request match the that of the server&amp;rsquo;s response a &lt;em&gt;304 status code&lt;/em&gt; is returned.&lt;/p&gt;
-
-&lt;h2&gt;Respecting HTTP Caching for API Consumers&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;API Consumers &amp;ndash; Client applications that makes more than one HTTP request to an external web service&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;API Consumers can take on different forms such as a browser or desktop/mobile/web application.&lt;/p&gt;
-
-&lt;h3&gt;Browsers&lt;/h3&gt;
-
-&lt;p&gt;Modern browsers have no problem handling HTTP caching. It is also easy to verify that they are respecting HTTP caching by using their &lt;em&gt;Developer Tools&lt;/em&gt; interface. The following image shows two requests made to the same API endpoint (https://api.github.com/users/kevinjalbert) in Google Chrome&amp;rsquo;s Network Tab of the Developer Tools:&lt;/p&gt;
-
-&lt;p&gt;First API request results in a 200 status code (standard success response):
-&lt;img alt="First Request results in a Status Code 200" width="1366" height="164" src="/images/2015-09-24-respect-http-caching/200-status-code-chrome.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Second API request results in a 304 status code (resource has not been modified since the last request, no body is returned in response):
-&lt;img alt="Second Request results in a Status Code 304" width="1366" height="152" src="/images/2015-09-24-respect-http-caching/304-status-code-chrome.png" /&gt;&lt;/p&gt;
-
-&lt;h3&gt;Mobile Applications&lt;/h3&gt;
-
-&lt;p&gt;Android and iOS have native mechanisms in place that developers can use to handle HTTP caching on any outbound requests. On iOS there is &lt;a href="https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLCache_Class/index.html#//apple_ref/occ/cl/NSURLCache"&gt;NSURLCache&lt;/a&gt; and on Android there is &lt;a href="http://developer.android.com/reference/android/net/http/HttpResponseCache.html"&gt;HttpResponseCache&lt;/a&gt;. If possible all HTTP requests made from mobile devices should be using the caching mechanisms.&lt;/p&gt;
-
-&lt;h3&gt;Desktop Applications&lt;/h3&gt;
-
-&lt;p&gt;Many programming languages can be used when creating desktop applications. In these cases it is best to check whether there is a built HTTP request caching mechanism akin to what Android and iOS have.&lt;/p&gt;
-
-&lt;h3&gt;Web Applications&lt;/h3&gt;
-
-&lt;p&gt;It is not uncommon to have web services talking to other web services through a defined API. In these situations there might not be a defined networking layer to push API requests through. For example, within a Ruby/Rails application one might use &lt;a href="https://github.com/lostisland/faraday"&gt;Faraday&lt;/a&gt; to handle network connections. HTTP caching is not enabled by default on Faraday and is instead an opt-in option.&lt;/p&gt;
-
-&lt;p&gt;The following is an example of using Faraday with &lt;a href="https://github.com/plataformatec/faraday-http-cache"&gt;Faraday::HttpCache&lt;/a&gt; middleware to handle HTTP caching.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'active_support'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'faraday'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'faraday-http-cache'&lt;/span&gt;
-
-&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;ApiConsumer&lt;/span&gt;
-  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Requester&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;cached: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="vi"&gt;@connection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Faraday&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://api.github.com/'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;cached&lt;/span&gt;
-          &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt; &lt;span class="no"&gt;Faraday&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;HttpCache&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-                   &lt;span class="ss"&gt;logger: &lt;/span&gt;&lt;span class="no"&gt;Logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;STDOUT&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-                   &lt;span class="ss"&gt;instrumenter: &lt;/span&gt;&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Notifications&lt;/span&gt;
-        &lt;span class="k"&gt;end&lt;/span&gt;
-        &lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;adapter&lt;/span&gt; &lt;span class="no"&gt;Faraday&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_adapter&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;method&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;
-      &lt;span class="n"&gt;start_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;
-
-      &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-        &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;method&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-
-      &lt;span class="n"&gt;time_taken_ms&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;start_time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
-      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Time Taken: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;time_taken_ms&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;round&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; ms"&lt;/span&gt;
-
-      &lt;span class="n"&gt;response&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Subscribes to all Faraday::HttpCache events&lt;/span&gt;
-&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Notifications&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subscribe&lt;/span&gt; &lt;span class="s2"&gt;"http_cache.faraday"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Notifications&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Cache Status: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:cache_status&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Faraday with HTTP Caching"&lt;/span&gt;
-&lt;span class="n"&gt;api_requester&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ApiConsumer&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;cached: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;api_requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'users/kevinjalbert'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-
-&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Faraday without HTTP Caching"&lt;/span&gt;
-&lt;span class="n"&gt;api_requester&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ApiConsumer&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;cached: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;api_requester&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'users/kevinjalbert'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="nb"&gt;sleep&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Executing the above example produces the following log statements. With caching the time taken per request decreases tremendously on subsequent requests. By respecting the HTTP cache-controls of the API, the subsequent request can be used until the cache-control directives say otherwise (i.e., ETag/Last-Modified changes, or the cache expires exceeding the max-age).&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Faraday with HTTP Caching
-D, [2015-09-20T23:06:27.570751 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] miss, store
-Cache Status: miss
-Time Taken: 1396.139 ms
-D, [2015-09-20T23:06:29.577798 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
-Cache Status: fresh
-Time Taken: 1.857 ms
-D, [2015-09-20T23:06:31.580719 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
-Cache Status: fresh
-Time Taken: 0.971 ms
-D, [2015-09-20T23:06:33.585455 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
-Cache Status: fresh
-Time Taken: 1.139 ms
-D, [2015-09-20T23:06:35.587833 #15189] DEBUG -- : HTTP Cache: [GET /users/kevinjalbert] fresh
-Cache Status: fresh
-Time Taken: 1.133 ms
-
-Faraday without HTTP Caching
-Time Taken: 807.486 ms
-Time Taken: 277.589 ms
-Time Taken: 186.115 ms
-Time Taken: 475.249 ms
-Time Taken: 1130.691 ms
-&lt;/code&gt;&lt;/pre&gt;
 </content>
   </entry>
 </feed>

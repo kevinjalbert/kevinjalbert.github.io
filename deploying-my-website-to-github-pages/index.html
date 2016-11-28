@@ -1,0 +1,80 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <title>Deploying my Website to GitHub Pages — Kevin Jalbert</title> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Posts — Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-4 col-md-4 banner"> <a href="/">Kevin Jalbert</a> </div> <div class="col-xs-8 col-md-8 navigation"> <ul> <li><input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on></li> <li><a href="/about/">About</a></li> <li><a href="/now/">Now</a></li> </ul> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Deploying my Website to GitHub Pages</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class=article__date>November 28, 2016 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>3 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/deploying-my-website-to-github-pages/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/ruby/">ruby</a> <a href="/tags/middleman/">middleman</a> <a href="/tags/github/">github</a> </div> </div> </div> <div class=article__separator></div> <h2>History of my Website</h2> <p>Let&rsquo;s look back at my website back in early <a href="https://web.archive.org/web/20120122125850/http://kevinjalbert.com/">2012</a>:</p> <ul> <li>It was built using <a href="http://nanoc.ws/">nanoc</a> as I was learning and enjoying using ruby. This static site generator seemed like a great tool when I started. It gave me a lot of control as I was able to write <a href="https://github.com/kevinjalbert/website/blob/master/lib/helpers/custom_helper.rb">custom ruby helpers</a> to assist in generating the website.</li> <li>It was focused on showcasing my academic accomplishments such as publications/posters/presentations and projects as I was still in the education system and going down the academia career track.</li> <li>The original <a href="https://github.com/kevinjalbert/website">GitHub repository</a> for this version of the website still exists, if you were interested in looking at it.</li> </ul> <p>After finishing my M.Sc degree I decided to work in industry instead of pursuing a Ph.D. I continued to update the website with minor changes, but for the most part it stagnated over time.</p> <h2>Deciding on Middleman</h2> <p>I eventually wanted to revamp my website to be more <em>relevant</em> and decided going with a blog to document my technical endeavors and musings. I retired the old website and built up the new blog from scratch. I look through the <a href="https://www.ruby-toolbox.com/categories/static_website_generation">Ruby Toolbox</a> to see the alternatives to nanoc. Top pick seems to be <a href="https://github.com/jekyll/jekyll">Jekyll</a>, which is likely contributed to its painless integration with <a href="https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/">GitHub Pages</a>.</p> <p>My two main concerns with Jekyll were:</p> <ul> <li>The use of <a href="https://jekyllrb.com/docs/templates/">Liquid Templating</a> - I was personally not a fan of it.</li> <li>To benefit from the tight integration with GitHub, you are restricted to certain <a href="https://pages.github.com/versions/">Jekyll plugin gems</a> and no custom plugins.</li> </ul> <p>The second contender is <a href="https://middlemanapp.com/">Middleman</a>. Its offering was very similar to nanoc. I decided to give Middleman a spin as it was new and different from nanoc. For hosting I could figure it out later, although I was still leaning towards a manual usage of GitHub Pages as it was a free hosting solution.</p> <h2>Deployment Approach</h2> <p>With the initial work on the new blog being completed, it was time to handle the deployment of it. As previously mentioned I was still going to use GitHub pages due to its free offering. All the work can be seen in the <a href="https://github.com/kevinjalbert/kevinjalbert.github.io">kevinjalbert/kevinjalbert.github.io repository</a>. A few things to note:</p> <ul> <li>User GitHub Pages at the time was only deployable from the <code>master</code> branch of the github repository.</li> <li>If the website used Jekyll then GitHub would automatically generate the static site and deploy it appropriately.</li> </ul> <p>To accommodate this I decided to treat <code>master</code> as the holding ground for the generated Middleman output. With respect to where to place the actual Middleman code, I placed everything in a new branch <code>real-master</code>.</p> <p>After a quick setup on GitHub, anything in the <code>master</code> branch would be deployed to the public.</p> <p><img alt="GitHub Configuration" width=1940 height=740 src="/images/2016-11-28-deploying-my-website-to-github-pages/github-configuration.png"/></p> <p>To reduce friction in deploying new changes, I created the following <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/424c42a5bd65cefb083a01e49f94cbc2e3a73e82/deploy.rb">ruby deploy script</a>.</p> <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'tmpdir'</span>
+
+<span class="sb">`git checkout real-master`</span>
+
+<span class="n">current_sha</span> <span class="o">=</span> <span class="sb">`git rev-parse --short HEAD`</span><span class="p">.</span><span class="nf">strip</span>
+
+<span class="sb">`rm -R -f ./bower_components`</span>
+<span class="sb">`rm -R -f ./build`</span>
+
+<span class="sb">`git add -f -A`</span>
+
+<span class="sb">`git commit -m "Temp commit"`</span>
+
+<span class="sb">`bundle install`</span>
+<span class="sb">`bower install`</span>
+
+<span class="sb">`bundle exec middleman build`</span>
+
+<span class="no">Dir</span><span class="p">.</span><span class="nf">mktmpdir</span> <span class="k">do</span> <span class="o">|</span><span class="n">tmp_dir</span><span class="o">|</span>
+  <span class="sb">`mv ./build/* </span><span class="si">#{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="sb">/`</span>
+
+  <span class="sb">`git checkout master`</span>
+
+  <span class="sb">`cp CNAME </span><span class="si">#{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="sb">/`</span>
+  <span class="sb">`cp README.md </span><span class="si">#{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="sb">`</span>
+
+  <span class="sb">`rm -R -f *`</span>
+
+  <span class="sb">`cp -r </span><span class="si">#{</span><span class="n">tmp_dir</span><span class="si">}</span><span class="sb">/* ./`</span>
+<span class="k">end</span>
+
+<span class="sb">`git add -f -A`</span>
+<span class="sb">`git commit -m "Update site @ </span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="si">}</span><span class="sb"> with </span><span class="si">#{</span><span class="n">current_sha</span><span class="si">}</span><span class="sb">"`</span>
+<span class="sb">`git push`</span>
+
+<span class="sb">`git checkout real-master`</span>
+<span class="sb">`git clean -df`</span>
+
+<span class="sb">`git reset --soft HEAD~1`</span>
+<span class="sb">`git reset`</span>
+
+<span class="sb">`bower install`</span>
+</code></pre> <p>Now, when everything is committed on <code>real-master</code> and I&rsquo;m ready to deploy I just run <code>ruby deploy.rb</code>. The following is then carried out:</p> <ol> <li>Ensure that I&rsquo;m on the <code>real-master</code> git branch</li> <li>Remove all the generated directories</li> <li>Add everything to a temporary commit</li> <li>Install all dependencies needed and build the Middleman website</li> <li>Create a temporary directory and put the built website in it along with the <em>CNAME and README.md</em> files</li> <li>Clear the current directory and put everything from the temporary directory (i.e., the build website) into the current directory</li> <li>Add everything to git and make a new commit with the current timestamp and git SHA that was used to generate the website</li> <li>Push new website changes to <code>master</code></li> <li>Checkout <code>real-master</code> again, clean everything, and reset that temporary commit</li> <li>Reinstall dependencies so we are back in a good state</li> </ol> <p>This results in a <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/commits/master">formatted commit log</a> on <code>master</code> that has snapshots of each deployment of the website.</p> <h2>That&rsquo;s All Folks</h2> <p>This approach is working well for me at the current moment. I&rsquo;ll probably keep using Middleman for the foreseeable future. I am sure I will go through another phase of redesigning this process, in which I will document yet again.</p> <div id=disqus_thread></div> <script>
+//<![CDATA[
+                  var disqus_shortname = 'kevinjalbert';
+          
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+//]]>
+</script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> <a href="http://disqus.com" class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </div> </div> </div> </body> <div class="col-md-12 footer__copywrite"> &copy; 2016 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script> <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16620161-5']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout(function() {
+      window.onscroll = function() {
+        window.onscroll = null; // Only track the event once
+        _gaq.push(['_trackEvent', 'scroll', 'read']);
+      }
+    }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>

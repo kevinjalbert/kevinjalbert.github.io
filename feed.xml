@@ -3,16 +3,115 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-11-27T19:00:00-05:00</updated>
+  <updated>2016-12-20T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Information at a Glance: `RailsRequestStats`</title>
+    <link rel="alternate" href="http://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
+    <id>http://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
+    <updated>2016-12-21T21:26:49-05:00</updated>
+    <published>2016-12-20T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <content type="html">&lt;p&gt;I developed &lt;a href="https://github.com/kevinjalbert/rails_request_stats"&gt;rails_request_stats&lt;/a&gt; to solve a personal problem of mine while optimizing certain Rails API endpoints at work. It provided me a quick way to get the required information at a glance in development logs.&lt;/p&gt;
+
+&lt;p&gt;To best describe what and how &lt;code&gt;rails_request_stats&lt;/code&gt; can be used the, following comes directly from &lt;code&gt;rails_request_stats&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/rails_request_stats#railsrequeststats"&gt;README&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;During development have you ever:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Wondered how many SQL queries occurred during a request?&lt;/li&gt;
+&lt;li&gt;Been curious on average view and database runtime for a request?&lt;/li&gt;
+&lt;li&gt;Wanted a report containing overall statistics of all unique requests?&lt;/li&gt;
+&lt;li&gt;Wanted a better way to iteratively optimize requests?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;RailsRequestStats&lt;/code&gt; provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.&lt;/p&gt;
+
+&lt;h2&gt;How this Works&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;RailsRequestStats::NotificationSubscribers&lt;/code&gt; when required will subscribe to the &lt;code&gt;sql.active_record&lt;/code&gt;, &lt;code&gt;start_processing.action_controller&lt;/code&gt;, and &lt;code&gt;process_action.action_controller&lt;/code&gt; &lt;code&gt;ActionSupport::Notifications&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;sql.active_record&lt;/code&gt; event allow us to count each SQL query that passes though ActiveRecord, which we count internally.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;cache_read.active_support&lt;/code&gt; event allows us to count each read and hit to the Rails cache.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;cache_fetch_hit.active_support&lt;/code&gt; event allows us to count the cache hits to the Rails cache when using &lt;em&gt;fetch&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;start_processing.action_controller&lt;/code&gt; event allows us to clear iternal counts, as well as perform a &lt;code&gt;GC.start&lt;/code&gt; and capturing the count of objects residing in the &lt;code&gt;ObjectSpace&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;process_action.action_controller&lt;/code&gt; event provides us runtime information along with identifying controller action details, we even determine the number of generated objects since the start of processing the action. At this point we are able to synthesis the query information and runtime information and store them internally in running collection of &lt;code&gt;RailsRequestStats::RequestStats&lt;/code&gt; objects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; the data collection is tracked and stored in class-level instance variables. Thus this is not threadsafe, as no concurrency mechanisms are used (i.e., mutex). For non-threaded and forking application servers this should be fine.&lt;/p&gt;
+
+&lt;h2&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Add this line to your application&amp;rsquo;s Gemfile:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'rails_request_stats'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;group: :development&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Example Outputs&lt;/h2&gt;
+
+&lt;p&gt;Within the console ./log/development.log you should start seeing the following statement appearing at the end of processing a request:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] (AVG view_runtime: 163.655ms | AVG db_runtime: 15.465ms | AVG generated_object_count: 14523 | query_count: 9 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally when you exit the application&amp;rsquo;s server, you should see a summary report of all the data captured:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] INDEX:html "/users" (AVG view_runtime: 128.492ms | AVG db_runtime: 9.186ms | AVG generated_object_count: 25529 | MIN query_count: 8 | MAX query_count: 9) from 4 requests
+[RailsRequestStats] SHOW:html "/users/2" (AVG view_runtime: 13.0429ms | AVG db_runtime: 1.69033ms | AVG generated_object_count: 14523 | MIN query_count: 2 | MAX query_count: 2) from 3 requests
+[RailsRequestStats] SHOW:html "/users/2?test=1&amp;amp;blah=2" (AVG view_runtime: 17.8252ms | AVG db_runtime: 1.621ms | AVG generated_object_count: 18511 | MIN query_count: 2 | MAX query_count: 2) from 1 requests
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Customizing Outputs&lt;/h2&gt;
+
+&lt;h3&gt;Memory Stats&lt;/h3&gt;
+
+&lt;p&gt;By setting the following class variable within in an initializer (&lt;code&gt;./config/initializers/rails_request_stats.rb&lt;/code&gt;):&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;RailsRequestStats&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Report&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;print_memory_stats&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see the &lt;em&gt;generated objects&lt;/em&gt; within the &lt;code&gt;ObjectSpace&lt;/code&gt; for individual requests:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] (AVG view_runtime: 93.7252ms | AVG db_runtime: 8.66075ms | AVG generated_object_count: 125282 | query_count: 8 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3 | generated_objects: {:total_generated_objects=&amp;gt;111878, :object=&amp;gt;921, :class=&amp;gt;35, :module=&amp;gt;0, :float=&amp;gt;0, :string=&amp;gt;49501, :regexp=&amp;gt;1556, :array=&amp;gt;17855, :hash=&amp;gt;2087, :struct=&amp;gt;103, :bignum=&amp;gt;0, :file=&amp;gt;0, :data=&amp;gt;37682, :match=&amp;gt;373, :complex=&amp;gt;0, :node=&amp;gt;1688, :iclass=&amp;gt;0})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Override Reports&lt;/h3&gt;
+
+&lt;p&gt;You can manually override the output by monkey-patching in an initializer (&lt;code&gt;./config/initializers/rails_request_stats.rb&lt;/code&gt;):&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;RailsRequestStats&lt;/span&gt;
+  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Report&lt;/span&gt;
+    &lt;span class="c1"&gt;# Called after every request&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;report_text&lt;/span&gt;
+      &lt;span class="c1"&gt;# Access to @request_stats (instance of RequestStats)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="c1"&gt;# Called after the application server is closed (via #at_exit_handler)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;exit_report_text&lt;/span&gt;
+      &lt;span class="c1"&gt;# Access to @request_stats (instance of RequestStats)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;NotificationSubscribers&lt;/span&gt;
+    &lt;span class="c1"&gt;# Called when the application server is closed&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;at_exit_handler&lt;/span&gt;
+      &lt;span class="c1"&gt;# Access to @requests (hash of { &amp;lt;paths&amp;gt; =&amp;gt; RequestStats })&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Reflections&lt;/h2&gt;
+
+&lt;p&gt;I have personally been using &lt;code&gt;RailsRequestStats&lt;/code&gt; at work since its inception. Reception has been quite good, it has little impact and simply provides extra information at a glance to developers during day-to-day work. I will mention that &lt;a href="https://github.com/MiniProfiler/rack-mini-profiler"&gt;rack-mini-profiler&lt;/a&gt; is an excellent gem, and kind of inspired my creation of this gem. I couldn&amp;rsquo;t find a good way to get the information I wanted when dealing with API endpoints, with &lt;code&gt;RailsRequestStats&lt;/code&gt; I was able to simply output it in the logs.&lt;/p&gt;
+
+&lt;p&gt;In the future I might add more &lt;a href="https://github.com/kevinjalbert/rails_request_stats/issues/4"&gt;detailed memory reports&lt;/a&gt;. I also have to verify that it continues to work in Rails 5 where the default webserver is &lt;a href="http://puma.io/"&gt;Puma&lt;/a&gt; which is a concurrent webserver. This could pose issue as information is stored in class instance variable and are modified at various parts of a requests life cycle.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -128,7 +227,7 @@
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -305,7 +404,7 @@
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -469,7 +568,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -595,7 +694,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -700,7 +799,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -798,7 +897,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -867,7 +966,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -973,7 +1072,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1193,7 +1292,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
+    <updated>2016-11-28T16:16:55-05:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1241,42 +1340,6 @@ nnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplace()&amp;lt;CR&amp;gt;
 endfunction
 xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;lt;CR&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Project-Wide Search and Replace with Vim</title>
-    <link rel="alternate" href="http://kevinjalbert.com/project-wide-search-and-replace-with-vim/"/>
-    <id>http://kevinjalbert.com/project-wide-search-and-replace-with-vim/</id>
-    <updated>2016-11-28T16:15:58-05:00</updated>
-    <published>2016-01-27T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <content type="html">&lt;p&gt;There are many instances where you might want to perform a mass search and replace in Vim. The following are two commands that can help out with such a task.&lt;/p&gt;
-
-&lt;h2&gt;List of Files&lt;/h2&gt;
-
-&lt;p&gt;First you need to acquire a list of files in which you want to perform search and replaces on. The following Vim command &lt;code&gt;args&lt;/code&gt; allows you to store a set of file names to act on later.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:args `&amp;lt;command which generates a file list&amp;gt;`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Thus we can use the following to store a list of files which match the &lt;code&gt;&amp;#39;Base::Lol::&amp;#39; .&lt;/code&gt; pattern.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:args `ag -l 'Base::Lol::' .`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If matches were not found you&amp;rsquo;ll get back something like the following &lt;em&gt;E79: Cannot expand wildcards&lt;/em&gt;. If at least one match was found the current buffer will change to one of the found files.&lt;/p&gt;
-
-&lt;h2&gt;Act on Files&lt;/h2&gt;
-
-&lt;p&gt;Now that you have the list of files that you want to act on, we are ready to perform our search and replace on them. The following Vim command &lt;code&gt;argdo&lt;/code&gt; allows us to specify a command to run against each of the files stored from the &lt;code&gt;args&lt;/code&gt; command.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:argdo &amp;lt;command to perform on each file stored from args&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In our running example we can replace every instance of the search we performed with a new string. We use the &lt;code&gt;%s&lt;/code&gt; command to perform this substitution (&lt;code&gt;%s/&amp;lt;original&amp;gt;/&amp;lt;new&amp;gt;&lt;/code&gt;). The &lt;code&gt;/g&lt;/code&gt; specifies that this substitution should be applied globally to the file. Finally we have &lt;code&gt;| w&lt;/code&gt; which saves the file after the substitution has been applied.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:argdo %s/Base::Lol::/Lol::Base::/g | w
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You are not only restricted to to using substitution here. Other resources indicated using macros.&lt;/p&gt;
 </content>
   </entry>
 </feed>

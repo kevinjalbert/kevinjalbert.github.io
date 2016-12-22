@@ -1,0 +1,64 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <title>Information at a Glance: `RailsRequestStats` — Kevin Jalbert</title> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Posts — Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-4 col-md-4 banner"> <a href="/">Kevin Jalbert</a> </div> <div class="col-xs-8 col-md-8 navigation"> <ul> <li><input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on></li> <li><a href="/about/">About</a></li> <li><a href="/now/">Now</a></li> </ul> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Information at a Glance: <code>RailsRequestStats</code></p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class=article__date>December 21, 2016 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>3 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/ruby/">ruby</a> <a href="/tags/rails/">rails</a> </div> </div> </div> <div class=article__separator></div> <p>I developed <a href="https://github.com/kevinjalbert/rails_request_stats">rails_request_stats</a> to solve a personal problem of mine while optimizing certain Rails API endpoints at work. It provided me a quick way to get the required information at a glance in development logs.</p> <p>To best describe what and how <code>rails_request_stats</code> can be used the, following comes directly from <code>rails_request_stats</code>&rsquo;s <a href="https://github.com/kevinjalbert/rails_request_stats#railsrequeststats">README</a>:</p> <p>During development have you ever:</p> <ul> <li>Wondered how many SQL queries occurred during a request?</li> <li>Been curious on average view and database runtime for a request?</li> <li>Wanted a report containing overall statistics of all unique requests?</li> <li>Wanted a better way to iteratively optimize requests?</li> </ul> <p><code>RailsRequestStats</code> provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.</p> <h2>How this Works</h2> <p><code>RailsRequestStats::NotificationSubscribers</code> when required will subscribe to the <code>sql.active_record</code>, <code>start_processing.action_controller</code>, and <code>process_action.action_controller</code> <code>ActionSupport::Notifications</code>.</p> <ul> <li>The <code>sql.active_record</code> event allow us to count each SQL query that passes though ActiveRecord, which we count internally.</li> <li>The <code>cache_read.active_support</code> event allows us to count each read and hit to the Rails cache.</li> <li>The <code>cache_fetch_hit.active_support</code> event allows us to count the cache hits to the Rails cache when using <em>fetch</em>.</li> <li>The <code>start_processing.action_controller</code> event allows us to clear iternal counts, as well as perform a <code>GC.start</code> and capturing the count of objects residing in the <code>ObjectSpace</code>.</li> <li>The <code>process_action.action_controller</code> event provides us runtime information along with identifying controller action details, we even determine the number of generated objects since the start of processing the action. At this point we are able to synthesis the query information and runtime information and store them internally in running collection of <code>RailsRequestStats::RequestStats</code> objects.</li> </ul> <p><strong>Note</strong> the data collection is tracked and stored in class-level instance variables. Thus this is not threadsafe, as no concurrency mechanisms are used (i.e., mutex). For non-threaded and forking application servers this should be fine.</p> <h2>Installation</h2> <p>Add this line to your application&rsquo;s Gemfile:</p> <pre class="highlight ruby"><code><span class="n">gem</span> <span class="s1">'rails_request_stats'</span><span class="p">,</span> <span class="ss">group: :development</span>
+</code></pre> <h2>Example Outputs</h2> <p>Within the console ./log/development.log you should start seeing the following statement appearing at the end of processing a request:</p> <pre class="highlight plaintext"><code>[RailsRequestStats] (AVG view_runtime: 163.655ms | AVG db_runtime: 15.465ms | AVG generated_object_count: 14523 | query_count: 9 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3)
+</code></pre> <p>Finally when you exit the application&rsquo;s server, you should see a summary report of all the data captured:</p> <pre class="highlight plaintext"><code>[RailsRequestStats] INDEX:html "/users" (AVG view_runtime: 128.492ms | AVG db_runtime: 9.186ms | AVG generated_object_count: 25529 | MIN query_count: 8 | MAX query_count: 9) from 4 requests
+[RailsRequestStats] SHOW:html "/users/2" (AVG view_runtime: 13.0429ms | AVG db_runtime: 1.69033ms | AVG generated_object_count: 14523 | MIN query_count: 2 | MAX query_count: 2) from 3 requests
+[RailsRequestStats] SHOW:html "/users/2?test=1&amp;blah=2" (AVG view_runtime: 17.8252ms | AVG db_runtime: 1.621ms | AVG generated_object_count: 18511 | MIN query_count: 2 | MAX query_count: 2) from 1 requests
+</code></pre> <h2>Customizing Outputs</h2> <h3>Memory Stats</h3> <p>By setting the following class variable within in an initializer (<code>./config/initializers/rails_request_stats.rb</code>):</p> <pre class="highlight ruby"><code><span class="no">RailsRequestStats</span><span class="o">::</span><span class="no">Report</span><span class="p">.</span><span class="nf">print_memory_stats</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre> <p>You can see the <em>generated objects</em> within the <code>ObjectSpace</code> for individual requests:</p> <pre class="highlight plaintext"><code>[RailsRequestStats] (AVG view_runtime: 93.7252ms | AVG db_runtime: 8.66075ms | AVG generated_object_count: 125282 | query_count: 8 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3 | generated_objects: {:total_generated_objects=&gt;111878, :object=&gt;921, :class=&gt;35, :module=&gt;0, :float=&gt;0, :string=&gt;49501, :regexp=&gt;1556, :array=&gt;17855, :hash=&gt;2087, :struct=&gt;103, :bignum=&gt;0, :file=&gt;0, :data=&gt;37682, :match=&gt;373, :complex=&gt;0, :node=&gt;1688, :iclass=&gt;0})
+</code></pre> <h3>Override Reports</h3> <p>You can manually override the output by monkey-patching in an initializer (<code>./config/initializers/rails_request_stats.rb</code>):</p> <pre class="highlight ruby"><code><span class="k">module</span> <span class="nn">RailsRequestStats</span>
+  <span class="k">class</span> <span class="nc">Report</span>
+    <span class="c1"># Called after every request</span>
+    <span class="k">def</span> <span class="nf">report_text</span>
+      <span class="c1"># Access to @request_stats (instance of RequestStats)</span>
+    <span class="k">end</span>
+    <span class="c1"># Called after the application server is closed (via #at_exit_handler)</span>
+    <span class="k">def</span> <span class="nf">exit_report_text</span>
+      <span class="c1"># Access to @request_stats (instance of RequestStats)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">class</span> <span class="nc">NotificationSubscribers</span>
+    <span class="c1"># Called when the application server is closed</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">at_exit_handler</span>
+      <span class="c1"># Access to @requests (hash of { &lt;paths&gt; =&gt; RequestStats })</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <h2>Reflections</h2> <p>I have personally been using <code>RailsRequestStats</code> at work since its inception. Reception has been quite good, it has little impact and simply provides extra information at a glance to developers during day-to-day work. I will mention that <a href="https://github.com/MiniProfiler/rack-mini-profiler">rack-mini-profiler</a> is an excellent gem, and kind of inspired my creation of this gem. I couldn&rsquo;t find a good way to get the information I wanted when dealing with API endpoints, with <code>RailsRequestStats</code> I was able to simply output it in the logs.</p> <p>In the future I might add more <a href="https://github.com/kevinjalbert/rails_request_stats/issues/4">detailed memory reports</a>. I also have to verify that it continues to work in Rails 5 where the default webserver is <a href="http://puma.io/">Puma</a> which is a concurrent webserver. This could pose issue as information is stored in class instance variable and are modified at various parts of a requests life cycle.</p> <div id=disqus_thread></div> <script>
+//<![CDATA[
+                  var disqus_shortname = 'kevinjalbert';
+          
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+//]]>
+</script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> <a href="http://disqus.com" class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </div> </div> </div> </body> <div class="col-md-12 footer__copywrite"> &copy; 2016 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script> <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16620161-5']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout(function() {
+      window.onscroll = function() {
+        window.onscroll = null; // Only track the event once
+        _gaq.push(['_trackEvent', 'scroll', 'read']);
+      }
+    }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>

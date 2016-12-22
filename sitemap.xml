@@ -49,6 +49,9 @@
     <loc>https://kevinjalbert.com/deploying-my-website-to-github-pages/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/</loc>
   </url>
   <url>
@@ -107,5 +110,8 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/3/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/page/4/</loc>
   </url>
 </urlset>

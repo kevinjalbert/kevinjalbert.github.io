@@ -12,7 +12,7 @@
     <title>Information at a Glance: `RailsRequestStats`</title>
     <link rel="alternate" href="http://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>http://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-12-20T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -113,7 +113,7 @@
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -231,7 +231,7 @@
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -410,7 +410,7 @@
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -576,7 +576,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -704,7 +704,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -811,7 +811,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -911,7 +911,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -982,7 +982,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1089,7 +1089,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1310,7 +1310,7 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-12-21T21:47:09-05:00</updated>
+    <updated>2017-01-08T14:19:32-05:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>

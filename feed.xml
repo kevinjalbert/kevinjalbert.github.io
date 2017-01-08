@@ -12,11 +12,13 @@
     <title>Information at a Glance: `RailsRequestStats`</title>
     <link rel="alternate" href="http://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>http://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-12-20T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">`RailsRequestStats` provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.
+</description>
     <content type="html">&lt;p&gt;I developed &lt;a href="https://github.com/kevinjalbert/rails_request_stats"&gt;rails_request_stats&lt;/a&gt; to solve a personal problem of mine while optimizing certain Rails API endpoints at work. It provided me a quick way to get the required information at a glance in development logs.&lt;/p&gt;
 
 &lt;p&gt;To best describe what and how &lt;code&gt;rails_request_stats&lt;/code&gt; can be used the, following comes directly from &lt;code&gt;rails_request_stats&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/rails_request_stats#railsrequeststats"&gt;README&lt;/a&gt;:&lt;/p&gt;
@@ -111,11 +113,13 @@
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">A little history on my website, and the underlying framework I have used -- Middleman. I walkthrough the process on how I deploy the website to GitHub pages using a deployment script.
+</description>
     <content type="html">&lt;h2&gt;History of my Website&lt;/h2&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look back at my website back in early &lt;a href="https://web.archive.org/web/20120122125850/http://kevinjalbert.com/"&gt;2012&lt;/a&gt;:&lt;/p&gt;
@@ -227,11 +231,13 @@
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's  transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs.
+</description>
     <content type="html">&lt;h2&gt;ActiveSupport Callbacks&lt;/h2&gt;
 
 &lt;p&gt;In my &lt;a href="/lets-pry-into-ruby-objects/"&gt;last post&lt;/a&gt; I touched on &lt;code&gt;pry&lt;/code&gt; and how it helped me verify that my class had &lt;code&gt;around_perform&lt;/code&gt; ActiveSupport Callbacks attached to it. In this post I will delve further into &lt;em&gt;what&lt;/em&gt; I was trying to accomplish.&lt;/p&gt;
@@ -404,11 +410,13 @@
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques in Ruby that can aid you. In particular, `pry` is an extreamly powerful tool that you should have in your toolbox.
+</description>
     <content type="html">&lt;h2&gt;Where is my &lt;code&gt;pry&lt;/code&gt;bar?&lt;/h2&gt;
 
 &lt;p&gt;You are probably already familiar with &lt;code&gt;irb&lt;/code&gt;, an &lt;em&gt;interactive Ruby&lt;/em&gt; shell. It is pretty powerful and can help you poke around Ruby. In Rails, you might have had access to &lt;code&gt;byebug&lt;/code&gt; and used it for debugging purposes. This is great and is standard with Rails projects. I do, however, recommend looking at &lt;code&gt;pry&lt;/code&gt;, which is just a bit more powerful in what it can do. We&amp;rsquo;re just going to scratch the surface here.&lt;/p&gt;
@@ -568,11 +576,13 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">In a large long-lived git repository there is a lot of history behind the current state of things. `git blame` lets you scratch the surface, while `git log` lets you dig deeper. The use of `git evolution` provides a succient and yet comprhensive approach to understanding the evolution of a range of lines within a git repository.
+</description>
     <content type="html">&lt;p&gt;As a developer its not uncommon to want a little more context surrounding the code snippet you are dealing with. You might have found yourself in these situations and reached for &lt;code&gt;git blame&lt;/code&gt; to get some initial context in why the code is like it is. This only scratches the surface and you might want a more context which &lt;code&gt;git log&lt;/code&gt; can provide to you. You are mostly interested in how the code evolved to this point, and really want you want is &lt;code&gt;git evolution&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;I developed &lt;a href="https://github.com/kevinjalbert/git_evolution"&gt;git_evolution&lt;/a&gt; to solve a personal problem of mine while spelunking in a git repository trying to find more reasons to why the code might have evolved in this way.&lt;/p&gt;
@@ -694,11 +704,13 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of `localhost` is a cumbersome and error prone issue. `port_map` is a ruby utility that provides a simple and almost automatic solution to this problem.
+</description>
     <content type="html">&lt;p&gt;As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of &lt;code&gt;localhost&lt;/code&gt; is a cumbersome and error prone issue. &lt;a href="https://github.com/kevinjalbert/port_map"&gt;port_map&lt;/a&gt; is a ruby utility that provides a simple and almost automatic solution to this problem.&lt;/p&gt;
 
 &lt;p&gt;I developed this utility gem to solve a personal problem of mine while dealing with multiple web servers during development. The next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;port_map&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/port_map#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
@@ -799,11 +811,13 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell's history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to _reverse search_ through it via `ctrl-r`.
+</description>
     <content type="html">&lt;p&gt;Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell&amp;rsquo;s history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to &lt;em&gt;reverse search&lt;/em&gt; through it via &lt;code&gt;ctrl-r&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h1&gt;Increasing History&lt;/h1&gt;
@@ -897,11 +911,13 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">As developers we are constantly learning tips, tricks and new ways to accomplish our work. We continue to accumulate these tips daily, but at the same time we potentially forget the less used but relevant ones. A system is presented that ensures that these tips are remembered.
+</description>
     <content type="html">&lt;p&gt;Learning is a way of life for a developer. Frequently we are exposed to techniques and tips such as: keybindings, shell commands, utilities, new functions/methods, new applications. While learning, we want to keep on remembering the previous techniques and tips that we&amp;rsquo;ve learned so that we can keep them &lt;em&gt;fresh&lt;/em&gt; and on our tool belt. It is not uncommon to forget some learned knowledge if you don&amp;rsquo;t use it often.&lt;/p&gt;
 
 &lt;p&gt;I would like to present my own problem and solution surrounding this idea.&lt;/p&gt;
@@ -966,11 +982,12 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">Vanilla vim offers farily powerful searching capabilities within a buffer. It is possible to _enhance_ vim's searching capabilities even further with vim plugins. Using several plugins, keymappings and settings, we can improve upon vim's search.</description>
     <content type="html">&lt;h2&gt;Basic Searching&lt;/h2&gt;
 
 &lt;p&gt;Vim provides rather simple searching capabilities using the following keys while in normal mode:&lt;/p&gt;
@@ -1072,11 +1089,12 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">Do you define methods within your Rake tasks? You might want to reconsider that, or _you're gonna have a bad time down the road_. Walkthrough an example which illustrates a tricky gotcha and solutions to avoiding it.</description>
     <content type="html">&lt;p&gt;Rake tasks provide a nice way to handle common tasks surrounding a ruby project. Within Rails projects they are nearly unavoidable and even have their own directory from which they are autoloaded. Eventually a project will grow in size and complexity to warrant multiple &lt;em&gt;task&lt;/em&gt; files for better separation of concerns. This alone is nothing to be worried about, but it&amp;rsquo;s when you start using methods in your task files where &lt;em&gt;you&amp;rsquo;re gonna have a bad time&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s setup a dummy Rails project that has a task file that calculates and saves blog metrics.&lt;/p&gt;
@@ -1292,11 +1310,12 @@ Saving default blog post
     <title>Vim Substitution Feedback Using `vim-over`</title>
     <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
     <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2016-12-21T21:44:17-05:00</updated>
+    <updated>2016-12-21T21:47:09-05:00</updated>
     <published>2016-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
+    <description type="html">Vim substitutions offer little affordance in whether the search will match the desired text. `vim-over` is a vim plugin that provides visual feedback while working with substitutions.</description>
     <content type="html">&lt;p&gt;It is common while in vim to perform substitution tasks over the text you are editing. This is often accomplished using the following command:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;:%s/&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g
 &lt;/code&gt;&lt;/pre&gt;

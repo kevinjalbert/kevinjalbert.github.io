@@ -2,8 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
-  <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2017-01-29T19:00:00-05:00</updated>
+  <updated>2017-01-30T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
@@ -12,8 +11,8 @@
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="http://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>http://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2017-01-29T19:00:00-05:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2017-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -149,8 +148,8 @@ it then returns the combined value
     <title>Information at a Glance: `RailsRequestStats`</title>
     <link rel="alternate" href="http://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>http://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-12-20T19:00:00-05:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -250,8 +249,8 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-11-27T19:00:00-05:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -368,8 +367,8 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-10-30T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -547,8 +546,8 @@ it then returns the combined value
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-09-29T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -713,8 +712,8 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-08-30T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -841,8 +840,8 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-07-29T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -948,8 +947,8 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-06-29T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -1048,8 +1047,8 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-05-30T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-05-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -1119,8 +1118,8 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-04-29T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-04-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
@@ -1226,8 +1225,8 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2017-01-30T23:50:14-05:00</updated>
-    <published>2016-03-20T20:00:00-04:00</published>
+    <updated>2017-01-30T23:51:12-05:00</updated>
+    <published>2016-03-21T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>

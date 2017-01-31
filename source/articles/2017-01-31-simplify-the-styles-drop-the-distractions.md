@@ -50,7 +50,7 @@ end
 Hopefully, you found the second snippet more pleasant and easier to read. The second one follows a styleguide while the first one had a mis-match of style.
 
 ## Starting with Styles
-![Mixing tabs and spaces](/images/2017-01-30-simplify-the-styles-drop-the-distractions/tabs-spaces-both.png)
+![Mixing tabs and spaces](/images/2017-01-31-simplify-the-styles-drop-the-distractions/tabs-spaces-both.png)
 _[Image from the [EmacsWiki](http://www.emacswiki.org/emacs/TabsSpacesBoth), original comic by [Steve Napierski](http://www.duelinganalogs.com/comic/2007/04/02/hello-im-linux/)]_
 
 Many basic style decisions are made early when a project is started. One of two things happen:
@@ -95,7 +95,7 @@ Each styleguide/linter has their own implementation and handling of their config
 
 Using a styleguide and linter, it becomes easy to identify and cut off the distractions of inconsistent styles early. If you can fix stylistic changes as you modify the underlying code, then the future you or your teammates won't have to deal with it later. In addition, during code reviews everyone knows that all stylistic changes _should_ be taken care of, thus reducing the mental burden.
 
-![Just use a styleguide!](/images/2017-01-30-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png)
+![Just use a styleguide!](/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png)
 _[Image from [xkcd](https://xkcd.com/1513/)]_
 
 ## Applying to an Existing Project

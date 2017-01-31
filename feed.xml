@@ -3,16 +3,153 @@
   <title>Kevin Jalbert</title>
   <link href="http://kevinjalbert.com"/>
   <link href="http://kevinjalbert.com/feed.xml" rel="self"/>
-  <updated>2016-12-20T19:00:00-05:00</updated>
+  <updated>2017-01-29T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>http://kevinjalbert.com</id>
   <entry>
+    <title>Simplify the Styles, Drop the Distractions</title>
+    <link rel="alternate" href="http://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
+    <id>http://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
+    <updated>2017-01-30T23:50:14-05:00</updated>
+    <published>2017-01-29T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">During development, everyone has a preference of coding style. For the most part these preferences have no effect on the functionality of the application. It is possible that they can become a large time sink, especially in larger teams and projects. In this article we will determine how minor style differences cause negative effects, and how we can mitigate them.
+</description>
+    <content type="html">&lt;p&gt;Everyone has preferences in how code should be structured from an aesthetic standpoint. Having creative freedom in finding your own style is a powerful and rewarding feeling. Seeing that new class/file completely written in your style can put a smile on your face. The problem is we&amp;rsquo;re often not the only developer on a project. In a team or open-source environment, it is unlikely that &lt;em&gt;everyone&lt;/em&gt; is on board with the exact coding style. It is not uncommon to see different styles in a project just because everyone has their own.&lt;/p&gt;
+
+&lt;h2&gt;Why Care?&lt;/h2&gt;
+
+&lt;p&gt;You might be asking &lt;em&gt;&amp;ldquo;Why Care?&amp;rdquo;&lt;/em&gt; about styles. As developers, we want to enjoy working in our codebase. If we&amp;rsquo;re constantly dealing with inconsistent styles, it becomes a mental burden. Also, during code reviews everyone might be imposing their own styles on the reviewed code. After all is said and done, it really comes down to dropping the distractions in a codebase. With a consistent style there are no stylistic arguments in code reviews, and readability increases as the taxing effort of dealing with multiple styles in the same file disappears.&lt;/p&gt;
+
+&lt;p&gt;The following is an extreme case of stylistic inconsistencies with two functionally identical code snippets &amp;ndash; one follows a styleguide while the other does not.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="cm"&gt;=begin
+This method checks if the two args are equal
+it then returns the combined value
+=end&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;method_one&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;second_arg&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Executing method_one"&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;eql?&lt;/span&gt; &lt;span class="n"&gt;second_arg&lt;/span&gt;
+          &lt;span class="nb"&gt;puts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'first_arg is the same as second_arg'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;second_arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# This method checks if the two args are equal&lt;/span&gt;
+&lt;span class="c1"&gt;# it then returns the combined value&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;method_one&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;second_arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s1"&gt;'Executing method_one'&lt;/span&gt;
+
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;eql?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;second_arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s1"&gt;'first_arg is the same as second_arg'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;second_arg&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hopefully, you found the second snippet more pleasant and easier to read. The second one follows a styleguide while the first one had a mis-match of style.&lt;/p&gt;
+
+&lt;h2&gt;Starting with Styles&lt;/h2&gt;
+
+&lt;p&gt;&lt;img alt="Mixing tabs and spaces" width="717" height="325" src="/images/2017-01-30-simplify-the-styles-drop-the-distractions/tabs-spaces-both.png" /&gt;
+&lt;em&gt;[Image from the &lt;a href="http://www.emacswiki.org/emacs/TabsSpacesBoth"&gt;EmacsWiki&lt;/a&gt;, original comic by &lt;a href="http://www.duelinganalogs.com/comic/2007/04/02/hello-im-linux/"&gt;Steve Napierski&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Many basic style decisions are made early when a project is started. One of two things happen:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Styles are &lt;strong&gt;implicitly determined&lt;/strong&gt; by the creator&lt;/li&gt;
+&lt;li&gt;Styles are &lt;strong&gt;explicitly established&lt;/strong&gt; upfront by the creator or collaborators&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Even if the project starts with an implicit determined style, the end goal is to make it explicit. The more people that contribute to a project, the more chance their coding styles will conflict. Also, your personal coding style evolves over time and it is likely that styles within a project will &lt;em&gt;drift&lt;/em&gt;, even with a single contributer.&lt;/p&gt;
+
+&lt;p&gt;To reduce wasted time dealing with style issues, just explicitly set a style for your project.&lt;/p&gt;
+
+&lt;h3&gt;Picking an Explicit Style&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;m willing to bet that all languages have community styleguides (if not, then that&amp;rsquo;s a great opportunity to start one!). The following are some example styleguides:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.python.org/dev/peps/pep-0008/"&gt;Python - PEP8 Styleguide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/bbatsov/ruby-style-guide"&gt;Ruby - Community Styleguide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/airbnb/javascript"&gt;Javascript - Airbnb Styleguide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://google.github.io/styleguide/jsguide.html"&gt;Javascript - Google Styleguide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When picking a type of style, I recommend to just pick one of the already established styleguides. You might be tempted to start completly fresh and make your own styleguide individually or with other contributors. The problem with creating a fresh styleguide is that eventually there will be the discussion, &lt;em&gt;&amp;ldquo;I want the style to look like this&amp;rdquo;&lt;/em&gt;, and there will be time wasted trying to make everyone happy (which possibly will never happen). When new developers get started in a codebase they might say, &lt;em&gt;&amp;ldquo;Why do we have the style like this?&amp;rdquo;&lt;/em&gt;. This leads to a discussion regarding wheather or not the styleguide should be revised, which again is a potential waste of time.&lt;/p&gt;
+
+&lt;p&gt;You can deflect all styleguide questions if you just select a community styleguide to begin with. These styleguides have already gone through rigorous discussions within the community. One more bonus of using a popular styleguide is that it is likely that other open-source projects are using the same styleguide.&lt;/p&gt;
+
+&lt;h3&gt;Using Linters&lt;/h3&gt;
+
+&lt;p&gt;Linters are styleguide checkers that often provide a command line interface and editor integrations. Like previously mentioned with styleguides, there is probably one for each language (if not, what a great opportunity!). The following are some example linters:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://batsov.com/rubocop/"&gt;Ruby - Rubocop&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://eslint.org/"&gt;Javascript - ESLint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://stylelint.io/"&gt;CSS/SCSS/LESS - Stylelint&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A styleguide and linter work hand-in-hand. Together they ensure that code that violates the styleguide is flagged before it is committed to the codebase. There really is no downside to using a linter, and in most cases the benefits far outweigh the effort to set up in your editor. I highly recommend that everyone takes advantage of linters within your editor.&lt;/p&gt;
+
+&lt;h3&gt;Deviating from the Styleguides&lt;/h3&gt;
+
+&lt;p&gt;If your team is completely set on having customized styles that differ from a popular styleguide, I would still encourage using one as a base. In an ideal scenario it is possible to use inheritance, where you can then inherit the rules from your choice of popular styleguide. If this isn&amp;rsquo;t possible, then the next best option is to simply copy the whole guide and use that as your base and make modifications to it.&lt;/p&gt;
+
+&lt;p&gt;Each styleguide/linter has their own implementation and handling of their configurations. You will have to explore each and see how to deal with the inheritance. For example, &lt;a href="http://eslint.org/docs/user-guide/configuring#extending-configuration-files"&gt;ESLint&lt;/a&gt; and &lt;a href="http://rubocop.readthedocs.io/en/latest/configuration/#inheritance"&gt;Rubocop&lt;/a&gt; define how to extend/inherit from other styleguides.&lt;/p&gt;
+
+&lt;h3&gt;Reduce the Distractions&lt;/h3&gt;
+
+&lt;p&gt;Using a styleguide and linter, it becomes easy to identify and cut off the distractions of inconsistent styles early. If you can fix stylistic changes as you modify the underlying code, then the future you or your teammates won&amp;rsquo;t have to deal with it later. In addition, during code reviews everyone knows that all stylistic changes &lt;em&gt;should&lt;/em&gt; be taken care of, thus reducing the mental burden.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Just use a styleguide!" width="1480" height="517" src="/images/2017-01-30-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png" /&gt;
+&lt;em&gt;[Image from &lt;a href="https://xkcd.com/1513/"&gt;xkcd&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2&gt;Applying to an Existing Project&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s great that you want to get a consistent style in an existing project. Now comes an important decision, &lt;em&gt;&amp;ldquo;Do we apply all the style fixes immediately, or as we encounter them?&amp;rdquo;&lt;/em&gt; The answer is situational and many factors can influence what works best for your project and team.&lt;/p&gt;
+
+&lt;p&gt;With a sweeping change, a lot of code might be modified, although nothing should be functionally different, as we are just dealing with stylistic edits. This can impact the effectiveness of &lt;code&gt;git blame&lt;/code&gt; as the latest commit might simply be &lt;em&gt;&amp;ldquo;Sweeping Style Changes&amp;rdquo;&lt;/em&gt;, and not the actual commit you were hoping for. Fortunately, there are ways to look deeper into the &lt;code&gt;git log&lt;/code&gt; and find the actual content you are looking for (i.e., &lt;a href="/git-evolution-how-did-we-get-here/"&gt;Git Evolution&lt;/a&gt;). With a sweeping change of style fixes, the project afterwards would be in a conistent state of styles.&lt;/p&gt;
+
+&lt;p&gt;By fixing style issues as you encounter them, it leaves a lot to interpretation by team members. &lt;em&gt;&amp;ldquo;Do I fix the whole file when I touch a line within it?&amp;rdquo;&lt;/em&gt;, &lt;em&gt;&amp;ldquo;Do I only fix styles for the lines I touch?&amp;rdquo;&lt;/em&gt;. In either case the commits will contain two concepts now going forward: feature/bug changes and style changes. Not only does this muddy the usefulness of looking back in the commit history, but code reviews now also contain the style element that everyone has to look at. Overall, the distractions of incrementally dealing with style changes never stop. Even while editing or reading the codebase you will subconsciously see the inconsistent style changes which leads to more distractions.&lt;/p&gt;
+
+&lt;p&gt;In my personal opinion, rip the band-aid off and just make a sweeping change of style fixes to put your project in a pristine state. In a legacy system, it might make sense to simply do the incremental approach as it would not be often that one would make changes in the battle-tested system.&lt;/p&gt;
+
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use a styleguide and linter for any software project to help reduce distractions on styles:
+
+&lt;ul&gt;
+&lt;li&gt;If possible pick a popular styleguide to avoid arguments/discussions on styles.&lt;/li&gt;
+&lt;li&gt;Use a linter in your editor to cut off stylistic distractions early (i.e., before code reviews).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;The sooner a project completely adheres to the styleguide:
+
+&lt;ul&gt;
+&lt;li&gt;The less stylistic distractions are encountered while reading through the codebase, and&lt;/li&gt;
+&lt;li&gt;The less work in keeping up the proper styles.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If possible, use a sweeping approach to applying style fixes:
+
+&lt;ul&gt;
+&lt;li&gt;The minimal impact on &lt;code&gt;git blame&lt;/code&gt; can be resolved with proper tools.&lt;/li&gt;
+&lt;li&gt;Opposed to using the incremental style of fixes, the distractions are reduced within code reviews and edits.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Information at a Glance: `RailsRequestStats`</title>
     <link rel="alternate" href="http://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>http://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-12-20T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -113,7 +250,7 @@
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -231,7 +368,7 @@
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -410,7 +547,7 @@
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -576,7 +713,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -704,7 +841,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-07-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -811,7 +948,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-06-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -911,7 +1048,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -982,7 +1119,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1089,7 +1226,7 @@ augroup END
     <title>Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_</title>
     <link rel="alternate" href="http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/"/>
     <id>http://kevinjalbert.com/defined_methods-in-rake-tasks-you-re-gonna-have-a-bad-time/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
+    <updated>2017-01-30T23:50:14-05:00</updated>
     <published>2016-03-20T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1304,61 +1441,6 @@ Saving default blog post
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now &lt;em&gt;test&lt;/em&gt; the defined functionality!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Vim Substitution Feedback Using `vim-over`</title>
-    <link rel="alternate" href="http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/"/>
-    <id>http://kevinjalbert.com/vim-substitution-feedback-using-vim-over/</id>
-    <updated>2017-01-08T14:19:32-05:00</updated>
-    <published>2016-02-28T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Vim substitutions offer little affordance in whether the search will match the desired text. `vim-over` is a vim plugin that provides visual feedback while working with substitutions.</description>
-    <content type="html">&lt;p&gt;It is common while in vim to perform substitution tasks over the text you are editing. This is often accomplished using the following command:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;:%s/&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;%s&lt;/code&gt; command will perform substitution over every line within the buffer. The &lt;code&gt;/&amp;lt;find&amp;gt;/&amp;lt;replace&amp;gt;&lt;/code&gt; specifies the substitution to perform. Finally the &lt;code&gt;/g&lt;/code&gt; indicates that this should apply to multiple occurrences if they are present on the same line.&lt;/p&gt;
-
-&lt;p&gt;This works great, although there is little affordance in determining whether the specified &lt;code&gt;&amp;lt;find&amp;gt;&lt;/code&gt; will hit the matches you are interested in. The aforementioned command is a &lt;em&gt;all-or-nothing&lt;/em&gt; with respect to execution, there is no &lt;em&gt;visual feedback&lt;/em&gt; until you execute the command.&lt;/p&gt;
-
-&lt;h1&gt;Visual Feedback via vim-over&lt;/h1&gt;
-
-&lt;p&gt;The &lt;a href="https://github.com/osyo-manga/vim-over"&gt;vim-over&lt;/a&gt; plugin provides a dynamic approach for visual feedback while performing substitutions. It is extremely useful while crafting specific &lt;code&gt;&amp;lt;find&amp;gt;&lt;/code&gt; patterns.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Visual Feedback Demo" width="440" height="320" src="/images/2016-02-29-vim-substitution-feedback-using-vim-over/visual-feedback-demo.gif" /&gt;&lt;/p&gt;
-
-&lt;h1&gt;Tips and Tricks&lt;/h1&gt;
-
-&lt;p&gt;I have three vim maps that I use to simplify and enhance my substitutions.&lt;/p&gt;
-
-&lt;h2&gt;#1 - Substitute Word&lt;/h2&gt;
-
-&lt;p&gt;This mapping (&lt;code&gt;&amp;lt;leader&amp;gt;s&lt;/code&gt;) will find and replace the text under the cursor using &lt;code&gt;vim-over&lt;/code&gt; for visual feedback. After the mapping has been executed you are left where you simply type the &lt;code&gt;&amp;lt;replacement&amp;gt;/g&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;nnoremap &amp;lt;leader&amp;gt;s :OverCommandLine&amp;lt;CR&amp;gt; %s/&amp;lt;C-r&amp;gt;&amp;lt;C-w&amp;gt;/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;#2 - Global Substitution&lt;/h2&gt;
-
-&lt;p&gt;This mapping (&lt;code&gt;&amp;lt;leader&amp;gt;v&lt;/code&gt;) will perform a global substitution using &lt;code&gt;vim-over&lt;/code&gt; for visual feedback. After the mapping has been executed you are left where you type the &lt;code&gt;&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;function! VisualFindAndReplace()
-    :OverCommandLine %s/
-    :noh
-endfunction
-nnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplace()&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;#3 - Visual Substitution&lt;/h2&gt;
-
-&lt;p&gt;This mapping (&lt;code&gt;&amp;lt;leader&amp;gt;v&lt;/code&gt; while in visual mode) will perform a substitution only within the visually selected text using &lt;code&gt;vim-over&lt;/code&gt; for visual feedback. After the mapping has been executed you are left where you type the &lt;code&gt;&amp;lt;find&amp;gt;/&amp;lt;replacement&amp;gt;/g&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;function! VisualFindAndReplaceWithSelection() range
-    :'&amp;lt;,'&amp;gt;OverCommandLine s/
-    :noh
-endfunction
-xnoremap &amp;lt;Leader&amp;gt;v :call VisualFindAndReplaceWithSelection()&amp;lt;CR&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
 </content>
   </entry>
 </feed>

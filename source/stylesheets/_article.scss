@@ -77,4 +77,16 @@
     border-bottom: 1px solid $content-border-colour;
     margin: 10px 0;
   }
+
+  .article__comments-button {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .show-comments {
+    width: 100%;
+    font-weight: bold;
+    background-color: #eceff4;
+    cursor: pointer;
+  }
 }

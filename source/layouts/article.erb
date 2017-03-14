@@ -39,10 +39,13 @@
       <%= yield %>
       <%= partial 'article-notes' %>
 
-      <%= disqus %>
-      <%= disqus_count %>
+      <div class="article__comments-button"><button type="button" class="btn btn-default show-comments">Click to Disqus</button></div>
+
+      <div id="disqus_thread"></div>
     </div>
   </div>
 </div>
+
+<%= disqus_count %>
 
 <%= partial :footer %>

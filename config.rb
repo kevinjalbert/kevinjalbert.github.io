@@ -47,14 +47,14 @@ activate :automatic_image_sizes
 activate :directory_indexes
 activate :syntax
 
+activate :disqus do |d|
+  d.shortname = 'kevinjalbert'
+end
+
 configure :development do
   set :root_url, 'http://kevinjalbert.dev'
 
   activate :livereload
-
-  activate :disqus do |d|
-    d.shortname = 'kevinjalbert-test'
-  end
 end
 
 configure :build do
@@ -76,9 +76,5 @@ configure :build do
     options.threads = true
     options.pngout = false
     options.svgo = false
-  end
-
-  activate :disqus do |d|
-    d.shortname = 'kevinjalbert'
   end
 end

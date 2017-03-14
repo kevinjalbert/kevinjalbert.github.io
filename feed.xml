@@ -11,7 +11,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="http://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>http://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -88,7 +88,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="http://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>http://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -225,7 +225,7 @@ it then returns the combined value
     <title>Information at a Glance: `RailsRequestStats`</title>
     <link rel="alternate" href="http://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>http://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -326,7 +326,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="http://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>http://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -444,7 +444,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="http://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>http://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -623,7 +623,7 @@ it then returns the combined value
     <title>Let's `pry` into Ruby Objects</title>
     <link rel="alternate" href="http://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>http://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -789,7 +789,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="http://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>http://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -917,7 +917,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="http://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>http://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1024,7 +1024,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="http://kevinjalbert.com/more-shell-history/"/>
     <id>http://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1124,7 +1124,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>http://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-05-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1195,7 +1195,7 @@ setopt share_history
     <title>Enhanced Vim Searching</title>
     <link rel="alternate" href="http://kevinjalbert.com/enhanced-vim-searching/"/>
     <id>http://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2017-02-27T09:30:41-05:00</updated>
+    <updated>2017-02-27T09:31:41-05:00</updated>
     <published>2016-04-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

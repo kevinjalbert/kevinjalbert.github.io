@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".show-comments").on("click",function(){var t="kevinjalbert";$.ajax({type:"GET",url:"http://"+t+".disqus.com/embed.js",dataType:"script",cache:!0}),$(this).fadeOut()})});

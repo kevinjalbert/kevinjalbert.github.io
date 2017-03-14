@@ -10,7 +10,14 @@
   }
 
   .article-teaser__tags {
-    text-align: right;
+    @media (min-width: 0px) {
+      padding-top: 10px;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      padding-top: 0px;
+      text-align: right;
+    }
 
     a {
       background: #eceff4;
@@ -25,10 +32,18 @@
     color: #9a9a9a;
     font-size: 14px;
     padding: 0 15px;
+    text-align: right;
   }
 
   .article-teaser__date {
     font-size: 14px;
+
+    @media (min-width: 0px) {
+      text-align: left;
+    }
+    @media (min-width: 768px) {
+      text-align: left;
+    }
   }
 }
 

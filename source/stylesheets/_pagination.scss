@@ -1,6 +1,6 @@
 .pagination {
   margin: $content-margins;
-  width: $content-max-width;
+  max-width: $content-max-width;
   text-align: center;
 
   ul {

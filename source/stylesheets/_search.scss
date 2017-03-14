@@ -2,21 +2,46 @@
  *= require jquery-ui/themes/base/autocomplete.css
  *= require jquery-ui/themes/base/menu.css
  */
+.search-component {
+  padding-top: $banner-font-size - $navigation-font-size + 4;
+
+  @media (min-width: 0px) {
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    text-align: right;
+  }
+}
 
 .search {
   border-radius: 5px;
-  font-size: small;
+  font-size: large;
   outline: 0;
-  width: 200px;
+
+  @media (min-width: 0px) {
+    width: 80vw;
+  }
+  @media (min-width: 768px) {
+    width: 20vw;
+    min-width: 200px;
+  }
 }
 
 .ui-autocomplete {
   background-color: rgba(255, 255, 255, 95);
   border-radius: 0 0 5px 5px;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .2);
-  max-height: 200px;
-  max-width: 199px;
   overflow: auto;
+
+  @media (min-width: 0px) {
+    width: 80vw !important;
+    max-width: 80vw;
+  }
+  @media (min-width: 768px) {
+    width: 20vw;
+    max-width: 300px;
+    min-width: 200px;
+  }
 }
 
 .ui-autocomplete .ui-menu-item {

@@ -1,28 +1,33 @@
 $banner-font-size: 25px;
-$navigation-font-size: 18px;
+$navigation-font-size: 15px;
 
 .header {
   @include no-underline-links;
 
-  border-bottom: 1px solid $content-border-colour;
-  margin: $content-margins;
-  min-height: 40px;
-  padding-bottom: 50px;
+  //margin: $content-margins;
+
+  @media (min-width: 0px) {
+    padding-bottom: 100px;
+  }
+  @media (min-width: 768px) {
+    padding-bottom: 50px;
+  }
 }
 
 .navigation {
   @include no-underline-links;
-  text-align: right;
+  font-size: $navigation-font-size;
+  padding-top: $banner-font-size - $navigation-font-size;
 
-  ul {
-    font-size: $navigation-font-size;
-    list-style: none;
-    padding-top: $banner-font-size - $navigation-font-size;
+  @media (min-width: 0px) {
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    text-align: left;
+  }
 
-    li {
-      display: inline-block;
-      padding-left: 25px;
-    }
+  a:not(:last-of-type) {
+    padding-right: 15px;
   }
 }
 

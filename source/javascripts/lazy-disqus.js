@@ -6,7 +6,7 @@ $(document).ready(function() {
     // ajax request to load the disqus javascript
     $.ajax({
       type: "GET",
-      url: "http://" + disqus_shortname + ".disqus.com/embed.js",
+      url: "https://" + disqus_shortname + ".disqus.com/embed.js",
       dataType: "script",
       cache: true
     });

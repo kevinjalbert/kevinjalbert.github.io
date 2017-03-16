@@ -1,13 +1,11 @@
 ---
-title: "Information at a Glance: `RailsRequestStats`"
+title: "Information at a Glance: RailsRequestStats"
 
-teaser: |
-  `RailsRequestStats` provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.
+description: "RailsRequestStats provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes."
 
 tags:
 - ruby
 - rails
-
 ---
 
 I developed [rails\_request\_stats](https://github.com/kevinjalbert/rails_request_stats) to solve a personal problem of mine while optimizing certain Rails API endpoints at work. It provided me a quick way to get the required information at a glance in development logs.

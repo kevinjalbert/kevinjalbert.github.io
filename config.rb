@@ -46,6 +46,7 @@ set :markdown, fenced_code_blocks: true, smartypants: true, tables: true
 activate :automatic_image_sizes
 activate :directory_indexes
 activate :syntax
+activate :meta_tags
 
 activate :disqus do |d|
   d.shortname = 'kevinjalbert'

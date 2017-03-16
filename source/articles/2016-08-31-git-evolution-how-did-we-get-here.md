@@ -1,14 +1,12 @@
 ---
 title: "Git Evolution: How did we get Here?"
 
-teaser: |
-  In a large long-lived git repository there is a lot of history behind the current state of things. `git blame` lets you scratch the surface, while `git log` lets you dig deeper. The use of `git evolution` provides a succient and yet comprhensive approach to understanding the evolution of a range of lines within a git repository.
+description: "In a large long-lived git repository there is a lot of history behind the current state of things. git blame lets you scratch the surface, while git log lets you dig deeper. The use of git evolution provides a succient and yet comprhensive approach to understanding the evolution of a range of lines within a git repository."
 
 tags:
 - ruby
 - git
 - vim
-
 ---
 
 As a developer its not uncommon to want a little more context surrounding the code snippet you are dealing with. You might have found yourself in these situations and reached for `git blame` to get some initial context in why the code is like it is. This only scratches the surface and you might want a more context which `git log` can provide to you. You are mostly interested in how the code evolved to this point, and really want you want is `git evolution`.

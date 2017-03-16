@@ -1,14 +1,12 @@
 ---
 title: "Deploying my Website to GitHub Pages"
 
-teaser: |
-  A little history on my website, and the underlying framework I have used -- Middleman. I walkthrough the process on how I deploy the website to GitHub pages using a deployment script.
+description: "A little history on my website, and the underlying framework I have used -- Middleman. I walkthrough the process on how I deploy the website to GitHub pages using a deployment script."
 
 tags:
 - ruby
 - middleman
 - github
-
 ---
 
 ## History of my Website

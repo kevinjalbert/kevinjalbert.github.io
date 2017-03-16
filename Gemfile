@@ -8,6 +8,7 @@ gem 'middleman-imageoptim', '~> 0.2.1'
 gem 'middleman-syntax', '~> 2.0.0'
 gem 'middleman-search', '~> 0.5.0'
 gem 'middleman-disqus', '~> 1.1.0'
+gem 'middleman-meta-tags', '~> 0.3.0'
 
 gem 'redcarpet', '~> 3.3.3'
 

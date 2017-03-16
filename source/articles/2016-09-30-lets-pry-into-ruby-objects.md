@@ -1,14 +1,12 @@
 ---
-title: "Let's `pry` into Ruby Objects"
+title: "Let's pry into Ruby Objects"
 
-teaser: |
-  When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques in Ruby that can aid you. In particular, `pry` is an extreamly powerful tool that you should have in your toolbox.
+description: "When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques in Ruby that can aid you. In particular, pry is an extreamly powerful tool that you should have in your toolbox."
 
 tags:
 - pry
 - ruby
 - rails
-
 ---
 
 ## Where is my `pry`bar?

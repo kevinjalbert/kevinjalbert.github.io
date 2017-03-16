@@ -1,11 +1,7 @@
 ---
-title: Share Your Bag of Tricks
+title: "Share Your Bag of Tricks"
 
-teaser:
-  Everyone has a <i>bag of tricks</i> in the form of tips and shortcuts that they
-  use throughout their lives. In general, there is no harm in sharing this
-  knowledge. This post encourages sharing ones <i>bag of tricks</i> to others,
-  as well as discusses various benefits.
+description: "Everyone has a bag of tricks in the form of tips and shortcuts that they use throughout their lives. In general, there is no harm in sharing this knowledge. This post encourages sharing ones bag of tricks to others, as well as discusses various benefits."
 
 tags:
 - self-improvement

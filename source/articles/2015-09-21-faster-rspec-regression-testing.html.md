@@ -1,11 +1,7 @@
 ---
-title: Faster RSpec Regression Testing
+title: "Faster RSpec Regression Testing"
 
-teaser:
-  Explore two approaches for testing along with a suggested workflow. The goal is to
-  improve the time spent during regression testing. The described technique can
-  apply to other testing frameworks, assuming they have similar mechanisms to
-  RSpec's `it` blocks.
+description: Explore two approaches for testing along with a suggested workflow. The goal is to improve the time spent during regression testing. The described technique can apply to other testing frameworks, assuming they have similar mechanisms to RSpec's it blocks."
 
 tags:
 - rspec

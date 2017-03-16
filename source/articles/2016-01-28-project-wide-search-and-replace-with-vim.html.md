@@ -1,8 +1,7 @@
 ---
-title: Project-Wide Search and Replace with Vim
+title: "Project-Wide Search and Replace with Vim"
 
-teaser:
-  There are many instances where you might want to perform a mass search and replace in Vim. The following are two commands that can help out with such a task.
+description: "There are many instances where you might want to perform a mass search and replace in Vim. The following are two commands that can help out with such a task."
 
 tags:
 - vim

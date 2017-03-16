@@ -1,8 +1,7 @@
 ---
 title: "Keep on Learning, but don't Forget to Remember"
 
-teaser: |
-  As developers we are constantly learning tips, tricks and new ways to accomplish our work. We continue to accumulate these tips daily, but at the same time we potentially forget the less used but relevant ones. A system is presented that ensures that these tips are remembered.
+description: "As developers we are constantly learning tips, tricks and new ways to accomplish our work. We continue to accumulate these tips daily, but at the same time we potentially forget the less used but relevant ones. A system is presented that ensures that these tips are remembered."
 
 tags:
 - self-improvement

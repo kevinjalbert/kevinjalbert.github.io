@@ -1,14 +1,12 @@
 ---
 title: "Find and Bury Dead Code"
 
-teaser: |
-  Dead code has no reason to be in a project. Dead code wastes a developer’s time and energy. Going from this it makes sense to remove the dead code and put it rest with a delete keystroke. The main problem is how to identify dead code in a living project?
+description: "Dead code has no reason to be in a project. Dead code wastes a developer’s time and energy. Going from this it makes sense to remove the dead code and put it rest with a delete keystroke. The main problem is how to identify dead code in a living project?"
 
 tags:
 - software
 - software quality
 - ruby
-
 ---
 
 Dead code has no reason to be in a project. When you know it’s there, it simply nags at you to be removed. Sometimes you aren’t even sure that you have dead code. It might just be the case that every line of your codebase is being executed, which if true is great! The other scenario is that there is some dead code wasting developers’ time as they maintain it and work with it.

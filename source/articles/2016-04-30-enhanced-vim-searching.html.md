@@ -1,8 +1,7 @@
 ---
-title: Enhanced Vim Searching
+title: "Enhanced Vim Searching"
 
-teaser:
-  Vanilla vim offers farily powerful searching capabilities within a buffer. It is possible to _enhance_ vim's searching capabilities even further with vim plugins. Using several plugins, keymappings and settings, we can improve upon vim's search.
+description: "Vanilla vim offers farily powerful searching capabilities within a buffer. It is possible to _enhance_ vim's searching capabilities even further with vim plugins. Using several plugins, keymappings and settings, we can improve upon vim's search."
 
 tags:
 - vim

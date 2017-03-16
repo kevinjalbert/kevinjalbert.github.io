@@ -1,8 +1,7 @@
 ---
 title: "More Shell History"
 
-teaser: |
-  Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell's history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to _reverse search_ through it via `ctrl-r`.
+description: "Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell's history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to _reverse search_ through it via ctrl-r."
 
 tags:
 - shell

@@ -1,8 +1,7 @@
 ---
-title: Vim Substitution Feedback Using `vim-over`
+title: "Vim Substitution Feedback Using vim-over"
 
-teaser:
-  Vim substitutions offer little affordance in whether the search will match the desired text. `vim-over` is a vim plugin that provides visual feedback while working with substitutions.
+description: "Vim substitutions offer little affordance in whether the search will match the desired text. vim-over is a vim plugin that provides visual feedback while working with substitutions."
 
 tags:
 - vim

@@ -1,13 +1,13 @@
 ---
 title: "Simplify the Styles, Drop the Distractions"
 
-teaser: |
-  During development, everyone has a preference of coding style. For the most part these preferences have no effect on the functionality of the application. It is possible that they can become a large time sink, especially in larger teams and projects. In this article we will determine how minor style differences cause negative effects, and how we can mitigate them.
+description: "During development, everyone has a preference of coding style. For the most part these preferences have no effect on the functionality of the application. It is possible that they can become a large time sink, especially in larger teams and projects. In this article we will determine how minor style differences cause negative effects, and how we can mitigate them."
 
 tags:
 - software
 - best practices
 
+pull_image: "/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png"
 ---
 
 Everyone has preferences in how code should be structured from an aesthetic standpoint. Having creative freedom in finding your own style is a powerful and rewarding feeling. Seeing that new class/file completely written in your style can put a smile on your face. The problem is we're often not the only developer on a project. In a team or open-source environment, it is unlikely that _everyone_ is on board with the exact coding style. It is not uncommon to see different styles in a project just because everyone has their own.

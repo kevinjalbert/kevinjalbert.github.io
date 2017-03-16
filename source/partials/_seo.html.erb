@@ -1,0 +1,20 @@
+<%
+  url = "https://kevinjalbert.com#{current_page.url}"
+  tag = current_page.metadata[:locals]['tagname']
+%>
+
+<%=
+  if tag
+    set_meta_tags title: "Articles on #{tag}"
+    set_meta_tags description: "Articles on #{tag} by Kevin Jalbert"
+  else
+    set_meta_tags title: current_page.data.title
+  end
+
+  set_meta_tags url: url
+  set_meta_tags 'og:url': url
+  set_meta_tags keywords: current_page.tags.join(', ') if current_page.respond_to?(:tags)
+
+  display_meta_tags
+  auto_display_meta_tags
+%>

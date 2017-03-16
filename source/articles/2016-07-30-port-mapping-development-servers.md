@@ -1,14 +1,12 @@
 ---
 title: "Port Mapping Development Servers"
 
-teaser: |
-  As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of `localhost` is a cumbersome and error prone issue. `port_map` is a ruby utility that provides a simple and almost automatic solution to this problem.
+description: "As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of localhost is a cumbersome and error prone issue. port_map is a ruby utility that provides a simple and almost automatic solution to this problem."
 
 tags:
 - development
 - shell
 - ruby
-
 ---
 
 As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of `localhost` is a cumbersome and error prone issue. [port_map](https://github.com/kevinjalbert/port_map) is a ruby utility that provides a simple and almost automatic solution to this problem.

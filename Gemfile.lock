@@ -103,6 +103,8 @@ GEM
       em-websocket (~> 0.5.1)
       middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
+    middleman-meta-tags (0.3.0)
+      middleman-core (>= 3.0.0)
     middleman-minify-html (3.4.1)
       htmlcompressor (~> 0.2.0)
       middleman-core (>= 3.2)
@@ -180,10 +182,11 @@ DEPENDENCIES
   middleman-disqus (~> 1.1.0)
   middleman-imageoptim (~> 0.2.1)
   middleman-livereload (~> 3.4.3)
+  middleman-meta-tags (~> 0.3.0)
   middleman-minify-html (~> 3.4.1)
   middleman-search (~> 0.5.0)
   middleman-syntax (~> 2.0.0)
   redcarpet (~> 3.3.3)
 
 BUNDLED WITH
-   1.12.5
+   1.14.3

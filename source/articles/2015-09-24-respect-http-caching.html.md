@@ -1,10 +1,7 @@
 ---
-title: Respect HTTP Caching
+title: "Respect HTTP Caching"
 
-teaser:
-  API developers put a lot of time and effort to ensure that their API can
-  scale. One effective way to mitigate load is to use HTTP caching.
-  As developers we need to respect HTTP caching to not waste efforts.
+description: "API developers put a lot of time and effort to ensure that their API can scale. One effective way to mitigate load is to use HTTP caching. As developers we need to respect HTTP caching to not waste efforts."
 
 tags:
 - http

@@ -1,8 +1,7 @@
 ---
-title: Defined Methods in Rake Tasks; _You're Gonna Have a Bad Time_
+title: "Defined Methods in Rake Tasks; You're Gonna Have a Bad Time"
 
-teaser:
-  Do you define methods within your Rake tasks? You might want to reconsider that, or _you're gonna have a bad time down the road_. Walkthrough an example which illustrates a tricky gotcha and solutions to avoiding it.
+description: "Do you define methods within your Rake tasks? You might want to reconsider that, or you're gonna have a bad time down the road. Walkthrough an example which illustrates a tricky gotcha and solutions to avoiding it."
 
 tags:
 - ruby

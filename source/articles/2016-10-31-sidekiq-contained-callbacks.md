@@ -1,14 +1,12 @@
 ---
 title: "Sidekiq: Contained Callbacks"
 
-teaser: |
-  ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's  transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs.
+description: "ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's  transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs."
 
 tags:
 - ruby
 - rails
 - sidekiq
-
 ---
 
 ## ActiveSupport Callbacks

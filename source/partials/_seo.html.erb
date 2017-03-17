@@ -29,13 +29,13 @@
   <% # JSON-LD for article pages %>
   <script type="application/ld+json">
     {
-       "@context":"http://schema.org",
-       "@type":"BlogPosting",
-       "headline":"<%= current_page.data.title %>",
-       "keywords":"<%= keywords %>",
-       "url":"<%= current_page_url %>",
-       "datePublished":"<%= current_page.date %>",
-       "dateModified":"<%= current_page.date %>",
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "<%= current_page.data.title %>",
+       "keywords": "<%= keywords %>",
+       "url": "<%= current_page_url %>",
+       "datePublished": "<%= current_page.date %>",
+       "dateModified": "<%= current_page.date %>",
        "author": {
          "@type": "Person",
          "name": "Kevin Jalbert",
@@ -46,9 +46,9 @@
            "https://reddit.com/user/kevinjalbert"
          ]
        },
-       "mainEntityOfPage":{
-          "@type":"WebPage",
-         "@id":"<%= current_page_url %>"
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "<%= current_page_url %>"
        }
     }
   </script>

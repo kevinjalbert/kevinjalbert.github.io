@@ -1,8 +1,13 @@
 <%
-  url = "https://kevinjalbert.com#{current_page.url}"
+  root_url = "https://kevinjalbert.com"
+  current_page_url = root_url + current_page.url
   tag = current_page.metadata[:locals]['tagname']
+  keywords = current_page.respond_to?(:tags) ? current_page.tags.join(', ') : ''
 %>
 
+<link rel="canonical" href=<%= current_page_url %>>
+
+<% # Adding meta/facebook/twitter tags %>
 <%=
   if tag
     set_meta_tags title: "Articles on #{tag}"
@@ -11,12 +16,63 @@
     set_meta_tags title: current_page.data.title
   end
 
-  set_meta_tags url: url
-  set_meta_tags 'og:url': url
+  set_meta_tags url: current_page_url
+  set_meta_tags 'og:url': current_page_url
   set_meta_tags keywords: current_page.tags.join(', ') if current_page.respond_to?(:tags)
 
   display_meta_tags
   auto_display_meta_tags
 %>
 
-<link rel="canonical" href=<%= url %>>
+
+<% if current_page.source_file.include?('/articles/') %>
+  <% # JSON-LD for article pages %>
+  <script type="application/ld+json">
+    {
+       "@context":"http://schema.org",
+       "@type":"BlogPosting",
+       "headline":"<%= current_page.data.title %>",
+       "keywords":"<%= keywords %>",
+       "url":"<%= current_page_url %>",
+       "datePublished":"<%= current_page.date %>",
+       "dateModified":"<%= current_page.date %>",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage":{
+          "@type":"WebPage",
+         "@id":"<%= current_page_url %>"
+       }
+    }
+  </script>
+<% elsif current_page.source_file.include?("/index.html.erb") %>
+  <% # JSON-LD for root page %>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Blog",
+      "url": "<%= root_url %>",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "<%= root_url %>"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Kevin Jalbert",
+        "sameAs": [
+          "https://twitter.com/kevinjalbert",
+          "https://github.com/kevinjalbert",
+          "https://keybase.io/kevinjalbert",
+          "https://reddit.com/user/kevinjalbert"
+        ]
+      }
+    }
+  </script>
+<% end %>

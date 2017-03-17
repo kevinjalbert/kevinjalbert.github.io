@@ -1,12 +1,12 @@
 <!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <link rel=canonical href=https://kevinjalbert.com/sidekiq-contained-callbacks/> <title>Sidekiq: Contained Callbacks | Kevin Jalbert</title> <meta name=description content="ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's transition from Active..."/> <meta name=keywords content="ruby, rails, sidekiq"/> <meta name=url content="https://kevinjalbert.com/sidekiq-contained-callbacks/"/> <meta property="og:url" content="https://kevinjalbert.com/sidekiq-contained-callbacks/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/kevin-jalbert.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Sidekiq: Contained Callbacks"/> <meta property="og:description" content="ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs."/> <meta property="og:image" content="https://kevinjalbert.com/images/kevin-jalbert.jpg"/> <meta property="og:title" content="Sidekiq: Contained Callbacks"/> <script type="application/ld+json">
     {
-       "@context":"http://schema.org",
-       "@type":"BlogPosting",
-       "headline":"Sidekiq: Contained Callbacks",
-       "keywords":"ruby, rails, sidekiq",
-       "url":"https://kevinjalbert.com/sidekiq-contained-callbacks/",
-       "datePublished":"2016-10-31 00:00:00 UTC",
-       "dateModified":"2016-10-31 00:00:00 UTC",
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Sidekiq: Contained Callbacks",
+       "keywords": "ruby, rails, sidekiq",
+       "url": "https://kevinjalbert.com/sidekiq-contained-callbacks/",
+       "datePublished": "2016-10-31 00:00:00 UTC",
+       "dateModified": "2016-10-31 00:00:00 UTC",
        "author": {
          "@type": "Person",
          "name": "Kevin Jalbert",
@@ -17,9 +17,9 @@
            "https://reddit.com/user/kevinjalbert"
          ]
        },
-       "mainEntityOfPage":{
-          "@type":"WebPage",
-         "@id":"https://kevinjalbert.com/sidekiq-contained-callbacks/"
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/sidekiq-contained-callbacks/"
        }
     }
   </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Sidekiq: Contained Callbacks</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class=article__date>October 31, 2016 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>3 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/sidekiq-contained-callbacks/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/ruby/">ruby</a> <a href="/tags/rails/">rails</a> <a href="/tags/sidekiq/">sidekiq</a> </div> </div> </div> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> Signup for my Newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>

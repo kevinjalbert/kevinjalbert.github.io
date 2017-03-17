@@ -1,12 +1,12 @@
 <!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <link rel=canonical href=https://kevinjalbert.com/lets-pry-into-ruby-objects/> <title>Let's pry into Ruby Objects | Kevin Jalbert</title> <meta name=description content="When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques ..."/> <meta name=keywords content="pry, ruby, rails"/> <meta name=url content="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/> <meta property="og:url" content="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques in Ruby that can aid you. In particular, pry is an extreamly powerful tool that you should have in your toolbox."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/kevin-jalbert.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Let's pry into Ruby Objects"/> <meta property="og:description" content="When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques in Ruby that can aid you. In particular, pry is an extreamly powerful tool that you should have in your toolbox."/> <meta property="og:image" content="https://kevinjalbert.com/images/kevin-jalbert.jpg"/> <meta property="og:title" content="Let's pry into Ruby Objects"/> <script type="application/ld+json">
     {
-       "@context":"http://schema.org",
-       "@type":"BlogPosting",
-       "headline":"Let's pry into Ruby Objects",
-       "keywords":"pry, ruby, rails",
-       "url":"https://kevinjalbert.com/lets-pry-into-ruby-objects/",
-       "datePublished":"2016-09-30 00:00:00 UTC",
-       "dateModified":"2016-09-30 00:00:00 UTC",
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Let's pry into Ruby Objects",
+       "keywords": "pry, ruby, rails",
+       "url": "https://kevinjalbert.com/lets-pry-into-ruby-objects/",
+       "datePublished": "2016-09-30 00:00:00 UTC",
+       "dateModified": "2016-09-30 00:00:00 UTC",
        "author": {
          "@type": "Person",
          "name": "Kevin Jalbert",
@@ -17,9 +17,9 @@
            "https://reddit.com/user/kevinjalbert"
          ]
        },
-       "mainEntityOfPage":{
-          "@type":"WebPage",
-         "@id":"https://kevinjalbert.com/lets-pry-into-ruby-objects/"
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/lets-pry-into-ruby-objects/"
        }
     }
   </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Let&#39;s pry into Ruby Objects</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class=article__date>September 30, 2016 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>3 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/lets-pry-into-ruby-objects/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/pry/">pry</a> <a href="/tags/ruby/">ruby</a> <a href="/tags/rails/">rails</a> </div> </div> </div> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> Signup for my Newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>

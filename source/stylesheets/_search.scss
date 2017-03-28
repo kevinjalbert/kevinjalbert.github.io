@@ -17,14 +17,7 @@
   border-radius: 5px;
   font-size: large;
   outline: 0;
-
-  @media (min-width: 0px) {
-    width: 80vw;
-  }
-  @media (min-width: 768px) {
-    width: 20vw;
-    min-width: 200px;
-  }
+  width: 100%;
 }
 
 .ui-autocomplete {
@@ -33,14 +26,8 @@
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .2);
   overflow: auto;
 
-  @media (min-width: 0px) {
-    width: 80vw !important;
-    max-width: 80vw;
-  }
   @media (min-width: 768px) {
-    width: 20vw;
     max-width: 300px;
-    min-width: 200px;
   }
 }
 

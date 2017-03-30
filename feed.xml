@@ -2,16 +2,155 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-02-26T18:53:20-05:00</updated>
+  <updated>2017-03-28T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Cut Code Review Noise on GitHub</title>
+    <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
+    <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
+    <updated>2017-03-28T20:36:26-04:00</updated>
+    <published>2017-03-28T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Code reviews on GitHub can be noisy and contain a lot of unnecessary chatter. We explore how to effectively coordinate code reviewing a pull request using GitHub's reactions and request review features.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1024" height="682" src="/images/2017-03-28-cut-code-review-noise-on-github/scissors.jpg" /&gt;
+&lt;em&gt;&lt;a href="https://www.flickr.com/photos/9918311@N02/4268582634/in/photostream/"&gt;Painting scissors with light 4 by Zechariah  Judy, on Flickr&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;For this post I&amp;rsquo;m not going to detail my preferred approach for working through a source code change using GitHub&amp;rsquo;s pull requests &amp;ndash; another post will likely contain this. I&amp;rsquo;m instead going to touch on GitHub&amp;rsquo;s review requests feature, and present an effective and efficient way to handle code reviews with GitHub&amp;rsquo;s interface.&lt;/p&gt;
+
+&lt;h2&gt;GitHub Review Requests and Reactions&lt;/h2&gt;
+
+&lt;p&gt;GitHub, in late 2016, introduced &lt;a href="https://github.com/blog/2291-introducing-review-requests"&gt;review requests&lt;/a&gt; to their platform. This was a welcome addition to code reviewing pull requests. It exposed a mechanism to request reviews without using &lt;em&gt;@mention&lt;/em&gt; or chat to get people&amp;rsquo;s attention.&lt;/p&gt;
+
+&lt;p&gt;GitHub made it easier to identify pull requests that require your attention by &lt;a href="https://github.com/blog/2306-filter-pull-request-reviews-and-review-requests"&gt;filtering review requests&lt;/a&gt;. Additionally, GitHub also allowed review requests to integrate with their &lt;a href="https://github.com/blog/2051-protected-branches-and-required-status-checks"&gt;protected branches&lt;/a&gt; feature. It became possible to prevent merging a pull request until at least one reviewer approved that pull request.&lt;/p&gt;
+
+&lt;p&gt;Last year GitHub released &lt;a href="https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments"&gt;reactions&lt;/a&gt; to simply reduce noise in large issues and pull requests. With this now you can simply add an emoji reaction instead of a new comment.&lt;/p&gt;
+
+&lt;p&gt;Overall, these are all incremental steps in the right direction towards the goal of a collaborative environment within GitHub. More and more, I find myself using review requests to communicate with other developers. Requesting a review now sends the appropriate notification to the individual. In the past, I would have pasted a link to the pull request in our chat room, or made an &lt;em&gt;@mention&lt;/em&gt; comment. By moving away from the old style of getting reviews, I find there is less &lt;em&gt;chatter&lt;/em&gt; and &lt;em&gt;noise&lt;/em&gt; for coordinating code reviews.&lt;/p&gt;
+
+&lt;h2&gt;Committed Reviewers&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to introduce the concept of &lt;em&gt;committed reviewers&lt;/em&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A &lt;em&gt;reviewer&lt;/em&gt; who is &lt;em&gt;committed&lt;/em&gt; to the overall quality and correctness of the pull request.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This implies that committed reviewers are individuals who give the final &lt;em&gt;approval&lt;/em&gt; for the pull request before merging.&lt;/p&gt;
+
+&lt;p&gt;This concept might not be applicable for various projects or organizations. I do recommend it, however, as it tends to promote higher quality code ending up in your codebase.&lt;/p&gt;
+
+&lt;p&gt;With GitHub&amp;rsquo;s request reviewers feature, this means that if you are requested, you are now a committed reviewer. The pull request cannot be merged until all committed reviewers approve it. This prevents a scenario where a reviewer could still be working through a pull request when it&amp;rsquo;s merged, wasting time and potentially missing issues. I have seen this happen when authors request numerous reviewers just to expedite the process.&lt;/p&gt;
+
+&lt;h2&gt;Coordinating Code Reviews&lt;/h2&gt;
+
+&lt;p&gt;Imagine we&amp;rsquo;re on a team of 4 people. You just created a pull request in GitHub. Now you want some eyes on the new changes you are proposing to put into the codebase.&lt;/p&gt;
+
+&lt;p&gt;You recall the old ways of using an &lt;em&gt;@mention&lt;/em&gt; just to get reviewers, same with pasting the link in our chat. You don&amp;rsquo;t want to disturb the team with unnecessary noise. Instead, it is time to use the new request reviewers interface in GitHub.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-1.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;You decide to directly request reviews from Jane and Bob, as you know they are familiar with this part of the system. You decided to request only two reviews as we have an informal rule of requiring two approvals before merging in any pull request.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-2.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bob leaves a request for changes inquiring on one aspect of your code. In one of his comments he indicates that Mary had encountered a similar problem and her solution was slightly different from yours.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-3.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;You read over the requested changes from Bob and make the corrections.&lt;/p&gt;
+
+&lt;p&gt;Mary chimes in regarding that comment and leaves some insight there for you. You read it over and leave a GitHub Reaction to express your thanks, which indicates that you acknowledged her comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-4.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;You now need to signal to Bob that you addressed his concerns so he can look at the new changes you added. Instead of getting his attention via chat or a &lt;em&gt;@mention&lt;/em&gt; comment, you can remove and request him again for a review.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Unfortunately, GitHub does not provide a one button click to request a review again from someone who is already a reviewer.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Bob receives a notification that he has been requested for a review and looks over the changes, finally approving it.&lt;/p&gt;
+
+&lt;p&gt;Jane gets back and also approves your pull request.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-5.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;At this specific point you have the two approvals that we as a team decided is required before merging a pull requests. Mary&amp;rsquo;s in a &lt;em&gt;comment&lt;/em&gt; state, which is fine as it indicates that she is not a &lt;em&gt;committed reviewer&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;You finally get around to merging in your pull request when you notice that Mary has added herself as a reviewer. She decided to give your pull request a complete review now as a committed reviewer. The intent was communicated through the request review.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-6.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even though you got two approvals, you know that Mary is committed to reviewing your pull requests. At this point you wait for her results as to not waste her time, or to potentially miss any issues she might raise.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-7.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Everything looks great. You have approvals across the board, so hit that merge button!&lt;/p&gt;
+
+&lt;h3&gt;Less Noise and Wasted Time&lt;/h3&gt;
+
+&lt;p&gt;A couple of things you might have noticed as we ran through that code review scenario:&lt;/p&gt;
+
+&lt;p&gt;No unnecessary commenting on the pull request to indicate that an individual has acknowledged something. GitHub Reactions provide an unobtrusive way for an individual to express themselves. Often reactions are replacing low-value comments (i.e,. &lt;em&gt;+1&lt;/em&gt;, &lt;em&gt;LGTM&lt;/em&gt;, &lt;em&gt;awesome!&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;No unnecessary &lt;em&gt;@mention&lt;/em&gt; comments to indicate that someone should review the pull request. In the past, we would have &lt;em&gt;@mention&lt;/em&gt; possible reviewers in the description or as comments in the pull request. The reviewers are now clearly indicated in the reviewers section of the pull request.&lt;/p&gt;
+
+&lt;p&gt;No unnecessary &lt;em&gt;@mention&lt;/em&gt; is needed to indicate a reviewer&amp;rsquo;s request for change has been addressed. Previously, it was common to &lt;em&gt;@mention&lt;/em&gt; a reviewer when their concerns were addressed, thus causing noise with comments.&lt;/p&gt;
+
+&lt;p&gt;With the above points on &lt;em&gt;@mention&lt;/em&gt; you could also factor in that this communication could have been in chat (public channels or privately).&lt;/p&gt;
+
+&lt;p&gt;Another scenario that we have encountered in the past is that the reviewer would come back preemptively to review the pull request as they noticed new commits. The problem is that sometimes new changes are still being worked on and pushed up incrementally. This can potentially waste the reviewer&amp;rsquo;s time as they have to look over more changes soon after.&lt;/p&gt;
+
+&lt;p&gt;As a reviewer, you know that you will receive a notification via GitHub when your attention is needed for a pull request. It also becomes easier to scan pull requests for where your action is required.&lt;/p&gt;
+
+&lt;h2&gt;Dealing with Notifications&lt;/h2&gt;
+
+&lt;p&gt;There are a couple of options when dealing with notifications surrounding GitHub:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Built-in web notification&lt;/li&gt;
+&lt;li&gt;Email notifications&lt;/li&gt;
+&lt;li&gt;Third-party application (depends on operating system)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I personally never got much benefit from the web notification, however, this could just be how I consume information. Without an actual notification appearing in my notification center (macOS), information doesn&amp;rsquo;t reach me well.&lt;/p&gt;
+
+&lt;p&gt;Email notifications are currently my preferred approach, as I can receive request review notifications via email. In addition, with email you can get fancy with filters to further reduce notification to only what you want.&lt;/p&gt;
+
+&lt;p&gt;I use &lt;a href="https://ptsochantaris.github.io/trailer/"&gt;Trailer.app&lt;/a&gt; in addition to email. With Trailer I am able to target specific repositories for native notification. Prior to review requests, this would have been my ideal approach for dealing with notifications at my work machine. There is active development to support the recent addition of GitHub review requests and reactions.&lt;/p&gt;
+
+&lt;p&gt;Regardless of delivery mechanism, take some time to figure how to deal with notifications. Each user will have different needs. For my case, I&amp;rsquo;m really only interested in emails about &lt;em&gt;Comments on Issues and Pull Requests&lt;/em&gt; and &lt;em&gt;Pull Request reviews&lt;/em&gt; on my &lt;em&gt;Participated Conversations&lt;/em&gt; (configured via &lt;a href="https://github.com/settings/notifications"&gt;GitHub&amp;rsquo;s Notifications&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2&gt;Keeping it all in GitHub&lt;/h2&gt;
+
+&lt;p&gt;Going back to the above scenario, no use of direct form of communication was used to facilitate the code review, everything was kept within GitHub. Of course, deeper discussions should use those mediums, but the key is that the coordination of the code review was kept entirely in the GitHub platform. This reduces chatter and noise that we receive throughout the day, and keeps the GitHub pull request succinct.&lt;/p&gt;
+
+&lt;p&gt;Using review requests clearly states the next action for the reviewer and author. With both parties actively using the provided utilities in GitHub, code review collaboration becomes much more manageable.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The idea is to reduce the unnecessary noise within a pull request using GitHub&amp;rsquo;s features.&lt;/li&gt;
+&lt;li&gt;GitHub review requests keep state of each reviewer during the code review process.&lt;/li&gt;
+&lt;li&gt;Make use of re-requesting a review when you have addressed a reviewer&amp;rsquo;s concerns.&lt;/li&gt;
+&lt;li&gt;Make use of reactions to acknowledge a comment if possible.&lt;/li&gt;
+&lt;li&gt;Be aware of committed reviewers and ensure everyone knows of their roles.&lt;/li&gt;
+&lt;li&gt;Ensure that all committed reviewers have approved the pull request before merging.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -87,7 +226,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -223,7 +362,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -323,7 +462,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -440,7 +579,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -618,7 +757,7 @@ it then returns the combined value
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -783,7 +922,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -910,7 +1049,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="https://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>https://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1016,7 +1155,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="https://kevinjalbert.com/more-shell-history/"/>
     <id>https://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1115,7 +1254,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
+    <updated>2017-03-17T10:45:27-04:00</updated>
     <published>2016-05-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1179,113 +1318,6 @@ setopt share_history
 &lt;h2&gt;Don&amp;rsquo;t Forget to Remember&lt;/h2&gt;
 
 &lt;p&gt;As I continue to learn new things I&amp;rsquo;ll be added them to the appropriate &lt;code&gt;tips.txt&lt;/code&gt; within my &lt;code&gt;.tips&lt;/code&gt; directory. If I am presented with a tip that is no longer relevant I can simply remove it. Overall this seems like a great solution for recollecting tips.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Enhanced Vim Searching</title>
-    <link rel="alternate" href="https://kevinjalbert.com/enhanced-vim-searching/"/>
-    <id>https://kevinjalbert.com/enhanced-vim-searching/</id>
-    <updated>2017-03-17T08:38:39-04:00</updated>
-    <published>2016-04-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Vanilla vim offers farily powerful searching capabilities within a buffer. It is possible to _enhance_ vim's searching capabilities even further with vim plugins. Using several plugins, keymappings and settings, we can improve upon vim's search.</description>
-    <content type="html">&lt;h2&gt;Basic Searching&lt;/h2&gt;
-
-&lt;p&gt;Vim provides rather simple searching capabilities using the following keys while in normal mode:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;/&lt;/code&gt; performs a &lt;em&gt;forward&lt;/em&gt; search of the provided pattern&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;?&lt;/code&gt; performs a &lt;em&gt;backward&lt;/em&gt; search of the provided pattern&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;*&lt;/code&gt; performs a &lt;em&gt;forward&lt;/em&gt; search of the word under the cursor&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#&lt;/code&gt; performs a &lt;em&gt;backward&lt;/em&gt; search of the word under the cursor&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;n&lt;/code&gt; navigates to the &lt;em&gt;next&lt;/em&gt; search occurrence&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;N&lt;/code&gt; navigates to the &lt;em&gt;previous&lt;/em&gt; search occurrence&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These commands alone are vital to anyone working with text in Vim. Without any customization these search commands perform simple&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Basic Searching" width="906" height="626" src="/images/2016-04-30-enhanced-vim-searching/basic-searching.gif" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Better Searching&lt;/h2&gt;
-
-&lt;p&gt;Personally, I always apply the following to make my searching slightly more responsive with visual feedback:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="k"&gt;set&lt;/span&gt; hlsearch
-&lt;span class="k"&gt;set&lt;/span&gt; incsearch
-
-&lt;span class="c"&gt;" This unsets the 'last search pattern' register by hitting ;&lt;/span&gt;
-nnoremap ; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;noh&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;CR&lt;span class="p"&gt;&amp;gt;:&amp;lt;&lt;/span&gt;backspace&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This allows our searches to &lt;em&gt;incrementally&lt;/em&gt; highlight the first match, providing visual feedback on our pattern matching. In addition, when proceeding with the search all the matches of the pattern are highlighted to visually indicate possible next matches.&lt;/p&gt;
-
-&lt;p&gt;As searching is a frequently used motion, I have added a map to &lt;code&gt;;&lt;/code&gt; to clear any highlighting from the searches.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Better Searching" width="910" height="630" src="/images/2016-04-30-enhanced-vim-searching/better-searching.gif" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Enhance Searching&lt;/h2&gt;
-
-&lt;p&gt;We can do better! Using a mixture of two vim plugins we can achieve an enhanced form of searching within vim:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" All around better searching (via Vundle's plugin manager)&lt;/span&gt;
-Bundle &lt;span class="s1"&gt;'haya14busa/incsearch.vim'&lt;/span&gt;
-Bundle &lt;span class="s1"&gt;'osyo-manga/vim-anzu'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;First, we have a bunch of maps and settings to incorporate &lt;a href="https://github.com/haya14busa/incsearch.vim"&gt;&lt;code&gt;incsearch.vim&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://github.com/osyo-manga/vim-anzu"&gt;&lt;code&gt;vim-anzu&lt;/code&gt;&lt;/a&gt; together:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" Use incsearch.vim for all search functions (with anzu for indication)&lt;/span&gt;
-map /  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;forward&lt;span class="p"&gt;)&lt;/span&gt;
-map ?  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;backward&lt;span class="p"&gt;)&lt;/span&gt;
-map &lt;span class="k"&gt;g&lt;/span&gt;/ &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;stay&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;g:incsearch&lt;/span&gt;#auto_nohlsearch &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;span class="k"&gt;set&lt;/span&gt; hlsearch
-map &lt;span class="k"&gt;n&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;n&lt;/span&gt;&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
-map N &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;N&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
-map * &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;star&lt;/span&gt;&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
-map # &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;incsearch&lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="k"&gt;nohl&lt;/span&gt;&lt;span class="p"&gt;)&amp;lt;&lt;/span&gt;Plug&lt;span class="p"&gt;&amp;gt;(&lt;/span&gt;anzu&lt;span class="p"&gt;-&lt;/span&gt;sharp&lt;span class="p"&gt;-&lt;/span&gt;with&lt;span class="p"&gt;-&lt;/span&gt;echo&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;g:anzu_status_format&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"%p(%i/%l) %w"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;By using &lt;code&gt;incsearch.vim&lt;/code&gt; we not only gain access to other perks that it brings in it&amp;rsquo;s toolkit, but it also handles our highlighting issue. Anytime the cursor moves after a search motion it &lt;code&gt;incsearch.vim&lt;/code&gt; will automatically remove the highlighting, which saves us from using the previously mentioned &lt;code&gt;;&lt;/code&gt; map for manually clearing the search highlighting. Secondly we have &lt;code&gt;vim-anzu&lt;/code&gt; which indicates the current &lt;em&gt;index&lt;/em&gt; of the search occurrence that you are at, it also indicates when you wrap around the bottom/top of the buffer.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Enhanced Searching" width="942" height="628" src="/images/2016-04-30-enhanced-vim-searching/enhanced-searching.gif" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;&lt;em&gt;tap tap tap&lt;/em&gt; Enhance&amp;hellip; &lt;em&gt;tap tap tap&lt;/em&gt; Enhance Searching&lt;/h2&gt;
-
-&lt;p&gt;We can go even further to &lt;em&gt;enhance&lt;/em&gt; our searching by making use of another vim plugin, &lt;a href="https://github.com/Lokaltog/vim-easymotion"&gt;&lt;code&gt;vim-easymotion&lt;/code&gt;&lt;/a&gt; for better targeting our searches:&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" Targeting our searching (via Vundle's plugin manager)&lt;/span&gt;
-Bundle &lt;span class="s1"&gt;'Lokaltog/vim-easymotion'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;By default &lt;code&gt;vim-easymotion&lt;/code&gt; could be used on the common &lt;code&gt;/&lt;/code&gt; searches to provide an intelligent way to &lt;em&gt;target&lt;/em&gt; our searches. Although, this tramples over our previous work, and we lose the simplicity of our common &lt;code&gt;/&lt;/code&gt; searches. The following function and augmentations allow &lt;code&gt;vim-easymotion&lt;/code&gt; to be triggered off of a &lt;code&gt;/&lt;/code&gt; search by hooking into the search by &lt;code&gt;incsearch.vim&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight viml"&gt;&lt;code&gt;&lt;span class="c"&gt;" Integrate incsearch and easymotion&lt;/span&gt;
-&lt;span class="c"&gt;" https://github.com/Lokaltog/vim-easymotion/issues/146#issuecomment-75443473&lt;/span&gt;
-&lt;span class="c"&gt;" Can use / for 'normal searching', at anytime its possible to use &amp;lt;space&amp;gt; to&lt;/span&gt;
-&lt;span class="c"&gt;" pass search over to easymotion. To use spaces in search you need to apply&lt;/span&gt;
-&lt;span class="c"&gt;" them via the regex approach \s.&lt;/span&gt;
-augroup incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion
-  autocmd&lt;span class="p"&gt;!&lt;/span&gt;
-  autocmd &lt;span class="nb"&gt;User&lt;/span&gt; IncSearchEnter autocmd&lt;span class="p"&gt;!&lt;/span&gt; incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion&lt;span class="p"&gt;-&lt;/span&gt;impl
-augroup END
-augroup incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion&lt;span class="p"&gt;-&lt;/span&gt;impl
-  autocmd&lt;span class="p"&gt;!&lt;/span&gt;
-augroup END
-&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; IncsearchEasyMotion&lt;span class="p"&gt;()&lt;/span&gt; abort
-  autocmd incsearch&lt;span class="p"&gt;-&lt;/span&gt;easymotion&lt;span class="p"&gt;-&lt;/span&gt;impl &lt;span class="nb"&gt;User&lt;/span&gt; IncSearchExecute &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;silent&lt;/span&gt;&lt;span class="p"&gt;!&lt;/span&gt; &lt;span class="k"&gt;call&lt;/span&gt; EasyMotion#Search&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"\&amp;lt;CR&amp;gt;"&lt;/span&gt;
-&lt;span class="k"&gt;endfunction&lt;/span&gt;
-&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="nv"&gt;g:incsearch_cli_key_mappings&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="se"&gt;\&lt;/span&gt;   &lt;span class="s2"&gt;"\&amp;lt;Space&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;span class="se"&gt;\&lt;/span&gt;       &lt;span class="s1"&gt;'key'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'IncsearchEasyMotion()'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="se"&gt;\&lt;/span&gt;       &lt;span class="s1"&gt;'noremap'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="se"&gt;\&lt;/span&gt;       &lt;span class="s1"&gt;'expr'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
-&lt;span class="se"&gt;\&lt;/span&gt;   &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="se"&gt;\&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img alt="Targeted Searching" width="938" height="630" src="/images/2016-04-30-enhanced-vim-searching/targeted-searching.gif" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We finally have all-around better vim searching, by configuring three search related plugins to play nice with each other!&lt;/p&gt;
 </content>
   </entry>
 </feed>

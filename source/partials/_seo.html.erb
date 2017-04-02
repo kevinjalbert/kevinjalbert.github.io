@@ -16,8 +16,17 @@
     set_meta_tags title: current_page.data.title
   end
 
+  if current_page.source_file.include?('/articles/')
+    set_meta_tags datePublished: current_page.date
+    set_meta_tags 'og:article:published_time': current_page.date
+
+    set_meta_tags author: "Kevin Jalbert"
+    set_meta_tags 'og:article:author': current_page.date
+  end
+
   set_meta_tags url: current_page_url
   set_meta_tags 'og:url': current_page_url
+
   set_meta_tags keywords: current_page.tags.join(', ') if current_page.respond_to?(:tags)
 
   display_meta_tags

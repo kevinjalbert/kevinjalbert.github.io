@@ -11,7 +11,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-03-28T20:36:26-04:00</updated>
+    <updated>2017-04-02T15:24:23-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -22,7 +22,7 @@
 
 &lt;p&gt;For this post I&amp;rsquo;m not going to detail my preferred approach for working through a source code change using GitHub&amp;rsquo;s pull requests &amp;ndash; another post will likely contain this. I&amp;rsquo;m instead going to touch on GitHub&amp;rsquo;s review requests feature, and present an effective and efficient way to handle code reviews with GitHub&amp;rsquo;s interface.&lt;/p&gt;
 
-&lt;h2&gt;GitHub Review Requests and Reactions&lt;/h2&gt;
+&lt;h1&gt;GitHub Review Requests and Reactions&lt;/h1&gt;
 
 &lt;p&gt;GitHub, in late 2016, introduced &lt;a href="https://github.com/blog/2291-introducing-review-requests"&gt;review requests&lt;/a&gt; to their platform. This was a welcome addition to code reviewing pull requests. It exposed a mechanism to request reviews without using &lt;em&gt;@mention&lt;/em&gt; or chat to get people&amp;rsquo;s attention.&lt;/p&gt;
 
@@ -32,7 +32,7 @@
 
 &lt;p&gt;Overall, these are all incremental steps in the right direction towards the goal of a collaborative environment within GitHub. More and more, I find myself using review requests to communicate with other developers. Requesting a review now sends the appropriate notification to the individual. In the past, I would have pasted a link to the pull request in our chat room, or made an &lt;em&gt;@mention&lt;/em&gt; comment. By moving away from the old style of getting reviews, I find there is less &lt;em&gt;chatter&lt;/em&gt; and &lt;em&gt;noise&lt;/em&gt; for coordinating code reviews.&lt;/p&gt;
 
-&lt;h2&gt;Committed Reviewers&lt;/h2&gt;
+&lt;h1&gt;Committed Reviewers&lt;/h1&gt;
 
 &lt;p&gt;I&amp;rsquo;m going to introduce the concept of &lt;em&gt;committed reviewers&lt;/em&gt;:&lt;/p&gt;
 
@@ -46,7 +46,7 @@
 
 &lt;p&gt;With GitHub&amp;rsquo;s request reviewers feature, this means that if you are requested, you are now a committed reviewer. The pull request cannot be merged until all committed reviewers approve it. This prevents a scenario where a reviewer could still be working through a pull request when it&amp;rsquo;s merged, wasting time and potentially missing issues. I have seen this happen when authors request numerous reviewers just to expedite the process.&lt;/p&gt;
 
-&lt;h2&gt;Coordinating Code Reviews&lt;/h2&gt;
+&lt;h1&gt;Coordinating Code Reviews&lt;/h1&gt;
 
 &lt;p&gt;Imagine we&amp;rsquo;re on a team of 4 people. You just created a pull request in GitHub. Now you want some eyes on the new changes you are proposing to put into the codebase.&lt;/p&gt;
 
@@ -92,7 +92,7 @@
 
 &lt;p&gt;Everything looks great. You have approvals across the board, so hit that merge button!&lt;/p&gt;
 
-&lt;h3&gt;Less Noise and Wasted Time&lt;/h3&gt;
+&lt;h2&gt;Less Noise and Wasted Time&lt;/h2&gt;
 
 &lt;p&gt;A couple of things you might have noticed as we ran through that code review scenario:&lt;/p&gt;
 
@@ -108,7 +108,7 @@
 
 &lt;p&gt;As a reviewer, you know that you will receive a notification via GitHub when your attention is needed for a pull request. It also becomes easier to scan pull requests for where your action is required.&lt;/p&gt;
 
-&lt;h2&gt;Dealing with Notifications&lt;/h2&gt;
+&lt;h1&gt;Dealing with Notifications&lt;/h1&gt;
 
 &lt;p&gt;There are a couple of options when dealing with notifications surrounding GitHub:&lt;/p&gt;
 
@@ -126,7 +126,7 @@
 
 &lt;p&gt;Regardless of delivery mechanism, take some time to figure how to deal with notifications. Each user will have different needs. For my case, I&amp;rsquo;m really only interested in emails about &lt;em&gt;Comments on Issues and Pull Requests&lt;/em&gt; and &lt;em&gt;Pull Request reviews&lt;/em&gt; on my &lt;em&gt;Participated Conversations&lt;/em&gt; (configured via &lt;a href="https://github.com/settings/notifications"&gt;GitHub&amp;rsquo;s Notifications&lt;/a&gt;).&lt;/p&gt;
 
-&lt;h2&gt;Keeping it all in GitHub&lt;/h2&gt;
+&lt;h1&gt;Keeping it all in GitHub&lt;/h1&gt;
 
 &lt;p&gt;Going back to the above scenario, no use of direct form of communication was used to facilitate the code review, everything was kept within GitHub. Of course, deeper discussions should use those mediums, but the key is that the coordination of the code review was kept entirely in the GitHub platform. This reduces chatter and noise that we receive throughout the day, and keeps the GitHub pull request succinct.&lt;/p&gt;
 
@@ -134,7 +134,7 @@
 
 &lt;hr&gt;
 
-&lt;h2&gt;TL;DR&lt;/h2&gt;
+&lt;h1&gt;TL;DR&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;The idea is to reduce the unnecessary noise within a pull request using GitHub&amp;rsquo;s features.&lt;/li&gt;
@@ -150,7 +150,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:20:48-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -159,11 +159,11 @@
     <content type="html">&lt;p&gt;Dead code has no reason to be in a project. When you know it’s there, it simply nags at you to be removed. Sometimes you aren’t even sure that you have dead code. It might just be the case that every line of your codebase is being executed, which if true is great! The other scenario is that there is some dead code wasting developers’ time as they maintain it and work with it.
 Going from this it makes sense to remove the dead code and put it rest with a delete keystroke. The main problem is how to identify dead code in a living project?&lt;/p&gt;
 
-&lt;h2&gt;Finding Dead Code&lt;/h2&gt;
+&lt;h1&gt;Finding Dead Code&lt;/h1&gt;
 
 &lt;p&gt;In smaller projects, it’s possible to simply see and know what is dead code just from the usage and familiarity you might have with the project. Within larger projects, identifying dead code is not as straight forward. Luckily, we have tools and systems that can aid us. For the most part, we will be looking at this problem from a dynamic language perspective, primarily Ruby.&lt;/p&gt;
 
-&lt;h3&gt;Static Analysis Tools&lt;/h3&gt;
+&lt;h2&gt;Static Analysis Tools&lt;/h2&gt;
 
 &lt;p&gt;Static analysis tools do not run the application and only examine the source code itself. A general property of these tools is the speed and ease of use, although they come at a price of precision (i.e., missing and incorrect results). I’ll will first present a Ruby specific tool called &lt;strong&gt;&lt;em&gt;debride&lt;/em&gt;&lt;/strong&gt; and then a language agnostic tool called &lt;strong&gt;&lt;em&gt;unused&lt;/em&gt;&lt;/strong&gt;:&lt;/p&gt;
 
@@ -173,7 +173,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
 
 &lt;p&gt;With both of these static analysis tools, there is a precision issue of whether or not the detected code is actually used during the execution of your project. This does not strum up immediate confidence in the results and often requires deeper investigation. Another large concern when dealing with dynamic language is class/method defined at runtime or methods that are invoked via meta programming.&lt;/p&gt;
 
-&lt;h3&gt;Dynamic Analysis Tools&lt;/h3&gt;
+&lt;h2&gt;Dynamic Analysis Tools&lt;/h2&gt;
 
 &lt;p&gt;Dynamic analysis tools, unlike their static counterparts, actually need to run the source code. A general property of these tools is that they provide richer and more accurate results, although at the cost of performance (i.e., slower due to measuring at runtime). I’ll present first a Ruby specific tool called &lt;strong&gt;&lt;em&gt;coverband&lt;/em&gt;&lt;/strong&gt; and then a language agnostic tool called &lt;strong&gt;&lt;em&gt;scythe&lt;/em&gt;&lt;/strong&gt;:&lt;/p&gt;
 
@@ -183,7 +183,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
 
 &lt;p&gt;Both of the above tools took different approaches for dead code identification. In either case, the underlying source code must be executed, and usually there is setup required for the tool to work in conjunction with the running application.&lt;/p&gt;
 
-&lt;h2&gt;Burying the Dead&lt;/h2&gt;
+&lt;h1&gt;Burying the Dead&lt;/h1&gt;
 
 &lt;p&gt;Now that we know that there is a class of tools for detecting dead code, the next set of questions revolve around removing the dead code.&lt;/p&gt;
 
@@ -195,7 +195,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
 
 &lt;p&gt;With sufficient time, it should be possible to make the decision to remove the dead code. As with any change, be observant to any signals that could indicate that the removal was of live code. Given the complex scope of usage, it can be difficult to detect dead code if there are third parties using your codebase. A side bonus of removing dead code, is that any associated tests can be removed &amp;ndash; effectively speeding up your test suite.&lt;/p&gt;
 
-&lt;h2&gt;Moving on&lt;/h2&gt;
+&lt;h1&gt;Moving on&lt;/h1&gt;
 
 &lt;p&gt;By removing dead code the scale of the source code shrinks ever so slightly. There is little to no point in having extra code in your project if it does not add value. There is possible arguments that if it works, there is no need to change it. I would counter that by saying that keeping dead code around is lugging around a mental burden that developers have to deal with. Dead code wastes a developer’s time and energy. Imagine having to upgrade a dependency and making changes in dead code &amp;ndash; what a waste.&lt;/p&gt;
 
@@ -207,7 +207,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
 
 &lt;hr&gt;
 
-&lt;h2&gt;TL;DR&lt;/h2&gt;
+&lt;h1&gt;TL;DR&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Dead code is code that is never exercised during the execution of the application.&lt;/li&gt;
@@ -226,7 +226,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:24:42-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -234,7 +234,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <description type="html">During development, everyone has a preference of coding style. For the most part these preferences have no effect on the functionality of the application. It is possible that they can become a large time sink, especially in larger teams and projects. In this article we will determine how minor style differences cause negative effects, and how we can mitigate them.</description>
     <content type="html">&lt;p&gt;Everyone has preferences in how code should be structured from an aesthetic standpoint. Having creative freedom in finding your own style is a powerful and rewarding feeling. Seeing that new class/file completely written in your style can put a smile on your face. The problem is we&amp;rsquo;re often not the only developer on a project. In a team or open-source environment, it is unlikely that &lt;em&gt;everyone&lt;/em&gt; is on board with the exact coding style. It is not uncommon to see different styles in a project just because everyone has their own.&lt;/p&gt;
 
-&lt;h2&gt;Why Care?&lt;/h2&gt;
+&lt;h1&gt;Why Care?&lt;/h1&gt;
 
 &lt;p&gt;You might be asking &lt;em&gt;&amp;ldquo;Why Care?&amp;rdquo;&lt;/em&gt; about styles. As developers, we want to enjoy working in our codebase. If we&amp;rsquo;re constantly dealing with inconsistent styles, it becomes a mental burden. Also, during code reviews everyone might be imposing their own styles on the reviewed code. After all is said and done, it really comes down to dropping the distractions in a codebase. With a consistent style there are no stylistic arguments in code reviews, and readability increases as the taxing effort of dealing with multiple styles in the same file disappears.&lt;/p&gt;
 
@@ -268,7 +268,7 @@ it then returns the combined value
 
 &lt;p&gt;Hopefully, you found the second snippet more pleasant and easier to read. The second one follows a styleguide while the first one had a mis-match of style.&lt;/p&gt;
 
-&lt;h2&gt;Starting with Styles&lt;/h2&gt;
+&lt;h1&gt;Starting with Styles&lt;/h1&gt;
 
 &lt;p&gt;&lt;img alt="Mixing tabs and spaces" width="717" height="325" src="/images/2017-01-31-simplify-the-styles-drop-the-distractions/tabs-spaces-both.png" /&gt;
 &lt;em&gt;[Image from the &lt;a href="http://www.emacswiki.org/emacs/TabsSpacesBoth"&gt;EmacsWiki&lt;/a&gt;, original comic by &lt;a href="http://www.duelinganalogs.com/comic/2007/04/02/hello-im-linux/"&gt;Steve Napierski&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
@@ -280,11 +280,11 @@ it then returns the combined value
 &lt;li&gt;Styles are &lt;strong&gt;explicitly established&lt;/strong&gt; upfront by the creator or collaborators&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Even if the project starts with an implicit determined style, the end goal is to make it explicit. The more people that contribute to a project, the more chance their coding styles will conflict. Also, your personal coding style evolves over time and it is likely that styles within a project will &lt;em&gt;drift&lt;/em&gt;, even with a single contributer.&lt;/p&gt;
+&lt;p&gt;Even if the project starts with an implicit determined style, the end goal is to make it explicit. The more people that contribute to a project, the more chance their coding styles will conflict. Also, your personal coding style evolves over time and it is likely that styles within a project will &lt;em&gt;drift&lt;/em&gt;, even with a single contributor.&lt;/p&gt;
 
 &lt;p&gt;To reduce wasted time dealing with style issues, just explicitly set a style for your project.&lt;/p&gt;
 
-&lt;h3&gt;Picking an Explicit Style&lt;/h3&gt;
+&lt;h2&gt;Picking an Explicit Style&lt;/h2&gt;
 
 &lt;p&gt;I&amp;rsquo;m willing to bet that all languages have community styleguides (if not, then that&amp;rsquo;s a great opportunity to start one!). The following are some example styleguides:&lt;/p&gt;
 
@@ -295,11 +295,11 @@ it then returns the combined value
 &lt;li&gt;&lt;a href="https://google.github.io/styleguide/jsguide.html"&gt;Javascript - Google Styleguide&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;When picking a type of style, I recommend to just pick one of the already established styleguides. You might be tempted to start completly fresh and make your own styleguide individually or with other contributors. The problem with creating a fresh styleguide is that eventually there will be the discussion, &lt;em&gt;&amp;ldquo;I want the style to look like this&amp;rdquo;&lt;/em&gt;, and there will be time wasted trying to make everyone happy (which possibly will never happen). When new developers get started in a codebase they might say, &lt;em&gt;&amp;ldquo;Why do we have the style like this?&amp;rdquo;&lt;/em&gt;. This leads to a discussion regarding wheather or not the styleguide should be revised, which again is a potential waste of time.&lt;/p&gt;
+&lt;p&gt;When picking a type of style, I recommend to just pick one of the already established styleguides. You might be tempted to start completely fresh and make your own styleguide individually or with other contributors. The problem with creating a fresh styleguide is that eventually there will be the discussion, &lt;em&gt;&amp;ldquo;I want the style to look like this&amp;rdquo;&lt;/em&gt;, and there will be time wasted trying to make everyone happy (which possibly will never happen). When new developers get started in a codebase they might say, &lt;em&gt;&amp;ldquo;Why do we have the style like this?&amp;rdquo;&lt;/em&gt;. This leads to a discussion regarding whether or not the styleguide should be revised, which again is a potential waste of time.&lt;/p&gt;
 
 &lt;p&gt;You can deflect all styleguide questions if you just select a community styleguide to begin with. These styleguides have already gone through rigorous discussions within the community. One more bonus of using a popular styleguide is that it is likely that other open-source projects are using the same styleguide.&lt;/p&gt;
 
-&lt;h3&gt;Using Linters&lt;/h3&gt;
+&lt;h2&gt;Using Linters&lt;/h2&gt;
 
 &lt;p&gt;Linters are styleguide checkers that often provide a command line interface and editor integrations. Like previously mentioned with styleguides, there is probably one for each language (if not, what a great opportunity!). The following are some example linters:&lt;/p&gt;
 
@@ -311,30 +311,30 @@ it then returns the combined value
 
 &lt;p&gt;A styleguide and linter work hand-in-hand. Together they ensure that code that violates the styleguide is flagged before it is committed to the codebase. There really is no downside to using a linter, and in most cases the benefits far outweigh the effort to set up in your editor. I highly recommend that everyone takes advantage of linters within your editor.&lt;/p&gt;
 
-&lt;h3&gt;Deviating from the Styleguides&lt;/h3&gt;
+&lt;h2&gt;Deviating from the Styleguides&lt;/h2&gt;
 
 &lt;p&gt;If your team is completely set on having customized styles that differ from a popular styleguide, I would still encourage using one as a base. In an ideal scenario it is possible to use inheritance, where you can then inherit the rules from your choice of popular styleguide. If this isn&amp;rsquo;t possible, then the next best option is to simply copy the whole guide and use that as your base and make modifications to it.&lt;/p&gt;
 
 &lt;p&gt;Each styleguide/linter has their own implementation and handling of their configurations. You will have to explore each and see how to deal with the inheritance. For example, &lt;a href="http://eslint.org/docs/user-guide/configuring#extending-configuration-files"&gt;ESLint&lt;/a&gt; and &lt;a href="http://rubocop.readthedocs.io/en/latest/configuration/#inheritance"&gt;Rubocop&lt;/a&gt; define how to extend/inherit from other styleguides.&lt;/p&gt;
 
-&lt;h3&gt;Reduce the Distractions&lt;/h3&gt;
+&lt;h2&gt;Reduce the Distractions&lt;/h2&gt;
 
 &lt;p&gt;Using a styleguide and linter, it becomes easy to identify and cut off the distractions of inconsistent styles early. If you can fix stylistic changes as you modify the underlying code, then the future you or your teammates won&amp;rsquo;t have to deal with it later. In addition, during code reviews everyone knows that all stylistic changes &lt;em&gt;should&lt;/em&gt; be taken care of, thus reducing the mental burden.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="Just use a styleguide!" width="1480" height="517" src="/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png" /&gt;
 &lt;em&gt;[Image from &lt;a href="https://xkcd.com/1513/"&gt;xkcd&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2&gt;Applying to an Existing Project&lt;/h2&gt;
+&lt;h1&gt;Applying to an Existing Project&lt;/h1&gt;
 
 &lt;p&gt;It&amp;rsquo;s great that you want to get a consistent style in an existing project. Now comes an important decision, &lt;em&gt;&amp;ldquo;Do we apply all the style fixes immediately, or as we encounter them?&amp;rdquo;&lt;/em&gt; The answer is situational and many factors can influence what works best for your project and team.&lt;/p&gt;
 
-&lt;p&gt;With a sweeping change, a lot of code might be modified, although nothing should be functionally different, as we are just dealing with stylistic edits. This can impact the effectiveness of &lt;code&gt;git blame&lt;/code&gt; as the latest commit might simply be &lt;em&gt;&amp;ldquo;Sweeping Style Changes&amp;rdquo;&lt;/em&gt;, and not the actual commit you were hoping for. Fortunately, there are ways to look deeper into the &lt;code&gt;git log&lt;/code&gt; and find the actual content you are looking for (i.e., &lt;a href="/git-evolution-how-did-we-get-here/"&gt;Git Evolution&lt;/a&gt;). With a sweeping change of style fixes, the project afterwards would be in a conistent state of styles.&lt;/p&gt;
+&lt;p&gt;With a sweeping change, a lot of code might be modified, although nothing should be functionally different, as we are just dealing with stylistic edits. This can impact the effectiveness of &lt;code&gt;git blame&lt;/code&gt; as the latest commit might simply be &lt;em&gt;&amp;ldquo;Sweeping Style Changes&amp;rdquo;&lt;/em&gt;, and not the actual commit you were hoping for. Fortunately, there are ways to look deeper into the &lt;code&gt;git log&lt;/code&gt; and find the actual content you are looking for (i.e., &lt;a href="/git-evolution-how-did-we-get-here/"&gt;Git Evolution&lt;/a&gt;). With a sweeping change of style fixes, the project afterwards would be in a consistent state of styles.&lt;/p&gt;
 
 &lt;p&gt;By fixing style issues as you encounter them, it leaves a lot to interpretation by team members. &lt;em&gt;&amp;ldquo;Do I fix the whole file when I touch a line within it?&amp;rdquo;&lt;/em&gt;, &lt;em&gt;&amp;ldquo;Do I only fix styles for the lines I touch?&amp;rdquo;&lt;/em&gt;. In either case the commits will contain two concepts now going forward: feature/bug changes and style changes. Not only does this muddy the usefulness of looking back in the commit history, but code reviews now also contain the style element that everyone has to look at. Overall, the distractions of incrementally dealing with style changes never stop. Even while editing or reading the codebase you will subconsciously see the inconsistent style changes which leads to more distractions.&lt;/p&gt;
 
 &lt;p&gt;In my personal opinion, rip the band-aid off and just make a sweeping change of style fixes to put your project in a pristine state. In a legacy system, it might make sense to simply do the incremental approach as it would not be often that one would make changes in the battle-tested system.&lt;/p&gt;
 
-&lt;h2&gt;TL;DR&lt;/h2&gt;
+&lt;h1&gt;TL;DR&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Use a styleguide and linter for any software project to help reduce distractions on styles:
@@ -362,7 +362,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:24:56-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -383,7 +383,7 @@ it then returns the combined value
 
 &lt;p&gt;&lt;code&gt;RailsRequestStats&lt;/code&gt; provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.&lt;/p&gt;
 
-&lt;h2&gt;How this Works&lt;/h2&gt;
+&lt;h1&gt;How this Works&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;RailsRequestStats::NotificationSubscribers&lt;/code&gt; when required will subscribe to the &lt;code&gt;sql.active_record&lt;/code&gt;, &lt;code&gt;start_processing.action_controller&lt;/code&gt;, and &lt;code&gt;process_action.action_controller&lt;/code&gt; &lt;code&gt;ActionSupport::Notifications&lt;/code&gt;.&lt;/p&gt;
 
@@ -391,19 +391,19 @@ it then returns the combined value
 &lt;li&gt;The &lt;code&gt;sql.active_record&lt;/code&gt; event allow us to count each SQL query that passes though ActiveRecord, which we count internally.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;cache_read.active_support&lt;/code&gt; event allows us to count each read and hit to the Rails cache.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;cache_fetch_hit.active_support&lt;/code&gt; event allows us to count the cache hits to the Rails cache when using &lt;em&gt;fetch&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;start_processing.action_controller&lt;/code&gt; event allows us to clear iternal counts, as well as perform a &lt;code&gt;GC.start&lt;/code&gt; and capturing the count of objects residing in the &lt;code&gt;ObjectSpace&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;start_processing.action_controller&lt;/code&gt; event allows us to clear internal counts, as well as perform a &lt;code&gt;GC.start&lt;/code&gt; and capturing the count of objects residing in the &lt;code&gt;ObjectSpace&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;process_action.action_controller&lt;/code&gt; event provides us runtime information along with identifying controller action details, we even determine the number of generated objects since the start of processing the action. At this point we are able to synthesis the query information and runtime information and store them internally in running collection of &lt;code&gt;RailsRequestStats::RequestStats&lt;/code&gt; objects.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; the data collection is tracked and stored in class-level instance variables. Thus this is not threadsafe, as no concurrency mechanisms are used (i.e., mutex). For non-threaded and forking application servers this should be fine.&lt;/p&gt;
 
-&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;h1&gt;Installation&lt;/h1&gt;
 
 &lt;p&gt;Add this line to your application&amp;rsquo;s Gemfile:&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'rails_request_stats'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;group: :development&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;Example Outputs&lt;/h2&gt;
+&lt;h1&gt;Example Outputs&lt;/h1&gt;
 
 &lt;p&gt;Within the console ./log/development.log you should start seeing the following statement appearing at the end of processing a request:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] (AVG view_runtime: 163.655ms | AVG db_runtime: 15.465ms | AVG generated_object_count: 14523 | query_count: 9 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3)
@@ -415,9 +415,9 @@ it then returns the combined value
 [RailsRequestStats] SHOW:html "/users/2?test=1&amp;amp;blah=2" (AVG view_runtime: 17.8252ms | AVG db_runtime: 1.621ms | AVG generated_object_count: 18511 | MIN query_count: 2 | MAX query_count: 2) from 1 requests
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;Customizing Outputs&lt;/h2&gt;
+&lt;h1&gt;Customizing Outputs&lt;/h1&gt;
 
-&lt;h3&gt;Memory Stats&lt;/h3&gt;
+&lt;h2&gt;Memory Stats&lt;/h2&gt;
 
 &lt;p&gt;By setting the following class variable within in an initializer (&lt;code&gt;./config/initializers/rails_request_stats.rb&lt;/code&gt;):&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;RailsRequestStats&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Report&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;print_memory_stats&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
@@ -427,7 +427,7 @@ it then returns the combined value
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] (AVG view_runtime: 93.7252ms | AVG db_runtime: 8.66075ms | AVG generated_object_count: 125282 | query_count: 8 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3 | generated_objects: {:total_generated_objects=&amp;gt;111878, :object=&amp;gt;921, :class=&amp;gt;35, :module=&amp;gt;0, :float=&amp;gt;0, :string=&amp;gt;49501, :regexp=&amp;gt;1556, :array=&amp;gt;17855, :hash=&amp;gt;2087, :struct=&amp;gt;103, :bignum=&amp;gt;0, :file=&amp;gt;0, :data=&amp;gt;37682, :match=&amp;gt;373, :complex=&amp;gt;0, :node=&amp;gt;1688, :iclass=&amp;gt;0})
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3&gt;Override Reports&lt;/h3&gt;
+&lt;h2&gt;Override Reports&lt;/h2&gt;
 
 &lt;p&gt;You can manually override the output by monkey-patching in an initializer (&lt;code&gt;./config/initializers/rails_request_stats.rb&lt;/code&gt;):&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;RailsRequestStats&lt;/span&gt;
@@ -451,7 +451,7 @@ it then returns the combined value
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;Reflections&lt;/h2&gt;
+&lt;h1&gt;Reflections&lt;/h1&gt;
 
 &lt;p&gt;I have personally been using &lt;code&gt;RailsRequestStats&lt;/code&gt; at work since its inception. Reception has been quite good, it has little impact and simply provides extra information at a glance to developers during day-to-day work. I will mention that &lt;a href="https://github.com/MiniProfiler/rack-mini-profiler"&gt;rack-mini-profiler&lt;/a&gt; is an excellent gem, and kind of inspired my creation of this gem. I couldn&amp;rsquo;t find a good way to get the information I wanted when dealing with API endpoints, with &lt;code&gt;RailsRequestStats&lt;/code&gt; I was able to simply output it in the logs.&lt;/p&gt;
 
@@ -462,13 +462,13 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:25:04-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">A little history on my website, and the underlying framework I have used -- Middleman. I walkthrough the process on how I deploy the website to GitHub pages using a deployment script.</description>
-    <content type="html">&lt;h2&gt;History of my Website&lt;/h2&gt;
+    <content type="html">&lt;h1&gt;History of my Website&lt;/h1&gt;
 
 &lt;p&gt;Let&amp;rsquo;s look back at my website back in early &lt;a href="https://web.archive.org/web/20120122125850/http://kevinjalbert.com/"&gt;2012&lt;/a&gt;:&lt;/p&gt;
 
@@ -480,7 +480,7 @@ it then returns the combined value
 
 &lt;p&gt;After finishing my M.Sc degree I decided to work in industry instead of pursuing a Ph.D. I continued to update the website with minor changes, but for the most part it stagnated over time.&lt;/p&gt;
 
-&lt;h2&gt;Deciding on Middleman&lt;/h2&gt;
+&lt;h1&gt;Deciding on Middleman&lt;/h1&gt;
 
 &lt;p&gt;I eventually wanted to revamp my website to be more &lt;em&gt;relevant&lt;/em&gt; and decided going with a blog to document my technical endeavors and musings. I retired the old website and built up the new blog from scratch. I look through the &lt;a href="https://www.ruby-toolbox.com/categories/static_website_generation"&gt;Ruby Toolbox&lt;/a&gt; to see the alternatives to nanoc. Top pick seems to be &lt;a href="https://github.com/jekyll/jekyll"&gt;Jekyll&lt;/a&gt;, which is likely contributed to its painless integration with &lt;a href="https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
 
@@ -493,7 +493,7 @@ it then returns the combined value
 
 &lt;p&gt;The second contender is &lt;a href="https://middlemanapp.com/"&gt;Middleman&lt;/a&gt;. Its offering was very similar to nanoc. I decided to give Middleman a spin as it was new and different from nanoc. For hosting I could figure it out later, although I was still leaning towards a manual usage of GitHub Pages as it was a free hosting solution.&lt;/p&gt;
 
-&lt;h2&gt;Deployment Approach&lt;/h2&gt;
+&lt;h1&gt;Deployment Approach&lt;/h1&gt;
 
 &lt;p&gt;With the initial work on the new blog being completed, it was time to handle the deployment of it. As previously mentioned I was still going to use GitHub pages due to its free offering. All the work can be seen in the &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io"&gt;kevinjalbert/kevinjalbert.github.io repository&lt;/a&gt;. A few things to note:&lt;/p&gt;
 
@@ -570,7 +570,7 @@ it then returns the combined value
 
 &lt;p&gt;This results in a &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io/commits/master"&gt;formatted commit log&lt;/a&gt; on &lt;code&gt;master&lt;/code&gt; that has snapshots of each deployment of the website.&lt;/p&gt;
 
-&lt;h2&gt;That&amp;rsquo;s All Folks&lt;/h2&gt;
+&lt;h1&gt;That&amp;rsquo;s All Folks&lt;/h1&gt;
 
 &lt;p&gt;This approach is working well for me at the current moment. I&amp;rsquo;ll probably keep using Middleman for the foreseeable future. I am sure I will go through another phase of redesigning this process, in which I will document yet again.&lt;/p&gt;
 </content>
@@ -579,17 +579,17 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:25:28-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
-    <description type="html">ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's  transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs.</description>
-    <content type="html">&lt;h2&gt;ActiveSupport Callbacks&lt;/h2&gt;
+    <description type="html">ActiveJob in Rails provides nice benefits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs.</description>
+    <content type="html">&lt;h1&gt;ActiveSupport Callbacks&lt;/h1&gt;
 
 &lt;p&gt;In my &lt;a href="/lets-pry-into-ruby-objects/"&gt;last post&lt;/a&gt; I touched on &lt;code&gt;pry&lt;/code&gt; and how it helped me verify that my class had &lt;code&gt;around_perform&lt;/code&gt; ActiveSupport Callbacks attached to it. In this post I will delve further into &lt;em&gt;what&lt;/em&gt; I was trying to accomplish.&lt;/p&gt;
 
-&lt;h2&gt;[ActiveJob, Sidekiq] - [ActiveJob]&lt;/h2&gt;
+&lt;h1&gt;[ActiveJob, Sidekiq] - [ActiveJob]&lt;/h1&gt;
 
 &lt;p&gt;I was working on a Rails 4.2.x project that had background job processing. We used &lt;a href="https://github.com/rails/rails/tree/4-2-stable/activejob"&gt;ActiveJob&lt;/a&gt; as our adapter to our background jobs. Behind the scenes, we were using the &lt;a href="http://sidekiq.org/"&gt;Sidekiq&lt;/a&gt; gem.&lt;/p&gt;
 
@@ -623,15 +623,15 @@ it then returns the combined value
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This module is wrapping the actual job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt; in a &lt;code&gt;MetricsLogger.timing&lt;/code&gt;. In a future post, I might go into further details about &lt;code&gt;MetricsLogger&lt;/code&gt;, but at its core it records a key/value and sends it off to a log aggregator. The benifit we get from this module is the ability to know timing metrics for jobs based on an identifying signature.&lt;/p&gt;
+&lt;p&gt;This module is wrapping the actual job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt; in a &lt;code&gt;MetricsLogger.timing&lt;/code&gt;. In a future post, I might go into further details about &lt;code&gt;MetricsLogger&lt;/code&gt;, but at its core it records a key/value and sends it off to a log aggregator. The benefit we get from this module is the ability to know timing metrics for jobs based on an identifying signature.&lt;/p&gt;
 
 &lt;p&gt;Moving away from ActiveJob, we need another way to accomplish the same thing (&lt;em&gt;contained callbacks&lt;/em&gt;) with just Sidekiq.&lt;/p&gt;
 
-&lt;h2&gt;Contained Callbacks&lt;/h2&gt;
+&lt;h1&gt;Contained Callbacks&lt;/h1&gt;
 
-&lt;p&gt;The goal is to have contained callbacks, which is just a seperate module that can be included on jobs that deifne the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.&lt;/p&gt;
+&lt;p&gt;The goal is to have contained callbacks, which is just a separate module that can be included on jobs that define the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.&lt;/p&gt;
 
-&lt;h3&gt;Prepend a Proxy&lt;/h3&gt;
+&lt;h2&gt;Prepend a Proxy&lt;/h2&gt;
 
 &lt;p&gt;I found out that to make use of &lt;code&gt;ActiveSupport::Callbacks&lt;/code&gt; you have to modify the executed method, which in our case would be the job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
@@ -658,7 +658,7 @@ it then returns the combined value
 
 &lt;p&gt;This module then can be prepended into the Sidekiq job classes and the callbacks will be executed &amp;ndash; if they are present. The next task is to support the &lt;code&gt;around_perform&lt;/code&gt; callback.&lt;/p&gt;
 
-&lt;h3&gt;Support Setting and Running Callbacks&lt;/h3&gt;
+&lt;h2&gt;Support Setting and Running Callbacks&lt;/h2&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"active_support/callbacks"&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Following approach used by ActiveJob&lt;/span&gt;
@@ -686,7 +686,7 @@ it then returns the combined value
 
 &lt;p&gt;Now &lt;code&gt;SidekiqCallbacks&lt;/code&gt; defines the ability to add callbacks, and they will be executed before &lt;code&gt;#perform&lt;/code&gt; if defined.&lt;/p&gt;
 
-&lt;h3&gt;Wrapping it up&lt;/h3&gt;
+&lt;h2&gt;Wrapping it up&lt;/h2&gt;
 
 &lt;p&gt;The last thing I want to do is to encapsulate this Sidekiq callback logic in its own module that defines the actual callback (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). To do this, we need to further modify &lt;code&gt;SidekiqCallbacks&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"active_support/callbacks"&lt;/span&gt;
@@ -700,7 +700,7 @@ it then returns the combined value
     &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
     &lt;span class="c1"&gt;# Check to see if we already have any callbacks for :perform&lt;/span&gt;
-    &lt;span class="c1"&gt;# Prevents overwritting callbacks if we already included this module (and defined callbacks)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Prevents overwriting callbacks if we already included this module (and defined callbacks)&lt;/span&gt;
     &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;define_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:_perform_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;_perform_callbacks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
 
     &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;
@@ -746,24 +746,24 @@ it then returns the combined value
 
 &lt;p&gt;Finally, we can see how &lt;code&gt;JobMetrics&lt;/code&gt; has a new &lt;code&gt;prepend SidekiqCallbacks&lt;/code&gt; and that pulls in all the required &lt;code&gt;ActiveSupport::Callback&lt;/code&gt; logic that allows for callbacks to be defined and executed.&lt;/p&gt;
 
-&lt;h3&gt;The Win&lt;/h3&gt;
+&lt;h1&gt;The Win&lt;/h1&gt;
 
-&lt;p&gt;With this approach, the benifit is that the callback implementation is completely contained within the &lt;code&gt;JobMetrics&lt;/code&gt; module. The &lt;code&gt;SidekiqCallbacks&lt;/code&gt; module provides the missing ActiveJob callback support for &lt;code&gt;around_perform&lt;/code&gt;. It is also possible to add the missing ActiveJob callbacks using this approach.&lt;/p&gt;
+&lt;p&gt;With this approach, the benefit is that the callback implementation is completely contained within the &lt;code&gt;JobMetrics&lt;/code&gt; module. The &lt;code&gt;SidekiqCallbacks&lt;/code&gt; module provides the missing ActiveJob callback support for &lt;code&gt;around_perform&lt;/code&gt;. It is also possible to add the missing ActiveJob callbacks using this approach.&lt;/p&gt;
 
-&lt;p&gt;In the ending, the concrete job classes just &lt;code&gt;include&lt;/code&gt; the contained callback module (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). &lt;code&gt;SidekiqCallbacks&lt;/code&gt; is designed to accomodate multiple contained callback modules being included on a single concrete job class.&lt;/p&gt;
+&lt;p&gt;In the ending, the concrete job classes just &lt;code&gt;include&lt;/code&gt; the contained callback module (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). &lt;code&gt;SidekiqCallbacks&lt;/code&gt; is designed to accommodate multiple contained callback modules being included on a single concrete job class.&lt;/p&gt;
 </content>
   </entry>
   <entry>
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:25:41-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">When you are knee deep in Ruby and dealing with objects that you never created it's sometimes a little daunting to trace everything back and figure it all out. Luckly there are a couple techniques in Ruby that can aid you. In particular, pry is an extreamly powerful tool that you should have in your toolbox.</description>
-    <content type="html">&lt;h2&gt;Where is my &lt;code&gt;pry&lt;/code&gt;bar?&lt;/h2&gt;
+    <content type="html">&lt;h1&gt;Where is my &lt;code&gt;pry&lt;/code&gt;bar?&lt;/h1&gt;
 
 &lt;p&gt;You are probably already familiar with &lt;code&gt;irb&lt;/code&gt;, an &lt;em&gt;interactive Ruby&lt;/em&gt; shell. It is pretty powerful and can help you poke around Ruby. In Rails, you might have had access to &lt;code&gt;byebug&lt;/code&gt; and used it for debugging purposes. This is great and is standard with Rails projects. I do, however, recommend looking at &lt;code&gt;pry&lt;/code&gt;, which is just a bit more powerful in what it can do. We&amp;rsquo;re just going to scratch the surface here.&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;gem install pry
@@ -771,7 +771,7 @@ it then returns the combined value
 
 &lt;p&gt;The &lt;code&gt;pry&lt;/code&gt; &lt;a href="https://github.com/pry/pry/wiki"&gt;wiki&lt;/a&gt; is quite detailed with a lot of accompanying resources.&lt;/p&gt;
 
-&lt;h2&gt;Adventure Time! Using &lt;code&gt;pry&lt;/code&gt; to Open Objects&lt;/h2&gt;
+&lt;h1&gt;Adventure Time! Using &lt;code&gt;pry&lt;/code&gt; to Open Objects&lt;/h1&gt;
 
 &lt;p&gt;We&amp;rsquo;ll use a shortened example that I recently encountered. I was pretty deep in Rails and was dealing with &lt;code&gt;ActiveSupport::Callbacks::CallbackChain&lt;/code&gt; (lets not ask why ;P). I wanted to verify if we have any &lt;code&gt;around_perform&lt;/code&gt; &lt;em&gt;callbacks&lt;/em&gt; set on a particular class. With my trusty &lt;code&gt;pry&lt;/code&gt;, I can inspect what I&amp;rsquo;m working with in more detail.&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; RandomClass_perform_callbacks
@@ -833,7 +833,7 @@ instance variables: @callbacks  @chain  @config  @mutex  @name
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;You can also modify the &lt;code&gt;ls&lt;/code&gt; commnd with modifiers which you can learn more with &lt;code&gt;ls -h&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can also modify the &lt;code&gt;ls&lt;/code&gt; command with modifiers which you can learn more with &lt;code&gt;ls -h&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;So we can see here that we have an &lt;code&gt;#empty?&lt;/code&gt; defined under &lt;code&gt;ActiveSupport::Callbacks::CallbackChain#methods&lt;/code&gt;. This sounds great, and my first thoughts is I can use &lt;code&gt;#empty?&lt;/code&gt;. My only concern is what it&amp;rsquo;s &lt;em&gt;actually&lt;/em&gt; checking. Again, &lt;code&gt;pry&lt;/code&gt; to the rescue with &lt;code&gt;show-source&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;pry(main)&amp;gt; show-source ActiveSupport::Callbacks::CallbackChain#empty?
@@ -922,7 +922,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:25:52-04:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -934,7 +934,7 @@ end
 
 &lt;p&gt;To best describe what and how git evolution can be used the next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;git_evolution&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/git_evolution#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2&gt;Example Scenario&lt;/h2&gt;
+&lt;h1&gt;Example Scenario&lt;/h1&gt;
 
 &lt;p&gt;If we were interesting in the source code evolution that lead to &lt;a href="https://github.com/rails/rails/blob/7ba3a48/activesupport/lib/active_support/core_ext/array/access.rb#L70-L75"&gt;rails&amp;rsquo;s Array#forty_two&lt;/a&gt;:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git_evolution --range 70:75 ./rails/activesupport/lib/active_support/core_ext/array/access.rb
@@ -980,11 +980,11 @@ utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; - 2/84 (2.38%)
 
 &lt;p&gt;In addition we have some &lt;em&gt;ownership&lt;/em&gt; information with respect to commits and changes. The ownership information can be used to identify &lt;em&gt;who&lt;/em&gt; to follow up with for additional context. In time new metrics and analysis could be attached to the output (i.e., factoring in time for ownership, types of changes, identifying file modifications such as movement or renames, etc&amp;hellip;)&lt;/p&gt;
 
-&lt;h2&gt;The Other (Hard) Way&lt;/h2&gt;
+&lt;h1&gt;The Other (Hard) Way&lt;/h1&gt;
 
 &lt;p&gt;If we were to identify the commit which introduced &lt;code&gt;Array#forty_two&lt;/code&gt; we have two main options &lt;code&gt;git blame&lt;/code&gt; and &lt;code&gt;git log&lt;/code&gt;:&lt;/p&gt;
 
-&lt;h3&gt;Using &lt;code&gt;git blame&lt;/code&gt;&lt;/h3&gt;
+&lt;h2&gt;Using &lt;code&gt;git blame&lt;/code&gt;&lt;/h2&gt;
 
 &lt;p&gt;I highly advise against this approach as it involves a lot of manual work. You essentially use &lt;code&gt;git blame&lt;/code&gt; to identify the previous commit which effects a line of concern within the area you are looking in.&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git blame --follow ./activesupport/lib/active_support/core_ext/array/access.rb
@@ -1020,7 +1020,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     Reduced the number of literal aliases to the range that has actually seen personal use. With the massive savings in overhead, I was able to fit Array#forty_two
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3&gt;Using &lt;code&gt;git log&lt;/code&gt;&lt;/h3&gt;
+&lt;h2&gt;Using &lt;code&gt;git log&lt;/code&gt;&lt;/h2&gt;
 
 &lt;p&gt;The following &lt;code&gt;git log&lt;/code&gt; command presents the entire file history (26 commits):&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git log --follow ./activesupport/lib/active_support/core_ext/array/access.rb
@@ -1034,11 +1034,11 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 
 &lt;p&gt;The output isn&amp;rsquo;t succinct, nor does it have ownership information. The command is also more verbose.&lt;/p&gt;
 
-&lt;h2&gt;Advance Usage&lt;/h2&gt;
+&lt;h1&gt;Advance Usage&lt;/h1&gt;
 
 &lt;p&gt;I personally use Vim for all my editing needs, especially while editing code. As most of the projects I&amp;rsquo;m working in are version controlled with Git I made a &lt;a href="https://github.com/kevinjalbert/dotfiles/blob/eaca550/vim/vim/functions.vim#L1-L16"&gt;Vim function&lt;/a&gt; that allows me to visually select and call &lt;code&gt;git_evolution&lt;/code&gt; using &lt;code&gt;ge&lt;/code&gt; on the selected lines. This opens the output in a new buffer which I can then look through and yank commit SHAs if needed.&lt;/p&gt;
 
-&lt;h2&gt;The Future&lt;/h2&gt;
+&lt;h1&gt;The Future&lt;/h1&gt;
 
 &lt;p&gt;Similar to what I mentioned in my &lt;a href="https://kevinjalbert.com/port-mapping-development-servers/"&gt;last post about &lt;code&gt;port_map&lt;/code&gt;&lt;/a&gt;, &lt;code&gt;git_evolution&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;git_evolution&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;git_evolution&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;git_evolution&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
 
@@ -1049,7 +1049,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="https://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>https://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:26:01-04:00</updated>
     <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1059,7 +1059,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 
 &lt;p&gt;I developed this utility gem to solve a personal problem of mine while dealing with multiple web servers during development. The next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;port_map&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/port_map#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2&gt;Example Scenario&lt;/h2&gt;
+&lt;h1&gt;Example Scenario&lt;/h1&gt;
 
 &lt;p&gt;You are developing a service that uses multiple web servers. You have two rails applications and one ember application.&lt;/p&gt;
 
@@ -1091,7 +1091,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 &lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;
 
-&lt;h3&gt;The Problem&lt;/h3&gt;
+&lt;h2&gt;The Problem&lt;/h2&gt;
 
 &lt;p&gt;In each of these applications there is some configuration work required to ensure that they communicate on the correct ports. There are two issues here:&lt;/p&gt;
 
@@ -1100,7 +1100,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 &lt;li&gt;You have to make sure that you correctly start each server with the right port number.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;&lt;code&gt;port_map&lt;/code&gt; to the Rescue!&lt;/h3&gt;
+&lt;h2&gt;&lt;code&gt;port_map&lt;/code&gt; to the Rescue!&lt;/h2&gt;
 
 &lt;p&gt;We&amp;rsquo;re going to transform this unwieldy scenario into an organized and easy to manage one using &lt;code&gt;port_map&lt;/code&gt;.&lt;/p&gt;
 
@@ -1136,7 +1136,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 
 &lt;p&gt;You can close and restart each web server multiple times and they will continue to use the same domain names. &lt;code&gt;port_map&lt;/code&gt; provides an easy way to logically name each web server, as well as remove the need of specifying ports.&lt;/p&gt;
 
-&lt;h2&gt;Putting it to the Test&lt;/h2&gt;
+&lt;h1&gt;Putting it to the Test&lt;/h1&gt;
 
 &lt;p&gt;I have been using &lt;code&gt;port_map&lt;/code&gt; for a little over 6 months (as of writing this), and it has served me quite well. The beauty of &lt;code&gt;port_map&lt;/code&gt; is that it works on any shell command that accepts a &lt;code&gt;--port &amp;lt;number&amp;gt;&lt;/code&gt; or &lt;code&gt;-p &amp;lt;number&amp;gt;&lt;/code&gt; flag. I enjoy finding new uses for &lt;code&gt;port_map&lt;/code&gt; in other web servers like &lt;a href="https://middlemanapp.com"&gt;middleman&lt;/a&gt; and &lt;a href="https://jekyllrb.com"&gt;jekyll&lt;/a&gt;.&lt;/p&gt;
 
@@ -1146,7 +1146,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 
 &lt;p&gt;One last inconvenience is that &lt;code&gt;port_map&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;port_map&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;port_map&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;port_map&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
 
-&lt;h2&gt;The Future&lt;/h2&gt;
+&lt;h1&gt;The Future&lt;/h1&gt;
 
 &lt;p&gt;I will continue to use &lt;code&gt;port_map&lt;/code&gt; until I can spend some time to dig deeper into &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; and &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;. These two technologies isolate and containerize environments (web services). I can see the benefits in such technologies as they are not dependant on the host environment, which in my case is my laptop.&lt;/p&gt;
 </content>
@@ -1155,7 +1155,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="https://kevinjalbert.com/more-shell-history/"/>
     <id>https://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T14:55:53-04:00</updated>
     <published>2016-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1254,7 +1254,7 @@ setopt share_history
     <title>Keep on Learning, but don't Forget to Remember</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
     <id>https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2017-03-17T10:45:27-04:00</updated>
+    <updated>2017-04-02T15:26:12-04:00</updated>
     <published>2016-05-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1264,7 +1264,7 @@ setopt share_history
 
 &lt;p&gt;I would like to present my own problem and solution surrounding this idea.&lt;/p&gt;
 
-&lt;h2&gt;Problem: Customization of vim/zsh&lt;/h2&gt;
+&lt;h1&gt;Problem: Customization of vim/zsh&lt;/h1&gt;
 
 &lt;p&gt;Vim and zsh are my editor and shell of choice, both decisions I made early in my career. I have since spent countless hours using both and each are indispensable to my development process. As typical of any developer I am always looking for ways to improve my process. Near the beginning of my career I discovered that both &lt;a href="http://vimawesome.com/"&gt;vim&lt;/a&gt; and &lt;a href="https://github.com/unixorn/awesome-zsh-plugins"&gt;zsh&lt;/a&gt; have thriving plugin communities.&lt;/p&gt;
 
@@ -1274,7 +1274,7 @@ setopt share_history
 
 &lt;p&gt;My use of zsh is nearly an identical story to that of my use with vim. In either case I routinely accumulate and pruning tips that I find useful. My largest gripe is &lt;em&gt;forgetting&lt;/em&gt; about new tips that I want to make part of my normal tool set. In most cases these have yet to become habit and common knowledge to me through repetitive exposure and use.&lt;/p&gt;
 
-&lt;h2&gt;Solution&lt;/h2&gt;
+&lt;h1&gt;Solution&lt;/h1&gt;
 
 &lt;p&gt;I decided to write my accumulation of tips down as one-liners in &lt;code&gt;tips.txt&lt;/code&gt; files, while using directories under &lt;code&gt;~/.tips&lt;/code&gt; for categorization:&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;&lt;code&gt;~/.tips❯ tree
@@ -1315,7 +1315,7 @@ setopt share_history
 ~/.tips❯
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;Don&amp;rsquo;t Forget to Remember&lt;/h2&gt;
+&lt;h1&gt;Don&amp;rsquo;t Forget to Remember&lt;/h1&gt;
 
 &lt;p&gt;As I continue to learn new things I&amp;rsquo;ll be added them to the appropriate &lt;code&gt;tips.txt&lt;/code&gt; within my &lt;code&gt;.tips&lt;/code&gt; directory. If I am presented with a tip that is no longer relevant I can simply remove it. Overall this seems like a great solution for recollecting tips.&lt;/p&gt;
 </content>

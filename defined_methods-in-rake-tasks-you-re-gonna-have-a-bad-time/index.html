@@ -55,7 +55,7 @@ Saving blog Metrics
 <span class="k">end</span>
 
 <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Saving defualt blog post"</span>
+  <span class="nb">puts</span> <span class="s2">"Saving default blog post"</span>
 <span class="k">end</span>
 </code></pre> <p>When we run our new task it does exactly what we wanted and expected it to do.</p> <pre class="highlight plaintext"><code>$ rake create_blog_post
 Generating a default blog post
@@ -81,7 +81,7 @@ Saving default blog post
 </code></pre> <p>We should be in the clear now.</p> <pre class="highlight plaintext"><code>$ rake blog_metrics:run
 Calculating blog metrics
 Saving default blog post
-</code></pre> <p>Nope! The namespace DSL does nothing for the defined methods. So we still have the same problem.</p> <p>There are a couple of solutions to this problem:</p> <ol> <li>Rename the methods, and ensure all future methods are uniquely named</li> <li>Inline the contents of the defined methods</li> <li>Extract the methods into a module/class and use that</li> </ol> <h2>Solution #1 - Uniquely Named Methods</h2> <p>It is possible to simply ensure that we uniquely name our methods so that they do no clash and end up redefining each other.</p> <pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
+</code></pre> <p>Nope! The namespace DSL does nothing for the defined methods. So we still have the same problem.</p> <p>There are a couple of solutions to this problem:</p> <ol> <li>Rename the methods, and ensure all future methods are uniquely named</li> <li>Inline the contents of the defined methods</li> <li>Extract the methods into a module/class and use that</li> </ol> <h1>Solution #1 - Uniquely Named Methods</h1> <p>It is possible to simply ensure that we uniquely name our methods so that they do no clash and end up redefining each other.</p> <pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
 <span class="n">desc</span> <span class="s1">'Calculate and save blog metrics'</span>
 <span class="n">task</span> <span class="ss">:blog_metrics</span> <span class="k">do</span>
   <span class="n">metrics</span> <span class="o">=</span> <span class="n">calculate_blog_metrics</span>
@@ -109,7 +109,7 @@ Saving default blog post
 <span class="k">def</span> <span class="nf">save_default_blog_post</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"Saving defualt blog post"</span>
 <span class="k">end</span>
-</code></pre> <p>This works and is a quick fix, although it is not exactly sustainable and requires you to be conscientious when naming new methods.</p> <h2>Solution #2 - Inline Method Contents</h2> <p>To ensure that method redefinition doesn&rsquo;t occur we can simply remove the methods and inline their content.</p> <pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
+</code></pre> <p>This works and is a quick fix, although it is not exactly sustainable and requires you to be conscientious when naming new methods.</p> <h1>Solution #2 - Inline Method Contents</h1> <p>To ensure that method redefinition doesn&rsquo;t occur we can simply remove the methods and inline their content.</p> <pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
 <span class="n">desc</span> <span class="s1">'Calculate and save blog metrics'</span>
 <span class="n">task</span> <span class="ss">:blog_metrics</span> <span class="k">do</span>
   <span class="nb">puts</span> <span class="s2">"Calculating blog metrics"</span>
@@ -127,7 +127,7 @@ Saving default blog post
   <span class="nb">puts</span> <span class="s2">"Saving default blog post"</span>
   <span class="c1"># Inline saving work</span>
 <span class="k">end</span>
-</code></pre> <p>This is also a quick fix, and might be optimal depending on the size, complexity, and reuse of the method&rsquo;s content.</p> <h2>Solution #3 - Extract Methods into Module/Class</h2> <p>Removing the methods from the rake files themselves is another valid solution. The methods can be extracted into their own class or module and used within the task files.</p> <pre class="highlight ruby"><code><span class="c1"># lib/blog_metric_calculator.rb</span>
+</code></pre> <p>This is also a quick fix, and might be optimal depending on the size, complexity, and reuse of the method&rsquo;s content.</p> <h1>Solution #3 - Extract Methods into Module/Class</h1> <p>Removing the methods from the rake files themselves is another valid solution. The methods can be extracted into their own class or module and used within the task files.</p> <pre class="highlight ruby"><code><span class="c1"># lib/blog_metric_calculator.rb</span>
 <span class="k">class</span> <span class="nc">BlogMetricCalculator</span>
   <span class="k">def</span> <span class="nf">metrics</span>
     <span class="nb">puts</span> <span class="s2">"Calculating blog metrics"</span>

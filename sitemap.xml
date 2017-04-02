@@ -67,6 +67,9 @@
     <loc>https://kevinjalbert.com/now/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/ruby/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/rspec/</loc>
   </url>
   <url>
@@ -74,6 +77,12 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/self-improvement/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/learning/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/mentorship/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/http/</loc>
@@ -85,9 +94,6 @@
     <loc>https://kevinjalbert.com/tags/vim/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/ruby/</loc>
-  </url>
-  <url>
     <loc>https://kevinjalbert.com/tags/rake/</loc>
   </url>
   <url>
@@ -95,6 +101,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/shell/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/terminal/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/development/</loc>

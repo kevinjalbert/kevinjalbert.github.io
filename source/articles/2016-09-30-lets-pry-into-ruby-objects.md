@@ -74,7 +74,7 @@ There is a lot of information here, but the key points to take away are:
 * If a method is redefined in a lower level, it is only shown on the lowest level.
   * For example, a parent class and child class define same method.
 
-You can also modify the `ls` commnd with modifiers which you can learn more with `ls -h`.
+You can also modify the `ls` command with modifiers which you can learn more with `ls -h`.
 
 So we can see here that we have an `#empty?` defined under `ActiveSupport::Callbacks::CallbackChain#methods`. This sounds great, and my first thoughts is I can use `#empty?`. My only concern is what it's _actually_ checking. Again, `pry` to the rescue with `show-source`.
 
@@ -164,6 +164,6 @@ end
 
 Yep! That works like I suspected it would -- that method chain winds up calling `ActiveSupport::Callbacks::CallbackChain#empty?` in the ending.
 
-# Wrapping up
+## Wrapping up
 
 So if you are not using `pry`, I highly recommend it. I _barely_ scratched the surface on what it can do for you. It is a powerful tool that can help in debugging and further digging around your codebase.

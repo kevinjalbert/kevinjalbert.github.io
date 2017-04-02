@@ -4,6 +4,7 @@ title: "No Excuses: Verifying RSpec Test Doubles"
 description: "RSpec 3.0 introduces new verifying doubles that offer the ability to verify received messages against the underlying class/object. Learn how using verifying doubles offer more robust tests with little effort."
 
 tags:
+- ruby
 - rspec
 - testing
 

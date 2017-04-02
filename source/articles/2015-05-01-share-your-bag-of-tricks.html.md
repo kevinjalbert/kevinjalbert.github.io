@@ -5,6 +5,8 @@ description: "Everyone has a bag of tricks in the form of tips and shortcuts tha
 
 tags:
 - self-improvement
+- learning
+- mentorship
 ---
 
 Everyone has specific tips and shortcuts that they have picked up from various sources, including the following:

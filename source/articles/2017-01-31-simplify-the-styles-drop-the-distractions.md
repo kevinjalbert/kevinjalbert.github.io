@@ -58,7 +58,7 @@ Many basic style decisions are made early when a project is started. One of two 
 1. Styles are **implicitly determined** by the creator
 2. Styles are **explicitly established** upfront by the creator or collaborators
 
-Even if the project starts with an implicit determined style, the end goal is to make it explicit. The more people that contribute to a project, the more chance their coding styles will conflict. Also, your personal coding style evolves over time and it is likely that styles within a project will _drift_, even with a single contributer.
+Even if the project starts with an implicit determined style, the end goal is to make it explicit. The more people that contribute to a project, the more chance their coding styles will conflict. Also, your personal coding style evolves over time and it is likely that styles within a project will _drift_, even with a single contributor.
 
 To reduce wasted time dealing with style issues, just explicitly set a style for your project.
 
@@ -70,7 +70,7 @@ I'm willing to bet that all languages have community styleguides (if not, then t
 * [Javascript - Airbnb Styleguide](https://github.com/airbnb/javascript)
 * [Javascript - Google Styleguide](https://google.github.io/styleguide/jsguide.html)
 
-When picking a type of style, I recommend to just pick one of the already established styleguides. You might be tempted to start completly fresh and make your own styleguide individually or with other contributors. The problem with creating a fresh styleguide is that eventually there will be the discussion, _"I want the style to look like this"_, and there will be time wasted trying to make everyone happy (which possibly will never happen). When new developers get started in a codebase they might say, _"Why do we have the style like this?"_. This leads to a discussion regarding wheather or not the styleguide should be revised, which again is a potential waste of time.
+When picking a type of style, I recommend to just pick one of the already established styleguides. You might be tempted to start completely fresh and make your own styleguide individually or with other contributors. The problem with creating a fresh styleguide is that eventually there will be the discussion, _"I want the style to look like this"_, and there will be time wasted trying to make everyone happy (which possibly will never happen). When new developers get started in a codebase they might say, _"Why do we have the style like this?"_. This leads to a discussion regarding whether or not the styleguide should be revised, which again is a potential waste of time.
 
 You can deflect all styleguide questions if you just select a community styleguide to begin with. These styleguides have already gone through rigorous discussions within the community. One more bonus of using a popular styleguide is that it is likely that other open-source projects are using the same styleguide.
 
@@ -102,7 +102,7 @@ _[Image from [xkcd](https://xkcd.com/1513/)]_
 
 It's great that you want to get a consistent style in an existing project. Now comes an important decision, _"Do we apply all the style fixes immediately, or as we encounter them?"_ The answer is situational and many factors can influence what works best for your project and team.
 
-With a sweeping change, a lot of code might be modified, although nothing should be functionally different, as we are just dealing with stylistic edits. This can impact the effectiveness of `git blame` as the latest commit might simply be _"Sweeping Style Changes"_, and not the actual commit you were hoping for. Fortunately, there are ways to look deeper into the `git log` and find the actual content you are looking for (i.e., [Git Evolution](/git-evolution-how-did-we-get-here/)). With a sweeping change of style fixes, the project afterwards would be in a conistent state of styles.
+With a sweeping change, a lot of code might be modified, although nothing should be functionally different, as we are just dealing with stylistic edits. This can impact the effectiveness of `git blame` as the latest commit might simply be _"Sweeping Style Changes"_, and not the actual commit you were hoping for. Fortunately, there are ways to look deeper into the `git log` and find the actual content you are looking for (i.e., [Git Evolution](/git-evolution-how-did-we-get-here/)). With a sweeping change of style fixes, the project afterwards would be in a consistent state of styles.
 
 By fixing style issues as you encounter them, it leaves a lot to interpretation by team members. _"Do I fix the whole file when I touch a line within it?"_, _"Do I only fix styles for the lines I touch?"_. In either case the commits will contain two concepts now going forward: feature/bug changes and style changes. Not only does this muddy the usefulness of looking back in the commit history, but code reviews now also contain the style element that everyone has to look at. Overall, the distractions of incrementally dealing with style changes never stop. Even while editing or reading the codebase you will subconsciously see the inconsistent style changes which leads to more distractions.
 

@@ -53,7 +53,7 @@ def generate_default_blog_post
 end
 
 def save(blog_post)
-  puts "Saving defualt blog post"
+  puts "Saving default blog post"
 end
 ```
 

@@ -6,6 +6,7 @@ description: "As developers we are constantly learning tips, tricks and new ways
 tags:
 - self-improvement
 - shell
+- terminal
 ---
 
 Learning is a way of life for a developer. Frequently we are exposed to techniques and tips such as: keybindings, shell commands, utilities, new functions/methods, new applications. While learning, we want to keep on remembering the previous techniques and tips that we've learned so that we can keep them _fresh_ and on our tool belt. It is not uncommon to forget some learned knowledge if you don't use it often.

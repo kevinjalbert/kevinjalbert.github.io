@@ -6,6 +6,7 @@ description: "As a developer its not uncommon to juggle multiple servers that in
 tags:
 - development
 - shell
+- terminal
 - ruby
 ---
 

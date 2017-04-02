@@ -28,7 +28,7 @@ During development have you ever:
  * The `sql.active_record` event allow us to count each SQL query that passes though ActiveRecord, which we count internally.
  * The `cache_read.active_support` event allows us to count each read and hit to the Rails cache.
  * The `cache_fetch_hit.active_support` event allows us to count the cache hits to the Rails cache when using *fetch*.
- * The `start_processing.action_controller` event allows us to clear iternal counts, as well as perform a `GC.start` and capturing the count of objects residing in the `ObjectSpace`.
+ * The `start_processing.action_controller` event allows us to clear internal counts, as well as perform a `GC.start` and capturing the count of objects residing in the `ObjectSpace`.
  * The `process_action.action_controller` event provides us runtime information along with identifying controller action details, we even determine the number of generated objects since the start of processing the action. At this point we are able to synthesis the query information and runtime information and store them internally in running collection of `RailsRequestStats::RequestStats` objects.
 
 **Note** the data collection is tracked and stored in class-level instance variables. Thus this is not threadsafe, as no concurrency mechanisms are used (i.e., mutex). For non-threaded and forking application servers this should be fine.

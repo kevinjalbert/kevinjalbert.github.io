@@ -1,7 +1,7 @@
 ---
 title: "Sidekiq: Contained Callbacks"
 
-description: "ActiveJob in Rails provides nice benifits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's  transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs."
+description: "ActiveJob in Rails provides nice benefits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs."
 
 tags:
 - ruby
@@ -44,12 +44,12 @@ module JobMetrics
 end
 ```
 
-This module is wrapping the actual job's `#perform` in a `MetricsLogger.timing`. In a future post, I might go into further details about `MetricsLogger`, but at its core it records a key/value and sends it off to a log aggregator. The benifit we get from this module is the ability to know timing metrics for jobs based on an identifying signature.
+This module is wrapping the actual job's `#perform` in a `MetricsLogger.timing`. In a future post, I might go into further details about `MetricsLogger`, but at its core it records a key/value and sends it off to a log aggregator. The benefit we get from this module is the ability to know timing metrics for jobs based on an identifying signature.
 
 Moving away from ActiveJob, we need another way to accomplish the same thing (_contained callbacks_) with just Sidekiq.
 
 ## Contained Callbacks
-The goal is to have contained callbacks, which is just a seperate module that can be included on jobs that deifne the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.
+The goal is to have contained callbacks, which is just a separate module that can be included on jobs that define the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.
 
 ### Prepend a Proxy
 I found out that to make use of `ActiveSupport::Callbacks` you have to modify the executed method, which in our case would be the job's `#perform`.
@@ -126,7 +126,7 @@ module SidekiqCallbacks
     base.include(ActiveSupport::Callbacks)
 
     # Check to see if we already have any callbacks for :perform
-    # Prevents overwritting callbacks if we already included this module (and defined callbacks)
+    # Prevents overwriting callbacks if we already included this module (and defined callbacks)
     base.define_callbacks :perform unless base.respond_to?(:_perform_callbacks) && base._perform_callbacks.present?
 
     class << base
@@ -175,6 +175,6 @@ end
 Finally, we can see how `JobMetrics` has a new `prepend SidekiqCallbacks` and that pulls in all the required `ActiveSupport::Callback` logic that allows for callbacks to be defined and executed.
 
 ### The Win
-With this approach, the benifit is that the callback implementation is completely contained within the `JobMetrics` module. The `SidekiqCallbacks` module provides the missing ActiveJob callback support for `around_perform`. It is also possible to add the missing ActiveJob callbacks using this approach.
+With this approach, the benefit is that the callback implementation is completely contained within the `JobMetrics` module. The `SidekiqCallbacks` module provides the missing ActiveJob callback support for `around_perform`. It is also possible to add the missing ActiveJob callbacks using this approach.
 
-In the ending, the concrete job classes just `include` the contained callback module (i.e., `JobMetrics`). `SidekiqCallbacks` is designed to accomodate multiple contained callback modules being included on a single concrete job class.
+In the ending, the concrete job classes just `include` the contained callback module (i.e., `JobMetrics`). `SidekiqCallbacks` is designed to accommodate multiple contained callback modules being included on a single concrete job class.

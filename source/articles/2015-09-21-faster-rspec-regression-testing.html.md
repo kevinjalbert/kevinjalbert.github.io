@@ -1,9 +1,10 @@
 ---
 title: "Faster RSpec Regression Testing"
 
-description: Explore two approaches for testing along with a suggested workflow. The goal is to improve the time spent during regression testing. The described technique can apply to other testing frameworks, assuming they have similar mechanisms to RSpec's it blocks."
+description: "Explore two approaches for testing along with a suggested workflow. The goal is to improve the time spent during regression testing. The described technique can apply to other testing frameworks, assuming they have similar mechanisms to RSpec's it blocks."
 
 tags:
+- ruby
 - rspec
 - testing
 
@@ -169,7 +170,7 @@ The following workflow is the one I follow as it provides the best of both world
 Eventually some issue may come up and a regression might be found. If more work is involved to fix and understand the issue at hand I might split the combined `it` block to provide more feedback on failures. At this point I would go back to following the workflow from the start.
 
 ### Best of Both Worlds with RSpec 3.3 `aggregate_failures`
-With [RSpec 3.3](http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/) a new feature `aggregate_failures` was introduced. This feature is specific to RSpec, and offers the best of both worlds with respect to the testing disscused earlier (many `it` blocks vs. single `it` block).
+With [RSpec 3.3](http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/) a new feature `aggregate_failures` was introduced. This feature is specific to RSpec, and offers the best of both worlds with respect to the testing discussed earlier (many `it` blocks vs. single `it` block).
 
 In summary it is possible to wrap the asserts within a combined `it` block with `agregate_failiures`. This allows all the assertions to execute with a single setup similar to the combined `it` block approach, yet any failed asserts are individually reported should they occur similar to the many `it` block approach.
 

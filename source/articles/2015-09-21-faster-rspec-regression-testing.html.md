@@ -15,7 +15,7 @@ notes:
   content: Mention of RSpec 3.3's support for `aggregate_failures` feature, which combines the best of both testing approaches.
 ---
 
-## Testing Approaches
+# Testing Approaches
   1. *Immediately* on the code that is being developed to help guide development. Generally using a *subset* of the test suite.
   2. *Afterwards* on the complete codebase to ensure no regressions appear. This is always done using the *complete* test suite.
 
@@ -23,10 +23,10 @@ In an ideal environment, the complete test suite is run after every meaningful c
 
 Eventually the active development stops as the feature is completed. A developer wants to have a high-level of confidence in the code that they wrote before committing the changes. By running the complete test suite, one can have a certain level of assurance that the code to be committed will not cause issues. Ideally this second phase of testing is carried out locally by the developer, but also on a continuous integration server to prevent regressions.
 
-## RSpecing `it` up
+# RSpecing `it` up
 RSpec tests are executed using the `it` method. The code within the `it` block is executed after applying context using `let` and `before`, which can be seen as the pre-amble of the test. In other words, for every `it` block the test will execute the required pre-amble before the actual `it` block.
 
-### Many `it` blocks
+## Many `it` blocks
 During development it is useful to use the following technique to understand as much detail of failing tests:
 
 ```ruby
@@ -57,7 +57,7 @@ Failures:
 
 The results of the testing present all of the failures. This approach is important during iterative development as fixing one test might cause others to fail.
 
-### Combining `it` blocks
+## Combining `it` blocks
 Another approach that can be used with RSpec is to combine the many `it` blocks into one:
 
 ```ruby
@@ -84,7 +84,7 @@ Failures:
 
 This time the results present *only the first* failure, even though two assertions are incorrect. This approach provides less information than the first example. Although there is a different benefit, it runs less examples (tests and their complete pre-amble). This approach leads to quicker test executions, with the loss of the complete listing of failures. Arguably this approach is better suited when a feature is complete and the tests remain present to detect regressions.
 
-## Performance Impact
+# Performance Impact
 In the previous section, two styles of using RSpec's `it` blocks were illustrated. The next example showcases both approaches to understand how the testing performance changes. To simulate some pre-amble (i.e., database interactions, setting up objects) sleeps are used when accessing the values from their `let` blocks.
 
 ```ruby
@@ -144,7 +144,7 @@ Finished in 0.41675 seconds (files took 0.09545 seconds to load)
 
 It is clear to see that the combined `it` block executes less examples and therefore requires less time. Both of these approaches are testing the *exact same thing*, however one does so more quickly than the other. There is still the loss of the precise failure reporting per `it` block. It can be argued that it is not a huge loss given the code under test has been developed and the tests are for regressions.
 
-### Larger Scale Test Suite
+## Larger Scale Test Suite
 To better illustrate the benefits of using combined `it` blocks when possible, I have applied this technique to a larger project. The conversion between the two approaches was straight-forward and the results are satisfying. It was possible to consolidated many `it` blocks (300 less test examples), reducing the run time by 38%.
 
 ```
@@ -159,7 +159,7 @@ Finished in 1 minute 55.27 seconds (files took 10.11 seconds to load)
 
 The results are going to differ between projects and testing styles, although in most cases there will be some performance improvements.
 
-## Suggested Testing Workflow
+# Suggested Testing Workflow
 The following workflow is the one I follow as it provides the best of both worlds:
 
 1. Iteratively develop feature using many `it` blocks for feedback locally
@@ -169,7 +169,7 @@ The following workflow is the one I follow as it provides the best of both world
 
 Eventually some issue may come up and a regression might be found. If more work is involved to fix and understand the issue at hand I might split the combined `it` block to provide more feedback on failures. At this point I would go back to following the workflow from the start.
 
-### Best of Both Worlds with RSpec 3.3 `aggregate_failures`
+## Best of Both Worlds with RSpec 3.3 `aggregate_failures`
 With [RSpec 3.3](http://rspec.info/blog/2015/06/rspec-3-3-has-been-released/) a new feature `aggregate_failures` was introduced. This feature is specific to RSpec, and offers the best of both worlds with respect to the testing discussed earlier (many `it` blocks vs. single `it` block).
 
 In summary it is possible to wrap the asserts within a combined `it` block with `agregate_failiures`. This allows all the assertions to execute with a single setup similar to the combined `it` block approach, yet any failed asserts are individually reported should they occur similar to the many `it` block approach.

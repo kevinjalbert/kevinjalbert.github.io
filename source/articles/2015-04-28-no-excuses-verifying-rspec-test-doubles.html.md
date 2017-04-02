@@ -17,7 +17,7 @@ notes:
 
 Tests which utilize external services or interact with the database are typically the culprits of long-running tests. We want to keep our tests quick. It is possible to mock/stub out long running database and/or external services calls. This reduces the time a test suite takes to execute.
 
-## Unsheathe the Double
+# Unsheathe the Double
 
 In Ruby, one approach to mocking is by completely replacing the object of interest with a lightweight [double](http://www.rubydoc.info/gems/rspec-mocks/frames#Test_Doubles) using [RSpec](http://rspec.info/). Proper usage of a *double* can prevent tests from interacting with external services, such as a database (i.e., `ActiveRecord`).
 
@@ -31,7 +31,7 @@ dog.walk  #=> Double "Dog" received unexpected message :walk with (no args)
 
 In the above example, a `'Dog'` *double* is created that only knows `#talk`. When it receives an unknown message like `#walk` an appropriate exception is raised.
 
-## Double-Edge Double
+# Double-Edge Double
 A *double* aims to abstract away from the concrete concepts that they are *standing in for* (i.e., defined classes/methods/attributes/associations and their implementations). This can simplify tests by only dealing with the immediate concerns in a restricted scope. Using *doubles* has its perks, but a problem can arise if changes occur to the underlying concrete concepts.
 
 Lets examine the following scenario:
@@ -46,7 +46,7 @@ The consequences of not seeing any failing tests can be serious. Even with minor
 
 It is important to always remember to check the usage of *doubles* whose underlying concepts are changed. A gem called [rspec-fire](https://github.com/xaviershay/rspec-fire) was created to alleviate this task. This gem would verify that a *double* is actually mocking an actual method defined on the concrete object. As of [RSpec 3.0](http://rspec.info/blog/2014/05/notable-changes-in-rspec-3), *rspec-fire* is now obsolete as RSpec has a set of new [verifying doubles](https://relishapp.com/rspec/rspec-mocks/v/3-0/docs/verifying-doubles). With the release of [RSpec 3.2](http://rspec.info/blog/2015/02/rspec-3-2-has-been-released), `instance_double` now support dynamic column methods defined by ActiveRecord.
 
-## Dance of the Double
+# Dance of the Double
 
 A simple example best illustrates the downside of using the original RSpec *doubles*. In this example we also show how to replace the *double* with the new and improved verifying *doubles*, along with their benefits.
 
@@ -178,7 +178,7 @@ end
 # 1 example, 1 failure
 ```
 
-## Double Development
+# Double Development
 
 If the underlying class is loaded `instance_double` will do the verifying on the class. In the situation where the class is not loaded than it acts as a normal *double*.
 
@@ -186,7 +186,7 @@ During development an `instance_double` allows one to develop in isolation if th
 
 In addition, during development you can use [`rubocop-rspec`](https://github.com/nevir/rubocop-rspec/blob/master/lib/rubocop/cop/rspec/verified_doubles.rb) to ensure you always verify your *doubles*.
 
-## Concluding Double
+# Concluding Double
 
 **TL;DR -- There are no excuses, verify your RSpec test doubles.**
 

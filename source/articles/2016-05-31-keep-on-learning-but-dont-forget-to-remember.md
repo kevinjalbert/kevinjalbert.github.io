@@ -13,7 +13,7 @@ Learning is a way of life for a developer. Frequently we are exposed to techniqu
 
 I would like to present my own problem and solution surrounding this idea.
 
-## Problem: Customization of vim/zsh
+# Problem: Customization of vim/zsh
 Vim and zsh are my editor and shell of choice, both decisions I made early in my career. I have since spent countless hours using both and each are indispensable to my development process. As typical of any developer I am always looking for ways to improve my process. Near the beginning of my career I discovered that both [vim](http://vimawesome.com/) and [zsh](https://github.com/unixorn/awesome-zsh-plugins) have thriving plugin communities.
 
 I saw that there were [popular](https://github.com/spf13/spf13-vim) vim [distributions](https://github.com/carlhuda/janus) that come pre-packaged with opinionated set of keybindings, plugins and themes. I originally used one of these and immediately felt overwhelmed with the added functionality. I eventually came to terms with the error of my ways, and went back to vanilla vim. Learning from my mistake I decided to slowly incorporate features I felt were useful as I came to need them.
@@ -22,7 +22,7 @@ I continue to stumble upon new plugins that simplifies tasks. I add custom keybi
 
 My use of zsh is nearly an identical story to that of my use with vim. In either case I routinely accumulate and pruning tips that I find useful. My largest gripe is _forgetting_ about new tips that I want to make part of my normal tool set. In most cases these have yet to become habit and common knowledge to me through repetitive exposure and use.
 
-## Solution
+# Solution
 I decided to write my accumulation of tips down as one-liners in `tips.txt` files, while using directories under `~/.tips` for categorization:
 
 ```
@@ -70,5 +70,5 @@ From zsh/tips:
 ~/.tips❯
 ```
 
-## Don't Forget to Remember
+# Don't Forget to Remember
 As I continue to learn new things I'll be added them to the appropriate `tips.txt` within my `.tips` directory. If I am presented with a tip that is no longer relevant I can simply remove it. Overall this seems like a great solution for recollecting tips.

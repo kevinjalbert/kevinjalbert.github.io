@@ -12,7 +12,7 @@ pull_image: "/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-c
 
 Everyone has preferences in how code should be structured from an aesthetic standpoint. Having creative freedom in finding your own style is a powerful and rewarding feeling. Seeing that new class/file completely written in your style can put a smile on your face. The problem is we're often not the only developer on a project. In a team or open-source environment, it is unlikely that _everyone_ is on board with the exact coding style. It is not uncommon to see different styles in a project just because everyone has their own.
 
-## Why Care?
+# Why Care?
 You might be asking _"Why Care?"_ about styles. As developers, we want to enjoy working in our codebase. If we're constantly dealing with inconsistent styles, it becomes a mental burden. Also, during code reviews everyone might be imposing their own styles on the reviewed code. After all is said and done, it really comes down to dropping the distractions in a codebase. With a consistent style there are no stylistic arguments in code reviews, and readability increases as the taxing effort of dealing with multiple styles in the same file disappears.
 
 The following is an extreme case of stylistic inconsistencies with two functionally identical code snippets -- one follows a styleguide while the other does not.
@@ -49,7 +49,7 @@ end
 
 Hopefully, you found the second snippet more pleasant and easier to read. The second one follows a styleguide while the first one had a mis-match of style.
 
-## Starting with Styles
+# Starting with Styles
 ![Mixing tabs and spaces](/images/2017-01-31-simplify-the-styles-drop-the-distractions/tabs-spaces-both.png)
 _[Image from the [EmacsWiki](http://www.emacswiki.org/emacs/TabsSpacesBoth), original comic by [Steve Napierski](http://www.duelinganalogs.com/comic/2007/04/02/hello-im-linux/)]_
 
@@ -62,7 +62,7 @@ Even if the project starts with an implicit determined style, the end goal is to
 
 To reduce wasted time dealing with style issues, just explicitly set a style for your project.
 
-### Picking an Explicit Style
+## Picking an Explicit Style
 I'm willing to bet that all languages have community styleguides (if not, then that's a great opportunity to start one!). The following are some example styleguides:
 
 * [Python - PEP8 Styleguide](https://www.python.org/dev/peps/pep-0008/)
@@ -74,7 +74,7 @@ When picking a type of style, I recommend to just pick one of the already establ
 
 You can deflect all styleguide questions if you just select a community styleguide to begin with. These styleguides have already gone through rigorous discussions within the community. One more bonus of using a popular styleguide is that it is likely that other open-source projects are using the same styleguide.
 
-### Using Linters
+## Using Linters
 
 Linters are styleguide checkers that often provide a command line interface and editor integrations. Like previously mentioned with styleguides, there is probably one for each language (if not, what a great opportunity!). The following are some example linters:
 
@@ -85,20 +85,20 @@ Linters are styleguide checkers that often provide a command line interface and 
 
 A styleguide and linter work hand-in-hand. Together they ensure that code that violates the styleguide is flagged before it is committed to the codebase. There really is no downside to using a linter, and in most cases the benefits far outweigh the effort to set up in your editor. I highly recommend that everyone takes advantage of linters within your editor.
 
-### Deviating from the Styleguides
+## Deviating from the Styleguides
 
 If your team is completely set on having customized styles that differ from a popular styleguide, I would still encourage using one as a base. In an ideal scenario it is possible to use inheritance, where you can then inherit the rules from your choice of popular styleguide. If this isn't possible, then the next best option is to simply copy the whole guide and use that as your base and make modifications to it.
 
 Each styleguide/linter has their own implementation and handling of their configurations. You will have to explore each and see how to deal with the inheritance. For example, [ESLint](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) and [Rubocop](http://rubocop.readthedocs.io/en/latest/configuration/#inheritance) define how to extend/inherit from other styleguides.
 
-### Reduce the Distractions
+## Reduce the Distractions
 
 Using a styleguide and linter, it becomes easy to identify and cut off the distractions of inconsistent styles early. If you can fix stylistic changes as you modify the underlying code, then the future you or your teammates won't have to deal with it later. In addition, during code reviews everyone knows that all stylistic changes _should_ be taken care of, thus reducing the mental burden.
 
 ![Just use a styleguide!](/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png)
 _[Image from [xkcd](https://xkcd.com/1513/)]_
 
-## Applying to an Existing Project
+# Applying to an Existing Project
 
 It's great that you want to get a consistent style in an existing project. Now comes an important decision, _"Do we apply all the style fixes immediately, or as we encounter them?"_ The answer is situational and many factors can influence what works best for your project and team.
 
@@ -108,7 +108,7 @@ By fixing style issues as you encounter them, it leaves a lot to interpretation 
 
 In my personal opinion, rip the band-aid off and just make a sweeping change of style fixes to put your project in a pristine state. In a legacy system, it might make sense to simply do the incremental approach as it would not be often that one would make changes in the battle-tested system.
 
-## TL;DR
+# TL;DR
 
 * Use a styleguide and linter for any software project to help reduce distractions on styles:
   * If possible pick a popular styleguide to avoid arguments/discussions on styles.

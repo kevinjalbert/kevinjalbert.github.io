@@ -15,7 +15,7 @@ I developed [git_evolution](https://github.com/kevinjalbert/git_evolution) to so
 
 To best describe what and how git evolution can be used the next section (_Example Scenario_) comes directly from `git_evolution`'s [README](https://github.com/kevinjalbert/git_evolution#example-scenario).
 
-## Example Scenario
+# Example Scenario
 
 If we were interesting in the source code evolution that lead to [rails's Array#forty_two](https://github.com/rails/rails/blob/7ba3a48/activesupport/lib/active_support/core_ext/array/access.rb#L70-L75):
 
@@ -63,11 +63,11 @@ utenmiki <utenmiki@gmail.com> - 2/84 (2.38%)
 
 In addition we have some _ownership_ information with respect to commits and changes. The ownership information can be used to identify _who_ to follow up with for additional context. In time new metrics and analysis could be attached to the output (i.e., factoring in time for ownership, types of changes, identifying file modifications such as movement or renames, etc...)
 
-## The Other (Hard) Way
+# The Other (Hard) Way
 
 If we were to identify the commit which introduced `Array#forty_two` we have two main options `git blame` and `git log`:
 
-### Using `git blame`
+## Using `git blame`
 I highly advise against this approach as it involves a lot of manual work. You essentially use `git blame` to identify the previous commit which effects a line of concern within the area you are looking in.
 
 ```
@@ -108,7 +108,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     Reduced the number of literal aliases to the range that has actually seen personal use. With the massive savings in overhead, I was able to fit Array#forty_two
 ```
 
-### Using `git log`
+## Using `git log`
 The following `git log` command presents the entire file history (26 commits):
 
 ```
@@ -125,10 +125,10 @@ $ git log -L70,75:./activesupport/lib/active_support/core_ext/array/access.rb --
 
 The output isn't succinct, nor does it have ownership information. The command is also more verbose.
 
-## Advance Usage
+# Advance Usage
 I personally use Vim for all my editing needs, especially while editing code. As most of the projects I'm working in are version controlled with Git I made a [Vim function](https://github.com/kevinjalbert/dotfiles/blob/eaca550/vim/vim/functions.vim#L1-L16) that allows me to visually select and call `git_evolution` using `ge` on the selected lines. This opens the output in a new buffer which I can then look through and yank commit SHAs if needed.
 
-## The Future
+# The Future
 Similar to what I mentioned in my [last post about `port_map`](https://kevinjalbert.com/port-mapping-development-servers/), `git_evolution` is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using [rvm](https://rvm.io/)/[rbenv](http://rbenv.org/) sometimes `git_evolution` is not installed. It is a slight detour to install `git_evolution` for the current Ruby version when I switch to a new Ruby version. Ideally `git_evolution` would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).
 
 I do want to expand on the _ownership_ aspect of `git_evolution` as I think it'll help quicker identify _who_ could be contacted for additional context. Currently it is simply looking at commits and change totals. Ideally there would be a better algorithm to determine ownership of selected lines.

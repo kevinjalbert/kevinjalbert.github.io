@@ -7,7 +7,7 @@ tags:
 - vim
 ---
 
-## Basic Searching
+# Basic Searching
 
 Vim provides rather simple searching capabilities using the following keys while in normal mode:
 
@@ -22,7 +22,7 @@ These commands alone are vital to anyone working with text in Vim. Without any c
 
 ![Basic Searching](/images/2016-04-30-enhanced-vim-searching/basic-searching.gif)
 
-## Better Searching
+# Better Searching
 
 Personally, I always apply the following to make my searching slightly more responsive with visual feedback:
 
@@ -40,7 +40,7 @@ As searching is a frequently used motion, I have added a map to `;` to clear any
 
 ![Better Searching](/images/2016-04-30-enhanced-vim-searching/better-searching.gif)
 
-## Enhance Searching
+# Enhance Searching
 
 We can do better! Using a mixture of two vim plugins we can achieve an enhanced form of searching within vim:
 
@@ -70,7 +70,7 @@ By using `incsearch.vim` we not only gain access to other perks that it brings i
 
 ![Enhanced Searching](/images/2016-04-30-enhanced-vim-searching/enhanced-searching.gif)
 
-## *tap tap tap* Enhance... *tap tap tap* Enhance Searching
+# *tap tap tap* Enhance... *tap tap tap* Enhance Searching
 
 We can go even further to *enhance* our searching by making use of another vim plugin, [`vim-easymotion`](https://github.com/Lokaltog/vim-easymotion) for better targeting our searches:
 

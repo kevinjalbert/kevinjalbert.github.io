@@ -17,7 +17,7 @@ _[Painting scissors with light 4 by Zechariah  Judy, on Flickr](https://www.flic
 
 For this post I'm not going to detail my preferred approach for working through a source code change using GitHub's pull requests -- another post will likely contain this. I'm instead going to touch on GitHub's review requests feature, and present an effective and efficient way to handle code reviews with GitHub's interface.
 
-## GitHub Review Requests and Reactions
+# GitHub Review Requests and Reactions
 
 GitHub, in late 2016, introduced [review requests](https://github.com/blog/2291-introducing-review-requests) to their platform. This was a welcome addition to code reviewing pull requests. It exposed a mechanism to request reviews without using _@mention_ or chat to get people's attention.
 
@@ -27,7 +27,7 @@ Last year GitHub released [reactions] (https://github.com/blog/2119-add-reaction
 
 Overall, these are all incremental steps in the right direction towards the goal of a collaborative environment within GitHub. More and more, I find myself using review requests to communicate with other developers. Requesting a review now sends the appropriate notification to the individual. In the past, I would have pasted a link to the pull request in our chat room, or made an _@mention_ comment. By moving away from the old style of getting reviews, I find there is less _chatter_ and _noise_ for coordinating code reviews.
 
-## Committed Reviewers
+# Committed Reviewers
 
 I'm going to introduce the concept of _committed reviewers_:
 
@@ -39,7 +39,7 @@ This concept might not be applicable for various projects or organizations. I do
 
 With GitHub's request reviewers feature, this means that if you are requested, you are now a committed reviewer. The pull request cannot be merged until all committed reviewers approve it. This prevents a scenario where a reviewer could still be working through a pull request when it's merged, wasting time and potentially missing issues. I have seen this happen when authors request numerous reviewers just to expedite the process.
 
-## Coordinating Code Reviews
+# Coordinating Code Reviews
 
 Imagine we're on a team of 4 people. You just created a pull request in GitHub. Now you want some eyes on the new changes you are proposing to put into the codebase.
 
@@ -83,7 +83,7 @@ Even though you got two approvals, you know that Mary is committed to reviewing 
 
 Everything looks great. You have approvals across the board, so hit that merge button!
 
-### Less Noise and Wasted Time
+## Less Noise and Wasted Time
 
 A couple of things you might have noticed as we ran through that code review scenario:
 
@@ -99,7 +99,7 @@ Another scenario that we have encountered in the past is that the reviewer would
 
 As a reviewer, you know that you will receive a notification via GitHub when your attention is needed for a pull request. It also becomes easier to scan pull requests for where your action is required.
 
-## Dealing with Notifications
+# Dealing with Notifications
 There are a couple of options when dealing with notifications surrounding GitHub:
 
 * Built-in web notification
@@ -114,7 +114,7 @@ I use [Trailer.app](https://ptsochantaris.github.io/trailer/) in addition to ema
 
 Regardless of delivery mechanism, take some time to figure how to deal with notifications. Each user will have different needs. For my case, I'm really only interested in emails about _Comments on Issues and Pull Requests_ and _Pull Request reviews_ on my _Participated Conversations_ (configured via [GitHub's Notifications](https://github.com/settings/notifications)).
 
-## Keeping it all in GitHub
+# Keeping it all in GitHub
 
 Going back to the above scenario, no use of direct form of communication was used to facilitate the code review, everything was kept within GitHub. Of course, deeper discussions should use those mediums, but the key is that the coordination of the code review was kept entirely in the GitHub platform. This reduces chatter and noise that we receive throughout the day, and keeps the GitHub pull request succinct.
 
@@ -122,7 +122,7 @@ Using review requests clearly states the next action for the reviewer and author
 
  -----
 
-## TL;DR
+# TL;DR
 
 * The idea is to reduce the unnecessary noise within a pull request using GitHub's features.
 * GitHub review requests keep state of each reviewer during the code review process.

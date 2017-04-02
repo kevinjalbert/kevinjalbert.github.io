@@ -9,7 +9,7 @@ tags:
 - github
 ---
 
-## History of my Website
+# History of my Website
 Let's look back at my website back in early [2012](https://web.archive.org/web/20120122125850/http://kevinjalbert.com/):
 
  - It was built using [nanoc](http://nanoc.ws/) as I was learning and enjoying using ruby. This static site generator seemed like a great tool when I started. It gave me a lot of control as I was able to write [custom ruby helpers](https://github.com/kevinjalbert/website/blob/master/lib/helpers/custom_helper.rb) to assist in generating the website.
@@ -18,7 +18,7 @@ Let's look back at my website back in early [2012](https://web.archive.org/web/2
 
 After finishing my M.Sc degree I decided to work in industry instead of pursuing a Ph.D. I continued to update the website with minor changes, but for the most part it stagnated over time.
 
-## Deciding on Middleman
+# Deciding on Middleman
 I eventually wanted to revamp my website to be more _relevant_ and decided going with a blog to document my technical endeavors and musings. I retired the old website and built up the new blog from scratch. I look through the [Ruby Toolbox](https://www.ruby-toolbox.com/categories/static_website_generation) to see the alternatives to nanoc. Top pick seems to be [Jekyll](https://github.com/jekyll/jekyll), which is likely contributed to its painless integration with [GitHub Pages](https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/).
 
 My two main concerns with Jekyll were:
@@ -28,7 +28,7 @@ My two main concerns with Jekyll were:
 
 The second contender is [Middleman](https://middlemanapp.com/). Its offering was very similar to nanoc. I decided to give Middleman a spin as it was new and different from nanoc. For hosting I could figure it out later, although I was still leaning towards a manual usage of GitHub Pages as it was a free hosting solution.
 
-## Deployment Approach
+# Deployment Approach
 With the initial work on the new blog being completed, it was time to handle the deployment of it. As previously mentioned I was still going to use GitHub pages due to its free offering. All the work can be seen in the [kevinjalbert/kevinjalbert.github.io repository](https://github.com/kevinjalbert/kevinjalbert.github.io). A few things to note:
 
 - User GitHub Pages at the time was only deployable from the `master` branch of the github repository.
@@ -102,5 +102,5 @@ Now, when everything is committed on `real-master` and I'm ready to deploy I jus
 
 This results in a [formatted commit log](https://github.com/kevinjalbert/kevinjalbert.github.io/commits/master) on `master` that has snapshots of each deployment of the website.
 
-## That's All Folks
+# That's All Folks
 This approach is working well for me at the current moment. I'll probably keep using Middleman for the foreseeable future. I am sure I will go through another phase of redesigning this process, in which I will document yet again.

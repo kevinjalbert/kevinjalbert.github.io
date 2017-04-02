@@ -9,10 +9,10 @@ tags:
 - sidekiq
 ---
 
-## ActiveSupport Callbacks
+# ActiveSupport Callbacks
 In my [last post](/lets-pry-into-ruby-objects/) I touched on `pry` and how it helped me verify that my class had `around_perform` ActiveSupport Callbacks attached to it. In this post I will delve further into _what_ I was trying to accomplish.
 
-## [ActiveJob, Sidekiq] - [ActiveJob]
+# [ActiveJob, Sidekiq] - [ActiveJob]
 I was working on a Rails 4.2.x project that had background job processing. We used [ActiveJob](https://github.com/rails/rails/tree/4-2-stable/activejob) as our adapter to our background jobs. Behind the scenes, we were using the [Sidekiq](http://sidekiq.org/) gem.
 
 We eventually needed specifics that only native Sidekiq can provide through its `sidekiq_options`. These options that Sidekiq provides were something that we didn't need initially. As mentioned in the [Sidekiq Wiki](https://github.com/mperham/sidekiq/wiki/Active-Job#active-job-introductio://github.com/mperham/sidekiq/wiki/Active-Job#active-job-introduction):
@@ -48,10 +48,10 @@ This module is wrapping the actual job's `#perform` in a `MetricsLogger.timing`.
 
 Moving away from ActiveJob, we need another way to accomplish the same thing (_contained callbacks_) with just Sidekiq.
 
-## Contained Callbacks
+# Contained Callbacks
 The goal is to have contained callbacks, which is just a separate module that can be included on jobs that define the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.
 
-### Prepend a Proxy
+## Prepend a Proxy
 I found out that to make use of `ActiveSupport::Callbacks` you have to modify the executed method, which in our case would be the job's `#perform`.
 
 ```ruby
@@ -81,7 +81,7 @@ end
 
 This module then can be prepended into the Sidekiq job classes and the callbacks will be executed -- if they are present. The next task is to support the `around_perform` callback.
 
-### Support Setting and Running Callbacks
+## Support Setting and Running Callbacks
 ```ruby
 require "active_support/callbacks"
 
@@ -110,7 +110,7 @@ end
 
 Now `SidekiqCallbacks` defines the ability to add callbacks, and they will be executed before `#perform` if defined.
 
-### Wrapping it up
+## Wrapping it up
 
 The last thing I want to do is to encapsulate this Sidekiq callback logic in its own module that defines the actual callback (i.e., `JobMetrics`). To do this, we need to further modify `SidekiqCallbacks`.
 
@@ -174,7 +174,7 @@ end
 
 Finally, we can see how `JobMetrics` has a new `prepend SidekiqCallbacks` and that pulls in all the required `ActiveSupport::Callback` logic that allows for callbacks to be defined and executed.
 
-### The Win
+# The Win
 With this approach, the benefit is that the callback implementation is completely contained within the `JobMetrics` module. The `SidekiqCallbacks` module provides the missing ActiveJob callback support for `around_perform`. It is also possible to add the missing ActiveJob callbacks using this approach.
 
 In the ending, the concrete job classes just `include` the contained callback module (i.e., `JobMetrics`). `SidekiqCallbacks` is designed to accommodate multiple contained callback modules being included on a single concrete job class.

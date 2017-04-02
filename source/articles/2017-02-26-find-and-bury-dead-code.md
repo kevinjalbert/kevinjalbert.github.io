@@ -12,11 +12,11 @@ tags:
 Dead code has no reason to be in a project. When you know it’s there, it simply nags at you to be removed. Sometimes you aren’t even sure that you have dead code. It might just be the case that every line of your codebase is being executed, which if true is great! The other scenario is that there is some dead code wasting developers’ time as they maintain it and work with it.
 Going from this it makes sense to remove the dead code and put it rest with a delete keystroke. The main problem is how to identify dead code in a living project?
 
-## Finding Dead Code
+# Finding Dead Code
 
 In smaller projects, it’s possible to simply see and know what is dead code just from the usage and familiarity you might have with the project. Within larger projects, identifying dead code is not as straight forward. Luckily, we have tools and systems that can aid us. For the most part, we will be looking at this problem from a dynamic language perspective, primarily Ruby.
 
-### Static Analysis Tools
+## Static Analysis Tools
 
 Static analysis tools do not run the application and only examine the source code itself. A general property of these tools is the speed and ease of use, although they come at a price of precision (i.e., missing and incorrect results). I’ll will first present a Ruby specific tool called **_debride_** and then a language agnostic tool called **_unused_**:
 
@@ -26,7 +26,7 @@ Static analysis tools do not run the application and only examine the source cod
 
 With both of these static analysis tools, there is a precision issue of whether or not the detected code is actually used during the execution of your project. This does not strum up immediate confidence in the results and often requires deeper investigation. Another large concern when dealing with dynamic language is class/method defined at runtime or methods that are invoked via meta programming.
 
-### Dynamic Analysis Tools
+## Dynamic Analysis Tools
 
 Dynamic analysis tools, unlike their static counterparts, actually need to run the source code. A general property of these tools is that they provide richer and more accurate results, although at the cost of performance (i.e., slower due to measuring at runtime). I’ll present first a Ruby specific tool called **_coverband_** and then a language agnostic tool called **_scythe_**:
 
@@ -36,7 +36,7 @@ Dynamic analysis tools, unlike their static counterparts, actually need to run t
 
 Both of the above tools took different approaches for dead code identification. In either case, the underlying source code must be executed, and usually there is setup required for the tool to work in conjunction with the running application.
 
-## Burying the Dead
+# Burying the Dead
 
 Now that we know that there is a class of tools for detecting dead code, the next set of questions revolve around removing the dead code.
 
@@ -46,7 +46,7 @@ Recall that static vs. dynamic analysis can inspire different levels of confiden
 
 With sufficient time, it should be possible to make the decision to remove the dead code. As with any change, be observant to any signals that could indicate that the removal was of live code. Given the complex scope of usage, it can be difficult to detect dead code if there are third parties using your codebase. A side bonus of removing dead code, is that any associated tests can be removed -- effectively speeding up your test suite.
 
-## Moving on
+# Moving on
 
 By removing dead code the scale of the source code shrinks ever so slightly. There is little to no point in having extra code in your project if it does not add value. There is possible arguments that if it works, there is no need to change it. I would counter that by saying that keeping dead code around is lugging around a mental burden that developers have to deal with. Dead code wastes a developer’s time and energy. Imagine having to upgrade a dependency and making changes in dead code -- what a waste.
 
@@ -56,7 +56,7 @@ Do be aware that there is some initial time investment in getting a system in pl
 
 -----
 
-## TL;DR
+# TL;DR
 
 * Dead code is code that is never exercised during the execution of the application.
 * Two types of tools exist for finding dead code: Static and Dynamic analysis tools

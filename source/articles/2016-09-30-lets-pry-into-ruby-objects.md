@@ -9,7 +9,7 @@ tags:
 - rails
 ---
 
-## Where is my `pry`bar?
+# Where is my `pry`bar?
 You are probably already familiar with `irb`, an _interactive Ruby_ shell. It is pretty powerful and can help you poke around Ruby. In Rails, you might have had access to `byebug` and used it for debugging purposes. This is great and is standard with Rails projects. I do, however, recommend looking at `pry`, which is just a bit more powerful in what it can do. We're just going to scratch the surface here.
 
 ```
@@ -18,7 +18,7 @@ gem install pry
 
 The `pry` [wiki](https://github.com/pry/pry/wiki) is quite detailed with a lot of accompanying resources.
 
-## Adventure Time! Using `pry` to Open Objects
+# Adventure Time! Using `pry` to Open Objects
 We'll use a shortened example that I recently encountered. I was pretty deep in Rails and was dealing with `ActiveSupport::Callbacks::CallbackChain` (lets not ask why ;P). I wanted to verify if we have any `around_perform` _callbacks_ set on a particular class. With my trusty `pry`, I can inspect what I'm working with in more detail.
 
 ```
@@ -164,6 +164,6 @@ end
 
 Yep! That works like I suspected it would -- that method chain winds up calling `ActiveSupport::Callbacks::CallbackChain#empty?` in the ending.
 
-## Wrapping up
+# Wrapping up
 
 So if you are not using `pry`, I highly recommend it. I _barely_ scratched the surface on what it can do for you. It is a powerful tool that can help in debugging and further digging around your codebase.

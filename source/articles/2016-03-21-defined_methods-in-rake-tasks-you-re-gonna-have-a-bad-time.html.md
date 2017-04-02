@@ -121,7 +121,7 @@ There are a couple of solutions to this problem:
 2. Inline the contents of the defined methods
 3. Extract the methods into a module/class and use that
 
-## Solution #1 - Uniquely Named Methods
+# Solution #1 - Uniquely Named Methods
 It is possible to simply ensure that we uniquely name our methods so that they do no clash and end up redefining each other.
 
 ```ruby
@@ -160,7 +160,7 @@ end
 
 This works and is a quick fix, although it is not exactly sustainable and requires you to be conscientious when naming new methods.
 
-## Solution #2 - Inline Method Contents
+# Solution #2 - Inline Method Contents
 
 To ensure that method redefinition doesn't occur we can simply remove the methods and inline their content.
 
@@ -190,7 +190,7 @@ end
 
 This is also a quick fix, and might be optimal depending on the size, complexity, and reuse of the method's content.
 
-## Solution #3 - Extract Methods into Module/Class
+# Solution #3 - Extract Methods into Module/Class
 
 Removing the methods from the rake files themselves is another valid solution. The methods can be extracted into their own class or module and used within the task files.
 

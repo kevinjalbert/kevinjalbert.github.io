@@ -2,16 +2,74 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-03-28T19:53:20-04:00</updated>
+  <updated>2017-04-08T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Bluetooth Connection/Battery Script for macOS</title>
+    <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
+    <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
+    <updated>2017-04-09T22:34:33-04:00</updated>
+    <published>2017-04-08T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Using AppleScript to simplify connecting bluetooth earphones to macOS.</description>
+    <content type="html">&lt;p&gt;&lt;img width="4032" height="3024" src="/images/2017-04-09-bluetooth-connection-battery-script-for-macos/beatsx.jpg" /&gt;
+&lt;em&gt;My BeatsX Earphones&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently purchased a pair of &lt;a href="http://www.apple.com/ca/shop/product/MLYE2LL/A/beatsx-earphones-black"&gt;BeatsX Earphones&lt;/a&gt; as I wanted to stop dealing with wired earbuds. For some reason, the wired connections always stopped working properly after a number of months. I supect it is just the stress on the wire while in my pocket during my commute.&lt;/p&gt;
+
+&lt;p&gt;When arriving at work, or really anytime I am transitioning from iPhone to MacBook Pro, I have to manually connect my BeatsX to the MacBook Pro. I wanted to automate this process, down to a simple command. If the BeatsX are in range and on they would initiate the connection process to my machine. In addition, it would be nice to have a way to monitor the battery level using a similar process.&lt;/p&gt;
+
+&lt;p&gt;Looking around, I couldn&amp;rsquo;t find any way through a command-line interface to do what I wanted. I eventually figured out that I could use macOS&amp;rsquo;s &lt;a href="https://en.wikipedia.org/wiki/AppleScript"&gt;AppleScript&lt;/a&gt; to automate the menu navigation.&lt;/p&gt;
+
+&lt;p&gt;The following script will attempt to connect to the desired device (i.e., BeatsX by name). If it is already connected then it will retrieve the battery level.&lt;/p&gt;
+&lt;pre class="highlight applescript"&gt;&lt;code&gt;&lt;span class="nb"&gt;activate&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"SystemUIServer"&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceName&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Kevin Jalbert's BeatsX"&lt;/span&gt;&lt;span class="w"&gt;
+
+&lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"System Events"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;process&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"SystemUIServer"&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bluetoothMenu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;whose&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;description&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;contains&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"bluetooth"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bluetoothMenu&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="nv"&gt;click&lt;/span&gt;&lt;span class="w"&gt;
+
+      &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceMenuItem&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceName&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceMenuItem&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nv"&gt;click&lt;/span&gt;&lt;span class="w"&gt;
+
+        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;exists&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Connect"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="nv"&gt;click&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Connect"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Connecting..."&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelMenuItem&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelMenuItem&lt;/span&gt;&lt;span class="w"&gt;
+            &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelText&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;title&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelMenuItem&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
+
+          &lt;/span&gt;&lt;span class="na"&gt;key code&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;53&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- esc key&lt;/span&gt;&lt;span class="w"&gt;
+
+          &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelText&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This on its own is a nice win and works as desired. Now, I&amp;rsquo;m a heavy user of &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; and I quickly threw together a workflow that uses this script. I now get a notification during connection, and repeated invokations will display the battery level.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="2104" height="632" src="/images/2017-04-09-bluetooth-connection-battery-script-for-macos/alfred-workflow.gif" /&gt;
+&lt;em&gt;My BeatsX Alfred workflow&lt;/em&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -150,7 +208,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -226,7 +284,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -362,7 +420,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -462,7 +520,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -579,7 +637,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -757,7 +815,7 @@ it then returns the combined value
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -922,7 +980,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1049,7 +1107,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="https://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>https://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1155,7 +1213,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="https://kevinjalbert.com/more-shell-history/"/>
     <id>https://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
+    <updated>2017-04-03T08:52:59-04:00</updated>
     <published>2016-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1248,76 +1306,6 @@ setopt HIST_FIND_NO_DUPS
 setopt inc_append_history
 setopt share_history
 &lt;/code&gt;&lt;/pre&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Keep on Learning, but don't Forget to Remember</title>
-    <link rel="alternate" href="https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/"/>
-    <id>https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</id>
-    <updated>2017-04-02T16:07:56-04:00</updated>
-    <published>2016-05-31T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">As developers we are constantly learning tips, tricks and new ways to accomplish our work. We continue to accumulate these tips daily, but at the same time we potentially forget the less used but relevant ones. A system is presented that ensures that these tips are remembered.</description>
-    <content type="html">&lt;p&gt;Learning is a way of life for a developer. Frequently we are exposed to techniques and tips such as: keybindings, shell commands, utilities, new functions/methods, new applications. While learning, we want to keep on remembering the previous techniques and tips that we&amp;rsquo;ve learned so that we can keep them &lt;em&gt;fresh&lt;/em&gt; and on our tool belt. It is not uncommon to forget some learned knowledge if you don&amp;rsquo;t use it often.&lt;/p&gt;
-
-&lt;p&gt;I would like to present my own problem and solution surrounding this idea.&lt;/p&gt;
-
-&lt;h1&gt;Problem: Customization of vim/zsh&lt;/h1&gt;
-
-&lt;p&gt;Vim and zsh are my editor and shell of choice, both decisions I made early in my career. I have since spent countless hours using both and each are indispensable to my development process. As typical of any developer I am always looking for ways to improve my process. Near the beginning of my career I discovered that both &lt;a href="http://vimawesome.com/"&gt;vim&lt;/a&gt; and &lt;a href="https://github.com/unixorn/awesome-zsh-plugins"&gt;zsh&lt;/a&gt; have thriving plugin communities.&lt;/p&gt;
-
-&lt;p&gt;I saw that there were &lt;a href="https://github.com/spf13/spf13-vim"&gt;popular&lt;/a&gt; vim &lt;a href="https://github.com/carlhuda/janus"&gt;distributions&lt;/a&gt; that come pre-packaged with opinionated set of keybindings, plugins and themes. I originally used one of these and immediately felt overwhelmed with the added functionality. I eventually came to terms with the error of my ways, and went back to vanilla vim. Learning from my mistake I decided to slowly incorporate features I felt were useful as I came to need them.&lt;/p&gt;
-
-&lt;p&gt;I continue to stumble upon new plugins that simplifies tasks. I add custom keybindings to perform certain motions. I create custom vim functions. While observing colleagues I take mental notes of vim motions that I have yet to take advantage of. I occasionally look through my setup and notice features and keybindings that I have not used in a while. Sometimes I remove them, but other times I&amp;rsquo;ll keep it and make a try and use it.&lt;/p&gt;
-
-&lt;p&gt;My use of zsh is nearly an identical story to that of my use with vim. In either case I routinely accumulate and pruning tips that I find useful. My largest gripe is &lt;em&gt;forgetting&lt;/em&gt; about new tips that I want to make part of my normal tool set. In most cases these have yet to become habit and common knowledge to me through repetitive exposure and use.&lt;/p&gt;
-
-&lt;h1&gt;Solution&lt;/h1&gt;
-
-&lt;p&gt;I decided to write my accumulation of tips down as one-liners in &lt;code&gt;tips.txt&lt;/code&gt; files, while using directories under &lt;code&gt;~/.tips&lt;/code&gt; for categorization:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;~/.tips❯ tree
-.
-├── ruby
-│   └── rspec
-│       └── tips.txt
-├── vim
-│   ├── plugins
-│   │   ├── ctrlp
-│   │   │   └── tips.txt
-│   │   └── nerdtree
-│   │       └── tips.txt
-│   └── vanilla
-│       └── tips.txt
-└── zsh
-    └── tips.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Ultimately my goal is to be presented with a random tip when I open a new shell. To accomplish this the following code snippet is placed near the start of my &lt;code&gt;.zshrc&lt;/code&gt; (also works in a &lt;code&gt;.bashrc&lt;/code&gt;):&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Displays a random tip from the .tips directory when opening the shell
-# Requires gshuf (brew install coreutils)
-(
-  TIP_PATH=$(find ~/.tips -type f -name tips.txt | gshuf -n1)    # Pick a random tips.txt file
-  TIP_TILE=${TIP_PATH#"$HOME/.tips/"}                            # i.e., ~/.tips/vim/vanilla/tips.txt  ---&amp;gt;  vim/vanilla/tips.txt
-  echo "From ${TIP_TILE%.txt}:"                                  # i.e., "From vim/vanilla/tips:"
-  gshuf -n1 &amp;lt; "$TIP_PATH"                                        # Displays a random line from the tip file
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now throughout the day when I open many new shells, I am presented with a random recorded tip:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;From vim/plugins/nerdtree/tips:
-`&amp;lt;f2&amp;gt;` toggles nerdtree open/close
-~/.tips❯
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;From zsh/tips:
-`j` allows you to jump to marked directories (via `jump`)
-~/.tips❯
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Don&amp;rsquo;t Forget to Remember&lt;/h1&gt;
-
-&lt;p&gt;As I continue to learn new things I&amp;rsquo;ll be added them to the appropriate &lt;code&gt;tips.txt&lt;/code&gt; within my &lt;code&gt;.tips&lt;/code&gt; directory. If I am presented with a tip that is no longer relevant I can simply remove it. Overall this seems like a great solution for recollecting tips.&lt;/p&gt;
 </content>
   </entry>
 </feed>

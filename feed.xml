@@ -11,7 +11,7 @@
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-04-09T22:34:33-04:00</updated>
+    <updated>2017-04-10T09:33:30-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -69,7 +69,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -208,7 +208,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -284,7 +284,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -420,7 +420,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-10T09:33:30-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -520,7 +520,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -637,7 +637,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -815,7 +815,7 @@ it then returns the combined value
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -980,7 +980,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1107,7 +1107,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="https://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>https://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1213,7 +1213,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>More Shell History</title>
     <link rel="alternate" href="https://kevinjalbert.com/more-shell-history/"/>
     <id>https://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-04-03T08:52:59-04:00</updated>
+    <updated>2017-04-09T22:38:47-04:00</updated>
     <published>2016-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

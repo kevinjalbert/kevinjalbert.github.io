@@ -26,8 +26,11 @@
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .2);
   overflow: auto;
 
+  width: 80%;
+
   @media (min-width: 768px) {
     max-width: 300px;
+    width: 100%;
   }
 }
 

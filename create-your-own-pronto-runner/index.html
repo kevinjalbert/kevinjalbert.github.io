@@ -1,0 +1,160 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <link rel=canonical href=https://kevinjalbert.com/create-your-own-pronto-runner/> <title>Create your own Pronto Runner | Kevin Jalbert</title> <meta name=description content="Pronto runners provides an automatic mechanism to find offenses in code reviews. Learn the essentials of pronto runners so that you can build your own."/> <meta name=keywords content="ruby, pronto, code review"/> <meta name=datePublished content="2017-05-30 00:00:00 UTC"/> <meta property="og:article:published_time" content="2017-05-30 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2017-05-30 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/create-your-own-pronto-runner/"/> <meta property="og:url" content="https://kevinjalbert.com/create-your-own-pronto-runner/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="Pronto runners provides an automatic mechanism to find offenses in code reviews. Learn the essentials of pronto runners so that you can build your own."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2017-05-30-create-your-own-pronto-runner/robot.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Create your own Pronto Runner"/> <meta property="og:description" content="Pronto runners provides an automatic mechanism to find offenses in code reviews. Learn the essentials of pronto runners so that you can build your own."/> <meta property="og:image" content="https://kevinjalbert.com/images/2017-05-30-create-your-own-pronto-runner/robot.jpg"/> <meta property="og:title" content="Create your own Pronto Runner"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Create your own Pronto Runner",
+       "keywords": "ruby, pronto, code review",
+       "url": "https://kevinjalbert.com/create-your-own-pronto-runner/",
+       "datePublished": "2017-05-30 00:00:00 UTC",
+       "dateModified": "2017-05-30 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/create-your-own-pronto-runner/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Create your own Pronto Runner</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">May 30, 2017 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>4 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/create-your-own-pronto-runner/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/ruby/">ruby</a> <a href="/tags/pronto/">pronto</a> <a href="/tags/code-review/">code review</a> </div> </div> </div> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> Signup for my Newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="email address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <p><img width=1280 height=857 src="/images/2017-05-30-create-your-own-pronto-runner/robot.jpg"/> <em>By Vanillase (Own work) <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:ASIMO_Conducting_Pose_on_4.14.2008.jpg">Wikimedia Commons</a></em></p> <h1>What is Pronto?</h1> <p><a href="https://github.com/prontolabs/pronto">Pronto</a> is a tool that provides an automated code review over new changes in a git branch. It is typically used in continuous integration as a way to provide feedback on a pull/merge request. It is configurable in how it provides feedback, through the use of <em>formatters</em>. For example, pronto on GitHub could <a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_pull_request_formatter.rb">comment directly on the offending line</a>, use <a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_status_formatter.rb">pull request status checks</a>, or even the recent <a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_pull_request_review_formatter.rb">pull request review</a>.</p> <p>Pronto uses the concept of <em>runners</em> to indicate what pronto will use to look for offenses during a code review. Generally, runners act as wrappers around existing tools. There are a number of <a href="https://github.com/prontolabs/pronto#runners">open source runners</a> available, and for the most part they will provide what you need. In some cases you&rsquo;ll want something different, which does not <em>yet</em> exist as a runner. This is where you can create a new runner to fill the gap.</p> <h1>What is a Runner&rsquo;s Job?</h1> <p>Pronto runners are responsible for parsing out offenses and matching them with lines from a git patch. These offenses normally are the result of a tool that the runner is using (i.e., a linter). The end goal is that the runner sends messages containing the patch line change and the offense to pronto. There are two methods that I&rsquo;ve seen when approaching a pronto runner, and are dictated by the following constraints:</p> <ol> <li>The tool can be run on individual files.</li> <li>The tool needs be run with the context of the whole code base.</li> </ol> <p>The second option could be used regardless, although when the size of your codebase increases the number of files that have to be processed would grow as well. Ideally, you would want the runner to be as quick as possible, so running the tool over the least amount of files would help accomplish that. In addition, there would be less error noise produced from non-changed files.</p> <p>In my experience, when creating <a href="https://github.com/kevinjalbert/pronto-stylelint">pronto-stylelint</a> and <a href="https://github.com/kevinjalbert/pronto-flow">pronto-flow</a>, I used existing pronto runners as my base. I would recommend the same when starting a new runner. Pick one as your base (which follows the approach you need) and modify as necessary. Again, most pronto runners are fairly straight forward, and usually consist of one file.</p> <h1>Examining a Runner</h1> <p>Let&rsquo;s take a look at <a href="https://github.com/prontolabs/pronto-rubocop/blob/v0.8.1/lib/pronto/rubocop.rb">pronto-rubocop</a> and make a few notes:</p> <ul> <li>The class inherits from <code>Pronto::Runner</code>, which provides the patch information along with <a href="https://github.com/prontolabs/pronto/blob/v0.8.2/lib/pronto/runner.rb">other methods</a> that you can use within your runner.</li> <li><code>#initialize</code> is setting up any custom configurations, as well as creating the <code>Rubocop::Runner</code> instance.</li> <li><code>#run</code> is the <a href="https://github.com/prontolabs/pronto/blob/v0.8.2/lib/pronto/runners.rb#L20">entry point of the runner</a> &ndash; this is where all your logic can start to come into play.</li> <li>In pronto-rubocop, <code>#run</code> is selecting all the patch information that pronto provides it, and only processing (i.e., run rubocop and send messages) those which are valid (i.e., ruby file that has a change).</li> <li>The <code>#inspect</code> method processes each patch with rubocop. The reported offenses from rubocop get matched up with the patch file/line. When a match is found then <code>#new_message</code> is called.</li> <li>The output of a pronto runner is to create instances of <code>Pronto::Message</code>, which requires <a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/message.rb#L7-L19">specific data inputs</a>.</li> </ul> <p>The following is a stripped down and commented version of pronto-rubocop:</p> <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pronto'</span>
+<span class="nb">require</span> <span class="s1">'rubocop'</span>
+
+<span class="k">module</span> <span class="nn">Pronto</span>
+  <span class="k">class</span> <span class="nc">Rubocop</span> <span class="o">&lt;</span> <span class="no">Runner</span>
+    <span class="sr">//</span> <span class="no">Required</span> <span class="sb">`#run`</span> <span class="nb">method</span> <span class="o">--</span> <span class="n">entry</span> <span class="n">point</span>
+    <span class="k">def</span> <span class="nf">run</span>
+      <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="vi">@patches</span>
+
+      <span class="sr">//</span> <span class="no">Loop</span> <span class="n">over</span> <span class="n">all</span> <span class="n">patches</span> <span class="n">passed</span> <span class="k">in</span> <span class="n">from</span> <span class="n">pronto</span> <span class="n">and</span> <span class="n">only</span> <span class="nb">select</span> <span class="n">valid</span> <span class="n">ones</span>
+      <span class="sr">//</span> <span class="n">to</span> <span class="nb">inspect</span><span class="p">,</span> <span class="n">process</span> <span class="n">and</span> <span class="n">possibly</span> <span class="n">create</span> <span class="n">a</span> <span class="n">message</span> <span class="n">from</span><span class="o">.</span>
+      <span class="vi">@patches</span><span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">patch</span><span class="o">|</span> <span class="n">valid_patch?</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span> <span class="p">}</span>
+        <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">patch</span><span class="o">|</span> <span class="nb">inspect</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span> <span class="p">}</span>
+        <span class="p">.</span><span class="nf">flatten</span><span class="p">.</span><span class="nf">compact</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">valid_patch?</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+      <span class="k">return</span> <span class="kp">false</span> <span class="k">if</span> <span class="n">patch</span><span class="p">.</span><span class="nf">additions</span> <span class="o">&lt;</span> <span class="mi">1</span>
+
+      <span class="sr">//</span> <span class="no">Return</span> <span class="n">boolean</span> <span class="n">value</span> <span class="n">to</span> <span class="n">determine</span> <span class="k">if</span> <span class="n">patch</span> <span class="n">is</span> <span class="n">valid</span> <span class="k">for</span> <span class="n">this</span> <span class="n">runner</span><span class="p">.</span>
+      <span class="nf">/</span><span class="o">/</span> <span class="n">i</span><span class="p">.</span><span class="nf">e</span><span class="p">.</span><span class="nf">,</span> <span class="n">whether</span> <span class="n">the</span> <span class="n">file</span> <span class="n">type</span><span class="o">/</span><span class="n">path</span> <span class="n">should</span> <span class="n">be</span> <span class="n">included</span> <span class="n">by</span> <span class="n">the</span> <span class="n">runner</span><span class="p">.</span>
+    <span class="nf">end</span>
+
+    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+      <span class="sr">//</span> <span class="no">Process</span> <span class="n">the</span> <span class="n">file</span> <span class="k">for</span> <span class="n">the</span> <span class="n">patch</span> <span class="n">and</span> <span class="n">acquire</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">offenses</span><span class="p">.</span>
+      <span class="nf">processed_source</span> <span class="o">=</span> <span class="n">processed_source_for</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+      <span class="n">offences</span> <span class="o">=</span> <span class="vi">@inspector</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="ss">:inspect_file</span><span class="p">,</span> <span class="n">processed_source</span><span class="p">).</span><span class="nf">first</span>
+
+      <span class="sr">//</span> <span class="no">Filter</span> <span class="n">the</span> <span class="n">offenses</span> <span class="n">to</span> <span class="n">only</span> <span class="n">those</span> <span class="n">which</span> <span class="n">match</span> <span class="n">up</span> <span class="n">to</span> <span class="n">a</span> <span class="n">line</span> <span class="n">from</span> <span class="n">the</span>
+      <span class="sr">//</span> <span class="n">patch</span><span class="o">.</span> <span class="no">If</span> <span class="n">so</span> <span class="k">then</span> <span class="n">create</span> <span class="n">a</span> <span class="n">message</span> <span class="n">with</span> <span class="n">said</span> <span class="n">information</span><span class="p">.</span>
+      <span class="nf">offences</span><span class="p">.</span><span class="nf">sort</span><span class="p">.</span><span class="nf">reject</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:disabled?</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">offence</span><span class="o">|</span>
+        <span class="n">patch</span><span class="p">.</span><span class="nf">added_lines</span>
+          <span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="n">line</span><span class="p">.</span><span class="nf">new_lineno</span> <span class="o">==</span> <span class="n">offence</span><span class="p">.</span><span class="nf">line</span> <span class="p">}</span>
+          <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="n">new_message</span><span class="p">(</span><span class="n">offence</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">new_message</span><span class="p">(</span><span class="n">offence</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+      <span class="n">path</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">patch</span><span class="p">.</span><span class="nf">delta</span><span class="p">.</span><span class="nf">new_file</span><span class="p">[</span><span class="ss">:path</span><span class="p">]</span>
+      <span class="n">level</span> <span class="o">=</span> <span class="n">offence</span><span class="p">.</span><span class="nf">severity</span><span class="p">.</span><span class="nf">name</span> <span class="sr">//</span> <span class="no">Symbol</span> <span class="n">of</span> <span class="n">offence</span><span class="p">.</span>
+
+      <span class="nf">/</span><span class="o">/</span> <span class="no">Required</span> <span class="n">construct</span> <span class="n">to</span> <span class="n">have</span> <span class="n">pronto</span> <span class="n">receive</span> <span class="n">the</span> <span class="n">messages</span><span class="p">.</span>
+      <span class="nf">/</span><span class="o">/</span> <span class="no">The</span> <span class="sb">`line`</span> <span class="n">here</span> <span class="n">is</span> <span class="n">the</span> <span class="n">line</span> <span class="n">extracted</span> <span class="n">from</span> <span class="n">the</span> <span class="vi">@patch</span><span class="o">.</span>
+      <span class="no">Message</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">offence</span><span class="p">.</span><span class="nf">message</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">processed_source_for</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+      <span class="sr">//</span> <span class="no">Rubocop</span> <span class="n">processing</span> <span class="n">of</span> <span class="n">file</span> <span class="n">from</span> <span class="n">patch</span><span class="p">.</span>
+    <span class="nf">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <h1>Building a Runner</h1> <p>As previously mentioned, most pronto runners are simply wrappers for an existing tool and the whole runner itself is quite small. Given that you inherit from <code>Pronto::Runner</code>, the only method you need to implement is <code>#run</code>. There is a lot of flexibility in what your runner can do.</p> <p>Together let&rsquo;s build a runner that flags lines that contain one of the <a href="https://en.wikipedia.org/wiki/Seven_dirty_words">seven dirty words</a>. I decided to use <a href="https://github.com/kevinjalbert/pronto-stylelint">pronto-stylelint</a> as my base, which I then pulled out everything except the essentials:</p> <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'pronto'</span>
+<span class="nb">require</span> <span class="s1">'shellwords'</span>
+
+<span class="k">module</span> <span class="nn">Pronto</span>
+  <span class="k">class</span> <span class="nc">DirtyWords</span> <span class="o">&lt;</span> <span class="no">Runner</span>
+    <span class="no">DIRTY_WORDS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'shit'</span><span class="p">,</span> <span class="s1">'piss'</span><span class="p">,</span> <span class="s1">'fuck'</span><span class="p">,</span> <span class="s1">'cunt'</span><span class="p">,</span> <span class="s1">'cocksucker'</span><span class="p">,</span> <span class="s1">'motherfucker'</span><span class="p">,</span> <span class="s1">'tits'</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">run</span>
+      <span class="k">return</span> <span class="p">[]</span> <span class="k">if</span> <span class="o">!</span><span class="vi">@patches</span> <span class="o">||</span> <span class="vi">@patches</span><span class="p">.</span><span class="nf">count</span><span class="p">.</span><span class="nf">zero?</span>
+
+      <span class="vi">@patches</span>
+        <span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">patch</span><span class="o">|</span> <span class="n">patch</span><span class="p">.</span><span class="nf">additions</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">}</span>
+        <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">patch</span><span class="o">|</span> <span class="nb">inspect</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span> <span class="p">}</span>
+        <span class="p">.</span><span class="nf">flatten</span><span class="p">.</span><span class="nf">compact</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+
+    <span class="k">def</span> <span class="nf">git_repo_path</span>
+      <span class="vi">@git_repo_path</span> <span class="o">||=</span> <span class="no">Rugged</span><span class="o">::</span><span class="no">Repository</span><span class="p">.</span><span class="nf">discover</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="no">Dir</span><span class="p">.</span><span class="nf">pwd</span><span class="p">)).</span><span class="nf">workdir</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+      <span class="n">offending_line_numbers</span><span class="p">(</span><span class="n">patch</span><span class="p">).</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">line_number</span><span class="o">|</span>
+        <span class="n">patch</span>
+          <span class="p">.</span><span class="nf">added_lines</span>
+          <span class="p">.</span><span class="nf">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="n">line</span><span class="p">.</span><span class="nf">new_lineno</span> <span class="o">==</span> <span class="n">line_number</span> <span class="p">}</span>
+          <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="n">new_message</span><span class="p">(</span><span class="s1">'Avoid using one of the seven dirty words'</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">new_message</span><span class="p">(</span><span class="n">offence</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+      <span class="n">path</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">patch</span><span class="p">.</span><span class="nf">delta</span><span class="p">.</span><span class="nf">new_file</span><span class="p">[</span><span class="ss">:path</span><span class="p">]</span>
+      <span class="n">level</span> <span class="o">=</span> <span class="ss">:warning</span>
+
+      <span class="no">Message</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">offence</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="nb">self</span><span class="p">.</span><span class="nf">class</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">offending_line_numbers</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+      <span class="n">line_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+
+      <span class="no">Dir</span><span class="p">.</span><span class="nf">chdir</span><span class="p">(</span><span class="n">git_repo_path</span><span class="p">)</span> <span class="k">do</span>
+        <span class="n">escaped_file_path</span> <span class="o">=</span> <span class="no">Shellwords</span><span class="p">.</span><span class="nf">escape</span><span class="p">(</span><span class="n">patch</span><span class="p">.</span><span class="nf">new_file_full_path</span><span class="p">.</span><span class="nf">to_s</span><span class="p">)</span>
+
+        <span class="no">File</span><span class="p">.</span><span class="nf">foreach</span><span class="p">(</span><span class="n">escaped_file_path</span><span class="p">).</span><span class="nf">with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="p">,</span> <span class="n">line_num</span><span class="o">|</span>
+          <span class="n">line_numbers</span> <span class="o">&lt;&lt;</span> <span class="n">line_num</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="no">DIRTY_WORDS</span><span class="p">.</span><span class="nf">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">word</span><span class="o">|</span> <span class="n">line</span><span class="p">.</span><span class="nf">downcase</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="p">}</span>
+        <span class="k">end</span>
+
+        <span class="n">line_numbers</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre> <p>The <code>#offending_line_numbers</code> methods is where the check for a <em>dirty word</em> occurs. When an offending line is found, we flag the line number for that file to be used in <code>#new_message</code>. Overall, it is not that hard to put together a simple pronto runner. To look at the end result of this pronto runner, it is open sourced at <a href="https://github.com/kevinjalbert/pronto-dirty_words">pronto-dirty_words</a>. Never forget it is always possible to add configuration files and external tools to a runner.</p> <h1>Pronto all the things</h1> <p>To this date, I have created two useful pronto runners (<em>dirty words</em> was more of a demo for this post). I have personally been using pronto for several years, and I will continue to use it. The ecosystem of runners continues to grow. I hope that this post helps others in creating new runners that will benefit everyone. Keep an eye out for tools that could be wrapped in a pronto runner &ndash; maybe you can help add to the set of runners!</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="col-md-12 footer__copywrite"> &copy; 2017 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script> <script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16620161-5']);
+    _gaq.push(['_trackPageview']);
+
+    setTimeout(function() {
+      window.onscroll = function() {
+        window.onscroll = null; // Only track the event once
+        _gaq.push(['_trackEvent', 'scroll', 'read']);
+      }
+    }, 5000);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>

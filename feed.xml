@@ -2,16 +2,182 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-04-08T19:53:20-04:00</updated>
+  <updated>2017-05-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Create your own Pronto Runner</title>
+    <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
+    <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
+    <updated>2017-05-30T00:26:02-04:00</updated>
+    <published>2017-05-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Pronto runners provides an automatic mechanism to find offenses in code reviews. Learn the essentials of pronto runners so that you can build your own.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1280" height="857" src="/images/2017-05-30-create-your-own-pronto-runner/robot.jpg" /&gt;
+&lt;em&gt;By Vanillase (Own work) &lt;a href="http://creativecommons.org/licenses/by-sa/3.0"&gt;CC BY-SA 3.0&lt;/a&gt;, via &lt;a href="https://commons.wikimedia.org/wiki/File:ASIMO_Conducting_Pose_on_4.14.2008.jpg"&gt;Wikimedia Commons&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1&gt;What is Pronto?&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/prontolabs/pronto"&gt;Pronto&lt;/a&gt; is a tool that provides an automated code review over new changes in a git branch. It is typically used in continuous integration as a way to provide feedback on a pull/merge request. It is configurable in how it provides feedback, through the use of &lt;em&gt;formatters&lt;/em&gt;. For example, pronto on GitHub could &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_pull_request_formatter.rb"&gt;comment directly on the offending line&lt;/a&gt;, use &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_status_formatter.rb"&gt;pull request status checks&lt;/a&gt;, or even the recent &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_pull_request_review_formatter.rb"&gt;pull request review&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Pronto uses the concept of &lt;em&gt;runners&lt;/em&gt; to indicate what pronto will use to look for offenses during a code review. Generally, runners act as wrappers around existing tools. There are a number of &lt;a href="https://github.com/prontolabs/pronto#runners"&gt;open source runners&lt;/a&gt; available, and for the most part they will provide what you need. In some cases you&amp;rsquo;ll want something different, which does not &lt;em&gt;yet&lt;/em&gt; exist as a runner. This is where you can create a new runner to fill the gap.&lt;/p&gt;
+
+&lt;h1&gt;What is a Runner&amp;rsquo;s Job?&lt;/h1&gt;
+
+&lt;p&gt;Pronto runners are responsible for parsing out offenses and matching them with lines from a git patch. These offenses normally are the result of a tool that the runner is using (i.e., a linter). The end goal is that the runner sends messages containing the patch line change and the offense to pronto. There are two methods that I&amp;rsquo;ve seen when approaching a pronto runner, and are dictated by the following constraints:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The tool can be run on individual files.&lt;/li&gt;
+&lt;li&gt;The tool needs be run with the context of the whole code base.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The second option could be used regardless, although when the size of your codebase increases the number of files that have to be processed would grow as well. Ideally, you would want the runner to be as quick as possible, so running the tool over the least amount of files would help accomplish that. In addition, there would be less error noise produced from non-changed files.&lt;/p&gt;
+
+&lt;p&gt;In my experience, when creating &lt;a href="https://github.com/kevinjalbert/pronto-stylelint"&gt;pronto-stylelint&lt;/a&gt; and &lt;a href="https://github.com/kevinjalbert/pronto-flow"&gt;pronto-flow&lt;/a&gt;, I used existing pronto runners as my base. I would recommend the same when starting a new runner. Pick one as your base (which follows the approach you need) and modify as necessary. Again, most pronto runners are fairly straight forward, and usually consist of one file.&lt;/p&gt;
+
+&lt;h1&gt;Examining a Runner&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a look at &lt;a href="https://github.com/prontolabs/pronto-rubocop/blob/v0.8.1/lib/pronto/rubocop.rb"&gt;pronto-rubocop&lt;/a&gt; and make a few notes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The class inherits from &lt;code&gt;Pronto::Runner&lt;/code&gt;, which provides the patch information along with &lt;a href="https://github.com/prontolabs/pronto/blob/v0.8.2/lib/pronto/runner.rb"&gt;other methods&lt;/a&gt; that you can use within your runner.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#initialize&lt;/code&gt; is setting up any custom configurations, as well as creating the &lt;code&gt;Rubocop::Runner&lt;/code&gt; instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#run&lt;/code&gt; is the &lt;a href="https://github.com/prontolabs/pronto/blob/v0.8.2/lib/pronto/runners.rb#L20"&gt;entry point of the runner&lt;/a&gt; &amp;ndash; this is where all your logic can start to come into play.&lt;/li&gt;
+&lt;li&gt;In pronto-rubocop, &lt;code&gt;#run&lt;/code&gt; is selecting all the patch information that pronto provides it, and only processing (i.e., run rubocop and send messages) those which are valid (i.e., ruby file that has a change).&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;#inspect&lt;/code&gt; method processes each patch with rubocop. The reported offenses from rubocop get matched up with the patch file/line. When a match is found then &lt;code&gt;#new_message&lt;/code&gt; is called.&lt;/li&gt;
+&lt;li&gt;The output of a pronto runner is to create instances of &lt;code&gt;Pronto::Message&lt;/code&gt;, which requires &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/message.rb#L7-L19"&gt;specific data inputs&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following is a stripped down and commented version of pronto-rubocop:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'pronto'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rubocop'&lt;/span&gt;
+
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Pronto&lt;/span&gt;
+  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Rubocop&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Runner&lt;/span&gt;
+    &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Required&lt;/span&gt; &lt;span class="sb"&gt;`#run`&lt;/span&gt; &lt;span class="nb"&gt;method&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;entry&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="vi"&gt;@patches&lt;/span&gt;
+
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Loop&lt;/span&gt; &lt;span class="n"&gt;over&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;patches&lt;/span&gt; &lt;span class="n"&gt;passed&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;pronto&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="nb"&gt;select&lt;/span&gt; &lt;span class="n"&gt;valid&lt;/span&gt; &lt;span class="n"&gt;ones&lt;/span&gt;
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="nb"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;possibly&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+      &lt;span class="vi"&gt;@patches&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;valid_patch?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;flatten&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;valid_patch?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;additions&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Return&lt;/span&gt; &lt;span class="n"&gt;boolean&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;determine&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;valid&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;runner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+      &lt;span class="nf"&gt;/&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;,&lt;/span&gt; &lt;span class="n"&gt;whether&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;included&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;runner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="nf"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Process&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;acquire&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;generated&lt;/span&gt; &lt;span class="n"&gt;offenses&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+      &lt;span class="nf"&gt;processed_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;processed_source_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;offences&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@inspector&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:inspect_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;processed_source&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
+
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Filter&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;offenses&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="n"&gt;those&lt;/span&gt; &lt;span class="n"&gt;which&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt;
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;If&lt;/span&gt; &lt;span class="n"&gt;so&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;said&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+      &lt;span class="nf"&gt;offences&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;reject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="ss"&gt;:disabled?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+        &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;added_lines&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_lineno&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;line&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delta&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_file&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:path&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;severity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Symbol&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+      &lt;span class="nf"&gt;/&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="no"&gt;Required&lt;/span&gt; &lt;span class="n"&gt;construct&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;pronto&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+      &lt;span class="nf"&gt;/&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="sb"&gt;`line`&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="n"&gt;extracted&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="vi"&gt;@patch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+      &lt;span class="no"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;processed_source_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Rubocop&lt;/span&gt; &lt;span class="n"&gt;processing&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="nf"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;Building a Runner&lt;/h1&gt;
+
+&lt;p&gt;As previously mentioned, most pronto runners are simply wrappers for an existing tool and the whole runner itself is quite small. Given that you inherit from &lt;code&gt;Pronto::Runner&lt;/code&gt;, the only method you need to implement is &lt;code&gt;#run&lt;/code&gt;. There is a lot of flexibility in what your runner can do.&lt;/p&gt;
+
+&lt;p&gt;Together let&amp;rsquo;s build a runner that flags lines that contain one of the &lt;a href="https://en.wikipedia.org/wiki/Seven_dirty_words"&gt;seven dirty words&lt;/a&gt;. I decided to use &lt;a href="https://github.com/kevinjalbert/pronto-stylelint"&gt;pronto-stylelint&lt;/a&gt; as my base, which I then pulled out everything except the essentials:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'pronto'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'shellwords'&lt;/span&gt;
+
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Pronto&lt;/span&gt;
+  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;DirtyWords&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Runner&lt;/span&gt;
+    &lt;span class="no"&gt;DIRTY_WORDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'shit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'piss'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'fuck'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'cunt'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'cocksucker'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'motherfucker'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'tits'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="vi"&gt;@patches&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="vi"&gt;@patches&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;zero?&lt;/span&gt;
+
+      &lt;span class="vi"&gt;@patches&lt;/span&gt;
+        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;additions&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;flatten&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="kp"&gt;private&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;git_repo_path&lt;/span&gt;
+      &lt;span class="vi"&gt;@git_repo_path&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="no"&gt;Rugged&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Repository&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;discover&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expand_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;pwd&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nf"&gt;workdir&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;offending_line_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line_number&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+        &lt;span class="n"&gt;patch&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;added_lines&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_lineno&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;line_number&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Avoid using one of the seven dirty words'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delta&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_file&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:path&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:warning&lt;/span&gt;
+
+      &lt;span class="no"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;offending_line_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;line_numbers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+      &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;chdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;git_repo_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="n"&gt;escaped_file_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Shellwords&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;escape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_file_full_path&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;foreach&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;escaped_file_path&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with_index&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line_num&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+          &lt;span class="n"&gt;line_numbers&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;line_num&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;DIRTY_WORDS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;any?&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;downcase&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;end&lt;/span&gt;
+
+        &lt;span class="n"&gt;line_numbers&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;#offending_line_numbers&lt;/code&gt; methods is where the check for a &lt;em&gt;dirty word&lt;/em&gt; occurs. When an offending line is found, we flag the line number for that file to be used in &lt;code&gt;#new_message&lt;/code&gt;. Overall, it is not that hard to put together a simple pronto runner. To look at the end result of this pronto runner, it is open sourced at &lt;a href="https://github.com/kevinjalbert/pronto-dirty_words"&gt;pronto-dirty_words&lt;/a&gt;. Never forget it is always possible to add configuration files and external tools to a runner.&lt;/p&gt;
+
+&lt;h1&gt;Pronto all the things&lt;/h1&gt;
+
+&lt;p&gt;To this date, I have created two useful pronto runners (&lt;em&gt;dirty words&lt;/em&gt; was more of a demo for this post). I have personally been using pronto for several years, and I will continue to use it. The ecosystem of runners continues to grow. I hope that this post helps others in creating new runners that will benefit everyone. Keep an eye out for tools that could be wrapped in a pronto runner &amp;ndash; maybe you can help add to the set of runners!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-04-10T09:33:30-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -69,7 +235,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -208,7 +374,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -284,7 +450,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -420,7 +586,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-04-10T09:33:30-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -520,7 +686,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -637,7 +803,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -815,7 +981,7 @@ it then returns the combined value
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -980,7 +1146,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1107,7 +1273,7 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
     <title>Port Mapping Development Servers</title>
     <link rel="alternate" href="https://kevinjalbert.com/port-mapping-development-servers/"/>
     <id>https://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
+    <updated>2017-05-30T00:26:02-04:00</updated>
     <published>2016-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1207,105 +1373,6 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 &lt;h1&gt;The Future&lt;/h1&gt;
 
 &lt;p&gt;I will continue to use &lt;code&gt;port_map&lt;/code&gt; until I can spend some time to dig deeper into &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; and &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;. These two technologies isolate and containerize environments (web services). I can see the benefits in such technologies as they are not dependant on the host environment, which in my case is my laptop.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>More Shell History</title>
-    <link rel="alternate" href="https://kevinjalbert.com/more-shell-history/"/>
-    <id>https://kevinjalbert.com/more-shell-history/</id>
-    <updated>2017-04-09T22:38:47-04:00</updated>
-    <published>2016-06-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell's history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to _reverse search_ through it via ctrl-r.</description>
-    <content type="html">&lt;p&gt;Developers who use the terminal on a daily basis have a wealth of knowledge stored in their shell&amp;rsquo;s history. It is not uncommon to need a lengthy command you used a while back. Thankfully shells provide a built in history and the functionality to &lt;em&gt;reverse search&lt;/em&gt; through it via &lt;code&gt;ctrl-r&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Increasing History&lt;/h1&gt;
-
-&lt;p&gt;First thing regardless of what shell try these commands and make note of their values:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$HISTSIZE&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$SAVEHIST&lt;/span&gt; &lt;span class="c"&gt;# or $HISTFILESIZE for bash&lt;/span&gt;
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$HISTFILE&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Across both zsh and bash these three environment variables determine the location and size of your shell history (&lt;a href="http://zsh.sourceforge.net/Guide/zshguide02.html#l17"&gt;zsh guide on setting history up&lt;/a&gt;):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;HISTSIZE&lt;/code&gt; indicates how many commands from your history file are loaded into the shell&amp;rsquo;s memory&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;SAVEHIST&lt;/code&gt;/&lt;code&gt;HISTFILESIZE&lt;/code&gt; indicates how many commands your history file can hold (you want this equal or larger than &lt;code&gt;HISTSIZE&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;HISTFILE&lt;/code&gt; indicates the history file itself which houses your previous commands&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Its possible you might have already set some configurations related to the shell&amp;rsquo;s history, or maybe a plugin has set it for you like &lt;a href="https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/history.zsh#L2-L7"&gt;oh-my-zsh&lt;/a&gt;. You should be aware of your history file and its size at the very least. This would also be a great opportunity to change it if you have not yet.&lt;/p&gt;
-
-&lt;p&gt;In the default zsh configuration only &lt;code&gt;HISTSIZE&lt;/code&gt; is set, and it is tiny at only 30. No history file it set, which means no history is persisted. Default bash configuration has defaults history file and sizes of 500. Both of these are both small with respect to the amount of commands one might use.&lt;/p&gt;
-
-&lt;p&gt;Recall that the effective reverse search (&lt;code&gt;ctrl-r&lt;/code&gt;) is based off of what is in your history. You don&amp;rsquo;t really want to lose anything right? So set something high!&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-
-&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.zhistory &lt;span class="c"&gt;# Don't forget to to set this also&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;From what I&amp;rsquo;ve witnessed the major downside to a large history is pretty negligible. When the shell starts it&amp;rsquo;ll read in your history file and store an amount defined by &lt;code&gt;$HISTSIZE&lt;/code&gt; in memory. More history simply means slower shell startup, although it is not that significant. In addition there might be some shell plugins which reach into your history, these can also cause slow downs (i.e., &lt;a href="https://github.com/zsh-users/zsh-history-substring-search"&gt;zsh-history-substring-search&lt;/a&gt; significantly slows down with a large history).&lt;/p&gt;
-
-&lt;h1&gt;Cleaning History&lt;/h1&gt;
-
-&lt;p&gt;Now we have a larger history, which by itself is a huge win. Now we want a &lt;em&gt;cleaner&lt;/em&gt; history if possible. The main benefit of a cleaner history is that stepping through your history with UP and DOWN keys will not show duplicates.&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ignoredups
-
-&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
-setopt HIST_FIND_NO_DUPS
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you wanted you could go even further and actually prevent duplicates from being saved in your history file with the following:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;erasedups
-
-&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
-setopt HIST_IGNORE_ALL_DUPS
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Sharing History&lt;/h1&gt;
-
-&lt;p&gt;If you end up using multiple shells at a time (i.e., opening multiple zsh or bash), you might want to &lt;em&gt;share history&lt;/em&gt; between them. By default the history files are written when the shell closes. With the following you can allow the shells to write and read from the history file after each command:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
-&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histappend
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"history -a; history -c; history -r; &lt;/span&gt;&lt;span class="nv"&gt;$PROMPT_COMMAND&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-
-&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
-setopt inc_append_history
-setopt share_history
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Putting it Together &amp;ndash; TL;DR&lt;/h1&gt;
-
-&lt;p&gt;If you want more history use the following:&lt;/p&gt;
-&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In your ~/.bashrc&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTCONTROL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ignoredups
-
-&lt;span class="nb"&gt;shopt&lt;/span&gt; -s histappend
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;PROMPT_COMMAND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"history -a; history -c; history -r; &lt;/span&gt;&lt;span class="nv"&gt;$PROMPT_COMMAND&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-
-&lt;span class="c"&gt;# In your ~/.zshrc&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTSIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILESIZE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;100000
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;HISTFILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;~/.zhistory
-
-setopt HIST_FIND_NO_DUPS
-
-setopt inc_append_history
-setopt share_history
-&lt;/code&gt;&lt;/pre&gt;
 </content>
   </entry>
 </feed>

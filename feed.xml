@@ -2,16 +2,169 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-05-30T19:53:20-04:00</updated>
+  <updated>2017-06-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Make the most of your Chat Channels</title>
+    <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
+    <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
+    <updated>2017-06-30T13:17:25-04:00</updated>
+    <published>2017-06-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Persisted chat channels communication platform, which by its nature, has little guidance in how you organize channels. To ensure that everyone is making the most of channels, I'll provided some tips and suggestions based on my experiences.</description>
+    <content type="html">&lt;p&gt;&lt;img width="2048" height="1371" src="/images/2017-06-30-make-the-most-of-your-chat-channels/communication-tower.jpg" /&gt;
+&lt;em&gt;&lt;a href="https://flic.kr/p/finMno"&gt;Communication Tower&lt;/a&gt; by &lt;a href="https://www.flickr.com/photos/95876508@N02/"&gt;Cocoy Pusung&lt;/a&gt;, on Flickr&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Organizations tend to use some instant messaging platform in addition to email. Ideally, the chosen platform permeates throughout the ranks of the organization instead of having fractured communication between members. The real-time and group collaborative nature of these messaging platforms are quite appealing.&lt;/p&gt;
+
+&lt;p&gt;I have personally used a couple of messaging platform so far (i.e., Hipchat, Gitter, Discord, Slack). Overall, they all offer the concept of channels. Channels are simply persisted chat &lt;em&gt;rooms&lt;/em&gt; in which members can communicate asynchronously. Topics and names of channels are left up to the members who use them.&lt;/p&gt;
+
+&lt;p&gt;My goal is to outline some steps to better foster an effective use of channels in your messaging platform of choice. I am currently using Slack at theScore, and so the context of this post will be within Slack.&lt;/p&gt;
+
+&lt;h1&gt;The Cleanse&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Macaitis recommends that if no one has used a channel for sixty days, it’s best to archive it. &amp;ndash; &lt;a href="https://expand.openviewpartners.com/former-slack-cmo-bill-macaitis-on-how-slack-uses-slack-868ffb495b71"&gt;Former Slack CMO, Bill Macaitis, on How Slack Uses Slack&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;An organization that uses chat channels for communication will accrue an abundance of such. Some of these channels are used more frequently than others. To keep things slightly under control, you should routinely clean the channels. As to &lt;em&gt;who&lt;/em&gt; should be doing this, I would say everyone should try to keep their communication platform clean. There are a few benefits to this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Keeps a more narrow focus within the organization&lt;/li&gt;
+&lt;li&gt;Easier for users to keep a handle on their channels&lt;/li&gt;
+&lt;li&gt;Newcomers feel less overwhelmed at the number of channels&lt;/li&gt;
+&lt;li&gt;Less ambiguity on where conversations/information should be put&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Archiving channels doesn&amp;rsquo;t have to be perfect, although there will be clear choices. If the need of the channel arises again, it can be recreated/unarchived as needed.&lt;/p&gt;
+
+&lt;h1&gt;Types of Channels&lt;/h1&gt;
+
+&lt;p&gt;Channels tend to fall under specific categories that define their behaviour or purpose. For example, &lt;a href="https://slack.global.ssl.fastly.net/5ccb/pdfs/admins_guide.pdf"&gt;Slack provides a guideline&lt;/a&gt; on what these channel types are:&lt;/p&gt;
+
+&lt;h2&gt;Global&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i.e., #general, #announcements, #everyone&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A global channel is one that &lt;em&gt;everyone&lt;/em&gt; is apart of. Normally this would be a general channel, however productivity can be limited depending on the number of members &amp;ndash; it&amp;rsquo;s more of a social channel. A common use case for using a global channel is for organizational announcements.&lt;/p&gt;
+
+&lt;h2&gt;Location&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i.e., #toronto, #ontario, #canada&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;An organization might be spread across many locations. These channels offer a way to group conversations that pertain to specific locations. How to name these channels depends on how your organization is structured geographically &amp;ndash; it might be based on cities, regions, or even offices within a city.&lt;/p&gt;
+
+&lt;h2&gt;Team&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i.e., #engineering, #engineering-ios, #sales, #designers&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;These channels are rather important in facilitating communication within teams. Realistically you would have high-level groups such as &lt;em&gt;#engineering&lt;/em&gt; that all your engineers are apart of. It would also be ideal to create &lt;em&gt;sub-teams&lt;/em&gt; to accommodate specializations such as &lt;em&gt;#engineering-android&lt;/em&gt; and &lt;em&gt;#engineering-web&lt;/em&gt;. By following this naming convention for teams and sub-teams, the channels are &lt;em&gt;grouped&lt;/em&gt; and sorted through the naming convention.&lt;/p&gt;
+
+&lt;h2&gt;Project&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i.e., #sports-app, #chat-bot, #squadup&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Often projects are underway. To help communication within that project, which might include individuals across different teams, a project channel is useful. As projects come and go, it might be worth archiving channels for projects that are no longer current.&lt;/p&gt;
+
+&lt;h2&gt;Topical&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i.e., #soccer, #javascript, #anime&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To me, these are the interesting channels! The previously mentioned channels types were more geared towards business communication, and generally are easily formed around the business needs. Topical channels could be on anything that interests a group of people. Generally, these channels are organically formed within an organization.&lt;/p&gt;
+
+&lt;h2&gt;Temporary&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;i.e., #xmas-party, #offsite-retreat, #brainstorm-session&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;These channels are short-lived and generally used for time-sensitive events. They have a specific purpose, and rarely offer much value after that purpose is completed. These channels could be deleted or archived when they are no longer needed. Channels are &lt;em&gt;cheap&lt;/em&gt; to create, and so people shouldn&amp;rsquo;t be worried about making one-off channels to help them accomplish specific tasks.&lt;/p&gt;
+
+&lt;h1&gt;Organizing Channels&lt;/h1&gt;
+
+&lt;p&gt;As we saw there are many categories of channels. To help with the organization of the multiple channels, a naming convention could be used.&lt;/p&gt;
+
+&lt;p&gt;One suggestion is to prefix all team channels with &lt;code&gt;team-&lt;/code&gt; (i.e., &lt;em&gt;#team-engineering&lt;/em&gt;). The same could be done with project channels using &lt;code&gt;project-&lt;/code&gt; (i.e., &lt;em&gt;#project-esports&lt;/em&gt;). The actual prefix doesn&amp;rsquo;t matter as long as it is unique (enough) and consistent. A benefit is that channels are ordered alphanumerically, making it easier to browse active teams/projects. If you wanted, you could even take the same approach with topics (i.e., &lt;em&gt;#topic-soccer&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Another idea is to have a &lt;em&gt;#meta&lt;/em&gt; channel where you can talk about improving the use of the platform itself. For example, new topic channels can be posted there, same with renames and such. Ensure everyone is a part of the channel so information travels. If there is support for it, you could also pin/sticky some guidelines on the platform (i.e., link to this article).&lt;/p&gt;
+
+&lt;h1&gt;Topical Channels (at theScore)&lt;/h1&gt;
+
+&lt;p&gt;As previously mentioned, topical channels are the interesting channels that I want to touch on more here. I&amp;rsquo;ll just say that this is coming from an software organization&amp;rsquo;s perspective, as I am a part of theScore engineering team.&lt;/p&gt;
+
+&lt;p&gt;Here are a few of our topical channels:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;#ping-pong&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;#overwatch&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;#pokemon-go&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;#podcasts&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;#board-games&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;#food&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;While these channels do provide topical information on their specific topics, we didn&amp;rsquo;t really have engineering topic channels.&lt;/p&gt;
+
+&lt;h2&gt;Birth of Engineering Topical Channels&lt;/h2&gt;
+
+&lt;p&gt;We were doing some recent work with &lt;a href="https://facebook.github.io/react/"&gt;React&lt;/a&gt; and &lt;a href="http://graphql.org/"&gt;GraphQL&lt;/a&gt;, and we saw the birth of two engineering topical channels:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;#graphql&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;#react&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Before this work, we did not &lt;em&gt;really&lt;/em&gt; have engineering topical channels. This caused slight inefficiencies in the flow of knowledge through our engineering team. We made these new channels known at the engineering level, and also invited people who are actively working in the areas. This approach injected people who cared about the topic into the channel. As we go about our day and we find something interesting related to one of these topics, it becomes easy to drop that information into the channel. In addition, more specific questions can be asked in these channels as their topic is fairly narrow.&lt;/p&gt;
+
+&lt;p&gt;Eventually, you end up seeing people who are not &lt;em&gt;directly&lt;/em&gt; working in that topic area, but are still in the channel. To me this suggests people have an interest.&lt;/p&gt;
+
+&lt;h2&gt;Educational Value of Topical Communication&lt;/h2&gt;
+
+&lt;p&gt;These specific topical channels on programming languages/frameworks/concepts are extremely beneficial to individuals, and the organization.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Provides a place for focused conversations to take place. For example, if someone had a general GraphQL question where do you go to ask it? Possibly in one our engineering channels, or maybe a specific team that is using it? In this case, having a dedicated topical channel for &lt;em&gt;#graphql&lt;/em&gt; would be beneficial.&lt;/li&gt;
+&lt;li&gt;Promotes people to widen their interests, as they can simply join a channel and &lt;em&gt;slowly&lt;/em&gt; absorb information. For example, if I was interested in &lt;em&gt;#machine-learning&lt;/em&gt;, I could join the channel and occasionally I&amp;rsquo;ll see people post links to articles, conference talks, and just general conversation on the topic.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is great educational value in these channels, especially in larger organizations where there are many teams and projects. These channels offer a place to share findings and communication to prevent knowledge silos.&lt;/p&gt;
+
+&lt;h2&gt;Effective Slack Plan&lt;/h2&gt;
+
+&lt;p&gt;Now at theScore, this is our plan in improving our usage of Slack channels:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Archive channels with no activity in the last 60 days&lt;/li&gt;
+&lt;li&gt;Rename team channels with the &lt;code&gt;team-&lt;/code&gt; prefix&lt;/li&gt;
+&lt;li&gt;Rename project channels with the &lt;code&gt;proj-&lt;/code&gt; prefix&lt;/li&gt;
+&lt;li&gt;Create a 2-level hierarchy for teams (i.e., &lt;em&gt;#eng&lt;/em&gt;, #eng-ios)&lt;/li&gt;
+&lt;li&gt;Create engineering topical channels (i.e., &lt;em&gt;#rails&lt;/em&gt;, &lt;em&gt;#android&lt;/em&gt;, &lt;em&gt;#swift&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;Create a &lt;em&gt;#meta&lt;/em&gt; channel (along with a note to some channel conventions)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;With routine maintenance, we will keep our Slack channels focused and organized. Hopefully we will see the benifit to education/knowledge sharing with the increased organization of our chat channels.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -177,7 +330,7 @@
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -235,7 +388,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -374,7 +527,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -450,7 +603,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -586,7 +739,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -686,7 +839,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -803,7 +956,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -981,7 +1134,7 @@ it then returns the combined value
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1146,7 +1299,7 @@ end
     <title>Git Evolution: How did we get Here?</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
     <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
+    <updated>2017-06-30T13:18:17-04:00</updated>
     <published>2016-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1267,112 +1420,6 @@ Date:   Fri Nov 21 09:06:46 2008 +0100
 &lt;p&gt;Similar to what I mentioned in my &lt;a href="https://kevinjalbert.com/port-mapping-development-servers/"&gt;last post about &lt;code&gt;port_map&lt;/code&gt;&lt;/a&gt;, &lt;code&gt;git_evolution&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;git_evolution&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;git_evolution&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;git_evolution&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
 
 &lt;p&gt;I do want to expand on the &lt;em&gt;ownership&lt;/em&gt; aspect of &lt;code&gt;git_evolution&lt;/code&gt; as I think it&amp;rsquo;ll help quicker identify &lt;em&gt;who&lt;/em&gt; could be contacted for additional context. Currently it is simply looking at commits and change totals. Ideally there would be a better algorithm to determine ownership of selected lines.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Port Mapping Development Servers</title>
-    <link rel="alternate" href="https://kevinjalbert.com/port-mapping-development-servers/"/>
-    <id>https://kevinjalbert.com/port-mapping-development-servers/</id>
-    <updated>2017-05-30T00:26:02-04:00</updated>
-    <published>2016-07-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of localhost is a cumbersome and error prone issue. port_map is a ruby utility that provides a simple and almost automatic solution to this problem.</description>
-    <content type="html">&lt;p&gt;As a developer its not uncommon to juggle multiple servers that interact with each other during development. Ensuring that each server has the correct port set while working off of &lt;code&gt;localhost&lt;/code&gt; is a cumbersome and error prone issue. &lt;a href="https://github.com/kevinjalbert/port_map"&gt;port_map&lt;/a&gt; is a ruby utility that provides a simple and almost automatic solution to this problem.&lt;/p&gt;
-
-&lt;p&gt;I developed this utility gem to solve a personal problem of mine while dealing with multiple web servers during development. The next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;port_map&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/port_map#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Example Scenario&lt;/h1&gt;
-
-&lt;p&gt;You are developing a service that uses multiple web servers. You have two rails applications and one ember application.&lt;/p&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Application&lt;/th&gt;
-&lt;th&gt;Directory&lt;/th&gt;
-&lt;th&gt;Command&lt;/th&gt;
-&lt;th&gt;Local URL&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Rails API&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/api/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;rails server&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;http://localhost:3000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Rails Background Jobs&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/jobs/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;rails server --port 3001&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;http://localhost:3001&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Ember Application&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/ember/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;ember server&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;http://localhost:4200&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2&gt;The Problem&lt;/h2&gt;
-
-&lt;p&gt;In each of these applications there is some configuration work required to ensure that they communicate on the correct ports. There are two issues here:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;As we add more web servers we have to avoid clashing on existing ports.&lt;/li&gt;
-&lt;li&gt;You have to make sure that you correctly start each server with the right port number.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;&lt;code&gt;port_map&lt;/code&gt; to the Rescue!&lt;/h2&gt;
-
-&lt;p&gt;We&amp;rsquo;re going to transform this unwieldy scenario into an organized and easy to manage one using &lt;code&gt;port_map&lt;/code&gt;.&lt;/p&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Application&lt;/th&gt;
-&lt;th&gt;Directory&lt;/th&gt;
-&lt;th&gt;Command&lt;/th&gt;
-&lt;th&gt;Local URL&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Rails API&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/api/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;port_map rails server&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;http://api.dev&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Rails Background Jobs&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/jobs/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;port_map rails server&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;http://jobs.dev&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Ember Application&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;/ember/&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;port_map ember server&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;http://ember.dev&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;p&gt;The domain names can be configured with environment variables, but by default they are based on the directory&amp;rsquo;s name.&lt;/p&gt;
-
-&lt;p&gt;You can close and restart each web server multiple times and they will continue to use the same domain names. &lt;code&gt;port_map&lt;/code&gt; provides an easy way to logically name each web server, as well as remove the need of specifying ports.&lt;/p&gt;
-
-&lt;h1&gt;Putting it to the Test&lt;/h1&gt;
-
-&lt;p&gt;I have been using &lt;code&gt;port_map&lt;/code&gt; for a little over 6 months (as of writing this), and it has served me quite well. The beauty of &lt;code&gt;port_map&lt;/code&gt; is that it works on any shell command that accepts a &lt;code&gt;--port &amp;lt;number&amp;gt;&lt;/code&gt; or &lt;code&gt;-p &amp;lt;number&amp;gt;&lt;/code&gt; flag. I enjoy finding new uses for &lt;code&gt;port_map&lt;/code&gt; in other web servers like &lt;a href="https://middlemanapp.com"&gt;middleman&lt;/a&gt; and &lt;a href="https://jekyllrb.com"&gt;jekyll&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There was one issue that I have hit, although its not a deal breaker &lt;a href="https://github.com/kevinjalbert/port_map/issues/7"&gt;kevinjalbert/port_map#7&lt;/a&gt;, although I suspect I can fix this eventually.&lt;/p&gt;
-
-&lt;p&gt;As &lt;code&gt;port_map&lt;/code&gt; is a wrapper around the command there are interesting issues that can arise. I use &lt;a href="http://www.zsh.org/"&gt;Zsh&lt;/a&gt; as my shell along with a bunch of aliases it was necessary for &lt;code&gt;port_map&lt;/code&gt; to support running commands that contain aliases. I recently moved to &lt;a href="https://zplug.sh/"&gt;zplug&lt;/a&gt; as my Zsh plugin framework, where I encountered the following issue &lt;a href="https://github.com/zplug/zplug/issues/209"&gt;zplug/zplug#209&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;One last inconvenience is that &lt;code&gt;port_map&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;port_map&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;port_map&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;port_map&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
-
-&lt;h1&gt;The Future&lt;/h1&gt;
-
-&lt;p&gt;I will continue to use &lt;code&gt;port_map&lt;/code&gt; until I can spend some time to dig deeper into &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; and &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;. These two technologies isolate and containerize environments (web services). I can see the benefits in such technologies as they are not dependant on the host environment, which in my case is my laptop.&lt;/p&gt;
 </content>
   </entry>
 </feed>

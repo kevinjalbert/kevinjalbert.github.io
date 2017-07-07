@@ -127,6 +127,5 @@ Now at theScore, this is our plan in improving our usage of Slack channels:
   5. Create engineering topical channels (i.e., _#rails_, _#android_, _#swift_)
   6. Create a _#meta_ channel (along with a note to some channel conventions)
 
-  With routine maintenance, we will keep our Slack channels focused and organized. Hopefully we will see the benifit to education/knowledge sharing with the increased organization of our chat channels.
-
+With routine maintenance, we will keep our Slack channels focused and organized. Hopefully we will see the benefit to education/knowledge sharing with the increased organization of our chat channels.
 

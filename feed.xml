@@ -2,16 +2,87 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-06-30T19:53:20-04:00</updated>
+  <updated>2017-07-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Knowledge and Screencast Culture</title>
+    <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
+    <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
+    <updated>2017-07-30T21:33:19-04:00</updated>
+    <published>2017-07-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">As a developer, I routinely share my knowledge and experiences, however I find that I repeat myself with different individuals. To overcome this, I present a knowledge repository using screencasts for persisted and asynchronous knowledge transfer.</description>
+    <content type="html">&lt;p&gt;&lt;img width="2048" height="1139" src="/images/2017-07-30-knowledge-and-screencast-culture/movie-camera.jpg" /&gt;
+&lt;em&gt;&lt;a href="https://flic.kr/p/jxJiU9"&gt;Vintage Filmo Auto Master 8mm Movie Camera&lt;/a&gt; by &lt;a href="https://www.flickr.com/photos/51764518@N02/"&gt;Joe Haupt&lt;/a&gt;, on Flickr&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1&gt;Leaking Knowledge&lt;/h1&gt;
+
+&lt;p&gt;I try my best to teach and impart knowledge to my peers. This is actually one reason why I blog &amp;ndash; to record and teach others from my experiences. While working at theScore, I attempt to &lt;a href="/share-your-bag-of-tricks/"&gt;share my bag of tricks&lt;/a&gt; to the best of my ability. I found during my tenure that my colleagues would occasionally:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ask what application/tool I just used&lt;/li&gt;
+&lt;li&gt;ask what hotkey/shortcut I just pressed&lt;/li&gt;
+&lt;li&gt;ask me how something works&lt;/li&gt;
+&lt;li&gt;ask me to explain a subject in deeper depth&lt;/li&gt;
+&lt;li&gt;comment on something they just learned from me&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I like to share information, tips and tricks. I came up with a rather simple idea and recently put it into practice at theScore. The whole point of this is to not just &lt;em&gt;leak&lt;/em&gt; knowledge but to directly share it.&lt;/p&gt;
+
+&lt;h1&gt;Sharing and Don&amp;rsquo;t Repeat Yourself&lt;/h1&gt;
+
+&lt;p&gt;There are those moments when a colleague of mine got value out of something I showed and/or explained to them. I like to capitalize on these moments, as I figured there are other people who would gain similar value if they were also there. Unfortunately, it&amp;rsquo;s not often that I am surrounded by &lt;em&gt;everyone&lt;/em&gt; when these moments happen (we&amp;rsquo;re all busy doing our own things).&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve noticed that I would be sharing similar tips when I pair or talk with another coworker. In retrospect, I&amp;rsquo;m repeating myself while slowly spreading enlightenment. As a developer I can see the pattern I&amp;rsquo;m following, and by my nature I want to automate or DRY (Don&amp;rsquo;t Repeat Yourself) things up. To overcome this hurdle I decided to come up with a more direct and permanent solution to disseminate my experience across the organization.&lt;/p&gt;
+
+&lt;h1&gt;Knowledge Repository&lt;/h1&gt;
+
+&lt;p&gt;I approach most things from a developer&amp;rsquo;s mindset. I love using GitHub and that is the platform theScore uses for its day to day operations on the engineering side. I created a &lt;em&gt;knowledge&lt;/em&gt; repository with the following in its README:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h2&gt;Knowledge&lt;/h2&gt;
+
+&lt;p&gt;We are always learning new things to help us work more efficiently and effectively. To help share this knowledge, we informally tell our team, or certain individuals. Eventually, we might have a presentation to a wider audience, which often is still a subset of our engineering department. In many cases, the information shared using these deliver mechanisms are not reviewable, and might not reach everyone who may benefit from it.&lt;/p&gt;
+
+&lt;p&gt;Doing formal presentation can be nerve racking for the presenter, and time consuming for everyone. The idea for this repository is to make everything as informal and async as possible. The goal is to take advantage of screenrecording/screencasting technologies for delivery and storage of information along with GitHub&amp;rsquo;s pull requests to facilitate discussion.&lt;/p&gt;
+
+&lt;h2&gt;What can be shared?&lt;/h2&gt;
+
+&lt;p&gt;Anything! This repository helps promote individuals to share even the smallest tidbit of knowledge that they feel is worth sharing. It could be even a 30 seconds editor trick. Without having any restrictions, the hope is that the friction to share something to a wider audience is minimal, also to help encourage sharing what one might not feel is important enough to have a formal presentation for.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;My idea was have a communal place to share and consume knowlege in an asynchronous environment. The README is treated as a living document and will adjust and improve over time.&lt;/p&gt;
+
+&lt;p&gt;I am continuously learning new things, and others have plenty to teach. This approach will create an environment for learning for not only myself, but for everyone.&lt;/p&gt;
+
+&lt;h1&gt;Screencast All the Things&lt;/h1&gt;
+
+&lt;p&gt;As you might have read in the README snippet, the preferred medium to use is screenrecording/screencasting technologies for delivery and storage. So in essence, you would create a screencast for anything that could provide value to someone and that you don&amp;rsquo;t want to repeat. There are broad criteria of what to screencast, but in that respect I think it&amp;rsquo;ll work out quite well in the long run.&lt;/p&gt;
+
+&lt;p&gt;There is quite an art to doing screencasts well, and I am just getting my feet wet. I&amp;rsquo;m still working on my presentation delivery as I generally don&amp;rsquo;t do much preperation before recording. As for tools I&amp;rsquo;m currently using:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://monosnap.com"&gt;Monosnap&lt;/a&gt; for the screenrecording software (for MacOS and Windows)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/keycastr/keycastr"&gt;KeyCastr&lt;/a&gt; for visualizing my keystrokes (for MacOS)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At theScore I download the recorded video and upload it to our internal Google Drive and link that in the GitHub Pull Request. I am tempted to just leave them on Monosnap&amp;rsquo;s built-in hosting service if there is no sensitive information within the video. To demonstrate my setup I&amp;rsquo;ve recorded a &lt;a href="https://monosnap.com/file/y53Rg1cvLJpT214tHz7erWDM9HgOik"&gt;quick screencast&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Screencast Culture&lt;/h1&gt;
+
+&lt;p&gt;The &lt;em&gt;knowledge&lt;/em&gt; repository is still a new concept at theScore, although I have high hopes for it. The more that people contribute to it, the more useful it&amp;rsquo;ll become. With a wide range of topics and data within it, there are bound to be new learning materials for each individual. The challenge is getting people to be aware of it as well as contribute to it. I&amp;rsquo;m still working out how best to approach this challenge.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-07-07T09:24:09-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -164,7 +235,7 @@
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -330,7 +401,7 @@
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -388,7 +459,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -527,7 +598,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -603,7 +674,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -739,7 +810,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -839,7 +910,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -956,7 +1027,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1134,7 +1205,7 @@ it then returns the combined value
     <title>Let's pry into Ruby Objects</title>
     <link rel="alternate" href="https://kevinjalbert.com/lets-pry-into-ruby-objects/"/>
     <id>https://kevinjalbert.com/lets-pry-into-ruby-objects/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
+    <updated>2017-07-07T09:25:39-04:00</updated>
     <published>2016-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1293,133 +1364,6 @@ end
 &lt;h1&gt;Wrapping up&lt;/h1&gt;
 
 &lt;p&gt;So if you are not using &lt;code&gt;pry&lt;/code&gt;, I highly recommend it. I &lt;em&gt;barely&lt;/em&gt; scratched the surface on what it can do for you. It is a powerful tool that can help in debugging and further digging around your codebase.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Git Evolution: How did we get Here?</title>
-    <link rel="alternate" href="https://kevinjalbert.com/git-evolution-how-did-we-get-here/"/>
-    <id>https://kevinjalbert.com/git-evolution-how-did-we-get-here/</id>
-    <updated>2017-06-30T13:20:39-04:00</updated>
-    <published>2016-08-31T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">In a large long-lived git repository there is a lot of history behind the current state of things. git blame lets you scratch the surface, while git log lets you dig deeper. The use of git evolution provides a succient and yet comprhensive approach to understanding the evolution of a range of lines within a git repository.</description>
-    <content type="html">&lt;p&gt;As a developer its not uncommon to want a little more context surrounding the code snippet you are dealing with. You might have found yourself in these situations and reached for &lt;code&gt;git blame&lt;/code&gt; to get some initial context in why the code is like it is. This only scratches the surface and you might want a more context which &lt;code&gt;git log&lt;/code&gt; can provide to you. You are mostly interested in how the code evolved to this point, and really want you want is &lt;code&gt;git evolution&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I developed &lt;a href="https://github.com/kevinjalbert/git_evolution"&gt;git_evolution&lt;/a&gt; to solve a personal problem of mine while spelunking in a git repository trying to find more reasons to why the code might have evolved in this way.&lt;/p&gt;
-
-&lt;p&gt;To best describe what and how git evolution can be used the next section (&lt;em&gt;Example Scenario&lt;/em&gt;) comes directly from &lt;code&gt;git_evolution&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/git_evolution#example-scenario"&gt;README&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Example Scenario&lt;/h1&gt;
-
-&lt;p&gt;If we were interesting in the source code evolution that lead to &lt;a href="https://github.com/rails/rails/blob/7ba3a48/activesupport/lib/active_support/core_ext/array/access.rb#L70-L75"&gt;rails&amp;rsquo;s Array#forty_two&lt;/a&gt;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git_evolution --range 70:75 ./rails/activesupport/lib/active_support/core_ext/array/access.rb
-
-Commits:
-utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; (Thu Oct 31 23:20:15 2013 +0900) - 3f79d8423078f0671c8aa505ae199608d451663d
-Add Rdoc document for Array#forty_two
-
-Jeremy Kemper &amp;lt;jeremy@bitsweat.net&amp;gt; (Sat Mar 21 03:26:09 2009 -0700) - 83fd1ae122cf1ee4ea2c52e0bd963462163516ca
-Convert array extension modules to class reopens
-
-David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; (Fri Nov 21 09:06:46 2008 +0100) - e50530ca3ab5db53ebc74314c54b62b91b932389
-Reduced the number of literal aliases to the range that has actually seen personal use. With the massive savings in overhead, I was able to fit Array#forty_two
-
-Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; (Sun Oct 5 22:16:26 2008 +0100) - a2932784bb71e72a78c32819ebd7ed2bed551e3e
-Merge docrails
-
-Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; (Mon Jul 28 12:26:59 2008 +0100) - 6e754551254a8cc64e034163f5d0dc155b450388
-Merge docrails changes
-
-David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; (Tue Jun 17 13:37:57 2008 -0500) - 22af62cf486721ee2e45bb720c42ac2f4121faf4
-Added Array#second through Array#tenth as aliases for Array#[1] through Array#[9] [DHH]
-
-David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; (Tue Nov 27 19:42:30 2007 +0000) - 4d177ae0d6d9f60c4000f45fb6f6df27317afbff
-Added Array#from and Array#to that behaves just from String#from and String#to [DHH]
-
---------------------------------------------------------------------------------
-
-Ownership (Commits):
-David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; - 3/7 (42.86%)
-Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; - 2/7 (28.57%)
-Jeremy Kemper &amp;lt;jeremy@bitsweat.net&amp;gt; - 1/7 (14.29%)
-utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; - 1/7 (14.29%)
-
-Ownership (Changes):
-David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt; - 53/84 (63.1%)
-Pratik Naik &amp;lt;pratiknaik@gmail.com&amp;gt; - 20/84 (23.81%)
-Jeremy Kemper &amp;lt;jeremy@bitsweat.net&amp;gt; - 9/84 (10.71%)
-utenmiki &amp;lt;utenmiki@gmail.com&amp;gt; - 2/84 (2.38%)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;GitEvolution&lt;/code&gt; provides a succinct output of the commits which contains any changes which lead to the current state. Its quick to see that &lt;a href="https://github.com/rails/rails/commit/e50530ca3ab5db53ebc74314c54b62b91b932389"&gt;e50530ca3ab5db53ebc74314c54b62b91b932389&lt;/a&gt; was the introduction point for &lt;code&gt;Array#forty_two&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;In addition we have some &lt;em&gt;ownership&lt;/em&gt; information with respect to commits and changes. The ownership information can be used to identify &lt;em&gt;who&lt;/em&gt; to follow up with for additional context. In time new metrics and analysis could be attached to the output (i.e., factoring in time for ownership, types of changes, identifying file modifications such as movement or renames, etc&amp;hellip;)&lt;/p&gt;
-
-&lt;h1&gt;The Other (Hard) Way&lt;/h1&gt;
-
-&lt;p&gt;If we were to identify the commit which introduced &lt;code&gt;Array#forty_two&lt;/code&gt; we have two main options &lt;code&gt;git blame&lt;/code&gt; and &lt;code&gt;git log&lt;/code&gt;:&lt;/p&gt;
-
-&lt;h2&gt;Using &lt;code&gt;git blame&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;I highly advise against this approach as it involves a lot of manual work. You essentially use &lt;code&gt;git blame&lt;/code&gt; to identify the previous commit which effects a line of concern within the area you are looking in.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git blame --follow ./activesupport/lib/active_support/core_ext/array/access.rb
-
-...
-83fd1ae1 (Jeremy Kemper            2009-03-21 03:26:09 -0700 70)   # Equal to &amp;lt;tt&amp;gt;self[41]&amp;lt;/tt&amp;gt;. Also known as accessing "the reddit".
-3f79d842 (utenmiki                 2013-10-31 23:20:15 +0900 71)   #
-3f79d842 (utenmiki                 2013-10-31 23:20:15 +0900 72)   #   (1..42).to_a.forty_two # =&amp;gt; 42
-83fd1ae1 (Jeremy Kemper            2009-03-21 03:26:09 -0700 73)   def forty_two
-83fd1ae1 (Jeremy Kemper            2009-03-21 03:26:09 -0700 74)     self[41]
-4d177ae0 (David Heinemeier Hansson 2007-11-27 19:42:30 +0000 75)   end
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can then use a similar command to blame the parent git revision at that point.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git blame --follow 83fd1ae1^ -- ./activesupport/lib/active_support/core_ext/array/access.rb
-
-...
-e50530ca (David Heinemeier Hansson 2008-11-21 09:06:46 +0100 46)         # Equal to &amp;lt;tt&amp;gt;self[41]&amp;lt;/tt&amp;gt;. Also known as accessing "the reddit".
-e50530ca (David Heinemeier Hansson 2008-11-21 09:06:46 +0100 47)         def forty_two
-e50530ca (David Heinemeier Hansson 2008-11-21 09:06:46 +0100 48)           self[41]
-22af62cf (David Heinemeier Hansson 2008-06-17 13:37:57 -0500 49)         end
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;All the while you occasionally want to inspect the commit in more detail using &lt;code&gt;git show &amp;lt;commit-sha&amp;gt;&lt;/code&gt;. Eventually you will end up where you want to be.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git show e50530ca
-
-commit e50530ca3ab5db53ebc74314c54b62b91b932389
-Author: David Heinemeier Hansson &amp;lt;david@loudthinking.com&amp;gt;
-Date:   Fri Nov 21 09:06:46 2008 +0100
-
-    Reduced the number of literal aliases to the range that has actually seen personal use. With the massive savings in overhead, I was able to fit Array#forty_two
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;Using &lt;code&gt;git log&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;The following &lt;code&gt;git log&lt;/code&gt; command presents the entire file history (26 commits):&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git log --follow ./activesupport/lib/active_support/core_ext/array/access.rb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This works, but it is a lot more information to sift through.&lt;/p&gt;
-
-&lt;p&gt;A better approach (which is what &lt;code&gt;GitEvolution&lt;/code&gt; uses under the hood) presents the file history for only the concerned portion (7 commits):&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ git log -L70,75:./activesupport/lib/active_support/core_ext/array/access.rb --follow ./activesupport/lib/active_support/core_ext/array/access.rb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The output isn&amp;rsquo;t succinct, nor does it have ownership information. The command is also more verbose.&lt;/p&gt;
-
-&lt;h1&gt;Advance Usage&lt;/h1&gt;
-
-&lt;p&gt;I personally use Vim for all my editing needs, especially while editing code. As most of the projects I&amp;rsquo;m working in are version controlled with Git I made a &lt;a href="https://github.com/kevinjalbert/dotfiles/blob/eaca550/vim/vim/functions.vim#L1-L16"&gt;Vim function&lt;/a&gt; that allows me to visually select and call &lt;code&gt;git_evolution&lt;/code&gt; using &lt;code&gt;ge&lt;/code&gt; on the selected lines. This opens the output in a new buffer which I can then look through and yank commit SHAs if needed.&lt;/p&gt;
-
-&lt;h1&gt;The Future&lt;/h1&gt;
-
-&lt;p&gt;Similar to what I mentioned in my &lt;a href="https://kevinjalbert.com/port-mapping-development-servers/"&gt;last post about &lt;code&gt;port_map&lt;/code&gt;&lt;/a&gt;, &lt;code&gt;git_evolution&lt;/code&gt; is a RubyGem, which is effectively tied to a specific Ruby version. When dealing with multiple Ruby version projects using &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt;/&lt;a href="http://rbenv.org/"&gt;rbenv&lt;/a&gt; sometimes &lt;code&gt;git_evolution&lt;/code&gt; is not installed. It is a slight detour to install &lt;code&gt;git_evolution&lt;/code&gt; for the current Ruby version when I switch to a new Ruby version. Ideally &lt;code&gt;git_evolution&lt;/code&gt; would not be tied to Ruby, and instead is a transportable executable (for example one written in Bash or Go).&lt;/p&gt;
-
-&lt;p&gt;I do want to expand on the &lt;em&gt;ownership&lt;/em&gt; aspect of &lt;code&gt;git_evolution&lt;/code&gt; as I think it&amp;rsquo;ll help quicker identify &lt;em&gt;who&lt;/em&gt; could be contacted for additional context. Currently it is simply looking at commits and change totals. Ideally there would be a better algorithm to determine ownership of selected lines.&lt;/p&gt;
 </content>
   </entry>
 </feed>

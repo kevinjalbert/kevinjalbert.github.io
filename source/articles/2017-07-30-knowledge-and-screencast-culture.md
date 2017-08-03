@@ -46,7 +46,7 @@ I approach most things from a developer's mindset. I love using GitHub and that 
 
 > Anything! This repository helps promote individuals to share even the smallest tidbit of knowledge that they feel is worth sharing. It could be even a 30 seconds editor trick. Without having any restrictions, the hope is that the friction to share something to a wider audience is minimal, also to help encourage sharing what one might not feel is important enough to have a formal presentation for.
 
-My idea was have a communal place to share and consume knowlege in an asynchronous environment. The README is treated as a living document and will adjust and improve over time.
+My idea was have a communal place to share and consume knowledge in an asynchronous environment. The README is treated as a living document and will adjust and improve over time.
 
 I am continuously learning new things, and others have plenty to teach. This approach will create an environment for learning for not only myself, but for everyone.
 
@@ -54,7 +54,7 @@ I am continuously learning new things, and others have plenty to teach. This app
 
 As you might have read in the README snippet, the preferred medium to use is screenrecording/screencasting technologies for delivery and storage. So in essence, you would create a screencast for anything that could provide value to someone and that you don't want to repeat. There are broad criteria of what to screencast, but in that respect I think it'll work out quite well in the long run.
 
-There is quite an art to doing screencasts well, and I am just getting my feet wet. I'm still working on my presentation delivery as I generally don't do much preperation before recording. As for tools I'm currently using:
+There is quite an art to doing screencasts well, and I am just getting my feet wet. I'm still working on my presentation delivery as I generally don't do much preparation before recording. As for tools I'm currently using:
 
 * [Monosnap](https://monosnap.com) for the screenrecording software (for MacOS and Windows)
 * [KeyCastr](https://github.com/keycastr/keycastr) for visualizing my keystrokes (for MacOS)

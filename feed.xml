@@ -11,7 +11,7 @@
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -49,7 +49,7 @@
 
 &lt;p&gt;Ideally I want to do this so that I am more transparent in what I&amp;rsquo;m doing (on a finer-level), but also accountable in what I&amp;rsquo;m setting out for myself. A side bonus is having an archive of data (although probably not in an ideal format &amp;ndash; maybe I&amp;rsquo;ll make some kind of JSON as the raw data for each update haha).&lt;/p&gt;
 
-&lt;p&gt;It would be sick to pull something like &lt;a href="http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/"&gt;Stephen Wolfream&amp;rsquo;s Personal Analytics&lt;/a&gt;, although that seems like quite a system he had put together.&lt;/p&gt;
+&lt;p&gt;It would be sick to pull something like &lt;a href="http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/"&gt;Stephen Wolfram&amp;rsquo;s Personal Analytics&lt;/a&gt;, although that seems like quite a system he had put together.&lt;/p&gt;
 
 &lt;h1&gt;Now Page&lt;/h1&gt;
 
@@ -68,7 +68,7 @@
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -139,7 +139,7 @@
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -292,7 +292,7 @@
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -458,7 +458,7 @@
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -516,7 +516,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -655,7 +655,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -731,7 +731,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -867,7 +867,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -967,7 +967,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1084,7 +1084,7 @@ it then returns the combined value
     <title>Sidekiq: Contained Callbacks</title>
     <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
     <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-09-01T07:06:45-04:00</updated>
+    <updated>2017-09-01T19:17:39-04:00</updated>
     <published>2016-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

@@ -40,7 +40,7 @@ This would be a living experiement. I'm not too sure I'll keep going with it, or
 
 Ideally I want to do this so that I am more transparent in what I'm doing (on a finer-level), but also accountable in what I'm setting out for myself. A side bonus is having an archive of data (although probably not in an ideal format -- maybe I'll make some kind of JSON as the raw data for each update haha).
 
-It would be sick to pull something like [Stephen Wolfream's Personal Analytics](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/), although that seems like quite a system he had put together.
+It would be sick to pull something like [Stephen Wolfram's Personal Analytics](http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/), although that seems like quite a system he had put together.
 
 # Now Page
 

@@ -2,16 +2,150 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-08-31T19:53:20-04:00</updated>
+  <updated>2017-09-28T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Synchronizing my dotfiles</title>
+    <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
+    <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
+    <updated>2017-09-28T19:45:16-04:00</updated>
+    <published>2017-09-28T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Overtime, you accumulate a set of configurations and dotfiles. To ensure a consistent environments across machines you want to have access to the same dotfiles. I share my synchronization approach along with how to keep the private and public information separate.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1362" height="887" src="/images/2017-09-28-synchronizing-my-dotfiles/github-dotfiles.jpg" /&gt;
+&lt;em&gt;&lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;My dotfiles repository on GitHub&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I always strive to &lt;a href="/share-your-bag-of-tricks/"&gt;share my bag of tricks&lt;/a&gt;. Hosting &lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;my dotfiles on GitHub&lt;/a&gt; is one way I can share the tricks and tips I&amp;rsquo;ve picked up over time. In addition, this makes it easy to replicate my development environment on another machine if needed.&lt;/p&gt;
+
+&lt;p&gt;There are some technical challenges I&amp;rsquo;ve had to overcome in open-sourcing my dotfiles. My dotfiles is a living repository, it is constantly changing as I tweak my environment. I recently encountered a situation where I have two physical machines to use for development. I want a simple and comprehensive solution for synchronizing my dotfiles, both the private and public content, between both machines.&lt;/p&gt;
+
+&lt;h1&gt;What are dotfiles?&lt;/h1&gt;
+
+&lt;p&gt;Jump right to the next section if you are already familiar with the dotfiles concept. The basic principle is that someone&amp;rsquo;s dotfiles are a set of the files that represent the configurations of applications and utilities (usually consisting of many &lt;em&gt;&amp;lt;dot&amp;gt;files&lt;/em&gt;, for example &lt;code&gt;.zshrc&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;As a developer, we have many tools at our disposal, and in many cases they are essential to our day-to-day work. The main reason to care about your own dotfiles is to ensure that you can replicate your working environment again. That alone is huge if you ever have to move to a new machine. It is a common pattern to push up your dotfiles to the cloud for back up purposes. I have most of mine on GitHub. The following points answer &lt;a href="https://dotfiles.github.io/"&gt;why you would want your dotfiles on GitHub&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Backup, restore, and sync the prefs and settings for your toolbox. Your dotfiles might be the most important files on your machine.&lt;/li&gt;
+&lt;li&gt;Learn from the community. Discover new tools for your toolbox and new tricks for the ones you already use.&lt;/li&gt;
+&lt;li&gt;Share what you’ve learned with the rest of us.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h1&gt;My dotfiles&lt;/h1&gt;
+
+&lt;p&gt;Since the beginning, I have hosted my dotfiles on GitHub. For the most part, I&amp;rsquo;ve only had one machine for development, and so I would slowly push my tweaks to my dotfiles repository.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve built up a &lt;a href="https://github.com/kevinjalbert/dotfiles/blob/6585c9a7e1ae1926fcaf2210d48be23a2e988bdb/Rakefile"&gt;Rakefile&lt;/a&gt; that orchestrates the install/update/backup/uninstall operations of my dotfiles.&lt;/p&gt;
+
+&lt;p&gt;My dotfiles are specific for MacOS and take advantage of &lt;a href="https://brew.sh/"&gt;homebrew&lt;/a&gt; to bootstrap the system. In addition, I also use &lt;a href="https://caskroom.github.io/"&gt;homebrew cask&lt;/a&gt; and &lt;a href="https://github.com/mas-cli/mas"&gt;mas&lt;/a&gt; to install system applications.&lt;/p&gt;
+
+&lt;p&gt;As previously mentioned, my dotfiles is a living repository &amp;ndash; it will continue to evolve and change. I make no guarantee that it&amp;rsquo;ll still operate or use the same solution at the time this article was written. The &lt;code&gt;README.md&lt;/code&gt; in the repository should always reflect the state of my dotfiles (although admittedly they are lacking as I write this).&lt;/p&gt;
+
+&lt;h2&gt;Mackup + Dropbox Synchronization&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve recently stumbled upon &lt;a href="https://github.com/lra/mackup"&gt;Mackup&lt;/a&gt;, a solution to keep application settings in sync for MacOS/Linux. The concept is pretty simple as per the &lt;a href="https://github.com/lra/mackup#what-does-it-do"&gt;What does it do&lt;/a&gt; section says in the README:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Back ups your application settings in a safe directory (e.g. Dropbox)&lt;/li&gt;
+&lt;li&gt;Syncs your application settings among all your workstations&lt;/li&gt;
+&lt;li&gt;Restores your configuration on any fresh install in one command line&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It has a list of &lt;a href="https://github.com/lra/mackup/tree/master/mackup/applications"&gt;support applications&lt;/a&gt;, although it also supports &lt;a href="https://github.com/lra/mackup/tree/master/doc#add-support-for-an-application-or-any-file-or-directory"&gt;custom file/directory/application&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using Mackup, I can take advantage of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Backing up configurations of supported applications. This alone is awesome, as there were many application settings that I never bothered to backup.&lt;/li&gt;
+&lt;li&gt;Ability to create custom application configurations defining their symlink-able dotfiles.&lt;/li&gt;
+&lt;li&gt;More battle-tested process for backing up and restoring symlinks.&lt;/li&gt;
+&lt;li&gt;Real-time synchronization of configurations in Dropbox.&lt;/li&gt;
+&lt;li&gt;Private dotfile synchronization in Dropbox.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Synchronization&lt;/h3&gt;
+
+&lt;p&gt;Before Mackup, I was using &lt;code&gt;git pull&lt;/code&gt; and &lt;code&gt;git push&lt;/code&gt; to synchronize &lt;em&gt;deliberate&lt;/em&gt; configuration changes. I would have to manually add files I wanted to synchronize to the dotfile repository, along with the initial symlink. On another machine, I would &lt;code&gt;git pull&lt;/code&gt; and &lt;em&gt;reinstall&lt;/em&gt; to apply the changes.&lt;/p&gt;
+
+&lt;p&gt;I was fortunate in that I didn&amp;rsquo;t whole-heartedly use this approach with multiple machines at the same time. I suspect there could be conflicts, or lost configurations using this approach.&lt;/p&gt;
+
+&lt;p&gt;With Mackup and the idea of using dropbox for synchronization, configurations are reflected in near real-time (although applications might have to be restarted on the other machine). To better accommodate the real-time synchronization features, I moved my dotfile repository to dropbox. I also let Mackup handle the backup/restore of symlinks as it has that feature built into it.&lt;/p&gt;
+
+&lt;p&gt;As Mackup provides a host of support applications, I was able to synchronize much more between environments. As it also has the support for custom application configurations I was able to better declare what I wanted to synchronize.&lt;/p&gt;
+
+&lt;h3&gt;Public Sharing&lt;/h3&gt;
+
+&lt;p&gt;One of my main goals was to keep my dotfiles &lt;a href="https://github.com/kevinjalbert/dotfiles/tree/6585c9a7e1ae1926fcaf2210d48be23a2e988bdb"&gt;focused and organized&lt;/a&gt; from a directory structure perspective. This simplifies the navigation and discoverability for anyone looking at my dotfiles. Each directory contains a specific set of configurations, and through the orchestration system, they get applied to the environment.&lt;/p&gt;
+
+&lt;p&gt;When adopting Mackup, I decided to shed this and simply adopt the &lt;em&gt;root is my home directory&lt;/em&gt; that Mackup uses by default. This isn&amp;rsquo;t pretty, but it removes the &lt;em&gt;mapping&lt;/em&gt; of where the file would reside in the system. In retrospect, it actually better reflects where someone would expect to find certain configurations.&lt;/p&gt;
+
+&lt;p&gt;I define my own &lt;a href="https://github.com/kevinjalbert/dotfiles/tree/5acf8672973e31dace420ad8e8303675094ed4e5/.mackup"&gt;custom applications&lt;/a&gt; so I can share/synchronize what I desire.&lt;/p&gt;
+
+&lt;p&gt;As mentioned, Mackup is capabile of synchronizing a bunch of supported applications. I didn&amp;rsquo;t exactly want to put all those up in my repository for sharing. If I don&amp;rsquo;t actively manage the configuration then I don&amp;rsquo;t want to share it. For example, my configurations for &lt;a href="https://github.com/lra/mackup/blob/719efd0a630fc3c6326aab5c84ac12b8509bbbf9/mackup/applications/doxie.cfg"&gt;Doxie&lt;/a&gt; aren&amp;rsquo;t important, while my vim/zsh configurations are highly curated.&lt;/p&gt;
+
+&lt;p&gt;To make sure my repository only has the &lt;em&gt;curated&lt;/em&gt; configurations that I want to publicly share I use &lt;a href="https://github.com/kevinjalbert/dotfiles/blob/5acf8672973e31dace420ad8e8303675094ed4e5/.gitignore"&gt;whitelisting in the &lt;code&gt;.gitignore&lt;/code&gt;&lt;/a&gt; to selectively publish dotfiles.&lt;/p&gt;
+
+&lt;p&gt;This approach allows me to take full advantage of synchronizing all configurations between environments, while publically sharing selected configurations in my repository.&lt;/p&gt;
+
+&lt;h2&gt;The Flow&lt;/h2&gt;
+
+&lt;h3&gt;Adding files to synchronize&lt;/h3&gt;
+
+&lt;p&gt;When I use &lt;code&gt;mackup --dry-run backup&lt;/code&gt;, I get a list of configurations that have not yet been backed up. This will pick up new applications, as well as new custom configurations I&amp;rsquo;ve added.&lt;/p&gt;
+
+&lt;p&gt;If I have something custom to backup I will create a new configuration.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat ~/.mackup/tips.cfg
+[application]
+name = My tips
+
+[configuration_files]
+.tips
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I can run &lt;code&gt;mackup backup&lt;/code&gt; and backup the new additions to my dropbox.&lt;/p&gt;
+
+&lt;p&gt;If I&amp;rsquo;m considering publically sharing this in my dotfiles repository, I&amp;rsquo;ll add the appropriate changes in the &lt;code&gt;.gitignore&lt;/code&gt; whitelist.&lt;/p&gt;
+
+&lt;h3&gt;Restoring files on different environment&lt;/h3&gt;
+
+&lt;p&gt;Similar to the backup command, I can use &lt;code&gt;mackup --dry-run restore&lt;/code&gt; to see a list of configurations that have yet to be restored. This will add new symlinks on the current machine based on the configurations in dropbox.&lt;/p&gt;
+
+&lt;p&gt;After that, the symlinks will take care of the synchronization of data between the multiple systems in real-time.&lt;/p&gt;
+
+&lt;h3&gt;Gotchas&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Some dotfiles of applications are always changing or overwriting the symlinks. These are hard to handle, and might not even be worth synchronizing between systems. With dropbox, I kept getting notifications of changes to files (i.e., Screenhero did this for me).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You can synchronize whole directories with a symlink. This is great as any new files that appear within it will be handled automatically. The only issue I&amp;rsquo;ve hit with this is when you want to change the scope of the symlinking (i.e., replace the directory with just individual files within it, or vice versa). Just be careful, as in my experience Mackup might not do the backup/restore correctly if you are changing the scope of the symlink.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Concerns with sensitive private keys (GPG/SSH private keys, secret API keys, etc&amp;hellip;), as you are putting them in Dropbox (in the cloud). Some people/organizations will not like this, and you have to be aware of what you are synchronizing.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You can always override an existing Mackup application configuration with a custom one. For example, I wanted to add some additional files for my &lt;a href="https://github.com/kevinjalbert/dotfiles/blob/1c6c2b03169a57708b4487c4af0d52168f9957ef/.mackup/zsh.cfg"&gt;ZSH configuration&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;TL;DR&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The concept of dotfiles is awesome, especially if you have multiple environments you want to synchronize configurations between.&lt;/li&gt;
+&lt;li&gt;GitHub is a great place to host/explore public dotfiles.&lt;/li&gt;
+&lt;li&gt;Mackup provides a comprehensive synchronization solution for application configurations and files.&lt;/li&gt;
+&lt;li&gt;Using Dropbox as Mackup&amp;rsquo;s storage option provides near real-time synchronization of dotfiles.&lt;/li&gt;
+&lt;li&gt;Make use of &lt;code&gt;.gitignore&lt;/code&gt;&amp;rsquo;s whitelisting feature to selectivly share your public dotfiles while staying within Mackup&amp;rsquo;s solution.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -68,7 +202,7 @@
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -139,7 +273,7 @@
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -292,7 +426,7 @@
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -458,7 +592,7 @@
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -516,7 +650,7 @@
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -655,7 +789,7 @@
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -731,7 +865,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -867,7 +1001,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -967,7 +1101,7 @@ it then returns the combined value
     <title>Deploying my Website to GitHub Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
     <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
+    <updated>2017-09-01T19:19:29-04:00</updated>
     <published>2016-11-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1078,184 +1212,6 @@ it then returns the combined value
 &lt;h1&gt;That&amp;rsquo;s All Folks&lt;/h1&gt;
 
 &lt;p&gt;This approach is working well for me at the current moment. I&amp;rsquo;ll probably keep using Middleman for the foreseeable future. I am sure I will go through another phase of redesigning this process, in which I will document yet again.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Sidekiq: Contained Callbacks</title>
-    <link rel="alternate" href="https://kevinjalbert.com/sidekiq-contained-callbacks/"/>
-    <id>https://kevinjalbert.com/sidekiq-contained-callbacks/</id>
-    <updated>2017-09-01T19:17:39-04:00</updated>
-    <published>2016-10-31T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">ActiveJob in Rails provides nice benefits. The background queueing gem Sidekiq allows for tailored options that you cannot use with ActiveJob. This post looks at a project's transition from ActiveJob to Sidekiq, and how to fill the missing functionality of ActiveJob Callbacks. By the end, we come up with a way to contain the callback logic to their own modules without modifying the concrete jobs.</description>
-    <content type="html">&lt;h1&gt;ActiveSupport Callbacks&lt;/h1&gt;
-
-&lt;p&gt;In my &lt;a href="/lets-pry-into-ruby-objects/"&gt;last post&lt;/a&gt; I touched on &lt;code&gt;pry&lt;/code&gt; and how it helped me verify that my class had &lt;code&gt;around_perform&lt;/code&gt; ActiveSupport Callbacks attached to it. In this post I will delve further into &lt;em&gt;what&lt;/em&gt; I was trying to accomplish.&lt;/p&gt;
-
-&lt;h1&gt;[ActiveJob, Sidekiq] - [ActiveJob]&lt;/h1&gt;
-
-&lt;p&gt;I was working on a Rails 4.2.x project that had background job processing. We used &lt;a href="https://github.com/rails/rails/tree/4-2-stable/activejob"&gt;ActiveJob&lt;/a&gt; as our adapter to our background jobs. Behind the scenes, we were using the &lt;a href="http://sidekiq.org/"&gt;Sidekiq&lt;/a&gt; gem.&lt;/p&gt;
-
-&lt;p&gt;We eventually needed specifics that only native Sidekiq can provide through its &lt;code&gt;sidekiq_options&lt;/code&gt;. These options that Sidekiq provides were something that we didn&amp;rsquo;t need initially. As mentioned in the &lt;a href="https://github.com/mperham/sidekiq/wiki/Active-Job#active-job-introductio://github.com/mperham/sidekiq/wiki/Active-Job#active-job-introduction"&gt;Sidekiq Wiki&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Note that more advanced Sidekiq features (&lt;code&gt;sidekiq_options&lt;/code&gt;) cannot be controlled or configured via ActiveJob, e.g. saving backtraces.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The time has come to take advantage of powerful sidekiq gems and options, thus we have to switch from ActiveJob to native Sidekiq.&lt;/p&gt;
-
-&lt;h1&gt;ActiveJob&amp;rsquo;s Free Perks&lt;/h1&gt;
-
-&lt;p&gt;ActiveJob provided certain features automatically such as using &lt;a href="http://guides.rubyonrails.org/active_job_basics.html#globalid"&gt;GlobalID&lt;/a&gt; and setting up &lt;a href="http://guides.rubyonrails.org/active_job_basics.html#callbacks"&gt;Callbacks&lt;/a&gt;, amongst others. With a native Sidekiq approach we lose those &lt;em&gt;free&lt;/em&gt; perks.&lt;/p&gt;
-
-&lt;p&gt;The biggest thing we missed was the callbacks, specifically &lt;code&gt;around_perform&lt;/code&gt;. We had several modules that were mixed in to our job classes, with the single responsibility of augmenting the class with callbacks.&lt;/p&gt;
-
-&lt;p&gt;For example:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;JobMetrics&lt;/span&gt;
-  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
-
-  &lt;span class="n"&gt;included&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;around_perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_job&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="no"&gt;MetricsLogger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timing&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;metrics_logger_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;metrics_logger_key&lt;/span&gt;
-      &lt;span class="vi"&gt;@metrics_logger_key&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;underscore&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This module is wrapping the actual job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt; in a &lt;code&gt;MetricsLogger.timing&lt;/code&gt;. In a future post, I might go into further details about &lt;code&gt;MetricsLogger&lt;/code&gt;, but at its core it records a key/value and sends it off to a log aggregator. The benefit we get from this module is the ability to know timing metrics for jobs based on an identifying signature.&lt;/p&gt;
-
-&lt;p&gt;Moving away from ActiveJob, we need another way to accomplish the same thing (&lt;em&gt;contained callbacks&lt;/em&gt;) with just Sidekiq.&lt;/p&gt;
-
-&lt;h1&gt;Contained Callbacks&lt;/h1&gt;
-
-&lt;p&gt;The goal is to have contained callbacks, which is just a separate module that can be included on jobs that define the required callback. This approach means that little has to change while removing ActiveJob, and we can reuse all our existing contained callbacks.&lt;/p&gt;
-
-&lt;h2&gt;Prepend a Proxy&lt;/h2&gt;
-
-&lt;p&gt;I found out that to make use of &lt;code&gt;ActiveSupport::Callbacks&lt;/code&gt; you have to modify the executed method, which in our case would be the job&amp;rsquo;s &lt;code&gt;#perform&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-  &lt;span class="nf"&gt;def&lt;/span&gt; &lt;span class="n"&gt;perform&lt;/span&gt;
-    &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="c1"&gt;# Actual perform's content here&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I didn&amp;rsquo;t want to modify the &lt;code&gt;#perform&lt;/code&gt; method definitions for all the jobs. So I came up with the solution of using &lt;code&gt;prepend&lt;/code&gt; to slot a proxy in front of the jobs&amp;rsquo; &lt;code&gt;#perform&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;SidekiqCallbacks&lt;/span&gt;
-  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This module then can be prepended into the Sidekiq job classes and the callbacks will be executed &amp;ndash; if they are present. The next task is to support the &lt;code&gt;around_perform&lt;/code&gt; callback.&lt;/p&gt;
-
-&lt;h2&gt;Support Setting and Running Callbacks&lt;/h2&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"active_support/callbacks"&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Following approach used by ActiveJob&lt;/span&gt;
-&lt;span class="c1"&gt;# https://github.com/rails/rails/blob/93c9534c9871d4adad4bc33b5edc355672b59c61/activejob/lib/active_job/callbacks.rb&lt;/span&gt;
-&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;SidekiqCallbacks&lt;/span&gt;
-  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:run_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;ClassMethods&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;around_perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;set_callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:perform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:around&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now &lt;code&gt;SidekiqCallbacks&lt;/code&gt; defines the ability to add callbacks, and they will be executed before &lt;code&gt;#perform&lt;/code&gt; if defined.&lt;/p&gt;
-
-&lt;h2&gt;Wrapping it up&lt;/h2&gt;
-
-&lt;p&gt;The last thing I want to do is to encapsulate this Sidekiq callback logic in its own module that defines the actual callback (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). To do this, we need to further modify &lt;code&gt;SidekiqCallbacks&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"active_support/callbacks"&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Following approach used by ActiveJob&lt;/span&gt;
-&lt;span class="c1"&gt;# https://github.com/rails/rails/blob/93c9534c9871d4adad4bc33b5edc355672b59c61/activejob/lib/active_job/callbacks.rb&lt;/span&gt;
-&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;SidekiqCallbacks&lt;/span&gt;
-  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;prepended&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Check to see if we already have any callbacks for :perform&lt;/span&gt;
-    &lt;span class="c1"&gt;# Prevents overwriting callbacks if we already included this module (and defined callbacks)&lt;/span&gt;
-    &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;define_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:_perform_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;_perform_callbacks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
-
-    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;
-      &lt;span class="n"&gt;prepend&lt;/span&gt; &lt;span class="no"&gt;ClassMethods&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;respond_to?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:run_callbacks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;run_callbacks&lt;/span&gt; &lt;span class="ss"&gt;:perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;ClassMethods&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;after_perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;set_callback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:perform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;filters&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;blk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We had to include the &lt;code&gt;self.prepended&lt;/code&gt; so that the job class will have access to the defined methods through the contained callback module. The main thing to note here is that we are including &lt;code&gt;ActiveSupport::Callbacks&lt;/code&gt; on the base object that is prepending this module. We also have to ensure that the callbacks are only defined once (this is where in my &lt;a href="/lets-pry-into-ruby-objects/"&gt;last post&lt;/a&gt; I was using &lt;code&gt;pry&lt;/code&gt; figure why not all my callbacks were defined).&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;JobMetrics&lt;/span&gt;
-  &lt;span class="kp"&gt;extend&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Concern&lt;/span&gt;
-
-  &lt;span class="n"&gt;included&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;prepend&lt;/span&gt; &lt;span class="no"&gt;SidekiqCallbacks&lt;/span&gt;
-
-    &lt;span class="n"&gt;around_perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;_job&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="no"&gt;MetricsLogger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timing&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;metrics_logger_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;metrics_logger_key&lt;/span&gt;
-      &lt;span class="vi"&gt;@metrics_logger_key&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;underscore&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Finally, we can see how &lt;code&gt;JobMetrics&lt;/code&gt; has a new &lt;code&gt;prepend SidekiqCallbacks&lt;/code&gt; and that pulls in all the required &lt;code&gt;ActiveSupport::Callback&lt;/code&gt; logic that allows for callbacks to be defined and executed.&lt;/p&gt;
-
-&lt;h1&gt;The Win&lt;/h1&gt;
-
-&lt;p&gt;With this approach, the benefit is that the callback implementation is completely contained within the &lt;code&gt;JobMetrics&lt;/code&gt; module. The &lt;code&gt;SidekiqCallbacks&lt;/code&gt; module provides the missing ActiveJob callback support for &lt;code&gt;around_perform&lt;/code&gt;. It is also possible to add the missing ActiveJob callbacks using this approach.&lt;/p&gt;
-
-&lt;p&gt;In the ending, the concrete job classes just &lt;code&gt;include&lt;/code&gt; the contained callback module (i.e., &lt;code&gt;JobMetrics&lt;/code&gt;). &lt;code&gt;SidekiqCallbacks&lt;/code&gt; is designed to accommodate multiple contained callback modules being included on a single concrete job class.&lt;/p&gt;
 </content>
   </entry>
 </feed>

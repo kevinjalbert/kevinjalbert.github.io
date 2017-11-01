@@ -2,16 +2,140 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-09-28T19:53:20-04:00</updated>
+  <updated>2017-10-31T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Share Highlighted Articles</title>
+    <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
+    <id>https://kevinjalbert.com/share-highlighted-articles/</id>
+    <updated>2017-11-01T00:07:36-04:00</updated>
+    <published>2017-10-31T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">We are ever consuming articles on the web. In most cases, the articles that interest me are highly technical and informative. Just like a book, you would highlight the important passages for future recollection. In this post, I present my use the Highly highlighting service to record, retrieve, and share highlights.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1024" height="683" src="/images/2017-10-31-share-highlighted-articles/book-highlighter.jpg" /&gt;
+&lt;em&gt;&lt;a title="IB English" href="https://flickr.com/photos/quinnanya/3242150010"&gt;IB English&lt;/a&gt; by &lt;a href="https://flickr.com/people/quinnanya"&gt;quinn.anya&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-sa/2.0/"&gt;CC BY-SA&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is yet another post on the topic of sharing knowledge to accompany my previous posts: &lt;em&gt;&lt;a href="/share-your-bag-of-tricks/"&gt;Share Your Bag of Tricks&lt;/a&gt;&lt;/em&gt; and &lt;em&gt;&lt;a href="/knowledge-and-screencast-culture/"&gt;Knowledge and Screencast Culture&lt;/a&gt;&lt;/em&gt;. I&amp;rsquo;ve recently made another change to my day-to-day workflow that accommodates sharing knowledge &amp;ndash; highlighting articles.&lt;/p&gt;
+
+&lt;h1&gt;Information Recollection&lt;/h1&gt;
+
+&lt;p&gt;In the software development world, I&amp;rsquo;m consuming a decent amount of articles from various sources. This is in a way how I keep up with the new changes in the landscape, which in its self could be an interesting short article on its own. I heavily use &lt;a href="https://getpocket.com"&gt;Pocket&lt;/a&gt; to stash articles I find throughout the day and I then slowly consume them at my own leisure. I had it such that if I &lt;em&gt;favourite&lt;/em&gt; an article in Pocket then, through &lt;a href="https://zapier.com"&gt;Zapier&lt;/a&gt; it will be saved in &lt;a href="https://evernote.com"&gt;Evernote&lt;/a&gt;. Evernote is my go-to note-taking and information recollection solution.&lt;/p&gt;
+
+&lt;p&gt;This approach works well, although I want to &lt;em&gt;distil&lt;/em&gt; and &lt;em&gt;reinforce&lt;/em&gt; the materials I&amp;rsquo;m consuming. My hypothesis is that I&amp;rsquo;ll have more succinct notes within Evernote and thus able to take advantage of more narrow focus search efforts. I have settled on using a highlighting service to accomplish for marking important passages that end up being searchable in Evernote.&lt;/p&gt;
+
+&lt;h1&gt;Highlighting Services&lt;/h1&gt;
+
+&lt;p&gt;I reviewed four highlighting services to find the best one that fits my needs. I quickly passed over &lt;a href="https://diigo.com"&gt;Diigo&lt;/a&gt; and &lt;a href="https://www.lumioapp.com"&gt;Lumio&lt;/a&gt;, as they just didn&amp;rsquo;t appeal to me. These next two were my serious contenders that I evaluated.&lt;/p&gt;
+
+&lt;h2&gt;&lt;a href="https://getliner.com"&gt;Liner&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Liner is a solid option for highlighting. The chrome extension works very well and is boiled down to the fundamentals: highlighting and comments. It offers a Pocket integration, which is nice, although not really needed. The ability to export highlights to Evernote is excellent, and as an off the shelf solution does what I need. The iOS application also is well done and works as expected. The sharing feature provides a link which renders the full article with highlightings in it, simple and effective &amp;ndash; &lt;a href="http://lnr.li/PbYky"&gt;example Liner shared link&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Even though there is a subscription at $5/month or $50/year, it is not really necessary. You get folder support along with, more colours and advance search. The colours I couldn&amp;rsquo;t really care for, and the search will be covered by Evernote. Folders are also unimportant to me. Overall this means I don&amp;rsquo;t have to pay for this service.&lt;/p&gt;
+
+&lt;p&gt;I really like Liner, and it almost made my pick. It satisfies all my needs, although it became my second choice as the next service Highly has a very neat &lt;em&gt;social&lt;/em&gt; feature.&lt;/p&gt;
+
+&lt;h2&gt;&lt;a href="https://www.highly.co"&gt;Highly&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Highly is very similar to Liner in terms of highlighting. It is, even more, streamline as it only offers highlights and drops comments. The main benefit I noticed with Highly is the &lt;a href="https://medium.com/highlight-to-share/the-highlight-layer-45b9a8e86476"&gt;Highlight Layer&lt;/a&gt;, which when you browse articles provides a social aspect to highlighting. This is pretty awesome as I can see a summary of new articles assuming someone has marked it up before me. In addition, the interface of the extension I would argue is slightly better than Liner. Highly also offers a Pocket integration like Liner. The iOS application for highlighting is also quite nice and offers a great user experience.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Highlight Layer" width="427" height="194" src="/images/2017-10-31-share-highlighted-articles/highlight-layer.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I was pleasantly surprised with the highlighting experience, considering I didn&amp;rsquo;t think you could improve much with highlighting. As you&amp;rsquo;ll see, the highlighting will automatically expand to fill the words in case you didn&amp;rsquo;t select them from the beginning or end:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Smart Highlighting by Highly" width="577" height="147" src="/images/2017-10-31-share-highlighted-articles/highly-smart-highlighting.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In contrast to how Liner displays the whole page with highlights when you share a link, Highly provides a summary page &amp;ndash; &lt;a href="https://www.highly.co/hl/FJrJO5TzhZt7d3"&gt;example Highly shared link&lt;/a&gt;. You can always drop into the context of the whole page, but this only works if you have the extension installed otherwise you get a prompt to install it.&lt;/p&gt;
+
+&lt;p&gt;Highly does offer a subscription as well for $2/month or $20/year, but all you get is private highlights. To me, that doesn&amp;rsquo;t matter since I want everything to be public, and out in the open for others to benefit from.&lt;/p&gt;
+
+&lt;p&gt;The Evernote storage is non-existent in Highly&amp;hellip; although I did counter this with a hacked together Zapier integration. That I&amp;rsquo;ll cover in the next section.&lt;/p&gt;
+
+&lt;p&gt;Highly&amp;rsquo;s excellent highlighting experience along with the social aspect sold me on it. Liner is a great contender and I am going to keep my eyes on it to see what they come up with in the future. Even though Highly didn&amp;rsquo;t offer an Evernote solution, I was able to hack a more favourable one using Zapier.&lt;/p&gt;
+
+&lt;h1&gt;Evernote Notes with Highly and Zapier&lt;/h1&gt;
+
+&lt;p&gt;As mentioned I want Evernote integration with the highlighting service I use, and with Highly it wasn&amp;rsquo;t there. I was pleased with the rest of Highly that I was willing to make it work.&lt;/p&gt;
+
+&lt;p&gt;First thing I was looking at was the RSS feed that Highly provides, figuring I could tie this with Zapier. Turns out that there already existed a &lt;a href="https://ifttt.com/applets/iTCzjXUP-highly-highlights-in-evernote"&gt;Highly highlights in Evernote on IFTTT&lt;/a&gt; already. The main issue is that the RSS feed has one item for each highlight. So you cannot aggregate all the highlights for a completed articled into one note. This wasn&amp;rsquo;t going to do it for me.&lt;/p&gt;
+
+&lt;p&gt;You can email a Highly link, so I was going to just email them into Evernote. While this worked, there were a couple of issues:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Evernote&amp;rsquo;s free account only allows 5 emails per month. I was not a paying customer and wasn&amp;rsquo;t planning on taking the additional cost at the moment.&lt;/li&gt;
+&lt;li&gt;The email is heavily branded with Highly, as it is meant to be a link sent to someone other than yourself.&lt;/li&gt;
+&lt;li&gt;The title of the email was generic and uninformative &amp;ndash; &lt;em&gt;kevinjalbert sent you a highlight.&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img alt="Highly Share Email To Evernote" width="425" height="745" src="/images/2017-10-31-share-highlighted-articles/email-to-evernote.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Fortunately, with Zapier, you can chain multiple actions together (limit of 3 with a free account). Zapier allows for some powerful workflows, especially since you can use JavaScript or Python to manipulate data within the flow.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Zapier Highly To Evernote Flow" width="380" height="495" src="/images/2017-10-31-share-highlighted-articles/zapier-highly-flow.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I use a Zapier inbound email trigger, that triggers when I email the share link from Highly. I then feed the HTML formatted email into a JavaScript function where I can clean up the &lt;code&gt;inputData.rawBody&lt;/code&gt; and &lt;code&gt;inputData.htmlBody&lt;/code&gt; and return an object for the next step.&lt;/p&gt;
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;titleRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/kevinjalbert's highlights&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;+&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;.*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;linkRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;https:&lt;/span&gt;&lt;span class="se"&gt;\/\/&lt;/span&gt;&lt;span class="sr"&gt;www.highly.co&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;hl&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;.*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;timeRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;.* Summary • .* Story&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;inputData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Remove html, head, and body&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;body"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;lastIndexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;/body&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Remove profile and divider&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;before&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;div class="main"&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;after&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;div class="article-meta'&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;before&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;after&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Remove redundant text&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"kevinjalbert's highlights"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Remove footer&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;lastIndexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;div class="footer"'&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Add wrapping div&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;div"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;/div&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Clean up nbsp&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;div class="split-15" height="15" style="font-size:15px;line-height:15px;height:15px;overflow:hidden;background:transparent"&amp;gt;&amp;amp;nbsp;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;div&amp;gt;/g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;div class="split-5" height="5" style="font-size:5px;line-height:5px;height:5px;overflow:hidden;background:transparent"&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;\/div&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="na"&gt;articleTitle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;titleRegex&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;inputData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rawBody&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="na"&gt;highlyLink&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;linkRegex&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;inputData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rawBody&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="na"&gt;timeSummary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;timeRegex&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;inputData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rawBody&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="na"&gt;evernoteFormattedBody&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Cleaning up the HTML body was an interesting task to make it conform to Evernote&amp;rsquo;s &lt;a href="https://dev.evernote.com/doc/articles/enml.php"&gt;ENML&lt;/a&gt; format. The code is a hack and brittle, but it works. I also extract the title so that I can ensure that the note&amp;rsquo;s title is properly reflecting in Evernote. The final step is to put all this together into the Evernote action template.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Zapier Create Evernote Note Template" width="760" height="560" src="/images/2017-10-31-share-highlighted-articles/zapier-create-evernote-note.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;With the Zapier flow, I now get a succinct note with the highlightings for an article. It triggers instantly when I send the email from Highly.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Zapier Formatted Email To Evernote" width="425" height="500" src="/images/2017-10-31-share-highlighted-articles/zapier-formatted-to-evernote.jpg" /&gt;&lt;/p&gt;
+
+&lt;h1&gt;Highlighting Workflow&lt;/h1&gt;
+
+&lt;p&gt;Now armed with my highlighter I can mark the good parts that I feel are most important when consuming articles online. With the ability to share summary links, I can better ensure that the take aways from the article surfaces easier. Finally, with my Evernote Zapier integration, I know that my highlighted information is always a few keystrokes away.&lt;/p&gt;
+
+&lt;p&gt;My goal is to highlight every article that lands in my Pocket. With Highly&amp;rsquo;s social aspects I hope that my highlights help future readers. In a similar fashion, I am always pleased when I see that someone else has already highlighted an article for the key points.&lt;/p&gt;
+
+&lt;p&gt;Make sure to check out my highlights and &lt;a href="https://www.highly.co/by/kevinjalbert"&gt;follow me on Highly&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -145,7 +269,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -202,7 +326,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -273,7 +397,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -426,7 +550,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -592,7 +716,7 @@ name = My tips
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -650,7 +774,7 @@ name = My tips
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -789,7 +913,7 @@ name = My tips
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -865,7 +989,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1001,7 +1125,7 @@ it then returns the combined value
     <title>Information at a Glance: RailsRequestStats</title>
     <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
     <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
+    <updated>2017-10-04T00:04:05-04:00</updated>
     <published>2016-12-21T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1095,123 +1219,6 @@ it then returns the combined value
 &lt;p&gt;I have personally been using &lt;code&gt;RailsRequestStats&lt;/code&gt; at work since its inception. Reception has been quite good, it has little impact and simply provides extra information at a glance to developers during day-to-day work. I will mention that &lt;a href="https://github.com/MiniProfiler/rack-mini-profiler"&gt;rack-mini-profiler&lt;/a&gt; is an excellent gem, and kind of inspired my creation of this gem. I couldn&amp;rsquo;t find a good way to get the information I wanted when dealing with API endpoints, with &lt;code&gt;RailsRequestStats&lt;/code&gt; I was able to simply output it in the logs.&lt;/p&gt;
 
 &lt;p&gt;In the future I might add more &lt;a href="https://github.com/kevinjalbert/rails_request_stats/issues/4"&gt;detailed memory reports&lt;/a&gt;. I also have to verify that it continues to work in Rails 5 where the default webserver is &lt;a href="http://puma.io/"&gt;Puma&lt;/a&gt; which is a concurrent webserver. This could pose issue as information is stored in class instance variable and are modified at various parts of a requests life cycle.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Deploying my Website to GitHub Pages</title>
-    <link rel="alternate" href="https://kevinjalbert.com/deploying-my-website-to-github-pages/"/>
-    <id>https://kevinjalbert.com/deploying-my-website-to-github-pages/</id>
-    <updated>2017-09-28T19:48:30-04:00</updated>
-    <published>2016-11-28T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">A little history on my website, and the underlying framework I have used -- Middleman. I walkthrough the process on how I deploy the website to GitHub pages using a deployment script.</description>
-    <content type="html">&lt;h1&gt;History of my Website&lt;/h1&gt;
-
-&lt;p&gt;Let&amp;rsquo;s look back at my website back in early &lt;a href="https://web.archive.org/web/20120122125850/http://kevinjalbert.com/"&gt;2012&lt;/a&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It was built using &lt;a href="http://nanoc.ws/"&gt;nanoc&lt;/a&gt; as I was learning and enjoying using ruby. This static site generator seemed like a great tool when I started. It gave me a lot of control as I was able to write &lt;a href="https://github.com/kevinjalbert/website/blob/master/lib/helpers/custom_helper.rb"&gt;custom ruby helpers&lt;/a&gt; to assist in generating the website.&lt;/li&gt;
-&lt;li&gt;It was focused on showcasing my academic accomplishments such as publications/posters/presentations and projects as I was still in the education system and going down the academia career track.&lt;/li&gt;
-&lt;li&gt;The original &lt;a href="https://github.com/kevinjalbert/website"&gt;GitHub repository&lt;/a&gt; for this version of the website still exists, if you were interested in looking at it.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;After finishing my M.Sc degree I decided to work in industry instead of pursuing a Ph.D. I continued to update the website with minor changes, but for the most part it stagnated over time.&lt;/p&gt;
-
-&lt;h1&gt;Deciding on Middleman&lt;/h1&gt;
-
-&lt;p&gt;I eventually wanted to revamp my website to be more &lt;em&gt;relevant&lt;/em&gt; and decided going with a blog to document my technical endeavors and musings. I retired the old website and built up the new blog from scratch. I look through the &lt;a href="https://www.ruby-toolbox.com/categories/static_website_generation"&gt;Ruby Toolbox&lt;/a&gt; to see the alternatives to nanoc. Top pick seems to be &lt;a href="https://github.com/jekyll/jekyll"&gt;Jekyll&lt;/a&gt;, which is likely contributed to its painless integration with &lt;a href="https://help.github.com/articles/using-jekyll-as-a-static-site-generator-with-github-pages/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;My two main concerns with Jekyll were:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The use of &lt;a href="https://jekyllrb.com/docs/templates/"&gt;Liquid Templating&lt;/a&gt; - I was personally not a fan of it.&lt;/li&gt;
-&lt;li&gt;To benefit from the tight integration with GitHub, you are restricted to certain &lt;a href="https://pages.github.com/versions/"&gt;Jekyll plugin gems&lt;/a&gt; and no custom plugins.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The second contender is &lt;a href="https://middlemanapp.com/"&gt;Middleman&lt;/a&gt;. Its offering was very similar to nanoc. I decided to give Middleman a spin as it was new and different from nanoc. For hosting I could figure it out later, although I was still leaning towards a manual usage of GitHub Pages as it was a free hosting solution.&lt;/p&gt;
-
-&lt;h1&gt;Deployment Approach&lt;/h1&gt;
-
-&lt;p&gt;With the initial work on the new blog being completed, it was time to handle the deployment of it. As previously mentioned I was still going to use GitHub pages due to its free offering. All the work can be seen in the &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io"&gt;kevinjalbert/kevinjalbert.github.io repository&lt;/a&gt;. A few things to note:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;User GitHub Pages at the time was only deployable from the &lt;code&gt;master&lt;/code&gt; branch of the github repository.&lt;/li&gt;
-&lt;li&gt;If the website used Jekyll then GitHub would automatically generate the static site and deploy it appropriately.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To accommodate this I decided to treat &lt;code&gt;master&lt;/code&gt; as the holding ground for the generated Middleman output. With respect to where to place the actual Middleman code, I placed everything in a new branch &lt;code&gt;real-master&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;After a quick setup on GitHub, anything in the &lt;code&gt;master&lt;/code&gt; branch would be deployed to the public.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="GitHub Configuration" width="1940" height="740" src="/images/2016-11-28-deploying-my-website-to-github-pages/github-configuration.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;To reduce friction in deploying new changes, I created the following &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/424c42a5bd65cefb083a01e49f94cbc2e3a73e82/deploy.rb"&gt;ruby deploy script&lt;/a&gt;.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'tmpdir'&lt;/span&gt;
-
-&lt;span class="sb"&gt;`git checkout real-master`&lt;/span&gt;
-
-&lt;span class="n"&gt;current_sha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sb"&gt;`git rev-parse --short HEAD`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;
-
-&lt;span class="sb"&gt;`rm -R -f ./bower_components`&lt;/span&gt;
-&lt;span class="sb"&gt;`rm -R -f ./build`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`git add -f -A`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`git commit -m "Temp commit"`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`bundle install`&lt;/span&gt;
-&lt;span class="sb"&gt;`bower install`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`bundle exec middleman build`&lt;/span&gt;
-
-&lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;mktmpdir&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="sb"&gt;`mv ./build/* &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/`&lt;/span&gt;
-
-  &lt;span class="sb"&gt;`git checkout master`&lt;/span&gt;
-
-  &lt;span class="sb"&gt;`cp CNAME &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/`&lt;/span&gt;
-  &lt;span class="sb"&gt;`cp README.md &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
-
-  &lt;span class="sb"&gt;`rm -R -f *`&lt;/span&gt;
-
-  &lt;span class="sb"&gt;`cp -r &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;tmp_dir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;/* ./`&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="sb"&gt;`git add -f -A`&lt;/span&gt;
-&lt;span class="sb"&gt;`git commit -m "Update site @ &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt; with &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;current_sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;"`&lt;/span&gt;
-&lt;span class="sb"&gt;`git push`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`git checkout real-master`&lt;/span&gt;
-&lt;span class="sb"&gt;`git clean -df`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`git reset --soft HEAD~1`&lt;/span&gt;
-&lt;span class="sb"&gt;`git reset`&lt;/span&gt;
-
-&lt;span class="sb"&gt;`bower install`&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, when everything is committed on &lt;code&gt;real-master&lt;/code&gt; and I&amp;rsquo;m ready to deploy I just run &lt;code&gt;ruby deploy.rb&lt;/code&gt;. The following is then carried out:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Ensure that I&amp;rsquo;m on the &lt;code&gt;real-master&lt;/code&gt; git branch&lt;/li&gt;
-&lt;li&gt;Remove all the generated directories&lt;/li&gt;
-&lt;li&gt;Add everything to a temporary commit&lt;/li&gt;
-&lt;li&gt;Install all dependencies needed and build the Middleman website&lt;/li&gt;
-&lt;li&gt;Create a temporary directory and put the built website in it along with the &lt;em&gt;CNAME and README.md&lt;/em&gt; files&lt;/li&gt;
-&lt;li&gt;Clear the current directory and put everything from the temporary directory (i.e., the build website) into the current directory&lt;/li&gt;
-&lt;li&gt;Add everything to git and make a new commit with the current timestamp and git SHA that was used to generate the website&lt;/li&gt;
-&lt;li&gt;Push new website changes to &lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Checkout &lt;code&gt;real-master&lt;/code&gt; again, clean everything, and reset that temporary commit&lt;/li&gt;
-&lt;li&gt;Reinstall dependencies so we are back in a good state&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This results in a &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io/commits/master"&gt;formatted commit log&lt;/a&gt; on &lt;code&gt;master&lt;/code&gt; that has snapshots of each deployment of the website.&lt;/p&gt;
-
-&lt;h1&gt;That&amp;rsquo;s All Folks&lt;/h1&gt;
-
-&lt;p&gt;This approach is working well for me at the current moment. I&amp;rsquo;ll probably keep using Middleman for the foreseeable future. I am sure I will go through another phase of redesigning this process, in which I will document yet again.&lt;/p&gt;
 </content>
   </entry>
 </feed>

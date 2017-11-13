@@ -1,7 +1,7 @@
 ---
 title: "Share Highlighted Articles"
 
-description: "We are ever consuming articles on the web. In most cases, the articles that interest me are highly technical and informative. Just like a book, you would highlight the important passages for future recollection. In this post, I present my use the Highly highlighting service to record, retrieve, and share highlights."
+description: "We are ever consuming articles on the web. In most cases, the articles that interest me are highly technical and informative. Just like a book, you would highlight the important passages for future recollection. In this post, I present my use of the Highly highlighting service to record, retrieve, and share highlights."
 
 tags:
 - tools

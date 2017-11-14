@@ -2,21 +2,79 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-10-31T19:53:20-04:00</updated>
+  <updated>2017-11-14T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>GitHub: Tell Me When It Closes Extension</title>
+    <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
+    <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
+    <updated>2017-11-14T13:42:49-05:00</updated>
+    <published>2017-11-14T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">My first foray into making and publishing a browser extension. Let me showcase a quick extension which adds a button on GitHub's pull request and issue pages that links to tellmewhenitcloses.com populated with data.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1000" height="890" src="/images/2017-11-14-github-tell-me-when-it-closes-extension/screenshot.jpg" /&gt;
+&lt;em&gt;&lt;a href="https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension"&gt;Screenshot of GitHub: Tell Me When It Closes Extension&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://tellmewhenitcloses.com/"&gt;Tell Me When It Closes&lt;/a&gt; is an amazing service by &lt;a href="https://thoughtbot.com/"&gt;thoughtbot&lt;/a&gt;. Often I&amp;rsquo;ll find an issue or pull request on GitHub for a tool I use and I just want to know &lt;em&gt;when&lt;/em&gt; it closes what the result was. I don&amp;rsquo;t care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.&lt;/p&gt;
+
+&lt;p&gt;The issue I ran into was the limited ways to integrate this into my workflow. Looking at the ways you can &lt;a href="https://tellmewhenitcloses.com/subscribing"&gt;subscribe to issues and pull requests&lt;/a&gt;, it&amp;rsquo;s a bookmarklet that runs JavaScript. I don&amp;rsquo;t use the bookmark bar in my chrome browser (or browser bookmarks), so that solution wasn&amp;rsquo;t ideal.&lt;/p&gt;
+
+&lt;p&gt;My old workflow for subscribing to an issue on Tell Me When It Closes was:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Cmd + L (move keyboard cursor to address bar)&lt;/li&gt;
+&lt;li&gt;Cmd + C (copy URL)&lt;/li&gt;
+&lt;li&gt;Cmd + T (open new tab)&lt;/li&gt;
+&lt;li&gt;Type tellmewhenitcloses.com (autocompletes after a few characters)&lt;/li&gt;
+&lt;li&gt;Enter (opens tellmewhenitcloses.com)&lt;/li&gt;
+&lt;li&gt;Cmd + V (paste in issue URL)&lt;/li&gt;
+&lt;li&gt;Enter (subscribe to issue)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To many manual steps for me.&lt;/p&gt;
+
+&lt;h1&gt;Simplify and Extend&lt;/h1&gt;
+
+&lt;p&gt;I want a way to simplify the steps to subscribe to an issue. I figured I could manipulate the webpage with JavaScript and add a button which, when, clicked would navigate to the subscription page with the URL filled in.&lt;/p&gt;
+
+&lt;p&gt;I looked into making a browser extension, originally for Google Chrome. Upon further investigation, I found that I could target more browsers without much extra effort. I decided to use &lt;a href="https://github.com/EmailThis/extension-boilerplate"&gt;EmailThis/extension-boilerplate&lt;/a&gt; so that I could build an extension for Chrome, Opera &amp;amp; Firefox.&lt;/p&gt;
+
+&lt;p&gt;The end result is a button which appears in the &lt;em&gt;notifications&lt;/em&gt; section of an issue or pull request page. When you click the button, it&amp;rsquo;ll open the tellmewhenitcloses.com with the appropriate URL pre-filled.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="400" height="315" src="/images/2017-11-14-github-tell-me-when-it-closes-extension/button.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now my workflow for subscribing to an issue on Tell Me When It Closes is:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Click &lt;em&gt;Tell Me When It Closes&lt;/em&gt; button (using trackpad or &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb"&gt;Vimium&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Enter (subscribe to issue)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Links&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension"&gt;GitHub Repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chrome.google.com/webstore/detail/github-tell-me-when-it-cl/mfaeeelmjfbblmkbalffbhfpkhhnjalp"&gt;Chrome Extension&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://addons.mozilla.org/en-US/firefox/addon/github-tell-me-when-it-closes/"&gt;Firefox Add-on&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://addons.opera.com/en/extensions/details/github-tell-me-when-it-closes"&gt;Opera Add-on&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2017-11-01T00:07:36-04:00</updated>
+    <updated>2017-11-01T08:13:31-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
-    <description type="html">We are ever consuming articles on the web. In most cases, the articles that interest me are highly technical and informative. Just like a book, you would highlight the important passages for future recollection. In this post, I present my use the Highly highlighting service to record, retrieve, and share highlights.</description>
+    <description type="html">We are ever consuming articles on the web. In most cases, the articles that interest me are highly technical and informative. Just like a book, you would highlight the important passages for future recollection. In this post, I present my use of the Highly highlighting service to record, retrieve, and share highlights.</description>
     <content type="html">&lt;p&gt;&lt;img width="1024" height="683" src="/images/2017-10-31-share-highlighted-articles/book-highlighter.jpg" /&gt;
 &lt;em&gt;&lt;a title="IB English" href="https://flickr.com/photos/quinnanya/3242150010"&gt;IB English&lt;/a&gt; by &lt;a href="https://flickr.com/people/quinnanya"&gt;quinn.anya&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-sa/2.0/"&gt;CC BY-SA&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
@@ -135,7 +193,7 @@
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -269,7 +327,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -326,7 +384,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -397,7 +455,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -550,7 +608,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -716,7 +774,7 @@ name = My tips
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -774,7 +832,7 @@ name = My tips
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -913,7 +971,7 @@ name = My tips
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -989,7 +1047,7 @@ Going from this it makes sense to remove the dead code and put it rest with a de
     <title>Simplify the Styles, Drop the Distractions</title>
     <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
     <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
+    <updated>2017-10-31T23:59:26-04:00</updated>
     <published>2017-01-31T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1119,106 +1177,6 @@ it then returns the combined value
 &lt;li&gt;Opposed to using the incremental style of fixes, the distractions are reduced within code reviews and edits.&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Information at a Glance: RailsRequestStats</title>
-    <link rel="alternate" href="https://kevinjalbert.com/information-at-a-glance-rails-request-stats/"/>
-    <id>https://kevinjalbert.com/information-at-a-glance-rails-request-stats/</id>
-    <updated>2017-10-04T00:04:05-04:00</updated>
-    <published>2016-12-21T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">RailsRequestStats provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.</description>
-    <content type="html">&lt;p&gt;I developed &lt;a href="https://github.com/kevinjalbert/rails_request_stats"&gt;rails_request_stats&lt;/a&gt; to solve a personal problem of mine while optimizing certain Rails API endpoints at work. It provided me a quick way to get the required information at a glance in development logs.&lt;/p&gt;
-
-&lt;p&gt;To best describe what and how &lt;code&gt;rails_request_stats&lt;/code&gt; can be used the, following comes directly from &lt;code&gt;rails_request_stats&lt;/code&gt;&amp;rsquo;s &lt;a href="https://github.com/kevinjalbert/rails_request_stats#railsrequeststats"&gt;README&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;During development have you ever:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Wondered how many SQL queries occurred during a request?&lt;/li&gt;
-&lt;li&gt;Been curious on average view and database runtime for a request?&lt;/li&gt;
-&lt;li&gt;Wanted a report containing overall statistics of all unique requests?&lt;/li&gt;
-&lt;li&gt;Wanted a better way to iteratively optimize requests?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;code&gt;RailsRequestStats&lt;/code&gt; provides a simple drop-in solution to expose more statistics on requests. New information is presented in your development logs, supplying you with the required information to iteratively optimize requests by noticing subtle changes in the number of queries and average runtimes.&lt;/p&gt;
-
-&lt;h1&gt;How this Works&lt;/h1&gt;
-
-&lt;p&gt;&lt;code&gt;RailsRequestStats::NotificationSubscribers&lt;/code&gt; when required will subscribe to the &lt;code&gt;sql.active_record&lt;/code&gt;, &lt;code&gt;start_processing.action_controller&lt;/code&gt;, and &lt;code&gt;process_action.action_controller&lt;/code&gt; &lt;code&gt;ActionSupport::Notifications&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;sql.active_record&lt;/code&gt; event allow us to count each SQL query that passes though ActiveRecord, which we count internally.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;cache_read.active_support&lt;/code&gt; event allows us to count each read and hit to the Rails cache.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;cache_fetch_hit.active_support&lt;/code&gt; event allows us to count the cache hits to the Rails cache when using &lt;em&gt;fetch&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;start_processing.action_controller&lt;/code&gt; event allows us to clear internal counts, as well as perform a &lt;code&gt;GC.start&lt;/code&gt; and capturing the count of objects residing in the &lt;code&gt;ObjectSpace&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;process_action.action_controller&lt;/code&gt; event provides us runtime information along with identifying controller action details, we even determine the number of generated objects since the start of processing the action. At this point we are able to synthesis the query information and runtime information and store them internally in running collection of &lt;code&gt;RailsRequestStats::RequestStats&lt;/code&gt; objects.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; the data collection is tracked and stored in class-level instance variables. Thus this is not threadsafe, as no concurrency mechanisms are used (i.e., mutex). For non-threaded and forking application servers this should be fine.&lt;/p&gt;
-
-&lt;h1&gt;Installation&lt;/h1&gt;
-
-&lt;p&gt;Add this line to your application&amp;rsquo;s Gemfile:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;'rails_request_stats'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;group: :development&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Example Outputs&lt;/h1&gt;
-
-&lt;p&gt;Within the console ./log/development.log you should start seeing the following statement appearing at the end of processing a request:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] (AVG view_runtime: 163.655ms | AVG db_runtime: 15.465ms | AVG generated_object_count: 14523 | query_count: 9 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Finally when you exit the application&amp;rsquo;s server, you should see a summary report of all the data captured:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] INDEX:html "/users" (AVG view_runtime: 128.492ms | AVG db_runtime: 9.186ms | AVG generated_object_count: 25529 | MIN query_count: 8 | MAX query_count: 9) from 4 requests
-[RailsRequestStats] SHOW:html "/users/2" (AVG view_runtime: 13.0429ms | AVG db_runtime: 1.69033ms | AVG generated_object_count: 14523 | MIN query_count: 2 | MAX query_count: 2) from 3 requests
-[RailsRequestStats] SHOW:html "/users/2?test=1&amp;amp;blah=2" (AVG view_runtime: 17.8252ms | AVG db_runtime: 1.621ms | AVG generated_object_count: 18511 | MIN query_count: 2 | MAX query_count: 2) from 1 requests
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Customizing Outputs&lt;/h1&gt;
-
-&lt;h2&gt;Memory Stats&lt;/h2&gt;
-
-&lt;p&gt;By setting the following class variable within in an initializer (&lt;code&gt;./config/initializers/rails_request_stats.rb&lt;/code&gt;):&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;RailsRequestStats&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Report&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;print_memory_stats&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can see the &lt;em&gt;generated objects&lt;/em&gt; within the &lt;code&gt;ObjectSpace&lt;/code&gt; for individual requests:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[RailsRequestStats] (AVG view_runtime: 93.7252ms | AVG db_runtime: 8.66075ms | AVG generated_object_count: 125282 | query_count: 8 | cached_query_count: 0 | cache_read_count: 3 | cache_hit_count: 3 | generated_objects: {:total_generated_objects=&amp;gt;111878, :object=&amp;gt;921, :class=&amp;gt;35, :module=&amp;gt;0, :float=&amp;gt;0, :string=&amp;gt;49501, :regexp=&amp;gt;1556, :array=&amp;gt;17855, :hash=&amp;gt;2087, :struct=&amp;gt;103, :bignum=&amp;gt;0, :file=&amp;gt;0, :data=&amp;gt;37682, :match=&amp;gt;373, :complex=&amp;gt;0, :node=&amp;gt;1688, :iclass=&amp;gt;0})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;Override Reports&lt;/h2&gt;
-
-&lt;p&gt;You can manually override the output by monkey-patching in an initializer (&lt;code&gt;./config/initializers/rails_request_stats.rb&lt;/code&gt;):&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;RailsRequestStats&lt;/span&gt;
-  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Report&lt;/span&gt;
-    &lt;span class="c1"&gt;# Called after every request&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;report_text&lt;/span&gt;
-      &lt;span class="c1"&gt;# Access to @request_stats (instance of RequestStats)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="c1"&gt;# Called after the application server is closed (via #at_exit_handler)&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;exit_report_text&lt;/span&gt;
-      &lt;span class="c1"&gt;# Access to @request_stats (instance of RequestStats)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;NotificationSubscribers&lt;/span&gt;
-    &lt;span class="c1"&gt;# Called when the application server is closed&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;at_exit_handler&lt;/span&gt;
-      &lt;span class="c1"&gt;# Access to @requests (hash of { &amp;lt;paths&amp;gt; =&amp;gt; RequestStats })&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Reflections&lt;/h1&gt;
-
-&lt;p&gt;I have personally been using &lt;code&gt;RailsRequestStats&lt;/code&gt; at work since its inception. Reception has been quite good, it has little impact and simply provides extra information at a glance to developers during day-to-day work. I will mention that &lt;a href="https://github.com/MiniProfiler/rack-mini-profiler"&gt;rack-mini-profiler&lt;/a&gt; is an excellent gem, and kind of inspired my creation of this gem. I couldn&amp;rsquo;t find a good way to get the information I wanted when dealing with API endpoints, with &lt;code&gt;RailsRequestStats&lt;/code&gt; I was able to simply output it in the logs.&lt;/p&gt;
-
-&lt;p&gt;In the future I might add more &lt;a href="https://github.com/kevinjalbert/rails_request_stats/issues/4"&gt;detailed memory reports&lt;/a&gt;. I also have to verify that it continues to work in Rails 5 where the default webserver is &lt;a href="http://puma.io/"&gt;Puma&lt;/a&gt; which is a concurrent webserver. This could pose issue as information is stored in class instance variable and are modified at various parts of a requests life cycle.&lt;/p&gt;
 </content>
   </entry>
 </feed>

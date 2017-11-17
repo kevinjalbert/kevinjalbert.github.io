@@ -10,18 +10,18 @@ body {
     border: 1px solid $content-border-colour;
     border-radius: 3px;
     margin-top: 10px;
-  }
 
-  img {
-    display: block;
-    height: auto;
-    margin: 10px auto;
-    max-width: 100%;
-    width: auto;
-  }
+    img {
+      display: block;
+      height: auto;
+      margin: 10px auto;
+      max-width: 100%;
+      width: auto;
+    }
 
-  code {
-    word-wrap: break-word;
+    code {
+      word-wrap: break-word;
+    }
   }
 }
 

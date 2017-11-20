@@ -7,27 +7,5 @@
 
 <%= javascript_include_tag :app %>
 
-<!-- http://drawingablank.me/blog/fix-your-bounce-rate.html -->
-<% if !development? %>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-16620161-5']);
-    _gaq.push(['_trackPageview']);
-
-    setTimeout(function() {
-      window.onscroll = function() {
-        window.onscroll = null; // Only track the event once
-        _gaq.push(['_trackEvent', 'scroll', 'read']);
-      }
-    }, 5000);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-<% end %>
-
 <!-- https://connect.getliner.com/api/in-site -->
 <script type="text/javascript" charset="utf-8" src="https://connect.getliner.com/sdk/sdk-in-site.js"></script>

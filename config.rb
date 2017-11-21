@@ -68,7 +68,7 @@ configure :build do
   activate :asset_host
   activate :minify_css
   activate :minify_html
-  activate :minify_javascript
+  #activate :minify_javascript
 
   activate :imageoptim do |options|
     options.manifest = false

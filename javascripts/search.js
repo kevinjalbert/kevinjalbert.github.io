@@ -1,1 +1,51 @@
-var lunrIndex=null,lunrData=null;$.ajax({url:"/search/lunr-index.json",cache:!0,method:"GET",success:function(n){lunrData=n}}),$(function(){$(".search").autocomplete({source:function(n,e){null==lunrIndex&&(lunrIndex=lunr.Index.load(lunrData.index));var l=_(lunrIndex.search(n.term)).take(50).pluck("ref").map(function(n){return lunrData.docs[n]}).value();0==l.length&&(l=[{noresults:!0}]),e(l)},select:function(n,e){e.item.noresults||(window.location.href=e.item.url)},open:function(){$(this).removeClass("ui-corner-all").addClass("ui-corner-top")},close:function(){$(this).removeClass("ui-corner-top").addClass("ui-corner-all")}}).autocomplete("instance")._renderItem=function(n,e){var l=e.noresults?'<span class="noresults">No results found</span>':'<a href="'+e.url+'">'+e.title+"</a>";return $(this.menu.element).toggleClass("noresults",e.noresults),$("<li>").append(l).appendTo(n)}});
+// Borrowed from http://manas.com.ar/blog/2015/10/22/middleman-search-client-side-search-in-your-middleman-site.html
+var lunrIndex = null;
+var lunrData  = null;
+
+// Download index data
+$.ajax({
+  url: '/search/lunr-index.json',
+  cache: true,
+  method: 'GET',
+  success: function(data) {
+    lunrData = data;
+  }
+});
+
+// Setup autocomplete field
+$(function() {
+  $('.search').autocomplete({
+    source: function(request, response) {
+      if (lunrIndex == null) {
+        lunrIndex = lunr.Index.load(lunrData.index);
+      }
+      var result = _(lunrIndex.search(request.term)).take(50).pluck('ref').map(function(ref) {
+        return lunrData.docs[ref];
+      }).value();
+
+      if (result.length == 0) {
+        result = [{'noresults': true}]
+      }
+      response(result);
+    },
+    select: function(event, selected) {
+      if (!selected.item.noresults) {
+        window.location.href = selected.item.url;
+      }
+    },
+    open: function() {
+      $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+    },
+    close: function() {
+      $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+    }
+  }).autocomplete("instance")._renderItem = function(ul, item) {
+    // Copied from https://jqueryui.com/autocomplete/#custom-data
+    var content = item.noresults
+      ? '<span class="noresults">No results found</span>'
+      : '<a href="' + item.url + '">' + item.title + '</a>';
+
+    $(this.menu.element).toggleClass('noresults', item.noresults);
+    return $("<li>").append(content).appendTo(ul);
+  };
+});

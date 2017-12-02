@@ -2,16 +2,96 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-11-14T18:53:20-05:00</updated>
+  <updated>2017-12-02T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Slack Reminding Users and Channels</title>
+    <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
+    <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
+    <updated>2017-12-02T15:10:45-05:00</updated>
+    <published>2017-12-02T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Slack Reminders are powerful, maybe even more so than you originally thought?! In my experience, I noticed that colleagues of mine didn't fully use reminders to their fullest extent.</description>
+    <content type="html">&lt;p&gt;&lt;img width="750" height="310" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-reminders.jpg" /&gt;
+&lt;em&gt;Screeshot of Slack&amp;rsquo;s Reminder Help&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://slack.com/"&gt;Slack&lt;/a&gt; has taken over communication for workplace environments, at least within tech circles surrounding me. I realize there are many competitors, and I have even used some of them in the past, but to me Slack is my preferred choice. If you haven&amp;rsquo;t given Slack a try, I highly recommend it! At &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt; we heavily use Slack.&lt;/p&gt;
+
+&lt;p&gt;This post will be short and focused on &lt;a href="https://get.slack.help/hc/en-us/articles/208423427"&gt;Slack Reminders&lt;/a&gt;. From what I&amp;rsquo;ve experienced with coworkers, they only knew of and used a small subset of Slack Reminder&amp;rsquo;s feature set. This post is going to demonstrate what you can do with Slack Reminders, mainly assigning reminders to users and channels.&lt;/p&gt;
+
+&lt;h1&gt;Reminding Myself&lt;/h1&gt;
+
+&lt;p&gt;A common use case for reminders &amp;ndash; you want some notification in the future to remind you about something.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind me to work on blog post in 30 minutes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img width="587" height="109" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-me.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the feature that most people know of with Slack Reminders.&lt;/p&gt;
+
+&lt;h1&gt;Reminding a User&lt;/h1&gt;
+
+&lt;p&gt;It&amp;rsquo;s not an uncommon task that you&amp;rsquo;d want to remind a colleague about a future task.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind @aaron.romeo deploy your changes before the weekend on friday morning
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img width="630" height="123" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-user.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example, &lt;a href="http://www.aaronromeo.com/"&gt;@aaron.romeo&lt;/a&gt; would receive a reminder at the specified time. Aaron doesn&amp;rsquo;t actually receive any indication that he has just been assigned a reminder. The only way he can get any insight that he has a new reminder is to either wait until the specified time, or to look at his own list of reminders and see it there. You just have to be aware of this detail depending on how you plan to use reminders.&lt;/p&gt;
+
+&lt;p&gt;Going back to our example, Aaron checks his reminders in Slack and he sees the newly assigned task, although there is no indication of who assigned it to him. Slack, if you are listening, I would like to be able to see who assigned the reminder.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="685" height="75" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-target-list.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Regardless, when the reminder does trigger, Aaron can interact with it. In this case he&amp;rsquo;ll mark it as completed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="615" height="100" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-target-trigger.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I received confirmation that he has seen and acted on the reminder I assigned him.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="700" height="60" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-target-completed.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;This asynchronous flow is awesome, as it allows you to &lt;em&gt;know&lt;/em&gt; that the reminder for that user was acted upon. I tend to use these types of reminders after hours to present information that can wait until the following day. Normally, I end up finding interesting articles that I want to pass on, so these types of reminders work perfectly for me.&lt;/p&gt;
+
+&lt;h1&gt;Reminding a Channel&lt;/h1&gt;
+
+&lt;p&gt;In a similar fashion to assigning a reminder to another user, you can target a channel itself. For example, you might want to remind all the online users within a channel about something.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #team-ep-dev :spiral_calendar_pad: @here standup time! every weekday at 10:30am
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img width="650" height="100" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-channel.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example, the channel &lt;code&gt;#diet-sup-dev&lt;/code&gt; will receive the message at the specified time. As you can see, I even used the &lt;code&gt;@here&lt;/code&gt; mention to make sure it gets all the active users&amp;rsquo; attention. When a channel reminder is set, the reminder is announced on the channel at the specified time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="698" height="82" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-channel-announcement.jpg" /&gt;&lt;/p&gt;
+
+&lt;h1&gt;What are my reminders&lt;/h1&gt;
+
+&lt;p&gt;Every now and then you might want to do a little housecleaning on your reminders. You have likely clicked the &lt;em&gt;View Reminders&lt;/em&gt;, or even just executed the following:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This presents a list of the past, present, and future reminders, as well as incomplete reminders, for yourself, along with reminders for other individuals and channels.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="684" height="123" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-list.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is a nice place to check every now and then to make sure your reminders are being actioned.&lt;/p&gt;
+
+&lt;h1&gt;Reminders are cheap&lt;/h1&gt;
+
+&lt;p&gt;The beauty of Slack Reminders is that they are quick to create and are actionable. You can be in any conversation in Slack and still use the &lt;code&gt;/remind&lt;/code&gt; command. The ease of making a new reminder means there is no reasons to not use them in your daily workflow.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -69,7 +149,7 @@
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -193,7 +273,7 @@
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -327,7 +407,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -384,7 +464,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -455,7 +535,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -608,7 +688,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -774,7 +854,7 @@ name = My tips
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -832,7 +912,7 @@ name = My tips
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -971,7 +1051,7 @@ name = My tips
     <title>Find and Bury Dead Code</title>
     <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
     <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
+    <updated>2017-11-24T23:59:40-05:00</updated>
     <published>2017-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1040,142 +1120,6 @@ Going from this it makes sense to remove the dead code and put it rest with a de
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Only remove dead code when you are confident that it is no longer used (deeper investigation and/or let dynamic analysis tools run for longer).&lt;/li&gt;
 &lt;li&gt;Less code relieves mental burden, and reduces time wasted while working in a codebase.&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Simplify the Styles, Drop the Distractions</title>
-    <link rel="alternate" href="https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/"/>
-    <id>https://kevinjalbert.com/simplify-the-styles-drop-the-distractions/</id>
-    <updated>2017-11-22T23:23:12-05:00</updated>
-    <published>2017-01-31T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">During development, everyone has a preference of coding style. For the most part these preferences have no effect on the functionality of the application. It is possible that they can become a large time sink, especially in larger teams and projects. In this article we will determine how minor style differences cause negative effects, and how we can mitigate them.</description>
-    <content type="html">&lt;p&gt;Everyone has preferences in how code should be structured from an aesthetic standpoint. Having creative freedom in finding your own style is a powerful and rewarding feeling. Seeing that new class/file completely written in your style can put a smile on your face. The problem is we&amp;rsquo;re often not the only developer on a project. In a team or open-source environment, it is unlikely that &lt;em&gt;everyone&lt;/em&gt; is on board with the exact coding style. It is not uncommon to see different styles in a project just because everyone has their own.&lt;/p&gt;
-
-&lt;h1&gt;Why Care?&lt;/h1&gt;
-
-&lt;p&gt;You might be asking &lt;em&gt;&amp;ldquo;Why Care?&amp;rdquo;&lt;/em&gt; about styles. As developers, we want to enjoy working in our codebase. If we&amp;rsquo;re constantly dealing with inconsistent styles, it becomes a mental burden. Also, during code reviews everyone might be imposing their own styles on the reviewed code. After all is said and done, it really comes down to dropping the distractions in a codebase. With a consistent style there are no stylistic arguments in code reviews, and readability increases as the taxing effort of dealing with multiple styles in the same file disappears.&lt;/p&gt;
-
-&lt;p&gt;The following is an extreme case of stylistic inconsistencies with two functionally identical code snippets &amp;ndash; one follows a styleguide while the other does not.&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="cm"&gt;=begin
-This method checks if the two args are equal
-it then returns the combined value
-=end&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;method_one&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;second_arg&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Executing method_one"&lt;/span&gt;
-
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;eql?&lt;/span&gt; &lt;span class="n"&gt;second_arg&lt;/span&gt;
-          &lt;span class="nb"&gt;puts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'first_arg is the same as second_arg'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;second_arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# This method checks if the two args are equal&lt;/span&gt;
-&lt;span class="c1"&gt;# it then returns the combined value&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;method_one&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;second_arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s1"&gt;'Executing method_one'&lt;/span&gt;
-
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;eql?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;second_arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s1"&gt;'first_arg is the same as second_arg'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;first_arg&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;second_arg&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Hopefully, you found the second snippet more pleasant and easier to read. The second one follows a styleguide while the first one had a mis-match of style.&lt;/p&gt;
-
-&lt;h1&gt;Starting with Styles&lt;/h1&gt;
-
-&lt;p&gt;&lt;img alt="Mixing tabs and spaces" width="717" height="325" src="/images/2017-01-31-simplify-the-styles-drop-the-distractions/tabs-spaces-both.png" /&gt;
-&lt;em&gt;[Image from the &lt;a href="http://www.emacswiki.org/emacs/TabsSpacesBoth"&gt;EmacsWiki&lt;/a&gt;, original comic by &lt;a href="http://www.duelinganalogs.com/comic/2007/04/02/hello-im-linux/"&gt;Steve Napierski&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Many basic style decisions are made early when a project is started. One of two things happen:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Styles are &lt;strong&gt;implicitly determined&lt;/strong&gt; by the creator&lt;/li&gt;
-&lt;li&gt;Styles are &lt;strong&gt;explicitly established&lt;/strong&gt; upfront by the creator or collaborators&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Even if the project starts with an implicit determined style, the end goal is to make it explicit. The more people that contribute to a project, the more chance their coding styles will conflict. Also, your personal coding style evolves over time and it is likely that styles within a project will &lt;em&gt;drift&lt;/em&gt;, even with a single contributor.&lt;/p&gt;
-
-&lt;p&gt;To reduce wasted time dealing with style issues, just explicitly set a style for your project.&lt;/p&gt;
-
-&lt;h2&gt;Picking an Explicit Style&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;m willing to bet that all languages have community styleguides (if not, then that&amp;rsquo;s a great opportunity to start one!). The following are some example styleguides:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.python.org/dev/peps/pep-0008/"&gt;Python - PEP8 Styleguide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/bbatsov/ruby-style-guide"&gt;Ruby - Community Styleguide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/airbnb/javascript"&gt;Javascript - Airbnb Styleguide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://google.github.io/styleguide/jsguide.html"&gt;Javascript - Google Styleguide&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;When picking a type of style, I recommend to just pick one of the already established styleguides. You might be tempted to start completely fresh and make your own styleguide individually or with other contributors. The problem with creating a fresh styleguide is that eventually there will be the discussion, &lt;em&gt;&amp;ldquo;I want the style to look like this&amp;rdquo;&lt;/em&gt;, and there will be time wasted trying to make everyone happy (which possibly will never happen). When new developers get started in a codebase they might say, &lt;em&gt;&amp;ldquo;Why do we have the style like this?&amp;rdquo;&lt;/em&gt;. This leads to a discussion regarding whether or not the styleguide should be revised, which again is a potential waste of time.&lt;/p&gt;
-
-&lt;p&gt;You can deflect all styleguide questions if you just select a community styleguide to begin with. These styleguides have already gone through rigorous discussions within the community. One more bonus of using a popular styleguide is that it is likely that other open-source projects are using the same styleguide.&lt;/p&gt;
-
-&lt;h2&gt;Using Linters&lt;/h2&gt;
-
-&lt;p&gt;Linters are styleguide checkers that often provide a command line interface and editor integrations. Like previously mentioned with styleguides, there is probably one for each language (if not, what a great opportunity!). The following are some example linters:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://batsov.com/rubocop/"&gt;Ruby - Rubocop&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://eslint.org/"&gt;Javascript - ESLint&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://stylelint.io/"&gt;CSS/SCSS/LESS - Stylelint&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A styleguide and linter work hand-in-hand. Together they ensure that code that violates the styleguide is flagged before it is committed to the codebase. There really is no downside to using a linter, and in most cases the benefits far outweigh the effort to set up in your editor. I highly recommend that everyone takes advantage of linters within your editor.&lt;/p&gt;
-
-&lt;h2&gt;Deviating from the Styleguides&lt;/h2&gt;
-
-&lt;p&gt;If your team is completely set on having customized styles that differ from a popular styleguide, I would still encourage using one as a base. In an ideal scenario it is possible to use inheritance, where you can then inherit the rules from your choice of popular styleguide. If this isn&amp;rsquo;t possible, then the next best option is to simply copy the whole guide and use that as your base and make modifications to it.&lt;/p&gt;
-
-&lt;p&gt;Each styleguide/linter has their own implementation and handling of their configurations. You will have to explore each and see how to deal with the inheritance. For example, &lt;a href="http://eslint.org/docs/user-guide/configuring#extending-configuration-files"&gt;ESLint&lt;/a&gt; and &lt;a href="http://rubocop.readthedocs.io/en/latest/configuration/#inheritance"&gt;Rubocop&lt;/a&gt; define how to extend/inherit from other styleguides.&lt;/p&gt;
-
-&lt;h2&gt;Reduce the Distractions&lt;/h2&gt;
-
-&lt;p&gt;Using a styleguide and linter, it becomes easy to identify and cut off the distractions of inconsistent styles early. If you can fix stylistic changes as you modify the underlying code, then the future you or your teammates won&amp;rsquo;t have to deal with it later. In addition, during code reviews everyone knows that all stylistic changes &lt;em&gt;should&lt;/em&gt; be taken care of, thus reducing the mental burden.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Just use a styleguide!" width="1480" height="517" src="/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png" /&gt;
-&lt;em&gt;[Image from &lt;a href="https://xkcd.com/1513/"&gt;xkcd&lt;/a&gt;]&lt;/em&gt;&lt;/p&gt;
-
-&lt;h1&gt;Applying to an Existing Project&lt;/h1&gt;
-
-&lt;p&gt;It&amp;rsquo;s great that you want to get a consistent style in an existing project. Now comes an important decision, &lt;em&gt;&amp;ldquo;Do we apply all the style fixes immediately, or as we encounter them?&amp;rdquo;&lt;/em&gt; The answer is situational and many factors can influence what works best for your project and team.&lt;/p&gt;
-
-&lt;p&gt;With a sweeping change, a lot of code might be modified, although nothing should be functionally different, as we are just dealing with stylistic edits. This can impact the effectiveness of &lt;code&gt;git blame&lt;/code&gt; as the latest commit might simply be &lt;em&gt;&amp;ldquo;Sweeping Style Changes&amp;rdquo;&lt;/em&gt;, and not the actual commit you were hoping for. Fortunately, there are ways to look deeper into the &lt;code&gt;git log&lt;/code&gt; and find the actual content you are looking for (i.e., &lt;a href="/git-evolution-how-did-we-get-here/"&gt;Git Evolution&lt;/a&gt;). With a sweeping change of style fixes, the project afterwards would be in a consistent state of styles.&lt;/p&gt;
-
-&lt;p&gt;By fixing style issues as you encounter them, it leaves a lot to interpretation by team members. &lt;em&gt;&amp;ldquo;Do I fix the whole file when I touch a line within it?&amp;rdquo;&lt;/em&gt;, &lt;em&gt;&amp;ldquo;Do I only fix styles for the lines I touch?&amp;rdquo;&lt;/em&gt;. In either case the commits will contain two concepts now going forward: feature/bug changes and style changes. Not only does this muddy the usefulness of looking back in the commit history, but code reviews now also contain the style element that everyone has to look at. Overall, the distractions of incrementally dealing with style changes never stop. Even while editing or reading the codebase you will subconsciously see the inconsistent style changes which leads to more distractions.&lt;/p&gt;
-
-&lt;p&gt;In my personal opinion, rip the band-aid off and just make a sweeping change of style fixes to put your project in a pristine state. In a legacy system, it might make sense to simply do the incremental approach as it would not be often that one would make changes in the battle-tested system.&lt;/p&gt;
-
-&lt;h1&gt;TL;DR&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use a styleguide and linter for any software project to help reduce distractions on styles:
-
-&lt;ul&gt;
-&lt;li&gt;If possible pick a popular styleguide to avoid arguments/discussions on styles.&lt;/li&gt;
-&lt;li&gt;Use a linter in your editor to cut off stylistic distractions early (i.e., before code reviews).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;The sooner a project completely adheres to the styleguide:
-
-&lt;ul&gt;
-&lt;li&gt;The less stylistic distractions are encountered while reading through the codebase, and&lt;/li&gt;
-&lt;li&gt;The less work in keeping up the proper styles.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;If possible, use a sweeping approach to applying style fixes:
-
-&lt;ul&gt;
-&lt;li&gt;The minimal impact on &lt;code&gt;git blame&lt;/code&gt; can be resolved with proper tools.&lt;/li&gt;
-&lt;li&gt;Opposed to using the incremental style of fixes, the distractions are reduced within code reviews and edits.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

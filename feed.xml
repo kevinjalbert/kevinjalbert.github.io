@@ -2,16 +2,156 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2017-12-02T18:53:20-05:00</updated>
+  <updated>2018-01-03T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Start Now: Architecture Decision Records</title>
+    <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
+    <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
+    <updated>2018-01-03T20:41:16-05:00</updated>
+    <published>2018-01-03T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Stop asking questions about certain architectural decisions for a project. Implement Architecture Decision Records, and save the team and yourself future headaches.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1024" height="768" src="/images/2018-01-03-start-now-architecture-decision-records/filing-cabinet.jpg" /&gt;
+&lt;em&gt;&lt;a title="Filing cabinet" href="https://flickr.com/photos/mightymightymatze/2150298078"&gt;Filing cabinet&lt;/a&gt; by &lt;a href="https://flickr.com/people/mightymightymatze"&gt;mightymightymatze&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc/2.0/"&gt;CC BY-NC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;While working on any project, you&amp;rsquo;ll eventually need to make decisions regarding the task at hand. The decision that has to be made can vary in size and impact. Often we are in the context of a team, and these decisions are made in consultation with others. As time progresses, with new and old team members moving on and off the project, we&amp;rsquo;ll start to question some of those decisions that were made in the past.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Why was it done that way?&lt;/p&gt;
+
+&lt;p&gt;Did we not consider this alternative?&lt;/p&gt;
+
+&lt;p&gt;What was the context when that decision was made?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Save the team and yourself future headaches and plan accordingly for these types of questions now, by starting Architecture Decision Records (ADRs) for your project.&lt;/p&gt;
+
+&lt;h1&gt;What are ADRs?&lt;/h1&gt;
+
+&lt;p&gt;I first read about ADRs in the &lt;a href="http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions"&gt;documenting architecture decisions&lt;/a&gt; blog post by &lt;a href="http://thinkrelevance.com/team/members/michael-nygard"&gt;Michael Nygard&lt;/a&gt;. ADRs are a form of documentation that record any &lt;em&gt;architecturally significant&lt;/em&gt; decisions that impact a project. For an impact to be considered &lt;em&gt;architecturally significant&lt;/em&gt; within a software project context, Micheal stated:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;hellip; those that affect the structure, non-functional characteristics, dependencies, interfaces, or construction techniques.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Michael&amp;rsquo;s blog post was focused on ADRs within the context of an agile software project, but I believe it can be applied across different domains. The affected values for what a decision might impact would have to be altered to suit the appropriate domain. For example, altering the customer support workflow could constitute a decision record as it significantly changes a business process.&lt;/p&gt;
+
+&lt;p&gt;I had recently read that &lt;a href="https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records"&gt;lightweight architecture decision records&lt;/a&gt; had made it into the &lt;em&gt;adopt&lt;/em&gt; ring of &lt;a href="https://www.thoughtworks.com/radar"&gt;Thoughtworks Technology Radar&lt;/a&gt; in the November 2017 edition. They note that the lightweight aspect of ADRs is to just have text/markdown files alongside software projects in their repositories.&lt;/p&gt;
+
+&lt;p&gt;Here is an example ADR (pretty meta as it is about starting ADRs):&lt;/p&gt;
+&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# 1. Record architecture decisions&lt;/span&gt;
+
+Date: 2018-01-03
+
+&lt;span class="gu"&gt;## Status&lt;/span&gt;
+
+Accepted
+
+&lt;span class="gu"&gt;## Context&lt;/span&gt;
+
+We need to record the architectural decisions made on this project.
+
+&lt;span class="gu"&gt;## Decision&lt;/span&gt;
+
+We will use Architecture Decision Records, as described by Michael Nygard in this article: http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions
+
+&lt;span class="gu"&gt;## Consequences&lt;/span&gt;
+
+See Michael Nygard's article, linked above. For a lightweight ADR toolset, see Nat Pryce's _adr-tools_ at https://github.com/npryce/adr-tools.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I don&amp;rsquo;t want to go into technical details of ADRs, as this blog post is to bring awareness to them, as well as tools/techniques around them. There is plenty of supplementary material in this blog post via links to other articles.&lt;/p&gt;
+
+&lt;h1&gt;Getting Started with ADRs&lt;/h1&gt;
+
+&lt;p&gt;The biggest thing when adopting ADRs in your project is being consistent with them. As with any added process, it&amp;rsquo;s easy to simply overlook the new parts if they aren&amp;rsquo;t at the forefront of your mind. Within our software projects, we actually incorporate ADR consideration in our &lt;a href="https://help.github.com/articles/creating-a-pull-request-template-for-your-repository/"&gt;GitHub pull request template&lt;/a&gt;. It&amp;rsquo;s a good idea to make sure all team members are all in agreement with using ADRs, as well as when to make one. You don&amp;rsquo;t want a decision to be made that is not documented.&lt;/p&gt;
+
+&lt;h2&gt;Simplify ADRs with &lt;code&gt;adr-tools&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;In addition to including a note about ADRs in our pull request template, there is more tooling to help out. In the spirit of being lightweight records, markdown files are the preferred way to write ADRs. The &lt;a href="https://github.com/npryce/adr-tools"&gt;&lt;code&gt;adr-tools&lt;/code&gt; command line tool&lt;/a&gt; is a great way to simplify the creation of ADRs. If you are on MacOS, back in May 2017, I got &lt;a href="https://github.com/Homebrew/homebrew-core/pull/13081"&gt;adr-tools accepted into homebrew&lt;/a&gt;, so now you can just &lt;code&gt;brew install adr-tools&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are a lot of configurations and features that exist within &lt;code&gt;adr-tools&lt;/code&gt;. I&amp;rsquo;m going to go over some of the essentials, with examples. I highly recommend taking a deeper look into the tool itself to get the most out of it.&lt;/p&gt;
+
+&lt;h3&gt;Initialize Repository&lt;/h3&gt;
+
+&lt;p&gt;With a new repository, you get started with &lt;code&gt;adr init&lt;/code&gt;, which creates the following &lt;code&gt;doc/adr/0001-record-architecture-decisions.md&lt;/code&gt; file for you. The contents of this ADR is actually the sample one presented above.&lt;/p&gt;
+
+&lt;h3&gt;Create New ADRs&lt;/h3&gt;
+
+&lt;p&gt;When you want to add a new ADR, you can execute &lt;code&gt;adr new &amp;quot;Split up component XXXX into two modules&amp;quot;&lt;/code&gt; which opens up a basic ADR template to fill in. It creates the next incremented ADR &amp;ndash; &lt;code&gt;doc/adr/0002-split-up-component-xxxx-into-two-modules.md&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Maintain Table of Contents&lt;/h3&gt;
+
+&lt;p&gt;Most software projects have a &lt;code&gt;README.md&lt;/code&gt; file. When working with ADRs, I include a hyperlink to &lt;code&gt;/doc/adr/README.md&lt;/code&gt;. This file can be generated using &lt;code&gt;adr generate toc &amp;gt; ./docs/adr/README.md&lt;/code&gt;, and ends up creating a nice table of contents of the current ADRs:&lt;/p&gt;
+&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# Architecture Decision Records&lt;/span&gt;
+&lt;span class="p"&gt;
+*&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;1. Record architecture decisions&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0001-record-architecture-decisions.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up component XXXX into two modules&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Superseding Existing ADRs&lt;/h3&gt;
+
+&lt;p&gt;Eventually, you will have a decision which is somehow &lt;em&gt;linked&lt;/em&gt; to another ADR. A great example of this is a new ADR which supersedes an older decision. First let us make a new ADR &lt;code&gt;adr new -s 2 &amp;quot;Combine modules back into one component&amp;quot;&lt;/code&gt;, which ends up superseding our earlier decision. This will actually modify the ADR&amp;rsquo;s &lt;em&gt;status&lt;/em&gt; section by adding the following:&lt;/p&gt;
+&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;
+Superseded by &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;3. Combine modules back into one component&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0003-combine-modules-back-into-one-component.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0003-combine-modules-back-into-one-component.md&lt;/span&gt;
+Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up component XXXX into two modules&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is useful to see how ADRs relate to each other. In our example, we&amp;rsquo;re indicating one ADR that supersedes another. It is possible to use &lt;code&gt;adr link&lt;/code&gt; to specifically tailor the link to use different wording, so you can be specific in how ADRs are associated. Ultimately, linking provides additional context surrounding linked decisions.&lt;/p&gt;
+
+&lt;h3&gt;Visualizing ADRs&lt;/h3&gt;
+
+&lt;p&gt;With the ability to &lt;em&gt;link&lt;/em&gt; ADRs together, it now becomes possible to trace the story of a specific ADR. By following links you can understand the &lt;em&gt;bigger picture&lt;/em&gt; of how the architecture evolved over time. It can be hard to navigate one file at a time, so fortunately for us, &lt;code&gt;adr-tools&lt;/code&gt; has us covered by being able to produce a visualization of the ADRs.&lt;/p&gt;
+
+&lt;p&gt;With &lt;code&gt;adr generate graph | dot -Tjpg &amp;gt; graph.jpg&lt;/code&gt; we can generate the following image (using our example ADRs so far):&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="390" height="271" src="/images/2018-01-03-start-now-architecture-decision-records/graph.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is quite apparent to see the ADR links in this diagram. I personally have not seen how well this scales, although it still is a good technique to be aware of.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;adr generate graph&lt;/code&gt; by itself will return a &lt;a href="https://graphviz.gitlab.io/"&gt;graphviz&lt;/a&gt; output. It would be interesting to attach this to the &lt;code&gt;/doc/adr/README.md&lt;/code&gt; using the &lt;a href="https://github.com/TLmaK0/gravizo"&gt;gravizo&lt;/a&gt; service. This way, the ADR visualization is always within reach and can be apart of the normal process when adding new ADRs. I have not personally done this approach, but it looks interesting.&lt;/p&gt;
+
+&lt;h2&gt;Searching ADRs&lt;/h2&gt;
+
+&lt;p&gt;As we&amp;rsquo;re just dealing with markdown files, it becomes trivial to search through the ADRs. The file names are the titles, so even at a glance, it becomes easy to narrow down what you are looking for. You can even use &lt;code&gt;adr list&lt;/code&gt; to just list all the ADRs. In combination with other command line tools (i.e., grep) you can filter the list. I personally like using the &lt;a href="https://github.com/junegunn/fzf"&gt;&lt;code&gt;fzf&lt;/code&gt; command line tool&lt;/a&gt; to filter the list and open it in vim: &lt;code&gt;adr list | fzf | xargs vim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to dig deeper you can search the contents of the files for what you are looking for. For example, &lt;code&gt;grep -l &amp;#39;tool&amp;#39; ./doc/adr/*.md | fzf | xargs vim&lt;/code&gt; would look for any file with &lt;em&gt;tool&lt;/em&gt; in it, and present the &lt;code&gt;fzf&lt;/code&gt; interface for further filtering.&lt;/p&gt;
+
+&lt;p&gt;In the end, you can be creative on how you search through ADRs &amp;ndash; there is a lot of flexibility built into it. I usually use the &lt;a href="https://github.com/aykamko/tag"&gt;&lt;code&gt;tag&lt;/code&gt; command line tool&lt;/a&gt; for searching within files.&lt;/p&gt;
+
+&lt;h2&gt;Customizing ADRs&lt;/h2&gt;
+
+&lt;p&gt;At this point, you might be thinking &lt;em&gt;&amp;ldquo;ADRs sound great, but it doesn&amp;rsquo;t quite satisfy all my needs&amp;rdquo;&lt;/em&gt;. The concept of ADRs is very general and flexible in nature so that if you have specific needs or requirements, you can customize it. In our case, we&amp;rsquo;ve been using &lt;code&gt;adr-tools&lt;/code&gt; and it has a base template. You can change it, or use a different template. For example, it might be useful to look through &lt;a href="https://github.com/joelparkerhenderson/architecture_decision_record"&gt;other templates&lt;/a&gt; to find one that fits your needs.&lt;/p&gt;
+
+&lt;p&gt;This post has been talking about using markdown files, but your ADRs could be held in any other medium (i.e., JIRA, Google Docs, etc&amp;hellip;). I would argue to use what works best for your team. In most cases, within a software project, the markdown approach is nice as it&amp;rsquo;s very lightweight and everything is contained in the source directory.&lt;/p&gt;
+
+&lt;h1&gt;TL;DR&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ADRs are a great way keep records of architectural decisions&lt;/li&gt;
+&lt;li&gt;ADRs provide context surrounding architectural decisions&lt;/li&gt;
+&lt;li&gt;ADRs can be lightweight as markdown files that live within your project&amp;rsquo;s repository&lt;/li&gt;
+&lt;li&gt;ADRs are searchable and customizable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;The best time to start ADRs is at the start of a project; the second best time is right now&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+  </entry>
+  <entry>
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2017-12-02T15:10:45-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -91,7 +231,7 @@
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -149,7 +289,7 @@
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -273,7 +413,7 @@
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -407,7 +547,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -464,7 +604,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -535,7 +675,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -688,7 +828,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -854,7 +994,7 @@ name = My tips
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -912,7 +1052,7 @@ name = My tips
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
+    <updated>2017-12-02T15:36:37-05:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1044,82 +1184,6 @@ name = My tips
 &lt;li&gt;Make use of reactions to acknowledge a comment if possible.&lt;/li&gt;
 &lt;li&gt;Be aware of committed reviewers and ensure everyone knows of their roles.&lt;/li&gt;
 &lt;li&gt;Ensure that all committed reviewers have approved the pull request before merging.&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Find and Bury Dead Code</title>
-    <link rel="alternate" href="https://kevinjalbert.com/find-and-bury-dead-code/"/>
-    <id>https://kevinjalbert.com/find-and-bury-dead-code/</id>
-    <updated>2017-11-24T23:59:40-05:00</updated>
-    <published>2017-02-26T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Dead code has no reason to be in a project. Dead code wastes a developer’s time and energy. Going from this it makes sense to remove the dead code and put it rest with a delete keystroke. The main problem is how to identify dead code in a living project?</description>
-    <content type="html">&lt;p&gt;Dead code has no reason to be in a project. When you know it’s there, it simply nags at you to be removed. Sometimes you aren’t even sure that you have dead code. It might just be the case that every line of your codebase is being executed, which if true is great! The other scenario is that there is some dead code wasting developers’ time as they maintain it and work with it.
-Going from this it makes sense to remove the dead code and put it rest with a delete keystroke. The main problem is how to identify dead code in a living project?&lt;/p&gt;
-
-&lt;h1&gt;Finding Dead Code&lt;/h1&gt;
-
-&lt;p&gt;In smaller projects, it’s possible to simply see and know what is dead code just from the usage and familiarity you might have with the project. Within larger projects, identifying dead code is not as straight forward. Luckily, we have tools and systems that can aid us. For the most part, we will be looking at this problem from a dynamic language perspective, primarily Ruby.&lt;/p&gt;
-
-&lt;h2&gt;Static Analysis Tools&lt;/h2&gt;
-
-&lt;p&gt;Static analysis tools do not run the application and only examine the source code itself. A general property of these tools is the speed and ease of use, although they come at a price of precision (i.e., missing and incorrect results). I’ll will first present a Ruby specific tool called &lt;strong&gt;&lt;em&gt;debride&lt;/em&gt;&lt;/strong&gt; and then a language agnostic tool called &lt;strong&gt;&lt;em&gt;unused&lt;/em&gt;&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/seattlerb/debride"&gt;&lt;strong&gt;&lt;em&gt;debride&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt; &amp;ndash; This tool analyzes your Ruby source code and detects uncalled or dead methods. It knows of Ruby on Rails method definitions, as they are not defined in your codebase. In addition, you can provide a whitelist of methods that you know should not be flagged by the tool. This is a specific tool that is tailored to work on Ruby and Rails projects.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/joshuaclayton/unused"&gt;&lt;strong&gt;&lt;em&gt;unused&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt; &amp;ndash; This tool is language agnostic. It first requires a &lt;a href="http://ctags.sourceforge.net/"&gt;&lt;em&gt;ctags&lt;/em&gt;&lt;/a&gt; file for your project, containing all the project class/method definitions and their locations. With this, &lt;em&gt;unused&lt;/em&gt; is able to scan through your project using &lt;a href="https://github.com/ggreer/the_silver_searcher"&gt;&lt;em&gt;ag&lt;/em&gt;&lt;/a&gt; for statements calling these definitions. Throughout the search, if no usage of the class/method definition is found, then that code is probably unused. In addition, there is a configuration file for further customization to reduce false positives.&lt;/p&gt;
-
-&lt;p&gt;With both of these static analysis tools, there is a precision issue of whether or not the detected code is actually used during the execution of your project. This does not strum up immediate confidence in the results and often requires deeper investigation. Another large concern when dealing with dynamic language is class/method defined at runtime or methods that are invoked via meta programming.&lt;/p&gt;
-
-&lt;h2&gt;Dynamic Analysis Tools&lt;/h2&gt;
-
-&lt;p&gt;Dynamic analysis tools, unlike their static counterparts, actually need to run the source code. A general property of these tools is that they provide richer and more accurate results, although at the cost of performance (i.e., slower due to measuring at runtime). I’ll present first a Ruby specific tool called &lt;strong&gt;&lt;em&gt;coverband&lt;/em&gt;&lt;/strong&gt; and then a language agnostic tool called &lt;strong&gt;&lt;em&gt;scythe&lt;/em&gt;&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/danmayer/coverband"&gt;&lt;strong&gt;&lt;em&gt;coverband&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt; &amp;ndash; The approach that &lt;em&gt;coverband&lt;/em&gt; uses could be applied to other languages, although it is a Ruby specific implementation. This tool borrows the results format of test suite coverage (i.e., how much code is exercised by your test suite), however it measures code coverage during the runtime of your application. A nice use case that &lt;em&gt;coverband&lt;/em&gt; accounts for is multiple instances of your application, it uses a &lt;em&gt;redis&lt;/em&gt; instance to hold the coverage results. There is some performance cost for using &lt;em&gt;coverband&lt;/em&gt;, as it records each line executed. If you are measuring a web application, the tool allows you to instrument a percentage of your requests. The coverage information keeps tracks of the number of times each line is hit, and this can indicate hot spots in your application.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/michaelfeathers/scythe"&gt;&lt;strong&gt;&lt;em&gt;scythe&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt; — The approach that &lt;em&gt;scythe&lt;/em&gt; uses is language agnostic. The basic idea is to place probes within your source code that when triggered, record the date and time to a file matching the probe’s  name. At its heart, &lt;em&gt;scythe&lt;/em&gt; is a command-line utility that reports on these files, giving you an indication of how long since the probe was last called. Currently, there are probe implementations for Java, Python and Ruby. Due to the simple contract (files which are updated when probes are triggered), it is not difficult to make &lt;em&gt;scythe&lt;/em&gt; work for other languages. The overhead using the probes is minimal and can be placed anywhere in your source code. Unfortunately, we have to use a manual process in placing and inspecting the probes.&lt;/p&gt;
-
-&lt;p&gt;Both of the above tools took different approaches for dead code identification. In either case, the underlying source code must be executed, and usually there is setup required for the tool to work in conjunction with the running application.&lt;/p&gt;
-
-&lt;h1&gt;Burying the Dead&lt;/h1&gt;
-
-&lt;p&gt;Now that we know that there is a class of tools for detecting dead code, the next set of questions revolve around removing the dead code.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The tool indicates this code is dead. Can we remove it?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Recall that static vs. dynamic analysis can inspire different levels of confidence. Tools like &lt;em&gt;scythe&lt;/em&gt; or &lt;em&gt;coverband&lt;/em&gt; actually determine whether the source code in question was executed in a real environment. The problem is whether or not the tool collected enough data during execution to ensure the code in question could have been ran. It is hard to know whether or not flagged dead code is just code that is rarely ran, but still alive.&lt;/p&gt;
-
-&lt;p&gt;With sufficient time, it should be possible to make the decision to remove the dead code. As with any change, be observant to any signals that could indicate that the removal was of live code. Given the complex scope of usage, it can be difficult to detect dead code if there are third parties using your codebase. A side bonus of removing dead code, is that any associated tests can be removed &amp;ndash; effectively speeding up your test suite.&lt;/p&gt;
-
-&lt;h1&gt;Moving on&lt;/h1&gt;
-
-&lt;p&gt;By removing dead code the scale of the source code shrinks ever so slightly. There is little to no point in having extra code in your project if it does not add value. There is possible arguments that if it works, there is no need to change it. I would counter that by saying that keeping dead code around is lugging around a mental burden that developers have to deal with. Dead code wastes a developer’s time and energy. Imagine having to upgrade a dependency and making changes in dead code &amp;ndash; what a waste.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Dead code wastes a developer’s time and energy.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Do be aware that there is some initial time investment in getting a system in place and learning how to identify dead code in your specific projects. In the long run, however, it is bound to save headaches in a long running project.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;h1&gt;TL;DR&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Dead code is code that is never exercised during the execution of the application.&lt;/li&gt;
-&lt;li&gt;Two types of tools exist for finding dead code: Static and Dynamic analysis tools
-
-&lt;ul&gt;
-&lt;li&gt;Dead code static analysis tools observe the source code and attempt to deduce methods that are never used.&lt;/li&gt;
-&lt;li&gt;Dead code dynamic analysis tools instrument the running state of the source code and record what is executed.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Only remove dead code when you are confident that it is no longer used (deeper investigation and/or let dynamic analysis tools run for longer).&lt;/li&gt;
-&lt;li&gt;Less code relieves mental burden, and reduces time wasted while working in a codebase.&lt;/li&gt;
 &lt;/ul&gt;
 </content>
   </entry>

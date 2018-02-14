@@ -11,7 +11,7 @@
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-01-03T20:41:16-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -151,7 +151,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -231,7 +231,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -289,7 +289,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -413,7 +413,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -547,7 +547,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -604,7 +604,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -675,7 +675,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -828,7 +828,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -994,7 +994,7 @@ name = My tips
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1052,7 +1052,7 @@ name = My tips
     <title>Cut Code Review Noise on GitHub</title>
     <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
     <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2017-12-02T15:36:37-05:00</updated>
+    <updated>2018-01-03T20:48:36-05:00</updated>
     <published>2017-03-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

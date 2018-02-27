@@ -2,16 +2,97 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-01-03T18:53:20-05:00</updated>
+  <updated>2018-02-26T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Rails ActiveStorage Configuration for Minio</title>
+    <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
+    <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
+    <updated>2018-02-26T21:28:39-05:00</updated>
+    <published>2018-02-26T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Trying to configure Rails ActiveStorage for Minio as your storage provider? The default configuration does not work out of the box, so read on to see what configuration options you are missing.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1024" height="768" src="/images/2018-02-26-rails-activestorage-configuration-for-minio/birdy-boxcar.jpg" /&gt;
+&lt;em&gt;&lt;a title="birdy boxcar" href="https://flickr.com/photos/agent_ladybug/661200957"&gt;birdy boxcar&lt;/a&gt; by &lt;a href="https://flickr.com/people/agent_ladybug"&gt;b.ug&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc/2.0/"&gt;CC BY-NC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;You are looking at Rails 5.2 and its shiny new &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;ActiveStorage&lt;/a&gt; &amp;ndash; a built-in abstraction/mechanism to handle file storage. You decide to give it a try and remove a dependency you normally use (i.e., &lt;a href="https://github.com/carrierwaveuploader/carrierwave"&gt;CarrierWave&lt;/a&gt; or &lt;a href="https://github.com/thoughtbot/paperclip"&gt;Paperclip&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;For some reason, you decide to use &lt;a href="https://minio.io/"&gt;Minio&lt;/a&gt; &amp;ndash; an Amazon S3 compatible open source project.&lt;/p&gt;
+
+&lt;p&gt;Looking through the ActiveStorage &lt;a href="http://edgeguides.rubyonrails.org/active_storage_overview.html"&gt;documentation&lt;/a&gt; and &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;repository&amp;rsquo;s readme&lt;/a&gt;, you figure out how to get everything working locally using ActiveStorage&amp;rsquo;s &lt;code&gt;local&lt;/code&gt; service.&lt;/p&gt;
+
+&lt;p&gt;Now it is time to try running everything, but with Minio as your file storage. Looking at your &lt;code&gt;config/storage.yml&lt;/code&gt; you&amp;rsquo;ll see the template for Amazon&amp;rsquo;s S3:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="s"&gt;amazon&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+   &lt;span class="s"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
+   &lt;span class="s"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :access_key_id) %&amp;gt;&lt;/span&gt;
+   &lt;span class="s"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :secret_access_key) %&amp;gt;&lt;/span&gt;
+   &lt;span class="s"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
+   &lt;span class="s"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;Configuration Options&lt;/h1&gt;
+
+&lt;p&gt;Now it&amp;rsquo;s time to figure out how to use the S3 service in conjunction with your Minio server&amp;hellip;&lt;/p&gt;
+
+&lt;h2&gt;Region&lt;/h2&gt;
+
+&lt;p&gt;Your Minio server doesn&amp;rsquo;t really support regions like Amazon&amp;rsquo;s S3. Just keep it as &lt;code&gt;us-east-1&lt;/code&gt; or your closest S3 region (although it really could be any string). From what I&amp;rsquo;ve seen, this is just used at the Amazon S3-level, and for your hosted Minio server it does not matter.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;region&lt;/code&gt; value is simply used to satisfy ActiveStorage and the &lt;code&gt;aws-sdk-s3&lt;/code&gt; gem. If you omit the &lt;code&gt;region&lt;/code&gt; option you get the following exception &lt;code&gt;missing keyword: region (ArgumentError)&lt;/code&gt;. If you use an empty string for &lt;code&gt;region&lt;/code&gt; you will see &lt;code&gt;missing region; use :region option or export region name to ENV[&amp;#39;AWS_REGION&amp;#39;] (Aws::Errors::MissingRegionError)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Endpoint&lt;/h2&gt;
+
+&lt;p&gt;Your Minio server is hosted at some URL (i.e., https://minio123.com), so you&amp;rsquo;ll need to inform ActiveStorage&amp;rsquo;s S3 service about this &lt;em&gt;endpoint&lt;/em&gt;. Luckily, it is just a matter of adding the URL endpoint to your configuration:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  endpoint: "https://minio123.com" # Points to your Minio server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also use ports on the endpoint (i.e., &amp;ldquo;http://localhost:9000&amp;rdquo;).&lt;/p&gt;
+
+&lt;h2&gt;Force Path Style&lt;/h2&gt;
+
+&lt;p&gt;So you have the endpoint and region all setup from a configuration standpoint. Your Minio server is also up and running, along with a bucket, &lt;code&gt;your_own_bucket&lt;/code&gt;. You try to upload a file and see the following exception:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Aws::Errors::NoSuchEndpointError (Encountered a `SocketError` while attempting to connect to:
+
+  https://you_own_bucket.minio123.com/RJioqjrTT4VmFobw5FhXkSby
+
+This is typically the result of an invalid `:region` option or a
+poorly formatted `:endpoint` option.
+
+* Avoid configuring the `:endpoint` option directly. Endpoints are constructed
+  from the `:region`. The `:endpoint` option is reserved for connecting to
+  non-standard test endpoints.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hmm&amp;hellip; Well that didn&amp;rsquo;t work out. If we look at the URL (https://your_own_bucket.minio123.com), we can see that it uses a bucket subdomain approach. However, Minio expects the bucket after the domain (i.e., https://minio123.com/your_own_bucket). Again, fortunately there is an configuration option we can add to &lt;em&gt;force this path style&lt;/em&gt;:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  force_path_style: true # Needed to be compliant with how Minio serves the bucket
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1&gt;Complete Configuration&lt;/h1&gt;
+
+&lt;p&gt;At this point we covered all the configuration &lt;em&gt;gotchas&lt;/em&gt; to set up ActiveStorage with Minio. Namely, the missing and (mostly undocumented) &lt;code&gt;endpoint&lt;/code&gt; and &lt;code&gt;force_path_style&lt;/code&gt; options. The following is a complete configuration.&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="s"&gt;minio&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+   &lt;span class="s"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
+   &lt;span class="s"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :access_key_id) %&amp;gt;&lt;/span&gt;
+   &lt;span class="s"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :secret_access_key) %&amp;gt;&lt;/span&gt;
+   &lt;span class="s"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
+   &lt;span class="s"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
+   &lt;span class="s"&gt;endpoint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;https://minio123.com"&lt;/span&gt;
+   &lt;span class="s"&gt;force_path_style&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It isn&amp;rsquo;t a bad idea to have the configuration named &lt;code&gt;minio&lt;/code&gt;, just so it is clear that it&amp;rsquo;s a Minio file storage instead of the typical Amazon S3.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -151,7 +232,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -231,7 +312,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -289,7 +370,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -413,7 +494,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -547,7 +628,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -604,7 +685,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -675,7 +756,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -828,7 +909,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -994,7 +1075,7 @@ name = My tips
     <title>Bluetooth Connection/Battery Script for macOS</title>
     <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
     <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
+    <updated>2018-02-26T21:28:39-05:00</updated>
     <published>2017-04-08T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1046,145 +1127,6 @@ name = My tips
 
 &lt;p&gt;&lt;img width="2104" height="632" src="/images/2017-04-09-bluetooth-connection-battery-script-for-macos/alfred-workflow.gif" /&gt;
 &lt;em&gt;My BeatsX Alfred workflow&lt;/em&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Cut Code Review Noise on GitHub</title>
-    <link rel="alternate" href="https://kevinjalbert.com/cut-code-review-noise-on-github/"/>
-    <id>https://kevinjalbert.com/cut-code-review-noise-on-github/</id>
-    <updated>2018-01-03T20:48:36-05:00</updated>
-    <published>2017-03-28T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Code reviews on GitHub can be noisy and contain a lot of unnecessary chatter. We explore how to effectively coordinate code reviewing a pull request using GitHub's reactions and request review features.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1024" height="682" src="/images/2017-03-28-cut-code-review-noise-on-github/scissors.jpg" /&gt;
-&lt;em&gt;&lt;a href="https://www.flickr.com/photos/9918311@N02/4268582634/in/photostream/"&gt;Painting scissors with light 4 by Zechariah  Judy, on Flickr&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;For this post I&amp;rsquo;m not going to detail my preferred approach for working through a source code change using GitHub&amp;rsquo;s pull requests &amp;ndash; another post will likely contain this. I&amp;rsquo;m instead going to touch on GitHub&amp;rsquo;s review requests feature, and present an effective and efficient way to handle code reviews with GitHub&amp;rsquo;s interface.&lt;/p&gt;
-
-&lt;h1&gt;GitHub Review Requests and Reactions&lt;/h1&gt;
-
-&lt;p&gt;GitHub, in late 2016, introduced &lt;a href="https://github.com/blog/2291-introducing-review-requests"&gt;review requests&lt;/a&gt; to their platform. This was a welcome addition to code reviewing pull requests. It exposed a mechanism to request reviews without using &lt;em&gt;@mention&lt;/em&gt; or chat to get people&amp;rsquo;s attention.&lt;/p&gt;
-
-&lt;p&gt;GitHub made it easier to identify pull requests that require your attention by &lt;a href="https://github.com/blog/2306-filter-pull-request-reviews-and-review-requests"&gt;filtering review requests&lt;/a&gt;. Additionally, GitHub also allowed review requests to integrate with their &lt;a href="https://github.com/blog/2051-protected-branches-and-required-status-checks"&gt;protected branches&lt;/a&gt; feature. It became possible to prevent merging a pull request until at least one reviewer approved that pull request.&lt;/p&gt;
-
-&lt;p&gt;Last year GitHub released &lt;a href="https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments"&gt;reactions&lt;/a&gt; to simply reduce noise in large issues and pull requests. With this now you can simply add an emoji reaction instead of a new comment.&lt;/p&gt;
-
-&lt;p&gt;Overall, these are all incremental steps in the right direction towards the goal of a collaborative environment within GitHub. More and more, I find myself using review requests to communicate with other developers. Requesting a review now sends the appropriate notification to the individual. In the past, I would have pasted a link to the pull request in our chat room, or made an &lt;em&gt;@mention&lt;/em&gt; comment. By moving away from the old style of getting reviews, I find there is less &lt;em&gt;chatter&lt;/em&gt; and &lt;em&gt;noise&lt;/em&gt; for coordinating code reviews.&lt;/p&gt;
-
-&lt;h1&gt;Committed Reviewers&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;m going to introduce the concept of &lt;em&gt;committed reviewers&lt;/em&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;A &lt;em&gt;reviewer&lt;/em&gt; who is &lt;em&gt;committed&lt;/em&gt; to the overall quality and correctness of the pull request.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This implies that committed reviewers are individuals who give the final &lt;em&gt;approval&lt;/em&gt; for the pull request before merging.&lt;/p&gt;
-
-&lt;p&gt;This concept might not be applicable for various projects or organizations. I do recommend it, however, as it tends to promote higher quality code ending up in your codebase.&lt;/p&gt;
-
-&lt;p&gt;With GitHub&amp;rsquo;s request reviewers feature, this means that if you are requested, you are now a committed reviewer. The pull request cannot be merged until all committed reviewers approve it. This prevents a scenario where a reviewer could still be working through a pull request when it&amp;rsquo;s merged, wasting time and potentially missing issues. I have seen this happen when authors request numerous reviewers just to expedite the process.&lt;/p&gt;
-
-&lt;h1&gt;Coordinating Code Reviews&lt;/h1&gt;
-
-&lt;p&gt;Imagine we&amp;rsquo;re on a team of 4 people. You just created a pull request in GitHub. Now you want some eyes on the new changes you are proposing to put into the codebase.&lt;/p&gt;
-
-&lt;p&gt;You recall the old ways of using an &lt;em&gt;@mention&lt;/em&gt; just to get reviewers, same with pasting the link in our chat. You don&amp;rsquo;t want to disturb the team with unnecessary noise. Instead, it is time to use the new request reviewers interface in GitHub.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-1.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;You decide to directly request reviews from Jane and Bob, as you know they are familiar with this part of the system. You decided to request only two reviews as we have an informal rule of requiring two approvals before merging in any pull request.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-2.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Bob leaves a request for changes inquiring on one aspect of your code. In one of his comments he indicates that Mary had encountered a similar problem and her solution was slightly different from yours.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-3.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;You read over the requested changes from Bob and make the corrections.&lt;/p&gt;
-
-&lt;p&gt;Mary chimes in regarding that comment and leaves some insight there for you. You read it over and leave a GitHub Reaction to express your thanks, which indicates that you acknowledged her comment.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-4.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;You now need to signal to Bob that you addressed his concerns so he can look at the new changes you added. Instead of getting his attention via chat or a &lt;em&gt;@mention&lt;/em&gt; comment, you can remove and request him again for a review.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Unfortunately, GitHub does not provide a one button click to request a review again from someone who is already a reviewer.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Bob receives a notification that he has been requested for a review and looks over the changes, finally approving it.&lt;/p&gt;
-
-&lt;p&gt;Jane gets back and also approves your pull request.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-5.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;At this specific point you have the two approvals that we as a team decided is required before merging a pull requests. Mary&amp;rsquo;s in a &lt;em&gt;comment&lt;/em&gt; state, which is fine as it indicates that she is not a &lt;em&gt;committed reviewer&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;You finally get around to merging in your pull request when you notice that Mary has added herself as a reviewer. She decided to give your pull request a complete review now as a committed reviewer. The intent was communicated through the request review.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-6.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Even though you got two approvals, you know that Mary is committed to reviewing your pull requests. At this point you wait for her results as to not waste her time, or to potentially miss any issues she might raise.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="280" height="190" src="/images/2017-03-28-cut-code-review-noise-on-github/reviewers-state-7.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Everything looks great. You have approvals across the board, so hit that merge button!&lt;/p&gt;
-
-&lt;h2&gt;Less Noise and Wasted Time&lt;/h2&gt;
-
-&lt;p&gt;A couple of things you might have noticed as we ran through that code review scenario:&lt;/p&gt;
-
-&lt;p&gt;No unnecessary commenting on the pull request to indicate that an individual has acknowledged something. GitHub Reactions provide an unobtrusive way for an individual to express themselves. Often reactions are replacing low-value comments (i.e,. &lt;em&gt;+1&lt;/em&gt;, &lt;em&gt;LGTM&lt;/em&gt;, &lt;em&gt;awesome!&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;No unnecessary &lt;em&gt;@mention&lt;/em&gt; comments to indicate that someone should review the pull request. In the past, we would have &lt;em&gt;@mention&lt;/em&gt; possible reviewers in the description or as comments in the pull request. The reviewers are now clearly indicated in the reviewers section of the pull request.&lt;/p&gt;
-
-&lt;p&gt;No unnecessary &lt;em&gt;@mention&lt;/em&gt; is needed to indicate a reviewer&amp;rsquo;s request for change has been addressed. Previously, it was common to &lt;em&gt;@mention&lt;/em&gt; a reviewer when their concerns were addressed, thus causing noise with comments.&lt;/p&gt;
-
-&lt;p&gt;With the above points on &lt;em&gt;@mention&lt;/em&gt; you could also factor in that this communication could have been in chat (public channels or privately).&lt;/p&gt;
-
-&lt;p&gt;Another scenario that we have encountered in the past is that the reviewer would come back preemptively to review the pull request as they noticed new commits. The problem is that sometimes new changes are still being worked on and pushed up incrementally. This can potentially waste the reviewer&amp;rsquo;s time as they have to look over more changes soon after.&lt;/p&gt;
-
-&lt;p&gt;As a reviewer, you know that you will receive a notification via GitHub when your attention is needed for a pull request. It also becomes easier to scan pull requests for where your action is required.&lt;/p&gt;
-
-&lt;h1&gt;Dealing with Notifications&lt;/h1&gt;
-
-&lt;p&gt;There are a couple of options when dealing with notifications surrounding GitHub:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Built-in web notification&lt;/li&gt;
-&lt;li&gt;Email notifications&lt;/li&gt;
-&lt;li&gt;Third-party application (depends on operating system)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I personally never got much benefit from the web notification, however, this could just be how I consume information. Without an actual notification appearing in my notification center (macOS), information doesn&amp;rsquo;t reach me well.&lt;/p&gt;
-
-&lt;p&gt;Email notifications are currently my preferred approach, as I can receive request review notifications via email. In addition, with email you can get fancy with filters to further reduce notification to only what you want.&lt;/p&gt;
-
-&lt;p&gt;I use &lt;a href="https://ptsochantaris.github.io/trailer/"&gt;Trailer.app&lt;/a&gt; in addition to email. With Trailer I am able to target specific repositories for native notification. Prior to review requests, this would have been my ideal approach for dealing with notifications at my work machine. There is active development to support the recent addition of GitHub review requests and reactions.&lt;/p&gt;
-
-&lt;p&gt;Regardless of delivery mechanism, take some time to figure how to deal with notifications. Each user will have different needs. For my case, I&amp;rsquo;m really only interested in emails about &lt;em&gt;Comments on Issues and Pull Requests&lt;/em&gt; and &lt;em&gt;Pull Request reviews&lt;/em&gt; on my &lt;em&gt;Participated Conversations&lt;/em&gt; (configured via &lt;a href="https://github.com/settings/notifications"&gt;GitHub&amp;rsquo;s Notifications&lt;/a&gt;).&lt;/p&gt;
-
-&lt;h1&gt;Keeping it all in GitHub&lt;/h1&gt;
-
-&lt;p&gt;Going back to the above scenario, no use of direct form of communication was used to facilitate the code review, everything was kept within GitHub. Of course, deeper discussions should use those mediums, but the key is that the coordination of the code review was kept entirely in the GitHub platform. This reduces chatter and noise that we receive throughout the day, and keeps the GitHub pull request succinct.&lt;/p&gt;
-
-&lt;p&gt;Using review requests clearly states the next action for the reviewer and author. With both parties actively using the provided utilities in GitHub, code review collaboration becomes much more manageable.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;h1&gt;TL;DR&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The idea is to reduce the unnecessary noise within a pull request using GitHub&amp;rsquo;s features.&lt;/li&gt;
-&lt;li&gt;GitHub review requests keep state of each reviewer during the code review process.&lt;/li&gt;
-&lt;li&gt;Make use of re-requesting a review when you have addressed a reviewer&amp;rsquo;s concerns.&lt;/li&gt;
-&lt;li&gt;Make use of reactions to acknowledge a comment if possible.&lt;/li&gt;
-&lt;li&gt;Be aware of committed reviewers and ensure everyone knows of their roles.&lt;/li&gt;
-&lt;li&gt;Ensure that all committed reviewers have approved the pull request before merging.&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

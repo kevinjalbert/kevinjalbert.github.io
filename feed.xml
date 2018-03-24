@@ -2,16 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-02-26T18:53:20-05:00</updated>
+  <updated>2018-03-23T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Editing with Pry</title>
+    <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
+    <id>https://kevinjalbert.com/editing-with-pry/</id>
+    <updated>2018-03-23T21:28:30-04:00</updated>
+    <published>2018-03-23T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Learn to edit within a pry session. Experience the power of multi-line and patch editing.</description>
+    <content type="html">&lt;p&gt;&lt;img width="2048" height="1365" src="/images/2018-03-23-editing-with-pry/prybar-brush.jpg" /&gt;
+&lt;a title="Pry Bar &amp;amp; Wire Brush" href="https://flickr.com/photos/evilpics/16088956283"&gt;Pry Bar &amp;amp; Wire Brush&lt;/a&gt; by &lt;a href="https://flickr.com/people/evilpics"&gt;Scott Hart&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc-nd/2.0/"&gt;CC BY-NC-ND&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1&gt;Editing with Pry&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve already touched a bit on the power of &lt;code&gt;pry&lt;/code&gt; in a &lt;a href="/lets-pry-into-ruby-objects/"&gt;previous post back in 2016&lt;/a&gt;. I want to revisit &lt;code&gt;pry&lt;/code&gt; to expand on a new functionality that I have since started using &amp;ndash; its ability to edit.&lt;/p&gt;
+
+&lt;h2&gt;More than One Line?&lt;/h2&gt;
+
+&lt;p&gt;In my personal experiences, I&amp;rsquo;ve constructed some &lt;em&gt;long&lt;/em&gt; one-liners while in &lt;code&gt;irb&lt;/code&gt; or &lt;code&gt;pry&lt;/code&gt;. These interactive sessions do not provide a great experience for multi line commands, as you are restricted to editing only one line at a time.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, in &lt;code&gt;pry&lt;/code&gt;, there is the &lt;code&gt;edit&lt;/code&gt; method. This opens up a temporary file (&lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s input buffer) with a more capable editor for your task. You can configure the editor by executing the &lt;code&gt;Pry.config.editor = &amp;quot;vim&amp;quot;&lt;/code&gt; statement, although your environment variable &lt;code&gt;EDITOR&lt;/code&gt; is used by default. If you want, you can even use a GUI editor like &lt;a href="https://atom.io/"&gt;Atom&lt;/a&gt; (you&amp;rsquo;ll need to use &lt;code&gt;atom --wait&lt;/code&gt; for this to work). If you have a specific preference, it make sense to add this configuration in your &lt;code&gt;.pryrc&lt;/code&gt; so it is configured when &lt;code&gt;pry&lt;/code&gt; loads up.&lt;/p&gt;
+
+&lt;p&gt;By default, &lt;code&gt;edit&lt;/code&gt; will open the last executed statement issued in your session. If you want to edit with a blank canvas, then you can use the &lt;code&gt;edit -t&lt;/code&gt; open a temporary buffer. You can even get fancy and re-edit older inputs using &lt;code&gt;edit --in &amp;lt;input-number&amp;gt;&lt;/code&gt; (i.e., &lt;code&gt;edit --in -2&lt;/code&gt; &amp;ndash; the second last input).&lt;/p&gt;
+
+&lt;p&gt;Using a full editor is great for those more complex statements. Now you can break up statements into multiple lines to make it easier to comprehend and create. In the event you were &lt;em&gt;slightly&lt;/em&gt; wrong, you can simply &lt;code&gt;edit&lt;/code&gt; again and fix up your statement. This is great for iterativly building longer statements. It is a common style in Ruby to use indentation when using blocks and defining classes/methods/modules, so take advantage of &lt;code&gt;edit&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The following demonstrates &lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s multi-line editing functionality.&lt;/p&gt;
+
+&lt;script src="https://asciinema.org/a/KjOsTASz7MMzrJV2lSxi6SWdM.js" id="asciicast-KjOsTASz7MMzrJV2lSxi6SWdM" async&gt;&lt;/script&gt;
+
+&lt;h2&gt;Patching Objects&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;edit&lt;/code&gt; method has one more amazing trick up its sleeve &amp;ndash; &lt;em&gt;patch editing&lt;/em&gt;. &lt;code&gt;pry&lt;/code&gt; now gives you the ability to modify existing object method definitions at runtime. To quote the help text for the &lt;code&gt;edit --patch&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Instead of editing the object&amp;rsquo;s file, try to edit in a tempfile and apply as a monkey patch&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As the patch is only for the &lt;code&gt;pry&lt;/code&gt; session, there is a greater sense of exploring and less worry surrounding the commitment of the edit.&lt;/p&gt;
+
+&lt;p&gt;Some caveats that I&amp;rsquo;ve hit with this approach is that you can only patch &lt;code&gt;&amp;lt;class&amp;gt;#&amp;lt;method&amp;gt;&lt;/code&gt; (instance method) or &lt;code&gt;&amp;lt;class&amp;gt;.&amp;lt;method&amp;gt;&lt;/code&gt; (class method). You might want to edit the class itself, but you&amp;rsquo;ll hit &lt;code&gt;NotImplementedError: Cannot yet patch #&amp;lt;Pry::WrappedModule:0x007fcc32afecd0&amp;gt; objects!&lt;/code&gt;. Unfortunately, I&amp;rsquo;ve not yet found a nice way to get around this (so let me know if you have a way!). I know that you can modify the file itself (i.e., &lt;code&gt;edit app/models/model.rb&lt;/code&gt;) but that&amp;rsquo;ll actually write to the file &amp;ndash; I would want it done as a patch.&lt;/p&gt;
+
+&lt;p&gt;The following demonstrates &lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s patch editing functionality.&lt;/p&gt;
+
+&lt;script src="https://asciinema.org/a/0zvuYLvnQXHkZ9DpFZl4l3Sxe.js" id="asciicast-0zvuYLvnQXHkZ9DpFZl4l3Sxe" async&gt;&lt;/script&gt;
+</content>
+  </entry>
+  <entry>
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-03-20T19:33:54-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -92,7 +140,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -232,7 +280,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -312,7 +360,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -370,7 +418,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -494,7 +542,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -628,7 +676,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -685,7 +733,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -756,7 +804,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -909,7 +957,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
+    <updated>2018-02-26T21:29:31-05:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1069,64 +1117,6 @@ name = My tips
 &lt;h1&gt;Pronto all the things&lt;/h1&gt;
 
 &lt;p&gt;To this date, I have created two useful pronto runners (&lt;em&gt;dirty words&lt;/em&gt; was more of a demo for this post). I have personally been using pronto for several years, and I will continue to use it. The ecosystem of runners continues to grow. I hope that this post helps others in creating new runners that will benefit everyone. Keep an eye out for tools that could be wrapped in a pronto runner &amp;ndash; maybe you can help add to the set of runners!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Bluetooth Connection/Battery Script for macOS</title>
-    <link rel="alternate" href="https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/"/>
-    <id>https://kevinjalbert.com/bluetooth-connection-battery-script-for-macos/</id>
-    <updated>2018-02-26T21:28:39-05:00</updated>
-    <published>2017-04-08T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Using AppleScript to simplify connecting bluetooth earphones to macOS.</description>
-    <content type="html">&lt;p&gt;&lt;img width="4032" height="3024" src="/images/2017-04-09-bluetooth-connection-battery-script-for-macos/beatsx.jpg" /&gt;
-&lt;em&gt;My BeatsX Earphones&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I recently purchased a pair of &lt;a href="http://www.apple.com/ca/shop/product/MLYE2LL/A/beatsx-earphones-black"&gt;BeatsX Earphones&lt;/a&gt; as I wanted to stop dealing with wired earbuds. For some reason, the wired connections always stopped working properly after a number of months. I supect it is just the stress on the wire while in my pocket during my commute.&lt;/p&gt;
-
-&lt;p&gt;When arriving at work, or really anytime I am transitioning from iPhone to MacBook Pro, I have to manually connect my BeatsX to the MacBook Pro. I wanted to automate this process, down to a simple command. If the BeatsX are in range and on they would initiate the connection process to my machine. In addition, it would be nice to have a way to monitor the battery level using a similar process.&lt;/p&gt;
-
-&lt;p&gt;Looking around, I couldn&amp;rsquo;t find any way through a command-line interface to do what I wanted. I eventually figured out that I could use macOS&amp;rsquo;s &lt;a href="https://en.wikipedia.org/wiki/AppleScript"&gt;AppleScript&lt;/a&gt; to automate the menu navigation.&lt;/p&gt;
-
-&lt;p&gt;The following script will attempt to connect to the desired device (i.e., BeatsX by name). If it is already connected then it will retrieve the battery level.&lt;/p&gt;
-&lt;pre class="highlight applescript"&gt;&lt;code&gt;&lt;span class="nb"&gt;activate&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"SystemUIServer"&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceName&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Kevin Jalbert's BeatsX"&lt;/span&gt;&lt;span class="w"&gt;
-
-&lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"System Events"&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;process&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"SystemUIServer"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bluetoothMenu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bar&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;whose&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;description&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;contains&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"bluetooth"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bluetoothMenu&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="nv"&gt;click&lt;/span&gt;&lt;span class="w"&gt;
-
-      &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceMenuItem&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceName&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;deviceMenuItem&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nv"&gt;click&lt;/span&gt;&lt;span class="w"&gt;
-
-        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;exists&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Connect"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="nv"&gt;click&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Connect"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Connecting..."&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelMenuItem&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelMenuItem&lt;/span&gt;&lt;span class="w"&gt;
-            &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelText&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;title&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelMenuItem&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-
-          &lt;/span&gt;&lt;span class="na"&gt;key code&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;53&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;-- esc key&lt;/span&gt;&lt;span class="w"&gt;
-
-          &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;batteryLevelText&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This on its own is a nice win and works as desired. Now, I&amp;rsquo;m a heavy user of &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; and I quickly threw together a workflow that uses this script. I now get a notification during connection, and repeated invokations will display the battery level.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="2104" height="632" src="/images/2017-04-09-bluetooth-connection-battery-script-for-macos/alfred-workflow.gif" /&gt;
-&lt;em&gt;My BeatsX Alfred workflow&lt;/em&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

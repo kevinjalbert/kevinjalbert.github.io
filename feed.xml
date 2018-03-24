@@ -11,7 +11,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-03-23T21:28:30-04:00</updated>
+    <updated>2018-03-24T13:37:47-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -28,11 +28,11 @@
 
 &lt;p&gt;In my personal experiences, I&amp;rsquo;ve constructed some &lt;em&gt;long&lt;/em&gt; one-liners while in &lt;code&gt;irb&lt;/code&gt; or &lt;code&gt;pry&lt;/code&gt;. These interactive sessions do not provide a great experience for multi line commands, as you are restricted to editing only one line at a time.&lt;/p&gt;
 
-&lt;p&gt;Fortunately, in &lt;code&gt;pry&lt;/code&gt;, there is the &lt;code&gt;edit&lt;/code&gt; method. This opens up a temporary file (&lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s input buffer) with a more capable editor for your task. You can configure the editor by executing the &lt;code&gt;Pry.config.editor = &amp;quot;vim&amp;quot;&lt;/code&gt; statement, although your environment variable &lt;code&gt;EDITOR&lt;/code&gt; is used by default. If you want, you can even use a GUI editor like &lt;a href="https://atom.io/"&gt;Atom&lt;/a&gt; (you&amp;rsquo;ll need to use &lt;code&gt;atom --wait&lt;/code&gt; for this to work). If you have a specific preference, it make sense to add this configuration in your &lt;code&gt;.pryrc&lt;/code&gt; so it is configured when &lt;code&gt;pry&lt;/code&gt; loads up.&lt;/p&gt;
+&lt;p&gt;Fortunately, in &lt;code&gt;pry&lt;/code&gt;, there is the &lt;code&gt;edit&lt;/code&gt; method. This opens up a temporary file (&lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s input buffer) with a more capable editor for your task. You can configure the editor by executing the &lt;code&gt;Pry.config.editor = &amp;quot;vim&amp;quot;&lt;/code&gt; statement, although your environment variable &lt;code&gt;EDITOR&lt;/code&gt; is used by default. If you want, you can even use a GUI editor like &lt;a href="https://atom.io/"&gt;Atom&lt;/a&gt; (you&amp;rsquo;ll need to use &lt;code&gt;atom --wait&lt;/code&gt; for this to work). If you have a specific preference, it makes sense to add this configuration in your &lt;code&gt;.pryrc&lt;/code&gt; so it is configured when &lt;code&gt;pry&lt;/code&gt; loads up.&lt;/p&gt;
 
-&lt;p&gt;By default, &lt;code&gt;edit&lt;/code&gt; will open the last executed statement issued in your session. If you want to edit with a blank canvas, then you can use the &lt;code&gt;edit -t&lt;/code&gt; open a temporary buffer. You can even get fancy and re-edit older inputs using &lt;code&gt;edit --in &amp;lt;input-number&amp;gt;&lt;/code&gt; (i.e., &lt;code&gt;edit --in -2&lt;/code&gt; &amp;ndash; the second last input).&lt;/p&gt;
+&lt;p&gt;By default, &lt;code&gt;edit&lt;/code&gt; will open the last executed statement issued in your session. If you want to edit with a blank canvas, then you can use the &lt;code&gt;edit -t&lt;/code&gt; to open a temporary buffer. You can even get fancy and re-edit older inputs using &lt;code&gt;edit --in &amp;lt;input-number&amp;gt;&lt;/code&gt; (i.e., &lt;code&gt;edit --in -2&lt;/code&gt; &amp;ndash; the second last input).&lt;/p&gt;
 
-&lt;p&gt;Using a full editor is great for those more complex statements. Now you can break up statements into multiple lines to make it easier to comprehend and create. In the event you were &lt;em&gt;slightly&lt;/em&gt; wrong, you can simply &lt;code&gt;edit&lt;/code&gt; again and fix up your statement. This is great for iterativly building longer statements. It is a common style in Ruby to use indentation when using blocks and defining classes/methods/modules, so take advantage of &lt;code&gt;edit&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Using a full editor is great for those more complex statements. Now you can break up statements into multiple lines to make it easier to comprehend and create. In the event you were &lt;em&gt;slightly&lt;/em&gt; wrong, you can simply &lt;code&gt;edit&lt;/code&gt; again and fix up your statement. This is great for iteratively building longer statements. It is a common style in Ruby to use indentation when using blocks and defining classes/methods/modules, so take advantage of &lt;code&gt;edit&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;The following demonstrates &lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s multi-line editing functionality.&lt;/p&gt;
 
@@ -59,7 +59,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-03-20T19:33:54-04:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -140,7 +140,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -280,7 +280,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -360,7 +360,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -418,7 +418,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -542,7 +542,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -676,7 +676,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -733,7 +733,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -804,7 +804,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -957,7 +957,7 @@ name = My tips
     <title>Create your own Pronto Runner</title>
     <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
     <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2018-02-26T21:29:31-05:00</updated>
+    <updated>2018-03-23T21:33:17-04:00</updated>
     <published>2017-05-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

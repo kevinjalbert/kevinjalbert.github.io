@@ -1,0 +1,256 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <script>addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});</script> <link rel=canonical href=https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/> <title>Jest Snapshots: Reducing styled-jsx Noise | Kevin Jalbert</title> <meta name=description content="Learn how to eliminate the noise in your diffs when using Jest snapshots with styled-jsx."/> <meta name=keywords content="jest, react, styled-jsx"/> <meta name=datePublished content="2018-04-11 00:00:00 UTC"/> <meta property="og:article:published_time" content="2018-04-11 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2018-04-11 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/> <meta property="og:url" content="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="Learn how to eliminate the noise in your diffs when using Jest snapshots with styled-jsx."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Jest Snapshots: Reducing styled-jsx Noise"/> <meta property="og:description" content="Learn how to eliminate the noise in your diffs when using Jest snapshots with styled-jsx."/> <meta property="og:image" content="https://kevinjalbert.com/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg"/> <meta property="og:title" content="Jest Snapshots: Reducing styled-jsx Noise"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Jest Snapshots: Reducing styled-jsx Noise",
+       "keywords": "jest, react, styled-jsx",
+       "url": "https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/",
+       "datePublished": "2018-04-11 00:00:00 UTC",
+       "dateModified": "2018-04-11 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> <script async src="/vendor/analytics/index.js"></script> <script async src="https://www.google-analytics.com/analytics.js"></script> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> <a href="https://github.com/kevinjalbert/ama/blob/master/README.md">AMA</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Jest Snapshots: Reducing styled-jsx Noise</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">April 11, 2018 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>5 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/jest/">jest</a> <a href="/tags/react/">react</a> <a href="/tags/styled-jsx/">styled-jsx</a> </div> </div> </div> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> Signup for my Newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="email address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <p><img width=1600 height=1065 src="/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg"/> <a title="Total Eclipse Light" href="https://flickr.com/photos/howardignatius/13875481115">Total Eclipse Light</a> by <a href="https://flickr.com/people/howardignatius">howardignatius</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">CC BY-NC-ND</a></p> <h1>Jest Snapshots: Reducing styled-jsx Noise</h1> <p>Facebook&rsquo;s <a href="https://facebook.github.io/jest/">Jest</a> is a powerful testing framework for JavaScript. It works <em>out of the box</em> for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the <a href="https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest">snapshot testing</a> functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage&rsquo;s documentation:</p> <blockquote> <p>Capture snapshots of React trees or other serializable values to simplify testing and to analyze how state changes over time.</p> </blockquote> <p>During my work with React and Jest, I was using <a href="https://github.com/zeit/styled-jsx"><code>styled-jsx</code></a> as my <a href="https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc">CSS-in-JS</a> technology choice. Many times, I saw the following when I made any CSS changes:</p> <div class=highlight><pre class="highlight plaintext"><code>FAIL  src/App.test.js
+● renders without crashing
+
+  expect(value).toMatchSnapshot()
+
+  Received value does not match stored snapshot 1.
+
+  - Snapshot
+  1. Received
+
+  @@ -1,28 +1,23 @@
+   &lt;div
+  -  className="jsx-188895008 App"
+  +  className="jsx-3481390381 App"
+   &gt;
+</code></pre></div> <p>This is because the CSS changed for this scoped component and thus the <code>jsx-########</code> (unique id) reflects the change.</p> <p>To me, these changes in the snapshot diffs are noise and it is harder to see the structural DOM changes. The original <code>className</code> for the DOM elements are still present, and ideally, I would just want snapshots without any of the <code>styled-jsx</code> stuff present.</p> <p>We will first start with a simplified <code>App</code> component using <a href="https://github.com/facebook/create-react-app">create-react-app</a> as the base. The goal is to illustrate the project setup, what the snapshots look like, how to reduce the noise, and what the snapshots look like afterwards. <code>styled-jsx</code> provides a way to style your components using <em>inline styles</em> or <em>external CSS files</em>, so we will consider both in this article. In addition, we will also consider both the <code>react-test-renderer</code> and <code>enzyme</code> Jest snapshot rendering methods.</p> <p>Given the above information, the following sections will cover these scenarios:</p> <ul> <li>Inline styles with <code>react-test-renderer</code></li> <li>Inline styles with <code>enzyme</code></li> <li>External styles with <code>react-test-renderer</code></li> <li>External styles with <code>enzyme</code></li> </ul> <h2>Inline Styles</h2> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          Example Component
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">style</span> <span class="nt">jsx</span><span class="p">&gt;</span><span class="si">{</span><span class="s2">`
+          .App {
+            text-align: center;
+          }
+        `</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div> <p>To make this all work, you have to add the <code>styled-jsx/babel</code> to <em>plugins</em> in the babel configuration.</p> <div class=highlight><pre class="highlight json"><code><span class="s2">"babel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"react-app"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"styled-jsx/babel"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div> <h3>Snapshots with react-test-renderer</h3> <p>Within the context of inline styles, we&rsquo;ll first look at the default approach for testing with Jest snapshots using <a href="https://github.com/facebook/react/tree/master/packages/react-test-renderer"><code>react-test-renderer</code></a>.</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="s1">'react-dom'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">renderer</span> <span class="k">from</span> <span class="s1">'react-test-renderer'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="s1">'./App'</span><span class="p">;</span>
+
+<span class="nx">it</span><span class="p">(</span><span class="s1">'renders without crashing'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">tree</span> <span class="o">=</span> <span class="nx">renderer</span><span class="p">.</span><span class="nx">create</span><span class="p">(&lt;</span><span class="nc">App</span> <span class="p">/&gt;).</span><span class="nx">toJSON</span><span class="p">();</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">tree</span><span class="p">).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div> <p>This generates the following snapshot:</p> <div class=highlight><pre class="highlight plaintext"><code>exports[`renders without crashing 1`] = `
+&lt;div
+  className="jsx-188096426 App"
+&gt;
+  &lt;p
+    className="jsx-188096426"
+  &gt;
+    Example Component
+  &lt;/p&gt;
+&lt;/div&gt;
+`;
+</code></pre></div> <p>If we change one aspect of the CSS (i.e., the <code>text-align</code> value), we get the following snapshot diff:</p> <div class=highlight><pre class="highlight diff"><code><span class="gd">- Snapshot
+</span><span class="gi">+ Received
+</span>
+ &lt;div
+<span class="gd">-  className="jsx-188096426 App"
+</span><span class="gi">+  className="jsx-1500233327 App"
+</span> &gt;
+   &lt;p
+<span class="gd">-    className="jsx-188096426"
+</span><span class="gi">+    className="jsx-1500233327"
+</span>   &gt;
+     Example Component
+   &lt;/p&gt;
+ &lt;/div&gt;
+</code></pre></div> <p>We can see the <code>jsx-########</code> noise in our diff. One other thing to note here is that the <code>p</code> element also has the noise even though our CSS doesn&rsquo;t target it!</p> <p>To eliminate this noise, let us remove the <code>styled-jsx/babel</code> plugin from the test environment (you will want to specify your different environments):</p> <div class=highlight><pre class="highlight json"><code><span class="s2">"babel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="s2">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"react-app"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"production"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"styled-jsx/babel"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"development"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"styled-jsx/babel"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div> <p>Now you have a snapshot that looks like this:</p> <div class=highlight><pre class="highlight plaintext"><code>exports[`renders without crashing 1`] = `
+&lt;div
+  className="App"
+&gt;
+  &lt;p&gt;
+    Example Component
+  &lt;/p&gt;
+  &lt;style
+    jsx={true}
+  &gt;
+
+              .App {
+                text-align: center;
+              }
+
+  &lt;/style&gt;
+&lt;/div&gt;
+`;
+</code></pre></div> <p>As we can see, the <code>jsx-########</code> values are no longer present, although there is now a <code>style</code> element which has the actual CSS. In my opinion, this is a good trade &ndash; now every element doesn&rsquo;t have the ever-changing <code>jsx-########</code>. This alone results in cleaner snapshots from my perspective.</p> <h3>Snapshots with enzyme</h3> <p>The second approach we will look at for inline styles is snapshot testing with <a href="https://github.com/airbnb/enzyme"><code>enzyme</code></a>. This package gives you the additional functionality to assert and manipulate the component&rsquo;s output. Unfortunately, the rendered component is wrapped in an <code>enzyme</code> specific component, which produces unnecessarily complex snapshots. Fortunately, the <a href="https://github.com/adriantoine/enzyme-to-json"><code>enzyme-to-json</code></a> package provides an approach to convert the wrapped component to the standard format we&rsquo;re familiar with. It is worth noting that you can further simplify the setup if you read more into the documentation of <code>enzyme</code> and <code>enzyme-to-json</code>.</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="s1">'react-dom'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Enzyme</span> <span class="k">from</span> <span class="s1">'enzyme'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Adapter</span> <span class="k">from</span> <span class="s1">'enzyme-adapter-react-16'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">shallow</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'enzyme'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">toJson</span> <span class="k">from</span> <span class="s1">'enzyme-to-json'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="s1">'./App'</span><span class="p">;</span>
+
+<span class="nx">Enzyme</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span> <span class="na">adapter</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Adapter</span><span class="p">()</span> <span class="p">});</span>
+
+<span class="nx">it</span><span class="p">(</span><span class="s1">'renders without crashing'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(&lt;</span><span class="nc">App</span> <span class="p">/&gt;);</span>
+  <span class="nx">expect</span><span class="p">(</span><span class="nx">toJson</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">)).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div> <p>This generates the following snapshot:</p> <div class=highlight><pre class="highlight plaintext"><code>exports[`renders without crashing 1`] = `
+&lt;div
+  className="jsx-188096426 App"
+&gt;
+  &lt;p
+    className="jsx-188096426"
+  &gt;
+    Example Component
+  &lt;/p&gt;
+  &lt;JSXStyle
+    css=".App.jsx-188096426{text-align:center;}"
+    styleId="188096426"
+  /&gt;
+&lt;/div&gt;
+`;
+</code></pre></div> <p>Notice here that we have an additional <code>JSXStyle</code> element that contains the actual CSS styles. This is <em>in addition</em> to the original noise we have in our snapshot.</p> <p>If we change one aspect of the CSS (i.e., the <code>text-align</code> value), we get the following snapshot readout:</p> <div class=highlight><pre class="highlight diff"><code><span class="gd">- Snapshot
+</span><span class="gi">+ Received
+</span>
+ &lt;div
+<span class="gd">-  className="jsx-188096426 App"
+</span><span class="gi">+  className="jsx-1500233327 App"
+</span> &gt;
+   &lt;p
+<span class="gd">-    className="jsx-188096426"
+</span><span class="gi">+    className="jsx-1500233327"
+</span>   &gt;
+     Example Component
+   &lt;/p&gt;
+   &lt;JSXStyle
+<span class="gd">-    css=".App.jsx-188096426{text-align:center;}"
+-    styleId="188096426"
+</span><span class="gi">+    css=".App.jsx-1500233327{text-align:left;}"
++    styleId="1500233327"
+</span>   /&gt;
+ &lt;/div&gt;
+</code></pre></div> <p>If we apply the same fix as we did for inline styles with <code>react-test-renderer</code> (removing <code>styled-jsx/babel</code> plugin from the test environment), we now get the same snapshot output. Thus, there are no more <code>jsx-########</code> values, however the raw CSS is within the <code>style</code> tag.</p> <h2>External Styles</h2> <p>I personally like to use <a href="https://github.com/zeit/styled-jsx#external-css-and-styles-outside-of-the-component">external CSS files</a> that I import into the components. The following shows our converted <code>App</code> component to use an imported CSS file instead of an inline style:</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">css</span> <span class="k">from</span> <span class="s1">'./App.css'</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"App"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+          Example Component
+        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">style</span> <span class="nt">jsx</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">css</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div><div class=highlight><pre class="highlight javascript"><code><span class="k">import</span> <span class="nx">css</span> <span class="k">from</span> <span class="s1">'styled-jsx/css'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">css</span><span class="s2">`
+  .App {
+    text-align: center;
+  }
+`</span><span class="p">;</span>
+</code></pre></div> <h3>Snapshots with react-test-renderer</h3> <p>Using external CSS files has no impact on <em>how</em> we test the component. Thus, we can use the same test from the inline styles section. Since that is the case, let us take the same approach to eliminate the noise in the diff by removing the <code>styled-jsx/babel</code> plugin from the test environment.</p> <div class=highlight><pre class="highlight plaintext"><code>FAIL  src/App.test.js
+● Test suite failed to run
+
+  styled-jsx/css: if you are getting this error it means that your `css` tagged template literals were not transpiled.
+
+    at Object.&lt;anonymous&gt;.module.exports [as default] (node_modules/styled-jsx/css.js:2:9)
+    at Object.&lt;anonymous&gt; (src/App.css.js:3:14)
+    at Object.&lt;anonymous&gt; (src/App.js:2:12)
+    at Object.&lt;anonymous&gt; (src/App.test.js:5:12)
+</code></pre></div> <p>We can recover from this error, if we use a <a href="https://facebook.github.io/jest/docs/en/manual-mocks.html">Jest manual mocks</a> to mock out the <code>css</code> tagged template literal. We can accomplish this by creating the following mock under <code>__mocks__/styled-jsx/css.js</code>:</p> <div class=highlight><pre class="highlight javascript"><code><span class="kd">function</span> <span class="nx">css</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s1">''</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">css</span><span class="p">;</span>
+</code></pre></div> <p>Now our snapshot looks like the following:</p> <div class=highlight><pre class="highlight plaintext"><code>exports[`renders without crashing 1`] = `
+&lt;div
+  className="App"
+&gt;
+  &lt;p&gt;
+    Example Component
+  &lt;/p&gt;
+  &lt;style
+    jsx={true}
+  /&gt;
+&lt;/div&gt;
+`;
+</code></pre></div> <p>We can see that the <code>jsx-########</code> values are no longer present, and in addition, the <code>style</code> tag does not have the raw CSS. This is an improvement over the inline style approaches, as the snapshot doesn&rsquo;t change with any CSS changes.</p> <h3>Snapshots with enzyme</h3> <p>We can use the same test we had when testing the inline styles using <code>react-test-renderer</code>. Going from what we know now, we can remove the <code>styled-jsx/babel</code> plugin from the test environment and mock the <code>css</code> tagged template literal. These two changes then result in the same snapshot that we received in the external styles using <code>react-test-renderer</code>.</p> <p>This is a great outcome given that the use of <code>enzyme</code> is common in the React tests I write, and it offers the <em>cleanest</em> snapshots.</p> <h2>TL;DR</h2> <ul> <li>If you are using <code>styled-jsx</code> with Jest snapshots: <ul> <li>You will see <code>className</code> changes for the <code>jsx-########</code> values any time the CSS changes</li> </ul></li> <li>If you are using inline styles: <ul> <li><em>Remove</em> the <code>styled-jsx/babel</code> plugin from your test environment</li> <li>See clean snapshots when using <code>react-test-renderer</code></li> <li>See clean snapshots (except for raw CSS under <code>style</code> tag) when using <code>enzyme</code></li> </ul></li> <li>If you are using external styles: <ul> <li><em>Remove</em> the <code>styled-jsx/babel</code> plugin from your test environment</li> <li><em>Mock</em> the <code>css</code> tagged template literal for <code>styled-jsx</code></li> <li>See clean snapshots when using <code>react-test-renderer</code></li> <li>See clean snapshots when using <code>enzyme</code></li> </ul></li> </ul> <p>There might be a better way to handle this, but as of the time this article was written I have yet to see a clean approach. One thing I noticed was a <a href="https://github.com/zeit/styled-jsx/issues/117#issuecomment-342115323">GitHub comment</a> that alluded to a better method that would follow a similar strategy to <a href="https://github.com/styled-components/jest-styled-components">jest-styled-components</a> but for <code>styled-jsx</code>.</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="col-md-12 footer__copywrite"> &copy; 2018 Kevin Jalbert </div> </html> <script src="/javascripts/app.js"></script>

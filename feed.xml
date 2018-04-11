@@ -2,16 +2,351 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-03-23T19:53:20-04:00</updated>
+  <updated>2018-04-11T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Jest Snapshots: Reducing styled-jsx Noise</title>
+    <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
+    <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
+    <updated>2018-04-11T09:18:54-04:00</updated>
+    <published>2018-04-11T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Learn how to eliminate the noise in your diffs when using Jest snapshots with styled-jsx.</description>
+    <content type="html">&lt;p&gt;&lt;img width="1600" height="1065" src="/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg" /&gt;
+&lt;a title="Total Eclipse Light" href="https://flickr.com/photos/howardignatius/13875481115"&gt;Total Eclipse Light&lt;/a&gt; by &lt;a href="https://flickr.com/people/howardignatius"&gt;howardignatius&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc-nd/2.0/"&gt;CC BY-NC-ND&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1&gt;Jest Snapshots: Reducing styled-jsx Noise&lt;/h1&gt;
+
+&lt;p&gt;Facebook&amp;rsquo;s &lt;a href="https://facebook.github.io/jest/"&gt;Jest&lt;/a&gt; is a powerful testing framework for JavaScript. It works &lt;em&gt;out of the box&lt;/em&gt; for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the &lt;a href="https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest"&gt;snapshot testing&lt;/a&gt; functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage&amp;rsquo;s documentation:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Capture snapshots of React trees or other serializable values to simplify testing and to analyze how state changes over time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;During my work with React and Jest, I was using &lt;a href="https://github.com/zeit/styled-jsx"&gt;&lt;code&gt;styled-jsx&lt;/code&gt;&lt;/a&gt; as my &lt;a href="https://hackernoon.com/all-you-need-to-know-about-css-in-js-984a72d48ebc"&gt;CSS-in-JS&lt;/a&gt; technology choice. Many times, I saw the following when I made any CSS changes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;FAIL  src/App.test.js
+● renders without crashing
+
+  expect(value).toMatchSnapshot()
+
+  Received value does not match stored snapshot 1.
+
+  - Snapshot
+  1. Received
+
+  @@ -1,28 +1,23 @@
+   &amp;lt;div
+  -  className="jsx-188895008 App"
+  +  className="jsx-3481390381 App"
+   &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is because the CSS changed for this scoped component and thus the &lt;code&gt;jsx-########&lt;/code&gt; (unique id) reflects the change.&lt;/p&gt;
+
+&lt;p&gt;To me, these changes in the snapshot diffs are noise and it is harder to see the structural DOM changes. The original &lt;code&gt;className&lt;/code&gt; for the DOM elements are still present, and ideally, I would just want snapshots without any of the &lt;code&gt;styled-jsx&lt;/code&gt; stuff present.&lt;/p&gt;
+
+&lt;p&gt;We will first start with a simplified &lt;code&gt;App&lt;/code&gt; component using &lt;a href="https://github.com/facebook/create-react-app"&gt;create-react-app&lt;/a&gt; as the base. The goal is to illustrate the project setup, what the snapshots look like, how to reduce the noise, and what the snapshots look like afterwards. &lt;code&gt;styled-jsx&lt;/code&gt; provides a way to style your components using &lt;em&gt;inline styles&lt;/em&gt; or &lt;em&gt;external CSS files&lt;/em&gt;, so we will consider both in this article. In addition, we will also consider both the &lt;code&gt;react-test-renderer&lt;/code&gt; and &lt;code&gt;enzyme&lt;/code&gt; Jest snapshot rendering methods.&lt;/p&gt;
+
+&lt;p&gt;Given the above information, the following sections will cover these scenarios:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Inline styles with &lt;code&gt;react-test-renderer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Inline styles with &lt;code&gt;enzyme&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;External styles with &lt;code&gt;react-test-renderer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;External styles with &lt;code&gt;enzyme&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Inline Styles&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;Component&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt; &lt;span class="kd"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;className=&lt;/span&gt;&lt;span class="s2"&gt;"App"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+          Example Component
+        &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt; &lt;span class="nt"&gt;jsx&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;`
+          .App {
+            text-align: center;
+          }
+        `&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To make this all work, you have to add the &lt;code&gt;styled-jsx/babel&lt;/code&gt; to &lt;em&gt;plugins&lt;/em&gt; in the babel configuration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="s2"&gt;"babel"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;"presets"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"react-app"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;"plugins"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"styled-jsx/babel"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Snapshots with react-test-renderer&lt;/h3&gt;
+
+&lt;p&gt;Within the context of inline styles, we&amp;rsquo;ll first look at the default approach for testing with Jest snapshots using &lt;a href="https://github.com/facebook/react/tree/master/packages/react-test-renderer"&gt;&lt;code&gt;react-test-renderer&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;ReactDOM&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react-dom'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;renderer&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react-test-renderer'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'./App'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'renders without crashing'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;tree&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;renderer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;App&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;).&lt;/span&gt;&lt;span class="nx"&gt;toJSON&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;tree&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;toMatchSnapshot&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This generates the following snapshot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;exports[`renders without crashing 1`] = `
+&amp;lt;div
+  className="jsx-188096426 App"
+&amp;gt;
+  &amp;lt;p
+    className="jsx-188096426"
+  &amp;gt;
+    Example Component
+  &amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+`;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If we change one aspect of the CSS (i.e., the &lt;code&gt;text-align&lt;/code&gt; value), we get the following snapshot diff:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight diff"&gt;&lt;code&gt;&lt;span class="gd"&gt;- Snapshot
+&lt;/span&gt;&lt;span class="gi"&gt;+ Received
+&lt;/span&gt;
+ &amp;lt;div
+&lt;span class="gd"&gt;-  className="jsx-188096426 App"
+&lt;/span&gt;&lt;span class="gi"&gt;+  className="jsx-1500233327 App"
+&lt;/span&gt; &amp;gt;
+   &amp;lt;p
+&lt;span class="gd"&gt;-    className="jsx-188096426"
+&lt;/span&gt;&lt;span class="gi"&gt;+    className="jsx-1500233327"
+&lt;/span&gt;   &amp;gt;
+     Example Component
+   &amp;lt;/p&amp;gt;
+ &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can see the &lt;code&gt;jsx-########&lt;/code&gt; noise in our diff. One other thing to note here is that the &lt;code&gt;p&lt;/code&gt; element also has the noise even though our CSS doesn&amp;rsquo;t target it!&lt;/p&gt;
+
+&lt;p&gt;To eliminate this noise, let us remove the &lt;code&gt;styled-jsx/babel&lt;/code&gt; plugin from the test environment (you will want to specify your different environments):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="s2"&gt;"babel"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;"presets"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"react-app"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="s2"&gt;"env"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"production"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="s2"&gt;"plugins"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="s2"&gt;"styled-jsx/babel"&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"development"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="s2"&gt;"plugins"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="s2"&gt;"styled-jsx/babel"&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="s2"&gt;"test"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="s2"&gt;"plugins"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you have a snapshot that looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;exports[`renders without crashing 1`] = `
+&amp;lt;div
+  className="App"
+&amp;gt;
+  &amp;lt;p&amp;gt;
+    Example Component
+  &amp;lt;/p&amp;gt;
+  &amp;lt;style
+    jsx={true}
+  &amp;gt;
+
+              .App {
+                text-align: center;
+              }
+
+  &amp;lt;/style&amp;gt;
+&amp;lt;/div&amp;gt;
+`;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As we can see, the &lt;code&gt;jsx-########&lt;/code&gt; values are no longer present, although there is now a &lt;code&gt;style&lt;/code&gt; element which has the actual CSS. In my opinion, this is a good trade &amp;ndash; now every element doesn&amp;rsquo;t have the ever-changing &lt;code&gt;jsx-########&lt;/code&gt;. This alone results in cleaner snapshots from my perspective.&lt;/p&gt;
+
+&lt;h3&gt;Snapshots with enzyme&lt;/h3&gt;
+
+&lt;p&gt;The second approach we will look at for inline styles is snapshot testing with &lt;a href="https://github.com/airbnb/enzyme"&gt;&lt;code&gt;enzyme&lt;/code&gt;&lt;/a&gt;. This package gives you the additional functionality to assert and manipulate the component&amp;rsquo;s output. Unfortunately, the rendered component is wrapped in an &lt;code&gt;enzyme&lt;/code&gt; specific component, which produces unnecessarily complex snapshots. Fortunately, the &lt;a href="https://github.com/adriantoine/enzyme-to-json"&gt;&lt;code&gt;enzyme-to-json&lt;/code&gt;&lt;/a&gt; package provides an approach to convert the wrapped component to the standard format we&amp;rsquo;re familiar with. It is worth noting that you can further simplify the setup if you read more into the documentation of &lt;code&gt;enzyme&lt;/code&gt; and &lt;code&gt;enzyme-to-json&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;ReactDOM&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react-dom'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;Enzyme&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'enzyme'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;Adapter&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'enzyme-adapter-react-16'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;shallow&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'enzyme'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;toJson&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'enzyme-to-json'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'./App'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="nx"&gt;Enzyme&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;configure&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;adapter&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Adapter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;});&lt;/span&gt;
+
+&lt;span class="nx"&gt;it&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'renders without crashing'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;shallow&lt;/span&gt;&lt;span class="p"&gt;(&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;App&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;);&lt;/span&gt;
+  &lt;span class="nx"&gt;expect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;toJson&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;wrapper&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nx"&gt;toMatchSnapshot&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This generates the following snapshot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;exports[`renders without crashing 1`] = `
+&amp;lt;div
+  className="jsx-188096426 App"
+&amp;gt;
+  &amp;lt;p
+    className="jsx-188096426"
+  &amp;gt;
+    Example Component
+  &amp;lt;/p&amp;gt;
+  &amp;lt;JSXStyle
+    css=".App.jsx-188096426{text-align:center;}"
+    styleId="188096426"
+  /&amp;gt;
+&amp;lt;/div&amp;gt;
+`;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice here that we have an additional &lt;code&gt;JSXStyle&lt;/code&gt; element that contains the actual CSS styles. This is &lt;em&gt;in addition&lt;/em&gt; to the original noise we have in our snapshot.&lt;/p&gt;
+
+&lt;p&gt;If we change one aspect of the CSS (i.e., the &lt;code&gt;text-align&lt;/code&gt; value), we get the following snapshot readout:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight diff"&gt;&lt;code&gt;&lt;span class="gd"&gt;- Snapshot
+&lt;/span&gt;&lt;span class="gi"&gt;+ Received
+&lt;/span&gt;
+ &amp;lt;div
+&lt;span class="gd"&gt;-  className="jsx-188096426 App"
+&lt;/span&gt;&lt;span class="gi"&gt;+  className="jsx-1500233327 App"
+&lt;/span&gt; &amp;gt;
+   &amp;lt;p
+&lt;span class="gd"&gt;-    className="jsx-188096426"
+&lt;/span&gt;&lt;span class="gi"&gt;+    className="jsx-1500233327"
+&lt;/span&gt;   &amp;gt;
+     Example Component
+   &amp;lt;/p&amp;gt;
+   &amp;lt;JSXStyle
+&lt;span class="gd"&gt;-    css=".App.jsx-188096426{text-align:center;}"
+-    styleId="188096426"
+&lt;/span&gt;&lt;span class="gi"&gt;+    css=".App.jsx-1500233327{text-align:left;}"
++    styleId="1500233327"
+&lt;/span&gt;   /&amp;gt;
+ &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If we apply the same fix as we did for inline styles with &lt;code&gt;react-test-renderer&lt;/code&gt; (removing &lt;code&gt;styled-jsx/babel&lt;/code&gt; plugin from the test environment), we now get the same snapshot output. Thus, there are no more &lt;code&gt;jsx-########&lt;/code&gt; values, however the raw CSS is within the &lt;code&gt;style&lt;/code&gt; tag.&lt;/p&gt;
+
+&lt;h2&gt;External Styles&lt;/h2&gt;
+
+&lt;p&gt;I personally like to use &lt;a href="https://github.com/zeit/styled-jsx#external-css-and-styles-outside-of-the-component"&gt;external CSS files&lt;/a&gt; that I import into the components. The following shows our converted &lt;code&gt;App&lt;/code&gt; component to use an imported CSS file instead of an inline style:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;Component&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;css&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'./App.css'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt; &lt;span class="kd"&gt;extends&lt;/span&gt; &lt;span class="nx"&gt;Component&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;className=&lt;/span&gt;&lt;span class="s2"&gt;"App"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+          Example Component
+        &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt; &lt;span class="nt"&gt;jsx&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;css&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;css&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'styled-jsx/css'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="nx"&gt;css&lt;/span&gt;&lt;span class="s2"&gt;`
+  .App {
+    text-align: center;
+  }
+`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Snapshots with react-test-renderer&lt;/h3&gt;
+
+&lt;p&gt;Using external CSS files has no impact on &lt;em&gt;how&lt;/em&gt; we test the component. Thus, we can use the same test from the inline styles section. Since that is the case, let us take the same approach to eliminate the noise in the diff by removing the &lt;code&gt;styled-jsx/babel&lt;/code&gt; plugin from the test environment.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;FAIL  src/App.test.js
+● Test suite failed to run
+
+  styled-jsx/css: if you are getting this error it means that your `css` tagged template literals were not transpiled.
+
+    at Object.&amp;lt;anonymous&amp;gt;.module.exports [as default] (node_modules/styled-jsx/css.js:2:9)
+    at Object.&amp;lt;anonymous&amp;gt; (src/App.css.js:3:14)
+    at Object.&amp;lt;anonymous&amp;gt; (src/App.js:2:12)
+    at Object.&amp;lt;anonymous&amp;gt; (src/App.test.js:5:12)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can recover from this error, if we use a &lt;a href="https://facebook.github.io/jest/docs/en/manual-mocks.html"&gt;Jest manual mocks&lt;/a&gt; to mock out the &lt;code&gt;css&lt;/code&gt; tagged template literal. We can accomplish this by creating the following mock under &lt;code&gt;__mocks__/styled-jsx/css.js&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;css&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;css&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now our snapshot looks like the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;exports[`renders without crashing 1`] = `
+&amp;lt;div
+  className="App"
+&amp;gt;
+  &amp;lt;p&amp;gt;
+    Example Component
+  &amp;lt;/p&amp;gt;
+  &amp;lt;style
+    jsx={true}
+  /&amp;gt;
+&amp;lt;/div&amp;gt;
+`;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can see that the &lt;code&gt;jsx-########&lt;/code&gt; values are no longer present, and in addition, the &lt;code&gt;style&lt;/code&gt; tag does not have the raw CSS. This is an improvement over the inline style approaches, as the snapshot doesn&amp;rsquo;t change with any CSS changes.&lt;/p&gt;
+
+&lt;h3&gt;Snapshots with enzyme&lt;/h3&gt;
+
+&lt;p&gt;We can use the same test we had when testing the inline styles using &lt;code&gt;react-test-renderer&lt;/code&gt;. Going from what we know now, we can remove the &lt;code&gt;styled-jsx/babel&lt;/code&gt; plugin from the test environment and mock the &lt;code&gt;css&lt;/code&gt; tagged template literal. These two changes then result in the same snapshot that we received in the external styles using &lt;code&gt;react-test-renderer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is a great outcome given that the use of &lt;code&gt;enzyme&lt;/code&gt; is common in the React tests I write, and it offers the &lt;em&gt;cleanest&lt;/em&gt; snapshots.&lt;/p&gt;
+
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you are using &lt;code&gt;styled-jsx&lt;/code&gt; with Jest snapshots:
+
+&lt;ul&gt;
+&lt;li&gt;You will see &lt;code&gt;className&lt;/code&gt; changes for the &lt;code&gt;jsx-########&lt;/code&gt; values any time the CSS changes&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If you are using inline styles:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Remove&lt;/em&gt; the &lt;code&gt;styled-jsx/babel&lt;/code&gt; plugin from your test environment&lt;/li&gt;
+&lt;li&gt;See clean snapshots when using &lt;code&gt;react-test-renderer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;See clean snapshots (except for raw CSS under &lt;code&gt;style&lt;/code&gt; tag) when using &lt;code&gt;enzyme&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If you are using external styles:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Remove&lt;/em&gt; the &lt;code&gt;styled-jsx/babel&lt;/code&gt; plugin from your test environment&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Mock&lt;/em&gt; the &lt;code&gt;css&lt;/code&gt; tagged template literal for &lt;code&gt;styled-jsx&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;See clean snapshots when using &lt;code&gt;react-test-renderer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;See clean snapshots when using &lt;code&gt;enzyme&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There might be a better way to handle this, but as of the time this article was written I have yet to see a clean approach. One thing I noticed was a &lt;a href="https://github.com/zeit/styled-jsx/issues/117#issuecomment-342115323"&gt;GitHub comment&lt;/a&gt; that alluded to a better method that would follow a similar strategy to &lt;a href="https://github.com/styled-components/jest-styled-components"&gt;jest-styled-components&lt;/a&gt; but for &lt;code&gt;styled-jsx&lt;/code&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-03-24T13:37:47-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -59,7 +394,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -75,14 +410,13 @@
 &lt;p&gt;Looking through the ActiveStorage &lt;a href="http://edgeguides.rubyonrails.org/active_storage_overview.html"&gt;documentation&lt;/a&gt; and &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;repository&amp;rsquo;s readme&lt;/a&gt;, you figure out how to get everything working locally using ActiveStorage&amp;rsquo;s &lt;code&gt;local&lt;/code&gt; service.&lt;/p&gt;
 
 &lt;p&gt;Now it is time to try running everything, but with Minio as your file storage. Looking at your &lt;code&gt;config/storage.yml&lt;/code&gt; you&amp;rsquo;ll see the template for Amazon&amp;rsquo;s S3:&lt;/p&gt;
-&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="s"&gt;amazon&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-   &lt;span class="s"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
-   &lt;span class="s"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :access_key_id) %&amp;gt;&lt;/span&gt;
-   &lt;span class="s"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :secret_access_key) %&amp;gt;&lt;/span&gt;
-   &lt;span class="s"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
-   &lt;span class="s"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="na"&gt;amazon&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+   &lt;span class="na"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
+   &lt;span class="na"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :access_key_id) %&amp;gt;&lt;/span&gt;
+   &lt;span class="na"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :secret_access_key) %&amp;gt;&lt;/span&gt;
+   &lt;span class="na"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
+   &lt;span class="na"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1&gt;Configuration Options&lt;/h1&gt;
 
 &lt;p&gt;Now it&amp;rsquo;s time to figure out how to use the S3 service in conjunction with your Minio server&amp;hellip;&lt;/p&gt;
@@ -96,15 +430,14 @@
 &lt;h2&gt;Endpoint&lt;/h2&gt;
 
 &lt;p&gt;Your Minio server is hosted at some URL (i.e., https://minio123.com), so you&amp;rsquo;ll need to inform ActiveStorage&amp;rsquo;s S3 service about this &lt;em&gt;endpoint&lt;/em&gt;. Luckily, it is just a matter of adding the URL endpoint to your configuration:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  endpoint: "https://minio123.com" # Points to your Minio server
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  endpoint: "https://minio123.com" # Points to your Minio server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You can also use ports on the endpoint (i.e., &amp;ldquo;http://localhost:9000&amp;rdquo;).&lt;/p&gt;
 
 &lt;h2&gt;Force Path Style&lt;/h2&gt;
 
 &lt;p&gt;So you have the endpoint and region all setup from a configuration standpoint. Your Minio server is also up and running, along with a bucket, &lt;code&gt;your_own_bucket&lt;/code&gt;. You try to upload a file and see the following exception:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Aws::Errors::NoSuchEndpointError (Encountered a `SocketError` while attempting to connect to:
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Aws::Errors::NoSuchEndpointError (Encountered a `SocketError` while attempting to connect to:
 
   https://you_own_bucket.minio123.com/RJioqjrTT4VmFobw5FhXkSby
 
@@ -114,25 +447,22 @@ poorly formatted `:endpoint` option.
 * Avoid configuring the `:endpoint` option directly. Endpoints are constructed
   from the `:region`. The `:endpoint` option is reserved for connecting to
   non-standard test endpoints.
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Hmm&amp;hellip; Well that didn&amp;rsquo;t work out. If we look at the URL (https://your_own_bucket.minio123.com), we can see that it uses a bucket subdomain approach. However, Minio expects the bucket after the domain (i.e., https://minio123.com/your_own_bucket). Again, fortunately there is an configuration option we can add to &lt;em&gt;force this path style&lt;/em&gt;:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  force_path_style: true # Needed to be compliant with how Minio serves the bucket
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  force_path_style: true # Needed to be compliant with how Minio serves the bucket
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1&gt;Complete Configuration&lt;/h1&gt;
 
 &lt;p&gt;At this point we covered all the configuration &lt;em&gt;gotchas&lt;/em&gt; to set up ActiveStorage with Minio. Namely, the missing and (mostly undocumented) &lt;code&gt;endpoint&lt;/code&gt; and &lt;code&gt;force_path_style&lt;/code&gt; options. The following is a complete configuration.&lt;/p&gt;
-&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="s"&gt;minio&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-   &lt;span class="s"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
-   &lt;span class="s"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :access_key_id) %&amp;gt;&lt;/span&gt;
-   &lt;span class="s"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :secret_access_key) %&amp;gt;&lt;/span&gt;
-   &lt;span class="s"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
-   &lt;span class="s"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
-   &lt;span class="s"&gt;endpoint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;https://minio123.com"&lt;/span&gt;
-   &lt;span class="s"&gt;force_path_style&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="na"&gt;minio&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+   &lt;span class="na"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
+   &lt;span class="na"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :access_key_id) %&amp;gt;&lt;/span&gt;
+   &lt;span class="na"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :secret_access_key) %&amp;gt;&lt;/span&gt;
+   &lt;span class="na"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
+   &lt;span class="na"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
+   &lt;span class="na"&gt;endpoint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;https://minio123.com"&lt;/span&gt;
+   &lt;span class="na"&gt;force_path_style&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It isn&amp;rsquo;t a bad idea to have the configuration named &lt;code&gt;minio&lt;/code&gt;, just so it is clear that it&amp;rsquo;s a Minio file storage instead of the typical Amazon S3.&lt;/p&gt;
 </content>
   </entry>
@@ -140,7 +470,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -174,7 +504,7 @@ poorly formatted `:endpoint` option.
 &lt;p&gt;I had recently read that &lt;a href="https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records"&gt;lightweight architecture decision records&lt;/a&gt; had made it into the &lt;em&gt;adopt&lt;/em&gt; ring of &lt;a href="https://www.thoughtworks.com/radar"&gt;Thoughtworks Technology Radar&lt;/a&gt; in the November 2017 edition. They note that the lightweight aspect of ADRs is to just have text/markdown files alongside software projects in their repositories.&lt;/p&gt;
 
 &lt;p&gt;Here is an example ADR (pretty meta as it is about starting ADRs):&lt;/p&gt;
-&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# 1. Record architecture decisions&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# 1. Record architecture decisions&lt;/span&gt;
 
 Date: 2018-01-03
 
@@ -193,8 +523,7 @@ We will use Architecture Decision Records, as described by Michael Nygard in thi
 &lt;span class="gu"&gt;## Consequences&lt;/span&gt;
 
 See Michael Nygard's article, linked above. For a lightweight ADR toolset, see Nat Pryce's _adr-tools_ at https://github.com/npryce/adr-tools.
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I don&amp;rsquo;t want to go into technical details of ADRs, as this blog post is to bring awareness to them, as well as tools/techniques around them. There is plenty of supplementary material in this blog post via links to other articles.&lt;/p&gt;
 
 &lt;h1&gt;Getting Started with ADRs&lt;/h1&gt;
@@ -218,22 +547,19 @@ See Michael Nygard's article, linked above. For a lightweight ADR toolset, see N
 &lt;h3&gt;Maintain Table of Contents&lt;/h3&gt;
 
 &lt;p&gt;Most software projects have a &lt;code&gt;README.md&lt;/code&gt; file. When working with ADRs, I include a hyperlink to &lt;code&gt;/doc/adr/README.md&lt;/code&gt;. This file can be generated using &lt;code&gt;adr generate toc &amp;gt; ./docs/adr/README.md&lt;/code&gt;, and ends up creating a nice table of contents of the current ADRs:&lt;/p&gt;
-&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# Architecture Decision Records&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# Architecture Decision Records&lt;/span&gt;
 &lt;span class="p"&gt;
 *&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;1. Record architecture decisions&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0001-record-architecture-decisions.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up component XXXX into two modules&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Superseding Existing ADRs&lt;/h3&gt;
 
 &lt;p&gt;Eventually, you will have a decision which is somehow &lt;em&gt;linked&lt;/em&gt; to another ADR. A great example of this is a new ADR which supersedes an older decision. First let us make a new ADR &lt;code&gt;adr new -s 2 &amp;quot;Combine modules back into one component&amp;quot;&lt;/code&gt;, which ends up superseding our earlier decision. This will actually modify the ADR&amp;rsquo;s &lt;em&gt;status&lt;/em&gt; section by adding the following:&lt;/p&gt;
-&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;
 Superseded by &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;3. Combine modules back into one component&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0003-combine-modules-back-into-one-component.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0003-combine-modules-back-into-one-component.md&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0003-combine-modules-back-into-one-component.md&lt;/span&gt;
 Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up component XXXX into two modules&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It is useful to see how ADRs relate to each other. In our example, we&amp;rsquo;re indicating one ADR that supersedes another. It is possible to use &lt;code&gt;adr link&lt;/code&gt; to specifically tailor the link to use different wording, so you can be specific in how ADRs are associated. Ultimately, linking provides additional context surrounding linked decisions.&lt;/p&gt;
 
 &lt;h3&gt;Visualizing ADRs&lt;/h3&gt;
@@ -280,7 +606,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -296,9 +622,8 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;h1&gt;Reminding Myself&lt;/h1&gt;
 
 &lt;p&gt;A common use case for reminders &amp;ndash; you want some notification in the future to remind you about something.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind me to work on blog post in 30 minutes
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind me to work on blog post in 30 minutes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img width="587" height="109" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-me.jpg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;This is the feature that most people know of with Slack Reminders.&lt;/p&gt;
@@ -306,9 +631,8 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;h1&gt;Reminding a User&lt;/h1&gt;
 
 &lt;p&gt;It&amp;rsquo;s not an uncommon task that you&amp;rsquo;d want to remind a colleague about a future task.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind @aaron.romeo deploy your changes before the weekend on friday morning
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind @aaron.romeo deploy your changes before the weekend on friday morning
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img width="630" height="123" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-user.jpg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;In this example, &lt;a href="http://www.aaronromeo.com/"&gt;@aaron.romeo&lt;/a&gt; would receive a reminder at the specified time. Aaron doesn&amp;rsquo;t actually receive any indication that he has just been assigned a reminder. The only way he can get any insight that he has a new reminder is to either wait until the specified time, or to look at his own list of reminders and see it there. You just have to be aware of this detail depending on how you plan to use reminders.&lt;/p&gt;
@@ -330,9 +654,8 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;h1&gt;Reminding a Channel&lt;/h1&gt;
 
 &lt;p&gt;In a similar fashion to assigning a reminder to another user, you can target a channel itself. For example, you might want to remind all the online users within a channel about something.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #team-ep-dev :spiral_calendar_pad: @here standup time! every weekday at 10:30am
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #team-ep-dev :spiral_calendar_pad: @here standup time! every weekday at 10:30am
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img width="650" height="100" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-channel.jpg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;In this example, the channel &lt;code&gt;#diet-sup-dev&lt;/code&gt; will receive the message at the specified time. As you can see, I even used the &lt;code&gt;@here&lt;/code&gt; mention to make sure it gets all the active users&amp;rsquo; attention. When a channel reminder is set, the reminder is announced on the channel at the specified time.&lt;/p&gt;
@@ -342,9 +665,8 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;h1&gt;What are my reminders&lt;/h1&gt;
 
 &lt;p&gt;Every now and then you might want to do a little housecleaning on your reminders. You have likely clicked the &lt;em&gt;View Reminders&lt;/em&gt;, or even just executed the following:&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind list
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This presents a list of the past, present, and future reminders, as well as incomplete reminders, for yourself, along with reminders for other individuals and channels.&lt;/p&gt;
 
 &lt;p&gt;&lt;img width="684" height="123" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-list.jpg" /&gt;&lt;/p&gt;
@@ -360,7 +682,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -418,7 +740,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -486,7 +808,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;p&gt;&lt;img alt="Zapier Highly To Evernote Flow" width="380" height="495" src="/images/2017-10-31-share-highlighted-articles/zapier-highly-flow.jpg" /&gt;&lt;/p&gt;
 
 &lt;p&gt;I use a Zapier inbound email trigger, that triggers when I email the share link from Highly. I then feed the HTML formatted email into a JavaScript function where I can clean up the &lt;code&gt;inputData.rawBody&lt;/code&gt; and &lt;code&gt;inputData.htmlBody&lt;/code&gt; and return an object for the next step.&lt;/p&gt;
-&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;titleRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/kevinjalbert's highlights&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;+&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;.*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;titleRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/kevinjalbert's highlights&lt;/span&gt;&lt;span class="se"&gt;\s&lt;/span&gt;&lt;span class="sr"&gt;+&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;.*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;linkRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;https:&lt;/span&gt;&lt;span class="se"&gt;\/\/&lt;/span&gt;&lt;span class="sr"&gt;www.highly.co&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;hl&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;.*&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;timeRegex&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="se"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;.* Summary • .* Story&lt;/span&gt;&lt;span class="se"&gt;)&lt;/span&gt;&lt;span class="sr"&gt;/g&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
@@ -511,7 +833,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;div"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;/div&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="c1"&gt;// Clean up nbsp&lt;/span&gt;
-&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;div class="split-15" height="15" style="font-size:15px;line-height:15px;height:15px;overflow:hidden;background:transparent"&amp;gt;&amp;amp;nbsp;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;div&amp;gt;/g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;div class="split-5" height="5" style="font-size:5px;line-height:5px;height:5px;overflow:hidden;background:transparent"&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;\/div&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nx"&gt;htmlBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sr"&gt;/&amp;lt;div class="split-15" height="15" style="font-size:15px;line-height:15px;height:15px;overflow:hidden;background:transparent"&amp;gt;&amp;amp;nbsp;&amp;lt;&lt;/span&gt;&lt;span class="se"&gt;\/&lt;/span&gt;&lt;span class="sr"&gt;div&amp;gt;/g&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'&amp;lt;div class="split-5" height="5" style="font-size:5px;line-height:5px;height:5px;overflow:hidden;background:transparent"&amp;gt;&amp;lt;br /&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="s1"&gt;/div&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
 &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="na"&gt;articleTitle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;titleRegex&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;inputData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rawBody&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
@@ -519,8 +841,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
   &lt;span class="na"&gt;timeSummary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;timeRegex&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;inputData&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;rawBody&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
   &lt;span class="na"&gt;evernoteFormattedBody&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;htmlBody&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Cleaning up the HTML body was an interesting task to make it conform to Evernote&amp;rsquo;s &lt;a href="https://dev.evernote.com/doc/articles/enml.php"&gt;ENML&lt;/a&gt; format. The code is a hack and brittle, but it works. I also extract the title so that I can ensure that the note&amp;rsquo;s title is properly reflecting in Evernote. The final step is to put all this together into the Evernote action template.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="Zapier Create Evernote Note Template" width="760" height="560" src="/images/2017-10-31-share-highlighted-articles/zapier-create-evernote-note.jpg" /&gt;&lt;/p&gt;
@@ -542,7 +863,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -634,14 +955,13 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;p&gt;When I use &lt;code&gt;mackup --dry-run backup&lt;/code&gt;, I get a list of configurations that have not yet been backed up. This will pick up new applications, as well as new custom configurations I&amp;rsquo;ve added.&lt;/p&gt;
 
 &lt;p&gt;If I have something custom to backup I will create a new configuration.&lt;/p&gt;
-&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat ~/.mackup/tips.cfg
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ cat ~/.mackup/tips.cfg
 [application]
 name = My tips
 
 [configuration_files]
 .tips
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now I can run &lt;code&gt;mackup backup&lt;/code&gt; and backup the new additions to my dropbox.&lt;/p&gt;
 
 &lt;p&gt;If I&amp;rsquo;m considering publically sharing this in my dotfiles repository, I&amp;rsquo;ll add the appropriate changes in the &lt;code&gt;.gitignore&lt;/code&gt; whitelist.&lt;/p&gt;
@@ -676,7 +996,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -733,7 +1053,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -804,7 +1124,7 @@ name = My tips
     <title>Make the most of your Chat Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
     <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
+    <updated>2018-04-11T09:18:54-04:00</updated>
     <published>2017-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -951,172 +1271,6 @@ name = My tips
 &lt;/ol&gt;
 
 &lt;p&gt;With routine maintenance, we will keep our Slack channels focused and organized. Hopefully we will see the benefit to education/knowledge sharing with the increased organization of our chat channels.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Create your own Pronto Runner</title>
-    <link rel="alternate" href="https://kevinjalbert.com/create-your-own-pronto-runner/"/>
-    <id>https://kevinjalbert.com/create-your-own-pronto-runner/</id>
-    <updated>2018-03-23T21:33:17-04:00</updated>
-    <published>2017-05-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Pronto runners provides an automatic mechanism to find offenses in code reviews. Learn the essentials of pronto runners so that you can build your own.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1280" height="857" src="/images/2017-05-30-create-your-own-pronto-runner/robot.jpg" /&gt;
-&lt;em&gt;By Vanillase (Own work) &lt;a href="http://creativecommons.org/licenses/by-sa/3.0"&gt;CC BY-SA 3.0&lt;/a&gt;, via &lt;a href="https://commons.wikimedia.org/wiki/File:ASIMO_Conducting_Pose_on_4.14.2008.jpg"&gt;Wikimedia Commons&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;h1&gt;What is Pronto?&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/prontolabs/pronto"&gt;Pronto&lt;/a&gt; is a tool that provides an automated code review over new changes in a git branch. It is typically used in continuous integration as a way to provide feedback on a pull/merge request. It is configurable in how it provides feedback, through the use of &lt;em&gt;formatters&lt;/em&gt;. For example, pronto on GitHub could &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_pull_request_formatter.rb"&gt;comment directly on the offending line&lt;/a&gt;, use &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_status_formatter.rb"&gt;pull request status checks&lt;/a&gt;, or even the recent &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/formatter/github_pull_request_review_formatter.rb"&gt;pull request review&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Pronto uses the concept of &lt;em&gt;runners&lt;/em&gt; to indicate what pronto will use to look for offenses during a code review. Generally, runners act as wrappers around existing tools. There are a number of &lt;a href="https://github.com/prontolabs/pronto#runners"&gt;open source runners&lt;/a&gt; available, and for the most part they will provide what you need. In some cases you&amp;rsquo;ll want something different, which does not &lt;em&gt;yet&lt;/em&gt; exist as a runner. This is where you can create a new runner to fill the gap.&lt;/p&gt;
-
-&lt;h1&gt;What is a Runner&amp;rsquo;s Job?&lt;/h1&gt;
-
-&lt;p&gt;Pronto runners are responsible for parsing out offenses and matching them with lines from a git patch. These offenses normally are the result of a tool that the runner is using (i.e., a linter). The end goal is that the runner sends messages containing the patch line change and the offense to pronto. There are two methods that I&amp;rsquo;ve seen when approaching a pronto runner, and are dictated by the following constraints:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;The tool can be run on individual files.&lt;/li&gt;
-&lt;li&gt;The tool needs be run with the context of the whole code base.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The second option could be used regardless, although when the size of your codebase increases the number of files that have to be processed would grow as well. Ideally, you would want the runner to be as quick as possible, so running the tool over the least amount of files would help accomplish that. In addition, there would be less error noise produced from non-changed files.&lt;/p&gt;
-
-&lt;p&gt;In my experience, when creating &lt;a href="https://github.com/kevinjalbert/pronto-stylelint"&gt;pronto-stylelint&lt;/a&gt; and &lt;a href="https://github.com/kevinjalbert/pronto-flow"&gt;pronto-flow&lt;/a&gt;, I used existing pronto runners as my base. I would recommend the same when starting a new runner. Pick one as your base (which follows the approach you need) and modify as necessary. Again, most pronto runners are fairly straight forward, and usually consist of one file.&lt;/p&gt;
-
-&lt;h1&gt;Examining a Runner&lt;/h1&gt;
-
-&lt;p&gt;Let&amp;rsquo;s take a look at &lt;a href="https://github.com/prontolabs/pronto-rubocop/blob/v0.8.1/lib/pronto/rubocop.rb"&gt;pronto-rubocop&lt;/a&gt; and make a few notes:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The class inherits from &lt;code&gt;Pronto::Runner&lt;/code&gt;, which provides the patch information along with &lt;a href="https://github.com/prontolabs/pronto/blob/v0.8.2/lib/pronto/runner.rb"&gt;other methods&lt;/a&gt; that you can use within your runner.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#initialize&lt;/code&gt; is setting up any custom configurations, as well as creating the &lt;code&gt;Rubocop::Runner&lt;/code&gt; instance.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;#run&lt;/code&gt; is the &lt;a href="https://github.com/prontolabs/pronto/blob/v0.8.2/lib/pronto/runners.rb#L20"&gt;entry point of the runner&lt;/a&gt; &amp;ndash; this is where all your logic can start to come into play.&lt;/li&gt;
-&lt;li&gt;In pronto-rubocop, &lt;code&gt;#run&lt;/code&gt; is selecting all the patch information that pronto provides it, and only processing (i.e., run rubocop and send messages) those which are valid (i.e., ruby file that has a change).&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;#inspect&lt;/code&gt; method processes each patch with rubocop. The reported offenses from rubocop get matched up with the patch file/line. When a match is found then &lt;code&gt;#new_message&lt;/code&gt; is called.&lt;/li&gt;
-&lt;li&gt;The output of a pronto runner is to create instances of &lt;code&gt;Pronto::Message&lt;/code&gt;, which requires &lt;a href="https://github.com/prontolabs/pronto/blob/master/lib/pronto/message.rb#L7-L19"&gt;specific data inputs&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The following is a stripped down and commented version of pronto-rubocop:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'pronto'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rubocop'&lt;/span&gt;
-
-&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Pronto&lt;/span&gt;
-  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Rubocop&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Runner&lt;/span&gt;
-    &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Required&lt;/span&gt; &lt;span class="sb"&gt;`#run`&lt;/span&gt; &lt;span class="nb"&gt;method&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;entry&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;
-      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="vi"&gt;@patches&lt;/span&gt;
-
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Loop&lt;/span&gt; &lt;span class="n"&gt;over&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;patches&lt;/span&gt; &lt;span class="n"&gt;passed&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;pronto&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="nb"&gt;select&lt;/span&gt; &lt;span class="n"&gt;valid&lt;/span&gt; &lt;span class="n"&gt;ones&lt;/span&gt;
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="nb"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;possibly&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-      &lt;span class="vi"&gt;@patches&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;valid_patch?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;flatten&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;valid_patch?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kp"&gt;false&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;additions&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Return&lt;/span&gt; &lt;span class="n"&gt;boolean&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;determine&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;valid&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;runner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-      &lt;span class="nf"&gt;/&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;,&lt;/span&gt; &lt;span class="n"&gt;whether&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;included&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;runner&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-    &lt;span class="nf"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Process&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;acquire&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;generated&lt;/span&gt; &lt;span class="n"&gt;offenses&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-      &lt;span class="nf"&gt;processed_source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;processed_source_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;offences&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@inspector&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:inspect_file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;processed_source&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;
-
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Filter&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;offenses&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="n"&gt;those&lt;/span&gt; &lt;span class="n"&gt;which&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt;
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="no"&gt;If&lt;/span&gt; &lt;span class="n"&gt;so&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;said&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-      &lt;span class="nf"&gt;offences&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;reject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="ss"&gt;:disabled?&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-        &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;added_lines&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_lineno&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;line&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delta&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_file&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:path&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;severity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Symbol&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-
-      &lt;span class="nf"&gt;/&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="no"&gt;Required&lt;/span&gt; &lt;span class="n"&gt;construct&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;pronto&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-      &lt;span class="nf"&gt;/&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="no"&gt;The&lt;/span&gt; &lt;span class="sb"&gt;`line`&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="n"&gt;extracted&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="vi"&gt;@patch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
-      &lt;span class="no"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;processed_source_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="sr"&gt;//&lt;/span&gt; &lt;span class="no"&gt;Rubocop&lt;/span&gt; &lt;span class="n"&gt;processing&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
-    &lt;span class="nf"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h1&gt;Building a Runner&lt;/h1&gt;
-
-&lt;p&gt;As previously mentioned, most pronto runners are simply wrappers for an existing tool and the whole runner itself is quite small. Given that you inherit from &lt;code&gt;Pronto::Runner&lt;/code&gt;, the only method you need to implement is &lt;code&gt;#run&lt;/code&gt;. There is a lot of flexibility in what your runner can do.&lt;/p&gt;
-
-&lt;p&gt;Together let&amp;rsquo;s build a runner that flags lines that contain one of the &lt;a href="https://en.wikipedia.org/wiki/Seven_dirty_words"&gt;seven dirty words&lt;/a&gt;. I decided to use &lt;a href="https://github.com/kevinjalbert/pronto-stylelint"&gt;pronto-stylelint&lt;/a&gt; as my base, which I then pulled out everything except the essentials:&lt;/p&gt;
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'pronto'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'shellwords'&lt;/span&gt;
-
-&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Pronto&lt;/span&gt;
-  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;DirtyWords&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Runner&lt;/span&gt;
-    &lt;span class="no"&gt;DIRTY_WORDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'shit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'piss'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'fuck'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'cunt'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'cocksucker'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'motherfucker'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'tits'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;
-      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="vi"&gt;@patches&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="vi"&gt;@patches&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;count&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;zero?&lt;/span&gt;
-
-      &lt;span class="vi"&gt;@patches&lt;/span&gt;
-        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;additions&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;flatten&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="kp"&gt;private&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;git_repo_path&lt;/span&gt;
-      &lt;span class="vi"&gt;@git_repo_path&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="no"&gt;Rugged&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Repository&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;discover&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expand_path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;pwd&lt;/span&gt;&lt;span class="p"&gt;)).&lt;/span&gt;&lt;span class="nf"&gt;workdir&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;inspect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;offending_line_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line_number&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-        &lt;span class="n"&gt;patch&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;added_lines&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;select&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_lineno&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;line_number&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-          &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Avoid using one of the seven dirty words'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;new_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;delta&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_file&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:path&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-      &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:warning&lt;/span&gt;
-
-      &lt;span class="no"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;offence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kp"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;class&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;offending_line_numbers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;line_numbers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-      &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;chdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;git_repo_path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-        &lt;span class="n"&gt;escaped_file_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Shellwords&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;escape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new_file_full_path&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-        &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;foreach&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;escaped_file_path&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;with_index&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line_num&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-          &lt;span class="n"&gt;line_numbers&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;line_num&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;DIRTY_WORDS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;any?&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;downcase&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-        &lt;span class="k"&gt;end&lt;/span&gt;
-
-        &lt;span class="n"&gt;line_numbers&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;#offending_line_numbers&lt;/code&gt; methods is where the check for a &lt;em&gt;dirty word&lt;/em&gt; occurs. When an offending line is found, we flag the line number for that file to be used in &lt;code&gt;#new_message&lt;/code&gt;. Overall, it is not that hard to put together a simple pronto runner. To look at the end result of this pronto runner, it is open sourced at &lt;a href="https://github.com/kevinjalbert/pronto-dirty_words"&gt;pronto-dirty_words&lt;/a&gt;. Never forget it is always possible to add configuration files and external tools to a runner.&lt;/p&gt;
-
-&lt;h1&gt;Pronto all the things&lt;/h1&gt;
-
-&lt;p&gt;To this date, I have created two useful pronto runners (&lt;em&gt;dirty words&lt;/em&gt; was more of a demo for this post). I have personally been using pronto for several years, and I will continue to use it. The ecosystem of runners continues to grow. I hope that this post helps others in creating new runners that will benefit everyone. Keep an eye out for tools that could be wrapped in a pronto runner &amp;ndash; maybe you can help add to the set of runners!&lt;/p&gt;
 </content>
   </entry>
 </feed>

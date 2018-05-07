@@ -2,16 +2,96 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-04-11T19:53:20-04:00</updated>
+  <updated>2018-05-06T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>iTerm2 Mouseless Copy</title>
+    <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
+    <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
+    <updated>2018-05-06T19:36:34-04:00</updated>
+    <published>2018-05-06T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Learn how to keep your hands on the keyboard, and accomplish mouseless selection and copying in iTerm2. We explore the find and copy approach, along with iTerm2's copy mode.</description>
+    <content type="html">&lt;p&gt;&lt;img width="2048" height="1225" src="/images/2018-05-06-iterm2-mouseless-copy/keyboard-with-mouse.jpg" /&gt;
+&lt;a title="3D printed mouse" href="https://flickr.com/photos/creative_tools/8573767153"&gt;3D printed mouse&lt;/a&gt; by &lt;a href="https://flickr.com/people/creative_tools"&gt;Creative Tools&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by/2.0/"&gt;CC BY&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1&gt;iTerm2 Mouseless Copy&lt;/h1&gt;
+
+&lt;p&gt;Where possible, I try to avoid using the mouse. I heavily use &lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; while editing which allows for keyboard navigation. I have taken such a liking to the Vim keyboard-bindings that I even use  &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en"&gt;Vimium (a Google Chrome extension)&lt;/a&gt; for keyboard-driven navigation in my browser (for as much as I can). In addition, I use &lt;a href="https://itunes.apple.com/ca/app/bettersnaptool/id417375580"&gt;BetterSnapTool&lt;/a&gt; for MacOS, which allows me to move/resize windows around solely from my keyboard.&lt;/p&gt;
+
+&lt;p&gt;One optimization within my terminal that I have been avoiding is &lt;a href="https://github.com/tmux/tmux"&gt;tmux&lt;/a&gt; &amp;ndash; it is unnecessarily complicated for what I need. For the most part, I am able to use &lt;a href="https://www.iterm2.com/"&gt;iTerm2&lt;/a&gt; to open tabs, split panes and navigate around. To be honest, I don&amp;rsquo;t really need the session keeping functionality that tmux or &lt;a href="http://www.gnu.org/software/screen/"&gt;screen&lt;/a&gt; provided. The big gain I was missing from tmux was the famed &lt;a href="https://minimul.com/increased-developer-productivity-with-tmux-part-8.html"&gt;copy mode&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A quick snippet from &lt;a href="https://www.iterm2.com/documentation-highlights.html"&gt;iTerm2&amp;rsquo;s documentation of highlights&lt;/a&gt; for text selection:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;You can use the mouse.&lt;/li&gt;
+&lt;li&gt;You can use the find feature&amp;rsquo;s &amp;ldquo;mouseless copy&amp;rdquo; feature.&lt;/li&gt;
+&lt;li&gt;You can use Copy Mode.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The first one we&amp;rsquo;re not interested in as it&amp;rsquo;s the &lt;em&gt;standard&lt;/em&gt; way to select and copy text. We will cover others two in the sections that follow.&lt;/p&gt;
+
+&lt;h2&gt;Find and Copy&lt;/h2&gt;
+
+&lt;p&gt;So one approach to copying anything within the iTerm2&amp;rsquo;s session is to use the default &lt;em&gt;search&lt;/em&gt;. It is an interesting approach, to say the least:&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="648" height="445" src="/images/2018-05-06-iterm2-mouseless-copy/search-copy.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Essentially, you initiate the search with &lt;em&gt;cmd+f&lt;/em&gt; and you can use the &lt;em&gt;enter&lt;/em&gt; and &lt;em&gt;tab&lt;/em&gt; to move your selection around and to control how much of the text you want in your selection. It works in a pinch, but if you mess up the amount of text in your selection, you basically have to restart the process. In addition, I found the &lt;em&gt;shift+tab&lt;/em&gt; command cycled the selected search result, leading to some confusion.&lt;/p&gt;
+
+&lt;p&gt;To be honest, I don&amp;rsquo;t use this search copying approach very often. I find it difficult to get right, as you cannot really afford any mistakes. The following is a summary of this approach:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Searching for some text using &lt;em&gt;cmd+f&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Use &lt;em&gt;enter&lt;/em&gt; to move to the next search result.&lt;/li&gt;
+&lt;li&gt;Use &lt;em&gt;shift+enter&lt;/em&gt; to move to the previous search result.&lt;/li&gt;
+&lt;li&gt;Navigate until you are on the desired location.&lt;/li&gt;
+&lt;li&gt;Use &lt;em&gt;tab&lt;/em&gt; to expand your search to the next word.&lt;/li&gt;
+&lt;li&gt;Use &lt;em&gt;shift+tab&lt;/em&gt; to expand your search to the previous word.
+
+&lt;ul&gt;
+&lt;li&gt;Although it moves to the previous search result if one exists.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;When your search term is selected, use &lt;em&gt;cmd+c&lt;/em&gt; to copy the selection.&lt;/li&gt;
+&lt;li&gt;Use &lt;em&gt;esc&lt;/em&gt; to exit search, and now you have the selection in your clipboard.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Copy Mode&lt;/h2&gt;
+
+&lt;p&gt;This iTerm2 mode attempts to emulate as much of the tmux copy mode as possible, allowing you to make text selections using the keyboard. It is a &lt;em&gt;mode&lt;/em&gt; very much like Vim&amp;rsquo;s &lt;em&gt;insert&lt;/em&gt; and &lt;em&gt;normal&lt;/em&gt; modes. It is important to note that the session within the pane will stop updating when you enter copy mode.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="648" height="445" src="/images/2018-05-06-iterm2-mouseless-copy/copy-mode.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I highly recommend reading the &lt;a href="https://www.iterm2.com/documentation-copymode.html"&gt;documentation on iTerm2&amp;rsquo;s copy mode&lt;/a&gt; as it completely covers the keyboard shortcuts and features. Copy mode, in my opinion, is the superior of the two approaches for mouseless copying. I highly recommend giving it a shot the next time you reach for your mouse. The following is a quick summary of copy mode:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enter copy mode with &lt;em&gt;cmd+shift+c&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Basic Vim keybinding, many keystrokes can active different actions.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;v&lt;/em&gt; to select by character.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;shift+v&lt;/em&gt; to select by line.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;ctrl+v&lt;/em&gt; for rectangular selection.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;ctrl+space&lt;/em&gt; to stop selecting.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;y&lt;/em&gt; to yank/copy the selection (also exits copy mode).&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;q&lt;/em&gt; to exit copy mode.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Can chain off of iTerm2&amp;rsquo;s search feature.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -346,7 +426,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -394,7 +474,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -470,7 +550,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -606,7 +686,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -682,7 +762,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -740,7 +820,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -863,7 +943,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -996,7 +1076,7 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1053,7 +1133,7 @@ name = My tips
     <title>Knowledge and Screencast Culture</title>
     <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
     <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
+    <updated>2018-05-02T09:05:38-04:00</updated>
     <published>2017-07-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1118,159 +1198,6 @@ name = My tips
 &lt;h1&gt;Screencast Culture&lt;/h1&gt;
 
 &lt;p&gt;The &lt;em&gt;knowledge&lt;/em&gt; repository is still a new concept at theScore, although I have high hopes for it. The more that people contribute to it, the more useful it&amp;rsquo;ll become. With a wide range of topics and data within it, there are bound to be new learning materials for each individual. The challenge is getting people to be aware of it as well as contribute to it. I&amp;rsquo;m still working out how best to approach this challenge.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Make the most of your Chat Channels</title>
-    <link rel="alternate" href="https://kevinjalbert.com/make-the-most-of-your-chat-channels/"/>
-    <id>https://kevinjalbert.com/make-the-most-of-your-chat-channels/</id>
-    <updated>2018-04-11T09:19:57-04:00</updated>
-    <published>2017-06-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Persisted chat channels communication platform, which by its nature, has little guidance in how you organize channels. To ensure that everyone is making the most of channels, I'll provided some tips and suggestions based on my experiences.</description>
-    <content type="html">&lt;p&gt;&lt;img width="2048" height="1371" src="/images/2017-06-30-make-the-most-of-your-chat-channels/communication-tower.jpg" /&gt;
-&lt;em&gt;&lt;a href="https://flic.kr/p/finMno"&gt;Communication Tower&lt;/a&gt; by &lt;a href="https://www.flickr.com/photos/95876508@N02/"&gt;Cocoy Pusung&lt;/a&gt;, on Flickr&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Organizations tend to use some instant messaging platform in addition to email. Ideally, the chosen platform permeates throughout the ranks of the organization instead of having fractured communication between members. The real-time and group collaborative nature of these messaging platforms are quite appealing.&lt;/p&gt;
-
-&lt;p&gt;I have personally used a couple of messaging platform so far (i.e., Hipchat, Gitter, Discord, Slack). Overall, they all offer the concept of channels. Channels are simply persisted chat &lt;em&gt;rooms&lt;/em&gt; in which members can communicate asynchronously. Topics and names of channels are left up to the members who use them.&lt;/p&gt;
-
-&lt;p&gt;My goal is to outline some steps to better foster an effective use of channels in your messaging platform of choice. I am currently using Slack at theScore, and so the context of this post will be within Slack.&lt;/p&gt;
-
-&lt;h1&gt;The Cleanse&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Macaitis recommends that if no one has used a channel for sixty days, it’s best to archive it. &amp;ndash; &lt;a href="https://expand.openviewpartners.com/former-slack-cmo-bill-macaitis-on-how-slack-uses-slack-868ffb495b71"&gt;Former Slack CMO, Bill Macaitis, on How Slack Uses Slack&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;An organization that uses chat channels for communication will accrue an abundance of such. Some of these channels are used more frequently than others. To keep things slightly under control, you should routinely clean the channels. As to &lt;em&gt;who&lt;/em&gt; should be doing this, I would say everyone should try to keep their communication platform clean. There are a few benefits to this:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Keeps a more narrow focus within the organization&lt;/li&gt;
-&lt;li&gt;Easier for users to keep a handle on their channels&lt;/li&gt;
-&lt;li&gt;Newcomers feel less overwhelmed at the number of channels&lt;/li&gt;
-&lt;li&gt;Less ambiguity on where conversations/information should be put&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Archiving channels doesn&amp;rsquo;t have to be perfect, although there will be clear choices. If the need of the channel arises again, it can be recreated/unarchived as needed.&lt;/p&gt;
-
-&lt;h1&gt;Types of Channels&lt;/h1&gt;
-
-&lt;p&gt;Channels tend to fall under specific categories that define their behaviour or purpose. For example, &lt;a href="https://slack.global.ssl.fastly.net/5ccb/pdfs/admins_guide.pdf"&gt;Slack provides a guideline&lt;/a&gt; on what these channel types are:&lt;/p&gt;
-
-&lt;h2&gt;Global&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i.e., #general, #announcements, #everyone&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A global channel is one that &lt;em&gt;everyone&lt;/em&gt; is apart of. Normally this would be a general channel, however productivity can be limited depending on the number of members &amp;ndash; it&amp;rsquo;s more of a social channel. A common use case for using a global channel is for organizational announcements.&lt;/p&gt;
-
-&lt;h2&gt;Location&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i.e., #toronto, #ontario, #canada&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;An organization might be spread across many locations. These channels offer a way to group conversations that pertain to specific locations. How to name these channels depends on how your organization is structured geographically &amp;ndash; it might be based on cities, regions, or even offices within a city.&lt;/p&gt;
-
-&lt;h2&gt;Team&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i.e., #engineering, #engineering-ios, #sales, #designers&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;These channels are rather important in facilitating communication within teams. Realistically you would have high-level groups such as &lt;em&gt;#engineering&lt;/em&gt; that all your engineers are apart of. It would also be ideal to create &lt;em&gt;sub-teams&lt;/em&gt; to accommodate specializations such as &lt;em&gt;#engineering-android&lt;/em&gt; and &lt;em&gt;#engineering-web&lt;/em&gt;. By following this naming convention for teams and sub-teams, the channels are &lt;em&gt;grouped&lt;/em&gt; and sorted through the naming convention.&lt;/p&gt;
-
-&lt;h2&gt;Project&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i.e., #sports-app, #chat-bot, #squadup&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Often projects are underway. To help communication within that project, which might include individuals across different teams, a project channel is useful. As projects come and go, it might be worth archiving channels for projects that are no longer current.&lt;/p&gt;
-
-&lt;h2&gt;Topical&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i.e., #soccer, #javascript, #anime&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To me, these are the interesting channels! The previously mentioned channels types were more geared towards business communication, and generally are easily formed around the business needs. Topical channels could be on anything that interests a group of people. Generally, these channels are organically formed within an organization.&lt;/p&gt;
-
-&lt;h2&gt;Temporary&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;i.e., #xmas-party, #offsite-retreat, #brainstorm-session&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;These channels are short-lived and generally used for time-sensitive events. They have a specific purpose, and rarely offer much value after that purpose is completed. These channels could be deleted or archived when they are no longer needed. Channels are &lt;em&gt;cheap&lt;/em&gt; to create, and so people shouldn&amp;rsquo;t be worried about making one-off channels to help them accomplish specific tasks.&lt;/p&gt;
-
-&lt;h1&gt;Organizing Channels&lt;/h1&gt;
-
-&lt;p&gt;As we saw there are many categories of channels. To help with the organization of the multiple channels, a naming convention could be used.&lt;/p&gt;
-
-&lt;p&gt;One suggestion is to prefix all team channels with &lt;code&gt;team-&lt;/code&gt; (i.e., &lt;em&gt;#team-engineering&lt;/em&gt;). The same could be done with project channels using &lt;code&gt;project-&lt;/code&gt; (i.e., &lt;em&gt;#project-esports&lt;/em&gt;). The actual prefix doesn&amp;rsquo;t matter as long as it is unique (enough) and consistent. A benefit is that channels are ordered alphanumerically, making it easier to browse active teams/projects. If you wanted, you could even take the same approach with topics (i.e., &lt;em&gt;#topic-soccer&lt;/em&gt;).&lt;/p&gt;
-
-&lt;p&gt;Another idea is to have a &lt;em&gt;#meta&lt;/em&gt; channel where you can talk about improving the use of the platform itself. For example, new topic channels can be posted there, same with renames and such. Ensure everyone is a part of the channel so information travels. If there is support for it, you could also pin/sticky some guidelines on the platform (i.e., link to this article).&lt;/p&gt;
-
-&lt;h1&gt;Topical Channels (at theScore)&lt;/h1&gt;
-
-&lt;p&gt;As previously mentioned, topical channels are the interesting channels that I want to touch on more here. I&amp;rsquo;ll just say that this is coming from an software organization&amp;rsquo;s perspective, as I am a part of theScore engineering team.&lt;/p&gt;
-
-&lt;p&gt;Here are a few of our topical channels:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;#ping-pong&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;#overwatch&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;#pokemon-go&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;#podcasts&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;#board-games&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;#food&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;While these channels do provide topical information on their specific topics, we didn&amp;rsquo;t really have engineering topic channels.&lt;/p&gt;
-
-&lt;h2&gt;Birth of Engineering Topical Channels&lt;/h2&gt;
-
-&lt;p&gt;We were doing some recent work with &lt;a href="https://facebook.github.io/react/"&gt;React&lt;/a&gt; and &lt;a href="http://graphql.org/"&gt;GraphQL&lt;/a&gt;, and we saw the birth of two engineering topical channels:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;#graphql&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;#react&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Before this work, we did not &lt;em&gt;really&lt;/em&gt; have engineering topical channels. This caused slight inefficiencies in the flow of knowledge through our engineering team. We made these new channels known at the engineering level, and also invited people who are actively working in the areas. This approach injected people who cared about the topic into the channel. As we go about our day and we find something interesting related to one of these topics, it becomes easy to drop that information into the channel. In addition, more specific questions can be asked in these channels as their topic is fairly narrow.&lt;/p&gt;
-
-&lt;p&gt;Eventually, you end up seeing people who are not &lt;em&gt;directly&lt;/em&gt; working in that topic area, but are still in the channel. To me this suggests people have an interest.&lt;/p&gt;
-
-&lt;h2&gt;Educational Value of Topical Communication&lt;/h2&gt;
-
-&lt;p&gt;These specific topical channels on programming languages/frameworks/concepts are extremely beneficial to individuals, and the organization.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Provides a place for focused conversations to take place. For example, if someone had a general GraphQL question where do you go to ask it? Possibly in one our engineering channels, or maybe a specific team that is using it? In this case, having a dedicated topical channel for &lt;em&gt;#graphql&lt;/em&gt; would be beneficial.&lt;/li&gt;
-&lt;li&gt;Promotes people to widen their interests, as they can simply join a channel and &lt;em&gt;slowly&lt;/em&gt; absorb information. For example, if I was interested in &lt;em&gt;#machine-learning&lt;/em&gt;, I could join the channel and occasionally I&amp;rsquo;ll see people post links to articles, conference talks, and just general conversation on the topic.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There is great educational value in these channels, especially in larger organizations where there are many teams and projects. These channels offer a place to share findings and communication to prevent knowledge silos.&lt;/p&gt;
-
-&lt;h2&gt;Effective Slack Plan&lt;/h2&gt;
-
-&lt;p&gt;Now at theScore, this is our plan in improving our usage of Slack channels:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Archive channels with no activity in the last 60 days&lt;/li&gt;
-&lt;li&gt;Rename team channels with the &lt;code&gt;team-&lt;/code&gt; prefix&lt;/li&gt;
-&lt;li&gt;Rename project channels with the &lt;code&gt;proj-&lt;/code&gt; prefix&lt;/li&gt;
-&lt;li&gt;Create a 2-level hierarchy for teams (i.e., &lt;em&gt;#eng&lt;/em&gt;, #eng-ios)&lt;/li&gt;
-&lt;li&gt;Create engineering topical channels (i.e., &lt;em&gt;#rails&lt;/em&gt;, &lt;em&gt;#android&lt;/em&gt;, &lt;em&gt;#swift&lt;/em&gt;)&lt;/li&gt;
-&lt;li&gt;Create a &lt;em&gt;#meta&lt;/em&gt; channel (along with a note to some channel conventions)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;With routine maintenance, we will keep our Slack channels focused and organized. Hopefully we will see the benefit to education/knowledge sharing with the increased organization of our chat channels.&lt;/p&gt;
 </content>
   </entry>
 </feed>

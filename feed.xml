@@ -2,27 +2,405 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-05-06T19:53:20-04:00</updated>
+  <updated>2018-06-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
+    <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
+    <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
+    <updated>2018-06-30T13:06:36-04:00</updated>
+    <published>2018-06-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">The goal here is to migrate an Amazon Web Services Relational Database Service PostgreSQL Database to Aurora with as little downtime as possible. The following documents the initial strategy that was considered using read replica promotion, followed by the end result using AWS's Database Migration Service.</description>
+    <content type="html">&lt;p&gt;The goal here is to migrate an Amazon Web Services (AWS) Relational Database Service (RDS) PostgreSQL Database to Aurora with as little downtime as possible. The following documents the initial strategy that was considered using read replica promotion, followed by the end result using AWS&amp;rsquo;s Database Migration Service (DMS).&lt;/p&gt;
+
+&lt;h1&gt;Why Aurora&lt;/h1&gt;
+
+&lt;p&gt;From the &lt;a href="https://aws.amazon.com/rds/aurora/details/"&gt;Aurora Details Page&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Amazon Aurora is designed to offer greater than 99.99% availability, increasing MySQL and PostgreSQL performance and availability by tightly integrating the database engine with an SSD-backed virtualized storage layer purpose-built for database workloads. Amazon Aurora&amp;rsquo;s storage is fault-tolerant and self-healing and disk failures are repaired in the background without loss of database availability. Amazon Aurora is designed to automatically detect database crashes and restart without the need for crash recovery or to rebuild the database cache. If the entire instance fails, Amazon Aurora will automatically fail over to one of up to 15 read replicas.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Essentially, better performance, reliability, and the ability to scale.&lt;/p&gt;
+
+&lt;p&gt;Our configuration changes become easier. Aurora acts as a cluster, so we have two endpoints to deal with, and the replicas underneath will adjust dynamically. We use &lt;a href="https://github.com/taskrabbit/makara"&gt;Makara&lt;/a&gt; to spread our database queries between our master and slaves. With RDS PostgreSQL we would have to enumerate all our slave databases so we could take advantage of the replicas. If we added a new replica, we would have to adjust our configuration to take advantage of it. With Aurora, we have two endpoints to deal with now (primary/writer and a read-only URL). These endpoints will dynamically rotate between the available instances that fall under that cluster URL. This is great as it handles a failover to a different primary database, or changing the number of replicas. Effectively, we end up with less configuration, but we still need Makara to direct our write and read queries to the two cluster URLs.&lt;/p&gt;
+
+&lt;h1&gt;Migration Approaches&lt;/h1&gt;
+
+&lt;p&gt;As mentioned earlier, there are two approaches to doing this migration. First, we&amp;rsquo;ll cover the &lt;em&gt;recommended&lt;/em&gt; approach that AWS suggested as we&amp;rsquo;re on the RDS platform. As we&amp;rsquo;ll cover, it is easy and quick but it does incur downtime during the migration. The second approach uses DMS and was brought up to us after opening a support ticket with AWS on how to do our migration with zero downtime.&lt;/p&gt;
+
+&lt;h2&gt;Read Replica Promotion&lt;/h2&gt;
+
+&lt;p&gt;This is the &lt;em&gt;recommended&lt;/em&gt; approach for migrating from PostgreSQL to Aurora. It is easy and has a little risk (during the migration), although it has unavoidable downtime.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create an Aurora read replica off of your master database.&lt;/li&gt;
+&lt;li&gt;Pause the master PostgreSQL database.
+
+&lt;ul&gt;
+&lt;li&gt;This is done so that the no additional write changes are occurring (as it won&amp;rsquo;t be replicated to the Aurora read replica during the promotion process).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Promote the Aurora read replica.
+
+&lt;ul&gt;
+&lt;li&gt;This takes about 10-20 minutes (at least in our experience).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Deploy app configuration changes to use new Aurora cluster for write/reads.&lt;/li&gt;
+&lt;li&gt;Immediately start building additional read replicas to match existing number.
+
+&lt;ul&gt;
+&lt;li&gt;Each one takes about 5-10 minutes to create (at least in our experience).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;When happy with the new setup, remove/delete the old databases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It is &lt;em&gt;recommended&lt;/em&gt; to do a dry run of the promotion (and just throw it away afterwards) to gauge how long that process takes.&lt;/p&gt;
+
+&lt;p&gt;The issue here is that you have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Downtime due to the promotion process. You need to prevent writes from happening on the master. Replication between the PostgreSQL master and the Aurora read replica breaks when the promotion process starts.&lt;/li&gt;
+&lt;li&gt;Immediately after you have your new Aurora master, you need to start building read replicas up.
+
+&lt;ul&gt;
+&lt;li&gt;In our case, we would want to match our existing number of replicas. So this would take additional time. Otherwise, you possibly run the risk of overwhelming the Database without those read replicas up.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One good thing is that even with the downtime the old read replicas will continue to serve up &lt;code&gt;GET&lt;/code&gt; requests. In addition, any CDN/&lt;a href="https://varnish-cache.org/"&gt;Varnish&lt;/a&gt; caching will also help serve stale data during the downtime.&lt;/p&gt;
+
+&lt;h2&gt;Full Load and Ongoing Replication with DMS&lt;/h2&gt;
+
+&lt;p&gt;This approach is much more involved and finicky, but it does offer a &lt;em&gt;near&lt;/em&gt; zero-downtime migration strategy. The general process here is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create an Aurora read replica (this is so we can keep the DB schema)&lt;/li&gt;
+&lt;li&gt;Promote Aurora read replica so it is on its own&lt;/li&gt;
+&lt;li&gt;Tweak settings on PostgreSQL DB&lt;/li&gt;
+&lt;li&gt;Setup DMS Endpoints for the original PostgreSQL and Aurora databases&lt;/li&gt;
+&lt;li&gt;Setup DMS Replication Instance to assist in the migration&lt;/li&gt;
+&lt;li&gt;Setup DMS Task to use the endpoints and the replication instance&lt;/li&gt;
+&lt;li&gt;Truncate Aurora data (we want to wipe the data, but we keep the schema)&lt;/li&gt;
+&lt;li&gt;Initiate the migration
+
+&lt;ul&gt;
+&lt;li&gt;The first phase is a &lt;em&gt;full load&lt;/em&gt; of the tables from the source to the target&lt;/li&gt;
+&lt;li&gt;The second phase is an &lt;em&gt;on-going replication&lt;/em&gt; of changes from the source to the target&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Both DBs are in-sync now&lt;/li&gt;
+&lt;li&gt;Create read replicas off of the Aurora master&lt;/li&gt;
+&lt;li&gt;Change app configuration to point to Aurora cluster&lt;/li&gt;
+&lt;li&gt;Delete old DBs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is a multi-part process, so the following sections will walk through each part.&lt;/p&gt;
+
+&lt;h3&gt;Setting up Aurora Read Replica&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create an Aurora read replica of the PostgreSQL database
+
+&lt;ul&gt;
+&lt;li&gt;Name it something like &lt;code&gt;&amp;lt;service&amp;gt;—&amp;lt;environment&amp;gt;-aurora&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;By creating an Aurora instance, we also get an Aurora cluster (i.e., &lt;code&gt;&amp;lt;service&amp;gt;—&amp;lt;environment&amp;gt;-aurora-cluster&lt;/code&gt;)
+
+&lt;ul&gt;
+&lt;li&gt;Ensure the subnet group and the security groups are set to the same values as defined for the PostgreSQL DB.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;You don&amp;rsquo;t need to have multi-AZ here, Aurora will handle fast failover if we have a replica&lt;/li&gt;
+&lt;li&gt;Additional read replicas can then be added later using &lt;code&gt;&amp;lt;service&amp;gt;—&amp;lt;environment&amp;gt;-aurora-&amp;lt;##&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At this point, we will have an Aurora read replica that is receiving replicated data changes off the master.&lt;/p&gt;
+
+&lt;h3&gt;Aurora Read Replica Promotion&lt;/h3&gt;
+
+&lt;p&gt;To isolate our newly created Aurora read replica so it can be its own master, we&amp;rsquo;re going to promote the replica. This process allows the instance to receive writes, and be the master for other replicas. We need to do this as otherwise we are limited to only one Aurora read replica off of a PostgreSQL master database. By starting the promotion process the on-going replication is broken between the PostgreSQL and Aurora databases.&lt;/p&gt;
+
+&lt;h3&gt;Tweak the Database Parameters&lt;/h3&gt;
+
+&lt;p&gt;To enable the ability for PostgreSQL to replicate to Aurora we need to make sure we have certain database parameters set.&lt;/p&gt;
+
+&lt;h4&gt;Configure PostgreSQL for Replication&lt;/h4&gt;
+
+&lt;p&gt;The first thing you need to do is change the &lt;code&gt;rds.logical_replication&lt;/code&gt; parameter to 1. As described in &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.RDSPostgreSQL"&gt;the documentation&lt;/a&gt; this parameter actually configures additional related parameters that allow the replication to process:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As part of applying this parameter, AWS DMS sets the &lt;code&gt;wal_level&lt;/code&gt;, &lt;code&gt;max_wal_senders&lt;/code&gt;, &lt;code&gt;max_replication_slots&lt;/code&gt;, and &lt;code&gt;max_connections&lt;/code&gt; parameters.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Another parameter configuration that &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.Prerequisites"&gt;Amazon recommends&lt;/a&gt; is to set &lt;code&gt;wal_sender_timeout&lt;/code&gt; to 0.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;wal_sender_timeout&lt;/code&gt; parameter terminates replication connections that are inactive longer than the specified number of milliseconds. Although the default is 60 seconds, we recommend that you set this parameter to zero, which disables the timeout mechanism.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Without setting the timeout parameter, the streaming of Write-Ahead Logging (WAL) files can be terminated if the sender is under load and does not send a WAL file within the timeout period. To prevent any risk of this it is best to disable it during the on-going replication phase of the migration process.&lt;/p&gt;
+
+&lt;p&gt;There are additional &lt;code&gt;wal&lt;/code&gt; settings available, but we &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt; need to configure them.&lt;/p&gt;
+
+&lt;h4&gt;Configure Aurora for Replication&lt;/h4&gt;
+
+&lt;p&gt;On the Aurora instance, we want to limit any foreign key constraints from triggering as the full loads for tables are occurring. Fortunately, if we change the &lt;code&gt;session_replication_role&lt;/code&gt; parameter to &lt;code&gt;replica&lt;/code&gt;, it only keeps &lt;em&gt;replica&lt;/em&gt; related constraint triggers active. This effectively disables foreign key constraints for us.&lt;/p&gt;
+
+&lt;h3&gt;Create Replication Instance&lt;/h3&gt;
+
+&lt;p&gt;DMS uses a dedicated &lt;em&gt;replication instance&lt;/em&gt; to help facilitate the migration process. In a PostgreSQL to Aurora migration, this machine is responsible for connecting to both the source and target databases and transforming and transferring the data.&lt;/p&gt;
+
+&lt;p&gt;The following steps expand on what is needed to set up a replication instance for the migration.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a replication instance under DMS
+
+&lt;ul&gt;
+&lt;li&gt;Name it as specific as possible for its purpose (i.e., production-api-replication-instance)&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;Instance Size&lt;/em&gt; might need to be tweaked based on various factors (&lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"&gt;documentation on instance sizes&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;For example, in our staging we used &lt;code&gt;dms.t2.large&lt;/code&gt;, while for production we used &lt;code&gt;dms.c4.large&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Set the &lt;em&gt;VPC&lt;/em&gt; to the same as the source and target databases&lt;/li&gt;
+&lt;li&gt;Enable &lt;em&gt;Multi-AZ&lt;/em&gt; as it is needed for on-going replication&lt;/li&gt;
+&lt;li&gt;The instance doesn’t need to be &lt;em&gt;Publicly Accessible&lt;/em&gt; (as the internal connections are done within the VPC)&lt;/li&gt;
+&lt;li&gt;Ensure the &lt;em&gt;VPC Security Group&lt;/em&gt; under &lt;em&gt;Advance&lt;/em&gt; is set to &lt;code&gt;default&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;This allows for connections between the databases and the replication instance&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Create Source and Target Endpoints&lt;/h3&gt;
+
+&lt;p&gt;We need to define the &lt;em&gt;endpoints&lt;/em&gt; of our databases in DMS. One to represent the source database (PostgreSQL) and another to represent the target database (Aurora). The following steps are to be applied to each endpoint.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;em&gt;Server Name&lt;/em&gt; is the DB’s endpoint (i.e., the connection URL)
+
+&lt;ul&gt;
+&lt;li&gt;You cannot use a read replica as your source (it does not support on-going replication)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;User&lt;/em&gt; and &lt;em&gt;Password&lt;/em&gt; are for the master user account of the database
+
+&lt;ul&gt;
+&lt;li&gt;The account &lt;em&gt;needs&lt;/em&gt; to be the master account. Otherwise, you need to follow the additional instructions listed in the &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.RDSPostgreSQL"&gt;documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;Password&lt;/em&gt; cannot have certain characters (&lt;code&gt;: ; + %&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Test the endpoint
+
+&lt;ul&gt;
+&lt;li&gt;After a success ensure you refresh the schema&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Create Task&lt;/h3&gt;
+
+&lt;p&gt;The DMS &lt;em&gt;task&lt;/em&gt; is where we actually configure and use the &lt;em&gt;endpoints&lt;/em&gt; and &lt;em&gt;replication instance&lt;/em&gt; to accomplish the migration. There are a couple of options and considerations to be made while creating a task. The following steps outline how to create a task, and the settings to configure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use the &lt;em&gt;source and target endpoints&lt;/em&gt; along with the &lt;em&gt;replica instance&lt;/em&gt; that was created for this migration task&lt;/li&gt;
+&lt;li&gt;Set the &lt;em&gt;Migration type&lt;/em&gt; to &lt;code&gt;Migrate existing data and replicate ongoing changes&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This ensures that we are doing the 2 phase approach:&lt;/li&gt;
+&lt;li&gt;Doing a full-load of the table&amp;rsquo;s data&lt;/li&gt;
+&lt;li&gt;Doing on-going replication of changes on the source database&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Target table preparation mode&lt;/em&gt; should be &lt;code&gt;Do nothing&lt;/code&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The reason here is that we want to preserve the table&amp;rsquo;s metadata (i.e., indexes, defaults, constraints)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Truncate&lt;/code&gt; could work, but is likely to fail due to constraints in the database&lt;/li&gt;
+&lt;li&gt;Remember that by using &lt;code&gt;Do nothing&lt;/code&gt; the target database needs to be truncated manually prior to running the task&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Stop task after full load completes&lt;/em&gt; should be set to &lt;code&gt;Don&amp;#39;t stop&lt;/code&gt;.
+
+&lt;ul&gt;
+&lt;li&gt;This ensures the on-going replication process starts immediately when a table is fully loaded&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;For the table mappings, we want to migrate all tables (i.e., &lt;code&gt;where schema name is like &amp;#39;public&amp;#39; and table name is like &amp;#39;%&amp;#39;, include&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;It is useful to enable the &lt;em&gt;validation&lt;/em&gt; and &lt;em&gt;logging&lt;/em&gt; to see how things are progressing during the migration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Include LOB columns in replication&lt;/em&gt; is an interesting setting, LOBs are &lt;em&gt;Large Objects&lt;/em&gt; that exist during the migration. As DMS is possibly migrating to a different database type a transformation of data types occurs. To understand what we&amp;rsquo;re dealing with you need to look up the source database&amp;rsquo;s supported types in the documentation. For example, using the DMS documentation you can see what &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.DataTypes"&gt;PostgreSQL data types&lt;/a&gt; end up being LOBs.&lt;/p&gt;
+
+&lt;p&gt;The following section will dig a little deeper into LOBs and the considerations that need to be considered.&lt;/p&gt;
+
+&lt;h4&gt;Full or Limited LOB Mode&lt;/h4&gt;
+
+&lt;p&gt;There are two options for handling LOBs during the migration: &lt;em&gt;Full&lt;/em&gt; or &lt;em&gt;Limited&lt;/em&gt; LOB Mode. LOBs are potentially massive objects that reside in the database, and they normally don&amp;rsquo;t have a fixed size in the column. The following &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.LOBSupport.html"&gt;documentation&lt;/a&gt; describes the two options:&lt;/p&gt;
+
+&lt;p&gt;DMS provides you with the &lt;em&gt;Full LOB Mode&lt;/em&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In full LOB mode, AWS DMS migrates all LOBs from source to target regardless of size. In this configuration, AWS DMS has no information about the maximum size of LOBs to expect. Thus, LOBs are migrated one at a time, piece by piece. Full LOB mode can be quite slow.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;DMS also provides the &lt;em&gt;Limited LOB Mode&lt;/em&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In limited LOB mode, you set a maximum size LOB that AWS DMS should accept. Doing so allows AWS DMS to pre-allocate memory and load the LOB data in bulk. LOBs that exceed the maximum LOB size are truncated and a warning is issued to the log file. In limited LOB mode, you get significant performance gains over full LOB mode. We recommend that you use limited LOB mode whenever possible.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Initially, it makes sense to just use &lt;em&gt;Full LOB Mode&lt;/em&gt; as it&amp;rsquo;ll preserve data by migrating LOBs regardless of size. The big issue with this choice is &lt;em&gt;speed&lt;/em&gt;. In our migration, we achieve full migration in 2 hours using &lt;em&gt;Limited LOB Mode&lt;/em&gt; and we estimated about 90 hours using &lt;em&gt;Full LOB Mode&lt;/em&gt;. The issue with using &lt;em&gt;Limited LOB Mode&lt;/em&gt; is that you can essentially lose data if the LOB&amp;rsquo;s size is less than the &lt;code&gt;Max LOB Size&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;p&gt;To work around this concern, the plan is to determine the max LOB size in the database and set the &lt;code&gt;Max LOB Size&lt;/code&gt; to slightly bigger than that value (i.e., multiply it by 2). By using a larger &lt;code&gt;Max LOB Size&lt;/code&gt; than the largest LOB we have in the database, we are ensured to have the full data migrated without any data loss.&lt;/p&gt;
+
+&lt;p&gt;A manual way to check for the size of a LOB column is to use the following query: &lt;code&gt;SELECT max(pg_column_size(column_name)) FROM table_name;&lt;/code&gt;. This will return the max number of bytes used in that column. This is the value you&amp;rsquo;ll want to be larger than. The following is a Rails rake task that walks through every table&amp;rsquo;s column and identifies the max sizes for any LOB column (for PostgreSQL):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:scripts&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s1"&gt;'Print out the max size of LOBs in the database. Usage: bin/rake scripts:max_lob_size'&lt;/span&gt;
+  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;max_lob_size: :environment&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+    &lt;span class="no"&gt;LOB_TYPES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sx"&gt;%w(
+      hstore
+      composite
+      array
+      jsonb
+      json
+      polygon
+      path
+      xml
+      tsquery
+      tsvector
+      bytea
+      text
+    )&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;freeze&lt;/span&gt;
+
+    &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tables&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="k"&gt;next&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;table_name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'schema_migrations'&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;starts_with?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'awsdms_'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="n"&gt;columns_sql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;~&lt;/span&gt;&lt;span class="no"&gt;HEREDOC&lt;/span&gt;&lt;span class="sh"&gt;
+        SELECT *
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name   = '&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;'
+&lt;/span&gt;&lt;span class="no"&gt;      HEREDOC&lt;/span&gt;
+
+      &lt;span class="n"&gt;columns_results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns_sql&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="n"&gt;columns_results&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+        &lt;span class="n"&gt;column_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'column_name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;column_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'data_type'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;LOB_TYPES&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;column_type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="n"&gt;size_sql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;~&lt;/span&gt;&lt;span class="no"&gt;HEREDOC&lt;/span&gt;&lt;span class="sh"&gt;
+            SELECT max(pg_column_size(&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;column_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;)) FROM &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;;
+&lt;/span&gt;&lt;span class="no"&gt;          HEREDOC&lt;/span&gt;
+          &lt;span class="n"&gt;size_results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size_sql&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+          &lt;span class="n"&gt;table_hash&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_sym&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+          &lt;span class="n"&gt;column_hash&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;table_hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;column_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_sym&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+          &lt;span class="n"&gt;column_hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:column_type&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;column_type&lt;/span&gt;
+          &lt;span class="n"&gt;column_hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:max_bytes_size&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;size_results&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'max'&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;to_i&lt;/span&gt;
+        &lt;span class="k"&gt;end&lt;/span&gt;
+
+        &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;
+      &lt;span class="k"&gt;end&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Raw Dump"&lt;/span&gt;
+    &lt;span class="n"&gt;pp&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
+
+    &lt;span class="n"&gt;max_bytes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:max_bytes_size&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;max&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Max bytes found in a LOB column is &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;max_bytes&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;LOB Nullability Constraints&lt;/h4&gt;
+
+&lt;p&gt;There are some concerns with &lt;code&gt;NOT NULL&lt;/code&gt; database constraints on columns that become LOBs during the migration. DMS has a certain process for dealing with tables with LOBs:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The data for each column in a row is added, except for LOB columns&lt;/li&gt;
+&lt;li&gt;LOB columns are left with a &lt;code&gt;null&lt;/code&gt; placeholder&lt;/li&gt;
+&lt;li&gt;Afterwards, LOB data replaces the &lt;code&gt;null&lt;/code&gt; placeholders&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This two-step process of dealing with LOB data types is where we have to be concerned with &lt;code&gt;NOT NULL&lt;/code&gt; constraints. The migration will fail if any LOB columns have a &lt;code&gt;NOT NULL&lt;/code&gt; constraint. In PostgreSQL, a common case of LOBs is &lt;code&gt;jsonb&lt;/code&gt; and &lt;code&gt;array&lt;/code&gt; columns. So we have to &lt;em&gt;remove&lt;/em&gt; these constraints on the target database just until the full table load phase is done. For example, the following statement would do the trick, &lt;code&gt;ALTER TABLE my_table ALTER COLUMN lob_column DROP NOT NULL;&lt;/code&gt;. Do not forget to add the &lt;code&gt;NOT NULL&lt;/code&gt; constraints back after the full table load phase is done.&lt;/p&gt;
+
+&lt;h3&gt;Migration Time&lt;/h3&gt;
+
+&lt;p&gt;At this point, the migration process is pretty much ready! Let&amp;rsquo;s break the process up into before/during/after migration.&lt;/p&gt;
+
+&lt;h4&gt;Before Migration&lt;/h4&gt;
+
+&lt;p&gt;Make sure that the:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The DMS endpoints, task and replication instance are present and configured&lt;/li&gt;
+&lt;li&gt;The Aurora instance is ready:
+
+&lt;ul&gt;
+&lt;li&gt;Truncated data&lt;/li&gt;
+&lt;li&gt;Disabled LOB nullability constraints&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;One thing that is suggested is to run &lt;code&gt;Assess&lt;/code&gt; on the task so you can get a report of potential issues. In our case, there were a couple of &lt;em&gt;Partially supported datatypes : float8&lt;/em&gt; on a few columns. This ended up changing the rounding of floats (i.e., 1.4999999998 &amp;ndash;&amp;gt; 1.5). It is worth noting that these differences occur after the migration process is completed and changes are being done on the new database type.&lt;/p&gt;
+
+&lt;p&gt;For the migration, ideally, it is done during a &lt;em&gt;low&lt;/em&gt; activity period. In addition, if possible stop any background jobs just before the migration, and wait for the current jobs to finish. The jobs can resume processing after the migration, this is to reduce risk.&lt;/p&gt;
+
+&lt;h4&gt;During Migration&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Keep an eye on the source database&amp;rsquo;s health
+
+&lt;ul&gt;
+&lt;li&gt;There will be additional load placed on it during the migration&lt;/li&gt;
+&lt;li&gt;If needed you could always lower the number of tables loaded in parallel during the &lt;em&gt;full load&lt;/em&gt; phase (under the advanced settings in the &lt;em&gt;Task&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Monitor the task&amp;rsquo;s &lt;em&gt;Table Statistics&lt;/em&gt; tab to make sure tables are progressing well&lt;/li&gt;
+&lt;li&gt;Monitor the task&amp;rsquo;s &lt;em&gt;Task Monitoring&lt;/em&gt; tab to make sure the on-going replication is keeping up
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;CDCIncomingChanges&lt;/code&gt; should be as close to 0 as possible&lt;/li&gt;
+&lt;li&gt;During the &lt;em&gt;full load&lt;/em&gt; phase, the &lt;code&gt;CDCIncomingChanges&lt;/code&gt; will climb as the on-going replication changes are stored until the tables have fully loaded into the target database&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Monitor the replication instance&amp;rsquo;s &lt;em&gt;Monitoring&lt;/em&gt; tab to make sure the &lt;code&gt;FreeStorageSpace&lt;/code&gt; and &lt;code&gt;FreeableMemory&lt;/code&gt; are not dropping too low
+
+&lt;ul&gt;
+&lt;li&gt;If any of these are too low then the migration can fail&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The first phase is &lt;em&gt;full table load&lt;/em&gt;, where all the source data is dumped into the target. Be aware that large tables can take some time. After a table has been fully loaded into the target, the on-going replication phase starts for that table.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;on-going replication&lt;/em&gt; phase is where &lt;em&gt;inserts/deletes/updates&lt;/em&gt; are replicated from the source to the target. After all the tables are in this phase (all tables in a &lt;em&gt;Table Completed&lt;/em&gt; state), it is now safe to re-enable the LOB nullability constraints that were disabled earlier.&lt;/p&gt;
+
+&lt;h5&gt;Validations&lt;/h5&gt;
+
+&lt;p&gt;If you have validations enabled for the &lt;em&gt;Task&lt;/em&gt; then the &lt;em&gt;validation&lt;/em&gt; columns in the &lt;em&gt;Table Statistics&lt;/em&gt; will update during the migration. These validations put additional load on the source and target database as the row data is compared after that row has been migrated. It is an on-going validation process.&lt;/p&gt;
+
+&lt;p&gt;Personally, I found the validation to be very flaky. It is either &lt;em&gt;really slow&lt;/em&gt; and it also reports validation errors that are not actual errors. In our case, we didn&amp;rsquo;t pay much attention to the validation failures as spot checking proved that the data was &lt;em&gt;fine&lt;/em&gt;. There were &lt;em&gt;minor&lt;/em&gt; cases where time columns were &lt;em&gt;slightly off&lt;/em&gt;. I am unsure how the validation actually works (i.e., when it does the checks), as the on-going replication could be lagging behind. According to the &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Validating.html#CHAP_Validating.Limitations"&gt;documentation&lt;/a&gt;, there are some limitations that might prevent it from being that useful:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If one or more rows are being continuously modified during the validation, then AWS DMS can&amp;rsquo;t validate those rows. However, you can validate those &lt;em&gt;busy&lt;/em&gt; rows manually, after the task completes.&lt;/li&gt;
+&lt;li&gt;If AWS DMS detects more than 10,000 failed or suspended records, it will stop the validation. Before you proceed further, resolve any underlying problems with the data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In either case under the target&amp;rsquo;s database, there is a new table called &lt;code&gt;awsdms_validation_failures_v1&lt;/code&gt; that contains information on the failures. The &lt;code&gt;KEY&lt;/code&gt; and &lt;code&gt;TABLE_NAME&lt;/code&gt; columns can be used to identify the record in question. It is then possible to check the source and target record and see if there are any issues. One other problem we had with spot-checking validation is that our PostgreSQL database used &lt;code&gt;UUID&lt;/code&gt;s for primary keys, this resulted in the &lt;code&gt;KEY&lt;/code&gt; column having truncated data on the &lt;code&gt;UUID&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4&gt;After Migration&lt;/h4&gt;
+
+&lt;p&gt;Hopefully, the migration went successfully, and both the source and target database are in-sync. At this point, the zero-downtime migration can occur &amp;ndash; simply point the application at the new database. It is advisable to wait for any replication lag or queued up &lt;code&gt;CDCIncomingChanges&lt;/code&gt; to drain before proceeding. You might have to wait a little bit for the connections of your application to cycle over to the new database, but you can monitor this in CloudWatch, or force the cycle (i.e., restart Rails Unicorn servers). Don&amp;rsquo;t forget to resume any background queues. After sufficient time, you can decommission the old database resources.&lt;/p&gt;
+
+&lt;p&gt;In the event that the migration doesn&amp;rsquo;t go as planned, it is possible to revert back to the old database. The only issue is that any write data that occurred during the migration process (i.e., only on the Aurora database) wouldn&amp;rsquo;t be present on the old database (i.e., PostgreSQL database). This is simply an issue that cannot be worked around, and hopefully, the low activity period reduces the amount of data loss.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-05-06T19:36:34-04:00</updated>
+    <updated>2018-06-30T13:07:16-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Learn how to keep your hands on the keyboard, and accomplish mouseless selection and copying in iTerm2. We explore the find and copy approach, along with iTerm2's copy mode.</description>
-    <content type="html">&lt;p&gt;&lt;img width="2048" height="1225" src="/images/2018-05-06-iterm2-mouseless-copy/keyboard-with-mouse.jpg" /&gt;
-&lt;a title="3D printed mouse" href="https://flickr.com/photos/creative_tools/8573767153"&gt;3D printed mouse&lt;/a&gt; by &lt;a href="https://flickr.com/people/creative_tools"&gt;Creative Tools&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by/2.0/"&gt;CC BY&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1&gt;iTerm2 Mouseless Copy&lt;/h1&gt;
-
-&lt;p&gt;Where possible, I try to avoid using the mouse. I heavily use &lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; while editing which allows for keyboard navigation. I have taken such a liking to the Vim keyboard-bindings that I even use  &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en"&gt;Vimium (a Google Chrome extension)&lt;/a&gt; for keyboard-driven navigation in my browser (for as much as I can). In addition, I use &lt;a href="https://itunes.apple.com/ca/app/bettersnaptool/id417375580"&gt;BetterSnapTool&lt;/a&gt; for MacOS, which allows me to move/resize windows around solely from my keyboard.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Where possible, I try to avoid using the mouse. I heavily use &lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; while editing which allows for keyboard navigation. I have taken such a liking to the Vim keyboard-bindings that I even use  &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en"&gt;Vimium (a Google Chrome extension)&lt;/a&gt; for keyboard-driven navigation in my browser (for as much as I can). In addition, I use &lt;a href="https://itunes.apple.com/ca/app/bettersnaptool/id417375580"&gt;BetterSnapTool&lt;/a&gt; for MacOS, which allows me to move/resize windows around solely from my keyboard.&lt;/p&gt;
 
 &lt;p&gt;One optimization within my terminal that I have been avoiding is &lt;a href="https://github.com/tmux/tmux"&gt;tmux&lt;/a&gt; &amp;ndash; it is unnecessarily complicated for what I need. For the most part, I am able to use &lt;a href="https://www.iterm2.com/"&gt;iTerm2&lt;/a&gt; to open tabs, split panes and navigate around. To be honest, I don&amp;rsquo;t really need the session keeping functionality that tmux or &lt;a href="http://www.gnu.org/software/screen/"&gt;screen&lt;/a&gt; provided. The big gain I was missing from tmux was the famed &lt;a href="https://minimul.com/increased-developer-productivity-with-tmux-part-8.html"&gt;copy mode&lt;/a&gt;.&lt;/p&gt;
 
@@ -91,18 +469,13 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T13:07:19-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Learn how to eliminate the noise in your diffs when using Jest snapshots with styled-jsx.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1600" height="1065" src="/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg" /&gt;
-&lt;a title="Total Eclipse Light" href="https://flickr.com/photos/howardignatius/13875481115"&gt;Total Eclipse Light&lt;/a&gt; by &lt;a href="https://flickr.com/people/howardignatius"&gt;howardignatius&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc-nd/2.0/"&gt;CC BY-NC-ND&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1&gt;Jest Snapshots: Reducing styled-jsx Noise&lt;/h1&gt;
-
-&lt;p&gt;Facebook&amp;rsquo;s &lt;a href="https://facebook.github.io/jest/"&gt;Jest&lt;/a&gt; is a powerful testing framework for JavaScript. It works &lt;em&gt;out of the box&lt;/em&gt; for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the &lt;a href="https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest"&gt;snapshot testing&lt;/a&gt; functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage&amp;rsquo;s documentation:&lt;/p&gt;
+    <content type="html">&lt;p&gt;Facebook&amp;rsquo;s &lt;a href="https://facebook.github.io/jest/"&gt;Jest&lt;/a&gt; is a powerful testing framework for JavaScript. It works &lt;em&gt;out of the box&lt;/em&gt; for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the &lt;a href="https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest"&gt;snapshot testing&lt;/a&gt; functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage&amp;rsquo;s documentation:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Capture snapshots of React trees or other serializable values to simplify testing and to analyze how state changes over time.&lt;/p&gt;
@@ -426,18 +799,13 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:55:47-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Learn to edit within a pry session. Experience the power of multi-line and patch editing.</description>
-    <content type="html">&lt;p&gt;&lt;img width="2048" height="1365" src="/images/2018-03-23-editing-with-pry/prybar-brush.jpg" /&gt;
-&lt;a title="Pry Bar &amp;amp; Wire Brush" href="https://flickr.com/photos/evilpics/16088956283"&gt;Pry Bar &amp;amp; Wire Brush&lt;/a&gt; by &lt;a href="https://flickr.com/people/evilpics"&gt;Scott Hart&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc-nd/2.0/"&gt;CC BY-NC-ND&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1&gt;Editing with Pry&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;ve already touched a bit on the power of &lt;code&gt;pry&lt;/code&gt; in a &lt;a href="/lets-pry-into-ruby-objects/"&gt;previous post back in 2016&lt;/a&gt;. I want to revisit &lt;code&gt;pry&lt;/code&gt; to expand on a new functionality that I have since started using &amp;ndash; its ability to edit.&lt;/p&gt;
+    <content type="html">&lt;p&gt;I&amp;rsquo;ve already touched a bit on the power of &lt;code&gt;pry&lt;/code&gt; in a &lt;a href="/lets-pry-into-ruby-objects/"&gt;previous post back in 2016&lt;/a&gt;. I want to revisit &lt;code&gt;pry&lt;/code&gt; to expand on a new functionality that I have since started using &amp;ndash; its ability to edit.&lt;/p&gt;
 
 &lt;h2&gt;More than One Line?&lt;/h2&gt;
 
@@ -474,16 +842,13 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:56:09-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Trying to configure Rails ActiveStorage for Minio as your storage provider? The default configuration does not work out of the box, so read on to see what configuration options you are missing.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1024" height="768" src="/images/2018-02-26-rails-activestorage-configuration-for-minio/birdy-boxcar.jpg" /&gt;
-&lt;em&gt;&lt;a title="birdy boxcar" href="https://flickr.com/photos/agent_ladybug/661200957"&gt;birdy boxcar&lt;/a&gt; by &lt;a href="https://flickr.com/people/agent_ladybug"&gt;b.ug&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc/2.0/"&gt;CC BY-NC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;You are looking at Rails 5.2 and its shiny new &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;ActiveStorage&lt;/a&gt; &amp;ndash; a built-in abstraction/mechanism to handle file storage. You decide to give it a try and remove a dependency you normally use (i.e., &lt;a href="https://github.com/carrierwaveuploader/carrierwave"&gt;CarrierWave&lt;/a&gt; or &lt;a href="https://github.com/thoughtbot/paperclip"&gt;Paperclip&lt;/a&gt;).&lt;/p&gt;
+    <content type="html">&lt;p&gt;You are looking at Rails 5.2 and its shiny new &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;ActiveStorage&lt;/a&gt; &amp;ndash; a built-in abstraction/mechanism to handle file storage. You decide to give it a try and remove a dependency you normally use (i.e., &lt;a href="https://github.com/carrierwaveuploader/carrierwave"&gt;CarrierWave&lt;/a&gt; or &lt;a href="https://github.com/thoughtbot/paperclip"&gt;Paperclip&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;For some reason, you decide to use &lt;a href="https://minio.io/"&gt;Minio&lt;/a&gt; &amp;ndash; an Amazon S3 compatible open source project.&lt;/p&gt;
 
@@ -550,16 +915,13 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:56:33-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Stop asking questions about certain architectural decisions for a project. Implement Architecture Decision Records, and save the team and yourself future headaches.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1024" height="768" src="/images/2018-01-03-start-now-architecture-decision-records/filing-cabinet.jpg" /&gt;
-&lt;em&gt;&lt;a title="Filing cabinet" href="https://flickr.com/photos/mightymightymatze/2150298078"&gt;Filing cabinet&lt;/a&gt; by &lt;a href="https://flickr.com/people/mightymightymatze"&gt;mightymightymatze&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc/2.0/"&gt;CC BY-NC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;While working on any project, you&amp;rsquo;ll eventually need to make decisions regarding the task at hand. The decision that has to be made can vary in size and impact. Often we are in the context of a team, and these decisions are made in consultation with others. As time progresses, with new and old team members moving on and off the project, we&amp;rsquo;ll start to question some of those decisions that were made in the past.&lt;/p&gt;
+    <content type="html">&lt;p&gt;While working on any project, you&amp;rsquo;ll eventually need to make decisions regarding the task at hand. The decision that has to be made can vary in size and impact. Often we are in the context of a team, and these decisions are made in consultation with others. As time progresses, with new and old team members moving on and off the project, we&amp;rsquo;ll start to question some of those decisions that were made in the past.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Why was it done that way?&lt;/p&gt;
@@ -686,16 +1048,13 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:57:24-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Slack Reminders are powerful, maybe even more so than you originally thought?! In my experience, I noticed that colleagues of mine didn't fully use reminders to their fullest extent.</description>
-    <content type="html">&lt;p&gt;&lt;img width="750" height="310" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-reminders.jpg" /&gt;
-&lt;em&gt;Screeshot of Slack&amp;rsquo;s Reminder Help&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://slack.com/"&gt;Slack&lt;/a&gt; has taken over communication for workplace environments, at least within tech circles surrounding me. I realize there are many competitors, and I have even used some of them in the past, but to me Slack is my preferred choice. If you haven&amp;rsquo;t given Slack a try, I highly recommend it! At &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt; we heavily use Slack.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;a href="https://slack.com/"&gt;Slack&lt;/a&gt; has taken over communication for workplace environments, at least within tech circles surrounding me. I realize there are many competitors, and I have even used some of them in the past, but to me Slack is my preferred choice. If you haven&amp;rsquo;t given Slack a try, I highly recommend it! At &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt; we heavily use Slack.&lt;/p&gt;
 
 &lt;p&gt;This post will be short and focused on &lt;a href="https://get.slack.help/hc/en-us/articles/208423427"&gt;Slack Reminders&lt;/a&gt;. From what I&amp;rsquo;ve experienced with coworkers, they only knew of and used a small subset of Slack Reminder&amp;rsquo;s feature set. This post is going to demonstrate what you can do with Slack Reminders, mainly assigning reminders to users and channels.&lt;/p&gt;
 
@@ -762,16 +1121,13 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:57:50-04:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">My first foray into making and publishing a browser extension. Let me showcase a quick extension which adds a button on GitHub's pull request and issue pages that links to tellmewhenitcloses.com populated with data.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1000" height="890" src="/images/2017-11-14-github-tell-me-when-it-closes-extension/screenshot.jpg" /&gt;
-&lt;em&gt;&lt;a href="https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension"&gt;Screenshot of GitHub: Tell Me When It Closes Extension&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://tellmewhenitcloses.com/"&gt;Tell Me When It Closes&lt;/a&gt; is an amazing service by &lt;a href="https://thoughtbot.com/"&gt;thoughtbot&lt;/a&gt;. Often I&amp;rsquo;ll find an issue or pull request on GitHub for a tool I use and I just want to know &lt;em&gt;when&lt;/em&gt; it closes what the result was. I don&amp;rsquo;t care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;a href="https://tellmewhenitcloses.com/"&gt;Tell Me When It Closes&lt;/a&gt; is an amazing service by &lt;a href="https://thoughtbot.com/"&gt;thoughtbot&lt;/a&gt;. Often I&amp;rsquo;ll find an issue or pull request on GitHub for a tool I use and I just want to know &lt;em&gt;when&lt;/em&gt; it closes what the result was. I don&amp;rsquo;t care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.&lt;/p&gt;
 
 &lt;p&gt;The issue I ran into was the limited ways to integrate this into my workflow. Looking at the ways you can &lt;a href="https://tellmewhenitcloses.com/subscribing"&gt;subscribe to issues and pull requests&lt;/a&gt;, it&amp;rsquo;s a bookmarklet that runs JavaScript. I don&amp;rsquo;t use the bookmark bar in my chrome browser (or browser bookmarks), so that solution wasn&amp;rsquo;t ideal.&lt;/p&gt;
 
@@ -820,16 +1176,13 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:58:15-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">We are ever consuming articles on the web. In most cases, the articles that interest me are highly technical and informative. Just like a book, you would highlight the important passages for future recollection. In this post, I present my use of the Highly highlighting service to record, retrieve, and share highlights.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1024" height="683" src="/images/2017-10-31-share-highlighted-articles/book-highlighter.jpg" /&gt;
-&lt;em&gt;&lt;a title="IB English" href="https://flickr.com/photos/quinnanya/3242150010"&gt;IB English&lt;/a&gt; by &lt;a href="https://flickr.com/people/quinnanya"&gt;quinn.anya&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-sa/2.0/"&gt;CC BY-SA&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Here is yet another post on the topic of sharing knowledge to accompany my previous posts: &lt;em&gt;&lt;a href="/share-your-bag-of-tricks/"&gt;Share Your Bag of Tricks&lt;/a&gt;&lt;/em&gt; and &lt;em&gt;&lt;a href="/knowledge-and-screencast-culture/"&gt;Knowledge and Screencast Culture&lt;/a&gt;&lt;/em&gt;. I&amp;rsquo;ve recently made another change to my day-to-day workflow that accommodates sharing knowledge &amp;ndash; highlighting articles.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Here is yet another post on the topic of sharing knowledge to accompany my previous posts: &lt;em&gt;&lt;a href="/share-your-bag-of-tricks/"&gt;Share Your Bag of Tricks&lt;/a&gt;&lt;/em&gt; and &lt;em&gt;&lt;a href="/knowledge-and-screencast-culture/"&gt;Knowledge and Screencast Culture&lt;/a&gt;&lt;/em&gt;. I&amp;rsquo;ve recently made another change to my day-to-day workflow that accommodates sharing knowledge &amp;ndash; highlighting articles.&lt;/p&gt;
 
 &lt;h1&gt;Information Recollection&lt;/h1&gt;
 
@@ -943,16 +1296,13 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:58:41-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">Overtime, you accumulate a set of configurations and dotfiles. To ensure a consistent environments across machines you want to have access to the same dotfiles. I share my synchronization approach along with how to keep the private and public information separate.</description>
-    <content type="html">&lt;p&gt;&lt;img width="1362" height="887" src="/images/2017-09-28-synchronizing-my-dotfiles/github-dotfiles.jpg" /&gt;
-&lt;em&gt;&lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;My dotfiles repository on GitHub&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I always strive to &lt;a href="/share-your-bag-of-tricks/"&gt;share my bag of tricks&lt;/a&gt;. Hosting &lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;my dotfiles on GitHub&lt;/a&gt; is one way I can share the tricks and tips I&amp;rsquo;ve picked up over time. In addition, this makes it easy to replicate my development environment on another machine if needed.&lt;/p&gt;
+    <content type="html">&lt;p&gt;I always strive to &lt;a href="/share-your-bag-of-tricks/"&gt;share my bag of tricks&lt;/a&gt;. Hosting &lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;my dotfiles on GitHub&lt;/a&gt; is one way I can share the tricks and tips I&amp;rsquo;ve picked up over time. In addition, this makes it easy to replicate my development environment on another machine if needed.&lt;/p&gt;
 
 &lt;p&gt;There are some technical challenges I&amp;rsquo;ve had to overcome in open-sourcing my dotfiles. My dotfiles is a living repository, it is constantly changing as I tweak my environment. I recently encountered a situation where I have two physical machines to use for development. I want a simple and comprehensive solution for synchronizing my dotfiles, both the private and public content, between both machines.&lt;/p&gt;
 
@@ -1076,16 +1426,13 @@ name = My tips
     <title>Self-Improvement, Accountability and Transparancy</title>
     <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
     <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
+    <updated>2018-06-30T12:59:06-04:00</updated>
     <published>2017-08-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">I outline changes that I want to implement for my website that will help push forward with: Self-Improvement, Accountability and Transparency. I'll be using ideas like a Now page, AMA, and Progress Posts.</description>
-    <content type="html">&lt;p&gt;&lt;img width="2048" height="1152" src="/images/2017-08-31-self-improvement-accountability-and-transparancy/leaf.jpg" /&gt;
-&lt;em&gt;&lt;a title="Raindrops on Nasturtiums, Whiskers on Gerbils" href="https://flickr.com/photos/uncoolbob/14342874746"&gt;Raindrops on Nasturtiums, Whiskers on Gerbils&lt;/a&gt; by &lt;a href="https://flickr.com/people/uncoolbob"&gt;uncoolbob&lt;/a&gt; is licensed under &lt;a href="https://creativecommons.org/licenses/by-nc/2.0/"&gt;CC BY-NC&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;This will be a quick blog post, but one that will mark a new page in my writings.&lt;/p&gt;
+    <content type="html">&lt;p&gt;This will be a quick blog post, but one that will mark a new page in my writings.&lt;/p&gt;
 
 &lt;p&gt;As the title suggests I want to be more &lt;em&gt;accountable&lt;/em&gt; and &lt;em&gt;transparent&lt;/em&gt; with what I am doing. Just by having a website that I blog in monthly does this a little. For example I am transparent that I want to blog once a month, and I&amp;rsquo;m held accountable as it is public. This maybe isn&amp;rsquo;t the greatest example, but hopefully you get the point.&lt;/p&gt;
 
@@ -1127,77 +1474,6 @@ name = My tips
 &lt;p&gt;With the accountability aspect, I&amp;rsquo;m hoping that I can push myself for deliberate self-improvement. Not only in software development, leadership, but in all aspects of my life. The progress posts and the now page should will hopefully be the catalyst in starting this trend.&lt;/p&gt;
 
 &lt;p&gt;I still have to give this article, &lt;a href="https://medium.com/@lissalauren/design-your-personal-growth-831582b8524d"&gt;Design your personal growth&lt;/a&gt;, a read. It offers a plan for self-improvement, and hopefully I can incorporate something like that in these new changes I&amp;rsquo;m implementing.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Knowledge and Screencast Culture</title>
-    <link rel="alternate" href="https://kevinjalbert.com/knowledge-and-screencast-culture/"/>
-    <id>https://kevinjalbert.com/knowledge-and-screencast-culture/</id>
-    <updated>2018-05-02T09:05:38-04:00</updated>
-    <published>2017-07-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">As a developer, I routinely share my knowledge and experiences, however I find that I repeat myself with different individuals. To overcome this, I present a knowledge repository using screencasts for persisted and asynchronous knowledge transfer.</description>
-    <content type="html">&lt;p&gt;&lt;img width="2048" height="1139" src="/images/2017-07-30-knowledge-and-screencast-culture/movie-camera.jpg" /&gt;
-&lt;em&gt;&lt;a href="https://flic.kr/p/jxJiU9"&gt;Vintage Filmo Auto Master 8mm Movie Camera&lt;/a&gt; by &lt;a href="https://www.flickr.com/photos/51764518@N02/"&gt;Joe Haupt&lt;/a&gt;, on Flickr&lt;/em&gt;&lt;/p&gt;
-
-&lt;h1&gt;Leaking Knowledge&lt;/h1&gt;
-
-&lt;p&gt;I try my best to teach and impart knowledge to my peers. This is actually one reason why I blog &amp;ndash; to record and teach others from my experiences. While working at theScore, I attempt to &lt;a href="/share-your-bag-of-tricks/"&gt;share my bag of tricks&lt;/a&gt; to the best of my ability. I found during my tenure that my colleagues would occasionally:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ask what application/tool I just used&lt;/li&gt;
-&lt;li&gt;ask what hotkey/shortcut I just pressed&lt;/li&gt;
-&lt;li&gt;ask me how something works&lt;/li&gt;
-&lt;li&gt;ask me to explain a subject in deeper depth&lt;/li&gt;
-&lt;li&gt;comment on something they just learned from me&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I like to share information, tips and tricks. I came up with a rather simple idea and recently put it into practice at theScore. The whole point of this is to not just &lt;em&gt;leak&lt;/em&gt; knowledge but to directly share it.&lt;/p&gt;
-
-&lt;h1&gt;Sharing and Don&amp;rsquo;t Repeat Yourself&lt;/h1&gt;
-
-&lt;p&gt;There are those moments when a colleague of mine got value out of something I showed and/or explained to them. I like to capitalize on these moments, as I figured there are other people who would gain similar value if they were also there. Unfortunately, it&amp;rsquo;s not often that I am surrounded by &lt;em&gt;everyone&lt;/em&gt; when these moments happen (we&amp;rsquo;re all busy doing our own things).&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve noticed that I would be sharing similar tips when I pair or talk with another coworker. In retrospect, I&amp;rsquo;m repeating myself while slowly spreading enlightenment. As a developer I can see the pattern I&amp;rsquo;m following, and by my nature I want to automate or DRY (Don&amp;rsquo;t Repeat Yourself) things up. To overcome this hurdle I decided to come up with a more direct and permanent solution to disseminate my experience across the organization.&lt;/p&gt;
-
-&lt;h1&gt;Knowledge Repository&lt;/h1&gt;
-
-&lt;p&gt;I approach most things from a developer&amp;rsquo;s mindset. I love using GitHub and that is the platform theScore uses for its day to day operations on the engineering side. I created a &lt;em&gt;knowledge&lt;/em&gt; repository with the following in its README:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;h2&gt;Knowledge&lt;/h2&gt;
-
-&lt;p&gt;We are always learning new things to help us work more efficiently and effectively. To help share this knowledge, we informally tell our team, or certain individuals. Eventually, we might have a presentation to a wider audience, which often is still a subset of our engineering department. In many cases, the information shared using these deliver mechanisms are not reviewable, and might not reach everyone who may benefit from it.&lt;/p&gt;
-
-&lt;p&gt;Doing formal presentation can be nerve racking for the presenter, and time consuming for everyone. The idea for this repository is to make everything as informal and async as possible. The goal is to take advantage of screenrecording/screencasting technologies for delivery and storage of information along with GitHub&amp;rsquo;s pull requests to facilitate discussion.&lt;/p&gt;
-
-&lt;h2&gt;What can be shared?&lt;/h2&gt;
-
-&lt;p&gt;Anything! This repository helps promote individuals to share even the smallest tidbit of knowledge that they feel is worth sharing. It could be even a 30 seconds editor trick. Without having any restrictions, the hope is that the friction to share something to a wider audience is minimal, also to help encourage sharing what one might not feel is important enough to have a formal presentation for.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;My idea was have a communal place to share and consume knowledge in an asynchronous environment. The README is treated as a living document and will adjust and improve over time.&lt;/p&gt;
-
-&lt;p&gt;I am continuously learning new things, and others have plenty to teach. This approach will create an environment for learning for not only myself, but for everyone.&lt;/p&gt;
-
-&lt;h1&gt;Screencast All the Things&lt;/h1&gt;
-
-&lt;p&gt;As you might have read in the README snippet, the preferred medium to use is screenrecording/screencasting technologies for delivery and storage. So in essence, you would create a screencast for anything that could provide value to someone and that you don&amp;rsquo;t want to repeat. There are broad criteria of what to screencast, but in that respect I think it&amp;rsquo;ll work out quite well in the long run.&lt;/p&gt;
-
-&lt;p&gt;There is quite an art to doing screencasts well, and I am just getting my feet wet. I&amp;rsquo;m still working on my presentation delivery as I generally don&amp;rsquo;t do much preparation before recording. As for tools I&amp;rsquo;m currently using:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://monosnap.com"&gt;Monosnap&lt;/a&gt; for the screenrecording software (for MacOS and Windows)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/keycastr/keycastr"&gt;KeyCastr&lt;/a&gt; for visualizing my keystrokes (for MacOS)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;At theScore I download the recorded video and upload it to our internal Google Drive and link that in the GitHub Pull Request. I am tempted to just leave them on Monosnap&amp;rsquo;s built-in hosting service if there is no sensitive information within the video. To demonstrate my setup I&amp;rsquo;ve recorded a &lt;a href="https://monosnap.com/file/y53Rg1cvLJpT214tHz7erWDM9HgOik"&gt;quick screencast&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Screencast Culture&lt;/h1&gt;
-
-&lt;p&gt;The &lt;em&gt;knowledge&lt;/em&gt; repository is still a new concept at theScore, although I have high hopes for it. The more that people contribute to it, the more useful it&amp;rsquo;ll become. With a wide range of topics and data within it, there are bound to be new learning materials for each individual. The challenge is getting people to be aware of it as well as contribute to it. I&amp;rsquo;m still working out how best to approach this challenge.&lt;/p&gt;
 </content>
   </entry>
 </feed>

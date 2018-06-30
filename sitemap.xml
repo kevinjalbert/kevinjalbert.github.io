@@ -103,6 +103,9 @@
     <loc>https://kevinjalbert.com/iterm2-mouseless-copy/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/</loc>
   </url>
   <url>
@@ -224,6 +227,18 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/iterm2/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/database/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/postgresql/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/aurora/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/aws/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/2/</loc>

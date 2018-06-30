@@ -1,0 +1,10 @@
+.article__originally-posted-to-notice {
+  @include no-underline-links;
+
+  text-align: center;
+}
+
+.article-teaser__separator {
+  border-bottom: 1px solid $content-border-colour;
+  margin: 20px 0;
+}

@@ -1,0 +1,6 @@
+<% if current_page.data.originally_posted_to %>
+  <% url = current_page.data.originally_posted_to %>
+  <div class="article__originally-posted-to-notice">
+    <i>~~ Originally posted at <a href=<%= url %>><%= URI.parse(url).host.downcase %></a> ~~</i>
+  </div>
+<% end %>

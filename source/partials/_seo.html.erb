@@ -1,11 +1,15 @@
 <%
-  root_url = "https://kevinjalbert.com"
+  root_url = config[:root_url]
   current_page_url = root_url + current_page.url
   tag = current_page.metadata[:locals]['tagname']
   keywords = current_page.respond_to?(:tags) ? current_page.tags.join(', ') : ''
 %>
 
-<link rel="canonical" href=<%= current_page_url %>>
+<% if current_page.data.originally_posted_to %>
+  <link rel="canonical" href=<%= current_page.data.originally_posted_to %>>
+<% else %>
+  <link rel="canonical" href=<%= current_page_url %>>
+<% end %>
 
 <% # Adding meta/facebook/twitter tags %>
 <%=

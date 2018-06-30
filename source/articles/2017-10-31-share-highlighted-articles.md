@@ -9,10 +9,8 @@ tags:
 - communication
 
 pull_image: "/images/2017-10-31-share-highlighted-articles/book-highlighter.jpg"
+pull_image_attribution: '_[IB English](https://flickr.com/photos/quinnanya/3242150010 "IB English") by [quinn.anya](https://flickr.com/people/quinnanya) is licensed under [CC BY-SA](https://creativecommons.org/licenses/by-sa/2.0/)'
 ---
-
-![](/images/2017-10-31-share-highlighted-articles/book-highlighter.jpg)
-_[IB English](https://flickr.com/photos/quinnanya/3242150010 "IB English") by [quinn.anya](https://flickr.com/people/quinnanya) is licensed under [CC BY-SA](https://creativecommons.org/licenses/by-sa/2.0/)_
 
 Here is yet another post on the topic of sharing knowledge to accompany my previous posts: _[Share Your Bag of Tricks](/share-your-bag-of-tricks/)_ and _[Knowledge and Screencast Culture](/knowledge-and-screencast-culture/)_. I've recently made another change to my day-to-day workflow that accommodates sharing knowledge -- highlighting articles.
 

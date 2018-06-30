@@ -9,12 +9,8 @@ tags:
 - pry
 
 pull_image: "/images/2018-03-23-editing-with-pry/prybar-brush.jpg"
+pull_image_attribution: '[Pry Bar & Wire Brush](https://flickr.com/photos/evilpics/16088956283 "Pry Bar & Wire Brush") by [Scott Hart](https://flickr.com/people/evilpics) is licensed under [CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/2.0/)'
 ---
-
-![](/images/2018-03-23-editing-with-pry/prybar-brush.jpg)
-[Pry Bar & Wire Brush](https://flickr.com/photos/evilpics/16088956283 "Pry Bar & Wire Brush") by [Scott Hart](https://flickr.com/people/evilpics) is licensed under [CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/2.0/)
-
-# Editing with Pry
 
 I've already touched a bit on the power of `pry` in a [previous post back in 2016](/lets-pry-into-ruby-objects/). I want to revisit `pry` to expand on a new functionality that I have since started using -- its ability to edit.
 

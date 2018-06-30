@@ -9,10 +9,8 @@ tags:
 - macOS
 
 pull_image: "/images/2017-04-09-bluetooth-connection-battery-script-for-macos/beatsx.jpg"
+pull_image_attribution: 'My BeatsX Earphones'
 ---
-
-![](/images/2017-04-09-bluetooth-connection-battery-script-for-macos/beatsx.jpg)
-_My BeatsX Earphones_
 
 I recently purchased a pair of [BeatsX Earphones](http://www.apple.com/ca/shop/product/MLYE2LL/A/beatsx-earphones-black) as I wanted to stop dealing with wired earbuds. For some reason, the wired connections always stopped working properly after a number of months. I supect it is just the stress on the wire while in my pocket during my commute.
 

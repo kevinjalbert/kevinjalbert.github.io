@@ -9,10 +9,8 @@ tags:
 - code review
 
 pull_image: "/images/2017-05-30-create-your-own-pronto-runner/robot.jpg"
+pull_image_attribution: 'By Vanillase (Own work) [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ASIMO_Conducting_Pose_on_4.14.2008.jpg)'
 ---
-
-![](/images/2017-05-30-create-your-own-pronto-runner/robot.jpg)
-_By Vanillase (Own work) [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0), via [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:ASIMO_Conducting_Pose_on_4.14.2008.jpg)_
 
 # What is Pronto?
 

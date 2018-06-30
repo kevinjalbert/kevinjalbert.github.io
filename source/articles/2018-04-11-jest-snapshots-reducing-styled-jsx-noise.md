@@ -9,12 +9,8 @@ tags:
 - styled-jsx
 
 pull_image: "/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg"
+pull_image_attribution: '[Total Eclipse Light](https://flickr.com/photos/howardignatius/13875481115 "Total Eclipse Light") by [howardignatius](https://flickr.com/people/howardignatius) is licensed under [CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/2.0/)'
 ---
-
-![](/images/2018-04-11-jest-snapshots-reducing-styled-jsx-noise/telescope.jpg)
-[Total Eclipse Light](https://flickr.com/photos/howardignatius/13875481115 "Total Eclipse Light") by [howardignatius](https://flickr.com/people/howardignatius) is licensed under [CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/2.0/)
-
-# Jest Snapshots: Reducing styled-jsx Noise
 
 Facebook's [Jest](https://facebook.github.io/jest/) is a powerful testing framework for JavaScript. It works _out of the box_ for React projects and is essentially the de facto testing framework for React. When I began using Jest in combination with React I fell in love with the [snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html#snapshot-testing-with-jest) functionality. Having snapshots helps detect structural regressions in the rendered DOM, as per the homepage's documentation:
 

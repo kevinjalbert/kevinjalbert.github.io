@@ -8,10 +8,8 @@ tags:
 - self-improvement
 
 pull_image: "/images/2017-08-31-self-improvement-accountability-and-transparancy/leaf.jpg"
+pull_image_attribution: '[Raindrops on Nasturtiums, Whiskers on Gerbils](https://flickr.com/photos/uncoolbob/14342874746 "Raindrops on Nasturtiums, Whiskers on Gerbils") by [uncoolbob](https://flickr.com/people/uncoolbob) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)'
 ---
-
-![](/images/2017-08-31-self-improvement-accountability-and-transparancy/leaf.jpg)
-_[Raindrops on Nasturtiums, Whiskers on Gerbils](https://flickr.com/photos/uncoolbob/14342874746 "Raindrops on Nasturtiums, Whiskers on Gerbils") by [uncoolbob](https://flickr.com/people/uncoolbob) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)_
 
 This will be a quick blog post, but one that will mark a new page in my writings.
 

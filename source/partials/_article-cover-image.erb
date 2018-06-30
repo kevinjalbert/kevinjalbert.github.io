@@ -1,0 +1,7 @@
+<% if current_page.data.pull_image %>
+  <img src=<%= current_page.data.pull_image %>>
+<% end %>
+
+<% if current_page.data.pull_image_attribution %>
+  <i><%= markdown(current_page.data.pull_image_attribution) %></i>
+<% end %>

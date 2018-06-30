@@ -8,6 +8,7 @@ tags:
 - best practices
 
 pull_image: "/images/2017-01-31-simplify-the-styles-drop-the-distractions/xkcd-code-quality.png"
+pull_image_attribution: '[XKCD Comic on Code Quality](https://xkcd.com/1513/)'
 ---
 
 Everyone has preferences in how code should be structured from an aesthetic standpoint. Having creative freedom in finding your own style is a powerful and rewarding feeling. Seeing that new class/file completely written in your style can put a smile on your face. The problem is we're often not the only developer on a project. In a team or open-source environment, it is unlikely that _everyone_ is on board with the exact coding style. It is not uncommon to see different styles in a project just because everyone has their own.

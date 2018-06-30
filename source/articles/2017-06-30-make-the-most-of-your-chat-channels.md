@@ -9,10 +9,8 @@ tags:
 - productivity
 
 pull_image: "/images/2017-06-30-make-the-most-of-your-chat-channels/communication-tower.jpg"
+pull_image_attribution: '[Communication Tower](https://flic.kr/p/finMno) by [Cocoy Pusung](https://www.flickr.com/photos/95876508@N02/), on Flickr'
 ---
-
-![](/images/2017-06-30-make-the-most-of-your-chat-channels/communication-tower.jpg)
-_[Communication Tower](https://flic.kr/p/finMno) by [Cocoy Pusung](https://www.flickr.com/photos/95876508@N02/), on Flickr_
 
 Organizations tend to use some instant messaging platform in addition to email. Ideally, the chosen platform permeates throughout the ranks of the organization instead of having fractured communication between members. The real-time and group collaborative nature of these messaging platforms are quite appealing.
 

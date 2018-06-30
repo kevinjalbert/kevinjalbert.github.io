@@ -8,10 +8,8 @@ tags:
 - tools
 
 pull_image: "/images/2017-11-14-github-tell-me-when-it-closes-extension/screenshot.jpg"
+pull_image_attribution: '[Screenshot of GitHub: Tell Me When It Closes Extension](https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension)'
 ---
-
-![](/images/2017-11-14-github-tell-me-when-it-closes-extension/screenshot.jpg)
-_[Screenshot of GitHub: Tell Me When It Closes Extension](https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension)_
 
 [Tell Me When It Closes](https://tellmewhenitcloses.com/) is an amazing service by [thoughtbot](https://thoughtbot.com/). Often I'll find an issue or pull request on GitHub for a tool I use and I just want to know _when_ it closes what the result was. I don't care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.
 

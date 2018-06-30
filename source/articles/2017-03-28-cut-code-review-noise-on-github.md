@@ -9,11 +9,8 @@ tags:
 - collaboration
 
 pull_image: "/images/2017-03-28-cut-code-review-noise-on-github/scissors.jpg"
+pull_image_attribution: '[Painting scissors with light 4 by Zechariah  Judy, on Flickr](https://www.flickr.com/photos/9918311@N02/4268582634/in/photostream/)'
 ---
-
-![](/images/2017-03-28-cut-code-review-noise-on-github/scissors.jpg)
-_[Painting scissors with light 4 by Zechariah  Judy, on Flickr](https://www.flickr.com/photos/9918311@N02/4268582634/in/photostream/)_
-
 
 For this post I'm not going to detail my preferred approach for working through a source code change using GitHub's pull requests -- another post will likely contain this. I'm instead going to touch on GitHub's review requests feature, and present an effective and efficient way to handle code reviews with GitHub's interface.
 

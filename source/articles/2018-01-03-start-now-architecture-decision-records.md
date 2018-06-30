@@ -9,10 +9,8 @@ tags:
 - architecture
 
 pull_image: "/images/2018-01-03-start-now-architecture-decision-records/filing-cabinet.jpg"
+pull_image_attribution: '[Filing cabinet](https://flickr.com/photos/mightymightymatze/2150298078 "Filing cabinet") by [mightymightymatze](https://flickr.com/people/mightymightymatze) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)'
 ---
-
-![](/images/2018-01-03-start-now-architecture-decision-records/filing-cabinet.jpg)
-_[Filing cabinet](https://flickr.com/photos/mightymightymatze/2150298078 "Filing cabinet") by [mightymightymatze](https://flickr.com/people/mightymightymatze) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)_
 
 While working on any project, you'll eventually need to make decisions regarding the task at hand. The decision that has to be made can vary in size and impact. Often we are in the context of a team, and these decisions are made in consultation with others. As time progresses, with new and old team members moving on and off the project, we'll start to question some of those decisions that were made in the past.
 

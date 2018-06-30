@@ -9,12 +9,8 @@ tags:
 - productivity
 
 pull_image: "/images/2018-05-06-iterm2-mouseless-copy/keyboard-with-mouse.jpg"
+pull_image_attribution: '[3D printed mouse](https://flickr.com/photos/creative_tools/8573767153 "3D printed mouse") by [Creative Tools](https://flickr.com/people/creative_tools) is licensed under [CC BY](https://creativecommons.org/licenses/by/2.0/)'
 ---
-
-![](/images/2018-05-06-iterm2-mouseless-copy/keyboard-with-mouse.jpg)
-[3D printed mouse](https://flickr.com/photos/creative_tools/8573767153 "3D printed mouse") by [Creative Tools](https://flickr.com/people/creative_tools) is licensed under [CC BY](https://creativecommons.org/licenses/by/2.0/)
-
-# iTerm2 Mouseless Copy
 
 Where possible, I try to avoid using the mouse. I heavily use [Vim](https://www.vim.org/) while editing which allows for keyboard navigation. I have taken such a liking to the Vim keyboard-bindings that I even use  [Vimium (a Google Chrome extension)](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en) for keyboard-driven navigation in my browser (for as much as I can). In addition, I use [BetterSnapTool](https://itunes.apple.com/ca/app/bettersnaptool/id417375580) for MacOS, which allows me to move/resize windows around solely from my keyboard.
 

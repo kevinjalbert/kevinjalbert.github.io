@@ -9,11 +9,8 @@ tags:
 - minio
 
 pull_image: "/images/2018-02-26-rails-activestorage-configuration-for-minio/birdy-boxcar.jpg"
+pull_image_attribution: '[birdy boxcar](https://flickr.com/photos/agent\_ladybug/661200957 "birdy boxcar") by [b.ug](https://flickr.com/people/agent_ladybug) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)'
 ---
-
-![](/images/2018-02-26-rails-activestorage-configuration-for-minio/birdy-boxcar.jpg)
-_[birdy boxcar](https://flickr.com/photos/agent\_ladybug/661200957 "birdy boxcar") by [b.ug](https://flickr.com/people/agent_ladybug) is licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/2.0/)_
-
 
 You are looking at Rails 5.2 and its shiny new [ActiveStorage](https://github.com/rails/rails/tree/master/activestorage) -- a built-in abstraction/mechanism to handle file storage. You decide to give it a try and remove a dependency you normally use (i.e., [CarrierWave](https://github.com/carrierwaveuploader/carrierwave) or [Paperclip](https://github.com/thoughtbot/paperclip)).
 

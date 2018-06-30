@@ -9,12 +9,8 @@ tags:
 - culture
 
 pull_image: "/images/2017-07-30-knowledge-and-screencast-culture/movie-camera.jpg"
+pull_image_attribution: '[Vintage Filmo Auto Master 8mm Movie Camera](https://flic.kr/p/jxJiU9) by [Joe Haupt](https://www.flickr.com/photos/51764518@N02/), on Flickr'
 ---
-
-![](/images/2017-07-30-knowledge-and-screencast-culture/movie-camera.jpg)
-_[Vintage Filmo Auto Master 8mm Movie Camera](https://flic.kr/p/jxJiU9) by [Joe Haupt](https://www.flickr.com/photos/51764518@N02/), on Flickr_
-
-# Leaking Knowledge
 
 I try my best to teach and impart knowledge to my peers. This is actually one reason why I blog -- to record and teach others from my experiences. While working at theScore, I attempt to [share my bag of tricks](/share-your-bag-of-tricks/) to the best of my ability. I found during my tenure that my colleagues would occasionally:
 

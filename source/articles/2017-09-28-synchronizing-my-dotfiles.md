@@ -9,11 +9,8 @@ tags:
 - dotfiles
 
 pull_image: "/images/2017-09-28-synchronizing-my-dotfiles/github-dotfiles.jpg"
+pull_image_attribution: '[My dotfiles repository on GitHub](https://github.com/kevinjalbert/dotfiles)'
 ---
-
-![](/images/2017-09-28-synchronizing-my-dotfiles/github-dotfiles.jpg)
-_[My dotfiles repository on GitHub](https://github.com/kevinjalbert/dotfiles)_
-
 
 I always strive to [share my bag of tricks](/share-your-bag-of-tricks/). Hosting [my dotfiles on GitHub](https://github.com/kevinjalbert/dotfiles) is one way I can share the tricks and tips I've picked up over time. In addition, this makes it easy to replicate my development environment on another machine if needed.
 

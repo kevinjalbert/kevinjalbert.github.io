@@ -2,16 +2,141 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-06-30T19:53:20-04:00</updated>
+  <updated>2018-07-15T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
+    <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
+    <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
+    <updated>2018-07-15T22:23:36-04:00</updated>
+    <published>2018-07-15T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">This is the first of four parts on GraphQL Persisted Queries with HTTP Caching. We start by describing some problems with GraphQL due to its flexibility, and how we can solve the issues with persisted queries.</description>
+    <content type="html">&lt;p&gt;GraphQL is a fast growing API specification, with aims of replacing REST APIs. A GraphQL server describes the data capabilities through the use of a type system and resolvers. A client is able to send a descriptive GraphQL query of what they want. The structure of the response then matches the query, providing a predictable result. There are many benefits to GraphQL servers and clients, to which I am not going to cover here as there is plenty of material on the Internet talking about those.&lt;/p&gt;
+
+&lt;p&gt;This four-part blog post series is specifically covering the topic of &lt;em&gt;GraphQL Persisted Queries&lt;/em&gt;. A persisted query is a slight modification to the GraphQL specification that allows for better performance and security, at the cost of less flexibility. I will cover a bit of history regarding persisted GraphQL queries, along with the problems it solves. We will look at how to implement persisted queries in Rails and Express. As an extension to persisted queries, we will look at how to adapt them to take advantage of HTTP caching.&lt;/p&gt;
+
+&lt;h1&gt;Problems with GraphQL&lt;/h1&gt;
+
+&lt;p&gt;GraphQL presents a flexible endpoint to which clients can send queries, however, this flexibility comes at a cost. The following three concerns are specifically targeting performance and security:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Queries could be large (i.e., data being sent) when compared to a standard REST endpoint&lt;/li&gt;
+&lt;li&gt;Queries could be inefficiently constructed (i.e., resource expensive)&lt;/li&gt;
+&lt;li&gt;Queries could be maliciously constructed (i.e., circular in nature)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As a consumer of a GraphQL API, it possible to construct &lt;em&gt;any query&lt;/em&gt; for the server to process. You can hope that the consumers are doing their best to create good queries, but in a public API that might not be the case. You might have ill-informed users creating very expensive queries, or even a bad actor trying to timeout or cripple your server by sending deeply cyclical queries.&lt;/p&gt;
+
+&lt;p&gt;There are several ways to mitigate these issues, as further outlined by &lt;a href="https://twitter.com/mxstbr"&gt;Max Stoiber&amp;rsquo;s&lt;/a&gt; article on &lt;a href="https://dev-blog.apollodata.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b"&gt;&lt;em&gt;Securing Your GraphQL API from Malicious Queries&lt;/em&gt;&lt;/a&gt;. In particular:
+ - &lt;em&gt;Depth Limiting&lt;/em&gt;: Rejecting queries which are too deeply nested
+ - &lt;em&gt;Amount Limiting&lt;/em&gt;: Rejecting queries which ask for too much information (i.e., via pagination arguments)
+ - &lt;em&gt;Query Cost Analysis&lt;/em&gt;: Rejecting queries which are too expensive (by assigning complexity values to fields)
+ - &lt;em&gt;Query Whitelisting&lt;/em&gt;: Rejecting queries that are not whitelisted&lt;/p&gt;
+
+&lt;p&gt;I would like to also add &lt;em&gt;Time Limiting&lt;/em&gt;, which would reject queries that take too long to resolve.  &lt;em&gt;Query Whitelisting&lt;/em&gt; is only applicable for private APIs, but otherwise, these are all good approaches for preventing malicious or expensive queries from hitting your API. As per the topic we are covering, we&amp;rsquo;ll focus on Query Whitelisting (otherwise known as Persisted Queries).&lt;/p&gt;
+
+&lt;h1&gt;Persisted Queries&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href="https://twitter.com/leeb/status/829434814402945026"&gt;Facebook has been using persisted queries since 2013&lt;/a&gt;, and comes highly recommended for production usage from them. The essence of a persisted query is that the query is &lt;em&gt;persisted&lt;/em&gt; on the server&amp;rsquo;s side and that a client can &lt;em&gt;reference&lt;/em&gt; it using some unique identifier. A great primer on persisted queries can be found on &lt;a href="https://dev-blog.apollodata.com/persisted-graphql-queries-with-apollo-client-119fd7e6bba5"&gt;Apollo&amp;rsquo;s blog article for this topic&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the sake of completeness, I want to demonstrate a scenario where persisted queries shine.&lt;/p&gt;
+
+&lt;p&gt;A client sends the following query to the server:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight graphql"&gt;&lt;code&gt;&lt;span class="k"&gt;query&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="n"&gt;releaseYear&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;No problems so far! Now a bad actor sends the following query:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight graphql"&gt;&lt;code&gt;&lt;span class="k"&gt;query&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+            &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+              &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;
+              &lt;/span&gt;&lt;span class="c"&gt;# ... continues nesting till happy with the damage&lt;/span&gt;&lt;span class="w"&gt;
+            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+          &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The server evaluating this query can experience performance or stability issues due to the deep nesting and complex nature of the query. Going forward, we will make some assumptions about our API:
+ - We control both the server and the clients (i.e., web/mobile clients)
+ - We don&amp;rsquo;t expose a public API (it is accessible, but it isn&amp;rsquo;t promoted for external usage)
+ - The data being returned from the queries is not personalized&lt;/p&gt;
+
+&lt;p&gt;In our specific case, we can use persisted queries to remedy the issue of malicious users sending bad queries to our API. In addition, we will also gain some performance benefits (i.e., reducing the request&amp;rsquo;s network size).&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Persist the query on the server and make note of the signature of the query (i.e., a hash of the query)&lt;/li&gt;
+&lt;li&gt;The client sends the query signature to the server, along with any query variables&lt;/li&gt;
+&lt;li&gt;Using the signature, the server looks up the matching query from a set of persisted queries&lt;/li&gt;
+&lt;li&gt;The server executes the query and returns the data&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That sounds great, but how can we go about implementing this? As previously mentioned, persisted queries are not part of the official specification. There are many implementations that exist, as well as some tooling for supporting persisted queries. In my experience at the time of writing this, there wasn&amp;rsquo;t a standard way to implement persisted queries.&lt;/p&gt;
+
+&lt;p&gt;I want to stress the following: &lt;strong&gt;Persisted Queries only work if you control the server and the client&lt;/strong&gt;. In theory, you could use persisted queries on public APIs, although the &lt;em&gt;security&lt;/em&gt; gains are not present. I do want to mention that &lt;a href="https://dev-blog.apollodata.com/improve-graphql-performance-with-automatic-persisted-queries-c31d27b8e6ea"&gt;Automatic Persisted Queries&lt;/a&gt; is one way which uses the concept of persisted queries solely for performance gains.&lt;/p&gt;
+
+&lt;h1&gt;Implementing GraphQL Persisted Queries with HTTP Caching&lt;/h1&gt;
+
+&lt;p&gt;For the sake of brevity and focus, this series will focus on the following platforms:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/facebook/react/"&gt;React&lt;/a&gt; with &lt;a href="https://github.com/apollographql/apollo-client"&gt;Apollo Client&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/expressjs/express"&gt;Express&lt;/a&gt; with &lt;a href="https://github.com/prismagraphql/graphql-yoga"&gt;GraphQL Yoga&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/rails/rails"&gt;Rails&lt;/a&gt; with &lt;a href="https://github.com/rmosolgo/graphql-ruby"&gt;GraphQL Ruby&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Part two will cover the following sections:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Setup Express Server&lt;/li&gt;
+&lt;li&gt;Setup React Application&lt;/li&gt;
+&lt;li&gt;Refactor React Application to use Persisted Queries&lt;/li&gt;
+&lt;li&gt;Extract GraphQL Queries from Client&lt;/li&gt;
+&lt;li&gt;Refactor Express Server to use Persisted Queries&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Part three will cover the following sections:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Setup Rails Server&lt;/li&gt;
+&lt;li&gt;Synchronize GraphQL Queries to Rails Server&lt;/li&gt;
+&lt;li&gt;Refactor Rails Server to use Persisted Queries&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Part four will cover the following sections:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Add HTTP Caching to React Application&lt;/li&gt;
+&lt;li&gt;Add HTTP Caching to Express Server&lt;/li&gt;
+&lt;li&gt;Add HTTP Caching to Rails Server&lt;/li&gt;
+&lt;li&gt;Alternative Caching with Gateways&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+  </entry>
+  <entry>
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-06-30T13:06:36-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -394,7 +519,7 @@
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-06-30T13:07:16-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -469,7 +594,7 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-06-30T13:07:19-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -799,7 +924,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-06-30T12:55:47-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -842,7 +967,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-06-30T12:56:09-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -915,7 +1040,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-06-30T12:56:33-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1048,7 +1173,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-06-30T12:57:24-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1121,7 +1246,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-06-30T12:57:50-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1176,7 +1301,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-06-30T12:58:15-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1296,7 +1421,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Synchronizing my dotfiles</title>
     <link rel="alternate" href="https://kevinjalbert.com/synchronizing-my-dotfiles/"/>
     <id>https://kevinjalbert.com/synchronizing-my-dotfiles/</id>
-    <updated>2018-06-30T12:58:41-04:00</updated>
+    <updated>2018-06-30T15:30:32-04:00</updated>
     <published>2017-09-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1420,60 +1545,6 @@ name = My tips
 &lt;li&gt;Using Dropbox as Mackup&amp;rsquo;s storage option provides near real-time synchronization of dotfiles.&lt;/li&gt;
 &lt;li&gt;Make use of &lt;code&gt;.gitignore&lt;/code&gt;&amp;rsquo;s whitelisting feature to selectivly share your public dotfiles while staying within Mackup&amp;rsquo;s solution.&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Self-Improvement, Accountability and Transparancy</title>
-    <link rel="alternate" href="https://kevinjalbert.com/self-improvement-accountability-and-transparency/"/>
-    <id>https://kevinjalbert.com/self-improvement-accountability-and-transparency/</id>
-    <updated>2018-06-30T12:59:06-04:00</updated>
-    <published>2017-08-31T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">I outline changes that I want to implement for my website that will help push forward with: Self-Improvement, Accountability and Transparency. I'll be using ideas like a Now page, AMA, and Progress Posts.</description>
-    <content type="html">&lt;p&gt;This will be a quick blog post, but one that will mark a new page in my writings.&lt;/p&gt;
-
-&lt;p&gt;As the title suggests I want to be more &lt;em&gt;accountable&lt;/em&gt; and &lt;em&gt;transparent&lt;/em&gt; with what I am doing. Just by having a website that I blog in monthly does this a little. For example I am transparent that I want to blog once a month, and I&amp;rsquo;m held accountable as it is public. This maybe isn&amp;rsquo;t the greatest example, but hopefully you get the point.&lt;/p&gt;
-
-&lt;p&gt;Moving forward, these are processes and constructs I want to start and/or continue doing.&lt;/p&gt;
-
-&lt;h1&gt;Ask me anything!&lt;/h1&gt;
-
-&lt;p&gt;I recently came back from &lt;a href="http://www.reactrally.com/"&gt;ReactRally 2017&lt;/a&gt; (which was awesome). In Sean Larkin&amp;rsquo;s presentation, he mentioned that he has an &lt;a href="https://github.com/TheLarkInn/ama"&gt;AMA&lt;/a&gt;. I took at look at it, and I thought it was an awesome idea. In the vein transparency, I decided to create one and link to it on my website.&lt;/p&gt;
-
-&lt;p&gt;I don&amp;rsquo;t have high hopes for many questions coming in, but at least it is there.&lt;/p&gt;
-
-&lt;h1&gt;Progress Posts&lt;/h1&gt;
-
-&lt;p&gt;In addition to the monthly blog posts, I want to publish a new series of progress posts. I&amp;rsquo;m still not 100% sure what they will entail, but I have seen other blogs do something similar. Right now these are some ideas I&amp;rsquo;m playing with:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Updates on progress in any side projects&lt;/li&gt;
-&lt;li&gt;Blog analytics&lt;/li&gt;
-&lt;li&gt;Productivity (i.e., RescueTime, pomodoros)&lt;/li&gt;
-&lt;li&gt;Fitness/Activity&lt;/li&gt;
-&lt;li&gt;Knowledge consumption (i.e., videos, articles, books, podcasts, courses)&lt;/li&gt;
-&lt;li&gt;GitHub stats&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This would be a living experiement. I&amp;rsquo;m not too sure I&amp;rsquo;ll keep going with it, or what I&amp;rsquo;ll be tracking progress on. I&amp;rsquo;ll likely make adjustments to what I&amp;rsquo;m tracking and writing about, as well as the frequency of updates. I&amp;rsquo;m going to start with monthly updates, although we&amp;rsquo;ll see how that plays out.&lt;/p&gt;
-
-&lt;p&gt;Ideally I want to do this so that I am more transparent in what I&amp;rsquo;m doing (on a finer-level), but also accountable in what I&amp;rsquo;m setting out for myself. A side bonus is having an archive of data (although probably not in an ideal format &amp;ndash; maybe I&amp;rsquo;ll make some kind of JSON as the raw data for each update haha).&lt;/p&gt;
-
-&lt;p&gt;It would be sick to pull something like &lt;a href="http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/"&gt;Stephen Wolfram&amp;rsquo;s Personal Analytics&lt;/a&gt;, although that seems like quite a system he had put together.&lt;/p&gt;
-
-&lt;h1&gt;Now Page&lt;/h1&gt;
-
-&lt;p&gt;I already have a &lt;a href="https://nownownow.com/about"&gt;now page&lt;/a&gt; (link points to where I got the idea from) located in the top navigation of this website. The contents of that page detail &lt;em&gt;what I&amp;rsquo;m doing now&lt;/em&gt;. I haven&amp;rsquo;t been that regular in updating it, but it is something I want to work on.&lt;/p&gt;
-
-&lt;p&gt;In a way the Now page could also act as a holding ground for my progress posts, with the next set of goals.&lt;/p&gt;
-
-&lt;h1&gt;The Goal&lt;/h1&gt;
-
-&lt;p&gt;With the accountability aspect, I&amp;rsquo;m hoping that I can push myself for deliberate self-improvement. Not only in software development, leadership, but in all aspects of my life. The progress posts and the now page should will hopefully be the catalyst in starting this trend.&lt;/p&gt;
-
-&lt;p&gt;I still have to give this article, &lt;a href="https://medium.com/@lissalauren/design-your-personal-growth-831582b8524d"&gt;Design your personal growth&lt;/a&gt;, a read. It offers a plan for self-improvement, and hopefully I can incorporate something like that in these new changes I&amp;rsquo;m implementing.&lt;/p&gt;
 </content>
   </entry>
 </feed>

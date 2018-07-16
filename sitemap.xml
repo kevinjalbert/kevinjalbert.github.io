@@ -106,6 +106,9 @@
     <loc>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/</loc>
   </url>
   <url>
@@ -239,6 +242,15 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/aws/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/graphql/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/express/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/http-caching/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/2/</loc>

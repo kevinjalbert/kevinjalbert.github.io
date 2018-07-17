@@ -11,13 +11,13 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-17T08:20:36-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">This is the second of four parts on GraphQL Persisted Queries with HTTP Caching. We'll setup a React application and Express server, both using GraphQL. We will refactor these applications to support persisted queries.</description>
-    <content type="html">&lt;p&gt;This is the second part of a four part series on GraphQL Persisted Queries with HTTP Caching. As a recap of part one, we described some issues with GraphQL and how persisted queries can be a solution for them. We also covered what persisted queries were from a high-level.&lt;/p&gt;
+    <content type="html">&lt;p&gt;This is the second part of a four part series on GraphQL Persisted Queries with HTTP Caching. As a recap of &lt;a href="/graphql-persisted-queries-with-http-caching-part-1/"&gt;part one&lt;/a&gt;, we described some issues with GraphQL and how persisted queries can be a solution for them. We also covered what persisted queries were from a high-level.&lt;/p&gt;
 
 &lt;p&gt;In part two we will cover the following topics:&lt;/p&gt;
 
@@ -293,7 +293,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-17T08:19:11-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -386,7 +386,7 @@
 &lt;li&gt;&lt;a href="https://github.com/rails/rails"&gt;Rails&lt;/a&gt; with &lt;a href="https://github.com/rmosolgo/graphql-ruby"&gt;GraphQL Ruby&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Part two will cover the following sections:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"&gt;Part two&lt;/a&gt; will cover the following sections:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Setup Express Server&lt;/li&gt;
@@ -418,7 +418,7 @@
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -801,7 +801,7 @@
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -876,7 +876,7 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1206,7 +1206,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1249,7 +1249,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1322,7 +1322,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1455,7 +1455,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1528,7 +1528,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>GitHub: Tell Me When It Closes Extension</title>
     <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
     <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2017-11-14T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1583,7 +1583,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Share Highlighted Articles</title>
     <link rel="alternate" href="https://kevinjalbert.com/share-highlighted-articles/"/>
     <id>https://kevinjalbert.com/share-highlighted-articles/</id>
-    <updated>2018-07-16T22:29:47-04:00</updated>
+    <updated>2018-07-16T22:35:54-04:00</updated>
     <published>2017-10-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

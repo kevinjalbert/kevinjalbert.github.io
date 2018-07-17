@@ -13,7 +13,7 @@ pull_image: "/images/2018-07-16-graphql-persisted-queries-with-http-caching-part
 pull_image_attribution: 'Generated with [Carbon.now.sh](https://carbon.now.sh/)'
 ---
 
-This is the second part of a four part series on GraphQL Persisted Queries with HTTP Caching. As a recap of part one, we described some issues with GraphQL and how persisted queries can be a solution for them. We also covered what persisted queries were from a high-level.
+This is the second part of a four part series on GraphQL Persisted Queries with HTTP Caching. As a recap of [part one](/graphql-persisted-queries-with-http-caching-part-1/), we described some issues with GraphQL and how persisted queries can be a solution for them. We also covered what persisted queries were from a high-level.
 
 In part two we will cover the following topics:
 

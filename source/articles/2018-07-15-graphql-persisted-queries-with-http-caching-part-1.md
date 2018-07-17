@@ -100,7 +100,7 @@ For the sake of brevity and focus, this series will focus on the following platf
   - [Express](https://github.com/expressjs/express) with [GraphQL Yoga](https://github.com/prismagraphql/graphql-yoga)
   - [Rails](https://github.com/rails/rails) with [GraphQL Ruby](https://github.com/rmosolgo/graphql-ruby)
 
-Part two will cover the following sections:
+[Part two](https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/) will cover the following sections:
 
   1. Setup Express Server
   2. Setup React Application

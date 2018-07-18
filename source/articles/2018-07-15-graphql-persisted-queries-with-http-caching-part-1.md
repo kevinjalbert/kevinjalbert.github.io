@@ -108,7 +108,7 @@ For the sake of brevity and focus, this series will focus on the following platf
   4. Extract GraphQL Queries from Client
   5. Refactor Express Server to use Persisted Queries
 
-Part three will cover the following sections:
+[Part three](https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/) will cover the following sections:
 
   1. Setup Rails Server
   2. Synchronize GraphQL Queries to Rails Server

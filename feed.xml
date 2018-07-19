@@ -2,16 +2,195 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-07-17T19:53:20-04:00</updated>
+  <updated>2018-07-18T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
+    <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
+    <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
+    <updated>2018-07-18T22:55:09-04:00</updated>
+    <published>2018-07-18T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">This is the last of four parts on GraphQL Persisted Queries with HTTP Caching. We end by adding HTTP caching to our Express, Rails and React applications.</description>
+    <content type="html">&lt;p&gt;This is the last part of a four-part series on GraphQL Persisted Queries with HTTP Caching. As a recap of &lt;a href="/graphql-persisted-queries-with-http-caching-part-3/"&gt;part three&lt;/a&gt;, we created a Rails application capable of handling persisted queries.&lt;/p&gt;
+
+&lt;p&gt;In part four we will cover the following topics:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Add HTTP Caching to React Application&lt;/li&gt;
+&lt;li&gt;Add HTTP Caching to Express Server&lt;/li&gt;
+&lt;li&gt;Add HTTP Caching to Rails Server&lt;/li&gt;
+&lt;li&gt;Alternative Caching with Gateways&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Caching with GraphQL&lt;/h1&gt;
+
+&lt;p&gt;There are different ways to &lt;em&gt;cache&lt;/em&gt; with GraphQL:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.apollographql.com/docs/react/advanced/caching.html"&gt;Caching on the Apollo client&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://mgiroux.me/2016/graphql-query-caching-with-rails/"&gt;Caching the parsed and validated GraphQL query&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/chatterbugapp/cacheql"&gt;Caching field and response resolutions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Amongst other mechanisms and techniques.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For our situation, we&amp;rsquo;re interested in HTTP caching, and the way to achieve this is to make our GraphQL network requests use &lt;code&gt;GET&lt;/code&gt; instead of &lt;code&gt;POST&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The main benefit for HTTP caching is that it allows CDNs and reverse proxy&amp;rsquo;s (i.e., &lt;a href="https://varnish-cache.org/"&gt;Varnish&lt;/a&gt;) to cache intermediate responses based on the response&amp;rsquo;s headers (i.e., &lt;code&gt;Cache-Control&lt;/code&gt;). This results in fewer requests hitting your server as the results might be cached, perfect for scaling your API. Even a short cache (i,e., &amp;lt; 10 seconds) could be extremely valuable as this cache could be shared across all consumers of the API.&lt;/p&gt;
+
+&lt;p&gt;I want to bring up an article by &lt;a href="https://twitter.com/_CoreyClark"&gt;Corey Clark&lt;/a&gt; which tackles a very similar problem on how to use &lt;a href="https://medium.com/@coreyclark/graphql-persisted-queries-using-get-requests-8a6704aba9eb"&gt;&lt;code&gt;GET&lt;/code&gt; requests with GraphQL Persisted Queries&lt;/a&gt;. Both the current post and Corey&amp;rsquo;s article reach a similar state in achieving HTTP cacheability using &lt;code&gt;GET&lt;/code&gt; requests.&lt;/p&gt;
+
+&lt;p&gt;In the following sections, we will augment our Express and Rails servers as well as our React application to use &lt;code&gt;GET&lt;/code&gt; requests. To simplify things, we&amp;rsquo;re going to apply a simple 10-second cache on all our responses (ideally you could tailor this to the individual query). In addition, we&amp;rsquo;re going to make an assumption that we don&amp;rsquo;t have any personalized data in our query responses.&lt;/p&gt;
+
+&lt;h2&gt;Add HTTP Caching to React Application&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/5cbb630c4780d20bc2747b0b62035a3702e87a3b"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Fortunately, the &lt;code&gt;apollo-link-persisted-queries&lt;/code&gt; link has a simple option (&lt;code&gt;useGETForHashedQueries&lt;/code&gt;) to enable &lt;code&gt;GET&lt;/code&gt; requests for queries (but not mutations):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;ApolloClient&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+  &lt;span class="na"&gt;link&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;createPersistedQueryLink&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;useGETForHashedQueries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt; &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;concat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="nx"&gt;createHttpLink&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'http://localhost:5000/graphql'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+  &lt;span class="p"&gt;),&lt;/span&gt;
+  &lt;span class="na"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;InMemoryCache&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now the outbound requests look like the following (a bit messy, but gets the job done):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;http://localhost:5000/graphql?operationName=ConsolesByYear&amp;amp;variables=%7B%22afterYear%22%3A1990%2C%22beforeYear%22%3A2000%7D&amp;amp;extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22a38e6d5349901b395334b5fd3b14e84a7ca7c4fc060a4089f2c23b5cf76f0f80%22%7D%7D
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To better see the requests being cached on the HTTP layer, we&amp;rsquo;re going to modify the &lt;code&gt;Query&lt;/code&gt; in our &lt;code&gt;ConsoleContainer&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;Query&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;QUERY&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="nx"&gt;variables&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{{&lt;/span&gt; &lt;span class="nx"&gt;afterYear&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;beforeYear&lt;/span&gt; &lt;span class="p"&gt;}}&lt;/span&gt; &lt;span class="nx"&gt;fetchPolicy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'network-only'&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By adding &lt;code&gt;fetchPolicy&lt;/code&gt; of &lt;code&gt;network-only&lt;/code&gt; the &lt;code&gt;apollo-client&lt;/code&gt; will not cache responses, and thus each query will be sent to the GraphQL API.&lt;/p&gt;
+
+&lt;h2&gt;Add HTTP Caching to Express Server&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/0bf8d6bccc5649b00dda77b4dfdce523c22b4796"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We have to do a couple things to get our Express server in shape to serve &lt;code&gt;GET&lt;/code&gt; requests. First thing is to remove the &lt;code&gt;bodyParser&lt;/code&gt; middleware as we aren&amp;rsquo;t parsing a &lt;code&gt;POST&lt;/code&gt; anymore. We will also adjust our &lt;code&gt;GraphQLServer&lt;/code&gt; options to toggle the &lt;code&gt;getEndpoint&lt;/code&gt;, which adds a &lt;code&gt;GET&lt;/code&gt; endpoint using our defined GraphQL route. Finally, we have to modify our &lt;code&gt;persistedQueriesMiddleware&lt;/code&gt; to be on the &lt;code&gt;GET&lt;/code&gt; route for &lt;code&gt;/graphql&lt;/code&gt;. Those changes looks like the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// server.js&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'graphql-yoga'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/typeDefs'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/resolvers'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./persistedQueriesMiddleware'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="na"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="na"&gt;getEndpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="na"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="na"&gt;playground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/playground'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kd"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;start&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;port&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
+  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;`Server started, listening on port &lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;port&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; for incoming requests.`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We also have to modify our &lt;code&gt;persistedQueriesMiddleware&lt;/code&gt; itself to parse the &lt;code&gt;GET&lt;/code&gt; query parameters and specify the response&amp;rsquo;s &lt;code&gt;Cache-Control&lt;/code&gt; header for a &lt;code&gt;max-age&lt;/code&gt; of 10 seconds:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// persistedQueriesMiddleware.js&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;invert&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'lodash'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;extractedQueries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;invert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./extracted_queries.json'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Handling request to: '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kd"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Cache-Control'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'public, max-age=10'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;querySignature&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;persistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sha256Hash&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;persistedQuery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;extractedQueries&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;querySignature&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;persistedQuery&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Invalid querySignature'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Invalid querySignature'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;persistedQuery&lt;/span&gt;
+  &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Add HTTP Caching to Rails Server&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/c3bcc3588012a9b4b22bd582c80de3e0dd208078"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For our Rails server, we have a few small changes to make to allow for &lt;code&gt;GET&lt;/code&gt; requests. First, we&amp;rsquo;ll add a new route to allow for &lt;code&gt;GET&lt;/code&gt; requests, under the same URL and controller action:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="c1"&gt;# .. other routes&lt;/span&gt;
+  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;"/graphql"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s2"&gt;"graphql#execute"&lt;/span&gt;
+  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s2"&gt;"/graphql"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s2"&gt;"graphql#execute"&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Like before, we handle the persisted queries within the &lt;code&gt;GraphqlController&lt;/code&gt;. We need to tweak the controller to conform to the new query parameters structure of the React application&amp;rsquo;s requests. We will also add an &lt;code&gt;expires_in&lt;/code&gt; to add in the 10-seconds of &lt;code&gt;max-age&lt;/code&gt; for the response&amp;rsquo;s &lt;code&gt;Cache-Control&lt;/code&gt; header:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;GraphqlController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute&lt;/span&gt;
+    &lt;span class="n"&gt;expires_in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;seconds&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;public: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ensure_hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:variables&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:query&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;operation_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:operationName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
+      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+      &lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:extensions&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+      &lt;span class="n"&gt;signature&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"persistedQuery"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"sha256Hash"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;persisted_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PersistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;signature: &lt;/span&gt;&lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persisted_query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;
+  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
+    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;errors: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Alternative Caching with Gateways&lt;/h2&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t mention &lt;a href="https://www.apollographql.com/engine"&gt;Apollo Engine&lt;/a&gt;, but this is a recent development in the GraphQL caching space. It provides a layer which sits in front of your GraphQL server and handles caching, query execution tracing, and error tracking. It is a paid solution if you need to handle more than 1 million requests per month.&lt;/p&gt;
+
+&lt;p&gt;Part of the secret sauce for caching with Apollo Engine is that it introduced the &lt;a href="https://github.com/apollographql/apollo-cache-control"&gt;Apollo Cache Control&lt;/a&gt; GraphQL extension. This allows the GraphQL API to return cache hints on a per field-level. Effectively, this allows the caching to be smarter than simply a blanket solution.&lt;/p&gt;
+
+&lt;p&gt;For additional reading on these technologies and techniques, I recommend the following article on &lt;a href="https://dev-blog.apollodata.com/caching-graphql-results-in-your-cdn-54299832b8e2"&gt;Caching GraphQL Results in your CDN&lt;/a&gt; as it uses Automatic Persisted Queries, Apollo Cache Control, and Apollo Engine.&lt;/p&gt;
+
+&lt;p&gt;Another paid solution (if you exceed 5,000 requests per months) is &lt;a href="https://fastql.io/"&gt;FastQL&lt;/a&gt;. This is a new gateway solution which acts as its own CDN, handling caching and expiration of fields. You are able to manually invalidate field-level caches through an API, or automatically invalidate by sending mutations through their CDN (which expires fields related to the mutation object type).&lt;/p&gt;
+
+&lt;h1&gt;Reflection&lt;/h1&gt;
+
+&lt;p&gt;There are a lot of options available for caching with GraphQL. It is possible to do so at different layers of the flow using different techniques and technologies. In this last post of the series we mainly took a look at HTTP caching. By enabling &lt;code&gt;GET&lt;/code&gt; requests we were half-way there &amp;ndash; the last bit remaining is attaching the appropriate &lt;code&gt;Cache-Control&lt;/code&gt; headers. Admittedly, we took an easy approach of blanketing all responses with a 10 second &lt;code&gt;max-age&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Depending on your situation, you might need to further explore the field-level caching options like Apollo Cache Control, or even using a Gateway to help out, like FastQL. Even though being aware of the data within your queries is important, is it all cacheable? If you have personalized data you have to approach this in a different way. There might not be value in caching if every response is personalized to a user, or maybe you have to split your queries into two queries (i.e., personalized, non-personalized). The cache configuration (i.e., CDN and/or a reverse proxy) is a huge piece we skipped over, but it likely will need some tweaking for your specific use cases (i.e., split caching based on the header).&lt;/p&gt;
+
+&lt;p&gt;Overall, I am pleased with the solutions we arrived too. We built a simple GraphQL API in Express and Rails. Both of these can communicate with a React application using persisted queries. Our Express server used a JSON file for its data and persisted queries, while for our Rails server we had everything in a database. We overcame the issues with the existing tooling for determining a signature for each query, and created the ability to synchronize persisted queries via HTTP &lt;code&gt;POST&lt;/code&gt; requests. We were able to implement &lt;code&gt;GET&lt;/code&gt; requests and apply a 10-second cache for intermediate CDN and reverse proxies.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+</content>
+  </entry>
+  <entry>
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-07-17T21:42:43-04:00</updated>
+    <updated>2018-07-18T22:55:00-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -181,13 +360,22 @@
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; there does exist a paid pro version of &lt;code&gt;graphql-ruby&lt;/code&gt; called &lt;a href="http://graphql.pro/"&gt;GraphQL::Pro&lt;/a&gt;, which has its own support for &lt;a href="http://graphql-ruby.org/operation_store/overview"&gt;persisted queries&lt;/a&gt;. It is a great solution as it covers synchronization of queries, admin dashboard, and connection to clients (Apollo/Relay). If you can afford the cost and want an &lt;em&gt;off the shelf&lt;/em&gt; solution, it is something you could consider. For the purpose of this article, however, we will skip out on it.&lt;/p&gt;
 
 &lt;p&gt;In the next and last part of this series, we will look at the final goal of adding HTTP caching to our GraphQL API servers. With HTTP caching we can lessen the load on our servers and offer faster response times to the consumers of the API.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 </content>
   </entry>
   <entry>
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-18T22:54:53-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -463,13 +651,22 @@
 &lt;/ul&gt;
 
 &lt;p&gt;We will take a look at the next iteration of our persisted queries implementation, one that&amp;rsquo;ll use synchronization &amp;ndash; using a Rails server backed by a database. We will cover this in the third part of our series.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 </content>
   </entry>
   <entry>
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-07-17T21:57:47-04:00</updated>
+    <updated>2018-07-18T22:55:49-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -562,7 +759,7 @@
 &lt;li&gt;&lt;a href="https://github.com/rails/rails"&gt;Rails&lt;/a&gt; with &lt;a href="https://github.com/rmosolgo/graphql-ruby"&gt;GraphQL Ruby&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;a href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"&gt;Part two&lt;/a&gt; will cover the following sections:&lt;/p&gt;
+&lt;p&gt;&lt;a href="/graphql-persisted-queries-with-http-caching-part-2/"&gt;Part two&lt;/a&gt; will cover the following sections:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Setup Express Server&lt;/li&gt;
@@ -572,7 +769,7 @@
 &lt;li&gt;Refactor Express Server to use Persisted Queries&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"&gt;Part three&lt;/a&gt; will cover the following sections:&lt;/p&gt;
+&lt;p&gt;&lt;a href="/graphql-persisted-queries-with-http-caching-part-3/"&gt;Part three&lt;/a&gt; will cover the following sections:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Setup Rails Server&lt;/li&gt;
@@ -580,7 +777,7 @@
 &lt;li&gt;Refactor Rails Server to use Persisted Queries&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Part four will cover the following sections:&lt;/p&gt;
+&lt;p&gt;&lt;a href="/graphql-persisted-queries-with-http-caching-part-4/"&gt;Part four&lt;/a&gt; will cover the following sections:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Add HTTP Caching to React Application&lt;/li&gt;
@@ -588,13 +785,22 @@
 &lt;li&gt;Add HTTP Caching to Rails Server&lt;/li&gt;
 &lt;li&gt;Alternative Caching with Gateways&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 </content>
   </entry>
   <entry>
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -977,7 +1183,7 @@
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1052,7 +1258,7 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1382,7 +1588,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1425,7 +1631,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1498,7 +1704,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1631,7 +1837,7 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
     <title>Slack Reminding Users and Channels</title>
     <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
     <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
+    <updated>2018-07-17T22:06:00-04:00</updated>
     <published>2017-12-02T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1698,61 +1904,6 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;h1&gt;Reminders are cheap&lt;/h1&gt;
 
 &lt;p&gt;The beauty of Slack Reminders is that they are quick to create and are actionable. You can be in any conversation in Slack and still use the &lt;code&gt;/remind&lt;/code&gt; command. The ease of making a new reminder means there is no reasons to not use them in your daily workflow.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>GitHub: Tell Me When It Closes Extension</title>
-    <link rel="alternate" href="https://kevinjalbert.com/github-tell-me-when-it-closes-extension/"/>
-    <id>https://kevinjalbert.com/github-tell-me-when-it-closes-extension/</id>
-    <updated>2018-07-17T08:28:31-04:00</updated>
-    <published>2017-11-14T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">My first foray into making and publishing a browser extension. Let me showcase a quick extension which adds a button on GitHub's pull request and issue pages that links to tellmewhenitcloses.com populated with data.</description>
-    <content type="html">&lt;p&gt;&lt;a href="https://tellmewhenitcloses.com/"&gt;Tell Me When It Closes&lt;/a&gt; is an amazing service by &lt;a href="https://thoughtbot.com/"&gt;thoughtbot&lt;/a&gt;. Often I&amp;rsquo;ll find an issue or pull request on GitHub for a tool I use and I just want to know &lt;em&gt;when&lt;/em&gt; it closes what the result was. I don&amp;rsquo;t care for the back-and-forth conversations between people when if I were to subscribe, so Tell Me When It Closes is the perfect service for me.&lt;/p&gt;
-
-&lt;p&gt;The issue I ran into was the limited ways to integrate this into my workflow. Looking at the ways you can &lt;a href="https://tellmewhenitcloses.com/subscribing"&gt;subscribe to issues and pull requests&lt;/a&gt;, it&amp;rsquo;s a bookmarklet that runs JavaScript. I don&amp;rsquo;t use the bookmark bar in my chrome browser (or browser bookmarks), so that solution wasn&amp;rsquo;t ideal.&lt;/p&gt;
-
-&lt;p&gt;My old workflow for subscribing to an issue on Tell Me When It Closes was:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Cmd + L (move keyboard cursor to address bar)&lt;/li&gt;
-&lt;li&gt;Cmd + C (copy URL)&lt;/li&gt;
-&lt;li&gt;Cmd + T (open new tab)&lt;/li&gt;
-&lt;li&gt;Type tellmewhenitcloses.com (autocompletes after a few characters)&lt;/li&gt;
-&lt;li&gt;Enter (opens tellmewhenitcloses.com)&lt;/li&gt;
-&lt;li&gt;Cmd + V (paste in issue URL)&lt;/li&gt;
-&lt;li&gt;Enter (subscribe to issue)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;To many manual steps for me.&lt;/p&gt;
-
-&lt;h1&gt;Simplify and Extend&lt;/h1&gt;
-
-&lt;p&gt;I want a way to simplify the steps to subscribe to an issue. I figured I could manipulate the webpage with JavaScript and add a button which, when, clicked would navigate to the subscription page with the URL filled in.&lt;/p&gt;
-
-&lt;p&gt;I looked into making a browser extension, originally for Google Chrome. Upon further investigation, I found that I could target more browsers without much extra effort. I decided to use &lt;a href="https://github.com/EmailThis/extension-boilerplate"&gt;EmailThis/extension-boilerplate&lt;/a&gt; so that I could build an extension for Chrome, Opera &amp;amp; Firefox.&lt;/p&gt;
-
-&lt;p&gt;The end result is a button which appears in the &lt;em&gt;notifications&lt;/em&gt; section of an issue or pull request page. When you click the button, it&amp;rsquo;ll open the tellmewhenitcloses.com with the appropriate URL pre-filled.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="400" height="315" src="/images/2017-11-14-github-tell-me-when-it-closes-extension/button.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now my workflow for subscribing to an issue on Tell Me When It Closes is:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Click &lt;em&gt;Tell Me When It Closes&lt;/em&gt; button (using trackpad or &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb"&gt;Vimium&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Enter (subscribe to issue)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Links&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/kevinjalbert/github-tell-me-when-it-closes-extension"&gt;GitHub Repository&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://chrome.google.com/webstore/detail/github-tell-me-when-it-cl/mfaeeelmjfbblmkbalffbhfpkhhnjalp"&gt;Chrome Extension&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://addons.mozilla.org/en-US/firefox/addon/github-tell-me-when-it-closes/"&gt;Firefox Add-on&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://addons.opera.com/en/extensions/details/github-tell-me-when-it-closes"&gt;Opera Add-on&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

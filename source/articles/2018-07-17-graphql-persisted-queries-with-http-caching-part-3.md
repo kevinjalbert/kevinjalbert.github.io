@@ -194,3 +194,8 @@ In this post, we created a Rails server that exposes a GraphQL API. We used [`pe
 **Note:** there does exist a paid pro version of `graphql-ruby` called [GraphQL::Pro](http://graphql.pro/), which has its own support for [persisted queries](http://graphql-ruby.org/operation_store/overview). It is a great solution as it covers synchronization of queries, admin dashboard, and connection to clients (Apollo/Relay). If you can afford the cost and want an _off the shelf_ solution, it is something you could consider. For the purpose of this article, however, we will skip out on it.
 
 In the next and last part of this series, we will look at the final goal of adding HTTP caching to our GraphQL API servers. With HTTP caching we can lessen the load on our servers and offer faster response times to the consumers of the API.
+
+> This topic was presented at [GraphQL Toronto July 2018](https://www.meetup.com/GraphQL-Toronto/events/251760335/):
+>
+> - [Watch the talk](https://www.youtube.com/watch?v=ocX_jf81LwE)
+> - [Read the slides](https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching)

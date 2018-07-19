@@ -293,3 +293,8 @@ At this point we've built:
  - Each time you update your persisted queries you will require a restart or redeployment of the server. With a database synchronization approach, you can send the queries to be persisted while the server is running.
 
 We will take a look at the next iteration of our persisted queries implementation, one that'll use synchronization -- using a Rails server backed by a database. We will cover this in the third part of our series.
+
+> This topic was presented at [GraphQL Toronto July 2018](https://www.meetup.com/GraphQL-Toronto/events/251760335/):
+>
+> - [Watch the talk](https://www.youtube.com/watch?v=ocX_jf81LwE)
+> - [Read the slides](https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching)

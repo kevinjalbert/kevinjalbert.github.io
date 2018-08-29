@@ -70,12 +70,12 @@ configure :build do
   activate :minify_html
   #activate :minify_javascript
 
-  activate :imageoptim do |options|
-    options.manifest = false
-    options.skip_missing_workers = true
-    options.nice = true
-    options.threads = true
-    options.pngout = false
-    options.svgo = false
-  end
+  #activate :imageoptim do |options|
+    #options.manifest = false
+    #options.skip_missing_workers = true
+    #options.nice = true
+    #options.threads = true
+    #options.pngout = false
+    #options.svgo = false
+  #end
 end

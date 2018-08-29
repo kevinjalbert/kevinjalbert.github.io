@@ -2,16 +2,150 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-07-18T19:53:20-04:00</updated>
+  <updated>2018-08-28T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Video Clubs: A Way to Keep Up</title>
+    <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
+    <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
+    <updated>2018-08-28T22:10:47-04:00</updated>
+    <published>2018-08-28T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Keeping up in your industry can be hard. Conferences offer industry-leading information and the direction of the community. Attending conferences is expensive in both cost and time. Learn how to start a video club to better consume conference videos in your workplace at a sustainable pace.</description>
+    <content type="html">&lt;p&gt;As a knowledge worker, a lot of our time is spent thinking about problems and solutions. We rely on pattern matching and experience while working to make the best progress we can. Is there a way to accelerate our learning and keep a pulse on new, upcoming, and innovative solutions? I will be approaching this question from a developer&amp;rsquo;s perspective, although the ideas presented here can be applied to other domains.&lt;/p&gt;
+
+&lt;p&gt;Being aware of best practices, new techniques, alternative frameworks, and really anything in general for your domain is good. I would attribute some of my successes to &lt;em&gt;surface knowledge&lt;/em&gt; (i.e., having a high-level understanding), as it allows you to know of alternatives and possible solutions. Obviously, you would dive deeper into the area if you are going to invest more effort into it. In a way, this promotes a &lt;em&gt;just-in-time learning&lt;/em&gt; philosophy, to focus on areas as needed. Again, the key is that you &lt;em&gt;know&lt;/em&gt; of these areas.&lt;/p&gt;
+
+&lt;h1&gt;Keeping up as Developers&lt;/h1&gt;
+
+&lt;p&gt;I encourage developers to do the following, although from my experiences it&amp;rsquo;s common for developers to be doing at least some of these activities already:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Read blog posts: low friction and easily discoverable source of information, it normally comes naturally while developing.&lt;/li&gt;
+&lt;li&gt;Listen to podcasts: commuter friendly, topical and timely due to the &lt;em&gt;real-time&lt;/em&gt; nature, interviews with high-calibre people can be insightful.&lt;/li&gt;
+&lt;li&gt;Read Books: a wealth of knowledge but require more time investment.&lt;/li&gt;
+&lt;li&gt;Attend meetups: allows for networking with like-minded individuals, local groups, talks or workshops, typically free to attend.&lt;/li&gt;
+&lt;li&gt;Attend conferences: like meetups but normally of a higher calibre and immersive, costs a lot of money to attend.&lt;/li&gt;
+&lt;li&gt;Watch conference videos: talks of a conference, without the cost and networking aspects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I want to focus on the last point &amp;ndash; watching conference videos. To me, this activity presents an affordable solution to attending conferences (from a time/money perspective). Additionally, conferences sometimes have multiple tracks and so, even as an attendee, it is not possible to see all the talks. The videos from a conference are usually available a few weeks after the conference. To me, conference talks represent distilled knowledge condensed into 30-60 minutes.&lt;/p&gt;
+
+&lt;p&gt;I would argue that it is a developer&amp;rsquo;s job to keep up with the community and to &lt;em&gt;learn&lt;/em&gt; from industry-leaders. It can be hard to find the time to watch these videos on your own (i.e., evenings or weekends). Not only is the time a constraint, but also if you are consuming a conference video by yourself you are missing out on valuable discussions with peers immediately after the talk. So in an effort to better facilitate the time for learning, I am proposing the following: to start a &lt;em&gt;video club at your workplace&lt;/em&gt;!&lt;/p&gt;
+
+&lt;h1&gt;The Workings of a Video Club&lt;/h1&gt;
+
+&lt;p&gt;At theScore, the way we&amp;rsquo;ve handled our video club has evolved over the years. Initially, the flow worked like so:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;See an interesting video to watch.&lt;/li&gt;
+&lt;li&gt;Add video URL to video club page in wiki (&lt;a href="https://www.atlassian.com/software/confluence"&gt;Confluence&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Once a week people would gather at lunch for the video club.&lt;/li&gt;
+&lt;li&gt;Watch the next video or one which the audience really wants to see.&lt;/li&gt;
+&lt;li&gt;Discuss (maybe?).&lt;/li&gt;
+&lt;li&gt;Continue on with the day.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This flow worked and to be honest was fine. The main issue we wanted to fix was more transparency and organization around the videos. By addressing these concerns, the idea is that we&amp;rsquo;d be able to surface the most desired videos to be watched, as well as better facilitating discussion and recording findings.&lt;/p&gt;
+
+&lt;p&gt;The next section outlines how we&amp;rsquo;ve changed our video club to better work for developers, mainly taking advantage of GitHub and Slack. These changes have been well received, and it seems to better encourage the functioning aspects of the video club. I do want to mention that this next section is going to be highly tailored to developers.&lt;/p&gt;
+
+&lt;h1&gt;Video Club on GitHub&lt;/h1&gt;
+
+&lt;p&gt;We decided to move away from the wiki version of the video club to GitHub. The main reasons were:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Better structure (i.e., issues, labels, etc&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;Familiar to developers.&lt;/li&gt;
+&lt;li&gt;Voting via &lt;em&gt;reactions&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Slack + GitHub integration for visibility.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Setup Repository&lt;/h2&gt;
+
+&lt;p&gt;The first thing we need is a repository &lt;code&gt;video-club&lt;/code&gt; (or any other name you like). We only need two files in our repository:&lt;/p&gt;
+
+&lt;p&gt;The following is the content of the &lt;code&gt;README.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# The Video Club
+* Video club for weekly educational videos
+* Place for tracking/voting/discussion
+* Slack Channel #video-club
+
+## Would like to group watch a video?
+* Create an issue
+* Throw some labels on it
+* Get people to vote on it with the :thumbsup: reactions
+
+## Each week the highest voted video is watched
+* Discussion happens immediately afterwards
+* Issue could be updated with large takeaway points
+* Close the issue
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The following is the content of the &lt;code&gt;ISSUE_TEMPLATE.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;## [Video Title -- Also should be issue title](video.url)
+
+### Description
+&amp;lt;!-- Talk's description --&amp;gt;
+
+### Time Length
+&amp;lt;!-- Length of the video (i.e., 16m, 1h10m) --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Videos as Issues&lt;/h2&gt;
+
+&lt;p&gt;&lt;img width="1001" height="692" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/issues.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see in the above image, each &lt;em&gt;GitHub Issue&lt;/em&gt; represents a video within our repository. As we have an &lt;code&gt;ISSUE_TEMPLATE.md&lt;/code&gt; each issue then follows a consistent format containing context and information about the video. Ideally, we want the inputting process for a video to be as low-friction as possible. Right now it is pretty quick to create a new issue for a video, although &lt;strong&gt;one thing I would like to do is create a bookmarklet or browser extension to pre-fill an issue based on the video URL&lt;/strong&gt;. The following image illustrates an example video in our issue format.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1022" height="521" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/video-issue.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see that we take advantage of &lt;em&gt;Issue Labels&lt;/em&gt; as well to further categorize the videos. We&amp;rsquo;re pretty loose with their usage, but it does provide additional context and filtering capabilities. One other aspect to notice is that we use &lt;em&gt;Issue Reactions&lt;/em&gt; to &lt;em&gt;vote&lt;/em&gt; on videos that a participant would like to watch at some point. These votes are then used to help &lt;em&gt;pick the next video&lt;/em&gt;, as we will see in the next section.&lt;/p&gt;
+
+&lt;h2&gt;Picking the Next Video&lt;/h2&gt;
+
+&lt;p&gt;One of the main draws to using GitHub Issues is that we can vote using the reactions and then and sort the issues by &lt;em&gt;votes&lt;/em&gt; (i.e., thumbsup reactions on the issue). This approach allows the participants to weigh in on what they would like to see. The end goal is that the most highly desired videos will be watched. By sorting the open issues by votes, the process of picking the next video is pretty straightforward.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="999" height="506" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/next-video-sorting.jpg" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Discussion and Context&lt;/h2&gt;
+
+&lt;p&gt;The fact that we have GitHub Issues gives us a space for discussion using &lt;em&gt;GitHub Comments&lt;/em&gt;. After the video has been watched, we carry out a 5~ minute discussion and record the high-level takeaways. Our video club accommodates remote attendees (coordination is done via Slack), and in those situations, we use video conferencing to facilitate the discussion process.&lt;/p&gt;
+
+&lt;p&gt;Ideally, additional discussion can be carried out via more comments (even later after the video has been watched). We use GitHub for our projects, and having the videos as issues allows us to link to videos if we want to use them as references or talking points in other issues or pull requests. Finally, a video issue is closed after the initial discussion is written up for it. The following image demonstrates the aforementioned concepts.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="782" height="630" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/completed-video.jpg" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Slack Integration&lt;/h2&gt;
+
+&lt;p&gt;To increase transparency and engagement, we are using the &lt;a href="https://slack.github.com/"&gt;GitHub + Slack integration&lt;/a&gt;. This allows us to have events in our &lt;code&gt;video-club&lt;/code&gt; repository to be pushed to our &lt;code&gt;#video-club&lt;/code&gt; Slack channel.&lt;/p&gt;
+
+&lt;p&gt;When someone adds a new video, the issue&amp;rsquo;s content (following the template) lets everyone know of a new video they could vote on:
+&lt;img width="640" height="420" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/slack-new-video.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;We use &lt;a href="/slack-reminding-users-and-channels/"&gt;Slack&amp;rsquo;s channel reminders&lt;/a&gt; to ping the room to ensuring that votes are cast prior to the time we&amp;rsquo;ll watch a video. In addition, we announce a bit before what video we will watch based on the sorting of votes:
+&lt;img width="760" height="555" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/slack-video-selected.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Discussion notes and comments are pushed through the channel to help surface further comments:
+&lt;img width="635" height="490" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/slack-video-finished.jpg" /&gt;&lt;/p&gt;
+
+&lt;h1&gt;Starting a Video Club&lt;/h1&gt;
+
+&lt;p&gt;So, are you are psyched to start a video club in your workplace? Now, how do you sell the idea to your boss and peers? You are trying to take 60~ minutes every week or so to watch &lt;em&gt;videos&lt;/em&gt;&amp;hellip; it doesn&amp;rsquo;t sound like a good use of work time. Again, the whole point of this is to improve yourself and that these changes will be reflected in the work you do (i.e., knowing better practices and tools).&lt;/p&gt;
+
+&lt;p&gt;There are different ways to go about starting a video club, and honestly, it could be as straightforward as asking your boss and peers. I personally think if you can &lt;em&gt;embody&lt;/em&gt; the change, it is an easier sell to the organization and your direct manager. First thing I would do is personally find a set of high-quality videos from a conference relevant to your domain (i.e., could even be old ones). Put these out in the open as great material that everyone &lt;em&gt;should&lt;/em&gt; watch at some point (which shouldn&amp;rsquo;t be a stretch from the truth). Suggest a brown bag lunch event, everyone brings their lunch (or buys it) and watches the video during their lunch. Encourage discussion and see if there are any takeaways that might be directly related to the work at hand. Then, eventually, you start to transition to an organizational model (i.e., GitHub) and getting participation from your peers by suggesting videos.&lt;/p&gt;
+
+&lt;p&gt;This is a cultural shift you are trying to create, therefore it could be slow. I believe the end goal is to move away from the brown bag lunch and instead to a dedicated &lt;em&gt;meeting time&lt;/em&gt; so that the video club isn&amp;rsquo;t taking up everyone&amp;rsquo;s personal time at lunch. I&amp;rsquo;ve seen various attendees drop off due to external lunch plans. Hopefully, a higher attendance can be achieved if it&amp;rsquo;s a normal meeting time. Overall, I would say either you&amp;rsquo;ll get your manager/organization to buy into the idea, or you will be stuck doing brown bag lunches. &lt;strong&gt;In either case, &lt;em&gt;you&lt;/em&gt; will be improving and investing in yourself.&lt;/strong&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-07-18T22:55:09-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -190,7 +324,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-07-18T22:55:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -375,7 +509,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-07-18T22:54:53-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -666,7 +800,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-07-18T22:55:49-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -800,7 +934,7 @@
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1183,7 +1317,7 @@
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1258,7 +1392,7 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1588,7 +1722,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1631,7 +1765,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1704,7 +1838,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
+    <updated>2018-08-28T22:10:47-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1831,79 +1965,6 @@ Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;The best time to start ADRs is at the start of a project; the second best time is right now&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Slack Reminding Users and Channels</title>
-    <link rel="alternate" href="https://kevinjalbert.com/slack-reminding-users-and-channels/"/>
-    <id>https://kevinjalbert.com/slack-reminding-users-and-channels/</id>
-    <updated>2018-07-17T22:06:00-04:00</updated>
-    <published>2017-12-02T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Slack Reminders are powerful, maybe even more so than you originally thought?! In my experience, I noticed that colleagues of mine didn't fully use reminders to their fullest extent.</description>
-    <content type="html">&lt;p&gt;&lt;a href="https://slack.com/"&gt;Slack&lt;/a&gt; has taken over communication for workplace environments, at least within tech circles surrounding me. I realize there are many competitors, and I have even used some of them in the past, but to me Slack is my preferred choice. If you haven&amp;rsquo;t given Slack a try, I highly recommend it! At &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt; we heavily use Slack.&lt;/p&gt;
-
-&lt;p&gt;This post will be short and focused on &lt;a href="https://get.slack.help/hc/en-us/articles/208423427"&gt;Slack Reminders&lt;/a&gt;. From what I&amp;rsquo;ve experienced with coworkers, they only knew of and used a small subset of Slack Reminder&amp;rsquo;s feature set. This post is going to demonstrate what you can do with Slack Reminders, mainly assigning reminders to users and channels.&lt;/p&gt;
-
-&lt;h1&gt;Reminding Myself&lt;/h1&gt;
-
-&lt;p&gt;A common use case for reminders &amp;ndash; you want some notification in the future to remind you about something.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind me to work on blog post in 30 minutes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img width="587" height="109" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-me.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is the feature that most people know of with Slack Reminders.&lt;/p&gt;
-
-&lt;h1&gt;Reminding a User&lt;/h1&gt;
-
-&lt;p&gt;It&amp;rsquo;s not an uncommon task that you&amp;rsquo;d want to remind a colleague about a future task.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind @aaron.romeo deploy your changes before the weekend on friday morning
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img width="630" height="123" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-user.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In this example, &lt;a href="http://www.aaronromeo.com/"&gt;@aaron.romeo&lt;/a&gt; would receive a reminder at the specified time. Aaron doesn&amp;rsquo;t actually receive any indication that he has just been assigned a reminder. The only way he can get any insight that he has a new reminder is to either wait until the specified time, or to look at his own list of reminders and see it there. You just have to be aware of this detail depending on how you plan to use reminders.&lt;/p&gt;
-
-&lt;p&gt;Going back to our example, Aaron checks his reminders in Slack and he sees the newly assigned task, although there is no indication of who assigned it to him. Slack, if you are listening, I would like to be able to see who assigned the reminder.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="685" height="75" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-target-list.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Regardless, when the reminder does trigger, Aaron can interact with it. In this case he&amp;rsquo;ll mark it as completed.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="615" height="100" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-target-trigger.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I received confirmation that he has seen and acted on the reminder I assigned him.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="700" height="60" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-target-completed.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;This asynchronous flow is awesome, as it allows you to &lt;em&gt;know&lt;/em&gt; that the reminder for that user was acted upon. I tend to use these types of reminders after hours to present information that can wait until the following day. Normally, I end up finding interesting articles that I want to pass on, so these types of reminders work perfectly for me.&lt;/p&gt;
-
-&lt;h1&gt;Reminding a Channel&lt;/h1&gt;
-
-&lt;p&gt;In a similar fashion to assigning a reminder to another user, you can target a channel itself. For example, you might want to remind all the online users within a channel about something.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind #team-ep-dev :spiral_calendar_pad: @here standup time! every weekday at 10:30am
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img width="650" height="100" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-channel.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;In this example, the channel &lt;code&gt;#diet-sup-dev&lt;/code&gt; will receive the message at the specified time. As you can see, I even used the &lt;code&gt;@here&lt;/code&gt; mention to make sure it gets all the active users&amp;rsquo; attention. When a channel reminder is set, the reminder is announced on the channel at the specified time.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="698" height="82" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-channel-announcement.jpg" /&gt;&lt;/p&gt;
-
-&lt;h1&gt;What are my reminders&lt;/h1&gt;
-
-&lt;p&gt;Every now and then you might want to do a little housecleaning on your reminders. You have likely clicked the &lt;em&gt;View Reminders&lt;/em&gt;, or even just executed the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;/remind list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This presents a list of the past, present, and future reminders, as well as incomplete reminders, for yourself, along with reminders for other individuals and channels.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="684" height="123" src="/images/2017-12-02-slack-reminding-users-and-channels/slack-remind-list.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;It is a nice place to check every now and then to make sure your reminders are being actioned.&lt;/p&gt;
-
-&lt;h1&gt;Reminders are cheap&lt;/h1&gt;
-
-&lt;p&gt;The beauty of Slack Reminders is that they are quick to create and are actionable. You can be in any conversation in Slack and still use the &lt;code&gt;/remind&lt;/code&gt; command. The ease of making a new reminder means there is no reasons to not use them in your daily workflow.&lt;/p&gt;
 </content>
   </entry>
 </feed>

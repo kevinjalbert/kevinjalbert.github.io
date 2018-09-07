@@ -145,8 +145,8 @@ module SidekiqCallbacks
   end
 
   module ClassMethods
-    def after_perform(*filters, &blk)
-      set_callback(:perform, :after, *filters, &blk)
+    def around_perform(*filters, &blk)
+      set_callback(:perform, :around, *filters, &blk)
     end
   end
 end

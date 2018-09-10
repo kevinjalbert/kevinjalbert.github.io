@@ -78,7 +78,7 @@ When you want to add a new ADR, you can execute `adr new "Split up component XXX
 
 ### Maintain Table of Contents
 
-Most software projects have a `README.md` file. When working with ADRs, I include a hyperlink to `/doc/adr/README.md`. This file can be generated using `adr generate toc > ./docs/adr/README.md`, and ends up creating a nice table of contents of the current ADRs:
+Most software projects have a `README.md` file. When working with ADRs, I include a hyperlink to `/doc/adr/README.md`. This file can be generated using `adr generate toc > ./doc/adr/README.md`, and ends up creating a nice table of contents of the current ADRs:
 
 ```markdown
 # Architecture Decision Records

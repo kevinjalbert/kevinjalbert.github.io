@@ -11,7 +11,7 @@
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -145,7 +145,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -324,7 +324,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -509,7 +509,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -800,7 +800,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -934,7 +934,7 @@
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1317,7 +1317,7 @@
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1392,7 +1392,7 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1722,7 +1722,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1765,7 +1765,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1838,7 +1838,7 @@ poorly formatted `:endpoint` option.
     <title>Start Now: Architecture Decision Records</title>
     <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
     <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-08-28T22:14:24-04:00</updated>
+    <updated>2018-09-10T07:51:02-04:00</updated>
     <published>2018-01-03T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1911,7 +1911,7 @@ See Michael Nygard's article, linked above. For a lightweight ADR toolset, see N
 
 &lt;h3&gt;Maintain Table of Contents&lt;/h3&gt;
 
-&lt;p&gt;Most software projects have a &lt;code&gt;README.md&lt;/code&gt; file. When working with ADRs, I include a hyperlink to &lt;code&gt;/doc/adr/README.md&lt;/code&gt;. This file can be generated using &lt;code&gt;adr generate toc &amp;gt; ./docs/adr/README.md&lt;/code&gt;, and ends up creating a nice table of contents of the current ADRs:&lt;/p&gt;
+&lt;p&gt;Most software projects have a &lt;code&gt;README.md&lt;/code&gt; file. When working with ADRs, I include a hyperlink to &lt;code&gt;/doc/adr/README.md&lt;/code&gt;. This file can be generated using &lt;code&gt;adr generate toc &amp;gt; ./doc/adr/README.md&lt;/code&gt;, and ends up creating a nice table of contents of the current ADRs:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# Architecture Decision Records&lt;/span&gt;
 &lt;span class="p"&gt;
 *&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;1. Record architecture decisions&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0001-record-architecture-decisions.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;

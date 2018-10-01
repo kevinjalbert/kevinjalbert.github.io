@@ -2,16 +2,112 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-08-28T19:53:20-04:00</updated>
+  <updated>2018-09-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Todoist with Keyboard Navigation via Nativefier</title>
+    <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
+    <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
+    <updated>2018-09-30T19:49:42-04:00</updated>
+    <published>2018-09-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Todoist does not have strong keyboard navigation and shortcuts. Fortunately, there is a browser extension that augments the web client to support better keyboard navigation. This article outlines how to gain this functionality in a desktop version of Todoist using 'nativefier'.</description>
+    <content type="html">&lt;p&gt;&lt;a href="https://todoist.com"&gt;Todoist&lt;/a&gt; is a powerful task manager. It offers a &lt;a href="https://itunes.apple.com/ca/app/todoist-organize-your-life/id585829637"&gt;MacOS Application&lt;/a&gt; that provides a desktop experience and a dedicated &lt;em&gt;quick task adding&lt;/em&gt; feature. I am a poweruser of the keyboard (i.e., I use &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en"&gt;Vimium&lt;/a&gt; in Chrome), and my big issue is that Todoist doesn&amp;rsquo;t offer strong keyboard navigation. Fortunately, &lt;a href="https://github.com/mgsloan/todoist-shortcuts"&gt;todoist-shortcuts&lt;/a&gt; adds much-needed keyboard navigation to the web client as a browser extension.&lt;/p&gt;
+
+&lt;p&gt;I enjoy having &lt;em&gt;dedicated tools/applications&lt;/em&gt; for tasks and tend to keep my browser for ephemeral tasks. Therefore I wanted to keep Todoist as a desktop application but with the keyboard navigation extension.&lt;/p&gt;
+
+&lt;h2&gt;Web Application -&amp;gt; Desktop Application&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve used &lt;a href="https://github.com/jiahaog/nativefier"&gt;nativefier&lt;/a&gt; in the past to create a desktop version of various web applications. Quick searching showed the following &lt;a href="https://github.com/jiahaog/nativefier/issues/207"&gt;issue&lt;/a&gt; mentioning that adding a Chrome extention isn&amp;rsquo;t supported, although it is possible to &lt;em&gt;inject&lt;/em&gt; custom JavaScript to be executed within the newly created application.&lt;/p&gt;
+
+&lt;p&gt;The following command will build the application while injecting &lt;a href="https://github.com/mgsloan/todoist-shortcuts/blob/v22/src/todoist-shortcuts.js"&gt;&lt;code&gt;src/todoist-shortcuts.js&lt;/code&gt;&lt;/a&gt; in it. The injected file contains all of the keyboard navigation of &lt;code&gt;todoist-shortcuts&lt;/code&gt;. In addition, other options were provided to &lt;code&gt;nativefier&lt;/code&gt; so that we have support for badge counts and bouncing the dock icon on changes when out of focus (MacOS).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span class="nt"&gt;--name&lt;/span&gt; &lt;span class="s1"&gt;'Todoist'&lt;/span&gt; &lt;span class="nt"&gt;--icon&lt;/span&gt; ./todoist-icon.png &lt;span class="nt"&gt;--inject&lt;/span&gt; ./todoist-shortcuts-22/src/todoist-shortcuts.js &lt;span class="nt"&gt;--counter&lt;/span&gt; &lt;span class="nt"&gt;--bounce&lt;/span&gt; &lt;span class="nt"&gt;--single-instance&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The produced application works as expected. Keyboard navigation exists within the &lt;code&gt;nativefier&lt;/code&gt; created application. Unfortunately, the badge count aspect did not&amp;hellip;&lt;/p&gt;
+
+&lt;h3&gt;Supporting Badge Count&lt;/h3&gt;
+
+&lt;p&gt;The reason the badge count didn&amp;rsquo;t work is because &lt;code&gt;nativefier&lt;/code&gt; is looking in the title of the window/application for the number (using a regular expression). To solve this, we will need some additional JavaScript that will propagate the number of tasks in &lt;em&gt;Today&lt;/em&gt; into the title (while handling edge cases). It isn&amp;rsquo;t the prettiest, but the following &lt;code&gt;counter.js&lt;/code&gt; snippet does the trick:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// Returns the count for the 'Today' list (defaults to 0)&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;currentCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;querySelector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#top_filters &amp;gt; li:nth-child(2) &amp;gt; span.item_content &amp;gt; small'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;innerText&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Returns the title without any annotated count&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;titleWithoutCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;" ("&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;indexOfCount&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Returns the existing count from the title (defaults to 0)&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;existingCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;" ("&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Update badge count based on the number in Today&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;updateBadgeCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;currentCount&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;titleWithoutCount&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;newTitle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;newTitle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="nx"&gt;existingCount&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;newTitle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;`&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; (&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;count&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;)`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="nx"&gt;newTitle&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;newTitle&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Update the badge every 5 seconds&lt;/span&gt;
+&lt;span class="nx"&gt;setInterval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;updateBadgeCount&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="c1"&gt;// Update the badge when the title changes&lt;/span&gt;
+&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;MutationObserver&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;mutations&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nx"&gt;updateBadgeCount&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;observe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;querySelector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'title'&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="na"&gt;subtree&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="na"&gt;characterData&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="na"&gt;childList&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unfortunately, &lt;code&gt;nativefier&lt;/code&gt; has an issue with &lt;a href="https://github.com/jiahaog/nativefier/issues/458"&gt;injecting multiple JavaScript files&lt;/a&gt;. As a workaround, we concatenate the JavaScript into one file before &lt;em&gt;injecting it&lt;/em&gt; (which fortunately works with the JavaScript we have).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="nb"&gt;cat&lt;/span&gt; ./counter.js &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; todoist.js&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;cat&lt;/span&gt; ./todoist-shortcuts-22/src/todoist-shortcuts.js &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; todoist.js
+nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span class="nt"&gt;--name&lt;/span&gt; &lt;span class="s1"&gt;'Todoist'&lt;/span&gt; &lt;span class="nt"&gt;--icon&lt;/span&gt; ./todoist-icon.png &lt;span class="nt"&gt;--inject&lt;/span&gt; ./todoist.js &lt;span class="nt"&gt;--counter&lt;/span&gt; &lt;span class="nt"&gt;--bounce&lt;/span&gt; &lt;span class="nt"&gt;--single-instance&lt;/span&gt; &lt;span class="nt"&gt;--overwrite&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Desktop Todoist with Keyboard Navigation&lt;/h2&gt;
+
+&lt;p&gt;At this point, we&amp;rsquo;ve successfully wrapped the web client of Todoist for Desktop while injecting &lt;code&gt;todoist-shortcuts&lt;/code&gt;. Badge support is preserved and notifications continue to function.&lt;/p&gt;
+
+&lt;p&gt;I still like the &lt;em&gt;quick task adding&lt;/em&gt; feature of the original Todoist application on the desktop, but unfortunately, that was outside the scope of what I could do with &lt;code&gt;nativefier&lt;/code&gt;. As a workaround, I&amp;rsquo;ve renamed the original application to &lt;code&gt;Todoist-store&lt;/code&gt; and moved the new application over with no naming conflicts. I run both applications so that I can continue to use the &lt;em&gt;quick task adding&lt;/em&gt; feature, although I hide &lt;code&gt;Todist-store&lt;/code&gt;in the tray and prevent any notifications from appearing.&lt;/p&gt;
+
+&lt;p&gt;To simplify the process of extending/modifying/building this solution, I&amp;rsquo;ve put together the following &lt;a href="https://github.com/kevinjalbert/todoist-shortcuts-nativefier"&gt;repository on GitHub&lt;/a&gt;. I hope that Todoist simply adds better keyboard navigation in their client by default&amp;hellip; but until then, I&amp;rsquo;ll be using this solution.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -145,7 +241,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -324,7 +420,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -509,7 +605,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -800,7 +896,7 @@
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -934,7 +1030,7 @@
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1317,7 +1413,7 @@
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1392,7 +1488,7 @@
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1722,7 +1818,7 @@
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1765,7 +1861,7 @@
     <title>Rails ActiveStorage Configuration for Minio</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
     <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
+    <updated>2018-09-10T09:05:10-04:00</updated>
     <published>2018-02-26T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1832,139 +1928,6 @@ poorly formatted `:endpoint` option.
    &lt;span class="na"&gt;force_path_style&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It isn&amp;rsquo;t a bad idea to have the configuration named &lt;code&gt;minio&lt;/code&gt;, just so it is clear that it&amp;rsquo;s a Minio file storage instead of the typical Amazon S3.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Start Now: Architecture Decision Records</title>
-    <link rel="alternate" href="https://kevinjalbert.com/start-now-architecture-decision-records/"/>
-    <id>https://kevinjalbert.com/start-now-architecture-decision-records/</id>
-    <updated>2018-09-10T07:51:02-04:00</updated>
-    <published>2018-01-03T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Stop asking questions about certain architectural decisions for a project. Implement Architecture Decision Records, and save the team and yourself future headaches.</description>
-    <content type="html">&lt;p&gt;While working on any project, you&amp;rsquo;ll eventually need to make decisions regarding the task at hand. The decision that has to be made can vary in size and impact. Often we are in the context of a team, and these decisions are made in consultation with others. As time progresses, with new and old team members moving on and off the project, we&amp;rsquo;ll start to question some of those decisions that were made in the past.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Why was it done that way?&lt;/p&gt;
-
-&lt;p&gt;Did we not consider this alternative?&lt;/p&gt;
-
-&lt;p&gt;What was the context when that decision was made?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Save the team and yourself future headaches and plan accordingly for these types of questions now, by starting Architecture Decision Records (ADRs) for your project.&lt;/p&gt;
-
-&lt;h1&gt;What are ADRs?&lt;/h1&gt;
-
-&lt;p&gt;I first read about ADRs in the &lt;a href="http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions"&gt;documenting architecture decisions&lt;/a&gt; blog post by &lt;a href="http://thinkrelevance.com/team/members/michael-nygard"&gt;Michael Nygard&lt;/a&gt;. ADRs are a form of documentation that record any &lt;em&gt;architecturally significant&lt;/em&gt; decisions that impact a project. For an impact to be considered &lt;em&gt;architecturally significant&lt;/em&gt; within a software project context, Micheal stated:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;hellip; those that affect the structure, non-functional characteristics, dependencies, interfaces, or construction techniques.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Michael&amp;rsquo;s blog post was focused on ADRs within the context of an agile software project, but I believe it can be applied across different domains. The affected values for what a decision might impact would have to be altered to suit the appropriate domain. For example, altering the customer support workflow could constitute a decision record as it significantly changes a business process.&lt;/p&gt;
-
-&lt;p&gt;I had recently read that &lt;a href="https://www.thoughtworks.com/radar/techniques/lightweight-architecture-decision-records"&gt;lightweight architecture decision records&lt;/a&gt; had made it into the &lt;em&gt;adopt&lt;/em&gt; ring of &lt;a href="https://www.thoughtworks.com/radar"&gt;Thoughtworks Technology Radar&lt;/a&gt; in the November 2017 edition. They note that the lightweight aspect of ADRs is to just have text/markdown files alongside software projects in their repositories.&lt;/p&gt;
-
-&lt;p&gt;Here is an example ADR (pretty meta as it is about starting ADRs):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# 1. Record architecture decisions&lt;/span&gt;
-
-Date: 2018-01-03
-
-&lt;span class="gu"&gt;## Status&lt;/span&gt;
-
-Accepted
-
-&lt;span class="gu"&gt;## Context&lt;/span&gt;
-
-We need to record the architectural decisions made on this project.
-
-&lt;span class="gu"&gt;## Decision&lt;/span&gt;
-
-We will use Architecture Decision Records, as described by Michael Nygard in this article: http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions
-
-&lt;span class="gu"&gt;## Consequences&lt;/span&gt;
-
-See Michael Nygard's article, linked above. For a lightweight ADR toolset, see Nat Pryce's _adr-tools_ at https://github.com/npryce/adr-tools.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I don&amp;rsquo;t want to go into technical details of ADRs, as this blog post is to bring awareness to them, as well as tools/techniques around them. There is plenty of supplementary material in this blog post via links to other articles.&lt;/p&gt;
-
-&lt;h1&gt;Getting Started with ADRs&lt;/h1&gt;
-
-&lt;p&gt;The biggest thing when adopting ADRs in your project is being consistent with them. As with any added process, it&amp;rsquo;s easy to simply overlook the new parts if they aren&amp;rsquo;t at the forefront of your mind. Within our software projects, we actually incorporate ADR consideration in our &lt;a href="https://help.github.com/articles/creating-a-pull-request-template-for-your-repository/"&gt;GitHub pull request template&lt;/a&gt;. It&amp;rsquo;s a good idea to make sure all team members are all in agreement with using ADRs, as well as when to make one. You don&amp;rsquo;t want a decision to be made that is not documented.&lt;/p&gt;
-
-&lt;h2&gt;Simplify ADRs with &lt;code&gt;adr-tools&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;In addition to including a note about ADRs in our pull request template, there is more tooling to help out. In the spirit of being lightweight records, markdown files are the preferred way to write ADRs. The &lt;a href="https://github.com/npryce/adr-tools"&gt;&lt;code&gt;adr-tools&lt;/code&gt; command line tool&lt;/a&gt; is a great way to simplify the creation of ADRs. If you are on MacOS, back in May 2017, I got &lt;a href="https://github.com/Homebrew/homebrew-core/pull/13081"&gt;adr-tools accepted into homebrew&lt;/a&gt;, so now you can just &lt;code&gt;brew install adr-tools&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;There are a lot of configurations and features that exist within &lt;code&gt;adr-tools&lt;/code&gt;. I&amp;rsquo;m going to go over some of the essentials, with examples. I highly recommend taking a deeper look into the tool itself to get the most out of it.&lt;/p&gt;
-
-&lt;h3&gt;Initialize Repository&lt;/h3&gt;
-
-&lt;p&gt;With a new repository, you get started with &lt;code&gt;adr init&lt;/code&gt;, which creates the following &lt;code&gt;doc/adr/0001-record-architecture-decisions.md&lt;/code&gt; file for you. The contents of this ADR is actually the sample one presented above.&lt;/p&gt;
-
-&lt;h3&gt;Create New ADRs&lt;/h3&gt;
-
-&lt;p&gt;When you want to add a new ADR, you can execute &lt;code&gt;adr new &amp;quot;Split up component XXXX into two modules&amp;quot;&lt;/code&gt; which opens up a basic ADR template to fill in. It creates the next incremented ADR &amp;ndash; &lt;code&gt;doc/adr/0002-split-up-component-xxxx-into-two-modules.md&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3&gt;Maintain Table of Contents&lt;/h3&gt;
-
-&lt;p&gt;Most software projects have a &lt;code&gt;README.md&lt;/code&gt; file. When working with ADRs, I include a hyperlink to &lt;code&gt;/doc/adr/README.md&lt;/code&gt;. This file can be generated using &lt;code&gt;adr generate toc &amp;gt; ./doc/adr/README.md&lt;/code&gt;, and ends up creating a nice table of contents of the current ADRs:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# Architecture Decision Records&lt;/span&gt;
-&lt;span class="p"&gt;
-*&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;1. Record architecture decisions&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0001-record-architecture-decisions.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;*&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up component XXXX into two modules&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;Superseding Existing ADRs&lt;/h3&gt;
-
-&lt;p&gt;Eventually, you will have a decision which is somehow &lt;em&gt;linked&lt;/em&gt; to another ADR. A great example of this is a new ADR which supersedes an older decision. First let us make a new ADR &lt;code&gt;adr new -s 2 &amp;quot;Combine modules back into one component&amp;quot;&lt;/code&gt;, which ends up superseding our earlier decision. This will actually modify the ADR&amp;rsquo;s &lt;em&gt;status&lt;/em&gt; section by adding the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;
-Superseded by &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;3. Combine modules back into one component&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0003-combine-modules-back-into-one-component.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre class="highlight markdown"&gt;&lt;code&gt;&lt;span class="gh"&gt;# In 0003-combine-modules-back-into-one-component.md&lt;/span&gt;
-Superseds &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;2. Split up component XXXX into two modules&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="sx"&gt;0002-split-up-component-xxxx-into-two-modules.md&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It is useful to see how ADRs relate to each other. In our example, we&amp;rsquo;re indicating one ADR that supersedes another. It is possible to use &lt;code&gt;adr link&lt;/code&gt; to specifically tailor the link to use different wording, so you can be specific in how ADRs are associated. Ultimately, linking provides additional context surrounding linked decisions.&lt;/p&gt;
-
-&lt;h3&gt;Visualizing ADRs&lt;/h3&gt;
-
-&lt;p&gt;With the ability to &lt;em&gt;link&lt;/em&gt; ADRs together, it now becomes possible to trace the story of a specific ADR. By following links you can understand the &lt;em&gt;bigger picture&lt;/em&gt; of how the architecture evolved over time. It can be hard to navigate one file at a time, so fortunately for us, &lt;code&gt;adr-tools&lt;/code&gt; has us covered by being able to produce a visualization of the ADRs.&lt;/p&gt;
-
-&lt;p&gt;With &lt;code&gt;adr generate graph | dot -Tjpg &amp;gt; graph.jpg&lt;/code&gt; we can generate the following image (using our example ADRs so far):&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="390" height="271" src="/images/2018-01-03-start-now-architecture-decision-records/graph.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;It is quite apparent to see the ADR links in this diagram. I personally have not seen how well this scales, although it still is a good technique to be aware of.&lt;/p&gt;
-
-&lt;p&gt;Using &lt;code&gt;adr generate graph&lt;/code&gt; by itself will return a &lt;a href="https://graphviz.gitlab.io/"&gt;graphviz&lt;/a&gt; output. It would be interesting to attach this to the &lt;code&gt;/doc/adr/README.md&lt;/code&gt; using the &lt;a href="https://github.com/TLmaK0/gravizo"&gt;gravizo&lt;/a&gt; service. This way, the ADR visualization is always within reach and can be apart of the normal process when adding new ADRs. I have not personally done this approach, but it looks interesting.&lt;/p&gt;
-
-&lt;h2&gt;Searching ADRs&lt;/h2&gt;
-
-&lt;p&gt;As we&amp;rsquo;re just dealing with markdown files, it becomes trivial to search through the ADRs. The file names are the titles, so even at a glance, it becomes easy to narrow down what you are looking for. You can even use &lt;code&gt;adr list&lt;/code&gt; to just list all the ADRs. In combination with other command line tools (i.e., grep) you can filter the list. I personally like using the &lt;a href="https://github.com/junegunn/fzf"&gt;&lt;code&gt;fzf&lt;/code&gt; command line tool&lt;/a&gt; to filter the list and open it in vim: &lt;code&gt;adr list | fzf | xargs vim&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to dig deeper you can search the contents of the files for what you are looking for. For example, &lt;code&gt;grep -l &amp;#39;tool&amp;#39; ./doc/adr/*.md | fzf | xargs vim&lt;/code&gt; would look for any file with &lt;em&gt;tool&lt;/em&gt; in it, and present the &lt;code&gt;fzf&lt;/code&gt; interface for further filtering.&lt;/p&gt;
-
-&lt;p&gt;In the end, you can be creative on how you search through ADRs &amp;ndash; there is a lot of flexibility built into it. I usually use the &lt;a href="https://github.com/aykamko/tag"&gt;&lt;code&gt;tag&lt;/code&gt; command line tool&lt;/a&gt; for searching within files.&lt;/p&gt;
-
-&lt;h2&gt;Customizing ADRs&lt;/h2&gt;
-
-&lt;p&gt;At this point, you might be thinking &lt;em&gt;&amp;ldquo;ADRs sound great, but it doesn&amp;rsquo;t quite satisfy all my needs&amp;rdquo;&lt;/em&gt;. The concept of ADRs is very general and flexible in nature so that if you have specific needs or requirements, you can customize it. In our case, we&amp;rsquo;ve been using &lt;code&gt;adr-tools&lt;/code&gt; and it has a base template. You can change it, or use a different template. For example, it might be useful to look through &lt;a href="https://github.com/joelparkerhenderson/architecture_decision_record"&gt;other templates&lt;/a&gt; to find one that fits your needs.&lt;/p&gt;
-
-&lt;p&gt;This post has been talking about using markdown files, but your ADRs could be held in any other medium (i.e., JIRA, Google Docs, etc&amp;hellip;). I would argue to use what works best for your team. In most cases, within a software project, the markdown approach is nice as it&amp;rsquo;s very lightweight and everything is contained in the source directory.&lt;/p&gt;
-
-&lt;h1&gt;TL;DR&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ADRs are a great way keep records of architectural decisions&lt;/li&gt;
-&lt;li&gt;ADRs provide context surrounding architectural decisions&lt;/li&gt;
-&lt;li&gt;ADRs can be lightweight as markdown files that live within your project&amp;rsquo;s repository&lt;/li&gt;
-&lt;li&gt;ADRs are searchable and customizable&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;The best time to start ADRs is at the start of a project; the second best time is right now&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
 </content>
   </entry>
 </feed>

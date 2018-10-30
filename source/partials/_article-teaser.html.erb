@@ -13,7 +13,7 @@
       <div class="col-xs-12 col-sm-6">
         <% if article.tags.size > 0 %>
           <div class="article-teaser__tags">
-            <% article.tags.each do |tag| %>
+            <% article.tags.sort.each do |tag| %>
               <%= link_to tag, tag_path(tag) %>
             <% end %>
           </div>

@@ -16,6 +16,9 @@
     <loc>https://kevinjalbert.com/share-highlighted-articles/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/project-wide-search-and-replace-with-vim/</loc>
   </url>
   <url>
@@ -160,6 +163,9 @@
     <loc>https://kevinjalbert.com/tags/communication/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/productivity/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/database/</loc>
   </url>
   <url>
@@ -194,9 +200,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/testing/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/productivity/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/github/</loc>
@@ -287,6 +290,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/8/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/page/9/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/ruby/page/2/</loc>

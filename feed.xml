@@ -2,16 +2,81 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-09-30T19:53:20-04:00</updated>
+  <updated>2018-10-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Automating Slack Statuses for Meetings and Focus Time</title>
+    <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
+    <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
+    <updated>2018-10-30T20:30:37-04:00</updated>
+    <published>2018-10-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Slack statuses can be a powerful communication tool for setting up expectations on response times. Using Zapier we look at how we can automate Slack statuses for meetings and focus times.</description>
+    <content type="html">&lt;p&gt;I use Slack statuses to communicate my &lt;em&gt;availability to respond&lt;/em&gt; to messages and to set up &lt;em&gt;expectations of my focus for a conversation&lt;/em&gt;. In an office setting, colleagues are able to see whether I&amp;rsquo;m at my desk or not, and that conveys to a certain degree how responsive I might be to messages. I work remotely a few times each week, and on those days my colleagues have even less visibility on whether I would be available or in a meeting.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve come up with a solution for two places where I can automate my Slack status to better communicate expectations and context. Hopefully, these changes will lead to fewer distractions and less ticked off colleagues.&lt;/p&gt;
+
+&lt;h1&gt;Automating Slack Status for Meetings&lt;/h1&gt;
+
+&lt;p&gt;I want to increase transparency in my response times (and set expectations for my colleagues) by updating my Slack status if I&amp;rsquo;m in a meeting. With Slack&amp;rsquo;s recent feature to &lt;a href="https://www.theverge.com/2018/8/30/17802308/slack-auto-expiring-status-updates-feature-change"&gt;auto-expire statuses&lt;/a&gt;, a clean solution using &lt;a href="https://zapier.com/"&gt;Zapier&lt;/a&gt; was possible.&lt;/p&gt;
+
+&lt;p&gt;The following three steps will outline the &lt;em&gt;Zap&lt;/em&gt; I use to automatically update my Slack status with a meeting status.&lt;/p&gt;
+
+&lt;h2&gt;Google Calendar - Event Start Trigger&lt;/h2&gt;
+
+&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/meeting-google-calendar-step.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I use the &lt;em&gt;Google Calendar Event Start&lt;/em&gt; as our trigger, specifying the calendar where all my meetings are set within. I also set the &lt;em&gt;Time Before&lt;/em&gt; value to 16 minutes as I&amp;rsquo;m not subscribed to a high premium plan.&lt;/p&gt;
+
+&lt;h2&gt;Zapier - Delay Until Action&lt;/h2&gt;
+
+&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/meeting-delay-step.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I want to delay the next step (setting the status) until the actual event starts. This is needed due to how the previous step works, as it might trigger up to 16 minutes earlier than the meeting start time.&lt;/p&gt;
+
+&lt;h2&gt;Slack - Set Status Action&lt;/h2&gt;
+
+&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/meeting-slack-step.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I update the Slack status with information on when I will be done my meeting, as well as provide a clear status emoji. With the expiration time field, the status is cleared after the meeting is completed.&lt;/p&gt;
+
+&lt;h2&gt;Possible Issue Due to Multi-Step Zap&lt;/h2&gt;
+
+&lt;p&gt;I have been a user of Zapier for a while, and somehow I have the ability to make &lt;em&gt;3-step Zaps&lt;/em&gt; with the free plan. It is possible to cut the &lt;em&gt;Delay Until&lt;/em&gt; step, but there is a possibility of the &lt;em&gt;Set Status&lt;/em&gt; step running a maximum of 16 minutes earlier than the event&amp;rsquo;s start time.&lt;/p&gt;
+
+&lt;p&gt;You could possibly mitigate this with some clever status text (i.e., &amp;ldquo;Meeting from 3:15 to 3:45&amp;rdquo;). At worse you have a meeting status &lt;em&gt;slightly&lt;/em&gt; before your meeting, which might not be a bad idea as you might be busy preparing or in-transit to a meeting room.&lt;/p&gt;
+
+&lt;h1&gt;Automating Slack Status For Focus Time&lt;/h1&gt;
+
+&lt;p&gt;Another place I automate Slack statuses is for focus time. While at work, there are times I need a deep focus time (i.e., being in the &lt;em&gt;zone&lt;/em&gt;). I use &lt;a href="https://pomodoneapp.com/"&gt;PomoDoneApp&lt;/a&gt; as my &lt;a href="https://francescocirillo.com/pages/pomodoro-technique"&gt;Pomodoro&lt;/a&gt; application of choice. Fortunately for me, it also interfaces with Zapier.&lt;/p&gt;
+
+&lt;p&gt;The goal here is for colleagues to know that I&amp;rsquo;m busy and might not get back to their messages until I have a break from my deep work.&lt;/p&gt;
+
+&lt;h2&gt;PomoDoneApp - New Timer Started Trigger&lt;/h2&gt;
+
+&lt;p&gt;With PomoDoneApp, Zapier will trigger whenever a timer begins. There is nothing to configure here, so the setup is straight forward for this step.&lt;/p&gt;
+
+&lt;h2&gt;Slack - Set Status Action&lt;/h2&gt;
+
+&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/pomodone-slack-step.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;At this step, I&amp;rsquo;m just setting the appropriate status (i.e., focusing) to indicate that I&amp;rsquo;m in deep work. As per the Pomodoro technique, after the timer is up I&amp;rsquo;m free for a small break. The status expiration helps accommodate this workflow easily.&lt;/p&gt;
+
+&lt;h1&gt;Slack Statuses While Working Remotely&lt;/h1&gt;
+
+&lt;p&gt;So, as I mentioned earlier, I occasionally work remotely. This presents an interesting problem of conveying two statuses simultaneously. My workaround isn&amp;rsquo;t pretty but it works&amp;hellip; I simply change my Slack name to &amp;ldquo;Kevin Jalbert (WFH)&amp;rdquo; to indicate that I&amp;rsquo;m working from home that day. This move frees up my actual Slack status to be automated throughout the day.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2018-09-30T19:49:42-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -107,7 +172,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -241,7 +306,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -420,7 +485,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -605,7 +670,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -896,7 +961,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1030,7 +1095,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1413,7 +1478,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1488,7 +1553,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1818,7 +1883,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Editing with Pry</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
     <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
+    <updated>2018-09-30T20:42:04-04:00</updated>
     <published>2018-03-23T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1855,79 +1920,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;p&gt;The following demonstrates &lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s patch editing functionality.&lt;/p&gt;
 
 &lt;script src="https://asciinema.org/a/0zvuYLvnQXHkZ9DpFZl4l3Sxe.js" id="asciicast-0zvuYLvnQXHkZ9DpFZl4l3Sxe" async&gt;&lt;/script&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Rails ActiveStorage Configuration for Minio</title>
-    <link rel="alternate" href="https://kevinjalbert.com/rails-activestorage-configuration-for-minio/"/>
-    <id>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</id>
-    <updated>2018-09-10T09:05:10-04:00</updated>
-    <published>2018-02-26T18:53:20-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Trying to configure Rails ActiveStorage for Minio as your storage provider? The default configuration does not work out of the box, so read on to see what configuration options you are missing.</description>
-    <content type="html">&lt;p&gt;You are looking at Rails 5.2 and its shiny new &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;ActiveStorage&lt;/a&gt; &amp;ndash; a built-in abstraction/mechanism to handle file storage. You decide to give it a try and remove a dependency you normally use (i.e., &lt;a href="https://github.com/carrierwaveuploader/carrierwave"&gt;CarrierWave&lt;/a&gt; or &lt;a href="https://github.com/thoughtbot/paperclip"&gt;Paperclip&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;For some reason, you decide to use &lt;a href="https://minio.io/"&gt;Minio&lt;/a&gt; &amp;ndash; an Amazon S3 compatible open source project.&lt;/p&gt;
-
-&lt;p&gt;Looking through the ActiveStorage &lt;a href="http://edgeguides.rubyonrails.org/active_storage_overview.html"&gt;documentation&lt;/a&gt; and &lt;a href="https://github.com/rails/rails/tree/master/activestorage"&gt;repository&amp;rsquo;s readme&lt;/a&gt;, you figure out how to get everything working locally using ActiveStorage&amp;rsquo;s &lt;code&gt;local&lt;/code&gt; service.&lt;/p&gt;
-
-&lt;p&gt;Now it is time to try running everything, but with Minio as your file storage. Looking at your &lt;code&gt;config/storage.yml&lt;/code&gt; you&amp;rsquo;ll see the template for Amazon&amp;rsquo;s S3:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="na"&gt;amazon&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-   &lt;span class="na"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
-   &lt;span class="na"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :access_key_id) %&amp;gt;&lt;/span&gt;
-   &lt;span class="na"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:aws, :secret_access_key) %&amp;gt;&lt;/span&gt;
-   &lt;span class="na"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
-   &lt;span class="na"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Configuration Options&lt;/h1&gt;
-
-&lt;p&gt;Now it&amp;rsquo;s time to figure out how to use the S3 service in conjunction with your Minio server&amp;hellip;&lt;/p&gt;
-
-&lt;h2&gt;Region&lt;/h2&gt;
-
-&lt;p&gt;Your Minio server doesn&amp;rsquo;t really support regions like Amazon&amp;rsquo;s S3. Just keep it as &lt;code&gt;us-east-1&lt;/code&gt; or your closest S3 region (although it really could be any string). From what I&amp;rsquo;ve seen, this is just used at the Amazon S3-level, and for your hosted Minio server it does not matter.&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;region&lt;/code&gt; value is simply used to satisfy ActiveStorage and the &lt;code&gt;aws-sdk-s3&lt;/code&gt; gem. If you omit the &lt;code&gt;region&lt;/code&gt; option you get the following exception &lt;code&gt;missing keyword: region (ArgumentError)&lt;/code&gt;. If you use an empty string for &lt;code&gt;region&lt;/code&gt; you will see &lt;code&gt;missing region; use :region option or export region name to ENV[&amp;#39;AWS_REGION&amp;#39;] (Aws::Errors::MissingRegionError)&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Endpoint&lt;/h2&gt;
-
-&lt;p&gt;Your Minio server is hosted at some URL (i.e., https://minio123.com), so you&amp;rsquo;ll need to inform ActiveStorage&amp;rsquo;s S3 service about this &lt;em&gt;endpoint&lt;/em&gt;. Luckily, it is just a matter of adding the URL endpoint to your configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  endpoint: "https://minio123.com" # Points to your Minio server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;You can also use ports on the endpoint (i.e., &amp;ldquo;http://localhost:9000&amp;rdquo;).&lt;/p&gt;
-
-&lt;h2&gt;Force Path Style&lt;/h2&gt;
-
-&lt;p&gt;So you have the endpoint and region all setup from a configuration standpoint. Your Minio server is also up and running, along with a bucket, &lt;code&gt;your_own_bucket&lt;/code&gt;. You try to upload a file and see the following exception:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Aws::Errors::NoSuchEndpointError (Encountered a `SocketError` while attempting to connect to:
-
-  https://you_own_bucket.minio123.com/RJioqjrTT4VmFobw5FhXkSby
-
-This is typically the result of an invalid `:region` option or a
-poorly formatted `:endpoint` option.
-
-* Avoid configuring the `:endpoint` option directly. Endpoints are constructed
-  from the `:region`. The `:endpoint` option is reserved for connecting to
-  non-standard test endpoints.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Hmm&amp;hellip; Well that didn&amp;rsquo;t work out. If we look at the URL (https://your_own_bucket.minio123.com), we can see that it uses a bucket subdomain approach. However, Minio expects the bucket after the domain (i.e., https://minio123.com/your_own_bucket). Again, fortunately there is an configuration option we can add to &lt;em&gt;force this path style&lt;/em&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  force_path_style: true # Needed to be compliant with how Minio serves the bucket
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Complete Configuration&lt;/h1&gt;
-
-&lt;p&gt;At this point we covered all the configuration &lt;em&gt;gotchas&lt;/em&gt; to set up ActiveStorage with Minio. Namely, the missing and (mostly undocumented) &lt;code&gt;endpoint&lt;/code&gt; and &lt;code&gt;force_path_style&lt;/code&gt; options. The following is a complete configuration.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt; &lt;span class="na"&gt;minio&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-   &lt;span class="na"&gt;service&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;S3&lt;/span&gt;
-   &lt;span class="na"&gt;access_key_id&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :access_key_id) %&amp;gt;&lt;/span&gt;
-   &lt;span class="na"&gt;secret_access_key&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;lt;%= Rails.application.credentials.dig(:minio, :secret_access_key) %&amp;gt;&lt;/span&gt;
-   &lt;span class="na"&gt;region&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;us-east-1&lt;/span&gt;
-   &lt;span class="na"&gt;bucket&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;your_own_bucket&lt;/span&gt;
-   &lt;span class="na"&gt;endpoint&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;https://minio123.com"&lt;/span&gt;
-   &lt;span class="na"&gt;force_path_style&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="no"&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It isn&amp;rsquo;t a bad idea to have the configuration named &lt;code&gt;minio&lt;/code&gt;, just so it is clear that it&amp;rsquo;s a Minio file storage instead of the typical Amazon S3.&lt;/p&gt;
 </content>
   </entry>
 </feed>

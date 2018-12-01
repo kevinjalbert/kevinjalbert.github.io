@@ -2,16 +2,145 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-10-30T19:53:20-04:00</updated>
+  <updated>2018-11-30T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Tracking Production Disruptions</title>
+    <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
+    <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
+    <updated>2018-11-30T23:07:17-05:00</updated>
+    <published>2018-11-30T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">When operating software in a production environment it is expected to have some unplanned disruptions over time. While the primary task is to resolve the disruption so that the impact is minimized, it is still very much important to track the disruption itself. Disruption reports provide transparency to others, accountability in the actionable tasks, a place for discussion, categorical data, and also a summary of the event.</description>
+    <content type="html">&lt;p&gt;Let us first iron out what constitutes a &lt;em&gt;disruption&lt;/em&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Any unexpected degradation or interruption of a service that in any method affects users ability to the service.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When operating a production service, it is simply a matter of time till a disruptions &lt;em&gt;happens&lt;/em&gt;. No matter the safeguards you&amp;rsquo;ve put in place, there is always the expected scenarios. There are many ways to prepare and to ensure that your services are as robust as possible, but that is a task left to you the reader. In this post I&amp;rsquo;ll be talking about what to do &lt;em&gt;after&lt;/em&gt; you&amp;rsquo;ve handled a production disruption.&lt;/p&gt;
+
+&lt;h1&gt;Why Track?&lt;/h1&gt;
+
+&lt;p&gt;A disruption can be a chaotic event, lasting from a few minutes to multiple hours. The main purpose of tracking these disruptions is to have a better understanding of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;what led to the issue.&lt;/li&gt;
+&lt;li&gt;what could have been done to prevent the issue from happening?&lt;/li&gt;
+&lt;li&gt;flaws in monitoring in detecting when the issue started.&lt;/li&gt;
+&lt;li&gt;learnings and processes when dealing with a similar issue in the future.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I highly encourage disseminating the learnings around all aspects of a disruption to the rest of the team and organization. A tracked disruption can be used in a post-mortem. The ultimate goal is by educating everyone it will lead to more resilient services and better processes during the inevitable future disruptions.&lt;/p&gt;
+
+&lt;p&gt;In addition, with tracked disruptions, it becomes easy to perform basic analysis of the frequency and length of disruptions.&lt;/p&gt;
+
+&lt;p&gt;Without any tracking, it becomes a huge failure if the same disruption happens again over and over.&lt;/p&gt;
+
+&lt;h1&gt;Tracking&lt;/h1&gt;
+
+&lt;p&gt;One thing to note is that the following is from experience that I have working at &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt;, along with reading various sources online. Let us touch on what to track, where to track, and how to track.&lt;/p&gt;
+
+&lt;h2&gt;What to Track?&lt;/h2&gt;
+
+&lt;p&gt;The more information you have the better you&amp;rsquo;ll understand the disruption if you weren&amp;rsquo;t immediately involved in it. Additionally, in most cases, multiple people are involved and so not everyone had the same exposure to the entire event. The following is a list and description of what we track at theScore for disruptions.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Service(s)&lt;/strong&gt;: name of service(s) that were interrupted.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Disruption Meta-Information&lt;/strong&gt;: at-a-glance information about the disruption.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt;: what type of disruption (i.e., Infrastructure, Critical Bug, Data Provider, etc&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Start Time&lt;/strong&gt;: when the disruption started (not necessarily when it was discovered).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Detection Time&lt;/strong&gt;: when the disruption was detected by users/support/team.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;End Time&lt;/strong&gt;: when the disruption was resolved (action items may extend past this time).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Length&lt;/strong&gt;: the total time the disruption was active (based on start/end times).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Time to Detection&lt;/strong&gt;: time to detect the disruption (based on start/detection times).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;People Involved&lt;/strong&gt;: list of individuals involved in handling the disruption.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Summary&lt;/strong&gt;: a high-level summary of the disruption (root cause and impact).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Timeline&lt;/strong&gt;: a table of events which constructs the timeline of the disruption.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Timestamp&lt;/strong&gt;: approximate time of this event.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Party Involved&lt;/strong&gt;: who/what was involved with this event (i.e., servers, people, services).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Description&lt;/strong&gt;: what happened at this event.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Retrospective&lt;/strong&gt;: a reflection of the disruption used for learnings.
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Good&lt;/strong&gt;: what went well (i.e., process, safeguards, etc&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bad&lt;/strong&gt;: what went poorly (i.e., process, cascading failures, etc&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lessons&lt;/strong&gt;: what was learned (i.e., flaws in the process, missing monitoring, etc&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Action Items&lt;/strong&gt;: assigned items to be completed in a timely fashion related to the disruption.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Supporting Documentation&lt;/strong&gt;: additional information (i.e., Slack Logs, Bug Reports, Screenshots, etc&amp;hellip;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Where to Track?&lt;/h2&gt;
+
+&lt;p&gt;To be honest, the none of this matters matter if you aren&amp;rsquo;t tracking disruptions to any capacity, just do it! Even if you have all your disruptions in a single text file, it&amp;rsquo;s better than nothing. Let&amp;rsquo;s get realistic though, we can do much better. For starters, you could opt for a spreadsheet or a basic database, maybe even a heavier integrated service like &lt;a href="https://victorops.com/"&gt;VictorOps&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;At theScore, we use a GitHub repository where each &lt;em&gt;issue&lt;/em&gt; is a disruption report. We record the aforementioned data points in each issue&amp;rsquo;s description. We decided to use GitHub as it:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Has great markdown support to provide rich information (i.e., font-styles, links, images, tables).&lt;/li&gt;
+&lt;li&gt;Gives us closer integration with our code if we want to link to resources in other repositories.&lt;/li&gt;
+&lt;li&gt;Has built-in support for comments on an issue to better facilitate discussions.&lt;/li&gt;
+&lt;li&gt;Has labels and open/close states for issues, which layers in additional categorization and grouping.&lt;/li&gt;
+&lt;li&gt;Has an API to interface with (for automation and analysis).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For us, our action items become &lt;a href="https://help.github.com/articles/about-task-lists/"&gt;GitHub tasks&lt;/a&gt; with a mentioned individual or team. Issues are to be closed when all action items are resolved, and after sufficient discussion/retrospection has been carried out.&lt;/p&gt;
+
+&lt;h2&gt;How to Track?&lt;/h2&gt;
+
+&lt;p&gt;After a disruption, within a few days, it should be tracked. Waiting too long to track a disruption will result in fuzzy/shallow details. There much special in building up the report, although from personal experience it is good for people to jot notes down immediately after a disruption. I also find it effective to create a specific channel or chatroom in your team&amp;rsquo;s messaging application when dealing with disruptions as all the communication is located in one area.&lt;/p&gt;
+
+&lt;p&gt;PagerDuty has some fantastic material on a &lt;a href="https://response.pagerduty.com/after/post_mortem_process/"&gt;post-mortem process&lt;/a&gt; and even a &lt;a href="https://response.pagerduty.com/after/post_mortem_template/"&gt;post-mortem template&lt;/a&gt;. They also document &lt;a href="https://response.pagerduty.com/before/different_roles/"&gt;defined roles during a disruption&lt;/a&gt;, in which the &lt;em&gt;Scribe&lt;/em&gt; is a critical role for tracking purposes.&lt;/p&gt;
+
+&lt;p&gt;A disruption report can be a single person&amp;rsquo;s responsibility, although it usually helps to reach out to the people involved for clarifying details.&lt;/p&gt;
+
+&lt;h1&gt;Making Sense of the Data&lt;/h1&gt;
+
+&lt;p&gt;With all these disruptions tracked, what can we do with them? Hopefully, all the action items and retrospection have led to large gains. Additionally, there is a lot of value in the data itself, it is simply a matter of finding the signals you want to pay attention too. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The frequency of disruptions (per service).
+
+&lt;ul&gt;
+&lt;li&gt;What services to focus on improving resilience.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Distribution of when disruptions happen.
+
+&lt;ul&gt;
+&lt;li&gt;When to be prepared (i.e., weekend/evenings) for possible on-call resolution.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Time to detection over time.
+
+&lt;ul&gt;
+&lt;li&gt;Are the improvements being made to monitoring helping out?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;etc&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Find aspects that your organization cares about and measure them.&lt;/p&gt;
+
+&lt;h1&gt;Improving the Process&lt;/h1&gt;
+
+&lt;p&gt;Never stop and periodically revisit the process to make adjustments. What works for one team, might not work for others. Even though tracking a disruption can be seen as &lt;em&gt;additional&lt;/em&gt; work, it will pay itself off in time.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2018-10-30T20:30:37-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -76,7 +205,7 @@
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -172,7 +301,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -306,7 +435,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -485,7 +614,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -670,7 +799,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -961,7 +1090,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1095,7 +1224,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1478,7 +1607,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1553,7 +1682,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Jest Snapshots: Reducing styled-jsx Noise</title>
     <link rel="alternate" href="https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/"/>
     <id>https://kevinjalbert.com/jest-snapshots-reducing-styled-jsx-noise/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
+    <updated>2018-10-30T20:37:43-04:00</updated>
     <published>2018-04-11T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1877,49 +2006,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;/ul&gt;
 
 &lt;p&gt;There might be a better way to handle this, but as of the time this article was written I have yet to see a clean approach. One thing I noticed was a &lt;a href="https://github.com/zeit/styled-jsx/issues/117#issuecomment-342115323"&gt;GitHub comment&lt;/a&gt; that alluded to a better method that would follow a similar strategy to &lt;a href="https://github.com/styled-components/jest-styled-components"&gt;jest-styled-components&lt;/a&gt; but for &lt;code&gt;styled-jsx&lt;/code&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Editing with Pry</title>
-    <link rel="alternate" href="https://kevinjalbert.com/editing-with-pry/"/>
-    <id>https://kevinjalbert.com/editing-with-pry/</id>
-    <updated>2018-09-30T20:42:04-04:00</updated>
-    <published>2018-03-23T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Learn to edit within a pry session. Experience the power of multi-line and patch editing.</description>
-    <content type="html">&lt;p&gt;I&amp;rsquo;ve already touched a bit on the power of &lt;code&gt;pry&lt;/code&gt; in a &lt;a href="/lets-pry-into-ruby-objects/"&gt;previous post back in 2016&lt;/a&gt;. I want to revisit &lt;code&gt;pry&lt;/code&gt; to expand on a new functionality that I have since started using &amp;ndash; its ability to edit.&lt;/p&gt;
-
-&lt;h2&gt;More than One Line?&lt;/h2&gt;
-
-&lt;p&gt;In my personal experiences, I&amp;rsquo;ve constructed some &lt;em&gt;long&lt;/em&gt; one-liners while in &lt;code&gt;irb&lt;/code&gt; or &lt;code&gt;pry&lt;/code&gt;. These interactive sessions do not provide a great experience for multi line commands, as you are restricted to editing only one line at a time.&lt;/p&gt;
-
-&lt;p&gt;Fortunately, in &lt;code&gt;pry&lt;/code&gt;, there is the &lt;code&gt;edit&lt;/code&gt; method. This opens up a temporary file (&lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s input buffer) with a more capable editor for your task. You can configure the editor by executing the &lt;code&gt;Pry.config.editor = &amp;quot;vim&amp;quot;&lt;/code&gt; statement, although your environment variable &lt;code&gt;EDITOR&lt;/code&gt; is used by default. If you want, you can even use a GUI editor like &lt;a href="https://atom.io/"&gt;Atom&lt;/a&gt; (you&amp;rsquo;ll need to use &lt;code&gt;atom --wait&lt;/code&gt; for this to work). If you have a specific preference, it makes sense to add this configuration in your &lt;code&gt;.pryrc&lt;/code&gt; so it is configured when &lt;code&gt;pry&lt;/code&gt; loads up.&lt;/p&gt;
-
-&lt;p&gt;By default, &lt;code&gt;edit&lt;/code&gt; will open the last executed statement issued in your session. If you want to edit with a blank canvas, then you can use the &lt;code&gt;edit -t&lt;/code&gt; to open a temporary buffer. You can even get fancy and re-edit older inputs using &lt;code&gt;edit --in &amp;lt;input-number&amp;gt;&lt;/code&gt; (i.e., &lt;code&gt;edit --in -2&lt;/code&gt; &amp;ndash; the second last input).&lt;/p&gt;
-
-&lt;p&gt;Using a full editor is great for those more complex statements. Now you can break up statements into multiple lines to make it easier to comprehend and create. In the event you were &lt;em&gt;slightly&lt;/em&gt; wrong, you can simply &lt;code&gt;edit&lt;/code&gt; again and fix up your statement. This is great for iteratively building longer statements. It is a common style in Ruby to use indentation when using blocks and defining classes/methods/modules, so take advantage of &lt;code&gt;edit&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The following demonstrates &lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s multi-line editing functionality.&lt;/p&gt;
-
-&lt;script src="https://asciinema.org/a/KjOsTASz7MMzrJV2lSxi6SWdM.js" id="asciicast-KjOsTASz7MMzrJV2lSxi6SWdM" async&gt;&lt;/script&gt;
-
-&lt;h2&gt;Patching Objects&lt;/h2&gt;
-
-&lt;p&gt;The &lt;code&gt;edit&lt;/code&gt; method has one more amazing trick up its sleeve &amp;ndash; &lt;em&gt;patch editing&lt;/em&gt;. &lt;code&gt;pry&lt;/code&gt; now gives you the ability to modify existing object method definitions at runtime. To quote the help text for the &lt;code&gt;edit --patch&lt;/code&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Instead of editing the object&amp;rsquo;s file, try to edit in a tempfile and apply as a monkey patch&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As the patch is only for the &lt;code&gt;pry&lt;/code&gt; session, there is a greater sense of exploring and less worry surrounding the commitment of the edit.&lt;/p&gt;
-
-&lt;p&gt;Some caveats that I&amp;rsquo;ve hit with this approach is that you can only patch &lt;code&gt;&amp;lt;class&amp;gt;#&amp;lt;method&amp;gt;&lt;/code&gt; (instance method) or &lt;code&gt;&amp;lt;class&amp;gt;.&amp;lt;method&amp;gt;&lt;/code&gt; (class method). You might want to edit the class itself, but you&amp;rsquo;ll hit &lt;code&gt;NotImplementedError: Cannot yet patch #&amp;lt;Pry::WrappedModule:0x007fcc32afecd0&amp;gt; objects!&lt;/code&gt;. Unfortunately, I&amp;rsquo;ve not yet found a nice way to get around this (so let me know if you have a way!). I know that you can modify the file itself (i.e., &lt;code&gt;edit app/models/model.rb&lt;/code&gt;) but that&amp;rsquo;ll actually write to the file &amp;ndash; I would want it done as a patch.&lt;/p&gt;
-
-&lt;p&gt;The following demonstrates &lt;code&gt;pry&lt;/code&gt;&amp;rsquo;s patch editing functionality.&lt;/p&gt;
-
-&lt;script src="https://asciinema.org/a/0zvuYLvnQXHkZ9DpFZl4l3Sxe.js" id="asciicast-0zvuYLvnQXHkZ9DpFZl4l3Sxe" async&gt;&lt;/script&gt;
 </content>
   </entry>
 </feed>

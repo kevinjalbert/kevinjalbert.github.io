@@ -10,6 +10,9 @@
     <loc>https://kevinjalbert.com/respect-http-caching/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/archive-unused-repositories/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/enhanced-vim-searching/</loc>
   </url>
   <url>
@@ -154,6 +157,15 @@
     <loc>https://kevinjalbert.com/tags/caching/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/process/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/communication/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/github/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/vim/</loc>
   </url>
   <url>
@@ -161,9 +173,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/learning/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/communication/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/productivity/</loc>
@@ -205,9 +214,6 @@
     <loc>https://kevinjalbert.com/tags/testing/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/github/</loc>
-  </url>
-  <url>
     <loc>https://kevinjalbert.com/tags/code-review/</loc>
   </url>
   <url>
@@ -239,9 +245,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/rake/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/process/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/architecture/</loc>

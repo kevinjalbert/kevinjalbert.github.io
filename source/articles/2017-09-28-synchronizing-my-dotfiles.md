@@ -75,7 +75,7 @@ I define my own [custom applications](https://github.com/kevinjalbert/dotfiles/t
 
 As mentioned, Mackup is capabile of synchronizing a bunch of supported applications. I didn't exactly want to put all those up in my repository for sharing. If I don't actively manage the configuration then I don't want to share it. For example, my configurations for [Doxie](https://github.com/lra/mackup/blob/719efd0a630fc3c6326aab5c84ac12b8509bbbf9/mackup/applications/doxie.cfg) aren't important, while my vim/zsh configurations are highly curated.
 
-To make sure my repository only has the _curated_ configurations that I want to publicly share I use [whitelisting in the `.gitignore`](https://github.com/kevinjalbert/dotfiles/blob/5acf8672973e31dace420ad8e8303675094ed4e5/.gitignore) to selectively publish dotfiles.
+To make sure my repository only has the _curated_ configurations that I want to publicly share I use [whitelisting in the `.gitignore`](https://github.com/kevinjalbert/dotfiles/blob/master/.gitignore) to selectively publish dotfiles.
 
 This approach allows me to take full advantage of synchronizing all configurations between environments, while publically sharing selected configurations in my repository.
 

@@ -11,7 +11,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2018-12-29T20:35:42-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -83,7 +83,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -212,7 +212,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -277,7 +277,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -373,7 +373,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -507,7 +507,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -686,7 +686,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -871,7 +871,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1162,7 +1162,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1296,7 +1296,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1679,7 +1679,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>iTerm2 Mouseless Copy</title>
     <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
     <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-11-30T23:08:35-05:00</updated>
+    <updated>2018-12-29T20:38:13-05:00</updated>
     <published>2018-05-06T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

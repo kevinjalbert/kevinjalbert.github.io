@@ -1,2 +1,0 @@
-source/images/2015-09-24-respect-http-caching/200-status-code-chrome.png filter=lfs diff=lfs merge=lfs -text
-source/images/2015-09-24-respect-http-caching/304-status-code-chrome.png filter=lfs diff=lfs merge=lfs -text

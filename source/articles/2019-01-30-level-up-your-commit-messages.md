@@ -27,8 +27,8 @@ As the creator of a commit, it is likely you already have a firm grasp of the co
 
 You cannot talk about how to make good commit messages without referencing these two fantastic posts:
 
-- [A Note About Git Commit Messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) by Chris Beams
-- [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit) by Tim Pope
+- [A Note About Git Commit Messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) by Tim Pope
+- [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit) by Chris Beams
 
 Even though both are referencing Git, the conventions can be applied to any version control system. I highly encourage you to read the above posts (and then come back) to learn what constitutes a good commit message.
 

@@ -2,16 +2,135 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2018-12-29T18:53:20-05:00</updated>
+  <updated>2019-01-30T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Level Up Your Commit Messages</title>
+    <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
+    <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
+    <updated>2019-01-30T23:46:59-05:00</updated>
+    <published>2019-01-30T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Version control is something that all developers have to work through. It is such an essential part of working in the software field, especially in teams. There are many tools, utilities, commands and scenarios to learn. One facet that sometimes is overlooked is the *commit message* itself.</description>
+    <content type="html">&lt;p&gt;A well-crafted message is important for yourself and others — it helps frame the context of what changed and why. It is especially important when you have to look back at old commits to figure out why the code has a certain structure or behaviour.&lt;/p&gt;
+
+&lt;p&gt;It is easy to make one-line commit messages that have little-to-no context in the description. There are a couple of reasons one might fall into this behaviour:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Doing exploratory work in which small changes are being made with little care&lt;/li&gt;
+&lt;li&gt;Want to move faster (although you will pay for it later)&lt;/li&gt;
+&lt;li&gt;Assuming that the &lt;em&gt;why&lt;/em&gt; and &lt;em&gt;what&lt;/em&gt; are obvious (which it might not be to others)&lt;/li&gt;
+&lt;li&gt;Not knowing the value of good commit messages&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As the creator of a commit, it is likely you already have a firm grasp of the context surrounding the change. It is not a good assumption that everyone will have the same level of comprehension when they look at your changes. You may also find yourself confused when looking at a commit from several months back if the commit message is lacking context.&lt;/p&gt;
+
+&lt;h1&gt;Foundation of a Good Commit Message&lt;/h1&gt;
+
+&lt;p&gt;You cannot talk about how to make good commit messages without referencing these two fantastic posts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"&gt;A Note About Git Commit Messages&lt;/a&gt; by Chris Beams&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit"&gt;How to Write a Git Commit Message&lt;/a&gt; by Tim Pope&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Even though both are referencing Git, the conventions can be applied to any version control system. I highly encourage you to read the above posts (and then come back) to learn what constitutes a good commit message.&lt;/p&gt;
+
+&lt;p&gt;As a TL;DR, Chris Beams outlines the &lt;a href="https://chris.beams.io/posts/git-commit/#seven-rules"&gt;seven rules of a great commit message&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#separate"&gt;Separate subject from body with a blank line&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#limit-50"&gt;Limit the subject line to 50 characters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#capitalize"&gt;Capitalize the subject line&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#end"&gt;Do not end the subject line with a period&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#imperative"&gt;Use the imperative mood in the subject line&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#wrap-72"&gt;Wrap the body at 72 characters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://chris.beams.io/posts/git-commit/#why-not-how"&gt;Use the body to explain &lt;em&gt;what&lt;/em&gt; and &lt;em&gt;why&lt;/em&gt; vs. &lt;em&gt;how&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Commit Early and Often&lt;/h1&gt;
+
+&lt;p&gt;I learned about the &lt;em&gt;Commit Early and Often&lt;/em&gt; approach early in my journey. It is an easy concept to understand, although from experience it can be hard to consistently adhere too.  Seth Robertson&amp;rsquo;s &lt;a href="https://sethrobertson.github.io/GitBestPractices/#commit"&gt;Do commit early and often&lt;/a&gt; article explains the benefits:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Git only takes full responsibility for your data when you commit. If you fail to commit and then do something poorly thought out, you can run into trouble. Additionally, having periodic checkpoints means that you can understand how you broke something.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It depends on the person and project, but it is an easy trap to hold your changes and make large commits for the &lt;em&gt;completed&lt;/em&gt; piece of work. Seth Robertson raises these concerns but suggests you can &lt;em&gt;hide the sausage making process&lt;/em&gt; if you so desire.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;People resist this out of some sense that this is ugly, limits git-bisection functionality, is confusing to observers, and might lead to accusations of stupidity. Well, I’m here to tell you that resisting this is ignorant.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1&gt;Hiding the Sausage Making Process&lt;/h1&gt;
+
+&lt;p&gt;As Seth Robertson mentions in his note &lt;a href="https://sethrobertson.github.io/GitBestPractices/#sausage"&gt;on sausage making&lt;/a&gt;, it is the process of doctoring &lt;em&gt;how your final&lt;/em&gt; commits look when completed. By committing early and often, the commits will likely expose your complete development process (i.e., fixing a bug you introduced earlier, adding tests after the fact, etc.).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Some people like to hide the sausage making, or in other words pretend to the outside world that their commits sprung full-formed in utter perfection into their git repository. Certain large public projects demand this, others demand smushing all work into one large commit, and still others do not care.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;With version control systems, it is possible to edit the commit history. Seth Robertson dives deeper into this in his article on &lt;a href="https://sethrobertson.github.io/GitPostProduction/gpp.html"&gt;Post-Production Editing using Git&lt;/a&gt;. There is another benefit other than the vanity aspect of making a set of commits &lt;em&gt;look&lt;/em&gt; good. By squashing bug fixes or even half-baked solutions into cohesive commits that compile and/or pass tests, you are able to &lt;code&gt;git bisect&lt;/code&gt;, &lt;code&gt;git revert&lt;/code&gt; and &lt;code&gt;git cherry-pick&lt;/code&gt; without much issue. In addition, you are able to squash several commits into logical &lt;a href="https://www.freshconsulting.com/atomic-commits/"&gt;atomic commits&lt;/a&gt; — then code review is straight-forward.&lt;/p&gt;
+
+&lt;p&gt;Personally, I like to commit early and often, and only after the fact will I squash commits down into atomic commits. These commits ideally are valid from a testing/compiling perspective. The whole set of commits that I push up for code review tell the story of &lt;em&gt;what w&lt;/em&gt;as changed and &lt;em&gt;why&lt;/em&gt; it was done.&lt;/p&gt;
+
+&lt;h1&gt;Semantic Commit Messages&lt;/h1&gt;
+
+&lt;p&gt;As an experiment, I&amp;rsquo;m going to be trying out &lt;em&gt;&lt;a href="https://www.conventionalcommits.org"&gt;semantic commit messages (aka conventional commits)&lt;/a&gt;&lt;/em&gt;. The idea here is that commit messages are structured so that it is easy to understand the intention and impact of a commit. In addition, adhering to a consistent format gives commit messages a machine-readable meaning.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href="https://seesparkbox.com/foundry/semantic_commit_messages"&gt;following snippet from Jeremy Mack&lt;/a&gt; best illustrates how semantic commits are formatted:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;feat: add hat wobble
+^--^  ^------------^
+|     |
+|     +-&amp;gt; Summary in present tense.
+|
++-------&amp;gt; Type: chore, docs, feat, fix, refactor, style, or test.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;An optional aspect you can add is a &lt;em&gt;scope&lt;/em&gt; after the &lt;em&gt;type&lt;/em&gt; to indicate the section of the codebase that the commit interacts with (i.e., &lt;code&gt;fix(linter): fix off by one in main loop&lt;/code&gt;). The following is an example of what a commit history with semantic commits might look like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;* bc0ee40 - (2 days ago) chore: bump Rails version
+* 52f87c0 - (3 days ago) docs: enhance README documentation
+* 66fd6f7 - (4 days ago) feat(payment): add new payment option
+* 3f0746c - (5 days ago) fix(admin): bug in dropdown selector
+* 2b56812 - (6 days ago) refactor(jobs): background job logging
+* da75ea2 - (7 days ago) style: remove extra whitespaces
+* 3ade674 - (8 days ago) test(payment): add more tests around payment
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The above history is easy to understand, and I believe it&amp;rsquo;ll help with creating those &lt;em&gt;atomic commits&lt;/em&gt;. As mentioned, the commit messages become machine-readable and this paves a way to use tools like &lt;a href="https://github.com/semantic-release/semantic-release"&gt;semantic-release&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Putting It All Together&lt;/h1&gt;
+
+&lt;p&gt;To better integrate semantic commit messages into my workflow, I have the following set as my &lt;code&gt;.gitmessage&lt;/code&gt; template (learn how to use this in &lt;a href="https://robots.thoughtbot.com/better-commit-messages-with-a-gitmessage-template"&gt;this article by Matt Sumner&lt;/a&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;
+
+# &amp;lt;type&amp;gt;(&amp;lt;scope&amp;gt;): &amp;lt;subject&amp;gt;
+#
+# &amp;lt;type&amp;gt; - chore, docs, feat, fix, refactor, style or test
+# (&amp;lt;scope&amp;gt;) - optional, section of codebase involved
+# &amp;lt;subject&amp;gt; - present tense summary, whole line is 50 characters
+#
+# 72-character wrapped longer description. This should answer:
+# * Why was this change necessary?
+# * How does it address the problem?
+# * Are there any side effects?
+#
+# Include a link to the ticket, if any.
+#
+# Add co-authors if you worked on this code with others:
+# Co-authored-by: Full Name &amp;lt;email@example.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As always, keep on levelling up!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -83,7 +202,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -212,7 +331,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -277,7 +396,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -373,7 +492,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -507,7 +626,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -686,7 +805,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -871,7 +990,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1162,7 +1281,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1296,7 +1415,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
     <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
     <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
+    <updated>2019-01-30T22:58:46-05:00</updated>
     <published>2018-06-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1673,81 +1792,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;p&gt;Hopefully, the migration went successfully, and both the source and target database are in-sync. At this point, the zero-downtime migration can occur &amp;ndash; simply point the application at the new database. It is advisable to wait for any replication lag or queued up &lt;code&gt;CDCIncomingChanges&lt;/code&gt; to drain before proceeding. You might have to wait a little bit for the connections of your application to cycle over to the new database, but you can monitor this in CloudWatch, or force the cycle (i.e., restart Rails Unicorn servers). Don&amp;rsquo;t forget to resume any background queues. After sufficient time, you can decommission the old database resources.&lt;/p&gt;
 
 &lt;p&gt;In the event that the migration doesn&amp;rsquo;t go as planned, it is possible to revert back to the old database. The only issue is that any write data that occurred during the migration process (i.e., only on the Aurora database) wouldn&amp;rsquo;t be present on the old database (i.e., PostgreSQL database). This is simply an issue that cannot be worked around, and hopefully, the low activity period reduces the amount of data loss.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>iTerm2 Mouseless Copy</title>
-    <link rel="alternate" href="https://kevinjalbert.com/iterm2-mouseless-copy/"/>
-    <id>https://kevinjalbert.com/iterm2-mouseless-copy/</id>
-    <updated>2018-12-29T20:38:13-05:00</updated>
-    <published>2018-05-06T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Learn how to keep your hands on the keyboard, and accomplish mouseless selection and copying in iTerm2. We explore the find and copy approach, along with iTerm2's copy mode.</description>
-    <content type="html">&lt;p&gt;Where possible, I try to avoid using the mouse. I heavily use &lt;a href="https://www.vim.org/"&gt;Vim&lt;/a&gt; while editing which allows for keyboard navigation. I have taken such a liking to the Vim keyboard-bindings that I even use  &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en"&gt;Vimium (a Google Chrome extension)&lt;/a&gt; for keyboard-driven navigation in my browser (for as much as I can). In addition, I use &lt;a href="https://itunes.apple.com/ca/app/bettersnaptool/id417375580"&gt;BetterSnapTool&lt;/a&gt; for MacOS, which allows me to move/resize windows around solely from my keyboard.&lt;/p&gt;
-
-&lt;p&gt;One optimization within my terminal that I have been avoiding is &lt;a href="https://github.com/tmux/tmux"&gt;tmux&lt;/a&gt; &amp;ndash; it is unnecessarily complicated for what I need. For the most part, I am able to use &lt;a href="https://www.iterm2.com/"&gt;iTerm2&lt;/a&gt; to open tabs, split panes and navigate around. To be honest, I don&amp;rsquo;t really need the session keeping functionality that tmux or &lt;a href="http://www.gnu.org/software/screen/"&gt;screen&lt;/a&gt; provided. The big gain I was missing from tmux was the famed &lt;a href="https://minimul.com/increased-developer-productivity-with-tmux-part-8.html"&gt;copy mode&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;A quick snippet from &lt;a href="https://www.iterm2.com/documentation-highlights.html"&gt;iTerm2&amp;rsquo;s documentation of highlights&lt;/a&gt; for text selection:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;You can use the mouse.&lt;/li&gt;
-&lt;li&gt;You can use the find feature&amp;rsquo;s &amp;ldquo;mouseless copy&amp;rdquo; feature.&lt;/li&gt;
-&lt;li&gt;You can use Copy Mode.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The first one we&amp;rsquo;re not interested in as it&amp;rsquo;s the &lt;em&gt;standard&lt;/em&gt; way to select and copy text. We will cover others two in the sections that follow.&lt;/p&gt;
-
-&lt;h2&gt;Find and Copy&lt;/h2&gt;
-
-&lt;p&gt;So one approach to copying anything within the iTerm2&amp;rsquo;s session is to use the default &lt;em&gt;search&lt;/em&gt;. It is an interesting approach, to say the least:&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="648" height="445" src="/images/2018-05-06-iterm2-mouseless-copy/search-copy.gif" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Essentially, you initiate the search with &lt;em&gt;cmd+f&lt;/em&gt; and you can use the &lt;em&gt;enter&lt;/em&gt; and &lt;em&gt;tab&lt;/em&gt; to move your selection around and to control how much of the text you want in your selection. It works in a pinch, but if you mess up the amount of text in your selection, you basically have to restart the process. In addition, I found the &lt;em&gt;shift+tab&lt;/em&gt; command cycled the selected search result, leading to some confusion.&lt;/p&gt;
-
-&lt;p&gt;To be honest, I don&amp;rsquo;t use this search copying approach very often. I find it difficult to get right, as you cannot really afford any mistakes. The following is a summary of this approach:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Searching for some text using &lt;em&gt;cmd+f&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Use &lt;em&gt;enter&lt;/em&gt; to move to the next search result.&lt;/li&gt;
-&lt;li&gt;Use &lt;em&gt;shift+enter&lt;/em&gt; to move to the previous search result.&lt;/li&gt;
-&lt;li&gt;Navigate until you are on the desired location.&lt;/li&gt;
-&lt;li&gt;Use &lt;em&gt;tab&lt;/em&gt; to expand your search to the next word.&lt;/li&gt;
-&lt;li&gt;Use &lt;em&gt;shift+tab&lt;/em&gt; to expand your search to the previous word.
-
-&lt;ul&gt;
-&lt;li&gt;Although it moves to the previous search result if one exists.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;When your search term is selected, use &lt;em&gt;cmd+c&lt;/em&gt; to copy the selection.&lt;/li&gt;
-&lt;li&gt;Use &lt;em&gt;esc&lt;/em&gt; to exit search, and now you have the selection in your clipboard.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Copy Mode&lt;/h2&gt;
-
-&lt;p&gt;This iTerm2 mode attempts to emulate as much of the tmux copy mode as possible, allowing you to make text selections using the keyboard. It is a &lt;em&gt;mode&lt;/em&gt; very much like Vim&amp;rsquo;s &lt;em&gt;insert&lt;/em&gt; and &lt;em&gt;normal&lt;/em&gt; modes. It is important to note that the session within the pane will stop updating when you enter copy mode.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="648" height="445" src="/images/2018-05-06-iterm2-mouseless-copy/copy-mode.gif" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I highly recommend reading the &lt;a href="https://www.iterm2.com/documentation-copymode.html"&gt;documentation on iTerm2&amp;rsquo;s copy mode&lt;/a&gt; as it completely covers the keyboard shortcuts and features. Copy mode, in my opinion, is the superior of the two approaches for mouseless copying. I highly recommend giving it a shot the next time you reach for your mouse. The following is a quick summary of copy mode:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Enter copy mode with &lt;em&gt;cmd+shift+c&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Basic Vim keybinding, many keystrokes can active different actions.
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;v&lt;/em&gt; to select by character.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;shift+v&lt;/em&gt; to select by line.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;ctrl+v&lt;/em&gt; for rectangular selection.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;ctrl+space&lt;/em&gt; to stop selecting.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;y&lt;/em&gt; to yank/copy the selection (also exits copy mode).&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;q&lt;/em&gt; to exit copy mode.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Can chain off of iTerm2&amp;rsquo;s search feature.&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

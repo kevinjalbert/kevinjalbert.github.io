@@ -2,16 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-01-30T18:53:20-05:00</updated>
+  <updated>2019-02-28T18:53:20-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Decompressing when Working Remotely</title>
+    <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
+    <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
+    <updated>2019-02-28T08:32:29-05:00</updated>
+    <published>2019-02-28T18:53:20-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Working in an office comes with built-in stress relievers, namely social lunchtime with peers and the commute. When working remotely, it is important to ensure your day includes opportunities to decompress from the stresses of work. Learn about my process for decompressing at home.</description>
+    <content type="html">&lt;p&gt;At the start of this year, I switched jobs. I intentionally aimed for a remote position so I could reclaim approximately 3 hours of my day from commuting. I have a toddler at home and being able to have more time with him is important to me. I have been in situations at my previous job where I would leave before he would wake up and be back home after he is sleeping. I now have the freedom and flexibility to be present for my son, as well as the opportunity to have lunch with my family.&lt;/p&gt;
+
+&lt;p&gt;Early on, I noticed that I missed certain aspects of my old commute. I was able to decompress in the time between finishing work and being home with my family. I feel the effects of stress when rushed or pressed for time. Since it takes about 20 seconds to go from my office to the main living area, my mind might be still with work without the time to decompress &amp;ndash; this isn&amp;rsquo;t good for my family or myself.&lt;/p&gt;
+
+&lt;h1&gt;Make Boundaries with Time Blocking&lt;/h1&gt;
+
+&lt;p&gt;&lt;img width="1135" height="940" src="/images/2019-02-28-decompressing-when-working-remotely/time-blocking.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The above screenshot shows a typical afternoon for me. Let me break down the two important events we can see here.&lt;/p&gt;
+
+&lt;h2&gt;Lunch&lt;/h2&gt;
+
+&lt;p&gt;It can be easy to just eat at your desk quickly and keep on working. Working from home presents unique ways to handle your lunchtime. Offices have built-in mechanisms to relieve stress, like ranting to a colleague about the problem you&amp;rsquo;re hitting, socializing humor and antics, off-topic conversations, etc. For me, it&amp;rsquo;s about making the best use of my time as a dedicated break to relax the brain.&lt;/p&gt;
+
+&lt;p&gt;I took an example from &lt;a href="https://twitter.com/mitchellh/status/1074709385266442246"&gt;Mitchell Hashimoto to block time for lunch&lt;/a&gt;. That time block can move, but I try to ensure that I take an actual lunch. This is time is where I can focus on my family without work distractions (i.e., email and slack) and be present mentally. In the event that I&amp;rsquo;m home alone, I&amp;rsquo;ll eat and read, I&amp;rsquo;ll do some chores or tidying on the main floor while listening to a podcast, and still take the full lunch hour.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m hoping to loop in some regular lunch outings with a remote friend in the neighbourhood who also works in the software domain. I suspect this will help us both get out of the house and provide a listening ear.&lt;/p&gt;
+
+&lt;h2&gt;Decompress&lt;/h2&gt;
+
+&lt;p&gt;At the end of my day, I slot in a 30-minute block of time to decompress. This to me is where I&amp;rsquo;ve reconstructed a &lt;em&gt;fake commute&lt;/em&gt; to detach from work thoughts. I&amp;rsquo;ve been experimenting and feel that these three steps work best for me:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Wrap up the current task. Ideally, this takes less than 10 minutes, as I&amp;rsquo;m simply getting to a checkpoint in my current task. There is a conscious effort to not dive deeper into things, so a natural endpoint will occur quickly.&lt;/li&gt;
+&lt;li&gt;Leave a note on what to start with when I get back to work the next day. This should take less than 5 minutes, as I&amp;rsquo;m dumping context in my scratchpad (within &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;Mindfulness exercise (i.e., I&amp;rsquo;m using &lt;a href="https://insighttimer.com/"&gt;Insight Timer&lt;/a&gt;) to clear the mind. This should occupy at least 10 minutes. I&amp;rsquo;m rather new to practicing mindfulness but it is something I am making a part of my day-to-day routine. Ending my work day with this helps me to be more present with my family.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Iterate and Improve&lt;/h1&gt;
+
+&lt;p&gt;The above are techniques and strategies I&amp;rsquo;ve put in place to help decompress while working from home. I make it a habit to try and improve my processes, so the same applies here as well. I&amp;rsquo;ll continue to tweak and experiment with the way I handle decompression time when working from home. I highly encourage the same for you; as you never know what you might be missing if you don&amp;rsquo;t try.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -130,7 +173,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -202,7 +245,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -331,7 +374,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -396,7 +439,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -492,7 +535,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -626,7 +669,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -805,7 +848,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -990,7 +1033,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1281,7 +1324,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
+    <updated>2019-02-26T10:32:39-05:00</updated>
     <published>2018-07-15T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1409,389 +1452,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Migrating PostgreSQL to Aurora with near Zero-Downtime</title>
-    <link rel="alternate" href="https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/"/>
-    <id>https://kevinjalbert.com/migrate-postgresql-to-aurora-with-near-zero-downtime/</id>
-    <updated>2019-02-25T08:53:04-05:00</updated>
-    <published>2018-06-30T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">The goal here is to migrate an Amazon Web Services Relational Database Service PostgreSQL Database to Aurora with as little downtime as possible. The following documents the initial strategy that was considered using read replica promotion, followed by the end result using AWS's Database Migration Service.</description>
-    <content type="html">&lt;p&gt;The goal here is to migrate an Amazon Web Services (AWS) Relational Database Service (RDS) PostgreSQL Database to Aurora with as little downtime as possible. The following documents the initial strategy that was considered using read replica promotion, followed by the end result using AWS&amp;rsquo;s Database Migration Service (DMS).&lt;/p&gt;
-
-&lt;h1&gt;Why Aurora&lt;/h1&gt;
-
-&lt;p&gt;From the &lt;a href="https://aws.amazon.com/rds/aurora/details/"&gt;Aurora Details Page&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Amazon Aurora is designed to offer greater than 99.99% availability, increasing MySQL and PostgreSQL performance and availability by tightly integrating the database engine with an SSD-backed virtualized storage layer purpose-built for database workloads. Amazon Aurora&amp;rsquo;s storage is fault-tolerant and self-healing and disk failures are repaired in the background without loss of database availability. Amazon Aurora is designed to automatically detect database crashes and restart without the need for crash recovery or to rebuild the database cache. If the entire instance fails, Amazon Aurora will automatically fail over to one of up to 15 read replicas.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Essentially, better performance, reliability, and the ability to scale.&lt;/p&gt;
-
-&lt;p&gt;Our configuration changes become easier. Aurora acts as a cluster, so we have two endpoints to deal with, and the replicas underneath will adjust dynamically. We use &lt;a href="https://github.com/taskrabbit/makara"&gt;Makara&lt;/a&gt; to spread our database queries between our master and slaves. With RDS PostgreSQL we would have to enumerate all our slave databases so we could take advantage of the replicas. If we added a new replica, we would have to adjust our configuration to take advantage of it. With Aurora, we have two endpoints to deal with now (primary/writer and a read-only URL). These endpoints will dynamically rotate between the available instances that fall under that cluster URL. This is great as it handles a failover to a different primary database, or changing the number of replicas. Effectively, we end up with less configuration, but we still need Makara to direct our write and read queries to the two cluster URLs.&lt;/p&gt;
-
-&lt;h1&gt;Migration Approaches&lt;/h1&gt;
-
-&lt;p&gt;As mentioned earlier, there are two approaches to doing this migration. First, we&amp;rsquo;ll cover the &lt;em&gt;recommended&lt;/em&gt; approach that AWS suggested as we&amp;rsquo;re on the RDS platform. As we&amp;rsquo;ll cover, it is easy and quick but it does incur downtime during the migration. The second approach uses DMS and was brought up to us after opening a support ticket with AWS on how to do our migration with zero downtime.&lt;/p&gt;
-
-&lt;h2&gt;Read Replica Promotion&lt;/h2&gt;
-
-&lt;p&gt;This is the &lt;em&gt;recommended&lt;/em&gt; approach for migrating from PostgreSQL to Aurora. It is easy and has a little risk (during the migration), although it has unavoidable downtime.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create an Aurora read replica off of your master database.&lt;/li&gt;
-&lt;li&gt;Pause the master PostgreSQL database.
-
-&lt;ul&gt;
-&lt;li&gt;This is done so that the no additional write changes are occurring (as it won&amp;rsquo;t be replicated to the Aurora read replica during the promotion process).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Promote the Aurora read replica.
-
-&lt;ul&gt;
-&lt;li&gt;This takes about 10-20 minutes (at least in our experience).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Deploy app configuration changes to use new Aurora cluster for write/reads.&lt;/li&gt;
-&lt;li&gt;Immediately start building additional read replicas to match existing number.
-
-&lt;ul&gt;
-&lt;li&gt;Each one takes about 5-10 minutes to create (at least in our experience).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;When happy with the new setup, remove/delete the old databases.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It is &lt;em&gt;recommended&lt;/em&gt; to do a dry run of the promotion (and just throw it away afterwards) to gauge how long that process takes.&lt;/p&gt;
-
-&lt;p&gt;The issue here is that you have:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Downtime due to the promotion process. You need to prevent writes from happening on the master. Replication between the PostgreSQL master and the Aurora read replica breaks when the promotion process starts.&lt;/li&gt;
-&lt;li&gt;Immediately after you have your new Aurora master, you need to start building read replicas up.
-
-&lt;ul&gt;
-&lt;li&gt;In our case, we would want to match our existing number of replicas. So this would take additional time. Otherwise, you possibly run the risk of overwhelming the Database without those read replicas up.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;One good thing is that even with the downtime the old read replicas will continue to serve up &lt;code&gt;GET&lt;/code&gt; requests. In addition, any CDN/&lt;a href="https://varnish-cache.org/"&gt;Varnish&lt;/a&gt; caching will also help serve stale data during the downtime.&lt;/p&gt;
-
-&lt;h2&gt;Full Load and Ongoing Replication with DMS&lt;/h2&gt;
-
-&lt;p&gt;This approach is much more involved and finicky, but it does offer a &lt;em&gt;near&lt;/em&gt; zero-downtime migration strategy. The general process here is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create an Aurora read replica (this is so we can keep the DB schema)&lt;/li&gt;
-&lt;li&gt;Promote Aurora read replica so it is on its own&lt;/li&gt;
-&lt;li&gt;Tweak settings on PostgreSQL DB&lt;/li&gt;
-&lt;li&gt;Setup DMS Endpoints for the original PostgreSQL and Aurora databases&lt;/li&gt;
-&lt;li&gt;Setup DMS Replication Instance to assist in the migration&lt;/li&gt;
-&lt;li&gt;Setup DMS Task to use the endpoints and the replication instance&lt;/li&gt;
-&lt;li&gt;Truncate Aurora data (we want to wipe the data, but we keep the schema)&lt;/li&gt;
-&lt;li&gt;Initiate the migration
-
-&lt;ul&gt;
-&lt;li&gt;The first phase is a &lt;em&gt;full load&lt;/em&gt; of the tables from the source to the target&lt;/li&gt;
-&lt;li&gt;The second phase is an &lt;em&gt;on-going replication&lt;/em&gt; of changes from the source to the target&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Both DBs are in-sync now&lt;/li&gt;
-&lt;li&gt;Create read replicas off of the Aurora master&lt;/li&gt;
-&lt;li&gt;Change app configuration to point to Aurora cluster&lt;/li&gt;
-&lt;li&gt;Delete old DBs&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This is a multi-part process, so the following sections will walk through each part.&lt;/p&gt;
-
-&lt;h3&gt;Setting up Aurora Read Replica&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create an Aurora read replica of the PostgreSQL database
-
-&lt;ul&gt;
-&lt;li&gt;Name it something like &lt;code&gt;&amp;lt;service&amp;gt;—&amp;lt;environment&amp;gt;-aurora&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;By creating an Aurora instance, we also get an Aurora cluster (i.e., &lt;code&gt;&amp;lt;service&amp;gt;—&amp;lt;environment&amp;gt;-aurora-cluster&lt;/code&gt;)
-
-&lt;ul&gt;
-&lt;li&gt;Ensure the subnet group and the security groups are set to the same values as defined for the PostgreSQL DB.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;You don&amp;rsquo;t need to have multi-AZ here, Aurora will handle fast failover if we have a replica&lt;/li&gt;
-&lt;li&gt;Additional read replicas can then be added later using &lt;code&gt;&amp;lt;service&amp;gt;—&amp;lt;environment&amp;gt;-aurora-&amp;lt;##&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;At this point, we will have an Aurora read replica that is receiving replicated data changes off the master.&lt;/p&gt;
-
-&lt;h3&gt;Aurora Read Replica Promotion&lt;/h3&gt;
-
-&lt;p&gt;To isolate our newly created Aurora read replica so it can be its own master, we&amp;rsquo;re going to promote the replica. This process allows the instance to receive writes, and be the master for other replicas. We need to do this as otherwise we are limited to only one Aurora read replica off of a PostgreSQL master database. By starting the promotion process the on-going replication is broken between the PostgreSQL and Aurora databases.&lt;/p&gt;
-
-&lt;h3&gt;Tweak the Database Parameters&lt;/h3&gt;
-
-&lt;p&gt;To enable the ability for PostgreSQL to replicate to Aurora we need to make sure we have certain database parameters set.&lt;/p&gt;
-
-&lt;h4&gt;Configure PostgreSQL for Replication&lt;/h4&gt;
-
-&lt;p&gt;The first thing you need to do is change the &lt;code&gt;rds.logical_replication&lt;/code&gt; parameter to 1. As described in &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.RDSPostgreSQL"&gt;the documentation&lt;/a&gt; this parameter actually configures additional related parameters that allow the replication to process:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;As part of applying this parameter, AWS DMS sets the &lt;code&gt;wal_level&lt;/code&gt;, &lt;code&gt;max_wal_senders&lt;/code&gt;, &lt;code&gt;max_replication_slots&lt;/code&gt;, and &lt;code&gt;max_connections&lt;/code&gt; parameters.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Another parameter configuration that &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.Prerequisites"&gt;Amazon recommends&lt;/a&gt; is to set &lt;code&gt;wal_sender_timeout&lt;/code&gt; to 0.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The &lt;code&gt;wal_sender_timeout&lt;/code&gt; parameter terminates replication connections that are inactive longer than the specified number of milliseconds. Although the default is 60 seconds, we recommend that you set this parameter to zero, which disables the timeout mechanism.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Without setting the timeout parameter, the streaming of Write-Ahead Logging (WAL) files can be terminated if the sender is under load and does not send a WAL file within the timeout period. To prevent any risk of this it is best to disable it during the on-going replication phase of the migration process.&lt;/p&gt;
-
-&lt;p&gt;There are additional &lt;code&gt;wal&lt;/code&gt; settings available, but we &lt;em&gt;shouldn&amp;rsquo;t&lt;/em&gt; need to configure them.&lt;/p&gt;
-
-&lt;h4&gt;Configure Aurora for Replication&lt;/h4&gt;
-
-&lt;p&gt;On the Aurora instance, we want to limit any foreign key constraints from triggering as the full loads for tables are occurring. Fortunately, if we change the &lt;code&gt;session_replication_role&lt;/code&gt; parameter to &lt;code&gt;replica&lt;/code&gt;, it only keeps &lt;em&gt;replica&lt;/em&gt; related constraint triggers active. This effectively disables foreign key constraints for us.&lt;/p&gt;
-
-&lt;h3&gt;Create Replication Instance&lt;/h3&gt;
-
-&lt;p&gt;DMS uses a dedicated &lt;em&gt;replication instance&lt;/em&gt; to help facilitate the migration process. In a PostgreSQL to Aurora migration, this machine is responsible for connecting to both the source and target databases and transforming and transferring the data.&lt;/p&gt;
-
-&lt;p&gt;The following steps expand on what is needed to set up a replication instance for the migration.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Create a replication instance under DMS
-
-&lt;ul&gt;
-&lt;li&gt;Name it as specific as possible for its purpose (i.e., production-api-replication-instance)&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;Instance Size&lt;/em&gt; might need to be tweaked based on various factors (&lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"&gt;documentation on instance sizes&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;For example, in our staging we used &lt;code&gt;dms.t2.large&lt;/code&gt;, while for production we used &lt;code&gt;dms.c4.large&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Set the &lt;em&gt;VPC&lt;/em&gt; to the same as the source and target databases&lt;/li&gt;
-&lt;li&gt;Enable &lt;em&gt;Multi-AZ&lt;/em&gt; as it is needed for on-going replication&lt;/li&gt;
-&lt;li&gt;The instance doesn’t need to be &lt;em&gt;Publicly Accessible&lt;/em&gt; (as the internal connections are done within the VPC)&lt;/li&gt;
-&lt;li&gt;Ensure the &lt;em&gt;VPC Security Group&lt;/em&gt; under &lt;em&gt;Advance&lt;/em&gt; is set to &lt;code&gt;default&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;This allows for connections between the databases and the replication instance&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Create Source and Target Endpoints&lt;/h3&gt;
-
-&lt;p&gt;We need to define the &lt;em&gt;endpoints&lt;/em&gt; of our databases in DMS. One to represent the source database (PostgreSQL) and another to represent the target database (Aurora). The following steps are to be applied to each endpoint.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;em&gt;Server Name&lt;/em&gt; is the DB’s endpoint (i.e., the connection URL)
-
-&lt;ul&gt;
-&lt;li&gt;You cannot use a read replica as your source (it does not support on-going replication)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;User&lt;/em&gt; and &lt;em&gt;Password&lt;/em&gt; are for the master user account of the database
-
-&lt;ul&gt;
-&lt;li&gt;The account &lt;em&gt;needs&lt;/em&gt; to be the master account. Otherwise, you need to follow the additional instructions listed in the &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.RDSPostgreSQL"&gt;documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;Password&lt;/em&gt; cannot have certain characters (&lt;code&gt;: ; + %&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Test the endpoint
-
-&lt;ul&gt;
-&lt;li&gt;After a success ensure you refresh the schema&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Create Task&lt;/h3&gt;
-
-&lt;p&gt;The DMS &lt;em&gt;task&lt;/em&gt; is where we actually configure and use the &lt;em&gt;endpoints&lt;/em&gt; and &lt;em&gt;replication instance&lt;/em&gt; to accomplish the migration. There are a couple of options and considerations to be made while creating a task. The following steps outline how to create a task, and the settings to configure:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Use the &lt;em&gt;source and target endpoints&lt;/em&gt; along with the &lt;em&gt;replica instance&lt;/em&gt; that was created for this migration task&lt;/li&gt;
-&lt;li&gt;Set the &lt;em&gt;Migration type&lt;/em&gt; to &lt;code&gt;Migrate existing data and replicate ongoing changes&lt;/code&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This ensures that we are doing the 2 phase approach:&lt;/li&gt;
-&lt;li&gt;Doing a full-load of the table&amp;rsquo;s data&lt;/li&gt;
-&lt;li&gt;Doing on-going replication of changes on the source database&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Target table preparation mode&lt;/em&gt; should be &lt;code&gt;Do nothing&lt;/code&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The reason here is that we want to preserve the table&amp;rsquo;s metadata (i.e., indexes, defaults, constraints)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Truncate&lt;/code&gt; could work, but is likely to fail due to constraints in the database&lt;/li&gt;
-&lt;li&gt;Remember that by using &lt;code&gt;Do nothing&lt;/code&gt; the target database needs to be truncated manually prior to running the task&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Stop task after full load completes&lt;/em&gt; should be set to &lt;code&gt;Don&amp;#39;t stop&lt;/code&gt;.
-
-&lt;ul&gt;
-&lt;li&gt;This ensures the on-going replication process starts immediately when a table is fully loaded&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;For the table mappings, we want to migrate all tables (i.e., &lt;code&gt;where schema name is like &amp;#39;public&amp;#39; and table name is like &amp;#39;%&amp;#39;, include&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;It is useful to enable the &lt;em&gt;validation&lt;/em&gt; and &lt;em&gt;logging&lt;/em&gt; to see how things are progressing during the migration&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;em&gt;Include LOB columns in replication&lt;/em&gt; is an interesting setting, LOBs are &lt;em&gt;Large Objects&lt;/em&gt; that exist during the migration. As DMS is possibly migrating to a different database type a transformation of data types occurs. To understand what we&amp;rsquo;re dealing with you need to look up the source database&amp;rsquo;s supported types in the documentation. For example, using the DMS documentation you can see what &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.DataTypes"&gt;PostgreSQL data types&lt;/a&gt; end up being LOBs.&lt;/p&gt;
-
-&lt;p&gt;The following section will dig a little deeper into LOBs and the considerations that need to be considered.&lt;/p&gt;
-
-&lt;h4&gt;Full or Limited LOB Mode&lt;/h4&gt;
-
-&lt;p&gt;There are two options for handling LOBs during the migration: &lt;em&gt;Full&lt;/em&gt; or &lt;em&gt;Limited&lt;/em&gt; LOB Mode. LOBs are potentially massive objects that reside in the database, and they normally don&amp;rsquo;t have a fixed size in the column. The following &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.LOBSupport.html"&gt;documentation&lt;/a&gt; describes the two options:&lt;/p&gt;
-
-&lt;p&gt;DMS provides you with the &lt;em&gt;Full LOB Mode&lt;/em&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;In full LOB mode, AWS DMS migrates all LOBs from source to target regardless of size. In this configuration, AWS DMS has no information about the maximum size of LOBs to expect. Thus, LOBs are migrated one at a time, piece by piece. Full LOB mode can be quite slow.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;DMS also provides the &lt;em&gt;Limited LOB Mode&lt;/em&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;In limited LOB mode, you set a maximum size LOB that AWS DMS should accept. Doing so allows AWS DMS to pre-allocate memory and load the LOB data in bulk. LOBs that exceed the maximum LOB size are truncated and a warning is issued to the log file. In limited LOB mode, you get significant performance gains over full LOB mode. We recommend that you use limited LOB mode whenever possible.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Initially, it makes sense to just use &lt;em&gt;Full LOB Mode&lt;/em&gt; as it&amp;rsquo;ll preserve data by migrating LOBs regardless of size. The big issue with this choice is &lt;em&gt;speed&lt;/em&gt;. In our migration, we achieve full migration in 2 hours using &lt;em&gt;Limited LOB Mode&lt;/em&gt; and we estimated about 90 hours using &lt;em&gt;Full LOB Mode&lt;/em&gt;. The issue with using &lt;em&gt;Limited LOB Mode&lt;/em&gt; is that you can essentially lose data if the LOB&amp;rsquo;s size is less than the &lt;code&gt;Max LOB Size&lt;/code&gt; parameter.&lt;/p&gt;
-
-&lt;p&gt;To work around this concern, the plan is to determine the max LOB size in the database and set the &lt;code&gt;Max LOB Size&lt;/code&gt; to slightly bigger than that value (i.e., multiply it by 2). By using a larger &lt;code&gt;Max LOB Size&lt;/code&gt; than the largest LOB we have in the database, we are ensured to have the full data migrated without any data loss.&lt;/p&gt;
-
-&lt;p&gt;A manual way to check for the size of a LOB column is to use the following query: &lt;code&gt;SELECT max(pg_column_size(column_name)) FROM table_name;&lt;/code&gt;. This will return the max number of bytes used in that column. This is the value you&amp;rsquo;ll want to be larger than. The following is a Rails rake task that walks through every table&amp;rsquo;s column and identifies the max sizes for any LOB column (for PostgreSQL):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="n"&gt;namespace&lt;/span&gt; &lt;span class="ss"&gt;:scripts&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;desc&lt;/span&gt; &lt;span class="s1"&gt;'Print out the max size of LOBs in the database. Usage: bin/rake scripts:max_lob_size'&lt;/span&gt;
-  &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="ss"&gt;max_lob_size: :environment&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-
-    &lt;span class="no"&gt;LOB_TYPES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sx"&gt;%w(
-      hstore
-      composite
-      array
-      jsonb
-      json
-      polygon
-      path
-      xml
-      tsquery
-      tsvector
-      bytea
-      text
-    )&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;freeze&lt;/span&gt;
-
-    &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;tables&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="k"&gt;next&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;table_name&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'schema_migrations'&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;starts_with?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'awsdms_'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-      &lt;span class="n"&gt;columns_sql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;~&lt;/span&gt;&lt;span class="no"&gt;HEREDOC&lt;/span&gt;&lt;span class="sh"&gt;
-        SELECT *
-        FROM information_schema.columns
-        WHERE table_schema = 'public'
-          AND table_name   = '&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;'
-&lt;/span&gt;&lt;span class="no"&gt;      HEREDOC&lt;/span&gt;
-
-      &lt;span class="n"&gt;columns_results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns_sql&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-      &lt;span class="n"&gt;columns_results&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-        &lt;span class="n"&gt;column_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'column_name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-        &lt;span class="n"&gt;column_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'data_type'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;LOB_TYPES&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;include?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;column_type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-          &lt;span class="n"&gt;size_sql&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;~&lt;/span&gt;&lt;span class="no"&gt;HEREDOC&lt;/span&gt;&lt;span class="sh"&gt;
-            SELECT max(pg_column_size(&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;column_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;)) FROM &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;;
-&lt;/span&gt;&lt;span class="no"&gt;          HEREDOC&lt;/span&gt;
-          &lt;span class="n"&gt;size_results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;connection&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size_sql&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-          &lt;span class="n"&gt;table_hash&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;table_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_sym&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-          &lt;span class="n"&gt;column_hash&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;table_hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;column_name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_sym&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-
-          &lt;span class="n"&gt;column_hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:column_type&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;column_type&lt;/span&gt;
-          &lt;span class="n"&gt;column_hash&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:max_bytes_size&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;size_results&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'max'&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;to_i&lt;/span&gt;
-        &lt;span class="k"&gt;end&lt;/span&gt;
-
-        &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;'.'&lt;/span&gt;
-      &lt;span class="k"&gt;end&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Raw Dump"&lt;/span&gt;
-    &lt;span class="n"&gt;pp&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;
-
-    &lt;span class="n"&gt;max_bytes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:max_bytes_size&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}.&lt;/span&gt;&lt;span class="nf"&gt;compact&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;max&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Max bytes found in a LOB column is &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;max_bytes&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4&gt;LOB Nullability Constraints&lt;/h4&gt;
-
-&lt;p&gt;There are some concerns with &lt;code&gt;NOT NULL&lt;/code&gt; database constraints on columns that become LOBs during the migration. DMS has a certain process for dealing with tables with LOBs:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The data for each column in a row is added, except for LOB columns&lt;/li&gt;
-&lt;li&gt;LOB columns are left with a &lt;code&gt;null&lt;/code&gt; placeholder&lt;/li&gt;
-&lt;li&gt;Afterwards, LOB data replaces the &lt;code&gt;null&lt;/code&gt; placeholders&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This two-step process of dealing with LOB data types is where we have to be concerned with &lt;code&gt;NOT NULL&lt;/code&gt; constraints. The migration will fail if any LOB columns have a &lt;code&gt;NOT NULL&lt;/code&gt; constraint. In PostgreSQL, a common case of LOBs is &lt;code&gt;jsonb&lt;/code&gt; and &lt;code&gt;array&lt;/code&gt; columns. So we have to &lt;em&gt;remove&lt;/em&gt; these constraints on the target database just until the full table load phase is done. For example, the following statement would do the trick, &lt;code&gt;ALTER TABLE my_table ALTER COLUMN lob_column DROP NOT NULL;&lt;/code&gt;. Do not forget to add the &lt;code&gt;NOT NULL&lt;/code&gt; constraints back after the full table load phase is done.&lt;/p&gt;
-
-&lt;h3&gt;Migration Time&lt;/h3&gt;
-
-&lt;p&gt;At this point, the migration process is pretty much ready! Let&amp;rsquo;s break the process up into before/during/after migration.&lt;/p&gt;
-
-&lt;h4&gt;Before Migration&lt;/h4&gt;
-
-&lt;p&gt;Make sure that the:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The DMS endpoints, task and replication instance are present and configured&lt;/li&gt;
-&lt;li&gt;The Aurora instance is ready:
-
-&lt;ul&gt;
-&lt;li&gt;Truncated data&lt;/li&gt;
-&lt;li&gt;Disabled LOB nullability constraints&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;One thing that is suggested is to run &lt;code&gt;Assess&lt;/code&gt; on the task so you can get a report of potential issues. In our case, there were a couple of &lt;em&gt;Partially supported datatypes : float8&lt;/em&gt; on a few columns. This ended up changing the rounding of floats (i.e., 1.4999999998 &amp;ndash;&amp;gt; 1.5). It is worth noting that these differences occur after the migration process is completed and changes are being done on the new database type.&lt;/p&gt;
-
-&lt;p&gt;For the migration, ideally, it is done during a &lt;em&gt;low&lt;/em&gt; activity period. In addition, if possible stop any background jobs just before the migration, and wait for the current jobs to finish. The jobs can resume processing after the migration, this is to reduce risk.&lt;/p&gt;
-
-&lt;h4&gt;During Migration&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Keep an eye on the source database&amp;rsquo;s health
-
-&lt;ul&gt;
-&lt;li&gt;There will be additional load placed on it during the migration&lt;/li&gt;
-&lt;li&gt;If needed you could always lower the number of tables loaded in parallel during the &lt;em&gt;full load&lt;/em&gt; phase (under the advanced settings in the &lt;em&gt;Task&lt;/em&gt;)&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Monitor the task&amp;rsquo;s &lt;em&gt;Table Statistics&lt;/em&gt; tab to make sure tables are progressing well&lt;/li&gt;
-&lt;li&gt;Monitor the task&amp;rsquo;s &lt;em&gt;Task Monitoring&lt;/em&gt; tab to make sure the on-going replication is keeping up
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;CDCIncomingChanges&lt;/code&gt; should be as close to 0 as possible&lt;/li&gt;
-&lt;li&gt;During the &lt;em&gt;full load&lt;/em&gt; phase, the &lt;code&gt;CDCIncomingChanges&lt;/code&gt; will climb as the on-going replication changes are stored until the tables have fully loaded into the target database&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Monitor the replication instance&amp;rsquo;s &lt;em&gt;Monitoring&lt;/em&gt; tab to make sure the &lt;code&gt;FreeStorageSpace&lt;/code&gt; and &lt;code&gt;FreeableMemory&lt;/code&gt; are not dropping too low
-
-&lt;ul&gt;
-&lt;li&gt;If any of these are too low then the migration can fail&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The first phase is &lt;em&gt;full table load&lt;/em&gt;, where all the source data is dumped into the target. Be aware that large tables can take some time. After a table has been fully loaded into the target, the on-going replication phase starts for that table.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;on-going replication&lt;/em&gt; phase is where &lt;em&gt;inserts/deletes/updates&lt;/em&gt; are replicated from the source to the target. After all the tables are in this phase (all tables in a &lt;em&gt;Table Completed&lt;/em&gt; state), it is now safe to re-enable the LOB nullability constraints that were disabled earlier.&lt;/p&gt;
-
-&lt;h5&gt;Validations&lt;/h5&gt;
-
-&lt;p&gt;If you have validations enabled for the &lt;em&gt;Task&lt;/em&gt; then the &lt;em&gt;validation&lt;/em&gt; columns in the &lt;em&gt;Table Statistics&lt;/em&gt; will update during the migration. These validations put additional load on the source and target database as the row data is compared after that row has been migrated. It is an on-going validation process.&lt;/p&gt;
-
-&lt;p&gt;Personally, I found the validation to be very flaky. It is either &lt;em&gt;really slow&lt;/em&gt; and it also reports validation errors that are not actual errors. In our case, we didn&amp;rsquo;t pay much attention to the validation failures as spot checking proved that the data was &lt;em&gt;fine&lt;/em&gt;. There were &lt;em&gt;minor&lt;/em&gt; cases where time columns were &lt;em&gt;slightly off&lt;/em&gt;. I am unsure how the validation actually works (i.e., when it does the checks), as the on-going replication could be lagging behind. According to the &lt;a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Validating.html#CHAP_Validating.Limitations"&gt;documentation&lt;/a&gt;, there are some limitations that might prevent it from being that useful:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;If one or more rows are being continuously modified during the validation, then AWS DMS can&amp;rsquo;t validate those rows. However, you can validate those &lt;em&gt;busy&lt;/em&gt; rows manually, after the task completes.&lt;/li&gt;
-&lt;li&gt;If AWS DMS detects more than 10,000 failed or suspended records, it will stop the validation. Before you proceed further, resolve any underlying problems with the data.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In either case under the target&amp;rsquo;s database, there is a new table called &lt;code&gt;awsdms_validation_failures_v1&lt;/code&gt; that contains information on the failures. The &lt;code&gt;KEY&lt;/code&gt; and &lt;code&gt;TABLE_NAME&lt;/code&gt; columns can be used to identify the record in question. It is then possible to check the source and target record and see if there are any issues. One other problem we had with spot-checking validation is that our PostgreSQL database used &lt;code&gt;UUID&lt;/code&gt;s for primary keys, this resulted in the &lt;code&gt;KEY&lt;/code&gt; column having truncated data on the &lt;code&gt;UUID&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4&gt;After Migration&lt;/h4&gt;
-
-&lt;p&gt;Hopefully, the migration went successfully, and both the source and target database are in-sync. At this point, the zero-downtime migration can occur &amp;ndash; simply point the application at the new database. It is advisable to wait for any replication lag or queued up &lt;code&gt;CDCIncomingChanges&lt;/code&gt; to drain before proceeding. You might have to wait a little bit for the connections of your application to cycle over to the new database, but you can monitor this in CloudWatch, or force the cycle (i.e., restart Rails Unicorn servers). Don&amp;rsquo;t forget to resume any background queues. After sufficient time, you can decommission the old database resources.&lt;/p&gt;
-
-&lt;p&gt;In the event that the migration doesn&amp;rsquo;t go as planned, it is possible to revert back to the old database. The only issue is that any write data that occurred during the migration process (i.e., only on the Aurora database) wouldn&amp;rsquo;t be present on the old database (i.e., PostgreSQL database). This is simply an issue that cannot be worked around, and hopefully, the low activity period reduces the amount of data loss.&lt;/p&gt;
 </content>
   </entry>
 </feed>

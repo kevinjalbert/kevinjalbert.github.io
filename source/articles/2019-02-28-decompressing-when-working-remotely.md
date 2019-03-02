@@ -35,7 +35,7 @@ I'm hoping to loop in some regular lunch outings with a remote friend in the nei
 At the end of my day, I slot in a 30-minute block of time to decompress. This to me is where I've reconstructed a _fake commute_ to detach from work thoughts. I've been experimenting and feel that these three steps work best for me:
 
 1. Wrap up the current task. Ideally, this takes less than 10 minutes, as I'm simply getting to a checkpoint in my current task. There is a conscious effort to not dive deeper into things, so a natural endpoint will occur quickly.
-2. Leave a note on what to start with when I get back to work the next day. This should take less than 5 minutes, as I'm dumping context in my scratchpad (within [Notion](https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e)).
+2. Leave a note on what to start with when I get back to work the next day. This should take less than 5 minutes, as I'm dumping context in my scratchpad (within [Notion [Referral Link]](https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e)).
 3. Mindfulness exercise (i.e., I'm using [Insight Timer](https://insighttimer.com/)) to clear the mind. This should occupy at least 10 minutes. I'm rather new to practicing mindfulness but it is something I am making a part of my day-to-day routine. Ending my work day with this helps me to be more present with my family.
 
 # Iterate and Improve

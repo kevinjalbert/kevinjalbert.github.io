@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kevinjalbert.com/about/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/now/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/uses/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</loc>
@@ -137,12 +146,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/synchronizing-my-dotfiles/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/now/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/about/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/graphql/</loc>

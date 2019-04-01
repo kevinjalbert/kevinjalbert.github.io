@@ -2,16 +2,114 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-02-28T18:53:20-05:00</updated>
+  <updated>2019-03-31T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Consuming Content and Managing the Flood</title>
+    <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
+    <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
+    <updated>2019-03-31T23:25:07-04:00</updated>
+    <published>2019-03-31T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">In the software development world, there are always new articles and content to consume. Learn how I keep on top of it all and focus on keeping the flood of information to a sustainable level.</description>
+    <content type="html">&lt;p&gt;For almost a decade, I&amp;rsquo;ve been immersed in the software development world. One single truth that has held on since the beginning is that there are always &lt;em&gt;things to keep up with.&lt;/em&gt; You know what I mean &amp;ndash; it seems like every day there are new frameworks, languages, techniques, and learnings to consume. I have always referred to this constant onslaught of information as &lt;em&gt;the Feed&lt;/em&gt;. This term comes from my original method of corralling the information &amp;ndash; via RSS feeds.&lt;/p&gt;
+
+&lt;p&gt;Early in my journey, I was looking to get up to date on anything and everything. I was grasping for information to consume. As I found sources, I simply latched on to the pipe and drank it all. In most cases this was unsustainable. The classic and best example of this is &lt;a href="https://news.ycombinator.com/"&gt;HackerNews&lt;/a&gt;, which presents a barrage of items every day.&lt;/p&gt;
+
+&lt;p&gt;I want to talk about the techniques I&amp;rsquo;ve adopted to better keep up to date in my field. The following are techniques I&amp;rsquo;ve found and solutions that work for me, but no guarantee they will work for you to the same capacity.&lt;/p&gt;
+
+&lt;h1&gt;Don&amp;rsquo;t Consume Everything&lt;/h1&gt;
+
+&lt;p&gt;Just don&amp;rsquo;t. It&amp;rsquo;s impossible to do so, you&amp;rsquo;ll only end up wasting your time and putting more pressure on yourself. I&amp;rsquo;ve been guilty of trying to stay on top of HackerNews and just drowned in it. It is a struggle if you try to consume everything. Even if you aren&amp;rsquo;t reading every article, you still have to spend the time and effort to determine if this is something you &lt;em&gt;want to read&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;So you don&amp;rsquo;t want to read everything&amp;hellip; how do you determine what to read? I ask the following two questions when I see a headline:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Is this actionable and relevant to me &lt;em&gt;right now?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Is this information that will stand the test of time (i.e., unchanging)?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These rules have some flexibility built-in and will vary by person and by time. If you do adhere to them, hopefully, you find a way to pass over media that you&amp;rsquo;ll get little benefit from. We want to maximize the return on investment when consuming information, everything takes time and effort.&lt;/p&gt;
+
+&lt;h1&gt;Focus on High-Quality Sources&lt;/h1&gt;
+
+&lt;p&gt;Going back to HackerNews, there are tens if not hundreds of links posted a day. Subreddits are another case where there is a large amount of content present daily. Unfortunately, not everything you see will be high-caliber.&lt;/p&gt;
+
+&lt;p&gt;If we think of getting the best return on our investment, we&amp;rsquo;d naturally want to only consume the finest information. To me, this is stuff that other people have found useful, and therefore has been vetted by the community. It is also worth considering content that is &lt;em&gt;gated&lt;/em&gt; by some criteria as this enforces a minimum bar of quality.&lt;/p&gt;
+
+&lt;h2&gt;Newsletters&lt;/h2&gt;
+
+&lt;p&gt;I subscribe to several &lt;em&gt;weekly&lt;/em&gt; newsletters from various sources &amp;ndash; they are curated and present the highlights for that week. The following is a subset of newsletters that I consume weekly.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://softwareleadweekly.com/"&gt;Software Lead Weekly&lt;/a&gt; — People, culture, and leadership&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.gitprime.com/engineering-impact/"&gt;Engineering Impact Newsletter&lt;/a&gt; — Engineering leadership, productivity, culture, and scaling development teams&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hackernewsletter.com/"&gt;Hacker NewsLetter&lt;/a&gt; — The best articles from HackerNews on startups, technology, programming and more&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://changelog.com/weekly"&gt;Changelog Weekly&lt;/a&gt; — Open source community and software development&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://cooperpress.com/publications/"&gt;&lt;em&gt;&amp;lt;tech&amp;gt;&lt;/em&gt; Weekly&lt;/a&gt; — 12 weekly newsletters curated by CooperPress (i.e., Ruby Weekly, JavaScript Weekly, etc&amp;hellip;). Each one is a curated newsletter sharing news, articles, and tutorials in their respective spaces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Recalling our earlier focus on &lt;em&gt;Don&amp;rsquo;t Consume Everything&lt;/em&gt;, we need to be selective even on the curated selections. Newsletters can be a slippery slope as well, as it still depends on how you handle them. In addition, we don&amp;rsquo;t want to &lt;em&gt;subscribe&lt;/em&gt; to everything. Be focused on the relevant and the unchanging. For example, don&amp;rsquo;t subscribe to Mobile Dev newsletters if you aren&amp;rsquo;t actively working in that area &amp;ndash; with any luck, different topics will converge in other areas you are focused on.&lt;/p&gt;
+
+&lt;h2&gt;Blogs&lt;/h2&gt;
+
+&lt;p&gt;Ultimately, a good chunk of content is sourced from the blogs of individuals. In the past, I have subscribed to receive updates from individuals (i.e., via RSS or their own newsletters), although I have started to slowly move away from this approach. It&amp;rsquo;s not uncommon to frequently see articles from an individual appearing in curated newsletters. In rare situations does an individual produce consistent high-quality material that is on-point and unchanging in value.&lt;/p&gt;
+
+&lt;h2&gt;Talks&lt;/h2&gt;
+
+&lt;p&gt;Conference talks are also a great medium to consider as they carry with them a certain level of quality. The same rules as before apply with the selection process. I skim over the titles of a conference talk when it appears on their preferred video hosting platform (i.e., YouTube, or &lt;a href="https://confreaks.tv/"&gt;Confreaks&lt;/a&gt;). I also want to bring up that &lt;a href="https://www.ted.com/talks"&gt;TED Talks&lt;/a&gt; are also a fantastic source of knowledge.&lt;/p&gt;
+
+&lt;h2&gt;Books&lt;/h2&gt;
+
+&lt;p&gt;A tried and tested approach to knowledge transfer is books. Writing a book is a significant undertaking requiring plenty of research and editing, and are also difficult to update after they are published. Given the constraints of books, we are hopeful that they are written to stand the test of time (i.e., the content is unchanging). One other valuable aspect is that book authors often have a unique viewpoint, which led them to write a book. Overall, I think books are a great medium of high-quality content, and there are many great books out there that are recommended.&lt;/p&gt;
+
+&lt;h2&gt;Podcasts&lt;/h2&gt;
+
+&lt;p&gt;The podcasts I listen to traditionally follow the format of a host interviewing a person of interest within the topic&amp;rsquo;s community of the podcast. Podcasts are interesting as their content can vary episode to episode, and can be heavily dependent on the people present. Sometimes there are musings on recent news, sometimes it is dissecting the success of an individual or project. I follow podcasts that are specific to my professional focus, although I&amp;rsquo;ll admit even those offer highly entertaining facets due to the light-hearted nature of interviewing styles.&lt;/p&gt;
+
+&lt;h2&gt;Twitter&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve always found &lt;a href="https://twitter.com/"&gt;Twitter&lt;/a&gt; to be hit-or-miss with respect to content. It&amp;rsquo;s a lot more &lt;em&gt;raw&lt;/em&gt; in nature, and if you&amp;rsquo;re following the right people you do get a glimmer of insight closer to their thought processes. In my opinion, keep Twitter for entertainment, and as a means for social connections. Also from my experience, if a nugget of information is linked to on Twitter, it normally ends up in another medium.&lt;/p&gt;
+
+&lt;h1&gt;Awareness of Emerging Trends&lt;/h1&gt;
+
+&lt;p&gt;To summarize the above, &lt;em&gt;focus on the high-quality content that is deeply relevant and/or unchanging over time&lt;/em&gt;. This brings up an interesting conundrum &amp;ndash; &lt;em&gt;how do we expand our knowledge to new areas?&lt;/em&gt; As previously mentioned, different topics and trends will bleed into each other if they are tangentially related. We can rest assured that we won&amp;rsquo;t be blindsided from an emerging trend.&lt;/p&gt;
+
+&lt;p&gt;I personally like to keep a pulse on emerging trends and technologies. I subscribe to the &lt;a href="https://www.thoughtworks.com/radar"&gt;Technology Radar by ThoughtWorks&lt;/a&gt;, an infrequent but detailed report with insights into the technology and trends shaping the future. To some degree, the trends mentioned in the report help shape new areas that I want to focus on in the near future.&lt;/p&gt;
+
+&lt;h1&gt;Building the Dam&lt;/h1&gt;
+
+&lt;p&gt;To tie everything together, I&amp;rsquo;m going to use the metaphor of a dam.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The flow of water is the content to be consumed.&lt;/li&gt;
+&lt;li&gt;The dam is our process to stop the flood, and only allow high-quality content through at a sustainable rate.&lt;/li&gt;
+&lt;li&gt;The reservoir is the holding area of content before we consume it.&lt;/li&gt;
+&lt;li&gt;The spillway filters out the excess content produced by the flow as it arrives in the reservoir.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The selection process we&amp;rsquo;ve talked about is our dam &amp;ndash; it helps reduce the flow and keeps high-quality content in our reservoir. The flow is composed of content mostly arriving in my email&amp;rsquo;s inbox (via newsletters, and RSS-to-Email). My reservoir is a combination of tools and services: &lt;a href="https://www.instapaper.com"&gt;Instapaper&lt;/a&gt; for individual articles, &lt;a href="https://www.kobo.com/"&gt;Kobo&lt;/a&gt; for books, &lt;a href="https://www.pocketcasts.com/"&gt;Pocket Casts&lt;/a&gt; for podcasts, and a list in &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; for video talks.&lt;/p&gt;
+
+&lt;p&gt;One aspect to be aware of is when the reservoir overflows. It is possible that there is just too much material to cover. There are two ways to correct this:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Be more aggressive with reducing the flow by removing certain sources that aren&amp;rsquo;t adding as much value as others or being stricter on the selection process of content.&lt;/li&gt;
+&lt;li&gt;Actively use a spillway to drain the reservoir by sweeping through the content and discarding things which aren&amp;rsquo;t relevant anymore, or not as impactful.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I plan to post more detailed information regarding my dam, how I manage it, and reasonings for certain decisions. Our information flow/consumption should be as sustainable as a real dam.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2019-02-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -54,7 +152,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -173,7 +271,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -245,7 +343,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -374,7 +472,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -439,7 +537,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -535,7 +633,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -669,7 +767,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -848,7 +946,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1033,7 +1131,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
+    <updated>2019-03-24T12:02:01-04:00</updated>
     <published>2018-07-16T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1309,140 +1407,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;/ul&gt;
 
 &lt;p&gt;We will take a look at the next iteration of our persisted queries implementation, one that&amp;rsquo;ll use synchronization &amp;ndash; using a Rails server backed by a database. We will cover this in the third part of our series.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-</content>
-  </entry>
-  <entry>
-    <title>GraphQL Persisted Queries with HTTP Caching [Part 1]</title>
-    <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/"/>
-    <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-1/</id>
-    <updated>2019-03-24T12:01:34-04:00</updated>
-    <published>2018-07-15T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">This is the first of four parts on GraphQL Persisted Queries with HTTP Caching. We start by describing some problems with GraphQL due to its flexibility, and how we can solve the issues with persisted queries.</description>
-    <content type="html">&lt;p&gt;GraphQL is a fast growing API specification, with aims of replacing REST APIs. A GraphQL server describes the data capabilities through the use of a type system and resolvers. A client is able to send a descriptive GraphQL query of what they want. The structure of the response then matches the query, providing a predictable result. There are many benefits to GraphQL servers and clients, to which I am not going to cover here as there is plenty of material on the Internet talking about those.&lt;/p&gt;
-
-&lt;p&gt;This four-part blog post series is specifically covering the topic of &lt;em&gt;GraphQL Persisted Queries&lt;/em&gt;. A persisted query is a slight modification to the GraphQL specification that allows for better performance and security, at the cost of less flexibility. I will cover a bit of history regarding persisted GraphQL queries, along with the problems it solves. We will look at how to implement persisted queries in Rails and Express. As an extension to persisted queries, we will look at how to adapt them to take advantage of HTTP caching.&lt;/p&gt;
-
-&lt;h1&gt;Problems with GraphQL&lt;/h1&gt;
-
-&lt;p&gt;GraphQL presents a flexible endpoint to which clients can send queries, however, this flexibility comes at a cost. The following three concerns are specifically targeting performance and security:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Queries could be large (i.e., data being sent) when compared to a standard REST endpoint&lt;/li&gt;
-&lt;li&gt;Queries could be inefficiently constructed (i.e., resource expensive)&lt;/li&gt;
-&lt;li&gt;Queries could be maliciously constructed (i.e., circular in nature)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;As a consumer of a GraphQL API, it possible to construct &lt;em&gt;any query&lt;/em&gt; for the server to process. You can hope that the consumers are doing their best to create good queries, but in a public API that might not be the case. You might have ill-informed users creating very expensive queries, or even a bad actor trying to timeout or cripple your server by sending deeply cyclical queries.&lt;/p&gt;
-
-&lt;p&gt;There are several ways to mitigate these issues, as further outlined by &lt;a href="https://twitter.com/mxstbr"&gt;Max Stoiber&amp;rsquo;s&lt;/a&gt; article on &lt;a href="https://dev-blog.apollodata.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b"&gt;&lt;em&gt;Securing Your GraphQL API from Malicious Queries&lt;/em&gt;&lt;/a&gt;. In particular:
- - &lt;em&gt;Depth Limiting&lt;/em&gt;: Rejecting queries which are too deeply nested
- - &lt;em&gt;Amount Limiting&lt;/em&gt;: Rejecting queries which ask for too much information (i.e., via pagination arguments)
- - &lt;em&gt;Query Cost Analysis&lt;/em&gt;: Rejecting queries which are too expensive (by assigning complexity values to fields)
- - &lt;em&gt;Query Whitelisting&lt;/em&gt;: Rejecting queries that are not whitelisted&lt;/p&gt;
-
-&lt;p&gt;I would like to also add &lt;em&gt;Time Limiting&lt;/em&gt;, which would reject queries that take too long to resolve.  &lt;em&gt;Query Whitelisting&lt;/em&gt; is only applicable for private APIs, but otherwise, these are all good approaches for preventing malicious or expensive queries from hitting your API. As per the topic we are covering, we&amp;rsquo;ll focus on Query Whitelisting (otherwise known as Persisted Queries).&lt;/p&gt;
-
-&lt;h1&gt;Persisted Queries&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href="https://twitter.com/leeb/status/829434814402945026"&gt;Facebook has been using persisted queries since 2013&lt;/a&gt;, and comes highly recommended for production usage from them. The essence of a persisted query is that the query is &lt;em&gt;persisted&lt;/em&gt; on the server&amp;rsquo;s side and that a client can &lt;em&gt;reference&lt;/em&gt; it using some unique identifier. A great primer on persisted queries can be found on &lt;a href="https://dev-blog.apollodata.com/persisted-graphql-queries-with-apollo-client-119fd7e6bba5"&gt;Apollo&amp;rsquo;s blog article for this topic&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;For the sake of completeness, I want to demonstrate a scenario where persisted queries shine.&lt;/p&gt;
-
-&lt;p&gt;A client sends the following query to the server:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight graphql"&gt;&lt;code&gt;&lt;span class="k"&gt;query&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="n"&gt;releaseYear&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;No problems so far! Now a bad actor sends the following query:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight graphql"&gt;&lt;code&gt;&lt;span class="k"&gt;query&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-            &lt;/span&gt;&lt;span class="n"&gt;consoles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-              &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;
-              &lt;/span&gt;&lt;span class="c"&gt;# ... continues nesting till happy with the damage&lt;/span&gt;&lt;span class="w"&gt;
-            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-          &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-      &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The server evaluating this query can experience performance or stability issues due to the deep nesting and complex nature of the query. Going forward, we will make some assumptions about our API:
- - We control both the server and the clients (i.e., web/mobile clients)
- - We don&amp;rsquo;t expose a public API (it is accessible, but it isn&amp;rsquo;t promoted for external usage)
- - The data being returned from the queries is not personalized&lt;/p&gt;
-
-&lt;p&gt;In our specific case, we can use persisted queries to remedy the issue of malicious users sending bad queries to our API. In addition, we will also gain some performance benefits (i.e., reducing the request&amp;rsquo;s network size).&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Persist the query on the server and make note of the signature of the query (i.e., a hash of the query)&lt;/li&gt;
-&lt;li&gt;The client sends the query signature to the server, along with any query variables&lt;/li&gt;
-&lt;li&gt;Using the signature, the server looks up the matching query from a set of persisted queries&lt;/li&gt;
-&lt;li&gt;The server executes the query and returns the data&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;That sounds great, but how can we go about implementing this? As previously mentioned, persisted queries are not part of the official specification. There are many implementations that exist, as well as some tooling for supporting persisted queries. In my experience at the time of writing this, there wasn&amp;rsquo;t a standard way to implement persisted queries.&lt;/p&gt;
-
-&lt;p&gt;I want to stress the following: &lt;strong&gt;Persisted Queries only work if you control the server and the client&lt;/strong&gt;. In theory, you could use persisted queries on public APIs, although the &lt;em&gt;security&lt;/em&gt; gains are not present. I do want to mention that &lt;a href="https://dev-blog.apollodata.com/improve-graphql-performance-with-automatic-persisted-queries-c31d27b8e6ea"&gt;Automatic Persisted Queries&lt;/a&gt; is one way which uses the concept of persisted queries solely for performance gains.&lt;/p&gt;
-
-&lt;h1&gt;Implementing GraphQL Persisted Queries with HTTP Caching&lt;/h1&gt;
-
-&lt;p&gt;For the sake of brevity and focus, this series will focus on the following platforms:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/facebook/react/"&gt;React&lt;/a&gt; with &lt;a href="https://github.com/apollographql/apollo-client"&gt;Apollo Client&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/expressjs/express"&gt;Express&lt;/a&gt; with &lt;a href="https://github.com/prismagraphql/graphql-yoga"&gt;GraphQL Yoga&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/rails/rails"&gt;Rails&lt;/a&gt; with &lt;a href="https://github.com/rmosolgo/graphql-ruby"&gt;GraphQL Ruby&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href="/graphql-persisted-queries-with-http-caching-part-2/"&gt;Part two&lt;/a&gt; will cover the following sections:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Setup Express Server&lt;/li&gt;
-&lt;li&gt;Setup React Application&lt;/li&gt;
-&lt;li&gt;Refactor React Application to use Persisted Queries&lt;/li&gt;
-&lt;li&gt;Extract GraphQL Queries from Client&lt;/li&gt;
-&lt;li&gt;Refactor Express Server to use Persisted Queries&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href="/graphql-persisted-queries-with-http-caching-part-3/"&gt;Part three&lt;/a&gt; will cover the following sections:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Setup Rails Server&lt;/li&gt;
-&lt;li&gt;Synchronize GraphQL Queries to Rails Server&lt;/li&gt;
-&lt;li&gt;Refactor Rails Server to use Persisted Queries&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href="/graphql-persisted-queries-with-http-caching-part-4/"&gt;Part four&lt;/a&gt; will cover the following sections:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Add HTTP Caching to React Application&lt;/li&gt;
-&lt;li&gt;Add HTTP Caching to Express Server&lt;/li&gt;
-&lt;li&gt;Add HTTP Caching to Rails Server&lt;/li&gt;
-&lt;li&gt;Alternative Caching with Gateways&lt;/li&gt;
-&lt;/ol&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;

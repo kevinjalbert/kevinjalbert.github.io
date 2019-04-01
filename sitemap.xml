@@ -13,6 +13,9 @@
     <loc>https://kevinjalbert.com/uses/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</loc>
   </url>
   <url>
@@ -148,6 +151,12 @@
     <loc>https://kevinjalbert.com/synchronizing-my-dotfiles/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/process/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/learning/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/graphql/</loc>
   </url>
   <url>
@@ -166,9 +175,6 @@
     <loc>https://kevinjalbert.com/tags/caching/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/process/</loc>
-  </url>
-  <url>
     <loc>https://kevinjalbert.com/tags/communication/</loc>
   </url>
   <url>
@@ -179,9 +185,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/tools/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/learning/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/productivity/</loc>
@@ -320,6 +323,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/9/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/page/10/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/ruby/page/2/</loc>

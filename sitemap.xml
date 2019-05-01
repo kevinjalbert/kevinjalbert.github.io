@@ -49,6 +49,9 @@
     <loc>https://kevinjalbert.com/knowledge-and-screencast-culture/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</loc>
   </url>
   <url>
@@ -214,6 +217,12 @@
     <loc>https://kevinjalbert.com/tags/culture/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/git/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/collaboration/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/ruby/</loc>
   </url>
   <url>
@@ -233,9 +242,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/code-review/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/collaboration/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/software/</loc>
@@ -287,9 +293,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/sidekiq/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/git/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/development/</loc>

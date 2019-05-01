@@ -2,16 +2,93 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-03-31T19:53:20-04:00</updated>
+  <updated>2019-04-30T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Editing Commits in a Pull Request; Make it your Last Action</title>
+    <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
+    <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
+    <updated>2019-04-30T21:31:27-04:00</updated>
+    <published>2019-04-30T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">If you are going to edit commits in a collapsing fashion (i.e., amend/squash) in a pull request, make it your last action before merging to avoid confusing code reviewers.</description>
+    <content type="html">&lt;p&gt;&lt;em&gt;This post should be seen through the lens of working with a team using Git and GitHub during the collaboration of developing software. There is also the assumption that the reader has a firm understanding of Git.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Editing commits are more common than you might think. Anytime you &lt;em&gt;amend, rebase, or squash&lt;/em&gt; you are modifying commits, in which the affected commits&amp;rsquo; SHA changes.&lt;/p&gt;
+
+&lt;p&gt;In a collaborative setting (i.e., a Pull Request in GitHub), we want to &lt;a href="https://git-scm.com/book/en/v1/Git-Branching-Rebasing#The-Perils-of-Rebasing"&gt;minimize editing commits&lt;/a&gt;. For many developers, it is worthwhile to keep the Git history as clean and linear as possible. The best way to achieve that simplicity is by reducing multiple commits or rebasing off of master to avoid a merge conflict/commit.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If you are going to edit commits in a collapsing fashion (i.e., amend/squash) in a pull request, make it your last action before merging to avoid confusing code reviewers.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1&gt;Editing Commits&lt;/h1&gt;
+
+&lt;p&gt;For brevity, the details of how to edit commits can be found at the following &lt;a href="https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history"&gt;article by thoughtbot&lt;/a&gt;. As touched on in my &lt;a href="https://kevinjalbert.com/level-up-your-commit-messages/"&gt;previous post&lt;/a&gt;, you can &lt;em&gt;hide the &lt;a href="https://sethrobertson.github.io/GitBestPractices/#sausage"&gt;sausage making process&lt;/a&gt;&lt;/em&gt; by amending and squashing commits. There are two main benefits to consolidating commits:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The ability to &lt;code&gt;git bisect&lt;/code&gt;, &lt;code&gt;git revert&lt;/code&gt; and &lt;code&gt;git cherry-pick&lt;/code&gt; work without much issue.&lt;/li&gt;
+&lt;li&gt;Commits are &lt;a href="https://www.freshconsulting.com/atomic-commits/"&gt;atomic&lt;/a&gt; and provide better archaeological information in &lt;code&gt;git log&lt;/code&gt; and &lt;code&gt;git blame&lt;/code&gt; scenarios.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Cautiously Edit a Pull Request&amp;rsquo;s Commits&lt;/h1&gt;
+
+&lt;p&gt;As developers learn early on, when a branch is public you avoid carelessly rewriting the commit history. If you do need to get changes from another branch (i.e., master) into the feature branch, there are two options (&lt;a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing"&gt;both which Atlassian covers in great detail&lt;/a&gt;):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;em&gt;safer&lt;/em&gt; way is merging master into the feature branch, which in my opinion makes things a bit messy.&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;cleaner&lt;/em&gt; way is rebasing the feature branch onto master, which results in a more linear commit history.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;From my experience, I&amp;rsquo;ve always gone with the rebase option as I value a simplified commit history. Incidentally, the two benefits mentioned in the previous section help with keeping the master branch simple and clean. In practice, this manifests as a final squashing effort before merging the pull request into master.&lt;/p&gt;
+
+&lt;p&gt;Regardless, communication is key if you plan to edit the commits of a pull request. Collaborators need to know that they have to account for the rewritten history the next time they want to use or contribute to that branch.&lt;/p&gt;
+
+&lt;h1&gt;Don&amp;rsquo;t Edit Commits During Code Reviews&lt;/h1&gt;
+
+&lt;p&gt;Imagine the following scenario:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Bob is creating a new feature in his local branch.&lt;/li&gt;
+&lt;li&gt;Bob pushes up the branch to GitHub and creates a pull request.&lt;/li&gt;
+&lt;li&gt;Bob communicates that he wants feedback from Jane by requesting her as a reviewer.&lt;/li&gt;
+&lt;li&gt;Jane makes some comments and good suggestions on the pull request.&lt;/li&gt;
+&lt;li&gt;Bob makes changes to address the code review comments.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now here is where we can hit some diverging paths:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bob creates new commits based off the review comments.&lt;/li&gt;
+&lt;li&gt;Bob amends the changes onto the last commit.&lt;/li&gt;
+&lt;li&gt;Bob squashes the changes into other commits on the branch.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the three presented cases, Bob addressed the code review comments and the resulting code is identical &amp;ndash; only the commits are different. The issue arises when he re-requests Jane to perform a subsequent review. As Jane has already left comments, she instinctively looks to see the &lt;em&gt;new&lt;/em&gt; changes on the branch as these changes are more likely the ones that address the earlier code review comments. In the first case, these are represented as new commits, and it is easy enough to see the changes. In the second and third case, the changes are hidden inside previous commits. &lt;strong&gt;This makes it incredibly difficult to isolate the changes made since Jane last looked at the pull request.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1454" height="392" src="/images/2019-04-30-editing-commits-in-a-pull-request-make-it-your-last-action/view-changes.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The take away here is that during the code review phase, we want to ensure that the commits are additive and tell a complete story. A reviewer can and should see how the pull request has changed at each step of the process. The back-and-forth of getting feedback and adding new commits to address them is the collaborative flow for which we should aim.&lt;/p&gt;
+
+&lt;h1&gt;Squash Before You Merge&lt;/h1&gt;
+
+&lt;p&gt;Ultimately, we still want that clean commit history when we finally merge, and so we have to squash commits down at some point. As previously mentioned, editing commits during the active code review cycle is detrimental, so you wait until the pull request is approved and ready to be merged.&lt;/p&gt;
+
+&lt;p&gt;A final rebase onto master might be needed to resolve any conflicts between the feature branch and master. If we do need this, it&amp;rsquo;s sometimes useful to get a final check if you were not confident in the conflict resolution.&lt;/p&gt;
+
+&lt;p&gt;Ideally, squashing commits results in no code changes from what was already reviewed. If, for whatever reason, there are some changes that need to be made, you&amp;rsquo;d want some final eyes to check it over. With respect to making the squashing task easier for yourself, I recommend taking a look over the &lt;a href="https://thoughtbot.com/blog/autosquashing-git-commits"&gt;auto-squashing feature built into Git&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s worth mentioning that GitHub also has a &lt;a href="https://help.github.com/en/articles/about-pull-request-merges#squash-and-merge-your-pull-request-commits"&gt;&lt;em&gt;Squash and Merge&lt;/em&gt; option&lt;/a&gt;, which does the squashing for you. This is a decent approach if your team is okay with all the changes being compressed down into one commit on master. I personally prefer having the finer grain control over how I structure my atomic commits.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2019-03-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -109,7 +186,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2019-02-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -152,7 +229,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -271,7 +348,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -343,7 +420,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -472,7 +549,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -537,7 +614,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -633,7 +710,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -767,7 +844,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -946,7 +1023,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
+    <updated>2019-04-30T21:31:27-04:00</updated>
     <published>2018-07-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1116,297 +1193,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; there does exist a paid pro version of &lt;code&gt;graphql-ruby&lt;/code&gt; called &lt;a href="http://graphql.pro/"&gt;GraphQL::Pro&lt;/a&gt;, which has its own support for &lt;a href="http://graphql-ruby.org/operation_store/overview"&gt;persisted queries&lt;/a&gt;. It is a great solution as it covers synchronization of queries, admin dashboard, and connection to clients (Apollo/Relay). If you can afford the cost and want an &lt;em&gt;off the shelf&lt;/em&gt; solution, it is something you could consider. For the purpose of this article, however, we will skip out on it.&lt;/p&gt;
 
 &lt;p&gt;In the next and last part of this series, we will look at the final goal of adding HTTP caching to our GraphQL API servers. With HTTP caching we can lessen the load on our servers and offer faster response times to the consumers of the API.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-</content>
-  </entry>
-  <entry>
-    <title>GraphQL Persisted Queries with HTTP Caching [Part 2]</title>
-    <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/"/>
-    <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-2/</id>
-    <updated>2019-04-03T11:07:08-04:00</updated>
-    <published>2018-07-16T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">This is the second of four parts on GraphQL Persisted Queries with HTTP Caching. We'll setup a React application and Express server, both using GraphQL. We will refactor these applications to support persisted queries.</description>
-    <content type="html">&lt;p&gt;This is the second part of a four part series on GraphQL Persisted Queries with HTTP Caching. As a recap of &lt;a href="/graphql-persisted-queries-with-http-caching-part-1/"&gt;part one&lt;/a&gt;, we described some issues with GraphQL and how persisted queries can be a solution for them. We also covered what persisted queries were from a high-level.&lt;/p&gt;
-
-&lt;p&gt;In part two we will cover the following topics:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Setup Express Server&lt;/li&gt;
-&lt;li&gt;Setup React Application&lt;/li&gt;
-&lt;li&gt;Refactor React Application to use Persisted Queries&lt;/li&gt;
-&lt;li&gt;Extract GraphQL Queries from Client&lt;/li&gt;
-&lt;li&gt;Refactor Express Server to use Persisted Queries&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Setup Express Server&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/5ac1a2a8dcc1757d145503ca0d209bcccca0ed97"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To begin, we&amp;rsquo;re going to setup up a very simple Express server that&amp;rsquo;ll serve up a GraphQL API. Let&amp;rsquo;s break down the following file:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// server.js&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'graphql-yoga'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/typeDefs'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/resolvers'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="na"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;playground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/playground'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;start&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;port&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;`Server started, listening on port &lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;port&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; for incoming requests.`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We have our GraphQL types and resolvers defined under the &lt;code&gt;./graphql&lt;/code&gt; directory. The resolvers are pulling data from &lt;code&gt;data.json&lt;/code&gt;, which is just an easier way to get this API started. In our example, we&amp;rsquo;re serving up data on video game consoles, so the data doesn&amp;rsquo;t change that often.&lt;/p&gt;
-
-&lt;p&gt;Using &lt;code&gt;graphql-yoga&lt;/code&gt; we can create a &lt;code&gt;GraphQLServer&lt;/code&gt;, supply it with the type definitions and resolvers. We set a couple of &lt;em&gt;options&lt;/em&gt; then we start the server.&lt;/p&gt;
-
-&lt;h1&gt;Setup React Application&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/c992730643a39f72bd5f5b6e335eb103b3646949"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To take advantage of our Express Server that is exposing a GraphQL API, we&amp;rsquo;re going to create a simple React application to use it. We&amp;rsquo;ll use &lt;code&gt;create-react-app&lt;/code&gt; for our foundation, and add in &lt;code&gt;react-apollo&lt;/code&gt; and &lt;code&gt;apollo-boost&lt;/code&gt; to bootstrap the GraphQL.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; we need to use the &lt;a href="https://github.com/facebook/create-react-app/pull/3909"&gt;&lt;em&gt;next&lt;/em&gt; version (2.x) of &lt;code&gt;react-scripts&lt;/code&gt; so that we can take advantage of a &lt;code&gt;graphql-tag/loader&lt;/code&gt;&lt;/a&gt; to load up &lt;a href="https://dev-blog.apollodata.com/5-benefits-of-static-graphql-queries-b7fa90b0b69a"&gt;static &lt;code&gt;.graphql&lt;/code&gt; files&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll first initialize our Apollo client and render our &lt;code&gt;App&lt;/code&gt; to the DOM. In addition, we need to set up the Apollo Client and point it to our GraphQL API. The following &lt;code&gt;index.js&lt;/code&gt; file accomplishes all this setup:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="c1"&gt;// index.js&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;ReactDOM&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react-dom'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;registerServiceWorker&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'./registerServiceWorker'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ApolloClient&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;InMemoryCache&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'apollo-boost'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;ApolloProvider&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react-apollo'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;createHttpLink&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'apollo-link-http'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;App&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'./components/App'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s1"&gt;'./index.css'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;ApolloClient&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-  &lt;span class="na"&gt;link&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;createHttpLink&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'http://localhost:5000/graphql'&lt;/span&gt; &lt;span class="p"&gt;}),&lt;/span&gt;
-  &lt;span class="na"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;InMemoryCache&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;AppWithProvider&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;ApolloProvider&lt;/span&gt; &lt;span class="na"&gt;client=&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;client&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;App&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nc"&gt;ApolloProvider&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="nx"&gt;ReactDOM&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;AppWithProvider&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;,&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'root'&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-&lt;span class="nx"&gt;registerServiceWorker&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Nothing special is happening in our &lt;code&gt;App&lt;/code&gt; component, as we&amp;rsquo;re just creating some input controls and passing the data to our &lt;code&gt;ConsoleContainer&lt;/code&gt; component. All our GraphQL data loading and usage is handled within the &lt;code&gt;ConsoleContainer&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="c1"&gt;// components/ConsoleContainer.js&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;PropTypes&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'prop-types'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;Query&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'react-apollo'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;QUERY&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'../graphql/ConsolesByYear.graphql'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;ConsolesAndCompany&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;afterYear&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;beforeYear&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;Query&lt;/span&gt; &lt;span class="na"&gt;query=&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;QUERY&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="na"&gt;variables=&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;afterYear&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;beforeYear&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="na"&gt;fetchPolicy=&lt;/span&gt;&lt;span class="s1"&gt;'network-only'&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;error&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;loading&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'Error!'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;loading&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'Loading'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nc"&gt;React&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;Fragment&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-          &lt;span class="si"&gt;{&lt;/span&gt;
-            &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;consoles&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-              &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;key=&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h3&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h4&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Release Year: &lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;releaseYear&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h4&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h4&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Company: &lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h4&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;br&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
-              &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class="p"&gt;))&lt;/span&gt;
-          &lt;span class="si"&gt;}&lt;/span&gt;
-        &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nc"&gt;React&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;Fragment&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="p"&gt;);&lt;/span&gt;
-    &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nc"&gt;Query&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="nx"&gt;ConsolesAndCompany&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;propTypes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="na"&gt;afterYear&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;PropTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;number&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;beforeYear&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;PropTypes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;number&lt;/span&gt; &lt;span class="p"&gt;};&lt;/span&gt;
-
-&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="nx"&gt;ConsolesAndCompany&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Notice that we&amp;rsquo;re loading the &lt;code&gt;QUERY&lt;/code&gt; from a static file. The &lt;code&gt;Query&lt;/code&gt; component then allows the Apollo client to handle the networking, storage, and retrieval of the query. Our component finally renders new &lt;code&gt;React.Fragments&lt;/code&gt; to the DOM with the resolved data.&lt;/p&gt;
-
-&lt;h1&gt;Refactor React Application to use Persisted Queries&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/f8b91be248c3b5c41813fc01dd99f05e3f62bf69"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;In the last two sections we created a simple React application using Apollo client that uses a GraphQL API being served on Express. With a small change on our React application we can make it &lt;em&gt;persisted query&lt;/em&gt; enabled.&lt;/p&gt;
-
-&lt;p&gt;We take advantage of the &lt;a href="https://github.com/apollographql/apollo-link-persisted-queries"&gt;&lt;code&gt;apollo-link-persisted-queries&lt;/code&gt;&lt;/a&gt; (an &lt;em&gt;Apollo Link&lt;/em&gt;) to modify the Apollo client. While it isn&amp;rsquo;t &lt;em&gt;too difficult&lt;/em&gt; to roll our own implementation, it is best to lean on community supported projects. Using this package will help us narrow down what our future implementation needs to conform to on the server-side. In addition, it provides some &lt;em&gt;portability/compatibility&lt;/em&gt; with different projects due to being a community solution.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// index.js&lt;/span&gt;
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;createPersistedQueryLink&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="s1"&gt;'apollo-link-persisted-queries'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-&lt;span class="c1"&gt;// ... rest of file&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;ApolloClient&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-  &lt;span class="na"&gt;link&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;createPersistedQueryLink&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;concat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="nx"&gt;createHttpLink&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'http://localhost:5000/graphql'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-  &lt;span class="p"&gt;),&lt;/span&gt;
-  &lt;span class="na"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;InMemoryCache&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-
-&lt;span class="c1"&gt;// ... rest of file&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;At this point our React application will be sending outbound &lt;code&gt;POST&lt;/code&gt; requests with the following body:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;{
-  extensions: {
-    persistedQuery: {
-      version: 1,
-      sha256Hash: "a38e6d5349901b395334b5fd3b14e84a7ca7c4fc060a4089f2c23b5cf76f0f80"
-    }
-  },
-  operationName: "ConsolesByYear",
-  variables: {
-    afterYear: 1990,
-    beforeYear: 1999
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We have our &lt;code&gt;operationName&lt;/code&gt;, &lt;code&gt;variables&lt;/code&gt; and the &lt;code&gt;extensions&lt;/code&gt; properties present. Within the &lt;code&gt;extensions&lt;/code&gt; property, we really only care about the &lt;code&gt;persistedQuery.sha256Hash&lt;/code&gt; value. The &lt;code&gt;sha256Hash&lt;/code&gt; value is automatically computed on-the-fly based on the outgoing query (it is worth noting you can &lt;a href="https://github.com/apollographql/apollo-link-persisted-queries#build-time-generation"&gt;calculate the hashes at build-time&lt;/a&gt;). Thus, we now need a way to identify the queries by this signature on the server.&lt;/p&gt;
-
-&lt;h1&gt;Extract GraphQL Queries from React Application&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/078b3d2784add9b54b831b7e0b662ebea2bd9d4e"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We can use the &lt;a href="https://github.com/apollographql/persistgraphql"&gt;persistgraphql&lt;/a&gt; tool from Apollo to help extract queries from the client application. This tool recursively scans a directory and looks for GraphQL queries (i.e., &lt;code&gt;.graphql&lt;/code&gt; files), then it generates a JSON file of &lt;code&gt;query_string&lt;/code&gt; keys mapped to &lt;code&gt;id&lt;/code&gt; values. Unfortunately, this tool&amp;rsquo;s major flaw is that the &lt;code&gt;id&lt;/code&gt; ends up being an auto-incremented number:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;query_string_1&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;query_string_2&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;query_string_3&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Auto-incrementing ids aren&amp;rsquo;t going to uniquely identify the query string, thus causing long-term concerns when you need to extract the queries multiple times or from multiple clients. Ideally, you could use some cryptographic hash function to come up with the unique ids, which effectively becomes the query&amp;rsquo;s signature). Currently, there are GitHub issues discussing these concerns (&lt;a href="https://github.com/apollographql/persistgraphql/pull/35"&gt;pull request #35&lt;/a&gt; and &lt;a href="https://github.com/apollographql/persistgraphql/issues/34"&gt;issue #34&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;There are general questions and concerns with the tool&amp;rsquo;s operation and how to use the output:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How do you sync them to the server (&lt;a href="https://github.com/apollographql/persistgraphql/issues/52"&gt;issue #52&lt;/a&gt;)?&lt;/li&gt;
-&lt;li&gt;How do you use them in the client (&lt;a href="https://github.com/apollographql/persistgraphql/issues/42"&gt;issue #42&lt;/a&gt;)?&lt;/li&gt;
-&lt;li&gt;How can you retain previous queries for a build process (&lt;a href="https://github.com/apollographql/persistgraphql/issues/17"&gt;issue #17&lt;/a&gt;)?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Apollo has another tool, &lt;a href="https://github.com/apollographql/apollo-codegen"&gt;apollo-codegen&lt;/a&gt;, that handles extracting queries for the purpose of generating code for other languages and types (i.e., Swift, Scala, Flow, etc&amp;hellip;). It has been brought up in &lt;a href="https://github.com/apollographql/apollo-codegen/issues/314"&gt;issue #314&lt;/a&gt; that a unification of &lt;code&gt;persistgraphql&lt;/code&gt; and &lt;code&gt;apollo-codegen&lt;/code&gt; would be ideal. In an article titled &lt;a href="https://leoasis.github.io/posts/2018/04/27/graphql-persisted-documents/"&gt;GraphQL Persisted Documents&lt;/a&gt; (by &lt;a href="https://twitter.com/leogcrespo"&gt;Leonardo Garcia Crespo&lt;/a&gt;), the landscape for extracting and using persisted queries can be confusing.&lt;/p&gt;
-
-&lt;p&gt;For the purpose of what we want to do, we will reuse the existing logic that &lt;code&gt;persistgraphql&lt;/code&gt; has to extract the queries and add in a post-process that will determine a unique signature for each query to match what we need. I created a script, &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/tree/master/persistgraphql-signature-sync"&gt;&lt;code&gt;persistgraphql-signature-sync&lt;/code&gt;&lt;/a&gt;, to extract the queries from the client and augmented the &lt;code&gt;id&lt;/code&gt;s to be a hash of the query acting as the unique signature. A SHA 256 hashing algorithm is used so that the generated hash value is the same as the ones generated by &lt;code&gt;apollo-link-persisted-queries&lt;/code&gt;. It also handles synchronization of queries to an endpoint, which we will explore in a later section.&lt;/p&gt;
-
-&lt;p&gt;The following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;node index.js --input-path=../react-graphql/src --output-file=./extracted_queries.json
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;produces a JSON file holding the query strings and their signatures:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="s2"&gt;"query ConsolesByYear($afterYear: Int, $beforeYear: Int) {&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;  consoles(afterYear: $afterYear, beforeYear: $beforeYear) {&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;    ...ConsoleFieldsFragment&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;    company {&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;      name&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;      __typename&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;    }&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;    __typename&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;  }&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\n\n&lt;/span&gt;&lt;span class="s2"&gt;fragment ConsoleFieldsFragment on Console {&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;  name&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;  releaseYear&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;  __typename&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"a38e6d5349901b395334b5fd3b14e84a7ca7c4fc060a4089f2c23b5cf76f0f80"&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Refactor Express Server to use Persisted Queries&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/a386f13fdc4e97ff0ceb4f159038eb924ced8386"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We now have our &lt;code&gt;extracted_queries.json&lt;/code&gt; file containing our mapping of queries to signatures. We can go back and refactor our express server to use the output file containing the mapping to support persisted queries.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'graphql-yoga'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;bodyParser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'body-parser'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/typeDefs'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/resolvers'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./persistedQueriesMiddleware'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="na"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;playground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/playground'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;use&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;bodyParser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
-&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;start&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;port&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;`Server started, listening on port &lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;port&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; for incoming requests.`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We have added two things here:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;We use the &lt;code&gt;bodyParser&lt;/code&gt; middleware that will allow us to access the &lt;code&gt;body&lt;/code&gt; parameters on &lt;code&gt;POST&lt;/code&gt; requests.&lt;/li&gt;
-&lt;li&gt;We have a new &lt;code&gt;persistedQueriesMiddleware&lt;/code&gt; that attaches onto the &lt;code&gt;/graphql&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt; route.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;We add the first middleware so that we can access the &lt;code&gt;req.body&lt;/code&gt; in our custom &lt;code&gt;persistedQueriesMiddleware&lt;/code&gt; middleware.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// persistedQueriesMiddleware.js&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;invert&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'lodash'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;extractedQueries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;invert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./extracted_queries.json'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Handling request to: "&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;querySignature&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;persistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sha256Hash&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;persistedQuery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;extractedQueries&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;querySignature&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;persistedQuery&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Invalid querySignature'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Invalid querySignature'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;persistedQuery&lt;/span&gt;
-  &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Recall the persisted query request body from our React application. We need to pull out the &lt;code&gt;sha256Hash&lt;/code&gt; value as our signature and do a lookup in our &lt;code&gt;extracted_queries.json&lt;/code&gt; file for the matching query. If we find a match, then we can set the &lt;em&gt;query&lt;/em&gt; to the actual query string and pass the request through to the underlying server to be resolved.&lt;/p&gt;
-
-&lt;h1&gt;Reflection&lt;/h1&gt;
-
-&lt;p&gt;At this point we&amp;rsquo;ve built:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;An Express server that exposes a GraphQL API.&lt;/li&gt;
-&lt;li&gt;A React application that uses Apollo to communicate with our GraphQL API.&lt;/li&gt;
-&lt;li&gt;A script to help to with extracting persisted queries from our React application.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Our Express server is using a static file, &lt;code&gt;extracted_queries.json&lt;/code&gt;, to do the mapping of the query to the signature. While this approach gets the job done, you might want to take it to the next level where this information is stored in a database (or similar storage). This adaptation comes with the following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;If we&amp;rsquo;re using a database, it becomes possible to create more analytics and administration around persisted queries.&lt;/li&gt;
-&lt;li&gt;If you have multiple clients, they would all produce their own JSON file of persisted queries. You will then have to track/manage/merge these and possible commit them to your server code.&lt;/li&gt;
-&lt;li&gt;Each time you update your persisted queries you will require a restart or redeployment of the server. With a database synchronization approach, you can send the queries to be persisted while the server is running.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We will take a look at the next iteration of our persisted queries implementation, one that&amp;rsquo;ll use synchronization &amp;ndash; using a Rails server backed by a database. We will cover this in the third part of our series.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;

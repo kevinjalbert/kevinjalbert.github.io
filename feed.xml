@@ -2,16 +2,190 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-04-30T19:53:20-04:00</updated>
+  <updated>2019-05-28T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>My Weekly Notion Setup</title>
+    <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
+    <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
+    <updated>2019-05-28T22:43:20-04:00</updated>
+    <published>2019-05-28T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">My note taking, tasks, and self-organization tools and systems have evolved over the years, and I'm feeling pretty confident that Notion is a keeper. It has this incredible range of flexibility that allows you to mould it to fit your needs. I want to showcase how I use Notion to organize and manage my week.</description>
+    <content type="html">&lt;p&gt;I started using &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; early 2018 in a limited capacity as I was evaluating it as a potential tool to adopt. In a year&amp;rsquo;s time, Notion, as a service, improved a lot and had garnered quite a following. It was at this point that I decided to fully commit to it.&lt;/p&gt;
+
+&lt;p&gt;My note taking, tasks, and self-organization tools and systems have evolved over the years, and I&amp;rsquo;m feeling pretty confident that Notion is a keeper. It has this incredible range of flexibility that allows you to mould it to fit your needs. I want to showcase how I use Notion to organize and manage my week.&lt;/p&gt;
+
+&lt;h1&gt;Features I Needed for my Week&lt;/h1&gt;
+
+&lt;p&gt;I spend many weeks iterating and refining my weekly Notion template and I suspect that I&amp;rsquo;ll continue to do so. I made a point to incorporate the following ideas into my template:&lt;/p&gt;
+
+&lt;h2&gt;Note Taking&lt;/h2&gt;
+
+&lt;p&gt;I wanted my weekly template to have the idea of a daily scratch pad for note-taking. It would be my &lt;em&gt;go-to&lt;/em&gt; notepad when I wanted to jot something down.&lt;/p&gt;
+
+&lt;p&gt;The plan then would be to clean up the raw notes at the end of the day and, if needed, extract them into a proper location.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Goal: Have a place for daily note-taking.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Journaling&lt;/h2&gt;
+
+&lt;p&gt;I like the idea of journaling daily as it gives a place to do a quick reflection and analysis of the events that transpired that day. Due to the normal work/life divide, I feel that it might not be a bad idea to split the journaling to individually accommodate both work and personal.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Goal: Have a place for daily journaling (work/personal).&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Tasks&lt;/h2&gt;
+
+&lt;p&gt;As I wanted to fully commit to Notion, I need to make Notion accommodate a task management system. My tasks in Notion will be backed by a database as this structure will better accommodate searching and organization. I want to be able to capture the following for tasks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Title&lt;/li&gt;
+&lt;li&gt;Creation date&lt;/li&gt;
+&lt;li&gt;Due date&lt;/li&gt;
+&lt;li&gt;Completed date&lt;/li&gt;
+&lt;li&gt;Tags&lt;/li&gt;
+&lt;li&gt;Notes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Having a tailored view of the tasks of importance for the day is ideal. This will help me focus on what is next and what is currently on my plate.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Goal: Have a master database of tasks, with a view to easily see relevant tasks at the current time.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Wins&lt;/h2&gt;
+
+&lt;p&gt;Something that kind of falls in line with journaling is recounting the wins of the day. I want to explicitly call out wins in different areas of my life (i.e., work, family, etc&amp;hellip;). To accomplish this, I&amp;rsquo;d also like the wins to be backed by a database for organization and searching capabilities. I want to be able to capture the following for wins:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Title&lt;/li&gt;
+&lt;li&gt;Creation date&lt;/li&gt;
+&lt;li&gt;Tags&lt;/li&gt;
+&lt;li&gt;Notes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In my weekly template, I want to see all the wins for the current week only. This is to simplify the view and keeps it in scope to the week.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Goal: Have a master database of wins, with a view to easily see wins for the week.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Habits&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve used habit trackers in the past with little success. I recently discovered a technique called &lt;em&gt;&lt;a href="https://www.ultraworking.com/lights"&gt;Lights by Ultraworking&lt;/a&gt;&lt;/em&gt; and it struck a chord with me. For more information, I recommend giving their &lt;a href="https://ultraworking.gitbooks.io/lights/content/"&gt;guide&lt;/a&gt; a quick read.&lt;/p&gt;
+
+&lt;p&gt;In my weekly template, I want a &lt;em&gt;Lights&lt;/em&gt; spreadsheet/database that I can use to track habits and objectives for each day of that week.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Goal: Replicate &lt;em&gt;Lights Spreadsheet by Ultraworking&lt;/em&gt; in my weekly template&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Weekly Reflection&lt;/h2&gt;
+
+&lt;p&gt;Finally, I wanted to be able to have a place to hold an end-of-the-week reflection. I want to be able to do a retrospective on the progress of my habits for the week. I&amp;rsquo;ve also been passively using &lt;a href="https://www.rescuetime.com/ref/31263"&gt;RescueTime [Referral]&lt;/a&gt; for many years now, and I want to actively pay attention to my productivity and time allocation going forward.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Goal: Have a place for a weekly reflection on habits and time allocation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1&gt;How it all looks&lt;/h1&gt;
+
+&lt;p&gt;Given the above features, how does all of this look in practice? The following pages took some time to arrive at due to much tweaking and testing. As mentioned earlier, I fully expect these pages to continue to evolve in structure in the future.&lt;/p&gt;
+
+&lt;h2&gt;Week Page&lt;/h2&gt;
+
+&lt;p&gt;The following is an annotated screenshot of what my week page looks like. Each numbered section is further described under its corresponding subheading. I decided to use the &lt;code&gt;Week ##&lt;/code&gt; format for my page names as it&amp;rsquo;s easy to use the sequential numbering and avoids issues with using specific days and handling crossover weeks (ie., May → June).&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1650" height="2520" src="/images/2019-05-28-my-weekly-notion-setup/week.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Quick Links (1)&lt;/h3&gt;
+
+&lt;p&gt;This section has links to pages for the previous week and the next week, acting as a quick way to navigate sequentially between weeks. In addition, I have &lt;em&gt;common&lt;/em&gt; pages that I like to keep accessible here as well.&lt;/p&gt;
+
+&lt;h3&gt;Days (2)&lt;/h3&gt;
+
+&lt;p&gt;This section has links to pages for each day within this week. The contents of the &lt;em&gt;day&lt;/em&gt; page is explained further below.&lt;/p&gt;
+
+&lt;h3&gt;Lights (3)&lt;/h3&gt;
+
+&lt;p&gt;This database is essentially my port of &lt;a href="https://www.ultraworking.com/lights"&gt;Lights by Ultraworking&lt;/a&gt;. If you have not read the &lt;a href="https://ultraworking.gitbooks.io/lights/content/"&gt;guide&lt;/a&gt; I recommend it as I&amp;rsquo;m not going to dive into the details of how it works. To make it work with Notion, I had to make some modifications:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The database is embedded in the page (i.e., this is only for the current week). This is done so that each week can have &lt;em&gt;different&lt;/em&gt; objectives.&lt;/li&gt;
+&lt;li&gt;The database&amp;rsquo;s name is formatted as &lt;code&gt;YEAR &amp;gt; WEEK ## &amp;gt; Lights&lt;/code&gt; so that it is easier to find via search.&lt;/li&gt;
+&lt;li&gt;I couldn&amp;rsquo;t really build any percentage or success statistics easily, so I just left them out. The colour coding of Yes/No/Half works out pretty well.&lt;/li&gt;
+&lt;li&gt;I use an explicit empty row to help separate the different areas.&lt;/li&gt;
+&lt;li&gt;I rename the default &lt;em&gt;name&lt;/em&gt; column to &lt;code&gt;.&lt;/code&gt; and push it all the way to the right. This is done so that the objectives don&amp;rsquo;t show up in Notion&amp;rsquo;s search as all row&amp;rsquo;s names are indexed.&lt;/li&gt;
+&lt;li&gt;Each day is not dated as this simplifies the reuse of this table for subsequent weeks. I also don&amp;rsquo;t feel I gain much from adding that information.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Throughout the day I end up looking at the Lights and updating them as I accomplish them. The presence of it also constantly reminds me of the objectives I want to meet.&lt;/p&gt;
+
+&lt;h3&gt;Wins (4)&lt;/h3&gt;
+
+&lt;p&gt;This is a &lt;em&gt;linked database&lt;/em&gt; of a global database that holds all the &lt;em&gt;wins&lt;/em&gt;. The benefit of this is that this linked database view can be filtered to the specific week. This allows me to look back at any week and see the victories.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1492" height="324" src="/images/2019-05-28-my-weekly-notion-setup/wins-filter.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Tags column for Wins (and later for Tasks) is a Notion &lt;em&gt;Relation&lt;/em&gt;. This allows the column to reference other values from another database. The main benefit here is that I wanted to have a global set of tags that could be used in all my tables. I accomplish this using a strategy outlined in the &lt;a href="https://www.reddit.com/r/NotionSo/comments/ayvkcs/notioneers_level_up_your_tagging/"&gt;Notion sub-reddit&lt;/a&gt;, where I have a dedicated &lt;em&gt;Tags&lt;/em&gt; table:&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1844" height="440" src="/images/2019-05-28-my-weekly-notion-setup/tags.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Weekly Review (5)&lt;/h3&gt;
+
+&lt;p&gt;This section is where I can reflect at the end of the week. I currently look at the Lights and see what happened — are there any trends or areas to change? I also have a section to put a screenshot of my week recorded by RescueTime.&lt;/p&gt;
+
+&lt;h2&gt;Day Page&lt;/h2&gt;
+
+&lt;p&gt;The following is an annotated screenshot of what my day page looks like. Each numbered section is further described under its corresponding subheading. I decided to use the &lt;code&gt;Month ## (Weekday)&lt;/code&gt; for my page names as I find it easier to use and easier to search.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1650" height="2520" src="/images/2019-05-28-my-weekly-notion-setup/day.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Previous/Next Day (1)&lt;/h3&gt;
+
+&lt;p&gt;These two links are present to quickly allow me to pan through the days. When they are all linked properly, it&amp;rsquo;s a pretty seamless way to navigate.&lt;/p&gt;
+
+&lt;h3&gt;Tasks (2)&lt;/h3&gt;
+
+&lt;p&gt;Similar to the Wins linked database, I&amp;rsquo;m using the same approach here. There is a master Tasks database that holds all of my tasks. I end up using filters on the linked database to only show relevant tasks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1328" height="630" src="/images/2019-05-28-my-weekly-notion-setup/tasks-filter.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The tasks have the desired attributes that I mentioned earlier. The Tags column is a &lt;em&gt;Relation&lt;/em&gt;, which is the same approach that was described for the Wins. The Status column helps me track tasks and assists with filtering. Each task also has full capabilities to add notes within the record. To me, this is where Notion excels for task management.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1328" height="888" src="/images/2019-05-28-my-weekly-notion-setup/task-record.png" /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Notes (3)&lt;/h3&gt;
+
+&lt;p&gt;This is just a flexible section to place random notes during the day. At the end of the day, I can clean up the notes and extract them into a larger page in Notion.&lt;/p&gt;
+
+&lt;p&gt;One great aspect of Notion is that you are able to search across all of the text, regardless of where the notes are located.&lt;/p&gt;
+
+&lt;h3&gt;Day Review (4)&lt;/h3&gt;
+
+&lt;p&gt;This section is where the journaling aspect comes in. Again, this is a flexible place to reflect on the day from a personal and work perspective.&lt;/p&gt;
+
+&lt;h1&gt;Setting up the Next Week&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve covered my week/days setups, although this has only been for one week. Manually setting this up for every week would be a pain — fortunately you can &lt;em&gt;duplicate pages&lt;/em&gt; in Notion.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1436" height="1134" src="/images/2019-05-28-my-weekly-notion-setup/year.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;By keeping a template that has mostly everything set up, I&amp;rsquo;m able to generate the next week in about 2 minutes. The days stay linked (even after renaming them), the linked databases are properly duplicated along with their filters, and a fresh Lights database is present. From my perspective, this is a huge win.&lt;/p&gt;
+
+&lt;h1&gt;Get your Own Version!&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.notion.so/Week-Template-0a7ac4d03082417c929176b5ea1df07e"&gt;Click to get my Weekly Notion Template&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Notion has the ability to &lt;a href="https://www.notion.so/Duplicate-public-pages-d8a461baeeb54d91b156ff5559192321#d8a461baeeb54d91b156ff5559192321"&gt;duplicate public pages into your own account&lt;/a&gt;. You can use that functionality along with the above link to get my template. It can be a bit overwhelming, but I&amp;rsquo;ve placed some annotations in the template to help you set it up. If you have any questions, feel free to leave a comment on this post. I&amp;rsquo;m planning to keep this public template static even though my own template will evolve over time — this is all for the purpose of this blog post.&lt;/p&gt;
+
+&lt;p&gt;I am loving what this setup has done for me so far and I&amp;rsquo;m planning to keep moving forward with it, further customizing it to fit my needs.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2019-04-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -88,7 +262,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2019-03-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -186,7 +360,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2019-02-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -229,7 +403,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -348,7 +522,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -420,7 +594,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -549,7 +723,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -614,7 +788,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -710,7 +884,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -844,7 +1018,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
+    <updated>2019-04-30T21:33:23-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1008,191 +1182,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;p&gt;Depending on your situation, you might need to further explore the field-level caching options like Apollo Cache Control, or even using a Gateway to help out, like FastQL. Even though being aware of the data within your queries is important, is it all cacheable? If you have personalized data you have to approach this in a different way. There might not be value in caching if every response is personalized to a user, or maybe you have to split your queries into two queries (i.e., personalized, non-personalized). The cache configuration (i.e., CDN and/or a reverse proxy) is a huge piece we skipped over, but it likely will need some tweaking for your specific use cases (i.e., split caching based on the header).&lt;/p&gt;
 
 &lt;p&gt;Overall, I am pleased with the solutions we arrived too. We built a simple GraphQL API in Express and Rails. Both of these can communicate with a React application using persisted queries. Our Express server used a JSON file for its data and persisted queries, while for our Rails server we had everything in a database. We overcame the issues with the existing tooling for determining a signature for each query, and created the ability to synchronize persisted queries via HTTP &lt;code&gt;POST&lt;/code&gt; requests. We were able to implement &lt;code&gt;GET&lt;/code&gt; requests and apply a 10-second cache for intermediate CDN and reverse proxies.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-</content>
-  </entry>
-  <entry>
-    <title>GraphQL Persisted Queries with HTTP Caching [Part 3]</title>
-    <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/"/>
-    <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</id>
-    <updated>2019-04-30T21:31:27-04:00</updated>
-    <published>2018-07-17T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">This is the third of four parts on GraphQL Persisted Queries with HTTP Caching. We continue our journey with creating a Rails GraphQL API, synchronizing queries to it, and adapting it to use persisted queries.</description>
-    <content type="html">&lt;p&gt;This is the third part of a four-part series on GraphQL Pesisted Queries with HTTP Caching. As a recap of &lt;a href="/graphql-persisted-queries-with-http-caching-part-2/"&gt;part two&lt;/a&gt;, we created an Express server and React application, both using persisted queries.&lt;/p&gt;
-
-&lt;p&gt;In part three we will cover the following topics:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Setup Rails Server&lt;/li&gt;
-&lt;li&gt;Synchronize GraphQL Queries to Rails Server&lt;/li&gt;
-&lt;li&gt;Refactor Rails Server to use Persisted Queries&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Setup Rails Server&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/5f78ac6dd2840a8690d82e4b50a752471332c8c2"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We&amp;rsquo;ll create a basic Rails server that uses &lt;a href="https://github.com/rmosolgo/graphql-ruby"&gt;&lt;code&gt;graphql-ruby&lt;/code&gt;&lt;/a&gt;. We will gloss over the busy work of setting up the models, database, and GraphQL types. First, we have our route defined that will accept &lt;code&gt;POST&lt;/code&gt; requests to &lt;code&gt;/graphql&lt;/code&gt; and passes them to our controller.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/routes.rb&lt;/span&gt;
-&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;"/graphql"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s2"&gt;"graphql#execute"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The controller then extracts the variables, query, and operation name from the request&amp;rsquo;s parameters. All this information is then executed against the GraphQL schema.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/controllers/graphql_controller.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;GraphqlController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute&lt;/span&gt;
-    &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ensure_hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:variables&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:query&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;operation_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:operationName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="kp"&gt;private&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;ensure_hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ambiguous_param&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="c1"&gt;# ... Generated code provided by graphql-ruby's graphql:install&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Synchronize GraphQL Queries to Rails Server&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/9f72e132f88e6f551e07700fd35539890d9e2a44"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To accommodate persisted queries, we will have to &lt;em&gt;synchronize&lt;/em&gt; the queries from our React application to our Rails server. Fortunately, &lt;code&gt;persistgraphql-signature-sync&lt;/code&gt; (our script from earlier to extract queries) does this already.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;It is possible to sync the persisted queries to a specified endpoint. The endpoint needs to accept a POST request with body parameters of query and signature.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We will need to do a few things to support this new synchronization endpoint.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s create a new &lt;code&gt;PersistedQuery&lt;/code&gt; model and migration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/models/persisted_query.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PersistedQuery&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationRecord&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# db/migrate/20180617011135_create_persisted_queries.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CreatePersistedQueries&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Migration&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;5.2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;change&lt;/span&gt;
-    &lt;span class="n"&gt;create_table&lt;/span&gt; &lt;span class="ss"&gt;:persisted_queries&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt; &lt;span class="ss"&gt;:signature&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;index: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;unique: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;string&lt;/span&gt; &lt;span class="ss"&gt;:query&lt;/span&gt;
-
-      &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;timestamps&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We will store the persisted queries in this newly created table &amp;ndash; notice that we have a unique index on the signature. Now let&amp;rsquo;s add the required route and controller that will accept the synchronization request.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/routes.rb&lt;/span&gt;
-&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="c1"&gt;# ... existing routes&lt;/span&gt;
-  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;"/graphql_persist"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s2"&gt;"graphql_persist#execute"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/controllers/graphql_persist_controller.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;GraphqlPersistController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute&lt;/span&gt;
-    &lt;span class="n"&gt;document&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;GraphQL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:query&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;valid_query?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;document&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;persisted_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PersistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="ss"&gt;signature: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:signature&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-        &lt;span class="ss"&gt;query: &lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:query&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
-      &lt;span class="p"&gt;)&lt;/span&gt;
-
-      &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="n"&gt;persisted_query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;attributes&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;errors: &lt;/span&gt;&lt;span class="vi"&gt;@errors&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="ss"&gt;status: &lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;errors: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="ss"&gt;status: &lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="kp"&gt;private&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;valid_query?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;document&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;GraphQL&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;document: &lt;/span&gt;&lt;span class="n"&gt;document&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;validator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;GraphQL&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;StaticValidation&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Validator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;schema: &lt;/span&gt;&lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;validator&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;validate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;errors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;results&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:errors&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-    &lt;span class="vi"&gt;@errors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="ss"&gt;:message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@errors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In this controller, we are parsing out the &lt;em&gt;query&lt;/em&gt; and validating it against our schema. If the query is okay from a schema perspective, then we create a new &lt;code&gt;PersistedQuery&lt;/code&gt; database record with the &lt;code&gt;query&lt;/code&gt; and the &lt;code&gt;signature&lt;/code&gt;. When we get to using the persisted queries, we can do a quick look up and pull the query to be used.&lt;/p&gt;
-
-&lt;p&gt;We can now run the &lt;code&gt;persistgraphql-signature-sync&lt;/code&gt; command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;node index.js --input-path=../react-graphql/src --sync-endpoint=http://localhost:3000/graphql_persist
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This will attempt to synchronize each query to the server. It is not the prettiest, but the command will print out the server&amp;rsquo;s response for each query.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Synching persisted query a38e6d5349901b395334b5fd3b14e84a7ca7c4fc060a4089f2c23b5cf76f0f80
-{ id: 1,
-  signature: 'a38e6d5349901b395334b5fd3b14e84a7ca7c4fc060a4089f2c23b5cf76f0f80',
-  query: 'query ConsolesByYear($afterYear: Int, $beforeYear: Int) {\n  consoles(afterYear: $afterYear, beforeYear: $beforeYear) {\n    ...ConsoleFieldsFragment\n    company {\n      name\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment ConsoleFieldsFragment on Console {\n  name\n  releaseYear\n  __typename\n}\n',
-  created_at: '2018-07-03T19:52:54.717Z',
-  updated_at: '2018-07-03T19:52:54.717Z' }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Refactor Rails Server to use Persisted Queries&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/802dcc0d9aef28b117f926d7638a4a2115d304e1"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The finish line is near! Our Rails server has the queries persisted in the database. Now we just have to adjust our &lt;code&gt;GraphqlController&lt;/code&gt; to pull the appropriate query when receiving the persisted query request from our React application.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/controllers/graphql_controller.rb&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;GraphqlController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute&lt;/span&gt;
-    &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ensure_hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:variables&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:query&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;operation_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:operationName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
-      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="n"&gt;signature&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:extensions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:persistedQuery&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:sha256Hash&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;persisted_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PersistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;signature: &lt;/span&gt;&lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persisted_query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;errors: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="c1"&gt;# ... rest of class&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Our controller&amp;rsquo;s action now handles the situation when we don&amp;rsquo;t have a query present, which is the case when we&amp;rsquo;re using persisted queries. In this situation, we pull out the &lt;code&gt;sha256Hash&lt;/code&gt; value from the parameters and look up the persisted query. We then execute the persisted query&amp;rsquo;s query against the schema.&lt;/p&gt;
-
-&lt;p&gt;In the event that we want to &lt;em&gt;lock down&lt;/em&gt; the API to only use persisted queries, we can use a conditional like &lt;code&gt;Rails.env.production?&lt;/code&gt; to gate the flow, allowing only the persisted queries through.&lt;/p&gt;
-
-&lt;h1&gt;Reflection&lt;/h1&gt;
-
-&lt;p&gt;In this post, we created a Rails server that exposes a GraphQL API. We used &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/tree/master/persistgraphql-signature-sync"&gt;&lt;code&gt;persistgraphql-signature-sync&lt;/code&gt;&lt;/a&gt; to assist in synchronizing the queries from the React application (that we built in &lt;a href="/graphql-persisted-queries-with-http-caching-part-2/"&gt;part two&lt;/a&gt;) to our Rails server.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; there does exist a paid pro version of &lt;code&gt;graphql-ruby&lt;/code&gt; called &lt;a href="http://graphql.pro/"&gt;GraphQL::Pro&lt;/a&gt;, which has its own support for &lt;a href="http://graphql-ruby.org/operation_store/overview"&gt;persisted queries&lt;/a&gt;. It is a great solution as it covers synchronization of queries, admin dashboard, and connection to clients (Apollo/Relay). If you can afford the cost and want an &lt;em&gt;off the shelf&lt;/em&gt; solution, it is something you could consider. For the purpose of this article, however, we will skip out on it.&lt;/p&gt;
-
-&lt;p&gt;In the next and last part of this series, we will look at the final goal of adding HTTP caching to our GraphQL API servers. With HTTP caching we can lessen the load on our servers and offer faster response times to the consumers of the API.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;

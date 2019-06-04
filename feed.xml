@@ -11,7 +11,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-05-28T22:43:20-04:00</updated>
+    <updated>2019-06-04T09:01:24-04:00</updated>
     <published>2019-05-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -86,6 +86,10 @@
 &lt;p&gt;&lt;strong&gt;Goal: Have a place for a weekly reflection on habits and time allocation&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h1&gt;How it all looks&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=ZwZMU5QeWgQ"&gt;Watch a Video that walks through the template&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Given the above features, how does all of this look in practice? The following pages took some time to arrive at due to much tweaking and testing. As mentioned earlier, I fully expect these pages to continue to evolve in structure in the future.&lt;/p&gt;
 
@@ -164,6 +168,10 @@
 
 &lt;h1&gt;Setting up the Next Week&lt;/h1&gt;
 
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=ZwZMU5QeWgQ"&gt;Watch a video on how I setup the next week&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;p&gt;I&amp;rsquo;ve covered my week/days setups, although this has only been for one week. Manually setting this up for every week would be a pain — fortunately you can &lt;em&gt;duplicate pages&lt;/em&gt; in Notion.&lt;/p&gt;
 
 &lt;p&gt;&lt;img width="1436" height="1134" src="/images/2019-05-28-my-weekly-notion-setup/year.png" /&gt;&lt;/p&gt;
@@ -185,7 +193,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2019-04-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -262,7 +270,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2019-03-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -360,7 +368,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2019-02-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -403,7 +411,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -522,7 +530,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -594,7 +602,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -723,7 +731,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -788,7 +796,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -884,7 +892,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1018,7 +1026,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
     <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
     <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2019-04-30T21:33:23-04:00</updated>
+    <updated>2019-05-28T22:47:02-04:00</updated>
     <published>2018-07-18T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

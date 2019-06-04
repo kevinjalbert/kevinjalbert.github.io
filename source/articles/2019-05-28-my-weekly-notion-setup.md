@@ -10,6 +10,12 @@ tags:
 
 pull_image: "/images/2019-05-28-my-weekly-notion-setup/notebook.jpg"
 pull_image_attribution: '[notebook](https://flickr.com/photos/markusspiske/14164315519 "notebook") by [markus spiske](https://flickr.com/people/markusspiske) is licensed under [CC BY](https://creativecommons.org/licenses/by/2.0/)'
+
+notes:
+-
+  date: 2019-06-04
+  type: add
+  content: Add YouTube links to supplementary videos.
 ---
 
 I started using [Notion [Referral]](https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e) early 2018 in a limited capacity as I was evaluating it as a potential tool to adopt. In a year's time, Notion, as a service, improved a lot and had garnered quite a following. It was at this point that I decided to fully commit to it.
@@ -77,6 +83,8 @@ Finally, I wanted to be able to have a place to hold an end-of-the-week reflecti
 **Goal: Have a place for a weekly reflection on habits and time allocation**
 
 # How it all looks
+
+> [Watch a Video that walks through the template](https://www.youtube.com/watch?v=ZwZMU5QeWgQ)
 
 Given the above features, how does all of this look in practice? The following pages took some time to arrive at due to much tweaking and testing. As mentioned earlier, I fully expect these pages to continue to evolve in structure in the future.
 
@@ -152,6 +160,8 @@ One great aspect of Notion is that you are able to search across all of the text
 This section is where the journaling aspect comes in. Again, this is a flexible place to reflect on the day from a personal and work perspective.
 
 # Setting up the Next Week
+
+> [Watch a video on how I setup the next week](https://www.youtube.com/watch?v=ZwZMU5QeWgQ)
 
 I've covered my week/days setups, although this has only been for one week. Manually setting this up for every week would be a pain — fortunately you can _duplicate pages_ in Notion.
 

@@ -2,16 +2,99 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-05-28T19:53:20-04:00</updated>
+  <updated>2019-06-17T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Integrating Notion with Alfred</title>
+    <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
+    <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
+    <updated>2019-06-17T22:33:36-04:00</updated>
+    <published>2019-06-17T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">I want to share how I integrate my Weekly Notion Setup with Alfred. It provides a seamless interaction so that I minimize context switching.</description>
+    <content type="html">&lt;p&gt;Last month I wrote about &lt;a href="/my-weekly-notion-setup"&gt;My Weekly Notion Setup&lt;/a&gt; and how I use it to help organize my life.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.notion.so/Week-Template-0a7ac4d03082417c929176b5ea1df07e"&gt;Click to get my Weekly Notion Template&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I like to use tools that are an extension of my hand and mind. If the tool does not bend to my will then I need to tailor it to do so. I&amp;rsquo;ve done this many times before, to which I normally share the end result (i.e., &lt;a href="/synchronizing-my-dotfiles"&gt;how I synchronize my dotfiles&lt;/a&gt;, &lt;a href="/todoist-with-keyboard-navigation-via-nativefier/"&gt;adding keyboard navigation to Todoist on MacOS&lt;/a&gt;, amongst other examples).&lt;/p&gt;
+
+&lt;p&gt;This month, I want to share how I integrate my &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; setup with &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt;. At the time of publication, Notion has not yet released an official API. I ended up taking advantage of &lt;a href="https://github.com/jamalex/notion-py"&gt;&lt;code&gt;notion-py&lt;/code&gt;&lt;/a&gt; &amp;ndash; an unofficial Python API client for Notion. With various Python scripts, I was able to connect everything together in an Alfred Workflow (as seen in the post&amp;rsquo;s title image).&lt;/p&gt;
+
+&lt;h1&gt;Added Extensions&lt;/h1&gt;
+
+&lt;p&gt;I mainly wanted to bypass the need for direct interaction with Notion, so that I could avoid excessive context switching. I was able to put together the following &lt;em&gt;actions&lt;/em&gt; in Alfred:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;:week&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword will open Notion to the current week.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:day&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword will open Notion to the current day.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:note&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword allows me to append a text block at the end of my current day&amp;rsquo;s notes section.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:tag&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword allows me to create a new tag in my tags database.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:win&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword allows me to create a new win in my wins database.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:task&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword allows me to create a new task in my tasks database.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;:search&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This keyword allows me to search my current day&amp;rsquo;s tasks, and be able to open it in Notion or change its status.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The end result allows me to do stuff like the following:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=i_Ce3ogyuTA"&gt;Watch a video with more detail&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img width="817" height="540" src="/images/2019-06-17-integrating-notion-with-alfred/alfred-notion-demo.gif" /&gt;&lt;/p&gt;
+
+&lt;h1&gt;How do I get this?&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve published the Alfred Workflow and Python scripts in a &lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;repository on GitHub at &lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt;. For the most part, you can follow the instructions laid out in the &lt;code&gt;README.md&lt;/code&gt; as it&amp;rsquo;ll be up to date with new changes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;Click to check out &lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I like to remind everyone that this is &lt;em&gt;my tailored solution&lt;/em&gt; on how I&amp;rsquo;ve integrated Notion to fit &lt;em&gt;my needs&lt;/em&gt;. If you want to use my solution as inspiration or as a foundation, everything is open sourced. If you want to use it verbatim, then don&amp;rsquo;t forget to get the weekly template.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;a href="https://github.com/kevinjalbert/alfred-notion/tree/v1.0.0"&gt;v1.0.0&lt;/a&gt; is current at the time of publication (June 16, 2019).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-06-04T09:01:24-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2019-05-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -193,7 +276,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2019-04-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -270,7 +353,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2019-03-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -368,7 +451,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2019-02-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -411,7 +494,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -530,7 +613,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -602,7 +685,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -731,7 +814,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -796,7 +879,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -892,7 +975,7 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
     <title>Video Clubs: A Way to Keep Up</title>
     <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
     <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
+    <updated>2019-06-04T09:03:02-04:00</updated>
     <published>2018-08-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1020,185 +1103,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;p&gt;There are different ways to go about starting a video club, and honestly, it could be as straightforward as asking your boss and peers. I personally think if you can &lt;em&gt;embody&lt;/em&gt; the change, it is an easier sell to the organization and your direct manager. First thing I would do is personally find a set of high-quality videos from a conference relevant to your domain (i.e., could even be old ones). Put these out in the open as great material that everyone &lt;em&gt;should&lt;/em&gt; watch at some point (which shouldn&amp;rsquo;t be a stretch from the truth). Suggest a brown bag lunch event, everyone brings their lunch (or buys it) and watches the video during their lunch. Encourage discussion and see if there are any takeaways that might be directly related to the work at hand. Then, eventually, you start to transition to an organizational model (i.e., GitHub) and getting participation from your peers by suggesting videos.&lt;/p&gt;
 
 &lt;p&gt;This is a cultural shift you are trying to create, therefore it could be slow. I believe the end goal is to move away from the brown bag lunch and instead to a dedicated &lt;em&gt;meeting time&lt;/em&gt; so that the video club isn&amp;rsquo;t taking up everyone&amp;rsquo;s personal time at lunch. I&amp;rsquo;ve seen various attendees drop off due to external lunch plans. Hopefully, a higher attendance can be achieved if it&amp;rsquo;s a normal meeting time. Overall, I would say either you&amp;rsquo;ll get your manager/organization to buy into the idea, or you will be stuck doing brown bag lunches. &lt;strong&gt;In either case, &lt;em&gt;you&lt;/em&gt; will be improving and investing in yourself.&lt;/strong&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>GraphQL Persisted Queries with HTTP Caching [Part 4]</title>
-    <link rel="alternate" href="https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/"/>
-    <id>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-4/</id>
-    <updated>2019-05-28T22:47:02-04:00</updated>
-    <published>2018-07-18T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">This is the last of four parts on GraphQL Persisted Queries with HTTP Caching. We end by adding HTTP caching to our Express, Rails and React applications.</description>
-    <content type="html">&lt;p&gt;This is the last part of a four-part series on GraphQL Persisted Queries with HTTP Caching. As a recap of &lt;a href="/graphql-persisted-queries-with-http-caching-part-3/"&gt;part three&lt;/a&gt;, we created a Rails application capable of handling persisted queries.&lt;/p&gt;
-
-&lt;p&gt;In part four we will cover the following topics:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Add HTTP Caching to React Application&lt;/li&gt;
-&lt;li&gt;Add HTTP Caching to Express Server&lt;/li&gt;
-&lt;li&gt;Add HTTP Caching to Rails Server&lt;/li&gt;
-&lt;li&gt;Alternative Caching with Gateways&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Caching with GraphQL&lt;/h1&gt;
-
-&lt;p&gt;There are different ways to &lt;em&gt;cache&lt;/em&gt; with GraphQL:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.apollographql.com/docs/react/advanced/caching.html"&gt;Caching on the Apollo client&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://mgiroux.me/2016/graphql-query-caching-with-rails/"&gt;Caching the parsed and validated GraphQL query&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/chatterbugapp/cacheql"&gt;Caching field and response resolutions&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Amongst other mechanisms and techniques.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For our situation, we&amp;rsquo;re interested in HTTP caching, and the way to achieve this is to make our GraphQL network requests use &lt;code&gt;GET&lt;/code&gt; instead of &lt;code&gt;POST&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The main benefit for HTTP caching is that it allows CDNs and reverse proxy&amp;rsquo;s (i.e., &lt;a href="https://varnish-cache.org/"&gt;Varnish&lt;/a&gt;) to cache intermediate responses based on the response&amp;rsquo;s headers (i.e., &lt;code&gt;Cache-Control&lt;/code&gt;). This results in fewer requests hitting your server as the results might be cached, perfect for scaling your API. Even a short cache (i,e., &amp;lt; 10 seconds) could be extremely valuable as this cache could be shared across all consumers of the API.&lt;/p&gt;
-
-&lt;p&gt;I want to bring up an article by &lt;a href="https://twitter.com/_CoreyClark"&gt;Corey Clark&lt;/a&gt; which tackles a very similar problem on how to use &lt;a href="https://medium.com/@coreyclark/graphql-persisted-queries-using-get-requests-8a6704aba9eb"&gt;&lt;code&gt;GET&lt;/code&gt; requests with GraphQL Persisted Queries&lt;/a&gt;. Both the current post and Corey&amp;rsquo;s article reach a similar state in achieving HTTP cacheability using &lt;code&gt;GET&lt;/code&gt; requests.&lt;/p&gt;
-
-&lt;p&gt;In the following sections, we will augment our Express and Rails servers as well as our React application to use &lt;code&gt;GET&lt;/code&gt; requests. To simplify things, we&amp;rsquo;re going to apply a simple 10-second cache on all our responses (ideally you could tailor this to the individual query). In addition, we&amp;rsquo;re going to make an assumption that we don&amp;rsquo;t have any personalized data in our query responses.&lt;/p&gt;
-
-&lt;h2&gt;Add HTTP Caching to React Application&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/5cbb630c4780d20bc2747b0b62035a3702e87a3b"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Fortunately, the &lt;code&gt;apollo-link-persisted-queries&lt;/code&gt; link has a simple option (&lt;code&gt;useGETForHashedQueries&lt;/code&gt;) to enable &lt;code&gt;GET&lt;/code&gt; requests for queries (but not mutations):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;ApolloClient&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-  &lt;span class="na"&gt;link&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;createPersistedQueryLink&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;useGETForHashedQueries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt; &lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;concat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="nx"&gt;createHttpLink&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;uri&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'http://localhost:5000/graphql'&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-  &lt;span class="p"&gt;),&lt;/span&gt;
-  &lt;span class="na"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;InMemoryCache&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
-&lt;span class="p"&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now the outbound requests look like the following (a bit messy, but gets the job done):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;http://localhost:5000/graphql?operationName=ConsolesByYear&amp;amp;variables=%7B%22afterYear%22%3A1990%2C%22beforeYear%22%3A2000%7D&amp;amp;extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22a38e6d5349901b395334b5fd3b14e84a7ca7c4fc060a4089f2c23b5cf76f0f80%22%7D%7D
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To better see the requests being cached on the HTTP layer, we&amp;rsquo;re going to modify the &lt;code&gt;Query&lt;/code&gt; in our &lt;code&gt;ConsoleContainer&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight jsx"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;Query&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;QUERY&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="nx"&gt;variables&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{{&lt;/span&gt; &lt;span class="nx"&gt;afterYear&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;beforeYear&lt;/span&gt; &lt;span class="p"&gt;}}&lt;/span&gt; &lt;span class="nx"&gt;fetchPolicy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'network-only'&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;By adding &lt;code&gt;fetchPolicy&lt;/code&gt; of &lt;code&gt;network-only&lt;/code&gt; the &lt;code&gt;apollo-client&lt;/code&gt; will not cache responses, and thus each query will be sent to the GraphQL API.&lt;/p&gt;
-
-&lt;h2&gt;Add HTTP Caching to Express Server&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/0bf8d6bccc5649b00dda77b4dfdce523c22b4796"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We have to do a couple things to get our Express server in shape to serve &lt;code&gt;GET&lt;/code&gt; requests. First thing is to remove the &lt;code&gt;bodyParser&lt;/code&gt; middleware as we aren&amp;rsquo;t parsing a &lt;code&gt;POST&lt;/code&gt; anymore. We will also adjust our &lt;code&gt;GraphQLServer&lt;/code&gt; options to toggle the &lt;code&gt;getEndpoint&lt;/code&gt;, which adds a &lt;code&gt;GET&lt;/code&gt; endpoint using our defined GraphQL route. Finally, we have to modify our &lt;code&gt;persistedQueriesMiddleware&lt;/code&gt; to be on the &lt;code&gt;GET&lt;/code&gt; route for &lt;code&gt;/graphql&lt;/code&gt;. Those changes looks like the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// server.js&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'graphql-yoga'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/typeDefs'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./graphql/resolvers'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./persistedQueriesMiddleware'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;GraphQLServer&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;typeDefs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;resolvers&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="na"&gt;port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;getEndpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="na"&gt;playground&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'/playground'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;express&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kd"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/graphql'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="nx"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;start&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;options&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="nx"&gt;port&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="s2"&gt;`Server started, listening on port &lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;port&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; for incoming requests.`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;We also have to modify our &lt;code&gt;persistedQueriesMiddleware&lt;/code&gt; itself to parse the &lt;code&gt;GET&lt;/code&gt; query parameters and specify the response&amp;rsquo;s &lt;code&gt;Cache-Control&lt;/code&gt; header for a &lt;code&gt;max-age&lt;/code&gt; of 10 seconds:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// persistedQueriesMiddleware.js&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;invert&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'lodash'&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;extractedQueries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;invert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'./extracted_queries.json'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Handling request to: '&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="kd"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Cache-Control'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'public, max-age=10'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;querySignature&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;persistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;sha256Hash&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;persistedQuery&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;extractedQueries&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;querySignature&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nx"&gt;persistedQuery&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt; &lt;span class="na"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Invalid querySignature'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Invalid querySignature'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="nx"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;persistedQuery&lt;/span&gt;
-  &lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;exports&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nx"&gt;persistedQueriesMiddleware&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Add HTTP Caching to Rails Server&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Follow along with the complete code changes on &lt;a href="https://github.com/kevinjalbert/graphql-persisted-queries/commit/c3bcc3588012a9b4b22bd582c80de3e0dd208078"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;For our Rails server, we have a few small changes to make to allow for &lt;code&gt;GET&lt;/code&gt; requests. First, we&amp;rsquo;ll add a new route to allow for &lt;code&gt;GET&lt;/code&gt; requests, under the same URL and controller action:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-  &lt;span class="c1"&gt;# .. other routes&lt;/span&gt;
-  &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;"/graphql"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s2"&gt;"graphql#execute"&lt;/span&gt;
-  &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s2"&gt;"/graphql"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="s2"&gt;"graphql#execute"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Like before, we handle the persisted queries within the &lt;code&gt;GraphqlController&lt;/code&gt;. We need to tweak the controller to conform to the new query parameters structure of the React application&amp;rsquo;s requests. We will also add an &lt;code&gt;expires_in&lt;/code&gt; to add in the 10-seconds of &lt;code&gt;max-age&lt;/code&gt; for the response&amp;rsquo;s &lt;code&gt;Cache-Control&lt;/code&gt; header:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;GraphqlController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute&lt;/span&gt;
-    &lt;span class="n"&gt;expires_in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;seconds&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;public: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ensure_hash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:variables&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:query&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;operation_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:operationName&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;present?&lt;/span&gt;
-      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;
-      &lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:extensions&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-      &lt;span class="n"&gt;signature&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"persistedQuery"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"sha256Hash"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;persisted_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;PersistedQuery&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;signature: &lt;/span&gt;&lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RailsGraphqlSchema&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;persisted_query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;variables: &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;operation_name: &lt;/span&gt;&lt;span class="n"&gt;operation_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;
-  &lt;span class="k"&gt;rescue&lt;/span&gt; &lt;span class="no"&gt;StandardError&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;
-    &lt;span class="n"&gt;render&lt;/span&gt; &lt;span class="ss"&gt;json: &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;errors: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;message&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Alternative Caching with Gateways&lt;/h2&gt;
-
-&lt;p&gt;I didn&amp;rsquo;t mention &lt;a href="https://www.apollographql.com/engine"&gt;Apollo Engine&lt;/a&gt;, but this is a recent development in the GraphQL caching space. It provides a layer which sits in front of your GraphQL server and handles caching, query execution tracing, and error tracking. It is a paid solution if you need to handle more than 1 million requests per month.&lt;/p&gt;
-
-&lt;p&gt;Part of the secret sauce for caching with Apollo Engine is that it introduced the &lt;a href="https://github.com/apollographql/apollo-cache-control"&gt;Apollo Cache Control&lt;/a&gt; GraphQL extension. This allows the GraphQL API to return cache hints on a per field-level. Effectively, this allows the caching to be smarter than simply a blanket solution.&lt;/p&gt;
-
-&lt;p&gt;For additional reading on these technologies and techniques, I recommend the following article on &lt;a href="https://dev-blog.apollodata.com/caching-graphql-results-in-your-cdn-54299832b8e2"&gt;Caching GraphQL Results in your CDN&lt;/a&gt; as it uses Automatic Persisted Queries, Apollo Cache Control, and Apollo Engine.&lt;/p&gt;
-
-&lt;p&gt;Another paid solution (if you exceed 5,000 requests per months) is &lt;a href="https://fastql.io/"&gt;FastQL&lt;/a&gt;. This is a new gateway solution which acts as its own CDN, handling caching and expiration of fields. You are able to manually invalidate field-level caches through an API, or automatically invalidate by sending mutations through their CDN (which expires fields related to the mutation object type).&lt;/p&gt;
-
-&lt;h1&gt;Reflection&lt;/h1&gt;
-
-&lt;p&gt;There are a lot of options available for caching with GraphQL. It is possible to do so at different layers of the flow using different techniques and technologies. In this last post of the series we mainly took a look at HTTP caching. By enabling &lt;code&gt;GET&lt;/code&gt; requests we were half-way there &amp;ndash; the last bit remaining is attaching the appropriate &lt;code&gt;Cache-Control&lt;/code&gt; headers. Admittedly, we took an easy approach of blanketing all responses with a 10 second &lt;code&gt;max-age&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Depending on your situation, you might need to further explore the field-level caching options like Apollo Cache Control, or even using a Gateway to help out, like FastQL. Even though being aware of the data within your queries is important, is it all cacheable? If you have personalized data you have to approach this in a different way. There might not be value in caching if every response is personalized to a user, or maybe you have to split your queries into two queries (i.e., personalized, non-personalized). The cache configuration (i.e., CDN and/or a reverse proxy) is a huge piece we skipped over, but it likely will need some tweaking for your specific use cases (i.e., split caching based on the header).&lt;/p&gt;
-
-&lt;p&gt;Overall, I am pleased with the solutions we arrived too. We built a simple GraphQL API in Express and Rails. Both of these can communicate with a React application using persisted queries. Our Express server used a JSON file for its data and persisted queries, while for our Rails server we had everything in a database. We overcame the issues with the existing tooling for determining a signature for each query, and created the ability to synchronize persisted queries via HTTP &lt;code&gt;POST&lt;/code&gt; requests. We were able to implement &lt;code&gt;GET&lt;/code&gt; requests and apply a 10-second cache for intermediate CDN and reverse proxies.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This topic was presented at &lt;a href="https://www.meetup.com/GraphQL-Toronto/events/251760335/"&gt;GraphQL Toronto July 2018&lt;/a&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=ocX_jf81LwE"&gt;Watch the talk&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://speakerdeck.com/kevinjalbert/graphql-persisted-queries-with-http-caching"&gt;Read the slides&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
 </content>
   </entry>
 </feed>

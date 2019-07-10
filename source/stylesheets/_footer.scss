@@ -1,6 +1,14 @@
-.footer__copywrite {
+.footer {
   @include no-underline-links;
+}
 
-  margin: 10px 0;
+.footer__copywrite {
   text-align: center;
+}
+
+.footer__social {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+  justify-content: space-around;
 }

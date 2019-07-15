@@ -2,16 +2,70 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-06-17T19:53:20-04:00</updated>
+  <updated>2019-07-15T19:53:20-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Integrating Notion with Google Assistant</title>
+    <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
+    <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
+    <updated>2019-07-15T07:24:53-04:00</updated>
+    <published>2019-07-15T19:53:20-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">I want to share how I integrate my Weekly Notion Setup with Google Assistant. It provides a ubiquitous way to interact with Notion. In particular, this solution opens up new ways to add notes and tasks in Notion via voice commands.</description>
+    <content type="html">&lt;p&gt;Building off two of my previous posts (&lt;a href="/my-weekly-notion-setup/"&gt;My Weekly Notion Setup&lt;/a&gt; and &lt;a href="/integrating-notion-with-alfred/"&gt;Integrating Notion with Alfred&lt;/a&gt;), I decided to further integrate &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; with &lt;a href="https://assistant.google.com/"&gt;Google Assistant&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Google Assistant is never too far away from me. I almost always have my phone within arms reach, and I also have multiple Google devices throughout my house. In the past, I&amp;rsquo;ve used other productivity applications in conjunction with Google Assistant (i.e., &lt;a href="https://help.evernote.com/hc/en-us/articles/360000930107-How-to-use-Google-Assistant-with-Evernote"&gt;Evernote&lt;/a&gt;, and &lt;a href="https://get.todoist.help/hc/en-us/articles/115000056165-How-can-I-use-Todoist-with-Google-Assistant-"&gt;Todoist&lt;/a&gt;) to capture notes and tasks. With my recent commitment to Notion, I&amp;rsquo;ve been missing this integration.&lt;/p&gt;
+
+&lt;h1&gt;The Goal&lt;/h1&gt;
+
+&lt;p&gt;The 2 main requirements I&amp;rsquo;m looking for here are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Ability to dictate notes that are appended to my &lt;em&gt;Notes&lt;/em&gt; section under the current day.&lt;/li&gt;
+&lt;li&gt;Ability to dictate a new task that gets added to my &lt;em&gt;Tasks&lt;/em&gt; database.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I would also like the end solution to be one that is extensible and can grow with my template and use cases.&lt;/p&gt;
+
+&lt;h1&gt;The Journey&lt;/h1&gt;
+
+&lt;p&gt;At the time of writing, no official API has been released for Notion. For a previous project, I was able to create &lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;&lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt; using an unofficial API client called &lt;a href="https://github.com/jamalex/notion-py"&gt;&lt;code&gt;notion-py&lt;/code&gt;&lt;/a&gt; to much success. To be honest, I suspect the official API to likely be restrictive to some degree, although only time will tell. In either case, using this API client gives me great flexibility in what can be done in Notion.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been successful in hooking Google Assistant into other application via the &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt; platform and naturally gravitate to this free solution.&lt;/p&gt;
+
+&lt;p&gt;The next piece of this solution is being able to execute custom code based on an action from the Google Assistant trigger on IFTTT. Fortunately, IFTTT has the capabilities to perform HTTP requests in response to a trigger. Thus, my end-goal solution requires a server to run my custom code, which uses &lt;code&gt;notion-py&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I decided to reach for &lt;a href="https://heroku.com/"&gt;Heroku&lt;/a&gt; as they have a pretty offering that allows you to run an application for free (within limits).&lt;/p&gt;
+
+&lt;h1&gt;The Reward&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=z8SgCwrci5I"&gt;Click to watch a video summarizing integration and demonstrating how it works&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I&amp;rsquo;ve put together &lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;, a GitHub repository, a Heroku application that performs Notion actions based on voice requests via &lt;a href="https://ifttt.com/maker_webhooks"&gt;IFTTT Webhooks&lt;/a&gt; and &lt;a href="https://ifttt.com/google_assistant"&gt;Google Assistant&lt;/a&gt;. I&amp;rsquo;ve put together easy-to-follow instructions that can help others open up integrations like this for themselves.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;Click to check out &lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;a href="https://github.com/kevinjalbert/notion-heroku/tree/v1.0.0"&gt;v1.0.0&lt;/a&gt; is current at the time of publication (July 15, 2019).&lt;/p&gt;
+
+&lt;h1&gt;The Future&lt;/h1&gt;
+
+&lt;p&gt;Running the application on Heroku (or any server to be honest) opens up new opportunities. For example, it would be entirely possible to have something run periodically or on a schedule. I can also continue to iterate and add to and improve the integration with Google Assistant (i.e., new endpoints that run Notion commands on my behalf).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2019-06-17T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -94,7 +148,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2019-05-28T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -276,7 +330,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2019-04-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -353,7 +407,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2019-03-31T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -451,7 +505,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2019-02-28T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -494,7 +548,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2019-01-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -613,7 +667,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2018-12-29T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -685,7 +739,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2018-11-30T18:53:20-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -814,7 +868,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2018-10-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -879,7 +933,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Todoist with Keyboard Navigation via Nativefier</title>
     <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
     <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
+    <updated>2019-07-15T07:24:53-04:00</updated>
     <published>2018-09-30T19:53:20-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -969,140 +1023,6 @@ nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span c
 &lt;p&gt;I still like the &lt;em&gt;quick task adding&lt;/em&gt; feature of the original Todoist application on the desktop, but unfortunately, that was outside the scope of what I could do with &lt;code&gt;nativefier&lt;/code&gt;. As a workaround, I&amp;rsquo;ve renamed the original application to &lt;code&gt;Todoist-store&lt;/code&gt; and moved the new application over with no naming conflicts. I run both applications so that I can continue to use the &lt;em&gt;quick task adding&lt;/em&gt; feature, although I hide &lt;code&gt;Todist-store&lt;/code&gt;in the tray and prevent any notifications from appearing.&lt;/p&gt;
 
 &lt;p&gt;To simplify the process of extending/modifying/building this solution, I&amp;rsquo;ve put together the following &lt;a href="https://github.com/kevinjalbert/todoist-shortcuts-nativefier"&gt;repository on GitHub&lt;/a&gt;. I hope that Todoist simply adds better keyboard navigation in their client by default&amp;hellip; but until then, I&amp;rsquo;ll be using this solution.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Video Clubs: A Way to Keep Up</title>
-    <link rel="alternate" href="https://kevinjalbert.com/video-clubs-a-way-to-keep-up/"/>
-    <id>https://kevinjalbert.com/video-clubs-a-way-to-keep-up/</id>
-    <updated>2019-07-09T21:43:08-04:00</updated>
-    <published>2018-08-28T19:53:20-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Keeping up in your industry can be hard. Conferences offer industry-leading information and the direction of the community. Attending conferences is expensive in both cost and time. Learn how to start a video club to better consume conference videos in your workplace at a sustainable pace.</description>
-    <content type="html">&lt;p&gt;As a knowledge worker, a lot of our time is spent thinking about problems and solutions. We rely on pattern matching and experience while working to make the best progress we can. Is there a way to accelerate our learning and keep a pulse on new, upcoming, and innovative solutions? I will be approaching this question from a developer&amp;rsquo;s perspective, although the ideas presented here can be applied to other domains.&lt;/p&gt;
-
-&lt;p&gt;Being aware of best practices, new techniques, alternative frameworks, and really anything in general for your domain is good. I would attribute some of my successes to &lt;em&gt;surface knowledge&lt;/em&gt; (i.e., having a high-level understanding), as it allows you to know of alternatives and possible solutions. Obviously, you would dive deeper into the area if you are going to invest more effort into it. In a way, this promotes a &lt;em&gt;just-in-time learning&lt;/em&gt; philosophy, to focus on areas as needed. Again, the key is that you &lt;em&gt;know&lt;/em&gt; of these areas.&lt;/p&gt;
-
-&lt;h1&gt;Keeping up as Developers&lt;/h1&gt;
-
-&lt;p&gt;I encourage developers to do the following, although from my experiences it&amp;rsquo;s common for developers to be doing at least some of these activities already:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Read blog posts: low friction and easily discoverable source of information, it normally comes naturally while developing.&lt;/li&gt;
-&lt;li&gt;Listen to podcasts: commuter friendly, topical and timely due to the &lt;em&gt;real-time&lt;/em&gt; nature, interviews with high-calibre people can be insightful.&lt;/li&gt;
-&lt;li&gt;Read Books: a wealth of knowledge but require more time investment.&lt;/li&gt;
-&lt;li&gt;Attend meetups: allows for networking with like-minded individuals, local groups, talks or workshops, typically free to attend.&lt;/li&gt;
-&lt;li&gt;Attend conferences: like meetups but normally of a higher calibre and immersive, costs a lot of money to attend.&lt;/li&gt;
-&lt;li&gt;Watch conference videos: talks of a conference, without the cost and networking aspects.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I want to focus on the last point &amp;ndash; watching conference videos. To me, this activity presents an affordable solution to attending conferences (from a time/money perspective). Additionally, conferences sometimes have multiple tracks and so, even as an attendee, it is not possible to see all the talks. The videos from a conference are usually available a few weeks after the conference. To me, conference talks represent distilled knowledge condensed into 30-60 minutes.&lt;/p&gt;
-
-&lt;p&gt;I would argue that it is a developer&amp;rsquo;s job to keep up with the community and to &lt;em&gt;learn&lt;/em&gt; from industry-leaders. It can be hard to find the time to watch these videos on your own (i.e., evenings or weekends). Not only is the time a constraint, but also if you are consuming a conference video by yourself you are missing out on valuable discussions with peers immediately after the talk. So in an effort to better facilitate the time for learning, I am proposing the following: to start a &lt;em&gt;video club at your workplace&lt;/em&gt;!&lt;/p&gt;
-
-&lt;h1&gt;The Workings of a Video Club&lt;/h1&gt;
-
-&lt;p&gt;At theScore, the way we&amp;rsquo;ve handled our video club has evolved over the years. Initially, the flow worked like so:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;See an interesting video to watch.&lt;/li&gt;
-&lt;li&gt;Add video URL to video club page in wiki (&lt;a href="https://www.atlassian.com/software/confluence"&gt;Confluence&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Once a week people would gather at lunch for the video club.&lt;/li&gt;
-&lt;li&gt;Watch the next video or one which the audience really wants to see.&lt;/li&gt;
-&lt;li&gt;Discuss (maybe?).&lt;/li&gt;
-&lt;li&gt;Continue on with the day.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This flow worked and to be honest was fine. The main issue we wanted to fix was more transparency and organization around the videos. By addressing these concerns, the idea is that we&amp;rsquo;d be able to surface the most desired videos to be watched, as well as better facilitating discussion and recording findings.&lt;/p&gt;
-
-&lt;p&gt;The next section outlines how we&amp;rsquo;ve changed our video club to better work for developers, mainly taking advantage of GitHub and Slack. These changes have been well received, and it seems to better encourage the functioning aspects of the video club. I do want to mention that this next section is going to be highly tailored to developers.&lt;/p&gt;
-
-&lt;h1&gt;Video Club on GitHub&lt;/h1&gt;
-
-&lt;p&gt;We decided to move away from the wiki version of the video club to GitHub. The main reasons were:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Better structure (i.e., issues, labels, etc&amp;hellip;).&lt;/li&gt;
-&lt;li&gt;Familiar to developers.&lt;/li&gt;
-&lt;li&gt;Voting via &lt;em&gt;reactions&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Slack + GitHub integration for visibility.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Setup Repository&lt;/h2&gt;
-
-&lt;p&gt;The first thing we need is a repository &lt;code&gt;video-club&lt;/code&gt; (or any other name you like). We only need two files in our repository:&lt;/p&gt;
-
-&lt;p&gt;The following is the content of the &lt;code&gt;README.md&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# The Video Club
-* Video club for weekly educational videos
-* Place for tracking/voting/discussion
-* Slack Channel #video-club
-
-## Would like to group watch a video?
-* Create an issue
-* Throw some labels on it
-* Get people to vote on it with the :thumbsup: reactions
-
-## Each week the highest voted video is watched
-* Discussion happens immediately afterwards
-* Issue could be updated with large takeaway points
-* Close the issue
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The following is the content of the &lt;code&gt;ISSUE_TEMPLATE.md&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;## [Video Title -- Also should be issue title](video.url)
-
-### Description
-&amp;lt;!-- Talk's description --&amp;gt;
-
-### Time Length
-&amp;lt;!-- Length of the video (i.e., 16m, 1h10m) --&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Videos as Issues&lt;/h2&gt;
-
-&lt;p&gt;&lt;img width="1001" height="692" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/issues.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see in the above image, each &lt;em&gt;GitHub Issue&lt;/em&gt; represents a video within our repository. As we have an &lt;code&gt;ISSUE_TEMPLATE.md&lt;/code&gt; each issue then follows a consistent format containing context and information about the video. Ideally, we want the inputting process for a video to be as low-friction as possible. Right now it is pretty quick to create a new issue for a video, although &lt;strong&gt;one thing I would like to do is create a bookmarklet or browser extension to pre-fill an issue based on the video URL&lt;/strong&gt;. The following image illustrates an example video in our issue format.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="1022" height="521" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/video-issue.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can see that we take advantage of &lt;em&gt;Issue Labels&lt;/em&gt; as well to further categorize the videos. We&amp;rsquo;re pretty loose with their usage, but it does provide additional context and filtering capabilities. One other aspect to notice is that we use &lt;em&gt;Issue Reactions&lt;/em&gt; to &lt;em&gt;vote&lt;/em&gt; on videos that a participant would like to watch at some point. These votes are then used to help &lt;em&gt;pick the next video&lt;/em&gt;, as we will see in the next section.&lt;/p&gt;
-
-&lt;h2&gt;Picking the Next Video&lt;/h2&gt;
-
-&lt;p&gt;One of the main draws to using GitHub Issues is that we can vote using the reactions and then and sort the issues by &lt;em&gt;votes&lt;/em&gt; (i.e., thumbsup reactions on the issue). This approach allows the participants to weigh in on what they would like to see. The end goal is that the most highly desired videos will be watched. By sorting the open issues by votes, the process of picking the next video is pretty straightforward.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="999" height="506" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/next-video-sorting.jpg" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Discussion and Context&lt;/h2&gt;
-
-&lt;p&gt;The fact that we have GitHub Issues gives us a space for discussion using &lt;em&gt;GitHub Comments&lt;/em&gt;. After the video has been watched, we carry out a 5~ minute discussion and record the high-level takeaways. Our video club accommodates remote attendees (coordination is done via Slack), and in those situations, we use video conferencing to facilitate the discussion process.&lt;/p&gt;
-
-&lt;p&gt;Ideally, additional discussion can be carried out via more comments (even later after the video has been watched). We use GitHub for our projects, and having the videos as issues allows us to link to videos if we want to use them as references or talking points in other issues or pull requests. Finally, a video issue is closed after the initial discussion is written up for it. The following image demonstrates the aforementioned concepts.&lt;/p&gt;
-
-&lt;p&gt;&lt;img width="782" height="630" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/completed-video.jpg" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Slack Integration&lt;/h2&gt;
-
-&lt;p&gt;To increase transparency and engagement, we are using the &lt;a href="https://slack.github.com/"&gt;GitHub + Slack integration&lt;/a&gt;. This allows us to have events in our &lt;code&gt;video-club&lt;/code&gt; repository to be pushed to our &lt;code&gt;#video-club&lt;/code&gt; Slack channel.&lt;/p&gt;
-
-&lt;p&gt;When someone adds a new video, the issue&amp;rsquo;s content (following the template) lets everyone know of a new video they could vote on:
-&lt;img width="640" height="420" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/slack-new-video.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;We use &lt;a href="/slack-reminding-users-and-channels/"&gt;Slack&amp;rsquo;s channel reminders&lt;/a&gt; to ping the room to ensuring that votes are cast prior to the time we&amp;rsquo;ll watch a video. In addition, we announce a bit before what video we will watch based on the sorting of votes:
-&lt;img width="760" height="555" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/slack-video-selected.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;Discussion notes and comments are pushed through the channel to help surface further comments:
-&lt;img width="635" height="490" src="/images/2018-08-28-video-clubs-a-way-to-keep-up/slack-video-finished.jpg" /&gt;&lt;/p&gt;
-
-&lt;h1&gt;Starting a Video Club&lt;/h1&gt;
-
-&lt;p&gt;So, are you are psyched to start a video club in your workplace? Now, how do you sell the idea to your boss and peers? You are trying to take 60~ minutes every week or so to watch &lt;em&gt;videos&lt;/em&gt;&amp;hellip; it doesn&amp;rsquo;t sound like a good use of work time. Again, the whole point of this is to improve yourself and that these changes will be reflected in the work you do (i.e., knowing better practices and tools).&lt;/p&gt;
-
-&lt;p&gt;There are different ways to go about starting a video club, and honestly, it could be as straightforward as asking your boss and peers. I personally think if you can &lt;em&gt;embody&lt;/em&gt; the change, it is an easier sell to the organization and your direct manager. First thing I would do is personally find a set of high-quality videos from a conference relevant to your domain (i.e., could even be old ones). Put these out in the open as great material that everyone &lt;em&gt;should&lt;/em&gt; watch at some point (which shouldn&amp;rsquo;t be a stretch from the truth). Suggest a brown bag lunch event, everyone brings their lunch (or buys it) and watches the video during their lunch. Encourage discussion and see if there are any takeaways that might be directly related to the work at hand. Then, eventually, you start to transition to an organizational model (i.e., GitHub) and getting participation from your peers by suggesting videos.&lt;/p&gt;
-
-&lt;p&gt;This is a cultural shift you are trying to create, therefore it could be slow. I believe the end goal is to move away from the brown bag lunch and instead to a dedicated &lt;em&gt;meeting time&lt;/em&gt; so that the video club isn&amp;rsquo;t taking up everyone&amp;rsquo;s personal time at lunch. I&amp;rsquo;ve seen various attendees drop off due to external lunch plans. Hopefully, a higher attendance can be achieved if it&amp;rsquo;s a normal meeting time. Overall, I would say either you&amp;rsquo;ll get your manager/organization to buy into the idea, or you will be stuck doing brown bag lunches. &lt;strong&gt;In either case, &lt;em&gt;you&lt;/em&gt; will be improving and investing in yourself.&lt;/strong&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

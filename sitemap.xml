@@ -13,6 +13,9 @@
     <loc>https://kevinjalbert.com/uses/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/integrating-notion-with-google-assistant/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</loc>
   </url>
   <url>
@@ -160,6 +163,18 @@
     <loc>https://kevinjalbert.com/synchronizing-my-dotfiles/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/notion/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/google-assistant/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/productivity/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/tools/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/process/</loc>
   </url>
   <url>
@@ -191,12 +206,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/vim/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/tools/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/productivity/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/database/</loc>
@@ -295,9 +304,6 @@
     <loc>https://kevinjalbert.com/tags/styled-jsx/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/notion/</loc>
-  </url>
-  <url>
     <loc>https://kevinjalbert.com/tags/organization/</loc>
   </url>
   <url>
@@ -344,6 +350,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/10/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/tools/page/2/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/ruby/page/2/</loc>

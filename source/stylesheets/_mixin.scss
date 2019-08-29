@@ -19,3 +19,20 @@ $hover-font-color: #2d73bf;
     }
   }
 }
+
+// Makes the styles not as 'red' for code elements
+// which also gives code+link more clickable affordance
+@mixin code-text-stylings {
+  // Inline code
+  code {
+    color: inherit;
+    background-color: #f8f8f8;
+  }
+
+  // Normal multi-line code blocks
+  pre {
+    code {
+      background-color: inherit;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 .article {
   @include no-underline-links;
+  @include code-text-stylings;
 
   .article__title {
     text-align: center;

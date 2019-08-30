@@ -2,16 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-07-14T20:00:00-04:00</updated>
+  <updated>2019-08-28T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Introducing notion-scripts</title>
+    <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
+    <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
+    <updated>2019-08-29T21:39:06-04:00</updated>
+    <published>2019-08-28T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Building off of my previous Notion work using notion-py, I continue to adjust Notion to fit my needs. In this article, I want to explain how I've been taking my integrations with Notion to the next level.</description>
+    <content type="html">&lt;p&gt;My &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; journey started with the creation of my &lt;a href="/my-weekly-notion-setup/"&gt;highly-tailored weekly template&lt;/a&gt;. I then made my first integration, &lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;&lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt;, an &lt;a href="https://www.alfredapp.com"&gt;Alfred&lt;/a&gt; workflow that allows me to issue quick commands to interact with Notion. Recently, I created &lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;, a web application that integrates Notion and &lt;a href="https://assistant.google.com/"&gt;Google Assistant&lt;/a&gt; via &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Laying the Foundation&lt;/h1&gt;
+
+&lt;p&gt;At this point, both of my Notion integrations share similarities with how I utilize &lt;a href="https://github.com/jamalex/notion-py"&gt;&lt;code&gt;notion-py&lt;/code&gt;&lt;/a&gt;. I decided to lay down some foundational work that will accelerate and open additional capabilities in my existing and future projects with respect to Notion. The initial culmination of this work is &lt;a href="https://github.com/kevinjalbert/notion-scripts"&gt;&lt;code&gt;notion-scripts&lt;/code&gt;&lt;/a&gt;, a Python package. I&amp;rsquo;ve extracted the commonalities between my two projects in an effort to &lt;a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself"&gt;DRY (don&amp;rsquo;t repeat yourself)&lt;/a&gt; the code up for better reuse.&lt;/p&gt;
+
+&lt;p&gt;My gameplan for &lt;code&gt;notion-scripts&lt;/code&gt; is that it holds all the higher-level interactions that I do with Notion (i.e., add a task, find current day, update task status, etc&amp;hellip;), as well as the underlying Notion API interactions via &lt;code&gt;notion-py&lt;/code&gt;. Ultimately, my other applications shouldn&amp;rsquo;t have to interact with &lt;code&gt;notion-py&lt;/code&gt; anymore. If there is an opportunity for some functionality to live in more than one project, it will end up in &lt;code&gt;notion-scripts&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Background/Reactive Tasks for Notion&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve always wanted a way to run certain &lt;em&gt;processes&lt;/em&gt; reactively in Notion. I took what I have for &lt;code&gt;notion-heroku&lt;/code&gt; and added the capabilities to run &lt;a href="https://github.com/kevinjalbert/notion-heroku/blob/26d3712a2869b699cbcbf7691807dc9b2a5bc4dd/src/api.py#L11-L26"&gt;recurring scheduled tasks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using recurring scheduled tasks, I added the ability to record task status changes reactively. My goal is so that when using Notion on my mobile device, task transitions will record automatically as this functionality is running on a server.&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1480" height="1080" src="/images/2019-08-29-introducing-notion-scripts/recorded-transitions.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;As mentioned earlier, I plan to continue to build on top of the work I&amp;rsquo;ve done so far. With respect to the transitions of a task, I&amp;rsquo;m hoping to add the ability to track the total time a task spent in each status. I&amp;rsquo;d also like to add email capabilities, so that I can get a daily/weekly email summary of tasks that are stale/stuck/new/completed.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I know that &lt;code&gt;notion-py&lt;/code&gt; has callbacks for &lt;a href="https://github.com/jamalex/notion-py#example-subscribing-to-updates"&gt;subscribing to updates&lt;/a&gt;. For my use case, I have not yet explored this and instead went with polling to watch for changes. For &lt;code&gt;notion-heroku&lt;/code&gt;, it would require a more substantial change, and the current design is stateless (i.e., run task, look at Notion, react) as Notion holds all the state itself. I might revisit this subject if need be.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1&gt;What&amp;rsquo;s Next?&lt;/h1&gt;
+
+&lt;p&gt;Having &lt;code&gt;notion-scripts&lt;/code&gt; will help in some regard with the following ideas, as they will touch all my integrations and then some.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Having an interval notification on the desktop that tells me what my current task is.&lt;/li&gt;
+&lt;li&gt;Sending myself daily/weekly email reports of tasks/wins/lights from my template.&lt;/li&gt;
+&lt;li&gt;An approach to help with time blocking of tasks with my Google Calendar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Don&amp;rsquo;t forget to subscribe to the blog as I&amp;rsquo;ll likely have a post with new changes. If you are interested in following the developments, you can also follow my projects on GitHub.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -65,7 +108,7 @@
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -148,7 +191,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -330,7 +373,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -407,7 +450,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -505,7 +548,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -548,7 +591,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2019-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -667,7 +710,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2018-12-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -739,7 +782,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2018-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -868,7 +911,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Automating Slack Statuses for Meetings and Focus Time</title>
     <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
     <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
+    <updated>2019-08-16T13:47:27-04:00</updated>
     <published>2018-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -927,102 +970,6 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
 &lt;h1&gt;Slack Statuses While Working Remotely&lt;/h1&gt;
 
 &lt;p&gt;So, as I mentioned earlier, I occasionally work remotely. This presents an interesting problem of conveying two statuses simultaneously. My workaround isn&amp;rsquo;t pretty but it works&amp;hellip; I simply change my Slack name to &amp;ldquo;Kevin Jalbert (WFH)&amp;rdquo; to indicate that I&amp;rsquo;m working from home that day. This move frees up my actual Slack status to be automated throughout the day.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Todoist with Keyboard Navigation via Nativefier</title>
-    <link rel="alternate" href="https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/"/>
-    <id>https://kevinjalbert.com/todoist-with-keyboard-navigation-via-nativefier/</id>
-    <updated>2019-07-15T07:25:19-04:00</updated>
-    <published>2018-09-29T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Todoist does not have strong keyboard navigation and shortcuts. Fortunately, there is a browser extension that augments the web client to support better keyboard navigation. This article outlines how to gain this functionality in a desktop version of Todoist using 'nativefier'.</description>
-    <content type="html">&lt;p&gt;&lt;a href="https://todoist.com"&gt;Todoist&lt;/a&gt; is a powerful task manager. It offers a &lt;a href="https://itunes.apple.com/ca/app/todoist-organize-your-life/id585829637"&gt;MacOS Application&lt;/a&gt; that provides a desktop experience and a dedicated &lt;em&gt;quick task adding&lt;/em&gt; feature. I am a poweruser of the keyboard (i.e., I use &lt;a href="https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en"&gt;Vimium&lt;/a&gt; in Chrome), and my big issue is that Todoist doesn&amp;rsquo;t offer strong keyboard navigation. Fortunately, &lt;a href="https://github.com/mgsloan/todoist-shortcuts"&gt;todoist-shortcuts&lt;/a&gt; adds much-needed keyboard navigation to the web client as a browser extension.&lt;/p&gt;
-
-&lt;p&gt;I enjoy having &lt;em&gt;dedicated tools/applications&lt;/em&gt; for tasks and tend to keep my browser for ephemeral tasks. Therefore I wanted to keep Todoist as a desktop application but with the keyboard navigation extension.&lt;/p&gt;
-
-&lt;h2&gt;Web Application -&amp;gt; Desktop Application&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve used &lt;a href="https://github.com/jiahaog/nativefier"&gt;nativefier&lt;/a&gt; in the past to create a desktop version of various web applications. Quick searching showed the following &lt;a href="https://github.com/jiahaog/nativefier/issues/207"&gt;issue&lt;/a&gt; mentioning that adding a Chrome extention isn&amp;rsquo;t supported, although it is possible to &lt;em&gt;inject&lt;/em&gt; custom JavaScript to be executed within the newly created application.&lt;/p&gt;
-
-&lt;p&gt;The following command will build the application while injecting &lt;a href="https://github.com/mgsloan/todoist-shortcuts/blob/v22/src/todoist-shortcuts.js"&gt;&lt;code&gt;src/todoist-shortcuts.js&lt;/code&gt;&lt;/a&gt; in it. The injected file contains all of the keyboard navigation of &lt;code&gt;todoist-shortcuts&lt;/code&gt;. In addition, other options were provided to &lt;code&gt;nativefier&lt;/code&gt; so that we have support for badge counts and bouncing the dock icon on changes when out of focus (MacOS).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span class="nt"&gt;--name&lt;/span&gt; &lt;span class="s1"&gt;'Todoist'&lt;/span&gt; &lt;span class="nt"&gt;--icon&lt;/span&gt; ./todoist-icon.png &lt;span class="nt"&gt;--inject&lt;/span&gt; ./todoist-shortcuts-22/src/todoist-shortcuts.js &lt;span class="nt"&gt;--counter&lt;/span&gt; &lt;span class="nt"&gt;--bounce&lt;/span&gt; &lt;span class="nt"&gt;--single-instance&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The produced application works as expected. Keyboard navigation exists within the &lt;code&gt;nativefier&lt;/code&gt; created application. Unfortunately, the badge count aspect did not&amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Supporting Badge Count&lt;/h3&gt;
-
-&lt;p&gt;The reason the badge count didn&amp;rsquo;t work is because &lt;code&gt;nativefier&lt;/code&gt; is looking in the title of the window/application for the number (using a regular expression). To solve this, we will need some additional JavaScript that will propagate the number of tasks in &lt;em&gt;Today&lt;/em&gt; into the title (while handling edge cases). It isn&amp;rsquo;t the prettiest, but the following &lt;code&gt;counter.js&lt;/code&gt; snippet does the trick:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// Returns the count for the 'Today' list (defaults to 0)&lt;/span&gt;
-&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;currentCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;querySelector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#top_filters &amp;gt; li:nth-child(2) &amp;gt; span.item_content &amp;gt; small'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;innerText&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Returns the title without any annotated count&lt;/span&gt;
-&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;titleWithoutCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;" ("&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;indexOfCount&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Returns the existing count from the title (defaults to 0)&lt;/span&gt;
-&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;existingCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;" ("&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;substring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;indexOfCount&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;length&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Update badge count based on the number in Today&lt;/span&gt;
-&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;updateBadgeCount&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;currentCount&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;titleWithoutCount&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-  &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;newTitle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;newTitle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="nx"&gt;existingCount&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nx"&gt;newTitle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;`&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; (&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;count&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;)`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-
-  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;!==&lt;/span&gt; &lt;span class="nx"&gt;newTitle&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;newTitle&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Update the badge every 5 seconds&lt;/span&gt;
-&lt;span class="nx"&gt;setInterval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;updateBadgeCount&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-
-&lt;span class="c1"&gt;// Update the badge when the title changes&lt;/span&gt;
-&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;MutationObserver&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;mutations&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nx"&gt;updateBadgeCount&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
-&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="nx"&gt;observe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-  &lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;querySelector&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'title'&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="na"&gt;subtree&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="na"&gt;characterData&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="na"&gt;childList&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Unfortunately, &lt;code&gt;nativefier&lt;/code&gt; has an issue with &lt;a href="https://github.com/jiahaog/nativefier/issues/458"&gt;injecting multiple JavaScript files&lt;/a&gt;. As a workaround, we concatenate the JavaScript into one file before &lt;em&gt;injecting it&lt;/em&gt; (which fortunately works with the JavaScript we have).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class="nb"&gt;cat&lt;/span&gt; ./counter.js &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; todoist.js&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;cat&lt;/span&gt; ./todoist-shortcuts-22/src/todoist-shortcuts.js &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; todoist.js
-nativefier &lt;span class="s1"&gt;'https://todoist.com/'&lt;/span&gt; &lt;span class="nt"&gt;--name&lt;/span&gt; &lt;span class="s1"&gt;'Todoist'&lt;/span&gt; &lt;span class="nt"&gt;--icon&lt;/span&gt; ./todoist-icon.png &lt;span class="nt"&gt;--inject&lt;/span&gt; ./todoist.js &lt;span class="nt"&gt;--counter&lt;/span&gt; &lt;span class="nt"&gt;--bounce&lt;/span&gt; &lt;span class="nt"&gt;--single-instance&lt;/span&gt; &lt;span class="nt"&gt;--overwrite&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Desktop Todoist with Keyboard Navigation&lt;/h2&gt;
-
-&lt;p&gt;At this point, we&amp;rsquo;ve successfully wrapped the web client of Todoist for Desktop while injecting &lt;code&gt;todoist-shortcuts&lt;/code&gt;. Badge support is preserved and notifications continue to function.&lt;/p&gt;
-
-&lt;p&gt;I still like the &lt;em&gt;quick task adding&lt;/em&gt; feature of the original Todoist application on the desktop, but unfortunately, that was outside the scope of what I could do with &lt;code&gt;nativefier&lt;/code&gt;. As a workaround, I&amp;rsquo;ve renamed the original application to &lt;code&gt;Todoist-store&lt;/code&gt; and moved the new application over with no naming conflicts. I run both applications so that I can continue to use the &lt;em&gt;quick task adding&lt;/em&gt; feature, although I hide &lt;code&gt;Todist-store&lt;/code&gt;in the tray and prevent any notifications from appearing.&lt;/p&gt;
-
-&lt;p&gt;To simplify the process of extending/modifying/building this solution, I&amp;rsquo;ve put together the following &lt;a href="https://github.com/kevinjalbert/todoist-shortcuts-nativefier"&gt;repository on GitHub&lt;/a&gt;. I hope that Todoist simply adds better keyboard navigation in their client by default&amp;hellip; but until then, I&amp;rsquo;ll be using this solution.&lt;/p&gt;
 </content>
   </entry>
 </feed>

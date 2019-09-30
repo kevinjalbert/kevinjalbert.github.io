@@ -2,16 +2,63 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-08-28T20:00:00-04:00</updated>
+  <updated>2019-09-28T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Docker Compose DNS Consistency (DCDC)</title>
+    <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
+    <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
+    <updated>2019-09-30T08:14:25-04:00</updated>
+    <published>2019-09-28T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Introducing DCDC: a way to work with multiple Docker Compose projects locally with consistent service URLs, internal and external to the Docker network.</description>
+    <content type="html">&lt;p&gt;While I&amp;rsquo;m no longer at &lt;a href="https://scoremediaandgaming.com/"&gt;theScore&lt;/a&gt;, I do recall the larger &lt;em&gt;dockerization&lt;/em&gt; efforts that happened near the end of my employment there. It wasn&amp;rsquo;t uncommon to have several services running for the product you were working on. At theScore we used &lt;a href="https://docs.docker.com/compose/"&gt;Docker Compose&lt;/a&gt; for local development as it eased the setup and took care of running dependencies.&lt;/p&gt;
+
+&lt;p&gt;This eventually leads to the overall problem of dealing with Docker Compose networking and DNS resolution. I ended up creating a tool called &lt;em&gt;Docker Compose DNS Consistency&lt;/em&gt;, &lt;a href="https://github.com/scoremedia/dcdc"&gt;&lt;code&gt;dcdc&lt;/code&gt;&lt;/a&gt;, as a way to solve this. The following sections are from the &lt;code&gt;dcdc&lt;/code&gt; README file, and I would highly recommend going there right after for more in-depth details on how &lt;code&gt;dcdc&lt;/code&gt; actually works.&lt;/p&gt;
+
+&lt;h1&gt;Problem&lt;/h1&gt;
+
+&lt;p&gt;We have a project (i.e., &lt;code&gt;proj1&lt;/code&gt;) that contains an API (&lt;code&gt;api&lt;/code&gt;) service. With Docker, we are able to expose the API server&amp;rsquo;s default port (&lt;code&gt;3000&lt;/code&gt;). Thus, &lt;code&gt;localhost:3000&lt;/code&gt; routes to the API of &lt;code&gt;proj1&lt;/code&gt;. We have another project (i.e., &lt;code&gt;proj2&lt;/code&gt;) that also contains an API (&lt;code&gt;api&lt;/code&gt;) service, and is also exposed on the default port of &lt;code&gt;3000&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Both projects exist as separate repositories and therefore have different &lt;code&gt;docker-compose.yml&lt;/code&gt; files. In isolation, both projects run without any problem and expose their respective API service on &lt;code&gt;localhost:3000&lt;/code&gt;. The issue is when you want to run both projects at the same time &amp;ndash; which might be needed for the development of a new feature or testing a complete flow.&lt;/p&gt;
+
+&lt;p&gt;The naive solution is to change one of the exposed ports for a project to &lt;code&gt;3001&lt;/code&gt; so that there is no clashing of ports. So for example, &lt;code&gt;proj2&lt;/code&gt;&amp;rsquo;s API is now exposed on port &lt;code&gt;3001&lt;/code&gt; and is reachable at &lt;code&gt;localhost:3001&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are a few problems here:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;This process of ensuring we have no conflicting ports on the host can be painful. Even if the projects aren&amp;rsquo;t related, you can have conflicting ports being exposed. As the number of projects grows, this becomes more challenging. It&amp;rsquo;s likely that a document is needed to keep track of used ports (or port ranges).&lt;/li&gt;
+&lt;li&gt;If the two projects have to communicate to each other internally (i.e., not via the host&amp;rsquo;s web browser), the projects cannot see each other as they are on a different network (by default).&lt;/li&gt;
+&lt;li&gt;Externally to the Docker network, we refer to the APIs as &lt;code&gt;localhost:&amp;lt;port&amp;gt;&lt;/code&gt;, but internally we need to use the &lt;em&gt;service name&lt;/em&gt; like &lt;code&gt;proj1&lt;/code&gt;&amp;rsquo;s &lt;code&gt;api&lt;/code&gt;. There is a disconnect in how we &lt;em&gt;refer&lt;/em&gt; to the services internally and externally to the Docker network.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Solution&lt;/h1&gt;
+
+&lt;p&gt;DCDC&amp;rsquo;s purpose is to provide an easy way to work with multiple Docker Compose projects locally by:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Exposing fully qualified domain names for each service (ending in &lt;code&gt;.test&lt;/code&gt;) using DNS and reverse proxy.&lt;/li&gt;
+&lt;li&gt;Providing consistent DNS resolution for services internal and external to the Docker network (i.e., &lt;code&gt;db.proj.test&lt;/code&gt; is accessible on the host machine and also from a service&amp;rsquo;s container).&lt;/li&gt;
+&lt;li&gt;Requiring as little configuration to projects to make them work with DCDC.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;em&gt;NOTE: at the time of publication, DCDC only works with macOS. It&amp;rsquo;s likely possible to work for other operating systems, although it will require some rejigging.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The following is the test output of &lt;code&gt;dcdc&lt;/code&gt; that demonstrates accessibility to services external and internal to the Docker network. Not only are HTTP services accessible, but also non-HTTP services (i.e., a database).&lt;/p&gt;
+
+&lt;p&gt;&lt;img width="1804" height="966" src="/images/2019-09-29-docker-compose-dns-consistency-dcdc/dcdc-tests.png" /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2019-08-29T21:39:06-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -54,7 +101,7 @@
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -108,7 +155,7 @@
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -191,7 +238,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -373,7 +420,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -450,7 +497,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -548,7 +595,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -591,7 +638,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2019-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -710,7 +757,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2018-12-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -782,7 +829,7 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
     <title>Tracking Production Disruptions</title>
     <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
     <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
+    <updated>2019-08-29T21:40:58-04:00</updated>
     <published>2018-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -905,71 +952,6 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
 &lt;h1&gt;Improving the Process&lt;/h1&gt;
 
 &lt;p&gt;Never stop and periodically revisit the process to make adjustments. What works for one team, might not work for others. Even though tracking a disruption can be seen as &lt;em&gt;additional&lt;/em&gt; work, it will pay itself off in time.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Automating Slack Statuses for Meetings and Focus Time</title>
-    <link rel="alternate" href="https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/"/>
-    <id>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</id>
-    <updated>2019-08-16T13:47:27-04:00</updated>
-    <published>2018-10-29T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Slack statuses can be a powerful communication tool for setting up expectations on response times. Using Zapier we look at how we can automate Slack statuses for meetings and focus times.</description>
-    <content type="html">&lt;p&gt;I use Slack statuses to communicate my &lt;em&gt;availability to respond&lt;/em&gt; to messages and to set up &lt;em&gt;expectations of my focus for a conversation&lt;/em&gt;. In an office setting, colleagues are able to see whether I&amp;rsquo;m at my desk or not, and that conveys to a certain degree how responsive I might be to messages. I work remotely a few times each week, and on those days my colleagues have even less visibility on whether I would be available or in a meeting.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve come up with a solution for two places where I can automate my Slack status to better communicate expectations and context. Hopefully, these changes will lead to fewer distractions and less ticked off colleagues.&lt;/p&gt;
-
-&lt;h1&gt;Automating Slack Status for Meetings&lt;/h1&gt;
-
-&lt;p&gt;I want to increase transparency in my response times (and set expectations for my colleagues) by updating my Slack status if I&amp;rsquo;m in a meeting. With Slack&amp;rsquo;s recent feature to &lt;a href="https://www.theverge.com/2018/8/30/17802308/slack-auto-expiring-status-updates-feature-change"&gt;auto-expire statuses&lt;/a&gt;, a clean solution using &lt;a href="https://zapier.com/"&gt;Zapier&lt;/a&gt; was possible.&lt;/p&gt;
-
-&lt;p&gt;The following three steps will outline the &lt;em&gt;Zap&lt;/em&gt; I use to automatically update my Slack status with a meeting status.&lt;/p&gt;
-
-&lt;h2&gt;Google Calendar - Event Start Trigger&lt;/h2&gt;
-
-&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/meeting-google-calendar-step.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I use the &lt;em&gt;Google Calendar Event Start&lt;/em&gt; as our trigger, specifying the calendar where all my meetings are set within. I also set the &lt;em&gt;Time Before&lt;/em&gt; value to 16 minutes as I&amp;rsquo;m not subscribed to a high premium plan.&lt;/p&gt;
-
-&lt;h2&gt;Zapier - Delay Until Action&lt;/h2&gt;
-
-&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/meeting-delay-step.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I want to delay the next step (setting the status) until the actual event starts. This is needed due to how the previous step works, as it might trigger up to 16 minutes earlier than the meeting start time.&lt;/p&gt;
-
-&lt;h2&gt;Slack - Set Status Action&lt;/h2&gt;
-
-&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/meeting-slack-step.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I update the Slack status with information on when I will be done my meeting, as well as provide a clear status emoji. With the expiration time field, the status is cleared after the meeting is completed.&lt;/p&gt;
-
-&lt;h2&gt;Possible Issue Due to Multi-Step Zap&lt;/h2&gt;
-
-&lt;p&gt;I have been a user of Zapier for a while, and somehow I have the ability to make &lt;em&gt;3-step Zaps&lt;/em&gt; with the free plan. It is possible to cut the &lt;em&gt;Delay Until&lt;/em&gt; step, but there is a possibility of the &lt;em&gt;Set Status&lt;/em&gt; step running a maximum of 16 minutes earlier than the event&amp;rsquo;s start time.&lt;/p&gt;
-
-&lt;p&gt;You could possibly mitigate this with some clever status text (i.e., &amp;ldquo;Meeting from 3:15 to 3:45&amp;rdquo;). At worse you have a meeting status &lt;em&gt;slightly&lt;/em&gt; before your meeting, which might not be a bad idea as you might be busy preparing or in-transit to a meeting room.&lt;/p&gt;
-
-&lt;h1&gt;Automating Slack Status For Focus Time&lt;/h1&gt;
-
-&lt;p&gt;Another place I automate Slack statuses is for focus time. While at work, there are times I need a deep focus time (i.e., being in the &lt;em&gt;zone&lt;/em&gt;). I use &lt;a href="https://pomodoneapp.com/"&gt;PomoDoneApp&lt;/a&gt; as my &lt;a href="https://francescocirillo.com/pages/pomodoro-technique"&gt;Pomodoro&lt;/a&gt; application of choice. Fortunately for me, it also interfaces with Zapier.&lt;/p&gt;
-
-&lt;p&gt;The goal here is for colleagues to know that I&amp;rsquo;m busy and might not get back to their messages until I have a break from my deep work.&lt;/p&gt;
-
-&lt;h2&gt;PomoDoneApp - New Timer Started Trigger&lt;/h2&gt;
-
-&lt;p&gt;With PomoDoneApp, Zapier will trigger whenever a timer begins. There is nothing to configure here, so the setup is straight forward for this step.&lt;/p&gt;
-
-&lt;h2&gt;Slack - Set Status Action&lt;/h2&gt;
-
-&lt;p&gt;&lt;img width="1227" height="1062" src="/images/2018-10-30-automating-slack-statuses-for-meetings-and-focus-times/pomodone-slack-step.jpg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;At this step, I&amp;rsquo;m just setting the appropriate status (i.e., focusing) to indicate that I&amp;rsquo;m in deep work. As per the Pomodoro technique, after the timer is up I&amp;rsquo;m free for a small break. The status expiration helps accommodate this workflow easily.&lt;/p&gt;
-
-&lt;h1&gt;Slack Statuses While Working Remotely&lt;/h1&gt;
-
-&lt;p&gt;So, as I mentioned earlier, I occasionally work remotely. This presents an interesting problem of conveying two statuses simultaneously. My workaround isn&amp;rsquo;t pretty but it works&amp;hellip; I simply change my Slack name to &amp;ldquo;Kevin Jalbert (WFH)&amp;rdquo; to indicate that I&amp;rsquo;m working from home that day. This move frees up my actual Slack status to be automated throughout the day.&lt;/p&gt;
 </content>
   </entry>
 </feed>

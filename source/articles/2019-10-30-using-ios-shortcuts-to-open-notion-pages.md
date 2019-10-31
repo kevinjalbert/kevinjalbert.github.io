@@ -46,7 +46,7 @@ Now we can start by creating our iOS Shortcut to open the Notion page. As shown 
 
 # Open my Current Day/Week Page
 
-> [Click to get iOS Shortcut to Open Current Day Notion Page](https://www.icloud.com/shortcuts/c3d283eb866847778bf77ac3354fee0c)
+> [Click to get iOS Shortcut to Open Current Day Notion Page](https://www.icloud.com/shortcuts/575fc46b4e1b486dab30c4ef42cdf180)
 
 As previously noted, I have a more elaborate Notion setup (more details about [highly-tailored weekly template](/my-weekly-notion-setup/)) where I have unique Notion pages for each day and week. My goal is to have a _'Notion Day'_ and _'Notion Week'_ shortcut on my home screen for quick access. Unfortunately, the page link for the current day and week change daily/weekly, and thus the previous solution doesn't work for me.
 
@@ -78,7 +78,7 @@ This shortcut works well, but it has two drawbacks. It _always_ has to make the 
 
 To address the drawbacks of the previous shortcut demonstration in the last section, we can cache the response from the `notion-heroku` server. Caching the results for a day then makes it so only the first usage of the shortcut requires a network call and all subsequent usage uses a cached file.
 
-The [new and improved iOS Shortcut](https://www.icloud.com/shortcuts/c3d283eb866847778bf77ac3354fee0c) now contains over 25 steps, although it handles caching, cache invalidation, and a notification if the server didn't respond. Using the shortcut when there is a cached value feels faster to me and it even works while in airplane mode.
+The [new and improved iOS Shortcut](https://www.icloud.com/shortcuts/575fc46b4e1b486dab30c4ef42cdf180) now contains over 25 steps, although it handles caching, cache invalidation, and a notification if the server didn't respond. Using the shortcut when there is a cached value feels faster to me and it even works while in airplane mode.
 
 The following video gives a walkthrough of the shortcuts:
 

@@ -92,4 +92,21 @@
     background-color: #eceff4;
     cursor: pointer;
   }
+
+  .youtube-embed {
+    margin: 0 auto;
+    display: block;
+
+    @media (min-width: 0px) {
+      width: 90%;
+      min-height: 300px;
+      height: 35vh;
+    }
+
+    @media (min-width: 768px) {
+      width: 75%;
+      min-height: 360px;
+      height: 30vh;
+    }
+  }
 }

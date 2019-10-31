@@ -2,16 +2,104 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-09-28T20:00:00-04:00</updated>
+  <updated>2019-10-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Using iOS Shortcuts to Open Notion Pages</title>
+    <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
+    <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
+    <updated>2019-10-30T21:52:22-04:00</updated>
+    <published>2019-10-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Learn how to quickly open Notion pages on your iOS device. See how I work around dynamic page links (e.g., current day/week) to open the correct pages from my Notion Weekly Template.</description>
+    <content type="html">&lt;p&gt;I recently switched from Android back to iOS for my mobile device. I decided to take a look at &lt;a href="https://support.apple.com/en-ca/guide/shortcuts/welcome/ios"&gt;iOS Shortcuts&lt;/a&gt; as I never really got to play with them before. Given my recent obsession with &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; I decided to see how I can put iOS Shortcuts to use here.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m going to walk you through two examples of using iOS Shortcuts to open Notion Pages. The first one uses a normal Notion page, and the second one uses the &lt;em&gt;current&lt;/em&gt; day/week pages from my &lt;a href="/my-weekly-notion-setup/"&gt;highly-tailored weekly template&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1&gt;Open Notion Page from iOS Home Screen&lt;/h1&gt;
+
+&lt;p&gt;The first thing that you can do is create a shortcut on your home screen that opens to a specific page in Notion. For example, you could have a page holding your todos, shopping list, latest project, etc. In my opinion, this is really useful if you frequently use specific pages in Notion on your mobile device.&lt;/p&gt;
+
+&lt;h2&gt;Notion Page Link&lt;/h2&gt;
+
+&lt;p&gt;We need to get the &lt;em&gt;Page Link&lt;/em&gt; from Notion. On iOS, you get this link by clicking the &lt;code&gt;...&lt;/code&gt; on a page in Notion and then &lt;em&gt;Copy Link&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: You can find the current Page Link in the Web interface for Notion as well, although the user interface will be slightly different.&lt;/em&gt;&lt;/p&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step1.jpg" style="width: 49%"/&gt;
+  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step2.jpg" style="width: 49%"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In your clipboard, you will have a link that looks like the following: &lt;code&gt;https://www.notion.so/Example-page-721c581be9734ad09480d0cc16f774fd&lt;/code&gt;. If visit this link, your browser will open the Notion web application to that page. Unfortunately, this will open the page in the web application in your browser.&lt;/p&gt;
+
+&lt;p&gt;The goal is to open the native Notion application. We can accomplish that using a custom URL Schema that Notion provides for iOS/macOS. &lt;strong&gt;Replacing &lt;code&gt;https&lt;/code&gt; with &lt;code&gt;notion&lt;/code&gt; in our link (e.g., &lt;code&gt;notion://www.notion.so/Example-page-721c581be9734ad09480d0cc16f774fd&lt;/code&gt;) will now open the Notion page in the native Notion application (if opened with Safari).&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Shortcut to Open Notion Page&lt;/h2&gt;
+
+&lt;p&gt;Now we can start by creating our iOS Shortcut to open the Notion page. As shown in the images below, our shortcut is just one step to open the &lt;code&gt;notion://&lt;/code&gt; page link with Safari. Finally, we can add this to the home screen, and now we have a single press shortcut that opens directly to the page we want.&lt;/p&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step3.jpg" style="width: 49%"/&gt;
+  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step4.jpg" style="width: 49%"/&gt;
+&lt;/div&gt;
+
+&lt;h1&gt;Open my Current Day/Week Page&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://www.icloud.com/shortcuts/c3d283eb866847778bf77ac3354fee0c"&gt;Click to get iOS Shortcut to Open Current Day Notion Page&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As previously noted, I have a more elaborate Notion setup (more details about &lt;a href="/my-weekly-notion-setup/"&gt;highly-tailored weekly template&lt;/a&gt;) where I have unique Notion pages for each day and week. My goal is to have a &lt;em&gt;&amp;lsquo;Notion Day&amp;rsquo;&lt;/em&gt; and &lt;em&gt;&amp;#39;Notion Week&amp;rsquo;&lt;/em&gt; shortcut on my home screen for quick access. Unfortunately, the page link for the current day and week change daily/weekly, and thus the previous solution doesn&amp;rsquo;t work for me.&lt;/p&gt;
+
+&lt;h2&gt;Fetching the Dynamic URLs&lt;/h2&gt;
+
+&lt;p&gt;I currently have a web application running that exposes an API (&lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;), allowing me to interact with my Notion account through HTTP requests. I&amp;rsquo;ve recently &lt;a href="https://github.com/kevinjalbert/notion-heroku/pull/3"&gt;added a feature&lt;/a&gt; that exposes the &lt;code&gt;notion://&lt;/code&gt; page URLs for the current day/week when I make a request.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;❯ curl https://notion-heroku.herokuapp.com/current_links.json &lt;span class="nt"&gt;-H&lt;/span&gt; &lt;span class="s2"&gt;"api_token: &lt;/span&gt;&lt;span class="nv"&gt;$API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="nt"&gt;-s&lt;/span&gt; | jq
+&lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s2"&gt;"current_day"&lt;/span&gt;: &lt;span class="s2"&gt;"notion://www.notion.so/YHuWdvUQ8nc5gBgkqHexDToWRzGvuP6e"&lt;/span&gt;,
+  &lt;span class="s2"&gt;"current_week"&lt;/span&gt;: &lt;span class="s2"&gt;"notion://www.notion.so/kG7jQamppo4RRGc7voAC7elyGDeg7a70"&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The shortcut isn&amp;rsquo;t too hard to create afterwards and ends up as a three-step shortcut:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Make the HTTP network call.&lt;/li&gt;
+&lt;li&gt;Access the value from the JSON response.&lt;/li&gt;
+&lt;li&gt;Open value (Notion page URL) in Safari.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-current-day.jpg" style="width: 49%"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This shortcut works well, but it has two drawbacks. It &lt;em&gt;always&lt;/em&gt; has to make the network call to get the page links, it can be slow based on latency and it requires network access.&lt;/p&gt;
+
+&lt;h2&gt;Performance and Robustness&lt;/h2&gt;
+
+&lt;p&gt;To address the drawbacks of the previous shortcut demonstration in the last section, we can cache the response from the &lt;code&gt;notion-heroku&lt;/code&gt; server. Caching the results for a day then makes it so only the first usage of the shortcut requires a network call and all subsequent usage uses a cached file.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href="https://www.icloud.com/shortcuts/c3d283eb866847778bf77ac3354fee0c"&gt;new and improved iOS Shortcut&lt;/a&gt; now contains over 25 steps, although it handles caching, cache invalidation, and a notification if the server didn&amp;rsquo;t respond. Using the shortcut when there is a cached value feels faster to me and it even works while in airplane mode.&lt;/p&gt;
+
+&lt;p&gt;The following video gives a walkthrough of the shortcuts:&lt;/p&gt;
+
+&lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/oGYWF5EpwbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h1&gt;The Possibilities with iOS Shortcuts&lt;/h1&gt;
+
+&lt;p&gt;In my opinion, iOS Shortcuts open up a lot of interesting possibilities. The fact that you are able to make and use API calls is very powerful on its own. I can see myself connecting more stuff to &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt;. With respect to Notion, I&amp;rsquo;ll likely continue to expand on my &lt;code&gt;notion-heroku&lt;/code&gt; server and see what I can do with it.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -58,7 +146,7 @@
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -101,7 +189,7 @@
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -155,7 +243,7 @@
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -238,7 +326,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -420,7 +508,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -497,7 +585,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -595,7 +683,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -638,7 +726,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2019-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -757,7 +845,7 @@
     <title>Archive Unused Repositories</title>
     <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
     <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
+    <updated>2019-10-18T21:03:20-04:00</updated>
     <published>2018-12-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -823,135 +911,6 @@ FancyProject as a product has been sunsetted and decommissioned as the adoption 
 &lt;h3&gt;4. Archive Repository&lt;/h3&gt;
 
 &lt;p&gt;Finally, with everything resolved, we can archive the repository in GitHub. Enjoy the event, as it simplifies the surface area of repositories you have to maintain.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Tracking Production Disruptions</title>
-    <link rel="alternate" href="https://kevinjalbert.com/tracking-production-disruptions/"/>
-    <id>https://kevinjalbert.com/tracking-production-disruptions/</id>
-    <updated>2019-09-30T08:15:19-04:00</updated>
-    <published>2018-11-29T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">When operating software in a production environment it is expected to have some unplanned disruptions over time. While the primary task is to resolve the disruption so that the impact is minimized, it is still very much important to track the disruption itself. Disruption reports provide transparency to others, accountability in the actionable tasks, a place for discussion, categorical data, and also a summary of the event.</description>
-    <content type="html">&lt;p&gt;Let us first iron out what constitutes a &lt;em&gt;disruption&lt;/em&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Any unexpected degradation or interruption of a service that in any method affects users ability to the service.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;When operating a production service, it is simply a matter of time till a disruptions &lt;em&gt;happens&lt;/em&gt;. No matter the safeguards you&amp;rsquo;ve put in place, there is always the expected scenarios. There are many ways to prepare and to ensure that your services are as robust as possible, but that is a task left to you the reader. In this post I&amp;rsquo;ll be talking about what to do &lt;em&gt;after&lt;/em&gt; you&amp;rsquo;ve handled a production disruption.&lt;/p&gt;
-
-&lt;h1&gt;Why Track?&lt;/h1&gt;
-
-&lt;p&gt;A disruption can be a chaotic event, lasting from a few minutes to multiple hours. The main purpose of tracking these disruptions is to have a better understanding of:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;what led to the issue.&lt;/li&gt;
-&lt;li&gt;what could have been done to prevent the issue from happening?&lt;/li&gt;
-&lt;li&gt;flaws in monitoring in detecting when the issue started.&lt;/li&gt;
-&lt;li&gt;learnings and processes when dealing with a similar issue in the future.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I highly encourage disseminating the learnings around all aspects of a disruption to the rest of the team and organization. A tracked disruption can be used in a post-mortem. The ultimate goal is by educating everyone it will lead to more resilient services and better processes during the inevitable future disruptions.&lt;/p&gt;
-
-&lt;p&gt;In addition, with tracked disruptions, it becomes easy to perform basic analysis of the frequency and length of disruptions.&lt;/p&gt;
-
-&lt;p&gt;Without any tracking, it becomes a huge failure if the same disruption happens again over and over.&lt;/p&gt;
-
-&lt;h1&gt;Tracking&lt;/h1&gt;
-
-&lt;p&gt;One thing to note is that the following is from experience that I have working at &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt;, along with reading various sources online. Let us touch on what to track, where to track, and how to track.&lt;/p&gt;
-
-&lt;h2&gt;What to Track?&lt;/h2&gt;
-
-&lt;p&gt;The more information you have the better you&amp;rsquo;ll understand the disruption if you weren&amp;rsquo;t immediately involved in it. Additionally, in most cases, multiple people are involved and so not everyone had the same exposure to the entire event. The following is a list and description of what we track at theScore for disruptions.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Service(s)&lt;/strong&gt;: name of service(s) that were interrupted.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Disruption Meta-Information&lt;/strong&gt;: at-a-glance information about the disruption.
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt;: what type of disruption (i.e., Infrastructure, Critical Bug, Data Provider, etc&amp;hellip;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Start Time&lt;/strong&gt;: when the disruption started (not necessarily when it was discovered).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Detection Time&lt;/strong&gt;: when the disruption was detected by users/support/team.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;End Time&lt;/strong&gt;: when the disruption was resolved (action items may extend past this time).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Length&lt;/strong&gt;: the total time the disruption was active (based on start/end times).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Time to Detection&lt;/strong&gt;: time to detect the disruption (based on start/detection times).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;People Involved&lt;/strong&gt;: list of individuals involved in handling the disruption.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Summary&lt;/strong&gt;: a high-level summary of the disruption (root cause and impact).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Timeline&lt;/strong&gt;: a table of events which constructs the timeline of the disruption.
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Timestamp&lt;/strong&gt;: approximate time of this event.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Party Involved&lt;/strong&gt;: who/what was involved with this event (i.e., servers, people, services).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Description&lt;/strong&gt;: what happened at this event.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Retrospective&lt;/strong&gt;: a reflection of the disruption used for learnings.
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Good&lt;/strong&gt;: what went well (i.e., process, safeguards, etc&amp;hellip;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Bad&lt;/strong&gt;: what went poorly (i.e., process, cascading failures, etc&amp;hellip;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Lessons&lt;/strong&gt;: what was learned (i.e., flaws in the process, missing monitoring, etc&amp;hellip;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Action Items&lt;/strong&gt;: assigned items to be completed in a timely fashion related to the disruption.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Supporting Documentation&lt;/strong&gt;: additional information (i.e., Slack Logs, Bug Reports, Screenshots, etc&amp;hellip;).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Where to Track?&lt;/h2&gt;
-
-&lt;p&gt;To be honest, the none of this matters matter if you aren&amp;rsquo;t tracking disruptions to any capacity, just do it! Even if you have all your disruptions in a single text file, it&amp;rsquo;s better than nothing. Let&amp;rsquo;s get realistic though, we can do much better. For starters, you could opt for a spreadsheet or a basic database, maybe even a heavier integrated service like &lt;a href="https://victorops.com/"&gt;VictorOps&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;At theScore, we use a GitHub repository where each &lt;em&gt;issue&lt;/em&gt; is a disruption report. We record the aforementioned data points in each issue&amp;rsquo;s description. We decided to use GitHub as it:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Has great markdown support to provide rich information (i.e., font-styles, links, images, tables).&lt;/li&gt;
-&lt;li&gt;Gives us closer integration with our code if we want to link to resources in other repositories.&lt;/li&gt;
-&lt;li&gt;Has built-in support for comments on an issue to better facilitate discussions.&lt;/li&gt;
-&lt;li&gt;Has labels and open/close states for issues, which layers in additional categorization and grouping.&lt;/li&gt;
-&lt;li&gt;Has an API to interface with (for automation and analysis).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For us, our action items become &lt;a href="https://help.github.com/articles/about-task-lists/"&gt;GitHub tasks&lt;/a&gt; with a mentioned individual or team. Issues are to be closed when all action items are resolved, and after sufficient discussion/retrospection has been carried out.&lt;/p&gt;
-
-&lt;h2&gt;How to Track?&lt;/h2&gt;
-
-&lt;p&gt;After a disruption, within a few days, it should be tracked. Waiting too long to track a disruption will result in fuzzy/shallow details. There much special in building up the report, although from personal experience it is good for people to jot notes down immediately after a disruption. I also find it effective to create a specific channel or chatroom in your team&amp;rsquo;s messaging application when dealing with disruptions as all the communication is located in one area.&lt;/p&gt;
-
-&lt;p&gt;PagerDuty has some fantastic material on a &lt;a href="https://response.pagerduty.com/after/post_mortem_process/"&gt;post-mortem process&lt;/a&gt; and even a &lt;a href="https://response.pagerduty.com/after/post_mortem_template/"&gt;post-mortem template&lt;/a&gt;. They also document &lt;a href="https://response.pagerduty.com/before/different_roles/"&gt;defined roles during a disruption&lt;/a&gt;, in which the &lt;em&gt;Scribe&lt;/em&gt; is a critical role for tracking purposes.&lt;/p&gt;
-
-&lt;p&gt;A disruption report can be a single person&amp;rsquo;s responsibility, although it usually helps to reach out to the people involved for clarifying details.&lt;/p&gt;
-
-&lt;h1&gt;Making Sense of the Data&lt;/h1&gt;
-
-&lt;p&gt;With all these disruptions tracked, what can we do with them? Hopefully, all the action items and retrospection have led to large gains. Additionally, there is a lot of value in the data itself, it is simply a matter of finding the signals you want to pay attention too. For example:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The frequency of disruptions (per service).
-
-&lt;ul&gt;
-&lt;li&gt;What services to focus on improving resilience.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Distribution of when disruptions happen.
-
-&lt;ul&gt;
-&lt;li&gt;When to be prepared (i.e., weekend/evenings) for possible on-call resolution.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Time to detection over time.
-
-&lt;ul&gt;
-&lt;li&gt;Are the improvements being made to monitoring helping out?&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;etc&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Find aspects that your organization cares about and measure them.&lt;/p&gt;
-
-&lt;h1&gt;Improving the Process&lt;/h1&gt;
-
-&lt;p&gt;Never stop and periodically revisit the process to make adjustments. What works for one team, might not work for others. Even though tracking a disruption can be seen as &lt;em&gt;additional&lt;/em&gt; work, it will pay itself off in time.&lt;/p&gt;
 </content>
   </entry>
 </feed>

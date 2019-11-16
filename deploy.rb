@@ -23,7 +23,8 @@ Dir.mktmpdir do |tmp_dir|
   `git checkout master`
 
   `cp CNAME #{tmp_dir}/`
-  `cp README.md #{tmp_dir}`
+  `cp .nojekyll #{tmp_dir}/`
+  `cp README.md #{tmp_dir}/`
 
   `rm -R -f *`
 

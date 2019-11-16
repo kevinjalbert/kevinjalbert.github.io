@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: kevinjalbert.com
+Token: d11d3a292ed01b9c3c27db863561fa9717bc2cdf3557cdadfc3f35d3bde1ccc7

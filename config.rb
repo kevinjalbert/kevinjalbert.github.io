@@ -61,6 +61,12 @@ end
 configure :build do
   set :root_url, 'https://kevinjalbert.com'
 
+  # Allowing the .well-known directory to pass-through
+  # https://github.com/middleman/middleman/issues/1243#issuecomment-39356604
+  config.ignored_sitemap_matchers[:source_dotfiles] = proc { |file|
+    file =~ %r{/\.} && file !~ %r{/\.(well-known|htaccess|htpasswd|nojekyll)}
+  }
+
   # Not really useful when serving from Github Pages
   #activate :gzip
   #activate :asset_hash

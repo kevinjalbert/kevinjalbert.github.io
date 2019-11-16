@@ -18,6 +18,7 @@ current_sha = `git rev-parse --short HEAD`.strip
 
 Dir.mktmpdir do |tmp_dir|
   `mv ./build/* #{tmp_dir}/`
+  `mv ./build/.well-known #{tmp_dir}/`
 
   `git checkout master`
 
@@ -27,6 +28,7 @@ Dir.mktmpdir do |tmp_dir|
   `rm -R -f *`
 
   `cp -r #{tmp_dir}/* ./`
+  `cp -r #{tmp_dir}/.well-known ./`
 end
 
 `git add -f -A`

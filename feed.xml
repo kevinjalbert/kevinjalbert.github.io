@@ -2,16 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-10-29T20:00:00-04:00</updated>
+  <updated>2019-11-29T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Learn More About Yourself Using Personality Types</title>
+    <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
+    <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
+    <updated>2019-11-30T21:28:56-05:00</updated>
+    <published>2019-11-29T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">I want to present well-known tests that you can take to learn more about yourself from a personality perspective. For one hour of your time, you'll likely come away with a renewed and deeper understanding of who you are.</description>
+    <content type="html">&lt;p&gt;I am a firm believer that a comprehensive understanding of one&amp;rsquo;s true inner-self can only lead to better growth and relationships. We&amp;rsquo;re all uniquely different in our own ways, although there are sets of archetypes that we can closely associate with.&lt;/p&gt;
+
+&lt;h1&gt;Tests&lt;/h1&gt;
+
+&lt;p&gt;From what I&amp;rsquo;ve seen, the &lt;a href="https://www.myersbriggs.org/"&gt;Myers Briggs Type&lt;/a&gt; and &lt;a href="https://www.enneagraminstitute.com/"&gt;Enneagram Type&lt;/a&gt; are the leaders in personality archetypes. The differences between these tests are out of the scope of this post. These are established institutions and you can pay for a complete test, although there are free alternatives, such as &lt;a href="https://www.16personalities.com/"&gt;16Personalities&lt;/a&gt; and &lt;a href="https://www.9types.com/"&gt;9Types&lt;/a&gt; respectively. The results from these tests are often distilled down into a digestible format, however, large bodies of material do exist for each type.&lt;/p&gt;
+
+&lt;p&gt;It is likely that you already have a good idea of your underlying personality and some of the inner mechanisms that propel you forward. I would argue that you will still uncover something about yourself if you have not taken these two tests yet. There may be some deeper insights that will resonate with you. It is worth noting that the results shouldn&amp;rsquo;t be taken 100% as truth, but nonetheless it&amp;rsquo;s still worthwhile to know more about yourself.&lt;/p&gt;
+
+&lt;h1&gt;Benefits&lt;/h1&gt;
+
+&lt;p&gt;With the results in hand, you can uncover and understand some of the inner-workings that make you tick. I personally found the information useful and insightful as it reaffirmed certain beliefs and values that I hold. I was pleased to see sections dedicated to relationships with other types, as well as personal growth.&lt;/p&gt;
+
+&lt;p&gt;An additional benefit is that you&amp;rsquo;ll be able to share your type with others (e.g., partner, boss, co-worker, friend), giving them a deeper understanding of &lt;em&gt;who you are&lt;/em&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -99,7 +124,7 @@
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -146,7 +171,7 @@
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -189,7 +214,7 @@
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -243,7 +268,7 @@
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -326,7 +351,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -508,7 +533,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -585,7 +610,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -683,7 +708,7 @@
     <title>Decompressing when Working Remotely</title>
     <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
     <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -726,7 +751,7 @@
     <title>Level Up Your Commit Messages</title>
     <link rel="alternate" href="https://kevinjalbert.com/level-up-your-commit-messages/"/>
     <id>https://kevinjalbert.com/level-up-your-commit-messages/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
+    <updated>2019-11-21T21:57:09-05:00</updated>
     <published>2019-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -839,78 +864,6 @@
 # Co-authored-by: Full Name &amp;lt;email@example.com&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As always, keep on levelling up!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Archive Unused Repositories</title>
-    <link rel="alternate" href="https://kevinjalbert.com/archive-unused-repositories/"/>
-    <id>https://kevinjalbert.com/archive-unused-repositories/</id>
-    <updated>2019-11-21T21:49:39-05:00</updated>
-    <published>2018-12-28T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Over time, an individual or organization will create a number of software projects. The purpose of these repositories is to facilitate libraries, micro-services, documentation, mono-repositories, etc. Every so often, the time comes when a repository is no longer used. This article will outline how to archive these repositories, and the benefits to be realized.</description>
-    <content type="html">&lt;p&gt;At the time of writing this article, &lt;a href="http://company.thescore.com/"&gt;theScore&lt;/a&gt; has approximately 250 repositories hosted on &lt;a href="https://github.com/"&gt;GitHub&lt;/a&gt;. The majority of these are private, although some public ones do exist as well. I suspect that software companies of sufficient size eventually accumulate a large number of repositories due to new projects, libraries, experiments, etc. An employee being faced with these numbers can waste a lot of time searching through these repositories and determining whether a repository is actively used.&lt;/p&gt;
-
-&lt;h1&gt;The Burden&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;Note: We&amp;rsquo;ll be focused on GitHub as the platform of choice, although the same principals can be applied to other code hosting platforms.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Over time, a repository can fade in activity and end up in either a &lt;em&gt;finished and active&lt;/em&gt; or a &lt;em&gt;unused&lt;/em&gt; state. In the event that someone stumbles upon an unused repository, they can waste a lot of time if it&amp;rsquo;s not clear that the repository is in fact unused. These repositories faded over time and so it will still have a detailed README and possibly open issues and pull requests. In the worst case scenario, an individual might put time and effort into addressing these unresolved issues to no benefits.&lt;/p&gt;
-
-&lt;p&gt;At theScore, we use &lt;a href="https://help.github.com/articles/about-teams/"&gt;GitHub Teams&lt;/a&gt; to help determine the ownership of repositories. As you can guess, when you have unused repositories, this leads to a cognitive burden on the team. Routine tasks might involve going over all the repositories that a team owns, which just eats up time if you are unsure a repository is used or not.&lt;/p&gt;
-
-&lt;p&gt;In addition, theScore also uses services that periodically check for security violations or outdated dependencies. In a similar vein, these services are triggering for unused repositories, thus leading to more noise. In some instances, the services are priced by the number of repositories or invocations, and so unused repositories can lead to additional costs as well.&lt;/p&gt;
-
-&lt;h1&gt;The Solution&lt;/h1&gt;
-
-&lt;p&gt;So one option that might have crossed your mind is to just delete/remove the repository. While it does the job of reducing the burden of having unused repositories, I would argue that there is a wealth of knowledge in the history of the repository and the code hosting platform (i.e., GitHub via issues and pull requests). A perfect example of where archiving makes a lot of sense is in open source software (i.e., like in &lt;a href="https://github.com/rails/actioncable"&gt;rails/actioncable&lt;/a&gt;) &amp;ndash; you want to retain the open contributions and communications.&lt;/p&gt;
-
-&lt;p&gt;To prevent future confusion and wasted effort/time/cost, we&amp;rsquo;ve made a conscious decision to &lt;em&gt;archive unused repositories&lt;/em&gt;. Fortunately, GitHub actually provides a mechanism for &lt;a href="https://help.github.com/articles/archiving-a-github-repository/"&gt;archiving repositories&lt;/a&gt;. I highly recommend giving &lt;a href="https://blog.github.com/2017-11-08-archiving-repositories/"&gt;GitHub&amp;rsquo;s blog post&lt;/a&gt; a read as it details how you use the feature and provides some recommendations for archiving.&lt;/p&gt;
-
-&lt;p&gt;The main takeaways of archiving a repository on GitHub are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The repository becomes read-only to everyone.&lt;/li&gt;
-&lt;li&gt;Forks can still happen in the event someone wants to take the repository in a new direction.&lt;/li&gt;
-&lt;li&gt;Archived repositories have a different appearance and can be filtered in a search.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1&gt;The Final Change&lt;/h1&gt;
-
-&lt;p&gt;The first thing we do is create our final pull request, which adds the following notice to the top of the README:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# This repository is ⚰️ ARCHIVED ⚰️
-
-FancyProject as a product has been sunsetted and decommissioned as the adoption was not as great as we were hoping for. Resources and efforts were moved to other projects. The last day of operation was on September 18, 2018.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This pull request has at least 4 major tasks in it:&lt;/p&gt;
-
-&lt;h3&gt;1. Close All Open Issues and Pull Requests&lt;/h3&gt;
-
-&lt;p&gt;We close the issues with the following message so that people know the reason why it was closed:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Closing open issues and pull requests as the project is now archived (&amp;lt;pr_of_final_update&amp;gt;).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A link to the pull request is also mentioned in the comment. We do this so the last pull request that GitHub includes all the issues and pull requests that were closed due to the archiving process. You can see an example of this in the image below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Closed issues and pull requests" width="708" height="612" src="/images/2018-12-29-archive-unused-repositories/closed-issues.jpg" /&gt;&lt;/p&gt;
-
-&lt;h3&gt;2. Set &lt;em&gt;Contributors&lt;/em&gt; to All Developers&lt;/h3&gt;
-
-&lt;p&gt;When a repository is archived you cannot change the contributors (i.e., adding/removing teams). In the event that a repository was only visible to a subset of developers (it sometimes happens), we ensure our &lt;em&gt;developers team&lt;/em&gt; is a contributor before archiving. This subtle change makes it so everyone in the organization can see the repository (in the event it was needed for something).&lt;/p&gt;
-
-&lt;h3&gt;3. Delete Repository from External Services&lt;/h3&gt;
-
-&lt;p&gt;As part of the archiving process, we want to disable/remove any external services that might be monitoring the repository. For example, &lt;a href="https://snyk.io/"&gt;Snyk&lt;/a&gt; checks for security vulnerabilities periodically, and would continue to do so unless disabled. As previously mentioned, some of these services are priced by invocations and/or the number of repositories, so it is important that this step is completed.&lt;/p&gt;
-
-&lt;p&gt;In the event that the repository represents a deployable project, you want to make sure you&amp;rsquo;ve taken steps to &lt;em&gt;decommission&lt;/em&gt; all aspects. For example, there might be servers, databases, cloud storage, etc., that are linked to this repository and need to be taken care of.&lt;/p&gt;
-
-&lt;h3&gt;4. Archive Repository&lt;/h3&gt;
-
-&lt;p&gt;Finally, with everything resolved, we can archive the repository in GitHub. Enjoy the event, as it simplifies the surface area of repositories you have to maintain.&lt;/p&gt;
 </content>
   </entry>
 </feed>

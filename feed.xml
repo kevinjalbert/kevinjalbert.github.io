@@ -2,16 +2,171 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2019-12-27T19:00:00-05:00</updated>
+  <updated>2020-01-29T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Testing the Use of Rails Caching</title>
+    <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
+    <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
+    <updated>2020-01-29T22:10:49-05:00</updated>
+    <published>2020-01-29T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">There is a strong test culture for Rubyist using Rails. Caching can be rewarding in performance, yet can introduce cache complexities. Read about how I approach testing low-level caching.</description>
+    <content type="html">&lt;p&gt;I was doing some performance work within a Rails application where expensive (computationally) data was being generated on each request. It was quick to implement the low-level caching that wrapped the expensive data generation. In this particular case, I wanted to ensure that the caching logic was valid as there were numerous conditions at play. I normally wouldn&amp;rsquo;t test caching if the cache key was something trivial (or automatic like using &lt;code&gt;ActiveRecord#cache_key&lt;/code&gt;).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;There are only two hard things in Computer Science: cache invalidation and naming things.&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash; Phil Karlton (&lt;a href="https://martinfowler.com/bliki/TwoHardThings.html"&gt;source&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1&gt;Peering into the Cache&lt;/h1&gt;
+
+&lt;p&gt;This Rails application had the &lt;code&gt;cache_store&lt;/code&gt; set to &lt;code&gt;:memory_store&lt;/code&gt; in the test environment. We wanted to make sure that our tests were still going through the same code paths as would happen in production.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/environments/test.rb:&lt;/span&gt;
+&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache_store&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ss"&gt;:memory_store&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The inner data structure of &lt;code&gt;ActiveSupport::Cache::MemoryStore&lt;/code&gt; is not publically accessible.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[1] pry(main)&amp;gt; Rails.cache.write('my-cache-key', 'my-value')
+=&amp;gt; true
+[2] pry(main)&amp;gt; Rails.cache
+=&amp;gt; &amp;lt;#ActiveSupport::Cache::MemoryStore entries=1, size=260, options={}&amp;gt;
+[3] pry(main)&amp;gt; ls Rails.cache
+ActiveSupport::ToJsonWithActiveSupportEncoder#methods: to_json
+ActiveSupport::Dependencies::ZeitwerkIntegration::RequireDependency#methods: require_dependency
+ActiveSupport::Cache::Store#methods: delete  exist?  fetch  fetch_multi  logger  logger=  mute  options  read  read_multi  silence  silence!  silence?  write  write_multi
+ActiveSupport::Cache::MemoryStore#methods: cleanup  clear  decrement  delete_matched  increment  inspect  prune  pruning?  synchronize
+instance variables: @cache_size  @data  @key_access  @max_prune_time  @max_size  @monitor  @options  @pruning
+class variables: @@logger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;em&gt;raw&lt;/em&gt; data is held in the instance variable &lt;code&gt;@data&lt;/code&gt;. We can &lt;em&gt;reach in&lt;/em&gt; and grab that to perform some inspections:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;[4] pry(main)&amp;gt; Rails.cache.instance_variable_get(:@data)
+=&amp;gt; {"my-cache-key"=&amp;gt;#&amp;lt;ActiveSupport::Cache::Entry:0x00007f8ade4da858 @created_at=1580064434.3177679, @expires_in=nil, @value="my-value", @version=nil&amp;gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The caveat of this approach is clear, as we&amp;rsquo;re reaching into the private space of the Rails cache.&lt;/p&gt;
+
+&lt;h1&gt;Creating the Helper&lt;/h1&gt;
+
+&lt;p&gt;I wanted to make it easier for myself and others to test Rails caching in this project. Creating a test helper is ideal as all the tests can reach for the built utilities when testing code related to caching.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll create a new test helper, that can be included in our &lt;code&gt;test/test_helper.rb&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# test/support/rails_cache_helper.rb:&lt;/span&gt;
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;RailsCacheHelper&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;with_clean_caching&lt;/span&gt;
+    &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;clear&lt;/span&gt;
+    &lt;span class="k"&gt;yield&lt;/span&gt;
+
+  &lt;span class="k"&gt;ensure&lt;/span&gt;
+    &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;clear&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cache_has_value?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;cache_data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="ss"&gt;:value&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;any?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;key_for_cached_value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;cache_data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;values&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;entry&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;entry&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;value&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cache_data&lt;/span&gt;
+    &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;instance_variable_get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:@data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This helper gives us three utilities:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The &lt;code&gt;with_clean_caching&lt;/code&gt; method, which purges the cache before and after the &lt;em&gt;block&lt;/em&gt; is executed. It is worth noting that the &lt;code&gt;:memory_store&lt;/code&gt; is only purged at the end of the test suite.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;cache_has_value?(value)&lt;/code&gt; method, which returns a &lt;em&gt;boolean&lt;/em&gt; if the cache has the specified &lt;em&gt;value&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;key_for_cached_value(value)&lt;/code&gt; method, which returns the &lt;em&gt;key&lt;/em&gt; that can be used to look up the specified &lt;em&gt;value&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;With these new methods, it was much easier to test the caching code. There was no need to do any fancy stubbing and/or using mock objects.&lt;/p&gt;
+
+&lt;p&gt;Note: there are more features that can be expanded upon in this helper:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Working with the meta-data on cache entries (e.g., &lt;code&gt;expires_in&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;Custom assertions (e.g., &lt;code&gt;assert_cached(value)&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Testing Rails Caching&lt;/h1&gt;
+
+&lt;p&gt;Now I was able to test the caching specifically. I wrapped my tests in &lt;code&gt;with_clean_caching&lt;/code&gt; as these tests were specific about using caching. I could have also approached this by making it so the cache is purged before each test (e.g., &lt;code&gt;setup()&lt;/code&gt;, &lt;code&gt;before(:each)&lt;/code&gt;), but I didn&amp;rsquo;t opt for that right now.&lt;/p&gt;
+
+&lt;p&gt;The following is a contrived example, but you could imagine that the &lt;em&gt;cache key&lt;/em&gt; is generated much deeper in the application code. This makes it difficult to &lt;em&gt;get&lt;/em&gt; the cache key to then inspect and make assertions about the cached data.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;RailsCacheHelper&lt;/code&gt; (that we created above), we can make use of &lt;code&gt;#cache_has_value?&lt;/code&gt; and &lt;code&gt;#key_for_cached_value&lt;/code&gt; to make assertions based on the returned value without needing to know the &lt;em&gt;cache key&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# test/caching_test.rb&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CachingTest&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;TestCase&lt;/span&gt;
+  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s1"&gt;'caching works'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;with_clean_caching&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="c1"&gt;# bunch of test setup ...&lt;/span&gt;
+
+      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Caching&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expensive_call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_object&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data_structure&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cache_has_value?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s1"&gt;'caching is not used if request header specifies caching=false'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;with_clean_caching&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="c1"&gt;# bunch of test setup, and adding caching=false in request_data ...&lt;/span&gt;
+
+      &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Caching&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expensive_call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_object&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data_structure&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cache_has_value?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s1"&gt;'cache varies correctly based on object'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;with_clean_caching&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="c1"&gt;# bunch of test setup ...&lt;/span&gt;
+
+      &lt;span class="n"&gt;original_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Caching&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expensive_call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;some_object&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data_structure&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;original_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;key_for_cached_value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;original_result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="c1"&gt;# setup different_object&lt;/span&gt;
+
+      &lt;span class="n"&gt;changed_object_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Caching&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expensive_call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;different_object&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data_structure&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;changed_object_key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;key_for_cached_value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;changed_object_result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+      &lt;span class="n"&gt;rufute_equal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;original_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;changed_object_key&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s1"&gt;'cache varies correctly based on data structure'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;with_clean_caching&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="c1"&gt;# pretty much same as the last test but varying the data structure&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s1"&gt;'cache varies correctly based on request data'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;with_clean_caching&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+      &lt;span class="c1"&gt;# pretty much same as the last test but varying the request_data&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that this approach worked for me, however, there are many different ways to test Rails caching. For example, this &lt;a href="https://stackoverflow.com/a/9603083/583592"&gt;StackOverflow answer&lt;/a&gt; suggests making an &lt;code&gt;InspectableMemoryStore&lt;/code&gt; which subclasses &lt;code&gt;ActiveSupport::Cache::MemoryStore&lt;/code&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -66,7 +221,7 @@
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -91,7 +246,7 @@
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -179,7 +334,7 @@
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -219,14 +374,14 @@
 
 &lt;p&gt;The following is the test output of &lt;code&gt;dcdc&lt;/code&gt; that demonstrates accessibility to services external and internal to the Docker network. Not only are HTTP services accessible, but also non-HTTP services (i.e., a database).&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1784" height="968" src="/images/2019-09-29-docker-compose-dns-consistency-dcdc/dcdc-tests.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Dcdc tests" width="1784" height="968" src="/images/2019-09-29-docker-compose-dns-consistency-dcdc/dcdc-tests.png" /&gt;&lt;/p&gt;
 </content>
   </entry>
   <entry>
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -246,7 +401,7 @@
 
 &lt;p&gt;Using recurring scheduled tasks, I added the ability to record task status changes reactively. My goal is so that when using Notion on my mobile device, task transitions will record automatically as this functionality is running on a server.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1480" height="1080" src="/images/2019-08-29-introducing-notion-scripts/recorded-transitions.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Recorded transitions" width="1480" height="1080" src="/images/2019-08-29-introducing-notion-scripts/recorded-transitions.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;As mentioned earlier, I plan to continue to build on top of the work I&amp;rsquo;ve done so far. With respect to the transitions of a task, I&amp;rsquo;m hoping to add the ability to track the total time a task spent in each status. I&amp;rsquo;d also like to add email capabilities, so that I can get a daily/weekly email summary of tasks that are stale/stuck/new/completed.&lt;/p&gt;
 
@@ -269,7 +424,7 @@
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -323,7 +478,7 @@
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -387,7 +542,7 @@
 &lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=i_Ce3ogyuTA"&gt;Watch a video with more detail&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img width="817" height="540" src="/images/2019-06-17-integrating-notion-with-alfred/alfred-notion-demo.gif" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alfred notion demo" width="817" height="540" src="/images/2019-06-17-integrating-notion-with-alfred/alfred-notion-demo.gif" /&gt;&lt;/p&gt;
 
 &lt;h1&gt;How do I get this?&lt;/h1&gt;
 
@@ -406,7 +561,7 @@
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -492,7 +647,7 @@
 
 &lt;p&gt;The following is an annotated screenshot of what my week page looks like. Each numbered section is further described under its corresponding subheading. I decided to use the &lt;code&gt;Week ##&lt;/code&gt; format for my page names as it&amp;rsquo;s easy to use the sequential numbering and avoids issues with using specific days and handling crossover weeks (ie., May → June).&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1650" height="2520" src="/images/2019-05-28-my-weekly-notion-setup/week.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Week" width="1650" height="2520" src="/images/2019-05-28-my-weekly-notion-setup/week.png" /&gt;&lt;/p&gt;
 
 &lt;h3&gt;Quick Links (1)&lt;/h3&gt;
 
@@ -521,11 +676,11 @@
 
 &lt;p&gt;This is a &lt;em&gt;linked database&lt;/em&gt; of a global database that holds all the &lt;em&gt;wins&lt;/em&gt;. The benefit of this is that this linked database view can be filtered to the specific week. This allows me to look back at any week and see the victories.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1492" height="324" src="/images/2019-05-28-my-weekly-notion-setup/wins-filter.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Wins filter" width="1492" height="324" src="/images/2019-05-28-my-weekly-notion-setup/wins-filter.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;The Tags column for Wins (and later for Tasks) is a Notion &lt;em&gt;Relation&lt;/em&gt;. This allows the column to reference other values from another database. The main benefit here is that I wanted to have a global set of tags that could be used in all my tables. I accomplish this using a strategy outlined in the &lt;a href="https://www.reddit.com/r/NotionSo/comments/ayvkcs/notioneers_level_up_your_tagging/"&gt;Notion sub-reddit&lt;/a&gt;, where I have a dedicated &lt;em&gt;Tags&lt;/em&gt; table:&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1844" height="440" src="/images/2019-05-28-my-weekly-notion-setup/tags.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Tags" width="1844" height="440" src="/images/2019-05-28-my-weekly-notion-setup/tags.png" /&gt;&lt;/p&gt;
 
 &lt;h3&gt;Weekly Review (5)&lt;/h3&gt;
 
@@ -535,7 +690,7 @@
 
 &lt;p&gt;The following is an annotated screenshot of what my day page looks like. Each numbered section is further described under its corresponding subheading. I decided to use the &lt;code&gt;Month ## (Weekday)&lt;/code&gt; for my page names as I find it easier to use and easier to search.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1650" height="2520" src="/images/2019-05-28-my-weekly-notion-setup/day.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Day" width="1650" height="2520" src="/images/2019-05-28-my-weekly-notion-setup/day.png" /&gt;&lt;/p&gt;
 
 &lt;h3&gt;Previous/Next Day (1)&lt;/h3&gt;
 
@@ -545,11 +700,11 @@
 
 &lt;p&gt;Similar to the Wins linked database, I&amp;rsquo;m using the same approach here. There is a master Tasks database that holds all of my tasks. I end up using filters on the linked database to only show relevant tasks.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1328" height="630" src="/images/2019-05-28-my-weekly-notion-setup/tasks-filter.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Tasks filter" width="1328" height="630" src="/images/2019-05-28-my-weekly-notion-setup/tasks-filter.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;The tasks have the desired attributes that I mentioned earlier. The Tags column is a &lt;em&gt;Relation&lt;/em&gt;, which is the same approach that was described for the Wins. The Status column helps me track tasks and assists with filtering. Each task also has full capabilities to add notes within the record. To me, this is where Notion excels for task management.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1328" height="888" src="/images/2019-05-28-my-weekly-notion-setup/task-record.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Task record" width="1328" height="888" src="/images/2019-05-28-my-weekly-notion-setup/task-record.png" /&gt;&lt;/p&gt;
 
 &lt;h3&gt;Notes (3)&lt;/h3&gt;
 
@@ -569,7 +724,7 @@
 
 &lt;p&gt;I&amp;rsquo;ve covered my week/days setups, although this has only been for one week. Manually setting this up for every week would be a pain — fortunately you can &lt;em&gt;duplicate pages&lt;/em&gt; in Notion.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1436" height="1134" src="/images/2019-05-28-my-weekly-notion-setup/year.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Year" width="1436" height="1134" src="/images/2019-05-28-my-weekly-notion-setup/year.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;By keeping a template that has mostly everything set up, I&amp;rsquo;m able to generate the next week in about 2 minutes. The days stay linked (even after renaming them), the linked databases are properly duplicated along with their filters, and a fresh Lights database is present. From my perspective, this is a huge win.&lt;/p&gt;
 
@@ -588,7 +743,7 @@
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -646,7 +801,7 @@
 
 &lt;p&gt;In the three presented cases, Bob addressed the code review comments and the resulting code is identical &amp;ndash; only the commits are different. The issue arises when he re-requests Jane to perform a subsequent review. As Jane has already left comments, she instinctively looks to see the &lt;em&gt;new&lt;/em&gt; changes on the branch as these changes are more likely the ones that address the earlier code review comments. In the first case, these are represented as new commits, and it is easy enough to see the changes. In the second and third case, the changes are hidden inside previous commits. &lt;strong&gt;This makes it incredibly difficult to isolate the changes made since Jane last looked at the pull request.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img width="1454" height="392" src="/images/2019-04-30-editing-commits-in-a-pull-request-make-it-your-last-action/view-changes.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="View changes" width="1454" height="392" src="/images/2019-04-30-editing-commits-in-a-pull-request-make-it-your-last-action/view-changes.png" /&gt;&lt;/p&gt;
 
 &lt;p&gt;The take away here is that during the code review phase, we want to ensure that the commits are additive and tell a complete story. A reviewer can and should see how the pull request has changed at each step of the process. The back-and-forth of getting feedback and adding new commits to address them is the collaborative flow for which we should aim.&lt;/p&gt;
 
@@ -665,7 +820,7 @@
     <title>Consuming Content and Managing the Flood</title>
     <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
     <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
+    <updated>2019-12-28T23:14:17-05:00</updated>
     <published>2019-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -757,49 +912,6 @@
 &lt;/ul&gt;
 
 &lt;p&gt;I plan to post more detailed information regarding my dam, how I manage it, and reasonings for certain decisions. Our information flow/consumption should be as sustainable as a real dam.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Decompressing when Working Remotely</title>
-    <link rel="alternate" href="https://kevinjalbert.com/decompressing-when-working-remotely/"/>
-    <id>https://kevinjalbert.com/decompressing-when-working-remotely/</id>
-    <updated>2019-12-28T21:37:07-05:00</updated>
-    <published>2019-02-27T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Working in an office comes with built-in stress relievers, namely social lunchtime with peers and the commute. When working remotely, it is important to ensure your day includes opportunities to decompress from the stresses of work. Learn about my process for decompressing at home.</description>
-    <content type="html">&lt;p&gt;At the start of this year, I switched jobs. I intentionally aimed for a remote position so I could reclaim approximately 3 hours of my day from commuting. I have a toddler at home and being able to have more time with him is important to me. I have been in situations at my previous job where I would leave before he would wake up and be back home after he is sleeping. I now have the freedom and flexibility to be present for my son, as well as the opportunity to have lunch with my family.&lt;/p&gt;
-
-&lt;p&gt;Early on, I noticed that I missed certain aspects of my old commute. I was able to decompress in the time between finishing work and being home with my family. I feel the effects of stress when rushed or pressed for time. Since it takes about 20 seconds to go from my office to the main living area, my mind might be still with work without the time to decompress &amp;ndash; this isn&amp;rsquo;t good for my family or myself.&lt;/p&gt;
-
-&lt;h1&gt;Make Boundaries with Time Blocking&lt;/h1&gt;
-
-&lt;p&gt;&lt;img width="1135" height="940" src="/images/2019-02-28-decompressing-when-working-remotely/time-blocking.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The above screenshot shows a typical afternoon for me. Let me break down the two important events we can see here.&lt;/p&gt;
-
-&lt;h2&gt;Lunch&lt;/h2&gt;
-
-&lt;p&gt;It can be easy to just eat at your desk quickly and keep on working. Working from home presents unique ways to handle your lunchtime. Offices have built-in mechanisms to relieve stress, like ranting to a colleague about the problem you&amp;rsquo;re hitting, socializing humor and antics, off-topic conversations, etc. For me, it&amp;rsquo;s about making the best use of my time as a dedicated break to relax the brain.&lt;/p&gt;
-
-&lt;p&gt;I took an example from &lt;a href="https://twitter.com/mitchellh/status/1074709385266442246"&gt;Mitchell Hashimoto to block time for lunch&lt;/a&gt;. That time block can move, but I try to ensure that I take an actual lunch. This is time is where I can focus on my family without work distractions (i.e., email and slack) and be present mentally. In the event that I&amp;rsquo;m home alone, I&amp;rsquo;ll eat and read, I&amp;rsquo;ll do some chores or tidying on the main floor while listening to a podcast, and still take the full lunch hour.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m hoping to loop in some regular lunch outings with a remote friend in the neighbourhood who also works in the software domain. I suspect this will help us both get out of the house and provide a listening ear.&lt;/p&gt;
-
-&lt;h2&gt;Decompress&lt;/h2&gt;
-
-&lt;p&gt;At the end of my day, I slot in a 30-minute block of time to decompress. This to me is where I&amp;rsquo;ve reconstructed a &lt;em&gt;fake commute&lt;/em&gt; to detach from work thoughts. I&amp;rsquo;ve been experimenting and feel that these three steps work best for me:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Wrap up the current task. Ideally, this takes less than 10 minutes, as I&amp;rsquo;m simply getting to a checkpoint in my current task. There is a conscious effort to not dive deeper into things, so a natural endpoint will occur quickly.&lt;/li&gt;
-&lt;li&gt;Leave a note on what to start with when I get back to work the next day. This should take less than 5 minutes, as I&amp;rsquo;m dumping context in my scratchpad (within &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral Link]&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Mindfulness exercise (i.e., I&amp;rsquo;m using &lt;a href="https://insighttimer.com/"&gt;Insight Timer&lt;/a&gt;) to clear the mind. This should occupy at least 10 minutes. I&amp;rsquo;m rather new to practicing mindfulness but it is something I am making a part of my day-to-day routine. Ending my work day with this helps me to be more present with my family.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Iterate and Improve&lt;/h1&gt;
-
-&lt;p&gt;The above are techniques and strategies I&amp;rsquo;ve put in place to help decompress while working from home. I make it a habit to try and improve my processes, so the same applies here as well. I&amp;rsquo;ll continue to tweak and experiment with the way I handle decompression time when working from home. I highly encourage the same for you; as you never know what you might be missing if you don&amp;rsquo;t try.&lt;/p&gt;
 </content>
   </entry>
 </feed>

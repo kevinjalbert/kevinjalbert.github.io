@@ -28,6 +28,9 @@
     <loc>https://kevinjalbert.com/respect-http-caching/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/testing-the-use-of-rails-caching/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/archive-unused-repositories/</loc>
   </url>
   <url>
@@ -217,6 +220,9 @@
     <loc>https://kevinjalbert.com/tags/caching/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/testing/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/communication/</loc>
   </url>
   <url>
@@ -263,9 +269,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/rspec/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/testing/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/docker/</loc>
@@ -374,6 +377,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/page/11/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/page/12/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/tools/page/2/</loc>

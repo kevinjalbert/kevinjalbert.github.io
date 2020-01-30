@@ -37,7 +37,7 @@
   -  className="jsx-188895008 App"
   +  className="jsx-3481390381 App"
    &gt;
-</code></pre></div> <p>This is because the CSS changed for this scoped component and thus the <code>jsx-########</code> (unique id) reflects the change.</p> <p>To me, these changes in the snapshot diffs are noise and it is harder to see the structural DOM changes. The original <code>className</code> for the DOM elements are still present, and ideally, I would just want snapshots without any of the <code>styled-jsx</code> stuff present.</p> <p>We will first start with a simplified <code>App</code> component using <a href="https://github.com/facebook/create-react-app">create-react-app</a> as the base. The goal is to illustrate the project setup, what the snapshots look like, how to reduce the noise, and what the snapshots look like afterwards. <code>styled-jsx</code> provides a way to style your components using <em>inline styles</em> or <em>external CSS files</em>, so we will consider both in this article. In addition, we will also consider both the <code>react-test-renderer</code> and <code>enzyme</code> Jest snapshot rendering methods.</p> <p>Given the above information, the following sections will cover these scenarios:</p> <ul> <li>Inline styles with <code>react-test-renderer</code></li> <li>Inline styles with <code>enzyme</code></li> <li>External styles with <code>react-test-renderer</code></li> <li>External styles with <code>enzyme</code></li> </ul> <h2>Inline Styles</h2> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
+</code></pre></div> <p>This is because the CSS changed for this scoped component and thus the <code>jsx-########</code> (unique id) reflects the change.</p> <p>To me, these changes in the snapshot diffs are noise and it is harder to see the structural DOM changes. The original <code>className</code> for the DOM elements are still present, and ideally, I would just want snapshots without any of the <code>styled-jsx</code> stuff present.</p> <p>We will first start with a simplified <code>App</code> component using <a href="https://github.com/facebook/create-react-app">create-react-app</a> as the base. The goal is to illustrate the project setup, what the snapshots look like, how to reduce the noise, and what the snapshots look like afterwards. <code>styled-jsx</code> provides a way to style your components using <em>inline styles</em> or <em>external CSS files</em>, so we will consider both in this article. In addition, we will also consider both the <code>react-test-renderer</code> and <code>enzyme</code> Jest snapshot rendering methods.</p> <p>Given the above information, the following sections will cover these scenarios:</p> <ul> <li>Inline styles with <code>react-test-renderer</code></li> <li>Inline styles with <code>enzyme</code></li> <li>External styles with <code>react-test-renderer</code></li> <li>External styles with <code>enzyme</code></li> </ul> <h2>Inline Styles</h2> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
@@ -57,21 +57,21 @@
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
-</code></pre></div> <p>To make this all work, you have to add the <code>styled-jsx/babel</code> to <em>plugins</em> in the babel configuration.</p> <div class=highlight><pre class="highlight json"><code><span class="s2">"babel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</code></pre></div> <p>To make this all work, you have to add the <code>styled-jsx/babel</code> to <em>plugins</em> in the babel configuration.</p> <div class=highlight><pre class="highlight json"><code><span class="nl">"babel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"react-app"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"styled-jsx/babel"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div> <h3>Snapshots with react-test-renderer</h3> <p>Within the context of inline styles, we&rsquo;ll first look at the default approach for testing with Jest snapshots using <a href="https://github.com/facebook/react/tree/master/packages/react-test-renderer"><code>react-test-renderer</code></a>.</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="s1">'react-dom'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">renderer</span> <span class="k">from</span> <span class="s1">'react-test-renderer'</span><span class="p">;</span>
+</span></code></pre></div> <h3>Snapshots with react-test-renderer</h3> <p>Within the context of inline styles, we&rsquo;ll first look at the default approach for testing with Jest snapshots using <a href="https://github.com/facebook/react/tree/master/packages/react-test-renderer"><code>react-test-renderer</code></a>.</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">renderer</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-test-renderer</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="s1">'./App'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./App</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="nx">it</span><span class="p">(</span><span class="s1">'renders without crashing'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">renders without crashing</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">tree</span> <span class="o">=</span> <span class="nx">renderer</span><span class="p">.</span><span class="nx">create</span><span class="p">(&lt;</span><span class="nc">App</span> <span class="p">/&gt;).</span><span class="nx">toJSON</span><span class="p">();</span>
   <span class="nx">expect</span><span class="p">(</span><span class="nx">tree</span><span class="p">).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
 <span class="p">});</span>
@@ -100,23 +100,23 @@
      Example Component
    &lt;/p&gt;
  &lt;/div&gt;
-</code></pre></div> <p>We can see the <code>jsx-########</code> noise in our diff. One other thing to note here is that the <code>p</code> element also has the noise even though our CSS doesn&rsquo;t target it!</p> <p>To eliminate this noise, let us remove the <code>styled-jsx/babel</code> plugin from the test environment (you will want to specify your different environments):</p> <div class=highlight><pre class="highlight json"><code><span class="s2">"babel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</code></pre></div> <p>We can see the <code>jsx-########</code> noise in our diff. One other thing to note here is that the <code>p</code> element also has the noise even though our CSS doesn&rsquo;t target it!</p> <p>To eliminate this noise, let us remove the <code>styled-jsx/babel</code> plugin from the test environment (you will want to specify your different environments):</p> <div class=highlight><pre class="highlight json"><code><span class="nl">"babel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"react-app"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"production"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"production"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"styled-jsx/babel"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"development"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"development"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"styled-jsx/babel"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"plugins"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -139,18 +139,18 @@
   &lt;/style&gt;
 &lt;/div&gt;
 `;
-</code></pre></div> <p>As we can see, the <code>jsx-########</code> values are no longer present, although there is now a <code>style</code> element which has the actual CSS. In my opinion, this is a good trade &ndash; now every element doesn&rsquo;t have the ever-changing <code>jsx-########</code>. This alone results in cleaner snapshots from my perspective.</p> <h3>Snapshots with enzyme</h3> <p>The second approach we will look at for inline styles is snapshot testing with <a href="https://github.com/airbnb/enzyme"><code>enzyme</code></a>. This package gives you the additional functionality to assert and manipulate the component&rsquo;s output. Unfortunately, the rendered component is wrapped in an <code>enzyme</code> specific component, which produces unnecessarily complex snapshots. Fortunately, the <a href="https://github.com/adriantoine/enzyme-to-json"><code>enzyme-to-json</code></a> package provides an approach to convert the wrapped component to the standard format we&rsquo;re familiar with. It is worth noting that you can further simplify the setup if you read more into the documentation of <code>enzyme</code> and <code>enzyme-to-json</code>.</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="s1">'react-dom'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">Enzyme</span> <span class="k">from</span> <span class="s1">'enzyme'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">Adapter</span> <span class="k">from</span> <span class="s1">'enzyme-adapter-react-16'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">shallow</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'enzyme'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">toJson</span> <span class="k">from</span> <span class="s1">'enzyme-to-json'</span><span class="p">;</span>
+</code></pre></div> <p>As we can see, the <code>jsx-########</code> values are no longer present, although there is now a <code>style</code> element which has the actual CSS. In my opinion, this is a good trade &ndash; now every element doesn&rsquo;t have the ever-changing <code>jsx-########</code>. This alone results in cleaner snapshots from my perspective.</p> <h3>Snapshots with enzyme</h3> <p>The second approach we will look at for inline styles is snapshot testing with <a href="https://github.com/airbnb/enzyme"><code>enzyme</code></a>. This package gives you the additional functionality to assert and manipulate the component&rsquo;s output. Unfortunately, the rendered component is wrapped in an <code>enzyme</code> specific component, which produces unnecessarily complex snapshots. Fortunately, the <a href="https://github.com/adriantoine/enzyme-to-json"><code>enzyme-to-json</code></a> package provides an approach to convert the wrapped component to the standard format we&rsquo;re familiar with. It is worth noting that you can further simplify the setup if you read more into the documentation of <code>enzyme</code> and <code>enzyme-to-json</code>.</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-dom</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Enzyme</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">enzyme</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Adapter</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">enzyme-adapter-react-16</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">shallow</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">enzyme</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">toJson</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">enzyme-to-json</span><span class="dl">'</span><span class="p">;</span>
 
-<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="s1">'./App'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./App</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="nx">Enzyme</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span> <span class="na">adapter</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Adapter</span><span class="p">()</span> <span class="p">});</span>
 
-<span class="nx">it</span><span class="p">(</span><span class="s1">'renders without crashing'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">renders without crashing</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(&lt;</span><span class="nc">App</span> <span class="p">/&gt;);</span>
   <span class="nx">expect</span><span class="p">(</span><span class="nx">toJson</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">)).</span><span class="nx">toMatchSnapshot</span><span class="p">();</span>
 <span class="p">});</span>
@@ -189,8 +189,8 @@
 +    styleId="1500233327"
 </span>   /&gt;
  &lt;/div&gt;
-</code></pre></div> <p>If we apply the same fix as we did for inline styles with <code>react-test-renderer</code> (removing <code>styled-jsx/babel</code> plugin from the test environment), we now get the same snapshot output. Thus, there are no more <code>jsx-########</code> values, however the raw CSS is within the <code>style</code> tag.</p> <h2>External Styles</h2> <p>I personally like to use <a href="https://github.com/zeit/styled-jsx#external-css-and-styles-outside-of-the-component">external CSS files</a> that I import into the components. The following shows our converted <code>App</code> component to use an imported CSS file instead of an inline style:</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">css</span> <span class="k">from</span> <span class="s1">'./App.css'</span><span class="p">;</span>
+</code></pre></div> <p>If we apply the same fix as we did for inline styles with <code>react-test-renderer</code> (removing <code>styled-jsx/babel</code> plugin from the test environment), we now get the same snapshot output. Thus, there are no more <code>jsx-########</code> values, however the raw CSS is within the <code>style</code> tag.</p> <h2>External Styles</h2> <p>I personally like to use <a href="https://github.com/zeit/styled-jsx#external-css-and-styles-outside-of-the-component">external CSS files</a> that I import into the components. The following shows our converted <code>App</code> component to use an imported CSS file instead of an inline style:</p> <div class=highlight><pre class="highlight jsx"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">css</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./App.css</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">class</span> <span class="nx">App</span> <span class="kd">extends</span> <span class="nx">Component</span> <span class="p">{</span>
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
@@ -206,7 +206,7 @@
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
-</code></pre></div><div class=highlight><pre class="highlight javascript"><code><span class="k">import</span> <span class="nx">css</span> <span class="k">from</span> <span class="s1">'styled-jsx/css'</span><span class="p">;</span>
+</code></pre></div><div class=highlight><pre class="highlight javascript"><code><span class="k">import</span> <span class="nx">css</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">styled-jsx/css</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">css</span><span class="s2">`
   .App {
@@ -223,7 +223,7 @@
     at Object.&lt;anonymous&gt; (src/App.js:2:12)
     at Object.&lt;anonymous&gt; (src/App.test.js:5:12)
 </code></pre></div> <p>We can recover from this error, if we use a <a href="https://facebook.github.io/jest/docs/en/manual-mocks.html">Jest manual mocks</a> to mock out the <code>css</code> tagged template literal. We can accomplish this by creating the following mock under <code>__mocks__/styled-jsx/css.js</code>:</p> <div class=highlight><pre class="highlight javascript"><code><span class="kd">function</span> <span class="nx">css</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="k">return</span> <span class="dl">''</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">css</span><span class="p">;</span>

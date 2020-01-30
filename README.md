@@ -12,6 +12,13 @@
 
 ### 🏠 [Homepage](https://kevinjalbert.com/)
 
+### Toubleshooting
+
+From personal experience, there have been some issues getting `libv8` and `therubyracer` dependencies working together:
+
+  - https://stackoverflow.com/a/29705230/583592
+  - https://gist.github.com/fernandoaleman/868b64cd60ab2d51ab24e7bf384da1ca#gistcomment-3152734
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!

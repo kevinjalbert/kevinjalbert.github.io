@@ -2,16 +2,67 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-01-29T19:00:00-05:00</updated>
+  <updated>2020-02-28T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Moving from RSS Feeds to Email</title>
+    <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
+    <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
+    <updated>2020-02-29T22:30:04-05:00</updated>
+    <published>2020-02-28T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read about how I moved away from RSS Feeds to emails to consume content. I take advantage of newsletters and IFTTT to ensure that everything moved over to email.</description>
+    <content type="html">&lt;p&gt;I&amp;rsquo;ve briefly mentioned using RSS to email in &lt;a href="/consuming-content-and-managing-the-flood/"&gt;Consuming Content and Managing the Flood&lt;/a&gt;. In this post, I want to further describe this approach and how I&amp;rsquo;ve effectively moved away from RSS Feeds towards emails.&lt;/p&gt;
+
+&lt;h1&gt;RSS Readers&lt;/h1&gt;
+
+&lt;p&gt;Back in the day, Google Reader was one of the most popular RSS reading services. I ended up using it and thoroughly enjoyed it. I was heavily invested in using RSS feeds and piped all the content I wanted through it.&lt;/p&gt;
+
+&lt;p&gt;Eventually, Google Reader was shut down and I made the move to &lt;a href="https://feedly.com"&gt;Feedly&lt;/a&gt;. I was not 100% happy with that service and decided to try a new approach with respect to consuming content from sites with RSS feeds.&lt;/p&gt;
+
+&lt;h1&gt;RSS Reader to Email (via Newsletters)&lt;/h1&gt;
+
+&lt;p&gt;My goal was to see how I could achieve the same content consumption but without using RSS readers. My idea was to see if I could consolidate the services that I used daily.&lt;/p&gt;
+
+&lt;p&gt;I noticed that a lot of the content I was following via RSS had email newsletters. Newsletters worked out well for me, as they contained generally the same information. This also fit in with the whole &lt;em&gt;Inbox Zero&lt;/em&gt; movement, as I treated my email inbox as a list of &lt;em&gt;actionable items&lt;/em&gt; that I needed to address. I could work through these emails at my own pace, and if needed I could defer an item by pushing it into &lt;a href="https://www.instapaper.com"&gt;Instapaper&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, there were still some RSS feeds that didn&amp;rsquo;t have an email newsletter option. In most cases, these feeds were for different content (e.g., screencasts, comics, music).&lt;/p&gt;
+
+&lt;h1&gt;RSS Reader to Email (via IFTTT)&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been a big fan of &lt;a href="https://ifttt.com/"&gt;IFTTT&lt;/a&gt; since it came out. Once again, I reached for this tool to help me with migrating the remaining RSS feeds to email.&lt;/p&gt;
+
+&lt;p&gt;The approach is quite simple as we&amp;rsquo;re taking advantage of the &lt;a href="https://ifttt.com/feed"&gt;New Feed Item Trigger from the RSS Feed Service&lt;/a&gt; and the &lt;a href="https://ifttt.com/email"&gt;Send me an email using the Email Service&lt;/a&gt;. When setting up a new applet, you just have to put in the RSS feed URL and that&amp;rsquo;s pretty much it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Ifttt applets" width="1978" height="1038" src="/images/2020-02-29-moving-from-rss-to-email/ifttt-applets.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The applets check and execute within seconds of when a new RSS item arrives. This results in rich-text emails being sent containing the content of the feed item.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Email" width="1484" height="814" src="/images/2020-02-29-moving-from-rss-to-email/email.png" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Alternatives to IFTTT&lt;/h2&gt;
+
+&lt;p&gt;I did find other alternatives to IFTTT that would accomplish the same end goal of getting RSS feed items into my email inbox.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://zapier.com/"&gt;Zapier&lt;/a&gt; - you will have to pay if you want more tasks (&amp;gt; 100) and zaps (&amp;gt; 5).&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blogtrottr.com/"&gt;Blogtrottr&lt;/a&gt; - has ads incorporated in the emails unless you pay.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://feedrabbit.com/"&gt;Feedrabbit&lt;/a&gt; - only allowed 10 subscriptions before you have to pay.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Overall, I found IFTTT to be a scalable and free solution that fits my needs.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-01-29T22:10:49-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -166,7 +217,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -221,7 +272,7 @@ class variables: @@logger
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -246,7 +297,7 @@ class variables: @@logger
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -334,7 +385,7 @@ class variables: @@logger
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -381,7 +432,7 @@ class variables: @@logger
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -424,7 +475,7 @@ class variables: @@logger
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -478,7 +529,7 @@ class variables: @@logger
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -561,7 +612,7 @@ class variables: @@logger
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -743,7 +794,7 @@ class variables: @@logger
     <title>Editing Commits in a Pull Request; Make it your Last Action</title>
     <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
     <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
+    <updated>2020-02-25T20:57:14-05:00</updated>
     <published>2019-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -814,104 +865,6 @@ class variables: @@logger
 &lt;p&gt;Ideally, squashing commits results in no code changes from what was already reviewed. If, for whatever reason, there are some changes that need to be made, you&amp;rsquo;d want some final eyes to check it over. With respect to making the squashing task easier for yourself, I recommend taking a look over the &lt;a href="https://thoughtbot.com/blog/autosquashing-git-commits"&gt;auto-squashing feature built into Git&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s worth mentioning that GitHub also has a &lt;a href="https://help.github.com/en/articles/about-pull-request-merges#squash-and-merge-your-pull-request-commits"&gt;&lt;em&gt;Squash and Merge&lt;/em&gt; option&lt;/a&gt;, which does the squashing for you. This is a decent approach if your team is okay with all the changes being compressed down into one commit on master. I personally prefer having the finer grain control over how I structure my atomic commits.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Consuming Content and Managing the Flood</title>
-    <link rel="alternate" href="https://kevinjalbert.com/consuming-content-and-managing-the-flood/"/>
-    <id>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</id>
-    <updated>2019-12-28T23:14:17-05:00</updated>
-    <published>2019-03-30T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">In the software development world, there are always new articles and content to consume. Learn how I keep on top of it all and focus on keeping the flood of information to a sustainable level.</description>
-    <content type="html">&lt;p&gt;For almost a decade, I&amp;rsquo;ve been immersed in the software development world. One single truth that has held on since the beginning is that there are always &lt;em&gt;things to keep up with.&lt;/em&gt; You know what I mean &amp;ndash; it seems like every day there are new frameworks, languages, techniques, and learnings to consume. I have always referred to this constant onslaught of information as &lt;em&gt;the Feed&lt;/em&gt;. This term comes from my original method of corralling the information &amp;ndash; via RSS feeds.&lt;/p&gt;
-
-&lt;p&gt;Early in my journey, I was looking to get up to date on anything and everything. I was grasping for information to consume. As I found sources, I simply latched on to the pipe and drank it all. In most cases this was unsustainable. The classic and best example of this is &lt;a href="https://news.ycombinator.com/"&gt;HackerNews&lt;/a&gt;, which presents a barrage of items every day.&lt;/p&gt;
-
-&lt;p&gt;I want to talk about the techniques I&amp;rsquo;ve adopted to better keep up to date in my field. The following are techniques I&amp;rsquo;ve found and solutions that work for me, but no guarantee they will work for you to the same capacity.&lt;/p&gt;
-
-&lt;h1&gt;Don&amp;rsquo;t Consume Everything&lt;/h1&gt;
-
-&lt;p&gt;Just don&amp;rsquo;t. It&amp;rsquo;s impossible to do so, you&amp;rsquo;ll only end up wasting your time and putting more pressure on yourself. I&amp;rsquo;ve been guilty of trying to stay on top of HackerNews and just drowned in it. It is a struggle if you try to consume everything. Even if you aren&amp;rsquo;t reading every article, you still have to spend the time and effort to determine if this is something you &lt;em&gt;want to read&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;So you don&amp;rsquo;t want to read everything&amp;hellip; how do you determine what to read? I ask the following two questions when I see a headline:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Is this actionable and relevant to me &lt;em&gt;right now?&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;Is this information that will stand the test of time (i.e., unchanging)?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These rules have some flexibility built-in and will vary by person and by time. If you do adhere to them, hopefully, you find a way to pass over media that you&amp;rsquo;ll get little benefit from. We want to maximize the return on investment when consuming information, everything takes time and effort.&lt;/p&gt;
-
-&lt;h1&gt;Focus on High-Quality Sources&lt;/h1&gt;
-
-&lt;p&gt;Going back to HackerNews, there are tens if not hundreds of links posted a day. Subreddits are another case where there is a large amount of content present daily. Unfortunately, not everything you see will be high-caliber.&lt;/p&gt;
-
-&lt;p&gt;If we think of getting the best return on our investment, we&amp;rsquo;d naturally want to only consume the finest information. To me, this is stuff that other people have found useful, and therefore has been vetted by the community. It is also worth considering content that is &lt;em&gt;gated&lt;/em&gt; by some criteria as this enforces a minimum bar of quality.&lt;/p&gt;
-
-&lt;h2&gt;Newsletters&lt;/h2&gt;
-
-&lt;p&gt;I subscribe to several &lt;em&gt;weekly&lt;/em&gt; newsletters from various sources &amp;ndash; they are curated and present the highlights for that week. The following is a subset of newsletters that I consume weekly.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://softwareleadweekly.com/"&gt;Software Lead Weekly&lt;/a&gt; — People, culture, and leadership&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.gitprime.com/engineering-impact/"&gt;Engineering Impact Newsletter&lt;/a&gt; — Engineering leadership, productivity, culture, and scaling development teams&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://hackernewsletter.com/"&gt;Hacker NewsLetter&lt;/a&gt; — The best articles from HackerNews on startups, technology, programming and more&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://changelog.com/weekly"&gt;Changelog Weekly&lt;/a&gt; — Open source community and software development&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://cooperpress.com/publications/"&gt;&lt;em&gt;&amp;lt;tech&amp;gt;&lt;/em&gt; Weekly&lt;/a&gt; — 12 weekly newsletters curated by CooperPress (i.e., Ruby Weekly, JavaScript Weekly, etc&amp;hellip;). Each one is a curated newsletter sharing news, articles, and tutorials in their respective spaces.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Recalling our earlier focus on &lt;em&gt;Don&amp;rsquo;t Consume Everything&lt;/em&gt;, we need to be selective even on the curated selections. Newsletters can be a slippery slope as well, as it still depends on how you handle them. In addition, we don&amp;rsquo;t want to &lt;em&gt;subscribe&lt;/em&gt; to everything. Be focused on the relevant and the unchanging. For example, don&amp;rsquo;t subscribe to Mobile Dev newsletters if you aren&amp;rsquo;t actively working in that area &amp;ndash; with any luck, different topics will converge in other areas you are focused on.&lt;/p&gt;
-
-&lt;h2&gt;Blogs&lt;/h2&gt;
-
-&lt;p&gt;Ultimately, a good chunk of content is sourced from the blogs of individuals. In the past, I have subscribed to receive updates from individuals (i.e., via RSS or their own newsletters), although I have started to slowly move away from this approach. It&amp;rsquo;s not uncommon to frequently see articles from an individual appearing in curated newsletters. In rare situations does an individual produce consistent high-quality material that is on-point and unchanging in value.&lt;/p&gt;
-
-&lt;h2&gt;Talks&lt;/h2&gt;
-
-&lt;p&gt;Conference talks are also a great medium to consider as they carry with them a certain level of quality. The same rules as before apply with the selection process. I skim over the titles of a conference talk when it appears on their preferred video hosting platform (i.e., YouTube, or &lt;a href="https://confreaks.tv/"&gt;Confreaks&lt;/a&gt;). I also want to bring up that &lt;a href="https://www.ted.com/talks"&gt;TED Talks&lt;/a&gt; are also a fantastic source of knowledge.&lt;/p&gt;
-
-&lt;h2&gt;Books&lt;/h2&gt;
-
-&lt;p&gt;A tried and tested approach to knowledge transfer is books. Writing a book is a significant undertaking requiring plenty of research and editing, and are also difficult to update after they are published. Given the constraints of books, we are hopeful that they are written to stand the test of time (i.e., the content is unchanging). One other valuable aspect is that book authors often have a unique viewpoint, which led them to write a book. Overall, I think books are a great medium of high-quality content, and there are many great books out there that are recommended.&lt;/p&gt;
-
-&lt;h2&gt;Podcasts&lt;/h2&gt;
-
-&lt;p&gt;The podcasts I listen to traditionally follow the format of a host interviewing a person of interest within the topic&amp;rsquo;s community of the podcast. Podcasts are interesting as their content can vary episode to episode, and can be heavily dependent on the people present. Sometimes there are musings on recent news, sometimes it is dissecting the success of an individual or project. I follow podcasts that are specific to my professional focus, although I&amp;rsquo;ll admit even those offer highly entertaining facets due to the light-hearted nature of interviewing styles.&lt;/p&gt;
-
-&lt;h2&gt;Twitter&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve always found &lt;a href="https://twitter.com/"&gt;Twitter&lt;/a&gt; to be hit-or-miss with respect to content. It&amp;rsquo;s a lot more &lt;em&gt;raw&lt;/em&gt; in nature, and if you&amp;rsquo;re following the right people you do get a glimmer of insight closer to their thought processes. In my opinion, keep Twitter for entertainment, and as a means for social connections. Also from my experience, if a nugget of information is linked to on Twitter, it normally ends up in another medium.&lt;/p&gt;
-
-&lt;h1&gt;Awareness of Emerging Trends&lt;/h1&gt;
-
-&lt;p&gt;To summarize the above, &lt;em&gt;focus on the high-quality content that is deeply relevant and/or unchanging over time&lt;/em&gt;. This brings up an interesting conundrum &amp;ndash; &lt;em&gt;how do we expand our knowledge to new areas?&lt;/em&gt; As previously mentioned, different topics and trends will bleed into each other if they are tangentially related. We can rest assured that we won&amp;rsquo;t be blindsided from an emerging trend.&lt;/p&gt;
-
-&lt;p&gt;I personally like to keep a pulse on emerging trends and technologies. I subscribe to the &lt;a href="https://www.thoughtworks.com/radar"&gt;Technology Radar by ThoughtWorks&lt;/a&gt;, an infrequent but detailed report with insights into the technology and trends shaping the future. To some degree, the trends mentioned in the report help shape new areas that I want to focus on in the near future.&lt;/p&gt;
-
-&lt;h1&gt;Building the Dam&lt;/h1&gt;
-
-&lt;p&gt;To tie everything together, I&amp;rsquo;m going to use the metaphor of a dam.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The flow of water is the content to be consumed.&lt;/li&gt;
-&lt;li&gt;The dam is our process to stop the flood, and only allow high-quality content through at a sustainable rate.&lt;/li&gt;
-&lt;li&gt;The reservoir is the holding area of content before we consume it.&lt;/li&gt;
-&lt;li&gt;The spillway filters out the excess content produced by the flow as it arrives in the reservoir.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The selection process we&amp;rsquo;ve talked about is our dam &amp;ndash; it helps reduce the flow and keeps high-quality content in our reservoir. The flow is composed of content mostly arriving in my email&amp;rsquo;s inbox (via newsletters, and RSS-to-Email). My reservoir is a combination of tools and services: &lt;a href="https://www.instapaper.com"&gt;Instapaper&lt;/a&gt; for individual articles, &lt;a href="https://www.kobo.com/"&gt;Kobo&lt;/a&gt; for books, &lt;a href="https://www.pocketcasts.com/"&gt;Pocket Casts&lt;/a&gt; for podcasts, and a list in &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; for video talks.&lt;/p&gt;
-
-&lt;p&gt;One aspect to be aware of is when the reservoir overflows. It is possible that there is just too much material to cover. There are two ways to correct this:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Be more aggressive with reducing the flow by removing certain sources that aren&amp;rsquo;t adding as much value as others or being stricter on the selection process of content.&lt;/li&gt;
-&lt;li&gt;Actively use a spillway to drain the reservoir by sweeping through the content and discarding things which aren&amp;rsquo;t relevant anymore, or not as impactful.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I plan to post more detailed information regarding my dam, how I manage it, and reasonings for certain decisions. Our information flow/consumption should be as sustainable as a real dam.&lt;/p&gt;
 </content>
   </entry>
 </feed>

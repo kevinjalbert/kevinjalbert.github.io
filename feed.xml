@@ -2,16 +2,66 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-02-28T19:00:00-05:00</updated>
+  <updated>2020-03-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Improve Your Home Office</title>
+    <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
+    <id>https://kevinjalbert.com/improve-your-home-office/</id>
+    <updated>2020-03-31T23:20:41-04:00</updated>
+    <published>2020-03-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Due to COVID-19 (Coronavirus), self-isolation brought on a wave of new people working from home, with varying states of home offices. This is the first of a multi-part series on improving your home office. In this part, we focus on evaluating your current setup.</description>
+    <content type="html">&lt;p&gt;At the time of publishing (March 31, 2020), &lt;a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"&gt;COVID-19 (Coronavirus)&lt;/a&gt; is a global pandemic and affecting much of the world. Most places are practicing social distancing and self-isolation. Some companies have switched to remote work by having their employees work from home during this time. As such, an influx of home office interest (&lt;a href="https://trends.google.com/trends/explore?date=2020-01-01%202020-03-31&amp;amp;q=home%20office,working%20from%20home"&gt;Google Trends shows a huge spike&lt;/a&gt;) has surfaced.&lt;/p&gt;
+
+&lt;p&gt;I am writing a multi-part article on the topic of improving your home office. This first one is to serve as a public service announcement given how many people are working from home due to COVID-19, and that they should evaluate and explore options to improve their setup to make work more effective and ergonomic. Subsequent parts will focus on different aspects:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The physical aspect (e.g., room/space, desk, and chair)&lt;/li&gt;
+&lt;li&gt;The input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video)&lt;/li&gt;
+&lt;li&gt;The miscellaneous aspects (e.g., lighting, organization, climate, and personalizations)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Evaluate your Home Office&lt;/h1&gt;
+
+&lt;p&gt;If you are fortunate enough to be able to work from home in these times (or you normally work remotely), you should take a few minutes to evaluate your current setup. Within a typical office, there will be fewer opportunities to modify your workspace to best conform to your specific needs. Changing your work setup can result in productivity gains and added comfort.&lt;/p&gt;
+
+&lt;p&gt;Look at your home office. Are you working at the kitchen table, or maybe from the couch? You might laugh, but in those first few days when people were making the switch to working from home, this might have been their reality. Ideally, you&amp;rsquo;d have a dedicated space for your work with a multitude of ergonomic features.&lt;/p&gt;
+
+&lt;p&gt;Creating an amazing home office can be a time and money sink as there are numerous items and options to furnish your setup. Fortunately, you can &lt;em&gt;chip&lt;/em&gt; away at the setup and slowly make additions over time as needed. Figure out what is causing discomfort and slight changes or upgrades may remedy the problem.&lt;/p&gt;
+
+&lt;h2&gt;Return on Investment&lt;/h2&gt;
+
+&lt;p&gt;You&amp;rsquo;ll want to think of how much the home office and the individual pieces will be used. There&amp;rsquo;s no point in going overboard with something that you would rarely use, in which case a cheaper or alternative solution might be best. With the COVID-19 situation, this warps the &lt;em&gt;how much am I going to use this afterwards&lt;/em&gt; question, just something to keep in mind.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Invest in where you spend your time.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is advice to avoid wasting resources in improving specific areas of your home office. You can always incrementally improve your office (i.e., improve the weakest, missing, or most used aspects of your space). There will be some items and changes that you can do to your home office that will have huge returns on investment in areas such as comfort, ergonomics, and productivity. Before making changes, be mindful of the return on your investment (i.e., you take a lot of meetings and so you&amp;rsquo;ll gain a lot from a great audio/video setup).&lt;/p&gt;
+
+&lt;h1&gt;Wirecutter is Awesome&lt;/h1&gt;
+
+&lt;p&gt;There are many articles circulating around the Internet on the subject of remote work and home offices. I did find that &lt;a href="https://thewirecutter.com/"&gt;Wirecutter&lt;/a&gt; has several great articles on the subject and they all link to their amazing &lt;em&gt;&amp;ldquo;The Best xxxx&amp;rdquo;&lt;/em&gt; reviews. For some quick wins, I highly recommend skimming the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://thewirecutter.com/lists/how-to-create-a-full-time-work-space-at-home/"&gt;How to Create a Full-Time Work Space at Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://thewirecutter.com/blog/work-from-home-starter-kit/"&gt;The WFH Starter Kit: What Companies Should Provide You With When You Work From Home&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://thewirecutter.com/blog/productivity-home-office-upgrades/"&gt;4 Small Home Office Upgrades That Can Give a Big Boost to Your Productivity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://thewirecutter.com/lists/the-essential-ergonomic-gear-for-your-home-office/"&gt;The Essential Ergonomic Gear for Your Home Office&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-02-29T22:30:04-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -62,7 +112,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -217,7 +267,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -272,7 +322,7 @@ class variables: @@logger
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -297,7 +347,7 @@ class variables: @@logger
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -385,7 +435,7 @@ class variables: @@logger
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -432,7 +482,7 @@ class variables: @@logger
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -475,7 +525,7 @@ class variables: @@logger
     <title>Integrating Notion with Google Assistant</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-07-14T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -529,7 +579,7 @@ class variables: @@logger
     <title>Integrating Notion with Alfred</title>
     <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-alfred/"/>
     <id>https://kevinjalbert.com/integrating-notion-with-alfred/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-06-16T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -612,7 +662,7 @@ class variables: @@logger
     <title>My Weekly Notion Setup</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-weekly-notion-setup/"/>
     <id>https://kevinjalbert.com/my-weekly-notion-setup/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
+    <updated>2020-02-29T22:31:29-05:00</updated>
     <published>2019-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -788,83 +838,6 @@ class variables: @@logger
 &lt;p&gt;Notion has the ability to &lt;a href="https://www.notion.so/Duplicate-public-pages-d8a461baeeb54d91b156ff5559192321#d8a461baeeb54d91b156ff5559192321"&gt;duplicate public pages into your own account&lt;/a&gt;. You can use that functionality along with the above link to get my template. It can be a bit overwhelming, but I&amp;rsquo;ve placed some annotations in the template to help you set it up. If you have any questions, feel free to leave a comment on this post. I&amp;rsquo;m planning to keep this public template static even though my own template will evolve over time — this is all for the purpose of this blog post.&lt;/p&gt;
 
 &lt;p&gt;I am loving what this setup has done for me so far and I&amp;rsquo;m planning to keep moving forward with it, further customizing it to fit my needs.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Editing Commits in a Pull Request; Make it your Last Action</title>
-    <link rel="alternate" href="https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/"/>
-    <id>https://kevinjalbert.com/editing-commits-in-a-pull-request-make-it-your-last-action/</id>
-    <updated>2020-02-25T20:57:14-05:00</updated>
-    <published>2019-04-29T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">If you are going to edit commits in a collapsing fashion (i.e., amend/squash) in a pull request, make it your last action before merging to avoid confusing code reviewers.</description>
-    <content type="html">&lt;p&gt;&lt;em&gt;This post should be seen through the lens of working with a team using Git and GitHub during the collaboration of developing software. There is also the assumption that the reader has a firm understanding of Git.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Editing commits are more common than you might think. Anytime you &lt;em&gt;amend, rebase, or squash&lt;/em&gt; you are modifying commits, in which the affected commits&amp;rsquo; SHA changes.&lt;/p&gt;
-
-&lt;p&gt;In a collaborative setting (i.e., a Pull Request in GitHub), we want to &lt;a href="https://git-scm.com/book/en/v1/Git-Branching-Rebasing#The-Perils-of-Rebasing"&gt;minimize editing commits&lt;/a&gt;. For many developers, it is worthwhile to keep the Git history as clean and linear as possible. The best way to achieve that simplicity is by reducing multiple commits or rebasing off of master to avoid a merge conflict/commit.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;If you are going to edit commits in a collapsing fashion (i.e., amend/squash) in a pull request, make it your last action before merging to avoid confusing code reviewers.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h1&gt;Editing Commits&lt;/h1&gt;
-
-&lt;p&gt;For brevity, the details of how to edit commits can be found at the following &lt;a href="https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history"&gt;article by thoughtbot&lt;/a&gt;. As touched on in my &lt;a href="https://kevinjalbert.com/level-up-your-commit-messages/"&gt;previous post&lt;/a&gt;, you can &lt;em&gt;hide the &lt;a href="https://sethrobertson.github.io/GitBestPractices/#sausage"&gt;sausage making process&lt;/a&gt;&lt;/em&gt; by amending and squashing commits. There are two main benefits to consolidating commits:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The ability to &lt;code&gt;git bisect&lt;/code&gt;, &lt;code&gt;git revert&lt;/code&gt; and &lt;code&gt;git cherry-pick&lt;/code&gt; work without much issue.&lt;/li&gt;
-&lt;li&gt;Commits are &lt;a href="https://www.freshconsulting.com/atomic-commits/"&gt;atomic&lt;/a&gt; and provide better archaeological information in &lt;code&gt;git log&lt;/code&gt; and &lt;code&gt;git blame&lt;/code&gt; scenarios.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1&gt;Cautiously Edit a Pull Request&amp;rsquo;s Commits&lt;/h1&gt;
-
-&lt;p&gt;As developers learn early on, when a branch is public you avoid carelessly rewriting the commit history. If you do need to get changes from another branch (i.e., master) into the feature branch, there are two options (&lt;a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing"&gt;both which Atlassian covers in great detail&lt;/a&gt;):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;em&gt;safer&lt;/em&gt; way is merging master into the feature branch, which in my opinion makes things a bit messy.&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;cleaner&lt;/em&gt; way is rebasing the feature branch onto master, which results in a more linear commit history.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;From my experience, I&amp;rsquo;ve always gone with the rebase option as I value a simplified commit history. Incidentally, the two benefits mentioned in the previous section help with keeping the master branch simple and clean. In practice, this manifests as a final squashing effort before merging the pull request into master.&lt;/p&gt;
-
-&lt;p&gt;Regardless, communication is key if you plan to edit the commits of a pull request. Collaborators need to know that they have to account for the rewritten history the next time they want to use or contribute to that branch.&lt;/p&gt;
-
-&lt;h1&gt;Don&amp;rsquo;t Edit Commits During Code Reviews&lt;/h1&gt;
-
-&lt;p&gt;Imagine the following scenario:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Bob is creating a new feature in his local branch.&lt;/li&gt;
-&lt;li&gt;Bob pushes up the branch to GitHub and creates a pull request.&lt;/li&gt;
-&lt;li&gt;Bob communicates that he wants feedback from Jane by requesting her as a reviewer.&lt;/li&gt;
-&lt;li&gt;Jane makes some comments and good suggestions on the pull request.&lt;/li&gt;
-&lt;li&gt;Bob makes changes to address the code review comments.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now here is where we can hit some diverging paths:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Bob creates new commits based off the review comments.&lt;/li&gt;
-&lt;li&gt;Bob amends the changes onto the last commit.&lt;/li&gt;
-&lt;li&gt;Bob squashes the changes into other commits on the branch.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In the three presented cases, Bob addressed the code review comments and the resulting code is identical &amp;ndash; only the commits are different. The issue arises when he re-requests Jane to perform a subsequent review. As Jane has already left comments, she instinctively looks to see the &lt;em&gt;new&lt;/em&gt; changes on the branch as these changes are more likely the ones that address the earlier code review comments. In the first case, these are represented as new commits, and it is easy enough to see the changes. In the second and third case, the changes are hidden inside previous commits. &lt;strong&gt;This makes it incredibly difficult to isolate the changes made since Jane last looked at the pull request.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="View changes" width="1454" height="392" src="/images/2019-04-30-editing-commits-in-a-pull-request-make-it-your-last-action/view-changes.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The take away here is that during the code review phase, we want to ensure that the commits are additive and tell a complete story. A reviewer can and should see how the pull request has changed at each step of the process. The back-and-forth of getting feedback and adding new commits to address them is the collaborative flow for which we should aim.&lt;/p&gt;
-
-&lt;h1&gt;Squash Before You Merge&lt;/h1&gt;
-
-&lt;p&gt;Ultimately, we still want that clean commit history when we finally merge, and so we have to squash commits down at some point. As previously mentioned, editing commits during the active code review cycle is detrimental, so you wait until the pull request is approved and ready to be merged.&lt;/p&gt;
-
-&lt;p&gt;A final rebase onto master might be needed to resolve any conflicts between the feature branch and master. If we do need this, it&amp;rsquo;s sometimes useful to get a final check if you were not confident in the conflict resolution.&lt;/p&gt;
-
-&lt;p&gt;Ideally, squashing commits results in no code changes from what was already reviewed. If, for whatever reason, there are some changes that need to be made, you&amp;rsquo;d want some final eyes to check it over. With respect to making the squashing task easier for yourself, I recommend taking a look over the &lt;a href="https://thoughtbot.com/blog/autosquashing-git-commits"&gt;auto-squashing feature built into Git&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s worth mentioning that GitHub also has a &lt;a href="https://help.github.com/en/articles/about-pull-request-merges#squash-and-merge-your-pull-request-commits"&gt;&lt;em&gt;Squash and Merge&lt;/em&gt; option&lt;/a&gt;, which does the squashing for you. This is a decent approach if your team is okay with all the changes being compressed down into one commit on master. I personally prefer having the finer grain control over how I structure my atomic commits.&lt;/p&gt;
 </content>
   </entry>
 </feed>

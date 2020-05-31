@@ -13,6 +13,9 @@
     <loc>https://kevinjalbert.com/uses/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</loc>
   </url>
   <url>
@@ -190,19 +193,22 @@
     <loc>https://kevinjalbert.com/synchronizing-my-dotfiles/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/ios/</loc>
+    <loc>https://kevinjalbert.com/tags/tools/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/productivity/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/remote/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/ios/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/notion/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/google-assistant/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/tools/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/process/</loc>
@@ -322,9 +328,6 @@
     <loc>https://kevinjalbert.com/tags/rake/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/remote/</loc>
-  </url>
-  <url>
     <loc>https://kevinjalbert.com/tags/architecture/</loc>
   </url>
   <url>
@@ -397,10 +400,10 @@
     <loc>https://kevinjalbert.com/page/12/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/productivity/page/2/</loc>
+    <loc>https://kevinjalbert.com/tags/tools/page/2/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/tags/tools/page/2/</loc>
+    <loc>https://kevinjalbert.com/tags/productivity/page/2/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/ruby/page/2/</loc>

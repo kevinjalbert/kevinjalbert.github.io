@@ -16,8 +16,8 @@ At the time of publishing (March 31, 2020), [COVID-19 (Coronavirus)](https://www
 
 I am writing a multi-part article on the topic of improving your home office. This first one is to serve as a public service announcement given how many people are working from home due to COVID-19, and that they should evaluate and explore options to improve their setup to make work more effective and ergonomic. Subsequent parts will focus on different aspects:
 
-- The physical aspect (e.g., room/space, desk, and chair)
-- The input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video)
+- [The physical aspect](/improve-your-home-office-the-physical-space/) (e.g., room/space, desk, and chair)
+- [The input/output aspects](/improve-your-home-office-the-input-output-devices/) (e.g., monitor, keyboard, mouse/trackpad, audio, and video)
 - The miscellaneous aspects (e.g., lighting, organization, climate, and personalizations)
 
 # Evaluate your Home Office

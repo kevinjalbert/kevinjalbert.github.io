@@ -2,16 +2,106 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-05-29T20:00:00-04:00</updated>
+  <updated>2020-06-28T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Improve Your Home Office - Miscellaneous Aspects</title>
+    <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
+    <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
+    <updated>2020-06-29T21:23:48-04:00</updated>
+    <published>2020-06-28T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">This is the fourth (and final) installment of a multi-part series on improving your home office. In this article, we talk about the miscellaneous aspects of your home office that I have not covered (lighting, organization, climate, and personalizations).</description>
+    <content type="html">&lt;p&gt;I am writing a multi-part article on the topic of improving your home office.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/improve-your-home-office/"&gt;Part 1&lt;/a&gt; was mostly a public service announcement to be aware of your home office and to evaluate it.&lt;/li&gt;
+&lt;li&gt;&lt;a href="/improve-your-home-office-the-physical-space/"&gt;Part 2&lt;/a&gt; explores the physical aspects (e.g., room/space, desk, and chair).&lt;/li&gt;
+&lt;li&gt;&lt;a href="/improve-your-home-office-the-input-output-devices/"&gt;Part 3&lt;/a&gt; explores the input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video).&lt;/li&gt;
+&lt;li&gt;Part 4 (this one) explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The previous parts of this series explored the foundation of your home office, along with the required devices that you need to get work done. We&amp;rsquo;re now at the point where we can consider extra aspects that augment and address new ancillary concerns.&lt;/p&gt;
+
+&lt;h1&gt;Lighting&lt;/h1&gt;
+
+&lt;p&gt;Natural light, while nice to have, is inconsistent in intensity and brightness. Ideally, you should have a decent lighting setup where you don&amp;rsquo;t need to depend on natural lighting.&lt;/p&gt;
+
+&lt;p&gt;From a video perspective, you&amp;rsquo;ll want to take extra care to make sure you have proper lighting. There are plenty of resources on how to achieve this, but the main takeaway is to have more light sources (e.g., &lt;a href="https://en.wikipedia.org/wiki/Three-point_lighting"&gt;3-point lighting&lt;/a&gt;). To create softer light on your face, you might want to explore putting a light diffuser on your main light source (there are many do-it-yourself options out there, see mine in the picture above).&lt;/p&gt;
+
+&lt;p&gt;If you find that your eyes are hurting from looking at your monitor, you&amp;rsquo;ll want to add some &lt;a href="https://powerpractical.com/pages/what-is-tv-bias-lighting"&gt;bias lighting&lt;/a&gt;. There is a very affordable solution in the form of &lt;a href="https://www.amazon.ca/Luminoodle-USB-Bias-Lighting-Backlight/dp/B076X89GRW"&gt;LED strips you attach behind your monitor&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The colour and warmth of your lights are also important &amp;ndash; you can go with &lt;em&gt;warmer/yellow&lt;/em&gt; lights for a relaxing feel, or &lt;em&gt;colder/white&lt;/em&gt; lights for a focus feel (read more &lt;a href="https://www.zmescience.com/medicine/mind-and-brain/lighting-and-mind-study/"&gt;here&lt;/a&gt;). A nice addition is to use smart light bulbs that allow you to change the colour as desired.&lt;/p&gt;
+
+&lt;p&gt;The following resources are recommended readings:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-smart-led-light-bulbs/"&gt;Wirecutter&amp;rsquo;s best smart LED light bulbs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-floor-lamps-under-300/"&gt;Wirecutter&amp;rsquo;s best floor lamps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-led-desk-lamp/"&gt;Wirecutter&amp;rsquo;s best desk lamps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Climate Control&lt;/h1&gt;
+
+&lt;p&gt;Taking care of your office&amp;rsquo;s environment will result in better productivity. &lt;a href="https://www.theguardian.com/environment/2019/jul/08/indoor-carbon-dioxide-levels-could-be-a-health-hazard-scientists-warn"&gt;CO2 and impurities in the air could result in lower cognitive performance&lt;/a&gt;. It&amp;rsquo;s a good idea to monitor these levels, investing in an air purifier if there is little air circulation for your office. If budget is a concern, there are affordable fixes (adding real plants) to improve air quality. Regular cleaning of your workspace will help reduce allergens like dust and pollen (if near a window).&lt;/p&gt;
+
+&lt;p&gt;Temperature is another factor that can increase/decrease comfort and focus in your workplace. Depending on your space, you might need to invest in a space heater or air conditioning unit. Suffer from cold hands? Check out these interesting solutions &amp;ndash; &lt;a href="https://envavo.com/"&gt;Envavo&lt;/a&gt; desktop heater as well as using sous vide machine (&lt;a href="https://mastery.games/post/warm-coding-hands/"&gt;read more about this unique solution&lt;/a&gt;). Be resourceful, see what works for you and your space and make it happen.&lt;/p&gt;
+
+&lt;p&gt;If you are in a part of the world where the winter blues hit hard and you are prone to SAD (Seasonal Affective Disorder), you might want to try using a light therapy lamp. These lamps are designed to be bright enough (10,000 lux) to simulate daylight earlier in the day to control a shifting circadian rhythm.&lt;/p&gt;
+
+&lt;p&gt;The following resources are recommended readings:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-home-air-quality-monitor/"&gt;Wirecutter&amp;rsquo;s best home air quality monitor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-air-purifier/"&gt;Wirecutter&amp;rsquo;s best air purifier&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-space-heaters/"&gt;Wirecutter&amp;rsquo;s best space heaters&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-light-therapy-lamp/"&gt;Wirecutter&amp;rsquo;s best light therapy lamp&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Organization&lt;/h1&gt;
+
+&lt;p&gt;Your workspace&amp;rsquo;s organization can have an impact on your mental state. Disorganization could result in added friction and chaos. Ideally, everything has a &lt;em&gt;home&lt;/em&gt; and is generally kept in check. How you organize your workspace depends entirely on what you need and how you do your work. A great strategy is to &lt;em&gt;reset&lt;/em&gt; everything at the end of the day so that you can start fresh the next day.&lt;/p&gt;
+
+&lt;p&gt;With many electronic devices, you&amp;rsquo;ll need a power supply to keep them charged and running. You will likely need more than 2-4 electrical outlets, which is where a power bar will be important. It is advisable to not cheap out on this - make sure you have a surge protector on your power bar that is capable of supporting the load. There are nice outlet positions and form-factors, but the end goal is to increase the number of available outlets for your usage. USB hubs are also ideal, as they allow for more connection ports.&lt;/p&gt;
+
+&lt;p&gt;Without a doubt, cables and wires will run rampant on and around your desk. You can keep this problem in check with proper cable management. There are plenty of ways to do this and there are plenty of unique product solutions out there. I highly recommend taking a look at &lt;a href="https://bluelounge.com/collections/cable-management"&gt;Bluelounge&lt;/a&gt; for comprehensive solutions, or just picking up &lt;a href="https://www.amazon.ca/gp/product/B001E1Y5O6"&gt;velcro fasteners&lt;/a&gt; for a quick way to keep groups of wires together.&lt;/p&gt;
+
+&lt;p&gt;Wall cabinets and shelving are great for more storage opportunities, as well as giving you a place to sort and organize important documents. A cabinet is a great way to store less reached for items. I recommend expanding the organization and storage space you have only as you need it.&lt;/p&gt;
+
+&lt;p&gt;The following resources are recommended readings:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-surge-protector/"&gt;Wirecutter&amp;rsquo;s best surge protector&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-usb-c-hubs-and-docks/"&gt;Wirecutter&amp;rsquo;s best USB-C hubs and docks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-usb-hubs/"&gt;Wirecutter&amp;rsquo;s best USB 3.0 hubs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nytimes.com/wirecutter/reviews/best-desktop-organizers/"&gt;Wirecutter&amp;rsquo;s best desktop organizers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;Personalization&lt;/h1&gt;
+
+&lt;p&gt;Adding personal touches to your workspace can be rewarding. If you have the desire to showcase some art or collectables go for it, especially if they bring you joy.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d highly recommend adding some plants to your home office as there is a &lt;a href="https://www.wework.com/ideas/office-design-space/benefits-of-indoor-plants-in-the-office"&gt;lot of research backing the benifits&lt;/a&gt;. If you want a low maintenance plant, succulents are very easy to care for. If you want no maintenance (albeit lower or no benefits), you can get fake plants.&lt;/p&gt;
+
+&lt;p&gt;You might have specific needs in your home office that require specific tools. You need to address that and make sure you give space and attention to them. For example, if you process a lot of paper, a document scanner and shredder would be good. If you need to draw or whiteboard in digital space, a tablet would be ideal.&lt;/p&gt;
+
+&lt;h1&gt;Constant Improvement&lt;/h1&gt;
+
+&lt;p&gt;The home office is a project you can keep chipping away at &amp;ndash; constantly improving it or changing it as your needs change. Working with your space and tools will help you figure what is adding friction or could be improved. Keep an eye on cost as it is easy to run up a large bill when tailoring your office to fit your needs.&lt;/p&gt;
+
+&lt;p&gt;This wraps up the multi-part series on improving your home office. This is a topic that could be written in incredible depth, and I merely scratched the surface. I hope that throughout this you got some new ideas and will be better equipped to work from home in this current situation as well as whatever the future holds.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-05-30T22:23:22-04:00</updated>
+    <updated>2020-06-29T21:24:22-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -23,7 +113,7 @@
 &lt;li&gt;&lt;a href="/improve-your-home-office/"&gt;Part 1&lt;/a&gt; was mostly a public service announcement to be aware of your home office and to evaluate it.&lt;/li&gt;
 &lt;li&gt;&lt;a href="/improve-your-home-office-the-physical-space/"&gt;Part 2&lt;/a&gt; explores the physical aspects (e.g., room/space, desk, and chair).&lt;/li&gt;
 &lt;li&gt;Part 3 (this one) explores the input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video).&lt;/li&gt;
-&lt;li&gt;Part 4 explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).&lt;/li&gt;
+&lt;li&gt;&lt;a href="/improve-your-home-office-the-miscellaneous-aspects/"&gt;Part 4&lt;/a&gt; explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;The input and output devices are the interfaces that exist between you and your workspace. You&amp;rsquo;ll want devices that offer sublime interactions that reduce friction and bring great pleasure to your work. This will make working in your space a joy instead of a burden. This is paramount in collaborative tasks as poor devices can hinder the experience for everyone.&lt;/p&gt;
@@ -129,7 +219,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-05-23T11:04:14-04:00</updated>
+    <updated>2020-06-20T12:41:20-04:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -141,7 +231,7 @@
 &lt;li&gt;&lt;a href="/improve-your-home-office/"&gt;Part 1&lt;/a&gt; was mostly a public service announcement to be aware of your home office and to evaluate it.&lt;/li&gt;
 &lt;li&gt;Part 2 (this one) explores the physical aspects (e.g., room/space, desk, and chair).&lt;/li&gt;
 &lt;li&gt;&lt;a href="/improve-your-home-office-the-input-output-devices"&gt;Part 3&lt;/a&gt; explores the input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video).&lt;/li&gt;
-&lt;li&gt;Part 4 explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).&lt;/li&gt;
+&lt;li&gt;&lt;a href="/improve-your-home-office-the-miscellaneous-aspects/"&gt;Part 4&lt;/a&gt; explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;The physical space is the foundation on which the rest is built. Without a good location for your home office, it can be hard to get &lt;em&gt;deep work&lt;/em&gt; done. The following dissects aspects of the physical space of a home office.&lt;/p&gt;
@@ -220,7 +310,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-05-23T11:04:26-04:00</updated>
+    <updated>2020-06-20T12:41:58-04:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -233,7 +323,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="/improve-your-home-office-the-physical-space/"&gt;The physical aspect&lt;/a&gt; (e.g., room/space, desk, and chair)&lt;/li&gt;
 &lt;li&gt;&lt;a href="/improve-your-home-office-the-input-output-devices/"&gt;The input/output aspects&lt;/a&gt; (e.g., monitor, keyboard, mouse/trackpad, audio, and video)&lt;/li&gt;
-&lt;li&gt;The miscellaneous aspects (e.g., lighting, organization, climate, and personalizations)&lt;/li&gt;
+&lt;li&gt;&lt;a href="/improve-your-home-office-the-miscellaneous-aspects/"&gt;The miscellaneous aspects&lt;/a&gt; (e.g., lighting, organization, climate, and personalizations)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1&gt;Evaluate your Home Office&lt;/h1&gt;
@@ -270,7 +360,7 @@
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -321,7 +411,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -476,7 +566,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -531,7 +621,7 @@ class variables: @@logger
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -556,7 +646,7 @@ class variables: @@logger
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -644,7 +734,7 @@ class variables: @@logger
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -691,7 +781,7 @@ class variables: @@logger
     <title>Introducing notion-scripts</title>
     <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
     <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
+    <updated>2020-05-30T22:24:03-04:00</updated>
     <published>2019-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -728,60 +818,6 @@ class variables: @@logger
 &lt;/ul&gt;
 
 &lt;p&gt;Don&amp;rsquo;t forget to subscribe to the blog as I&amp;rsquo;ll likely have a post with new changes. If you are interested in following the developments, you can also follow my projects on GitHub.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Integrating Notion with Google Assistant</title>
-    <link rel="alternate" href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"/>
-    <id>https://kevinjalbert.com/integrating-notion-with-google-assistant/</id>
-    <updated>2020-04-29T22:37:31-04:00</updated>
-    <published>2019-07-14T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">I want to share how I integrate my Weekly Notion Setup with Google Assistant. It provides a ubiquitous way to interact with Notion. In particular, this solution opens up new ways to add notes and tasks in Notion via voice commands.</description>
-    <content type="html">&lt;p&gt;Building off two of my previous posts (&lt;a href="/my-weekly-notion-setup/"&gt;My Weekly Notion Setup&lt;/a&gt; and &lt;a href="/integrating-notion-with-alfred/"&gt;Integrating Notion with Alfred&lt;/a&gt;), I decided to further integrate &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; with &lt;a href="https://assistant.google.com/"&gt;Google Assistant&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Google Assistant is never too far away from me. I almost always have my phone within arms reach, and I also have multiple Google devices throughout my house. In the past, I&amp;rsquo;ve used other productivity applications in conjunction with Google Assistant (i.e., &lt;a href="https://help.evernote.com/hc/en-us/articles/360000930107-How-to-use-Google-Assistant-with-Evernote"&gt;Evernote&lt;/a&gt;, and &lt;a href="https://get.todoist.help/hc/en-us/articles/115000056165-How-can-I-use-Todoist-with-Google-Assistant-"&gt;Todoist&lt;/a&gt;) to capture notes and tasks. With my recent commitment to Notion, I&amp;rsquo;ve been missing this integration.&lt;/p&gt;
-
-&lt;h1&gt;The Goal&lt;/h1&gt;
-
-&lt;p&gt;The 2 main requirements I&amp;rsquo;m looking for here are:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Ability to dictate notes that are appended to my &lt;em&gt;Notes&lt;/em&gt; section under the current day.&lt;/li&gt;
-&lt;li&gt;Ability to dictate a new task that gets added to my &lt;em&gt;Tasks&lt;/em&gt; database.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I would also like the end solution to be one that is extensible and can grow with my template and use cases.&lt;/p&gt;
-
-&lt;h1&gt;The Journey&lt;/h1&gt;
-
-&lt;p&gt;At the time of writing, no official API has been released for Notion. For a previous project, I was able to create &lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;&lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt; using an unofficial API client called &lt;a href="https://github.com/jamalex/notion-py"&gt;&lt;code&gt;notion-py&lt;/code&gt;&lt;/a&gt; to much success. To be honest, I suspect the official API to likely be restrictive to some degree, although only time will tell. In either case, using this API client gives me great flexibility in what can be done in Notion.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been successful in hooking Google Assistant into other application via the &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt; platform and naturally gravitate to this free solution.&lt;/p&gt;
-
-&lt;p&gt;The next piece of this solution is being able to execute custom code based on an action from the Google Assistant trigger on IFTTT. Fortunately, IFTTT has the capabilities to perform HTTP requests in response to a trigger. Thus, my end-goal solution requires a server to run my custom code, which uses &lt;code&gt;notion-py&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I decided to reach for &lt;a href="https://heroku.com/"&gt;Heroku&lt;/a&gt; as they have a pretty offering that allows you to run an application for free (within limits).&lt;/p&gt;
-
-&lt;h1&gt;The Reward&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://www.youtube.com/watch?v=z8SgCwrci5I"&gt;Click to watch a video summarizing integration and demonstrating how it works&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I&amp;rsquo;ve put together &lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;, a GitHub repository, a Heroku application that performs Notion actions based on voice requests via &lt;a href="https://ifttt.com/maker_webhooks"&gt;IFTTT Webhooks&lt;/a&gt; and &lt;a href="https://ifttt.com/google_assistant"&gt;Google Assistant&lt;/a&gt;. I&amp;rsquo;ve put together easy-to-follow instructions that can help others open up integrations like this for themselves.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;Click to check out &lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; &lt;a href="https://github.com/kevinjalbert/notion-heroku/tree/v1.0.0"&gt;v1.0.0&lt;/a&gt; is current at the time of publication (July 15, 2019).&lt;/p&gt;
-
-&lt;h1&gt;The Future&lt;/h1&gt;
-
-&lt;p&gt;Running the application on Heroku (or any server to be honest) opens up new opportunities. For example, it would be entirely possible to have something run periodically or on a schedule. I can also continue to iterate and add to and improve the integration with Google Assistant (i.e., new endpoints that run Notion commands on my behalf).&lt;/p&gt;
 </content>
   </entry>
 </feed>

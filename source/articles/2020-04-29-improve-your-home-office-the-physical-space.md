@@ -17,7 +17,7 @@ I am writing a multi-part article on the topic of improving your home office.
 - [Part 1](/improve-your-home-office/) was mostly a public service announcement to be aware of your home office and to evaluate it.
 - Part 2 (this one) explores the physical aspects (e.g., room/space, desk, and chair).
 - [Part 3](/improve-your-home-office-the-input-output-devices) explores the input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video).
-- Part 4 explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).
+- [Part 4](/improve-your-home-office-the-miscellaneous-aspects/) explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).
 
 The physical space is the foundation on which the rest is built. Without a good location for your home office, it can be hard to get _deep work_ done. The following dissects aspects of the physical space of a home office.
 

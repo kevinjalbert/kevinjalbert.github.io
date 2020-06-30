@@ -18,7 +18,7 @@ I am writing a multi-part article on the topic of improving your home office. Th
 
 - [The physical aspect](/improve-your-home-office-the-physical-space/) (e.g., room/space, desk, and chair)
 - [The input/output aspects](/improve-your-home-office-the-input-output-devices/) (e.g., monitor, keyboard, mouse/trackpad, audio, and video)
-- The miscellaneous aspects (e.g., lighting, organization, climate, and personalizations)
+- [The miscellaneous aspects](/improve-your-home-office-the-miscellaneous-aspects/) (e.g., lighting, organization, climate, and personalizations)
 
 # Evaluate your Home Office
 

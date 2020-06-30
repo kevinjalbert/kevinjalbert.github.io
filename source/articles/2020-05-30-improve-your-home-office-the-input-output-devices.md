@@ -17,7 +17,7 @@ I am writing a multi-part article on the topic of improving your home office.
 - [Part 1](/improve-your-home-office/) was mostly a public service announcement to be aware of your home office and to evaluate it.
 - [Part 2](/improve-your-home-office-the-physical-space/) explores the physical aspects (e.g., room/space, desk, and chair).
 - Part 3 (this one) explores the input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video).
-- Part 4 explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).
+- [Part 4](/improve-your-home-office-the-miscellaneous-aspects/) explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).
 
 The input and output devices are the interfaces that exist between you and your workspace. You'll want devices that offer sublime interactions that reduce friction and bring great pleasure to your work. This will make working in your space a joy instead of a burden. This is paramount in collaborative tasks as poor devices can hinder the experience for everyone.
 

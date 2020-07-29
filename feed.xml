@@ -2,16 +2,53 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-06-28T20:00:00-04:00</updated>
+  <updated>2020-07-27T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Working From Home: Family, I'm Busy Now</title>
+    <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
+    <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
+    <updated>2020-07-28T20:40:39-04:00</updated>
+    <published>2020-07-27T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">In this post, I demonstrate how to communicate work meetings to my family while working from home. I use a combination of software and hardware to accomplish an informative and automated solution that provides information about my availability to my family.</description>
+    <content type="html">&lt;p&gt;At the time of writing this post (still in COVID-19 times), remote working, at least for the short-term, is quite prominent. If I had to guess, remote work will continue to thrive after the COVID-19 pandemic passes.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve previously written a multi-part series on how to &lt;a href="/improve-your-home-office/"&gt;Improve your Home Office&lt;/a&gt;, and this current post builds on the topic by providing my solution to meeting interruptions by my family.&lt;/p&gt;
+
+&lt;h1&gt;The Problem: Family Interruptions&lt;/h1&gt;
+
+&lt;p&gt;My home office is in the basement. During the day, my wife is caring for our two children (3.5 years and 6 months old). She occasionally needs my help for a few minutes here and there. From a timing perspective, I do take breaks, but they might not 100% lineup with when she is seeking assistance/relief. Ideally, she would be able to reach out to me when I&amp;rsquo;m not busy (or in a meeting) and I can come up from my office for a few minutes to help out.&lt;/p&gt;
+
+&lt;p&gt;I needed a way to communicate my meeting schedule so that my wife could see when I&amp;rsquo;m not available to help. This is going to be more important as my children get older, as they will more likely want to come into my office while I&amp;rsquo;m working. It is worth mentioning that I have a door to my office that I keep closed during the workday &amp;ndash; it just doesn&amp;rsquo;t communicate my availability.&lt;/p&gt;
+
+&lt;h1&gt;The Solution: Wall-Mounted Tablet Showing Google Calendar&lt;/h1&gt;
+
+&lt;p&gt;I had an old &lt;a href="https://amzn.to/32Pn3Wy"&gt;Fire 7 Tablet from Amazon&lt;/a&gt; that I attached to the wall with two &lt;a href="https://amzn.to/2D4SzEM"&gt;Command Picture Hanging Strips&lt;/a&gt; and powered via a long Micro-B USB cable.&lt;/p&gt;
+
+&lt;p&gt;The idea is that the tablet screen is always on and showing Google Calendar&amp;rsquo;s &lt;em&gt;today&lt;/em&gt; view. My wife has her Google Account signed in and only displaying my shared &lt;em&gt;Work&lt;/em&gt; calendar (it only shows busy times). Changes in events are synchronized automatically and are reflected within a minute.&lt;/p&gt;
+
+&lt;p&gt;The position of the tablet is on the main floor near the door to the basement. This spot was picked by my wife, as it is a central location during her day. Being able to view the whole day is important as she can better understand my availability and plan her day as well. She is able to see when meetings start/end, and it also captures those impromptu meetings that are made shortly before they begin.&lt;/p&gt;
+
+&lt;p&gt;Could you use a different tablet (like an iPad)? Sure thing, I just worked with what I had around the house. This is a perfect way to put an old tablet to good use as the processing specs don&amp;rsquo;t have to be good. One thing to note with the Fire tablets, you have to &lt;a href="https://vidabox.com/blog/2017/02/11/hidden-always-on-setting-for-amazon-fire-tablets/"&gt;enable the &lt;em&gt;Always on&lt;/em&gt; setting&lt;/a&gt; as well as &lt;a href="https://www.androidpolice.com/2020/07/11/install-play-store-amazon-fire-tablet/"&gt;install the Google Play Store&lt;/a&gt; to get Google Calendar.&lt;/p&gt;
+
+&lt;h1&gt;Future Iteration: Indicating in the Basement&lt;/h1&gt;
+
+&lt;p&gt;If my family is downstairs, there isn&amp;rsquo;t any indication of my availability as my solution is only on the main floor. I&amp;rsquo;d like to replicate the same setup in the basement itself, although I&amp;rsquo;ve been thinking about simply using a &lt;em&gt;busy light&lt;/em&gt; instead.&lt;/p&gt;
+
+&lt;p&gt;The busy light would be on/off to indicate if I&amp;rsquo;m busy. I feel that this solution is better for kids as opposed to the calendar schedule solution, as it clear and binary. I would set up the busy light by using a smart light/plug that can be toggled based on my Google Calendar&amp;rsquo;s event start/end times via &lt;a href="https://ifttt.com/"&gt;IFTTT&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2020-06-29T21:23:48-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -101,7 +138,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-06-29T21:24:22-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -219,7 +256,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-06-20T12:41:20-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -310,7 +347,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-06-20T12:41:58-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -360,7 +397,7 @@
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -411,7 +448,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -566,7 +603,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -621,7 +658,7 @@ class variables: @@logger
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -646,7 +683,7 @@ class variables: @@logger
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -734,7 +771,7 @@ class variables: @@logger
     <title>Docker Compose DNS Consistency (DCDC)</title>
     <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
     <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
+    <updated>2020-06-29T21:25:39-04:00</updated>
     <published>2019-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -775,49 +812,6 @@ class variables: @@logger
 &lt;p&gt;The following is the test output of &lt;code&gt;dcdc&lt;/code&gt; that demonstrates accessibility to services external and internal to the Docker network. Not only are HTTP services accessible, but also non-HTTP services (i.e., a database).&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt="Dcdc tests" width="1784" height="968" src="/images/2019-09-29-docker-compose-dns-consistency-dcdc/dcdc-tests.png" /&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Introducing notion-scripts</title>
-    <link rel="alternate" href="https://kevinjalbert.com/introducing-notion-scripts/"/>
-    <id>https://kevinjalbert.com/introducing-notion-scripts/</id>
-    <updated>2020-05-30T22:24:03-04:00</updated>
-    <published>2019-08-28T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Building off of my previous Notion work using notion-py, I continue to adjust Notion to fit my needs. In this article, I want to explain how I've been taking my integrations with Notion to the next level.</description>
-    <content type="html">&lt;p&gt;My &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; journey started with the creation of my &lt;a href="/my-weekly-notion-setup/"&gt;highly-tailored weekly template&lt;/a&gt;. I then made my first integration, &lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;&lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt;, an &lt;a href="https://www.alfredapp.com"&gt;Alfred&lt;/a&gt; workflow that allows me to issue quick commands to interact with Notion. Recently, I created &lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;, a web application that integrates Notion and &lt;a href="https://assistant.google.com/"&gt;Google Assistant&lt;/a&gt; via &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Laying the Foundation&lt;/h1&gt;
-
-&lt;p&gt;At this point, both of my Notion integrations share similarities with how I utilize &lt;a href="https://github.com/jamalex/notion-py"&gt;&lt;code&gt;notion-py&lt;/code&gt;&lt;/a&gt;. I decided to lay down some foundational work that will accelerate and open additional capabilities in my existing and future projects with respect to Notion. The initial culmination of this work is &lt;a href="https://github.com/kevinjalbert/notion-scripts"&gt;&lt;code&gt;notion-scripts&lt;/code&gt;&lt;/a&gt;, a Python package. I&amp;rsquo;ve extracted the commonalities between my two projects in an effort to &lt;a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself"&gt;DRY (don&amp;rsquo;t repeat yourself)&lt;/a&gt; the code up for better reuse.&lt;/p&gt;
-
-&lt;p&gt;My gameplan for &lt;code&gt;notion-scripts&lt;/code&gt; is that it holds all the higher-level interactions that I do with Notion (i.e., add a task, find current day, update task status, etc&amp;hellip;), as well as the underlying Notion API interactions via &lt;code&gt;notion-py&lt;/code&gt;. Ultimately, my other applications shouldn&amp;rsquo;t have to interact with &lt;code&gt;notion-py&lt;/code&gt; anymore. If there is an opportunity for some functionality to live in more than one project, it will end up in &lt;code&gt;notion-scripts&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Background/Reactive Tasks for Notion&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;ve always wanted a way to run certain &lt;em&gt;processes&lt;/em&gt; reactively in Notion. I took what I have for &lt;code&gt;notion-heroku&lt;/code&gt; and added the capabilities to run &lt;a href="https://github.com/kevinjalbert/notion-heroku/blob/26d3712a2869b699cbcbf7691807dc9b2a5bc4dd/src/api.py#L11-L26"&gt;recurring scheduled tasks&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Using recurring scheduled tasks, I added the ability to record task status changes reactively. My goal is so that when using Notion on my mobile device, task transitions will record automatically as this functionality is running on a server.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Recorded transitions" width="1480" height="1080" src="/images/2019-08-29-introducing-notion-scripts/recorded-transitions.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;As mentioned earlier, I plan to continue to build on top of the work I&amp;rsquo;ve done so far. With respect to the transitions of a task, I&amp;rsquo;m hoping to add the ability to track the total time a task spent in each status. I&amp;rsquo;d also like to add email capabilities, so that I can get a daily/weekly email summary of tasks that are stale/stuck/new/completed.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: I know that &lt;code&gt;notion-py&lt;/code&gt; has callbacks for &lt;a href="https://github.com/jamalex/notion-py#example-subscribing-to-updates"&gt;subscribing to updates&lt;/a&gt;. For my use case, I have not yet explored this and instead went with polling to watch for changes. For &lt;code&gt;notion-heroku&lt;/code&gt;, it would require a more substantial change, and the current design is stateless (i.e., run task, look at Notion, react) as Notion holds all the state itself. I might revisit this subject if need be.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h1&gt;What&amp;rsquo;s Next?&lt;/h1&gt;
-
-&lt;p&gt;Having &lt;code&gt;notion-scripts&lt;/code&gt; will help in some regard with the following ideas, as they will touch all my integrations and then some.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Having an interval notification on the desktop that tells me what my current task is.&lt;/li&gt;
-&lt;li&gt;Sending myself daily/weekly email reports of tasks/wins/lights from my template.&lt;/li&gt;
-&lt;li&gt;An approach to help with time blocking of tasks with my Google Calendar.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Don&amp;rsquo;t forget to subscribe to the blog as I&amp;rsquo;ll likely have a post with new changes. If you are interested in following the developments, you can also follow my projects on GitHub.&lt;/p&gt;
 </content>
   </entry>
 </feed>

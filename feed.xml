@@ -2,16 +2,160 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-07-27T20:00:00-04:00</updated>
+  <updated>2020-08-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>My Dam Broke - Revisiting Content Consumption</title>
+    <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
+    <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
+    <updated>2020-08-30T22:52:46-04:00</updated>
+    <published>2020-08-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">In this post I revisit the topic of content consumption, adding new criteria to my selection process. I also discuss using a new tool (spoiler...it's Notion) to hold the content.</description>
+    <content type="html">&lt;p&gt;I&amp;rsquo;ve previously talked about &lt;a href="/consuming-content-and-managing-the-flood"&gt;managing your content consumption&lt;/a&gt; using metaphors such as a dam, the flow of water, a reservoir, and a spillway. I highly recommend reading through if you are looking for some techniques to tame information overload. In case you don&amp;rsquo;t want to read the above article, the main point is to focus on high-quality sources and don&amp;rsquo;t consume everything.&lt;/p&gt;
+
+&lt;p&gt;Spoiler alert! Even though I wrote the above article, I have to revisit the topic as my metaphorical dam is broken. I&amp;rsquo;m finding myself facing the flood with 300+ articles in the reservoir. In this article, I will revisit content consumption management.&lt;/p&gt;
+
+&lt;h1&gt;System Check&lt;/h1&gt;
+
+&lt;p&gt;I took a look at my content consumption from a system&amp;rsquo;s perspective. There are four factors at play that determine the backlog of content to consume.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The pace at which I can consume content from my reservoir&lt;/li&gt;
+&lt;li&gt;The flow of content from sources making it to my dam&lt;/li&gt;
+&lt;li&gt;The effectiveness of my dam (i.e., the filter)&lt;/li&gt;
+&lt;li&gt;The effective removal of content that is no longer valuable.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Improving the pace at which I can consume content is tricky as it depends a lot on the amount of free time I can devote to it. I decided to focus on the other three factors instead as a way to distil the content down to the most valuable.&lt;/p&gt;
+
+&lt;h2&gt;Reducing the Flow&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The flow of content from sources making it to my dam&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;em&gt;flow of water&lt;/em&gt; was the analogy I used in my dam metaphor for the rate of content coming in. This is tunable and can be controlled. I had advocated highly for the use of newsletters as they are narrow in focus and are filtered for good calibre pieces.&lt;/p&gt;
+
+&lt;p&gt;I want to keep tabs on where the good pieces of content are coming from. The importance and value of consumed content will change over time based on projects and interests. This means that I can remove specific content sources if they are underdelivering in value.&lt;/p&gt;
+
+&lt;p&gt;This is something I have done organically (i.e., &lt;em&gt;&amp;ldquo;I&amp;rsquo;ll unsubscribe from this newsletter as I don&amp;rsquo;t care about YYYY much anymore&amp;rdquo;&lt;/em&gt;), but I want to put more of an objective system in place. To do this, I want to track the volume and perceived value gain from my content sources. I&amp;rsquo;ll then routinely be able to revisit and see what is feeding into my content consumption pipeline and what is not.&lt;/p&gt;
+
+&lt;h2&gt;Effectiveness of Dam&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The effectiveness of my dam (i.e., the filter)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;My goal of consuming content is to extract information and turn that into knowledge, ultimately being able to use that to produce results. With that in mind, the following are three guiding principles I&amp;rsquo;ve decided to use before committing to consuming a piece of content:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Is the information valuable in the long-term?
+
+&lt;ul&gt;
+&lt;li&gt;Prioritizing long-term knowledge will lead to &lt;a href="https://fs.blog/2019/02/compounding-knowledge/"&gt;compounding knowledge&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Is the information relevant to immediate projects?
+
+&lt;ul&gt;
+&lt;li&gt;Short-term knowledge is needed for the current situation.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Is the information uniquely valuable?
+
+&lt;ul&gt;
+&lt;li&gt;There are diminishing returns from consuming more content on the same topic.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Overall, I want to maximize the effectiveness and efficiency of knowledge extraction. The first two principles I&amp;rsquo;m carrying over from the previous system of content consumption. The third principle is new and should help improve the effectiveness of my dam.&lt;/p&gt;
+
+&lt;p&gt;Essentially I want the content to make it through the dam filter if &lt;code&gt;(content is long-term || content is relevant) &amp;amp;&amp;amp; content is unique&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Either of the first two principles must be true for the content to be of any value. It is worth noting that having both being true is the best scenario &amp;ndash; the information is relevant and long-term knowledge. The relevancy principle is important to have as I want to make sure that I&amp;rsquo;m not losing short-term gains on the projects and problems I&amp;rsquo;m working on.&lt;/p&gt;
+
+&lt;h3&gt;Filtering Examples&lt;/h3&gt;
+
+&lt;p&gt;An example of something that would be filtered out is an article on &lt;em&gt;upgrading from Rails 5.x to 6.x&lt;/em&gt;. I wouldn&amp;rsquo;t consider this long-term knowledge as eventually, Rails will progress past these versions. There is no relevance for this article based on my current projects, and thus it should be filtered out. If afterwards I now have a project that would have benefited from this information, not all is lost as I would just &lt;em&gt;seek&lt;/em&gt; it, embracing &lt;em&gt;Just In Time&lt;/em&gt; learning.&lt;/p&gt;
+
+&lt;p&gt;Another example would be pieces of content around &lt;em&gt;empathy in code reviews&lt;/em&gt;. This is great long-term knowledge, as well as relevant to my work. The problem is, I&amp;rsquo;ve already consumed something like this and have extracted and internalized the knowledge. This fails the third principle of being uniquely valuable, and thus I would filter these out. If at a later date, I&amp;rsquo;m doing a presentation or article on empathy in code reviews, I would employ &lt;em&gt;Just In Time&lt;/em&gt; learning to find all relevant information.&lt;/p&gt;
+
+&lt;h2&gt;Effectiveness of Spillway&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The effective removal of content that is no longer valuable.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Right before consuming a piece of content from the reservoir, I&amp;rsquo;ll revisit the three principles. A piece of content may have lost relevancy, or is no longer going to provide unique value. This is a quick way of removing content.&lt;/p&gt;
+
+&lt;p&gt;With hopefully a smaller number of content sitting in the reservoir, this mechanism will be enough. In the event that the reservoir is overflowing, you can quickly sweep through everything and reevaluate. The key is to be ruthless, as important information will likely find its way back to you.&lt;/p&gt;
+
+&lt;h1&gt;Notion: The New System&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve previously used a mixture of applications to store consumable content. The main application I have used for articles is &lt;a href="https://www.instapaper.com"&gt;Instapaper&lt;/a&gt;. The new system demands more metadata and so I&amp;rsquo;ve made the switch to entirely use &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt;. I&amp;rsquo;ll continue to use separate applications for podcasts and books, but they&amp;rsquo;ll likely have &lt;em&gt;entries&lt;/em&gt; within Notion.&lt;/p&gt;
+
+&lt;h2&gt;The Reservoir&lt;/h2&gt;
+
+&lt;p&gt;Everything is in a single database within Notion, these are the following fields.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A default text field that holds the name of the piece of content.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt; (e.g., article, video, podcast, book, twitter thread, etc&amp;hellip;)
+
+&lt;ul&gt;
+&lt;li&gt;A select field that specifies what medium the content resides in.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Origin&lt;/strong&gt; (e.g., XXXX Newsletter, XXXX Podcast, friend, etc&amp;hellip;)
+
+&lt;ul&gt;
+&lt;li&gt;A select field that specifies how I discovered the piece of content.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;URL&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A URL field that holds the link to the content, which in some cases might be blank depending on the content&amp;rsquo;s type.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Criteria&lt;/strong&gt; (Long-Term, Relevant, and Unique)
+
+&lt;ul&gt;
+&lt;li&gt;A multi-select field that indicates the criterion that holds true for the piece of content&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Value&lt;/strong&gt; (None, Low, Medium, and High)
+
+&lt;ul&gt;
+&lt;li&gt;A select field that indicates the value gained after consuming the piece of content.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Created At&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A timestamp field of when the piece of content was added.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These fields address the three principles within the &lt;em&gt;Criteria&lt;/em&gt; field, as well as metadata on how to reduce the flow of content via the &lt;em&gt;Origin&lt;/em&gt; and &lt;em&gt;Value&lt;/em&gt; fields.&lt;/p&gt;
+
+&lt;p&gt;Within desktop usage, I make use of the &lt;a href="https://chrome.google.com/webstore/detail/save-to-notion/ldmmifpegigmeammaeckplhnjbbpccmm"&gt;Save to Notion&lt;/a&gt; extension as I can fill in more of the metadata from the browser. Within mobile usage, saving content takes another step as I have to go into Notion and add the metadata. For the most part, I try to make use of my desktop when adding content to the Notion database.&lt;/p&gt;
+
+&lt;h1&gt;Iterate and Evolve&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ll keep making changes and iterate on my content consumption system, hopefully making it better each time. The goal is still to turn pieces of content into information that I can use as knowledge.&lt;/p&gt;
+
+&lt;p&gt;The next thing I&amp;rsquo;m planning to tackle is the actual consumption part of the system and having a process for knowledge retention.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2020-07-28T20:40:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -48,7 +192,7 @@
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -138,7 +282,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -256,7 +400,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -347,7 +491,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -397,7 +541,7 @@
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -448,7 +592,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -603,7 +747,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -658,7 +802,7 @@ class variables: @@logger
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -683,7 +827,7 @@ class variables: @@logger
     <title>Using iOS Shortcuts to Open Notion Pages</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
     <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
+    <updated>2020-08-30T22:52:46-04:00</updated>
     <published>2019-10-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -765,53 +909,6 @@ class variables: @@logger
 &lt;h1&gt;The Possibilities with iOS Shortcuts&lt;/h1&gt;
 
 &lt;p&gt;In my opinion, iOS Shortcuts open up a lot of interesting possibilities. The fact that you are able to make and use API calls is very powerful on its own. I can see myself connecting more stuff to &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt;. With respect to Notion, I&amp;rsquo;ll likely continue to expand on my &lt;code&gt;notion-heroku&lt;/code&gt; server and see what I can do with it.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Docker Compose DNS Consistency (DCDC)</title>
-    <link rel="alternate" href="https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/"/>
-    <id>https://kevinjalbert.com/docker-compose-dns-consistency-dcdc/</id>
-    <updated>2020-06-29T21:25:39-04:00</updated>
-    <published>2019-09-28T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Introducing DCDC: a way to work with multiple Docker Compose projects locally with consistent service URLs, internal and external to the Docker network.</description>
-    <content type="html">&lt;p&gt;While I&amp;rsquo;m no longer at &lt;a href="https://scoremediaandgaming.com/"&gt;theScore&lt;/a&gt;, I do recall the larger &lt;em&gt;dockerization&lt;/em&gt; efforts that happened near the end of my employment there. It wasn&amp;rsquo;t uncommon to have several services running for the product you were working on. At theScore we used &lt;a href="https://docs.docker.com/compose/"&gt;Docker Compose&lt;/a&gt; for local development as it eased the setup and took care of running dependencies.&lt;/p&gt;
-
-&lt;p&gt;This eventually leads to the overall problem of dealing with Docker Compose networking and DNS resolution. I ended up creating a tool called &lt;em&gt;Docker Compose DNS Consistency&lt;/em&gt;, &lt;a href="https://github.com/scoremedia/dcdc"&gt;&lt;code&gt;dcdc&lt;/code&gt;&lt;/a&gt;, as a way to solve this. The following sections are from the &lt;code&gt;dcdc&lt;/code&gt; README file, and I would highly recommend going there right after for more in-depth details on how &lt;code&gt;dcdc&lt;/code&gt; actually works.&lt;/p&gt;
-
-&lt;h1&gt;Problem&lt;/h1&gt;
-
-&lt;p&gt;We have a project (i.e., &lt;code&gt;proj1&lt;/code&gt;) that contains an API (&lt;code&gt;api&lt;/code&gt;) service. With Docker, we are able to expose the API server&amp;rsquo;s default port (&lt;code&gt;3000&lt;/code&gt;). Thus, &lt;code&gt;localhost:3000&lt;/code&gt; routes to the API of &lt;code&gt;proj1&lt;/code&gt;. We have another project (i.e., &lt;code&gt;proj2&lt;/code&gt;) that also contains an API (&lt;code&gt;api&lt;/code&gt;) service, and is also exposed on the default port of &lt;code&gt;3000&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Both projects exist as separate repositories and therefore have different &lt;code&gt;docker-compose.yml&lt;/code&gt; files. In isolation, both projects run without any problem and expose their respective API service on &lt;code&gt;localhost:3000&lt;/code&gt;. The issue is when you want to run both projects at the same time &amp;ndash; which might be needed for the development of a new feature or testing a complete flow.&lt;/p&gt;
-
-&lt;p&gt;The naive solution is to change one of the exposed ports for a project to &lt;code&gt;3001&lt;/code&gt; so that there is no clashing of ports. So for example, &lt;code&gt;proj2&lt;/code&gt;&amp;rsquo;s API is now exposed on port &lt;code&gt;3001&lt;/code&gt; and is reachable at &lt;code&gt;localhost:3001&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;There are a few problems here:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;This process of ensuring we have no conflicting ports on the host can be painful. Even if the projects aren&amp;rsquo;t related, you can have conflicting ports being exposed. As the number of projects grows, this becomes more challenging. It&amp;rsquo;s likely that a document is needed to keep track of used ports (or port ranges).&lt;/li&gt;
-&lt;li&gt;If the two projects have to communicate to each other internally (i.e., not via the host&amp;rsquo;s web browser), the projects cannot see each other as they are on a different network (by default).&lt;/li&gt;
-&lt;li&gt;Externally to the Docker network, we refer to the APIs as &lt;code&gt;localhost:&amp;lt;port&amp;gt;&lt;/code&gt;, but internally we need to use the &lt;em&gt;service name&lt;/em&gt; like &lt;code&gt;proj1&lt;/code&gt;&amp;rsquo;s &lt;code&gt;api&lt;/code&gt;. There is a disconnect in how we &lt;em&gt;refer&lt;/em&gt; to the services internally and externally to the Docker network.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Solution&lt;/h1&gt;
-
-&lt;p&gt;DCDC&amp;rsquo;s purpose is to provide an easy way to work with multiple Docker Compose projects locally by:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Exposing fully qualified domain names for each service (ending in &lt;code&gt;.test&lt;/code&gt;) using DNS and reverse proxy.&lt;/li&gt;
-&lt;li&gt;Providing consistent DNS resolution for services internal and external to the Docker network (i.e., &lt;code&gt;db.proj.test&lt;/code&gt; is accessible on the host machine and also from a service&amp;rsquo;s container).&lt;/li&gt;
-&lt;li&gt;Requiring as little configuration to projects to make them work with DCDC.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;em&gt;NOTE: at the time of publication, DCDC only works with macOS. It&amp;rsquo;s likely possible to work for other operating systems, although it will require some rejigging.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The following is the test output of &lt;code&gt;dcdc&lt;/code&gt; that demonstrates accessibility to services external and internal to the Docker network. Not only are HTTP services accessible, but also non-HTTP services (i.e., a database).&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Dcdc tests" width="1784" height="968" src="/images/2019-09-29-docker-compose-dns-consistency-dcdc/dcdc-tests.png" /&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

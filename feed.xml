@@ -2,16 +2,133 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-08-29T20:00:00-04:00</updated>
+  <updated>2020-09-27T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Daily Review Using iOS Shortcuts and Scriptable</title>
+    <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
+    <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
+    <updated>2020-09-27T20:18:43-04:00</updated>
+    <published>2020-09-27T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read how I orchestrate my daily review that consists of multiple applications using iOS Shortcuts. I create a notification-based workflow as a workaround to Shortcut's time limit when switching between applications.</description>
+    <content type="html">&lt;p&gt;Doing daily and weekly reviews are generally considered a good habit, as it can help with organizing life and making sure you focus on the important things. Reviews are tailored to the individual and depend a lot on the individual&amp;rsquo;s goals and systems.&lt;/p&gt;
+
+&lt;h1&gt;My Frustrations Doing Daily Reviews&lt;/h1&gt;
+
+&lt;p&gt;Doing daily reviews for me has raised some frustrations:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;I have several steps in my daily review, which I haven&amp;rsquo;t properly formalized.&lt;/li&gt;
+&lt;li&gt;I sometimes don&amp;rsquo;t have a solid block of time to process each step of my review.&lt;/li&gt;
+&lt;li&gt;I like using my laptop that resides in my home office, which has caused me to delay/miss reviews if I cannot make time to get to my laptop.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Using my iPhone for Daily Reviews&lt;/h1&gt;
+
+&lt;p&gt;Upon looking at the frustrations, I came up with a better solution that uses my iPhone for my daily reviews. I always have my iPhone near me, and the individual steps of my review use applications that are web-based or within the Apple ecosystem. I&amp;rsquo;m giving up a physical keyboard by using my iPhone, but I&amp;rsquo;m willing to make that trade-off for accessibility.&lt;/p&gt;
+
+&lt;p&gt;When iOS 12 was released, it came with &lt;em&gt;Shortcuts&lt;/em&gt;. This was a new feature that allowed you to string together a bunch of tasks to create workflows. The Shortcuts functionality is my best bet in creating a formalized process that allows me to work through various applications as part of my daily review.&lt;/p&gt;
+
+&lt;h1&gt;iOS Shortcuts and its Limitations&lt;/h1&gt;
+
+&lt;p&gt;My strategy includes a &lt;em&gt;Review&lt;/em&gt; Shortcuts folder that contains the individual steps of my review process. I&amp;rsquo;ll have a single shortcut which then orchestrates my review using all those individual steps. I take advantage of the &lt;code&gt;Wait to return&lt;/code&gt; scripting action, which allows me to interact with an application (e.g., &lt;em&gt;Things&lt;/em&gt;) and then continue to the next step when I return to the Shortcuts application.&lt;/p&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-folder.png" style="width: 33%"/&gt;
+  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-shortcut.png" style="width: 33%"/&gt;
+  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/things-shortcut.png" style="width: 33%"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This worked out well when I was creating the workflow, but I hit a limitation in iOS Shortcuts. A running shortcut will only stay active for a short period of time when you are away from the Shortcuts application. From my experience, this is around 3 minutes. This means that if one step of my daily review takes longer than 3 minutes, the whole thing breaks down.&lt;/p&gt;
+
+&lt;h1&gt;Actionable Notifications via Scriptable&lt;/h1&gt;
+
+&lt;p&gt;To be honest, I was a bit disheartened with the time limitation in Shortcuts. I looked around for another solution. Instead of using the &lt;code&gt;Wait to return&lt;/code&gt; scripting action, I could use actionable notifications to open a URL that triggers the shortcut via the &lt;code&gt;shortcuts://run-shortcut?name=shortcutname&lt;/code&gt; URL scheme. Unfortunately, iOS Shortcuts does not have that capability when creating notifications as they can only show text.&lt;/p&gt;
+
+&lt;p&gt;I did some searching online and found &lt;a href="https://scriptable.app/"&gt;Scriptable&lt;/a&gt;, a powerful iOS automation application that uses JavaScript. With this, I could create notifications that, when interacted with, could open a specified URL.&lt;/p&gt;
+
+&lt;h2&gt;Putting it Together&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ll try my best to explain how I used iOS Shortcuts and Scriptables together to make everything work, as this just got a bit more complicated.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;Daily Review&lt;/em&gt; shortcut grabs the text of each shortcut of my review process (within the &lt;em&gt;Review&lt;/em&gt; folder) and turns it into a single string separated by commas. This string looks like &lt;code&gt;Things,Journal,Habits,Drafts&lt;/code&gt; and we pass that into a Scriptable action.&lt;/p&gt;
+
+&lt;p&gt;Our individual steps of the review process are still fairly simple shortcuts, although now they take the &lt;em&gt;Shortcut Input&lt;/em&gt; and push that into the same Scriptable action as mentioned above.&lt;/p&gt;
+
+&lt;p&gt;It is worth noting that there are a few other small things happening in these shortcuts, but I&amp;rsquo;ve omitted them for the sake of brevity.&lt;/p&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/revised-review-shortcut.jpeg" style="width: 49%; height: 100%"/&gt;
+  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/revised-things-shortcut.png" style="width: 49%; height: 100%"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;My approach pushes all state of &lt;em&gt;where I am in the review process&lt;/em&gt; into the shortcut input, which is the string of shortcut steps to run. To see how we connect these shortcuts together, we&amp;rsquo;ll look at the Scriptable code that uses that string of shortcut steps.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// Variables used by Scriptable.&lt;/span&gt;
+&lt;span class="c1"&gt;// These must be at the very top of the file. Do not edit.&lt;/span&gt;
+&lt;span class="c1"&gt;// icon-color: deep-green; icon-glyph: user-md;&lt;/span&gt;
+&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;createNotification&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;openURL&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;notification&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Notification&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="nx"&gt;notification&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;body&lt;/span&gt;
+  &lt;span class="nx"&gt;notification&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;openURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;openURL&lt;/span&gt;
+  &lt;span class="nx"&gt;notification&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;schedule&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;shortcutParameter&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="dl"&gt;""&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createNotification&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="na"&gt;body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="s2"&gt;Done after this!&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="na"&gt;openURL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="s2"&gt;shortcuts://run-shortcut?name=Homescreen&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;
+  &lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;shortcuts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;shortcutParameter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="s2"&gt;,&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;nextShortcut&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;shortcuts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;remainingShortcuts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;shortcuts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;,&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+  &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createNotification&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+    &lt;span class="na"&gt;body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;`Next step is &lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nb"&gt;decodeURI&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;nextShortcut&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;&lt;span class="s2"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="na"&gt;openURL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;`shortcuts://run-shortcut?name=&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;nextShortcut&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;input=text&amp;amp;text=&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;remainingShortcuts&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;`&lt;/span&gt;
+  &lt;span class="p"&gt;})&lt;/span&gt;
+
+  &lt;span class="nx"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setShortcutOutput&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;remainingShortcuts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nx"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I&amp;rsquo;ll walk through key steps of what happens when we trigger the &lt;em&gt;Daily Review&lt;/em&gt; shortcut:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Grab all shortcuts from the &lt;em&gt;Review&lt;/em&gt; folder and combine them into a single string (e.g., &lt;code&gt;Things,Journal,Habits,Drafts&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;This string is passed as input to the Scriptable action.&lt;/li&gt;
+&lt;li&gt;The script identifies &lt;code&gt;nextShortcut = &amp;quot;Things&amp;quot;&lt;/code&gt; and &lt;code&gt;remainingShortcuts = &amp;quot;Journal,Habits,Drafts&amp;quot;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;A notification is created that has the URL of &lt;code&gt;shortcuts://run-shortcut?name=Things&amp;amp;input=text&amp;amp;text=Journal,Habits,Drafts&lt;/code&gt; that says &amp;ldquo;Next step is Things&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;Daily Review&lt;/em&gt; Shortcut has finished running.&lt;/li&gt;
+&lt;li&gt;Tapping the notification will run the &lt;code&gt;Things&lt;/code&gt; shortcut and pass in the inputs of &lt;code&gt;Journal,Habits,Drafts&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The Things application is opened, and the shortcut&amp;rsquo;s input is passed along to the same Scriptable action as before.&lt;/li&gt;
+&lt;li&gt;A new notification is created for the next step while removing that step from the string of remaining shortcuts.&lt;/li&gt;
+&lt;li&gt;Eventually all shortcuts are run using steps 6-8, and a &amp;ldquo;Done after this!&amp;rdquo; notification finally shows. This will open the user&amp;rsquo;s homescreen.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1&gt;Daily Review With No Time Limits&lt;/h1&gt;
+
+&lt;p&gt;This new approach using Scriptable along with Shortcuts, while complicated, allows me to circumvent the time limit of Shortcuts. The workflow is actually pretty nice as I can move along entirely following notifications as the triggers for the next steps. All the state of the whole process is encoded in the string of shortcuts that have to run. The Review folder approach also makes it easy to add a new step in my review process, should the need arise.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Demo" width="414" height="896" src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/demo.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;If the above gif isn&amp;rsquo;t doing it for you, you can get a better sense of the whole thing by watching the following video I recorded.&lt;/p&gt;
+
+&lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/CjTzhPxfz8Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+</content>
+  </entry>
+  <entry>
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-09-28T10:24:44-04:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -155,7 +272,7 @@
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -192,7 +309,7 @@
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -282,7 +399,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -400,7 +517,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -491,7 +608,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -541,7 +658,7 @@
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -592,7 +709,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -747,7 +864,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -802,7 +919,7 @@ class variables: @@logger
     <title>Learn More About Yourself Using Personality Types</title>
     <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
     <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
+    <updated>2020-08-30T22:53:08-04:00</updated>
     <published>2019-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -821,94 +938,6 @@ class variables: @@logger
 &lt;p&gt;With the results in hand, you can uncover and understand some of the inner-workings that make you tick. I personally found the information useful and insightful as it reaffirmed certain beliefs and values that I hold. I was pleased to see sections dedicated to relationships with other types, as well as personal growth.&lt;/p&gt;
 
 &lt;p&gt;An additional benefit is that you&amp;rsquo;ll be able to share your type with others (e.g., partner, boss, co-worker, friend), giving them a deeper understanding of &lt;em&gt;who you are&lt;/em&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Using iOS Shortcuts to Open Notion Pages</title>
-    <link rel="alternate" href="https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/"/>
-    <id>https://kevinjalbert.com/using-ios-shortcuts-to-open-notion-pages/</id>
-    <updated>2020-08-30T22:52:46-04:00</updated>
-    <published>2019-10-29T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Learn how to quickly open Notion pages on your iOS device. See how I work around dynamic page links (e.g., current day/week) to open the correct pages from my Notion Weekly Template.</description>
-    <content type="html">&lt;p&gt;I recently switched from Android back to iOS for my mobile device. I decided to take a look at &lt;a href="https://support.apple.com/en-ca/guide/shortcuts/welcome/ios"&gt;iOS Shortcuts&lt;/a&gt; as I never really got to play with them before. Given my recent obsession with &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; I decided to see how I can put iOS Shortcuts to use here.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m going to walk you through two examples of using iOS Shortcuts to open Notion Pages. The first one uses a normal Notion page, and the second one uses the &lt;em&gt;current&lt;/em&gt; day/week pages from my &lt;a href="/my-weekly-notion-setup/"&gt;highly-tailored weekly template&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Open Notion Page from iOS Home Screen&lt;/h1&gt;
-
-&lt;p&gt;The first thing that you can do is create a shortcut on your home screen that opens to a specific page in Notion. For example, you could have a page holding your todos, shopping list, latest project, etc. In my opinion, this is really useful if you frequently use specific pages in Notion on your mobile device.&lt;/p&gt;
-
-&lt;h2&gt;Notion Page Link&lt;/h2&gt;
-
-&lt;p&gt;We need to get the &lt;em&gt;Page Link&lt;/em&gt; from Notion. On iOS, you get this link by clicking the &lt;code&gt;...&lt;/code&gt; on a page in Notion and then &lt;em&gt;Copy Link&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: You can find the current Page Link in the Web interface for Notion as well, although the user interface will be slightly different.&lt;/em&gt;&lt;/p&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step1.jpg" style="width: 49%"/&gt;
-  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step2.jpg" style="width: 49%"/&gt;
-&lt;/div&gt;
-
-&lt;p&gt;In your clipboard, you will have a link that looks like the following: &lt;code&gt;https://www.notion.so/Example-page-721c581be9734ad09480d0cc16f774fd&lt;/code&gt;. If visit this link, your browser will open the Notion web application to that page. Unfortunately, this will open the page in the web application in your browser.&lt;/p&gt;
-
-&lt;p&gt;The goal is to open the native Notion application. We can accomplish that using a custom URL Schema that Notion provides for iOS/macOS. &lt;strong&gt;Replacing &lt;code&gt;https&lt;/code&gt; with &lt;code&gt;notion&lt;/code&gt; in our link (e.g., &lt;code&gt;notion://www.notion.so/Example-page-721c581be9734ad09480d0cc16f774fd&lt;/code&gt;) will now open the Notion page in the native Notion application (if opened with Safari).&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2&gt;Shortcut to Open Notion Page&lt;/h2&gt;
-
-&lt;p&gt;Now we can start by creating our iOS Shortcut to open the Notion page. As shown in the images below, our shortcut is just one step to open the &lt;code&gt;notion://&lt;/code&gt; page link with Safari. Finally, we can add this to the home screen, and now we have a single press shortcut that opens directly to the page we want.&lt;/p&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step3.jpg" style="width: 49%"/&gt;
-  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step4.jpg" style="width: 49%"/&gt;
-&lt;/div&gt;
-
-&lt;h1&gt;Open my Current Day/Week Page&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://www.icloud.com/shortcuts/575fc46b4e1b486dab30c4ef42cdf180"&gt;Click to get iOS Shortcut to Open Current Day Notion Page&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As previously noted, I have a more elaborate Notion setup (more details about &lt;a href="/my-weekly-notion-setup/"&gt;highly-tailored weekly template&lt;/a&gt;) where I have unique Notion pages for each day and week. My goal is to have a &lt;em&gt;&amp;lsquo;Notion Day&amp;rsquo;&lt;/em&gt; and &lt;em&gt;&amp;#39;Notion Week&amp;rsquo;&lt;/em&gt; shortcut on my home screen for quick access. Unfortunately, the page link for the current day and week change daily/weekly, and thus the previous solution doesn&amp;rsquo;t work for me.&lt;/p&gt;
-
-&lt;h2&gt;Fetching the Dynamic URLs&lt;/h2&gt;
-
-&lt;p&gt;I currently have a web application running that exposes an API (&lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt;), allowing me to interact with my Notion account through HTTP requests. I&amp;rsquo;ve recently &lt;a href="https://github.com/kevinjalbert/notion-heroku/pull/3"&gt;added a feature&lt;/a&gt; that exposes the &lt;code&gt;notion://&lt;/code&gt; page URLs for the current day/week when I make a request.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;❯ curl https://notion-heroku.herokuapp.com/current_links.json &lt;span class="nt"&gt;-H&lt;/span&gt; &lt;span class="s2"&gt;"api_token: &lt;/span&gt;&lt;span class="nv"&gt;$API_TOKEN&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="nt"&gt;-s&lt;/span&gt; | jq
-&lt;span class="o"&gt;{&lt;/span&gt;
-  &lt;span class="s2"&gt;"current_day"&lt;/span&gt;: &lt;span class="s2"&gt;"notion://www.notion.so/YHuWdvUQ8nc5gBgkqHexDToWRzGvuP6e"&lt;/span&gt;,
-  &lt;span class="s2"&gt;"current_week"&lt;/span&gt;: &lt;span class="s2"&gt;"notion://www.notion.so/kG7jQamppo4RRGc7voAC7elyGDeg7a70"&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The shortcut isn&amp;rsquo;t too hard to create afterwards and ends up as a three-step shortcut:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Make the HTTP network call.&lt;/li&gt;
-&lt;li&gt;Access the value from the JSON response.&lt;/li&gt;
-&lt;li&gt;Open value (Notion page URL) in Safari.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-current-day.jpg" style="width: 49%"/&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This shortcut works well, but it has two drawbacks. It &lt;em&gt;always&lt;/em&gt; has to make the network call to get the page links, it can be slow based on latency and it requires network access.&lt;/p&gt;
-
-&lt;h2&gt;Performance and Robustness&lt;/h2&gt;
-
-&lt;p&gt;To address the drawbacks of the previous shortcut demonstration in the last section, we can cache the response from the &lt;code&gt;notion-heroku&lt;/code&gt; server. Caching the results for a day then makes it so only the first usage of the shortcut requires a network call and all subsequent usage uses a cached file.&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href="https://www.icloud.com/shortcuts/575fc46b4e1b486dab30c4ef42cdf180"&gt;new and improved iOS Shortcut&lt;/a&gt; now contains over 25 steps, although it handles caching, cache invalidation, and a notification if the server didn&amp;rsquo;t respond. Using the shortcut when there is a cached value feels faster to me and it even works while in airplane mode.&lt;/p&gt;
-
-&lt;p&gt;The following video gives a walkthrough of the shortcuts:&lt;/p&gt;
-
-&lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/oGYWF5EpwbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;h1&gt;The Possibilities with iOS Shortcuts&lt;/h1&gt;
-
-&lt;p&gt;In my opinion, iOS Shortcuts open up a lot of interesting possibilities. The fact that you are able to make and use API calls is very powerful on its own. I can see myself connecting more stuff to &lt;a href="https://ifttt.com"&gt;IFTTT&lt;/a&gt;. With respect to Notion, I&amp;rsquo;ll likely continue to expand on my &lt;code&gt;notion-heroku&lt;/code&gt; server and see what I can do with it.&lt;/p&gt;
 </content>
   </entry>
 </feed>

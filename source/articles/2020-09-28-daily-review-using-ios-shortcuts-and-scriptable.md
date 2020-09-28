@@ -33,9 +33,9 @@ When iOS 12 was released, it came with _Shortcuts_. This was a new feature that 
 My strategy includes a _Review_ Shortcuts folder that contains the individual steps of my review process. I'll have a single shortcut which then orchestrates my review using all those individual steps. I take advantage of the `Wait to return` scripting action, which allows me to interact with an application (e.g., _Things_) and then continue to the next step when I return to the Shortcuts application.
 
 <div style="display: flex">
-  <img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-folder.png" style="width: 33%"/>
-  <img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-shortcut.png" style="width: 33%"/>
-  <img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/things-shortcut.png" style="width: 33%"/>
+  <img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-folder.png" style="width: 33%; height: 100%"/>
+  <img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-shortcut.png" style="width: 33%; height: 100%"/>
+  <img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/things-shortcut.png" style="width: 33%; height: 100%"/>
 </div>
 
 This worked out well when I was creating the workflow, but I hit a limitation in iOS Shortcuts. A running shortcut will only stay active for a short period of time when you are away from the Shortcuts application. From my experience, this is around 3 minutes. This means that if one step of my daily review takes longer than 3 minutes, the whole thing breaks down.

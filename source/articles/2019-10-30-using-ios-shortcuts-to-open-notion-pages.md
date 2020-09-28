@@ -27,8 +27,8 @@ We need to get the _Page Link_ from Notion. On iOS, you get this link by clickin
 *Note: You can find the current Page Link in the Web interface for Notion as well, although the user interface will be slightly different.*
 
 <div style="display: flex">
-  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step1.jpg" style="width: 49%"/>
-  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step2.jpg" style="width: 49%"/>
+  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step1.jpg" style="width: 49%; height: 100%"/>
+  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step2.jpg" style="width: 49%; height: 100%"/>
 </div>
 
 In your clipboard, you will have a link that looks like the following: `https://www.notion.so/Example-page-721c581be9734ad09480d0cc16f774fd`. If visit this link, your browser will open the Notion web application to that page. Unfortunately, this will open the page in the web application in your browser.
@@ -40,8 +40,8 @@ The goal is to open the native Notion application. We can accomplish that using 
 Now we can start by creating our iOS Shortcut to open the Notion page. As shown in the images below, our shortcut is just one step to open the `notion://` page link with Safari. Finally, we can add this to the home screen, and now we have a single press shortcut that opens directly to the page we want.
 
 <div style="display: flex">
-  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step3.jpg" style="width: 49%"/>
-  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step4.jpg" style="width: 49%"/>
+  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step3.jpg" style="width: 49%; height: 100%"/>
+  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-page-step4.jpg" style="width: 49%; height: 100%"/>
 </div>
 
 # Open my Current Day/Week Page
@@ -69,7 +69,7 @@ The shortcut isn't too hard to create afterwards and ends up as a three-step sho
 3. Open value (Notion page URL) in Safari.
 
 <div style="display: flex">
-  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-current-day.jpg" style="width: 49%"/>
+  <img src="/images/2019-10-30-using-ios-shortcuts-to-open-notion-pages/notion-current-day.jpg" style="width: 49%; height: 100%"/>
 </div>
 
 This shortcut works well, but it has two drawbacks. It _always_ has to make the network call to get the page links, it can be slow based on latency and it requires network access.

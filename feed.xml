@@ -2,16 +2,76 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-09-27T20:00:00-04:00</updated>
+  <updated>2020-10-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Guided Access on iOS - A Hidden Gem</title>
+    <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
+    <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
+    <updated>2020-10-31T20:58:26-04:00</updated>
+    <published>2020-10-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Guided Access is a great feature in iOS that limits the device to only show a single application with customizable restrictions. The ease of enabling/disabling a Guided Access session, opens up a lot of easy use cases that you might want to try it.</description>
+    <content type="html">&lt;p&gt;This will be a short post that serves more as a reminder to iOS users that you have access to the &lt;em&gt;Guided Access&lt;/em&gt; feature. This is a feature that is tucked away under &lt;em&gt;Settings &amp;gt; Accessibility&lt;/em&gt;, although its uses might fall a bit out of the typical realm of &lt;em&gt;accessibility&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1&gt;What does Guided Access do?&lt;/h1&gt;
+
+&lt;p&gt;To quote &lt;a href="https://support.apple.com/en-ca/HT202612"&gt;Apple&amp;rsquo;s Support page&lt;/a&gt; on Guided Access:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Guided Access limits your device to a single app and lets you control which features are available. You can turn on Guided Access when you let a child use your device, or when accidental gestures might distract you.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The main draw is that it allows you to lock down your device by allowing only a single application to run. This means that without the passcode (or your touch/face ID), people cannot navigate away from where you enabled Guided Access. You also have the ability to disable regions of the screen and various device features (e.g., touch, keyboard, buttons, motion). It&amp;rsquo;s worth noting that banner notifications no longer show up while in a session.&lt;/p&gt;
+
+&lt;p&gt;You can enter a Guided Access session with a triple-click of the side/home button, and you exit with a double-click (if you have touch/face ID enabled). No need for the passcode if it is you trying to exit.&lt;/p&gt;
+
+&lt;h1&gt;Where to use Guided Access?&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve outlined some use cases here, but I&amp;rsquo;m certain that there are other creative uses that I&amp;rsquo;m missing.&lt;/p&gt;
+
+&lt;h2&gt;When handing your device over&lt;/h2&gt;
+
+&lt;p&gt;For those with children, this is a great feature to leverage when you hand your child your device. You can lock down the device to the point where you don&amp;rsquo;t have to fear them getting into things they shouldn&amp;rsquo;t. You can also set time limits if needed so that a passcode pops up, ending their fun.&lt;/p&gt;
+
+&lt;p&gt;In a similar capacity to using it with children, this feature is useful when handing your phone to another person to show them something specific on your device. For example, you can enable a session and disable the touch feature so they can only &lt;em&gt;look&lt;/em&gt; at what you have on the screen. There is also no chance of embarrassment/privacy concerns as banner notifications don&amp;rsquo;t show up when you are in a session.&lt;/p&gt;
+
+&lt;p&gt;In situations when you are using a device for surveys or as a kiosk to complete forms, Guided Access would work well. As a side note, there is a better way to handle this using the &lt;a href="https://support.apple.com/en-ca/guide/apple-configurator-2/cadbf9c172/mac"&gt;Single App Mode via the Apple Configurator&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;When gaming&lt;/h2&gt;
+
+&lt;p&gt;iOS doesn&amp;rsquo;t have a &lt;em&gt;gaming mode&lt;/em&gt;, unlike some Android phones. This would be a mode that disables notifications and some touch gestures. Well, Guided Access on iOS is pretty much that without being labelled as such. &lt;a href="https://www.reddit.com/r/ios/comments/jh8co3/pro_tip_if_you_turn_on_guided_access_gaming_gets"&gt;This Reddit post&lt;/a&gt; does a great job outlining the benefits of gaming in a Guided Access session. TL;DR:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No notifications.&lt;/li&gt;
+&lt;li&gt;No accidental swipe gestures opening the notifications or control center.&lt;/li&gt;
+&lt;li&gt;No home bar indicator if you don&amp;rsquo;t have a home button.&lt;/li&gt;
+&lt;li&gt;No redirection if you touch an ad.&lt;/li&gt;
+&lt;li&gt;No accidental &lt;em&gt;Back Tap&lt;/em&gt; (if you have them set up).&lt;/li&gt;
+&lt;li&gt;Change/disable Auto-Lock&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I would like to add that you can still get notifications on your Apple Watch even when in a Guided Access session.&lt;/p&gt;
+
+&lt;p&gt;You can automate some of this if you plan to always play certain games in Guided Access by using an iOS Shortcut. You would create an &lt;em&gt;Automation&lt;/em&gt; that, when your game application, would start the Guided Access session automatically.&lt;/p&gt;
+
+&lt;h1&gt;Tl;DR&lt;/h1&gt;
+
+&lt;p&gt;Guided Access is powerful and quick to enable/disable. It can really help when you have to hand your device over to someone without fearing what they might get into. As mobile devices are nearly full-fledged gaming devices as well, the usage in a gaming scenario can also prove useful.&lt;/p&gt;
+
+&lt;p&gt;Did you know about this iOS feature? Have you used it before, and if so in what capacity?&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2020-09-28T16:45:16-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -128,7 +188,7 @@
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -272,7 +332,7 @@
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -309,7 +369,7 @@
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -399,7 +459,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -517,7 +577,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -608,7 +668,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -658,7 +718,7 @@
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -709,7 +769,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -864,7 +924,7 @@ class variables: @@logger
     <title>Consolidating Notion Projects into notion-toolbox</title>
     <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
     <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
+    <updated>2020-09-28T16:49:57-04:00</updated>
     <published>2019-12-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -913,31 +973,6 @@ class variables: @@logger
 &lt;/ul&gt;
 
 &lt;p&gt;I look forward to making more Notion tools in 2020.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Learn More About Yourself Using Personality Types</title>
-    <link rel="alternate" href="https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/"/>
-    <id>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</id>
-    <updated>2020-09-28T10:27:01-04:00</updated>
-    <published>2019-11-29T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">I want to present well-known tests that you can take to learn more about yourself from a personality perspective. For one hour of your time, you'll likely come away with a renewed and deeper understanding of who you are.</description>
-    <content type="html">&lt;p&gt;I am a firm believer that a comprehensive understanding of one&amp;rsquo;s true inner-self can only lead to better growth and relationships. We&amp;rsquo;re all uniquely different in our own ways, although there are sets of archetypes that we can closely associate with.&lt;/p&gt;
-
-&lt;h1&gt;Tests&lt;/h1&gt;
-
-&lt;p&gt;From what I&amp;rsquo;ve seen, the &lt;a href="https://www.myersbriggs.org/"&gt;Myers Briggs Type&lt;/a&gt; and &lt;a href="https://www.enneagraminstitute.com/"&gt;Enneagram Type&lt;/a&gt; are the leaders in personality archetypes. The differences between these tests are out of the scope of this post. These are established institutions and you can pay for a complete test, although there are free alternatives, such as &lt;a href="https://www.16personalities.com/"&gt;16Personalities&lt;/a&gt; and &lt;a href="https://www.9types.com/"&gt;9Types&lt;/a&gt; respectively. The results from these tests are often distilled down into a digestible format, however, large bodies of material do exist for each type.&lt;/p&gt;
-
-&lt;p&gt;It is likely that you already have a good idea of your underlying personality and some of the inner mechanisms that propel you forward. I would argue that you will still uncover something about yourself if you have not taken these two tests yet. There may be some deeper insights that will resonate with you. It is worth noting that the results shouldn&amp;rsquo;t be taken 100% as truth, but nonetheless it&amp;rsquo;s still worthwhile to know more about yourself.&lt;/p&gt;
-
-&lt;h1&gt;Benefits&lt;/h1&gt;
-
-&lt;p&gt;With the results in hand, you can uncover and understand some of the inner-workings that make you tick. I personally found the information useful and insightful as it reaffirmed certain beliefs and values that I hold. I was pleased to see sections dedicated to relationships with other types, as well as personal growth.&lt;/p&gt;
-
-&lt;p&gt;An additional benefit is that you&amp;rsquo;ll be able to share your type with others (e.g., partner, boss, co-worker, friend), giving them a deeper understanding of &lt;em&gt;who you are&lt;/em&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>

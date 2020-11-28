@@ -2,16 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-10-30T20:00:00-04:00</updated>
+  <updated>2020-11-27T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Custom Notion iOS Widget</title>
+    <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
+    <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
+    <updated>2020-11-27T22:28:37-05:00</updated>
+    <published>2020-11-27T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Notion has recently released iOS widgets, however, they are limited in functionality. In this article, I present my custom Notion iOS widget that has a unique set of features. This widget is built using iOS Shortcuts, the Scriptable application, and a notion-py server.</description>
+    <content type="html">&lt;h1&gt;The Offical Notion Widget&lt;/h1&gt;
+
+&lt;p&gt;On &lt;a href="https://www.notion.so/What-s-New-157765353f2c4705bd45474e5ba8b46c#a2dc9af353a746cabaf436fdfaeca4a7"&gt;November 22 of 2020, Notion released their iOS widgets&lt;/a&gt;. This was a great step forward for the &lt;a href="https://apps.apple.com/app/notion-notes-tasks-wikis/id1232780281"&gt;Notion iOS application&lt;/a&gt; as iOS 14 had just released support for widgets in September.&lt;/p&gt;
+
+&lt;p&gt;They offered the following three widgets (as quoted from their widget descriptions):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Page: Get quick access to one of your Notion pages&lt;/li&gt;
+&lt;li&gt;Favorites: Get quick access to your Notion favorites&lt;/li&gt;
+&lt;li&gt;Recents: Get quick access to recently viewed pages in Notion&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;My Unofficial Notion Widget&lt;/h1&gt;
+
+&lt;p&gt;I&amp;rsquo;ve been working on my own custom Notion iOS widget since October before it was known that official widgets were coming out. I was pleasantly surprised that their widgets haven&amp;rsquo;t made my custom widget obsolete, as the functionality is unique.&lt;/p&gt;
+
+&lt;p&gt;The following video provides a demo of my widget in action, as well as explaining a bit about how it was made.&lt;/p&gt;
+
+&lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/atq6u7Le1JE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The following technologies were used to make this all possible:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;API server using &lt;a href="https://github.com/jamalex/notion-py"&gt;&lt;code&gt;notion-py&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://support.apple.com/en-ca/guide/shortcuts/welcome/ios"&gt;iOS Shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://scriptable.app/"&gt;Scriptable&lt;/a&gt; iOS application&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are more interested in the technicals or would like to set up your own widget, you can look at the &lt;a href="https://github.com/kevinjalbert/notion-toolbox/tree/master/ios_widget"&gt;&lt;code&gt;ios_widget&lt;/code&gt; tool&lt;/a&gt; within my &lt;a href="https://github.com/kevinjalbert/notion-toolbox"&gt;&lt;code&gt;notion-toolbox&lt;/code&gt; GitHub Repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s worth noting that there are plenty of rough edges in this implementation as of its initial release, and it does require a lot of setup investment. In addition, if/when Notion decides to up their widget game, my custom solution might become obsolete. There are also concerns surrounding the upcoming offical Notion API, as I&amp;rsquo;m currently using the unofficial one (which can, in theory, break without notice). I&amp;rsquo;ll be curious how I can adapt my widget to use the official API in the future.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2020-10-31T20:58:26-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -71,7 +114,7 @@
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -188,7 +231,7 @@
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -332,7 +375,7 @@
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -369,7 +412,7 @@
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -459,7 +502,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -577,7 +620,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -668,7 +711,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -718,7 +761,7 @@
     <title>Moving from RSS Feeds to Email</title>
     <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
     <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-02-28T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -769,7 +812,7 @@
     <title>Testing the Use of Rails Caching</title>
     <link rel="alternate" href="https://kevinjalbert.com/testing-the-use-of-rails-caching/"/>
     <id>https://kevinjalbert.com/testing-the-use-of-rails-caching/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
+    <updated>2020-10-31T21:00:13-04:00</updated>
     <published>2020-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -918,61 +961,6 @@ class variables: @@logger
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note that this approach worked for me, however, there are many different ways to test Rails caching. For example, this &lt;a href="https://stackoverflow.com/a/9603083/583592"&gt;StackOverflow answer&lt;/a&gt; suggests making an &lt;code&gt;InspectableMemoryStore&lt;/code&gt; which subclasses &lt;code&gt;ActiveSupport::Cache::MemoryStore&lt;/code&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Consolidating Notion Projects into notion-toolbox</title>
-    <link rel="alternate" href="https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/"/>
-    <id>https://kevinjalbert.com/consolidating-notion-projects-into-notion-toolbox/</id>
-    <updated>2020-09-28T16:49:57-04:00</updated>
-    <published>2019-12-27T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">I made the decision to consolidate all my Notion related projects into a single repository. The goal is to increase cohesion to allow the tools to better interact with each other. Read more about how I did it and why.</description>
-    <content type="html">&lt;p&gt;For a good part of 2019, I focused heavily on my &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion[Referral]&lt;/a&gt; setup. I personally feel that this was time well invested, akin to a craftsman refining his tools.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I created a &lt;a href="https://kevinjalbert.com/my-weekly-notion-setup/"&gt;specific weekly/daily template&lt;/a&gt; to satisfy some of my needs and give structure to Notion.&lt;/li&gt;
-&lt;li&gt;I created an integration with &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; called &lt;a href="https://github.com/kevinjalbert/alfred-notion"&gt;&lt;code&gt;alfred-notion&lt;/code&gt;&lt;/a&gt; (&lt;a href="https://kevinjalbert.com/integrating-notion-with-alfred/"&gt;blog post&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;I created a server web application called &lt;a href="https://github.com/kevinjalbert/notion-heroku"&gt;&lt;code&gt;notion-heroku&lt;/code&gt;&lt;/a&gt; that interacts with &lt;a href="https://ifttt.com/"&gt;IFTTT&lt;/a&gt; and Google Assistant (&lt;a href="https://kevinjalbert.com/integrating-notion-with-google-assistant/"&gt;blog post&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;I created a shared repository called &lt;a href="https://github.com/kevinjalbert/notion-scripts"&gt;&lt;code&gt;notion-scripts&lt;/code&gt;&lt;/a&gt; to further help the development of my tooling for Notion (&lt;a href="https://kevinjalbert.com/introducing-notion-scripts/"&gt;blog post&lt;/a&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I recently made the decision to consolidate all my Notion related projects into a single repository. The goal is to increase cohesion to allow the tools to better interact with each other. It also puts everything in one place instead of spreading it out over multiple repositories. This approach does increase the size of the repository and the deployment/usage complexity for certain tools, but overall I feel that this decision will result in an easier way to use and develop with the Notion tools found there.&lt;/p&gt;
-
-&lt;h1&gt;The Great Merge&lt;/h1&gt;
-
-&lt;p&gt;The great merge happened on December 27, 2019. On GitHub, &lt;code&gt;notion-heroku&lt;/code&gt; and &lt;code&gt;notion-scripts&lt;/code&gt; were merged into &lt;code&gt;alfred-notion&lt;/code&gt;. I decided for &lt;code&gt;alfred-notion&lt;/code&gt; to be the main repository as it had the most &lt;em&gt;stars&lt;/em&gt; on GitHub and was the longest-tenured repository I have for Notion tools. I did rename the repository to &lt;a href="https://github.com/kevinjalbert/notion-toolbox"&gt;&lt;code&gt;notion-toolbox&lt;/code&gt;&lt;/a&gt; to better represent the mission and contents of this project. Fortunately, GitHub automatically handles the redirects from &lt;code&gt;alfred-notion&lt;/code&gt; to &lt;code&gt;notion-toolbox&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I was able to retain the commit history of each project by following the approach mentioned in this article on &lt;em&gt;&lt;a href="https://medium.com/altcampus/how-to-merge-two-or-multiple-git-repositories-into-one-9f8a5209913f"&gt;How to merge two or multiple git repositories into one&lt;/a&gt;&lt;/em&gt;. This approach worked flawlessly for me, and was rather straightforward. The only thing I had to do was move each project&amp;rsquo;s contents into subdirectories.&lt;/p&gt;
-
-&lt;p&gt;As for the merged repositories, I archived them following my approach listed in &lt;em&gt;&lt;a href="https://kevinjalbert.com/archive-unused-repositories/"&gt;Archive Unused Repositories&lt;/a&gt;&lt;/em&gt; that I blogged about last year.&lt;/p&gt;
-
-&lt;p&gt;The only issue that I&amp;rsquo;ve hit right now is the &lt;em&gt;server&lt;/em&gt; (formerly &lt;code&gt;notion-heroku&lt;/code&gt;) &lt;a href="https://devcenter.heroku.com/articles/procfile#procfile-naming-and-location"&gt;expects certain files in the root directory to be deployable to Heroku&lt;/a&gt;. I&amp;rsquo;ve temporarily restructured the repository so that it works, but it isn&amp;rsquo;t ideal as the tool itself is bleeding outside of its sub-directory. A better solution will be found in the future.&lt;/p&gt;
-
-&lt;h1&gt;The tools in &lt;code&gt;notion-toolbox&lt;/code&gt;&lt;/h1&gt;
-
-&lt;p&gt;This is a collection of &lt;a href="https://www.notion.so/"&gt;Notion&lt;/a&gt; tools that work in tandem together. All of these tools take advantage of a &lt;a href="https://kevinjalbert.com/my-weekly-notion-setup/"&gt;specific weekly/daily template&lt;/a&gt; that integrates with various tools and solutions present in this repository.&lt;/p&gt;
-
-&lt;p&gt;As of the publish date of this post, the following tools are available. Each tool has a README file present in its corresponding sub-directory.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/kevinjalbert/notion-toolbox/tree/master/alfred"&gt;Alfred&lt;/a&gt; workflow
-
-&lt;ul&gt;
-&lt;li&gt;Enables a handful of ways to interact with the template using shortcuts&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/kevinjalbert/notion-toolbox/tree/master/server"&gt;Server&lt;/a&gt; application
-
-&lt;ul&gt;
-&lt;li&gt;Enables an online (and backgrounded) interface to interact with the template&lt;/li&gt;
-&lt;li&gt;Useful to connect with webhooks (e.g., &lt;a href="https://ifttt.com/maker_webhooks"&gt;IFTTT&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Opens integrations with Google Assistant&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I look forward to making more Notion tools in 2020.&lt;/p&gt;
 </content>
   </entry>
 </feed>

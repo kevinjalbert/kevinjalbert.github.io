@@ -1,0 +1,14 @@
+---
+title: "Tags"
+
+description: "Tags about what I've written on"
+---
+<h2 class="tags__title">Tags</b></h2>
+
+<div class="article-teaser__separator"></div>
+
+<% tag_groups(page_articles).each do |tag| %>
+  <ul>
+    <li><%= link_to("#{tag.first} (#{tag.last})", "tags/#{tag.first.gsub(" ", "-")}") %></li>
+  </ul>
+<% end%>

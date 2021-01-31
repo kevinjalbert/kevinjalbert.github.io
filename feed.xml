@@ -2,16 +2,111 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2020-12-21T19:00:00-05:00</updated>
+  <updated>2021-01-29T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Reflecting on Five Years of Monthly Blogging</title>
+    <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
+    <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
+    <updated>2021-01-30T23:02:12-05:00</updated>
+    <published>2021-01-29T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">In 2016, I made a New Year's resolution to blog about something of substance every month. In this post, I'll reflect on this five-year journey.</description>
+    <content type="html">&lt;p&gt;Just over five years ago, I decided to dive into the technical blogging sphere. Since then, I have consistently produced a blog post every month. There are a couple of reasons why I blog and why I wanted to keep the monthly cadence:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Sharing Knowledge&lt;/li&gt;
+&lt;li&gt;Improving my Writing&lt;/li&gt;
+&lt;li&gt;Online Presence&lt;/li&gt;
+&lt;li&gt;Recognition&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Over the last five years, I&amp;rsquo;ve:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Published 63 blog posts.&lt;/li&gt;
+&lt;li&gt;Wrote 53,017 words (includes a bit of markup here and there).&lt;/li&gt;
+&lt;li&gt;Created content that would take 263 minutes to read (assuming 180 words per minute).&lt;/li&gt;
+&lt;li&gt;Reached 78,121 people with my writing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this post, I want to reflect on this journey &amp;ndash; goals, challenges, rewards.&lt;/p&gt;
+
+&lt;h1&gt;Challenges with Blogging&lt;/h1&gt;
+
+&lt;h2&gt;Time Commitment&lt;/h2&gt;
+
+&lt;p&gt;This is my biggest struggle with blogging. I procrastinate until the last possible moment and usually post within the last few days of the month.&lt;/p&gt;
+
+&lt;p&gt;The time commitment for each blog post varies depending on its content. The technical ones normally require a lot of upfront work (building the project and writing the code), while the non-technical posts are typically shorter to write.&lt;/p&gt;
+
+&lt;p&gt;Overall, I try to work on the posts in the evenings, but it sometimes bleeds into the weekend. Having a family makes it a bit challenging, but not impossible as my wife is a rockstar. A post can be &lt;em&gt;chipped away&lt;/em&gt; at instead of just writing the whole thing in one go, which is something I want to do more consistently.&lt;/p&gt;
+
+&lt;h2&gt;Blogging Platform&lt;/h2&gt;
+
+&lt;p&gt;I built my blog using &lt;a href="https://middlemanapp.com/"&gt;Middleman&lt;/a&gt;. If you&amp;rsquo;re interested, you can look at the &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io"&gt;GitHub repository for the website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Early on, I put a decent amount of work into making the site. It still serves its purpose but isn&amp;rsquo;t aging well. I almost always hit some local development issue when I spin it up as the technology stack/dependencies are old.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m torn &amp;ndash; I want a simple platform for writing, but I want customization capabilities. I&amp;rsquo;ll likely move to a new platform in the future, but it&amp;rsquo;s such a daunting task. I&amp;rsquo;ll also plan to investigate using an off-the-shelf solution for blogging. The idea is to spend less time on the platform and more time on creating content.&lt;/p&gt;
+
+&lt;h2&gt;Driving Traffic&lt;/h2&gt;
+
+&lt;p&gt;Getting traffic to my website is something I don&amp;rsquo;t really enjoy, and for the most part, I really depend on organic traffic and just the general SEO (Search Engine Optimization) that my website provides.&lt;/p&gt;
+
+&lt;p&gt;At one point, I decided to add a newsletter (which has just surpassed 100 subscribers). I&amp;rsquo;m currently using &lt;a href="https://mailchimp.com/"&gt;Mailchimp&lt;/a&gt; as it has an option to consume an RSS feed that pushes emails out to subscribers.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve also done some posting here and there on &lt;a href="https://www.reddit.com/"&gt;Reddit&lt;/a&gt;. When the subreddit matches the blog post topic it can drive some traffic. I saw this best when I was writing Notion related posts.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve cross-posted a few times on &lt;a href="https://dev.to/kevinjalbert"&gt;Dev.to&lt;/a&gt; and &lt;a href="https://medium.com/@kevinjalbert"&gt;Medium&lt;/a&gt;, but haven&amp;rsquo;t done so in a while. I&amp;rsquo;m still not 100% sure about the measurable benefits of cross-posting and whether it&amp;rsquo;s worth the time.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve occasionally promoted my posts on social media. Similar to the above point, do the benefits outweigh the time invested. I have seen some traction when tagging companies or topics to widen the reach.&lt;/p&gt;
+
+&lt;h1&gt;Rewards of Blogging&lt;/h1&gt;
+
+&lt;h2&gt;Reaching Many&lt;/h2&gt;
+
+&lt;p&gt;The following image is a snapshot of the five years in Google Analytics. I take pride that so many people have seen my content. The growth is a nice nod as well in keeping the monthly cadence up.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Blog stats" width="1912" height="1318" src="/images/2021-01-30-reflecting-on-five-years-of-monthly-blogging/blog-stats.png" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Following Referrals&lt;/h2&gt;
+
+&lt;p&gt;It is nice to see &lt;em&gt;where&lt;/em&gt; my content is reaching, and the following image shows how users are finding my content from a referral perspective. When drilling into specifics, it&amp;rsquo;s rewarding to see one of my blog posts ending up in a &lt;a href="https://github.com/chatwoot/chatwoot/pull/1134#issue-466028793"&gt;GitHub issue&lt;/a&gt;, &lt;a href="https://stackoverflow.com/questions/7298088/def-block-in-rake-task"&gt;StackOverflow answer&lt;/a&gt;, or &lt;a href="https://tshaped.io/zapier-and-notion/"&gt;blog post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Blog referrals" width="1958" height="1728" src="/images/2021-01-30-reflecting-on-five-years-of-monthly-blogging/blog-referrals.png" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Ability to Refer to own Posts&lt;/h2&gt;
+
+&lt;p&gt;At times during my work, I am able to refer a colleague to a post of my own. I&amp;rsquo;ve had colleagues mention that they had found my posts when searching for a topic as well. I&amp;rsquo;ve even caught myself stumbling upon my own post when Googling.&lt;/p&gt;
+
+&lt;p&gt;By writing down some information as a post, I don&amp;rsquo;t have to reiterate it again if it is relevant &amp;ndash; I can simply link to it.&lt;/p&gt;
+
+&lt;h1&gt;The Future&lt;/h1&gt;
+
+&lt;p&gt;I see myself continuing with my monthly blog post for the foreseeable future. It&amp;rsquo;s worth my time investment.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve recently made posts that have a YouTube video embedded in them. Normally these are for demos from a side project. I&amp;rsquo;ll likely continue these tactics, and experiment how I can incorporate them into a variety of other post topics. &lt;a href="https://www.youtube.com/channel/UCFWPd8rky_tD4B4Qqq99i4Q"&gt;My YouTube channel&lt;/a&gt; is very much in its infancy, and the quality of the videos could use some improvement.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Youtube stats" width="1384" height="874" src="/images/2021-01-30-reflecting-on-five-years-of-monthly-blogging/youtube-stats.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;As mentioned in the challenges section, I have dabbled in other services and platforms to broadcast my content. I would like to further explore this as it has the potential to drive more traffic to my content and improve the SEO.&lt;/p&gt;
+
+&lt;p&gt;My current blogging set up is aging, and I would really like to improve it. I plan to look into using a more modern &lt;a href="https://jamstack.org/"&gt;Jamstack&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thank you for reading my content over the past five years. I look forward to creating new content that sparks interest.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2020-12-22T21:20:45-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -67,7 +162,7 @@
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -110,7 +205,7 @@
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -170,7 +265,7 @@
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -287,7 +382,7 @@
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -431,7 +526,7 @@
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -468,7 +563,7 @@
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -558,7 +653,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -676,7 +771,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -767,7 +862,7 @@
     <title>Improve Your Home Office</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
     <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
+    <updated>2021-01-13T11:50:29-05:00</updated>
     <published>2020-03-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -811,57 +906,6 @@
 &lt;li&gt;&lt;a href="https://thewirecutter.com/blog/productivity-home-office-upgrades/"&gt;4 Small Home Office Upgrades That Can Give a Big Boost to Your Productivity&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://thewirecutter.com/lists/the-essential-ergonomic-gear-for-your-home-office/"&gt;The Essential Ergonomic Gear for Your Home Office&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Moving from RSS Feeds to Email</title>
-    <link rel="alternate" href="https://kevinjalbert.com/moving-from-rss-to-email/"/>
-    <id>https://kevinjalbert.com/moving-from-rss-to-email/</id>
-    <updated>2020-11-28T12:20:23-05:00</updated>
-    <published>2020-02-28T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read about how I moved away from RSS Feeds to emails to consume content. I take advantage of newsletters and IFTTT to ensure that everything moved over to email.</description>
-    <content type="html">&lt;p&gt;I&amp;rsquo;ve briefly mentioned using RSS to email in &lt;a href="/consuming-content-and-managing-the-flood/"&gt;Consuming Content and Managing the Flood&lt;/a&gt;. In this post, I want to further describe this approach and how I&amp;rsquo;ve effectively moved away from RSS Feeds towards emails.&lt;/p&gt;
-
-&lt;h1&gt;RSS Readers&lt;/h1&gt;
-
-&lt;p&gt;Back in the day, Google Reader was one of the most popular RSS reading services. I ended up using it and thoroughly enjoyed it. I was heavily invested in using RSS feeds and piped all the content I wanted through it.&lt;/p&gt;
-
-&lt;p&gt;Eventually, Google Reader was shut down and I made the move to &lt;a href="https://feedly.com"&gt;Feedly&lt;/a&gt;. I was not 100% happy with that service and decided to try a new approach with respect to consuming content from sites with RSS feeds.&lt;/p&gt;
-
-&lt;h1&gt;RSS Reader to Email (via Newsletters)&lt;/h1&gt;
-
-&lt;p&gt;My goal was to see how I could achieve the same content consumption but without using RSS readers. My idea was to see if I could consolidate the services that I used daily.&lt;/p&gt;
-
-&lt;p&gt;I noticed that a lot of the content I was following via RSS had email newsletters. Newsletters worked out well for me, as they contained generally the same information. This also fit in with the whole &lt;em&gt;Inbox Zero&lt;/em&gt; movement, as I treated my email inbox as a list of &lt;em&gt;actionable items&lt;/em&gt; that I needed to address. I could work through these emails at my own pace, and if needed I could defer an item by pushing it into &lt;a href="https://www.instapaper.com"&gt;Instapaper&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Unfortunately, there were still some RSS feeds that didn&amp;rsquo;t have an email newsletter option. In most cases, these feeds were for different content (e.g., screencasts, comics, music).&lt;/p&gt;
-
-&lt;h1&gt;RSS Reader to Email (via IFTTT)&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;ve been a big fan of &lt;a href="https://ifttt.com/"&gt;IFTTT&lt;/a&gt; since it came out. Once again, I reached for this tool to help me with migrating the remaining RSS feeds to email.&lt;/p&gt;
-
-&lt;p&gt;The approach is quite simple as we&amp;rsquo;re taking advantage of the &lt;a href="https://ifttt.com/feed"&gt;New Feed Item Trigger from the RSS Feed Service&lt;/a&gt; and the &lt;a href="https://ifttt.com/email"&gt;Send me an email using the Email Service&lt;/a&gt;. When setting up a new applet, you just have to put in the RSS feed URL and that&amp;rsquo;s pretty much it.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Ifttt applets" width="1978" height="1038" src="/images/2020-02-29-moving-from-rss-to-email/ifttt-applets.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;The applets check and execute within seconds of when a new RSS item arrives. This results in rich-text emails being sent containing the content of the feed item.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Email" width="1484" height="814" src="/images/2020-02-29-moving-from-rss-to-email/email.png" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Alternatives to IFTTT&lt;/h2&gt;
-
-&lt;p&gt;I did find other alternatives to IFTTT that would accomplish the same end goal of getting RSS feed items into my email inbox.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://zapier.com/"&gt;Zapier&lt;/a&gt; - you will have to pay if you want more tasks (&amp;gt; 100) and zaps (&amp;gt; 5).&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://blogtrottr.com/"&gt;Blogtrottr&lt;/a&gt; - has ads incorporated in the emails unless you pay.&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://feedrabbit.com/"&gt;Feedrabbit&lt;/a&gt; - only allowed 10 subscriptions before you have to pay.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Overall, I found IFTTT to be a scalable and free solution that fits my needs.&lt;/p&gt;
 </content>
   </entry>
 </feed>

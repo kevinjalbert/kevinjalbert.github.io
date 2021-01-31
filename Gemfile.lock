@@ -195,4 +195,4 @@ DEPENDENCIES
   redcarpet (~> 3.3.3)
 
 BUNDLED WITH
-   1.16.0
+   2.2.7

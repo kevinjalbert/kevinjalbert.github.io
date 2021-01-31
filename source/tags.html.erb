@@ -9,6 +9,6 @@ description: "Tags about what I've written on"
 
 <% tag_groups(page_articles).each do |tag| %>
   <ul>
-    <li><%= link_to("#{tag.first} (#{tag.last})", "tags/#{tag.first.gsub(" ", "-")}") %></li>
+    <li><%= link_to("#{tag.first} (#{tag.last})", "/tags/#{tag.first.gsub(" ", "-")}") %></li>
   </ul>
 <% end%>

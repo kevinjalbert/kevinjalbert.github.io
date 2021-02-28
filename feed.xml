@@ -2,16 +2,100 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-01-29T19:00:00-05:00</updated>
+  <updated>2021-02-26T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Wrapping Shell Commands and Keep the Original Name</title>
+    <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
+    <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
+    <updated>2021-02-27T21:35:06-05:00</updated>
+    <published>2021-02-26T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">In this post, I present two ways to wrap a shell command and keep its original name. This allows you to run additional statements before and after the execution of a command that you don't own.</description>
+    <content type="html">&lt;p&gt;I wanted to wrap a shell command (that I had no ownership of) so that I could execute additional statements around the original command. In the following sections, I present two scenarios for wrapping shell commands.&lt;/p&gt;
+
+&lt;p&gt;I do want to say there is a possibility that the wrapped command &lt;em&gt;could&lt;/em&gt; potentially cause some issues down the road, however, I have not encountered any as of yet with my limited testing.&lt;/p&gt;
+
+&lt;h1&gt;Wrapping an Executable&lt;/h1&gt;
+
+&lt;p&gt;You can create a new function with the name of the executable that you wish to wrap. This works because the function lookup occurs before the executable lookup on your PATH.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# In .zshrc or .bashrc&lt;/span&gt;
+ping&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"before"&lt;/span&gt;
+
+  /sbin/ping &lt;span class="nv"&gt;$@&lt;/span&gt;
+  &lt;span class="nb"&gt;local &lt;/span&gt;&lt;span class="nv"&gt;exit_code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"after"&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$exit_code&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The function itself uses the original executable (&lt;code&gt;/sbin/ping&lt;/code&gt;) by specifying the full-path along with the original parameters (via &lt;code&gt;$@&lt;/code&gt;). We grab the &lt;em&gt;exit code&lt;/em&gt; (via &lt;code&gt;$?&lt;/code&gt;) and store it to be returned at the ending. This ensures that the new function still operates as it did before.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;❯ ping google.com &lt;span class="nt"&gt;-c&lt;/span&gt; 1
+before
+PING google.com &lt;span class="o"&gt;(&lt;/span&gt;172.217.0.238&lt;span class="o"&gt;)&lt;/span&gt;: 56 data bytes
+64 bytes from 172.217.0.238: &lt;span class="nv"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0 &lt;span class="nv"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;115 &lt;span class="nb"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;25.484 ms
+
+&lt;span class="nt"&gt;---&lt;/span&gt; google.com ping statistics &lt;span class="nt"&gt;---&lt;/span&gt;
+1 packets transmitted, 1 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev &lt;span class="o"&gt;=&lt;/span&gt; 25.484/25.484/25.484/0.000 ms
+after
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can see that that the &lt;code&gt;ping&lt;/code&gt; command still works as expected, but we also now have additional statements around it.&lt;/p&gt;
+
+&lt;h1&gt;Wrapping a Function&lt;/h1&gt;
+
+&lt;p&gt;The approaches for dealing with a function were mostly borrowed from this &lt;a href="https://unix.stackexchange.com/questions/102595/is-there-a-hook-like-system-for-shell/102626#102626"&gt;Unix StackExchange answer&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Not a function I have defined (i.e., defined in a library I sourced)&lt;/span&gt;
+&lt;span class="k"&gt;function &lt;/span&gt;example&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"inside example function (&lt;/span&gt;&lt;span class="nv"&gt;$@&lt;/span&gt;&lt;span class="s2"&gt;)"&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c"&gt;# In .zshrc or .bashrc&lt;/span&gt;
+&lt;span class="nb"&gt;eval &lt;/span&gt;_&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;declare&lt;/span&gt; &lt;span class="nt"&gt;-f&lt;/span&gt; example&lt;span class="si"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+example&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"before function"&lt;/span&gt;
+
+  _example &lt;span class="nv"&gt;$@&lt;/span&gt;
+  &lt;span class="nb"&gt;local &lt;/span&gt;&lt;span class="nv"&gt;exit_code&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"after function"&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;$exit_code&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;eval&lt;/code&gt; is essentially renaming the original function (&lt;code&gt;example&lt;/code&gt;) to have a leading underscore (&lt;code&gt;_example)&lt;/code&gt;. A new function is then defined that overrides &lt;code&gt;example&lt;/code&gt;, and actually uses the original&amp;rsquo;s function (now called &lt;code&gt;_example&lt;/code&gt;). You define additional statements before and after the wrapped function, in a similar fashion to how it was handled with wrapping an executable. The exit code is also preserved from the wrapped function.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;❯ example 5
+before
+inside example &lt;span class="k"&gt;function &lt;/span&gt;5
+after
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One downside to the above approach is that the &lt;em&gt;old&lt;/em&gt; function is still present (&lt;code&gt;_example&lt;/code&gt;). While the following only works in ZSH, it is possible to directly override the original function by using the original&amp;rsquo;s definition when creating the new function. To note, I do find the former approach simpler.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# .zshrc&lt;/span&gt;
+functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
+  (){
+    echo "before"
+
+    '&lt;/span&gt;&lt;span class="nv"&gt;$functions&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;example]&lt;span class="s1"&gt;';
+    } "$@";
+  local exit_code=$?
+
+  echo "after"
+
+  return $exit_code'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+  </entry>
+  <entry>
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -106,7 +190,7 @@
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -162,7 +246,7 @@
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -205,7 +289,7 @@
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -265,7 +349,7 @@
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -382,7 +466,7 @@
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -526,7 +610,7 @@
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -563,7 +647,7 @@
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -653,7 +737,7 @@
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -771,7 +855,7 @@
     <title>Improve Your Home Office - Physical Space</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
+    <updated>2021-01-30T23:06:49-05:00</updated>
     <published>2020-04-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -856,56 +940,6 @@
 &lt;h1&gt;Lay the Foundation&lt;/h1&gt;
 
 &lt;p&gt;Take care to pick the right physical space for your home office as it is the foundation upon which everything else is built. The right desk and chair will have to fit within that space comfortably. You can tailor your space to maximize productivity and comfort.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Improve Your Home Office</title>
-    <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office/"/>
-    <id>https://kevinjalbert.com/improve-your-home-office/</id>
-    <updated>2021-01-30T23:04:30-05:00</updated>
-    <published>2020-03-30T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Due to COVID-19 (Coronavirus), self-isolation brought on a wave of new people working from home, with varying states of home offices. This is the first of a multi-part series on improving your home office. In this part, we focus on evaluating your current setup.</description>
-    <content type="html">&lt;p&gt;At the time of publishing (March 31, 2020), &lt;a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019"&gt;COVID-19 (Coronavirus)&lt;/a&gt; is a global pandemic and affecting much of the world. Most places are practicing social distancing and self-isolation. Some companies have switched to remote work by having their employees work from home during this time. As such, an influx of home office interest (&lt;a href="https://trends.google.com/trends/explore?date=2020-01-01%202020-03-31&amp;amp;q=home%20office,working%20from%20home"&gt;Google Trends shows a huge spike&lt;/a&gt;) has surfaced.&lt;/p&gt;
-
-&lt;p&gt;I am writing a multi-part article on the topic of improving your home office. This first one is to serve as a public service announcement given how many people are working from home due to COVID-19, and that they should evaluate and explore options to improve their setup to make work more effective and ergonomic. Subsequent parts will focus on different aspects:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="/improve-your-home-office-the-physical-space/"&gt;The physical aspect&lt;/a&gt; (e.g., room/space, desk, and chair)&lt;/li&gt;
-&lt;li&gt;&lt;a href="/improve-your-home-office-the-input-output-devices/"&gt;The input/output aspects&lt;/a&gt; (e.g., monitor, keyboard, mouse/trackpad, audio, and video)&lt;/li&gt;
-&lt;li&gt;&lt;a href="/improve-your-home-office-the-miscellaneous-aspects/"&gt;The miscellaneous aspects&lt;/a&gt; (e.g., lighting, organization, climate, and personalizations)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1&gt;Evaluate your Home Office&lt;/h1&gt;
-
-&lt;p&gt;If you are fortunate enough to be able to work from home in these times (or you normally work remotely), you should take a few minutes to evaluate your current setup. Within a typical office, there will be fewer opportunities to modify your workspace to best conform to your specific needs. Changing your work setup can result in productivity gains and added comfort.&lt;/p&gt;
-
-&lt;p&gt;Look at your home office. Are you working at the kitchen table, or maybe from the couch? You might laugh, but in those first few days when people were making the switch to working from home, this might have been their reality. Ideally, you&amp;rsquo;d have a dedicated space for your work with a multitude of ergonomic features.&lt;/p&gt;
-
-&lt;p&gt;Creating an amazing home office can be a time and money sink as there are numerous items and options to furnish your setup. Fortunately, you can &lt;em&gt;chip&lt;/em&gt; away at the setup and slowly make additions over time as needed. Figure out what is causing discomfort and slight changes or upgrades may remedy the problem.&lt;/p&gt;
-
-&lt;h2&gt;Return on Investment&lt;/h2&gt;
-
-&lt;p&gt;You&amp;rsquo;ll want to think of how much the home office and the individual pieces will be used. There&amp;rsquo;s no point in going overboard with something that you would rarely use, in which case a cheaper or alternative solution might be best. With the COVID-19 situation, this warps the &lt;em&gt;how much am I going to use this afterwards&lt;/em&gt; question, just something to keep in mind.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Invest in where you spend your time.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This is advice to avoid wasting resources in improving specific areas of your home office. You can always incrementally improve your office (i.e., improve the weakest, missing, or most used aspects of your space). There will be some items and changes that you can do to your home office that will have huge returns on investment in areas such as comfort, ergonomics, and productivity. Before making changes, be mindful of the return on your investment (i.e., you take a lot of meetings and so you&amp;rsquo;ll gain a lot from a great audio/video setup).&lt;/p&gt;
-
-&lt;h1&gt;Wirecutter is Awesome&lt;/h1&gt;
-
-&lt;p&gt;There are many articles circulating around the Internet on the subject of remote work and home offices. I did find that &lt;a href="https://thewirecutter.com/"&gt;Wirecutter&lt;/a&gt; has several great articles on the subject and they all link to their amazing &lt;em&gt;&amp;ldquo;The Best xxxx&amp;rdquo;&lt;/em&gt; reviews. For some quick wins, I highly recommend skimming the following:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/lists/how-to-create-a-full-time-work-space-at-home/"&gt;How to Create a Full-Time Work Space at Home&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/blog/work-from-home-starter-kit/"&gt;The WFH Starter Kit: What Companies Should Provide You With When You Work From Home&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/blog/productivity-home-office-upgrades/"&gt;4 Small Home Office Upgrades That Can Give a Big Boost to Your Productivity&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/lists/the-essential-ergonomic-gear-for-your-home-office/"&gt;The Essential Ergonomic Gear for Your Home Office&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

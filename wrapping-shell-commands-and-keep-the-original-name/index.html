@@ -1,0 +1,92 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <script>addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});</script> <link rel=canonical href=https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/> <title>Wrapping Shell Commands and Keep the Original Name | Kevin Jalbert</title> <meta name=description content="In this post, I present two ways to wrap a shell command and keep its original name. This allows you to run additional statements before and after the execution of a command that you don't own."/> <meta name=keywords content="tools, shell, terminal"/> <meta name=datePublished content="2021-02-27 00:00:00 UTC"/> <meta property="og:article:published_time" content="2021-02-27 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2021-02-27 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/> <meta property="og:url" content="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="In this post, I present two ways to wrap a shell command and keep its original name. This allows you to run additional statements before and after the execution of a command that you don't own."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2021-02-27-wrapping-shell-commands-and-keep-the-original-name/shell-book.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Wrapping Shell Commands and Keep the Original Name"/> <meta property="og:description" content="In this post, I present two ways to wrap a shell command and keep its original name. This allows you to run additional statements before and after the execution of a command that you don't own."/> <meta property="og:image" content="https://kevinjalbert.com/images/2021-02-27-wrapping-shell-commands-and-keep-the-original-name/shell-book.jpg"/> <meta property="og:title" content="Wrapping Shell Commands and Keep the Original Name"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Wrapping Shell Commands and Keep the Original Name",
+       "keywords": "tools, shell, terminal",
+       "url": "https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/",
+       "datePublished": "2021-02-27 00:00:00 UTC",
+       "dateModified": "2021-02-27 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> <script async src="/vendor/analytics/index.js"></script> <script async src="https://www.google-analytics.com/analytics.js"></script> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> <a href="/uses/">Uses</a> <a href="https://github.com/kevinjalbert/ama/blob/master/README.md">AMA</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Wrapping Shell Commands and Keep the Original Name</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">February 27, 2021 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>1 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/shell/">shell</a> <a href="/tags/terminal/">terminal</a> <a href="/tags/tools/">tools</a> </div> </div> </div> <img src=/images/2021-02-27-wrapping-shell-commands-and-keep-the-original-name/shell-book.jpg> <i><p><a href="https://flickr.com/photos/30403793@N03/9664491018" title=Shell>Shell</a> by <a href="https://flickr.com/people/30403793@N03">snap713</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">CC BY-NC-ND</a></p> </i> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> If you enjoy this, consider subscribing to my newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <p style="text-align: center">I aim to publish one article a month</p> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <p>I wanted to wrap a shell command (that I had no ownership of) so that I could execute additional statements around the original command. In the following sections, I present two scenarios for wrapping shell commands.</p> <p>I do want to say there is a possibility that the wrapped command <em>could</em> potentially cause some issues down the road, however, I have not encountered any as of yet with my limited testing.</p> <h1>Wrapping an Executable</h1> <p>You can create a new function with the name of the executable that you wish to wrap. This works because the function lookup occurs before the executable lookup on your PATH.</p> <div class=highlight><pre class="highlight shell"><code><span class="c"># In .zshrc or .bashrc</span>
+ping<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">"before"</span>
+
+  /sbin/ping <span class="nv">$@</span>
+  <span class="nb">local </span><span class="nv">exit_code</span><span class="o">=</span><span class="nv">$?</span>
+
+  <span class="nb">echo</span> <span class="s2">"after"</span>
+
+  <span class="k">return</span> <span class="nv">$exit_code</span>
+<span class="o">}</span>
+</code></pre></div> <p>The function itself uses the original executable (<code>/sbin/ping</code>) by specifying the full-path along with the original parameters (via <code>$@</code>). We grab the <em>exit code</em> (via <code>$?</code>) and store it to be returned at the ending. This ensures that the new function still operates as it did before.</p> <div class=highlight><pre class="highlight shell"><code>❯ ping google.com <span class="nt">-c</span> 1
+before
+PING google.com <span class="o">(</span>172.217.0.238<span class="o">)</span>: 56 data bytes
+64 bytes from 172.217.0.238: <span class="nv">icmp_seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>115 <span class="nb">time</span><span class="o">=</span>25.484 ms
+
+<span class="nt">---</span> google.com ping statistics <span class="nt">---</span>
+1 packets transmitted, 1 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev <span class="o">=</span> 25.484/25.484/25.484/0.000 ms
+after
+</code></pre></div> <p>We can see that that the <code>ping</code> command still works as expected, but we also now have additional statements around it.</p> <h1>Wrapping a Function</h1> <p>The approaches for dealing with a function were mostly borrowed from this <a href="https://unix.stackexchange.com/questions/102595/is-there-a-hook-like-system-for-shell/102626#102626">Unix StackExchange answer</a>.</p> <div class=highlight><pre class="highlight shell"><code><span class="c"># Not a function I have defined (i.e., defined in a library I sourced)</span>
+<span class="k">function </span>example<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">"inside example function (</span><span class="nv">$@</span><span class="s2">)"</span>
+<span class="o">}</span>
+
+<span class="c"># In .zshrc or .bashrc</span>
+<span class="nb">eval </span>_<span class="s2">"</span><span class="si">$(</span><span class="nb">declare</span> <span class="nt">-f</span> example<span class="si">)</span><span class="s2">"</span>
+example<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">"before function"</span>
+
+  _example <span class="nv">$@</span>
+  <span class="nb">local </span><span class="nv">exit_code</span><span class="o">=</span><span class="nv">$?</span>
+
+  <span class="nb">echo</span> <span class="s2">"after function"</span>
+
+  <span class="k">return</span> <span class="nv">$exit_code</span>
+<span class="o">}</span>
+</code></pre></div> <p>The <code>eval</code> is essentially renaming the original function (<code>example</code>) to have a leading underscore (<code>_example)</code>. A new function is then defined that overrides <code>example</code>, and actually uses the original&rsquo;s function (now called <code>_example</code>). You define additional statements before and after the wrapped function, in a similar fashion to how it was handled with wrapping an executable. The exit code is also preserved from the wrapped function.</p> <div class=highlight><pre class="highlight shell"><code>❯ example 5
+before
+inside example <span class="k">function </span>5
+after
+</code></pre></div> <p>One downside to the above approach is that the <em>old</em> function is still present (<code>_example</code>). While the following only works in ZSH, it is possible to directly override the original function by using the original&rsquo;s definition when creating the new function. To note, I do find the former approach simpler.</p> <div class=highlight><pre class="highlight shell"><code><span class="c"># .zshrc</span>
+functions[example]<span class="o">=</span><span class="s1">'
+  (){
+    echo "before"
+
+    '</span><span class="nv">$functions</span><span class="o">[</span>example]<span class="s1">';
+    } "$@";
+  local exit_code=$?
+
+  echo "after"
+
+  return $exit_code'</span>
+</code></pre></div> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="container footer"> <div class="col-md-12 footer__social"> <a href="https://twitter.com/KevinJalbert">Twitter</a> <a href="https://github.com/kevinjalbert">GitHub</a> <a href="https://stackoverflow.com/users/583592/kevin-jalbert">Stack Overflow</a> </div> <div class="col-md-12 footer__copywrite"> Code licensed <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">MIT</a>, Content &copy; 2019 Kevin Jalbert </div> </div> </html> <script src="/javascripts/app.js"></script>

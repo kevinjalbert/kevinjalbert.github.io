@@ -26,7 +26,7 @@
               #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
               /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
                  We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <p>Rake tasks provide a nice way to handle common tasks surrounding a ruby project. Within Rails projects they are nearly unavoidable and even have their own directory from which they are autoloaded. Eventually a project will grow in size and complexity to warrant multiple <em>task</em> files for better separation of concerns. This alone is nothing to be worried about, but it&rsquo;s when you start using methods in your task files where <em>you&rsquo;re gonna have a bad time</em>.</p> <p>Let&rsquo;s setup a dummy Rails project that has a task file that calculates and saves blog metrics.</p> <div class=highlight><pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <p>Rake tasks provide a nice way to handle common tasks surrounding a ruby project. Within Rails projects they are nearly unavoidable and even have their own directory from which they are autoloaded. Eventually a project will grow in size and complexity to warrant multiple <em>task</em> files for better separation of concerns. This alone is nothing to be worried about, but it&rsquo;s when you start using methods in your task files that <em>you&rsquo;re gonna have a bad time</em>.</p> <p>Let&rsquo;s setup a dummy Rails project that has a task file that calculates and saves blog metrics.</p> <div class=highlight><pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
 <span class="n">desc</span> <span class="s1">'Calculate and save blog metrics'</span>
 <span class="n">task</span> <span class="ss">:blog_metrics</span> <span class="k">do</span>
   <span class="n">metrics</span> <span class="o">=</span> <span class="n">calculate_blog_metrics</span>
@@ -81,11 +81,11 @@ Saving default blog post
 </code></pre></div> <p>We should be in the clear now.</p> <div class=highlight><pre class="highlight plaintext"><code>$ rake blog_metrics:run
 Calculating blog metrics
 Saving default blog post
-</code></pre></div> <p>Nope! The namespace DSL does nothing for the defined methods. So we still have the same problem.</p> <p>There are a couple of solutions to this problem:</p> <ol> <li>Rename the methods, and ensure all future methods are uniquely named</li> <li>Inline the contents of the defined methods</li> <li>Extract the methods into a module/class and use that</li> </ol> <h1>Solution #1 - Uniquely Named Methods</h1> <p>It is possible to simply ensure that we uniquely name our methods so that they do no clash and end up redefining each other.</p> <div class=highlight><pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
+</code></pre></div> <p>Nope! The namespace DSL does nothing for the defined methods. So we still have the same problem.</p> <p>There are a couple of solutions to this problem:</p> <ol> <li>Rename the methods, and ensure all future methods are uniquely named</li> <li>Inline the contents of the defined methods</li> <li>Extract the methods into a module/class and use that</li> <li>Move the methods inside the task</li> </ol> <h1>Solution #1 - Uniquely Named Methods</h1> <p>It is possible to simply ensure that we uniquely name our methods so that they do not clash and end up redefining each other.</p> <div class=highlight><pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics_task.rake</span>
 <span class="n">desc</span> <span class="s1">'Calculate and save blog metrics'</span>
 <span class="n">task</span> <span class="ss">:blog_metrics</span> <span class="k">do</span>
   <span class="n">metrics</span> <span class="o">=</span> <span class="n">calculate_blog_metrics</span>
-  <span class="n">save</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+  <span class="n">save_blog_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="k">def</span> <span class="nf">calculate_blog_metrics</span>
@@ -99,7 +99,7 @@ Saving default blog post
 <span class="n">desc</span> <span class="s1">'Create and save a new blog post'</span>
 <span class="n">task</span> <span class="ss">:create_blog_post</span> <span class="k">do</span>
   <span class="n">blog_post</span> <span class="o">=</span> <span class="n">generate_default_blog_post</span>
-  <span class="n">save</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
+  <span class="n">save_default_blog_post</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
 <span class="k">end</span>
 
 <span class="k">def</span> <span class="nf">generate_default_blog_post</span>
@@ -165,7 +165,36 @@ Saving default blog post
   <span class="n">blog_post</span> <span class="o">=</span> <span class="no">BlogPostCreator</span><span class="p">.</span><span class="nf">create_default_blog_post</span>
   <span class="no">BlogPostCreator</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
 <span class="k">end</span>
-</code></pre></div> <p>This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now <em>test</em> the defined functionality!</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+</code></pre></div> <p>This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now <em>test</em> the defined functionality!</p> <h1>Solution #4 - Move the methods inside the task</h1> <p>Whilst the rake namespaces do nothing to scope the methods, defining them within the task block will isolate them from each other.</p> <div class=highlight><pre class="highlight plaintext"><code># lib/tasks/blog_metrics.rake
+desc 'Calculate and save blog metrics'
+task :create_blog_metrics do
+  def calculate_metrics
+    puts "Calculating blog metrics"
+  end
+
+  def save(metrics)
+    puts "Saving blog metrics"
+  end
+
+  metrics = calculate_metrics
+  save(metrics)
+end
+
+# lib/tasks/blog_post.rake
+desc 'Generate and save a default blog post'
+task :create_blog_post do
+  def generate_default_blog_post
+    puts "Generating a default blog post"
+  end
+
+  def save(blog_post)
+    puts "Saving default blog post"
+  end
+
+  blog_post = generate_default_blog_post
+  save(blog_post)
+end
+</code></pre></div> <p>Now the two <code>.save</code> methods are scoped within the task block. This is esentially the same as inlining the code but you get to keep the advantage of meaningful method names. This option is probably the best first step if you don&rsquo;t need to share the method between tasks. Later you can extract it to a Class/Module if you need to use it elsewhere.</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
 //<![CDATA[
     var disqus_shortname = 'kevinjalbert';
     (function () {

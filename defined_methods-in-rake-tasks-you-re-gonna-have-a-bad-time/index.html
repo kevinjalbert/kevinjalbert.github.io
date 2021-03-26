@@ -165,36 +165,36 @@ Saving default blog post
   <span class="n">blog_post</span> <span class="o">=</span> <span class="no">BlogPostCreator</span><span class="p">.</span><span class="nf">create_default_blog_post</span>
   <span class="no">BlogPostCreator</span><span class="p">.</span><span class="nf">save</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
 <span class="k">end</span>
-</code></pre></div> <p>This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now <em>test</em> the defined functionality!</p> <h1>Solution #4 - Move the methods inside the task</h1> <p>Whilst the rake namespaces do nothing to scope the methods, defining them within the task block will isolate them from each other.</p> <div class=highlight><pre class="highlight plaintext"><code># lib/tasks/blog_metrics.rake
-desc 'Calculate and save blog metrics'
-task :create_blog_metrics do
-  def calculate_metrics
-    puts "Calculating blog metrics"
-  end
+</code></pre></div> <p>This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now <em>test</em> the defined functionality!</p> <h1>Solution #4 - Move the Methods Inside the Task</h1> <p>Whilst the rake namespaces do nothing to scope the methods, defining them within the task block will isolate them from each other.</p> <div class=highlight><pre class="highlight ruby"><code><span class="c1"># lib/tasks/blog_metrics.rake</span>
+<span class="n">desc</span> <span class="s1">'Calculate and save blog metrics'</span>
+<span class="n">task</span> <span class="ss">:create_blog_metrics</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="nf">calculate_metrics</span>
+    <span class="nb">puts</span> <span class="s2">"Calculating blog metrics"</span>
+  <span class="k">end</span>
 
-  def save(metrics)
-    puts "Saving blog metrics"
-  end
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"Saving blog metrics"</span>
+  <span class="k">end</span>
 
-  metrics = calculate_metrics
-  save(metrics)
-end
+  <span class="n">metrics</span> <span class="o">=</span> <span class="n">calculate_metrics</span>
+  <span class="n">save</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+<span class="k">end</span>
 
-# lib/tasks/blog_post.rake
-desc 'Generate and save a default blog post'
-task :create_blog_post do
-  def generate_default_blog_post
-    puts "Generating a default blog post"
-  end
+<span class="c1"># lib/tasks/blog_post.rake</span>
+<span class="n">desc</span> <span class="s1">'Generate and save a default blog post'</span>
+<span class="n">task</span> <span class="ss">:create_blog_post</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="nf">generate_default_blog_post</span>
+    <span class="nb">puts</span> <span class="s2">"Generating a default blog post"</span>
+  <span class="k">end</span>
 
-  def save(blog_post)
-    puts "Saving default blog post"
-  end
+  <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">"Saving default blog post"</span>
+  <span class="k">end</span>
 
-  blog_post = generate_default_blog_post
-  save(blog_post)
-end
-</code></pre></div> <p>Now the two <code>.save</code> methods are scoped within the task block. This is esentially the same as inlining the code but you get to keep the advantage of meaningful method names. This option is probably the best first step if you don&rsquo;t need to share the method between tasks. Later you can extract it to a Class/Module if you need to use it elsewhere.</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+  <span class="n">blog_post</span> <span class="o">=</span> <span class="n">generate_default_blog_post</span>
+  <span class="n">save</span><span class="p">(</span><span class="n">blog_post</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div> <p>Now the two <code>save</code> methods are scoped within the task block. This is esentially the same as inlining the code but you get to keep the advantage of meaningful method names. This option is probably the best first step if you don&rsquo;t need to share the method between tasks. Later you can extract it to a Class/Module if you need to use it elsewhere.</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
 //<![CDATA[
     var disqus_shortname = 'kevinjalbert';
     (function () {

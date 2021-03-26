@@ -9,7 +9,7 @@ tags:
 - rails
 ---
 
-Rake tasks provide a nice way to handle common tasks surrounding a ruby project. Within Rails projects they are nearly unavoidable and even have their own directory from which they are autoloaded. Eventually a project will grow in size and complexity to warrant multiple _task_ files for better separation of concerns. This alone is nothing to be worried about, but it's when you start using methods in your task files where _you're gonna have a bad time_.
+Rake tasks provide a nice way to handle common tasks surrounding a ruby project. Within Rails projects they are nearly unavoidable and even have their own directory from which they are autoloaded. Eventually a project will grow in size and complexity to warrant multiple _task_ files for better separation of concerns. This alone is nothing to be worried about, but it's when you start using methods in your task files that _you're gonna have a bad time_.
 
 Let's setup a dummy Rails project that has a task file that calculates and saves blog metrics.
 
@@ -120,16 +120,17 @@ There are a couple of solutions to this problem:
 1. Rename the methods, and ensure all future methods are uniquely named
 2. Inline the contents of the defined methods
 3. Extract the methods into a module/class and use that
+4. Move the methods inside the task
 
 # Solution #1 - Uniquely Named Methods
-It is possible to simply ensure that we uniquely name our methods so that they do no clash and end up redefining each other.
+It is possible to simply ensure that we uniquely name our methods so that they do not clash and end up redefining each other.
 
 ```ruby
 # lib/tasks/blog_metrics_task.rake
 desc 'Calculate and save blog metrics'
 task :blog_metrics do
   metrics = calculate_blog_metrics
-  save(metrics)
+  save_blog_metrics(metrics)
 end
 
 def calculate_blog_metrics
@@ -146,7 +147,7 @@ end
 desc 'Create and save a new blog post'
 task :create_blog_post do
   blog_post = generate_default_blog_post
-  save(blog_post)
+  save_default_blog_post(blog_post)
 end
 
 def generate_default_blog_post
@@ -239,3 +240,41 @@ end
 ```
 
 This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now _test_ the defined functionality!
+
+# Solution #4 - Move the methods inside the task
+
+Whilst the rake namespaces do nothing to scope the methods, defining them within the task block will isolate them from each other.
+
+```
+# lib/tasks/blog_metrics.rake
+desc 'Calculate and save blog metrics'
+task :create_blog_metrics do
+  def calculate_metrics
+    puts "Calculating blog metrics"
+  end
+
+  def save(metrics)
+    puts "Saving blog metrics"
+  end
+
+  metrics = calculate_metrics
+  save(metrics)
+end
+
+# lib/tasks/blog_post.rake
+desc 'Generate and save a default blog post'
+task :create_blog_post do
+  def generate_default_blog_post
+    puts "Generating a default blog post"
+  end
+
+  def save(blog_post)
+    puts "Saving default blog post"
+  end
+
+  blog_post = generate_default_blog_post
+  save(blog_post)
+end
+```
+
+Now the two `.save` methods are scoped within the task block. This is esentially the same as inlining the code but you get to keep the advantage of meaningful method names. This option is probably the best first step if you don't need to share the method between tasks. Later you can extract it to a Class/Module if you need to use it elsewhere.

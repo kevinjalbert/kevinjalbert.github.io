@@ -241,11 +241,11 @@ end
 
 This is the preferred method if there is sufficient complexity involved. By extracting the methods you begin to build up a set of related concerns within a module/class. By having an external entity outside of the rake tasks themselves you can now _test_ the defined functionality!
 
-# Solution #4 - Move the methods inside the task
+# Solution #4 - Move the Methods Inside the Task
 
 Whilst the rake namespaces do nothing to scope the methods, defining them within the task block will isolate them from each other.
 
-```
+```ruby
 # lib/tasks/blog_metrics.rake
 desc 'Calculate and save blog metrics'
 task :create_blog_metrics do
@@ -277,4 +277,4 @@ task :create_blog_post do
 end
 ```
 
-Now the two `.save` methods are scoped within the task block. This is esentially the same as inlining the code but you get to keep the advantage of meaningful method names. This option is probably the best first step if you don't need to share the method between tasks. Later you can extract it to a Class/Module if you need to use it elsewhere.
+Now the two `save` methods are scoped within the task block. This is esentially the same as inlining the code but you get to keep the advantage of meaningful method names. This option is probably the best first step if you don't need to share the method between tasks. Later you can extract it to a Class/Module if you need to use it elsewhere.

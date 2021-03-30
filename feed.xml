@@ -2,16 +2,45 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-02-26T19:00:00-05:00</updated>
+  <updated>2021-03-28T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>How I Keep Active At Home</title>
+    <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
+    <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
+    <updated>2021-03-29T22:34:21-04:00</updated>
+    <published>2021-03-28T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">If you're not one to exercise but you like to play games or watch shows/movies, make it a point to not sit still. Get a stationary bike, an inexpensive treadmill, or other types of exercise equipment and bundle what you want to do with physical activity.</description>
+    <content type="html">&lt;p&gt;At this point in my life, I live a pretty sedentary lifestyle. I&amp;rsquo;ve been working remotely for just over two years and so I&amp;rsquo;ve lost the &lt;em&gt;walk&lt;/em&gt; my old commute would provide me. The commute walk amounted to about 30 minutes of brisk walking each day. I&amp;rsquo;m not one to go to a gym for a workout, and I&amp;rsquo;m satisfied with at-home exercises. I have two young kids and it can be challenging to find time to exercise.&lt;/p&gt;
+
+&lt;p&gt;I picked up an inexpensive folding &lt;a href="https://www.amazon.ca/gp/product/B007595TKU"&gt;exercise bike&lt;/a&gt; to keep in my office a few years back to help with at-home exercising (cardio). I didn&amp;rsquo;t use it all that much until I started working remotely. The bike helped keep my Apple Watch &lt;em&gt;rings&lt;/em&gt; happy.&lt;/p&gt;
+
+&lt;p&gt;I had also discovered the joy of playing video games while cycling. As the exercise bike was light enough, I could drag it outside my office to where the video game consoles were. I also would sometimes just raise my desk into its standing position and play something on Steam.&lt;/p&gt;
+
+&lt;p&gt;I mostly play Action/Adventure and RPG games and these tend to work out well for me while cycling. Playing video games while biking can be a bit challenging at times, depending on what the game&amp;rsquo;s task is. I sometimes find myself slowing down for &lt;em&gt;tricky&lt;/em&gt; platforming, even completely stopping to complete a difficult boss battle.&lt;/p&gt;
+
+&lt;p&gt;In addition to playing video games, I will mix it up by watching videos. I generally stay to YouTube in which I&amp;rsquo;ll watch some videos on technical content (i.e., conference talks), or videos on random stuff. I have, on occasion, exercised through a movie, however that usually means splitting the &lt;em&gt;movie experience&lt;/em&gt; over multiple sessions.&lt;/p&gt;
+
+&lt;p&gt;I normally end up doing 30-45 minutes of cycling a day (depending on how sad my Apple rings are at the end of the day) while watching/playing something, and it is enough to work up a bit of sweat. I aim to keep my pace within a set range - nothing too intense, just enough to get the heart pumping faster than normal.&lt;/p&gt;
+
+&lt;p&gt;I recently purchased a &lt;a href="https://www.amazon.ca/gp/product/B08423CNCR"&gt;treadmill&lt;/a&gt; as well that I&amp;rsquo;ve tried gaming with. I personally found it much harder than being on a stationary bicycle. You cannot easily slow down for those &lt;em&gt;harder&lt;/em&gt; moments in a game (think flying off the back of the treadmill), and I found that my stride was a lot more clumsy. Watching a video while on a treadmill is better though, as you don&amp;rsquo;t have to work the controller and perform input commands.&lt;/p&gt;
+
+&lt;p&gt;This approach works for me and allows me to combine two things together - I can exercise and play at the same time.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; If you&amp;rsquo;re not one to exercise but you like to play games or watch shows/movies, make it a point to not sit still. Get a stationary bike, an inexpensive treadmill, or other types of exercise equipment and bundle what you want to do with physical activity.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -95,7 +124,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -190,7 +219,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -246,7 +275,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -289,7 +318,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -349,7 +378,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -466,7 +495,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -610,7 +639,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Working From Home: Family, I'm Busy Now</title>
     <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
     <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-07-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -647,7 +676,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Improve Your Home Office - Miscellaneous Aspects</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-miscellaneous-aspects/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-06-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -737,7 +766,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Improve Your Home Office - Input/Output Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/"/>
     <id>https://kevinjalbert.com/improve-your-home-office-the-input-output-devices/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
+    <updated>2021-03-26T08:58:36-04:00</updated>
     <published>2020-05-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -849,97 +878,6 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 &lt;h1&gt;Powerful Subtle Interfaces&lt;/h1&gt;
 
 &lt;p&gt;The interactions between yourself and a computer are driven entirely through input and output devices. Ergonomics is key, especially for prolonged use. Having a good set of devices allows you to focus more on your work with less hindrance. Pay attention to the purchasing cost of devices as there are diminishing returns with expensive products.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Improve Your Home Office - Physical Space</title>
-    <link rel="alternate" href="https://kevinjalbert.com/improve-your-home-office-the-physical-space/"/>
-    <id>https://kevinjalbert.com/improve-your-home-office-the-physical-space/</id>
-    <updated>2021-03-26T08:55:40-04:00</updated>
-    <published>2020-04-28T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">This is the second of a multi-part series on improving your home office. In this part, we talk about the physical aspects of your home office (space, desk, and chair).</description>
-    <content type="html">&lt;p&gt;I am writing a multi-part article on the topic of improving your home office.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="/improve-your-home-office/"&gt;Part 1&lt;/a&gt; was mostly a public service announcement to be aware of your home office and to evaluate it.&lt;/li&gt;
-&lt;li&gt;Part 2 (this one) explores the physical aspects (e.g., room/space, desk, and chair).&lt;/li&gt;
-&lt;li&gt;&lt;a href="/improve-your-home-office-the-input-output-devices"&gt;Part 3&lt;/a&gt; explores the input/output aspects (e.g., monitor, keyboard, mouse/trackpad, audio, and video).&lt;/li&gt;
-&lt;li&gt;&lt;a href="/improve-your-home-office-the-miscellaneous-aspects/"&gt;Part 4&lt;/a&gt; explores the miscellaneous aspects (e.g., lighting, organization, climate, and personalizations).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The physical space is the foundation on which the rest is built. Without a good location for your home office, it can be hard to get &lt;em&gt;deep work&lt;/em&gt; done. The following dissects aspects of the physical space of a home office.&lt;/p&gt;
-
-&lt;h1&gt;The Space&lt;/h1&gt;
-
-&lt;p&gt;A home office is a place to focus and work, thus it is paramount to keep external distractions at bay. The space that you use for your home office will contribute greatly to how productive you might be. Having your office in a common area (e.g., living room) is pretty much fighting a losing battle if you live with other people (family/friends).&lt;/p&gt;
-
-&lt;p&gt;If space allows it, I highly recommend placing your home office in its own dedicated room. If that isn&amp;rsquo;t possible, the next best place would be a shared space with minimal traffic. A dedicated office space creates boundaries. When your space&amp;rsquo;s functionality and location bleed into other areas, it can blur the line between work and home time.&lt;/p&gt;
-
-&lt;p&gt;When deciding where your home office should be, there are various environmental factors to take into account:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Being in a basement might limit natural light and the ability to get fresh air, and also prove noisy from the activity above.&lt;/li&gt;
-&lt;li&gt;Being near a window (which you want to open occasionally) or other noisy space can be distracting.&lt;/li&gt;
-&lt;li&gt;Being near a window can also introduce annoying glare.&lt;/li&gt;
-&lt;li&gt;Being aware of air/heat circulation.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Be aware of the size of your space. Opt for a location where you can have a decent space for working, along with some space to store/place miscellaneous items. Having the extra room gives you some freedom in how to structure your space, and can open some customization opportunities (e.g., fitness equipment, whiteboard, etc.)&lt;/p&gt;
-
-&lt;h1&gt;The Desk&lt;/h1&gt;
-
-&lt;p&gt;Your desk is something that you don&amp;rsquo;t want to skimp on if possible. If you are planning to use the home office long term, I would avoid the following: &lt;em&gt;&amp;ldquo;I just use my countertop or kitchen table. I just sit on the couch and use my lap&amp;rdquo;&lt;/em&gt;. If you spend long periods of time working in your home office then ergonomics and a dedicated surface are key. Once you decide on your space, I would try to maximize the surface size of your desk.&lt;/p&gt;
-
-&lt;p&gt;There are plenty of desk options out there, and it really boils down to what works for you and your space:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A desk with built-in drawers and/or a hutch for extra storage space.&lt;/li&gt;
-&lt;li&gt;A desk that supports clamps for monitor arms (i.e., good thickness/strength and an open back).&lt;/li&gt;
-&lt;li&gt;A desk that has an ergonomic bezel.&lt;/li&gt;
-&lt;li&gt;A desk that can support a lot of weight if necessary.&lt;/li&gt;
-&lt;li&gt;A desk that is esthetically pleasing.&lt;/li&gt;
-&lt;li&gt;A standing desk (fixed or adjustable) to avoid sitting all the time.&lt;/li&gt;
-&lt;li&gt;An L-shaped desk for corner offices.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If you have a standard desk and are looking to explore the sit/stand or stand options, you could take a look at &lt;em&gt;Standing Desk Converters&lt;/em&gt;.&lt;/p&gt;
-
-&lt;p&gt;The following resources are recommended readings:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/reviews/best-standing-desk/"&gt;Wirecutter&amp;rsquo;s best standing desks&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/reviews/best-standing-desk-converters/"&gt;Wirecutter&amp;rsquo;s best standing desk converters&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1&gt;The Chair&lt;/h1&gt;
-
-&lt;p&gt;If you are working at a desk then you will likely spend many hours sitting on a chair (unless you have a standing desk). A basic wooden chair works in a pinch, but for the long term, you&amp;rsquo;ll want a chair that offers more adjustability and comfort.&lt;/p&gt;
-
-&lt;p&gt;Much like the desk, there are plenty of options available, most of it comes down to personal preference. For that reason, I highly recommend going with a chair that you can sit in before purchasing. The following are some factors to consider:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A chair with casters to move around easily.&lt;/li&gt;
-&lt;li&gt;A chair that has adjustable or removable features.&lt;/li&gt;
-&lt;li&gt;A chair that is breathable.&lt;/li&gt;
-&lt;li&gt;A chair that is comfortable.&lt;/li&gt;
-&lt;li&gt;A &lt;a href="https://en.wikipedia.org/wiki/Kneeling_chair"&gt;kneeling chair&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;An &lt;a href="https://www.uncagedergonomics.com/blog/what-is-an-active-chair/"&gt;active wobble chair&lt;/a&gt; or yoga ball&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;One other thing to consider is a standing desk mat if you decide on the standing desk route.&lt;/p&gt;
-
-&lt;p&gt;The following resource is a recommended reading:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://thewirecutter.com/reviews/best-office-chair/"&gt;Wirecutter&amp;rsquo;s best office chairs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1&gt;Lay the Foundation&lt;/h1&gt;
-
-&lt;p&gt;Take care to pick the right physical space for your home office as it is the foundation upon which everything else is built. The right desk and chair will have to fit within that space comfortably. You can tailor your space to maximize productivity and comfort.&lt;/p&gt;
 </content>
   </entry>
 </feed>

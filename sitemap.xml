@@ -25,6 +25,9 @@
     <loc>https://kevinjalbert.com/consuming-content-and-managing-the-flood/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/how-i-keep-active-at-home/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</loc>
   </url>
   <url>
@@ -247,6 +250,12 @@
     <loc>https://kevinjalbert.com/tags/learning/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/health/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/self-improvement/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/graphql/</loc>
   </url>
   <url>
@@ -290,9 +299,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/minio/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/self-improvement/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/mentorship/</loc>

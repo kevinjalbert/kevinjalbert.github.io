@@ -49,9 +49,6 @@
     <loc>https://kevinjalbert.com/share-highlighted-articles/</loc>
   </url>
   <url>
-    <loc>https://kevinjalbert.com/applescript-to-mirror-iphone-to-quicktime/</loc>
-  </url>
-  <url>
     <loc>https://kevinjalbert.com/automating-slack-statuses-for-meetings-and-focus-times/</loc>
   </url>
   <url>
@@ -190,6 +187,9 @@
     <loc>https://kevinjalbert.com/my-weekly-notion-setup/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/keep-on-learning-but-dont-forget-to-remember/</loc>
   </url>
   <url>
@@ -287,12 +287,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/vim/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/alfred/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/applescript/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/database/</loc>
@@ -395,6 +389,12 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/organization/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/alfred/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/applescript/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/version-control/</loc>

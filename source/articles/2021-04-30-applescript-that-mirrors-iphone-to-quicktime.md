@@ -1,5 +1,5 @@
 ---
-title: "AppleScript to Mirror iPhone to QuickTime"
+title: "AppleScript that Mirrors iPhone to QuickTime"
 
 description: "I automated seven manual steps to mirror my iPhone to QuickTime using AppleScript. Read about some of the challenges I encountered and see the finalized script being trigged by Alfred."
 
@@ -9,7 +9,7 @@ tags:
 - alfred
 - applescript
 
-pull_image: "/images/2021-04-30-applescript-to-mirror-iphone-to-quicktime/mirror-alfred-script.png"
+pull_image: "/images/2021-04-30-applescript-that-mirrors-iphone-to-quicktime/mirror-alfred-script.png"
 pull_image_attribution: 'Photo of the AppleScript and Alfred Workflow to mirror my iPhone to QuickTime'
 ---
 
@@ -31,7 +31,7 @@ There are a number of steps that I have to complete to mirror my iPhone to Quick
 
 This GIF demonstrates the automation that covers all seven manual steps. I launch it using [Alfred](https://www.alfredapp.com/).
 
-![](/images/2021-04-30-applescript-to-mirror-iphone-to-quicktime/mirror-ios-alfred.gif)
+![](/images/2021-04-30-applescript-that-mirrors-iphone-to-quicktime/mirror-ios-alfred.gif)
 
 # The Code
 

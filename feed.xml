@@ -2,16 +2,69 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-05-27T20:00:00-04:00</updated>
+  <updated>2021-06-25T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Embrace Active Support without Rails</title>
+    <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
+    <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
+    <updated>2021-06-26T21:50:03-04:00</updated>
+    <published>2021-06-25T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read my opinion on using Active Support without Rails in Ruby-only projects. I think the benefits outweigh the cost. Active Support is a Ruby on Rails component that primarily extends the Ruby language providing, a richer experience to developers.</description>
+    <content type="html">&lt;h2&gt;What is Active Support&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Active Support is the Ruby on Rails component responsible for providing Ruby language extensions, utilities, and other transversal stuff.&lt;/p&gt;
+
+&lt;p&gt;It offers a richer bottom-line at the language level, targeted both at the development of Rails applications and at the development of Ruby on Rails itself.&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash; &lt;a href="https://guides.rubyonrails.org/active_support_core_extensions.html"&gt;RailsGuides&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As a developer using Ruby, it is highly likely that you are using Rails in some projects. During your journey, you&amp;rsquo;ve likely touched aspects of Active Support without knowing it. Ruby, as a language, allows you to &lt;em&gt;redefine&lt;/em&gt; classes easily, almost to a fault. Active Support does exactly this.&lt;/p&gt;
+
+&lt;p&gt;Active Support does &lt;em&gt;a lot&lt;/em&gt; under the hood by modifying core Ruby classes. These core extensions provide more capabilities through new methods. If you are using Rails, Active Support is already there as a dependency. If you spend enough time on a Rails project, you&amp;rsquo;ll reach for these methods from Active Support.&lt;/p&gt;
+
+&lt;h2&gt;Active Support Without Rails&lt;/h2&gt;
+
+&lt;p&gt;The following are my opinions on when to use Active Support without Rails.&lt;/p&gt;
+
+&lt;h3&gt;Projects&lt;/h3&gt;
+
+&lt;p&gt;In Ruby-only projects, you likely already require some gems, and at this point including Active Support just adds another dependency to the project. With Active Support, your project gains all those convenience methods you are used to.&lt;/p&gt;
+
+&lt;p&gt;The reality of the situation is that you are unlikely to use &lt;em&gt;all&lt;/em&gt; the features of Active Support. Yes, this dependency is a large one, although if you want you can be &lt;a href="https://guides.rubyonrails.org/active_support_core_extensions.html#how-to-load-core-extensions"&gt;selective in loading only parts of Active Support&lt;/a&gt;. If you need to optimize your project (i.e., no dependencies for portability, or optimized code for performance), you might be using the wrong language. Active Support does lazy-load parts of itself, so it might not even be as &lt;em&gt;heavy&lt;/em&gt; as you think.&lt;/p&gt;
+
+&lt;p&gt;In my Ruby projects I dislike reaching for something I&amp;rsquo;d typically use in a Rails project only to find out I don&amp;rsquo;t have access to it (i.e., &lt;code&gt;10.days.ago&lt;/code&gt;). Could I take an approach that doesn&amp;rsquo;t require Active Support? Sure, but at what cost (i.e., time/complexity)? I love Ruby for its expressiveness and ease at &lt;em&gt;getting things done&lt;/em&gt;. Active Support helps me do that better and faster.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Opinion: Embrace Active Support and add it to your project&amp;rsquo;s dependencies&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3&gt;Scripts&lt;/h3&gt;
+
+&lt;p&gt;Small Ruby scripts are unique in the sense that they don&amp;rsquo;t always have dependencies. Requiring that first gem in a script can feel &lt;em&gt;wrong&lt;/em&gt;, although in my experience it&amp;rsquo;s worth it. The boost in productivity that a gem provides when you are trying to script something together is immense.&lt;/p&gt;
+
+&lt;p&gt;Dealing with dependencies for scripts is a small inconvenience, as running a script without the required gems usually presents a clear error that is quickly remedied.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Opinion: Embrace Active Support if you already require gems for your script or if you want methods that Active Support offers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3&gt;Gems&lt;/h3&gt;
+
+&lt;p&gt;If you are developing a Ruby gem, it would be best to not &lt;em&gt;force&lt;/em&gt; Active Support as a dependency without good reasons. If you absolutely need it, go for it &amp;ndash; ultimately it&amp;rsquo;s your call as the maintainer. Now if your gem is inherently tied to Rails, then it&amp;rsquo;s all good to include it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Opinion: Avoid Active Support unless you absolutely need parts of it, or if the gem is intended to be used in a Rails project&lt;/strong&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-05-28T21:56:25-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -60,7 +113,7 @@
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -137,7 +190,7 @@
     <title>How I Keep Active At Home</title>
     <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
     <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2021-03-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -166,7 +219,7 @@
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -250,7 +303,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -345,7 +398,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -401,7 +454,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -444,7 +497,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -504,7 +557,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -621,7 +674,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>My Dam Broke - Revisiting Content Consumption</title>
     <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
     <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
+    <updated>2021-05-28T22:01:39-04:00</updated>
     <published>2020-08-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -759,43 +812,6 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 &lt;p&gt;I&amp;rsquo;ll keep making changes and iterate on my content consumption system, hopefully making it better each time. The goal is still to turn pieces of content into information that I can use as knowledge.&lt;/p&gt;
 
 &lt;p&gt;The next thing I&amp;rsquo;m planning to tackle is the actual consumption part of the system and having a process for knowledge retention.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Working From Home: Family, I'm Busy Now</title>
-    <link rel="alternate" href="https://kevinjalbert.com/working-from-home-family-im-busy-now/"/>
-    <id>https://kevinjalbert.com/working-from-home-family-im-busy-now/</id>
-    <updated>2021-05-16T21:37:03-04:00</updated>
-    <published>2020-07-27T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">In this post, I demonstrate how to communicate work meetings to my family while working from home. I use a combination of software and hardware to accomplish an informative and automated solution that provides information about my availability to my family.</description>
-    <content type="html">&lt;p&gt;At the time of writing this post (still in COVID-19 times), remote working, at least for the short-term, is quite prominent. If I had to guess, remote work will continue to thrive after the COVID-19 pandemic passes.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve previously written a multi-part series on how to &lt;a href="/improve-your-home-office/"&gt;Improve your Home Office&lt;/a&gt;, and this current post builds on the topic by providing my solution to meeting interruptions by my family.&lt;/p&gt;
-
-&lt;h1&gt;The Problem: Family Interruptions&lt;/h1&gt;
-
-&lt;p&gt;My home office is in the basement. During the day, my wife is caring for our two children (3.5 years and 6 months old). She occasionally needs my help for a few minutes here and there. From a timing perspective, I do take breaks, but they might not 100% lineup with when she is seeking assistance/relief. Ideally, she would be able to reach out to me when I&amp;rsquo;m not busy (or in a meeting) and I can come up from my office for a few minutes to help out.&lt;/p&gt;
-
-&lt;p&gt;I needed a way to communicate my meeting schedule so that my wife could see when I&amp;rsquo;m not available to help. This is going to be more important as my children get older, as they will more likely want to come into my office while I&amp;rsquo;m working. It is worth mentioning that I have a door to my office that I keep closed during the workday &amp;ndash; it just doesn&amp;rsquo;t communicate my availability.&lt;/p&gt;
-
-&lt;h1&gt;The Solution: Wall-Mounted Tablet Showing Google Calendar&lt;/h1&gt;
-
-&lt;p&gt;I had an old &lt;a href="https://amzn.to/32Pn3Wy"&gt;Fire 7 Tablet from Amazon&lt;/a&gt; that I attached to the wall with two &lt;a href="https://amzn.to/2D4SzEM"&gt;Command Picture Hanging Strips&lt;/a&gt; and powered via a long Micro-B USB cable.&lt;/p&gt;
-
-&lt;p&gt;The idea is that the tablet screen is always on and showing Google Calendar&amp;rsquo;s &lt;em&gt;today&lt;/em&gt; view. My wife has her Google Account signed in and only displaying my shared &lt;em&gt;Work&lt;/em&gt; calendar (it only shows busy times). Changes in events are synchronized automatically and are reflected within a minute.&lt;/p&gt;
-
-&lt;p&gt;The position of the tablet is on the main floor near the door to the basement. This spot was picked by my wife, as it is a central location during her day. Being able to view the whole day is important as she can better understand my availability and plan her day as well. She is able to see when meetings start/end, and it also captures those impromptu meetings that are made shortly before they begin.&lt;/p&gt;
-
-&lt;p&gt;Could you use a different tablet (like an iPad)? Sure thing, I just worked with what I had around the house. This is a perfect way to put an old tablet to good use as the processing specs don&amp;rsquo;t have to be good. One thing to note with the Fire tablets, you have to &lt;a href="https://vidabox.com/blog/2017/02/11/hidden-always-on-setting-for-amazon-fire-tablets/"&gt;enable the &lt;em&gt;Always on&lt;/em&gt; setting&lt;/a&gt; as well as &lt;a href="https://www.androidpolice.com/2020/07/11/install-play-store-amazon-fire-tablet/"&gt;install the Google Play Store&lt;/a&gt; to get Google Calendar.&lt;/p&gt;
-
-&lt;h1&gt;Future Iteration: Indicating in the Basement&lt;/h1&gt;
-
-&lt;p&gt;If my family is downstairs, there isn&amp;rsquo;t any indication of my availability as my solution is only on the main floor. I&amp;rsquo;d like to replicate the same setup in the basement itself, although I&amp;rsquo;ve been thinking about simply using a &lt;em&gt;busy light&lt;/em&gt; instead.&lt;/p&gt;
-
-&lt;p&gt;The busy light would be on/off to indicate if I&amp;rsquo;m busy. I feel that this solution is better for kids as opposed to the calendar schedule solution, as it clear and binary. I would set up the busy light by using a smart light/plug that can be toggled based on my Google Calendar&amp;rsquo;s event start/end times via &lt;a href="https://ifttt.com/"&gt;IFTTT&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -1,0 +1,59 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <script>addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});</script> <link rel=canonical href=https://kevinjalbert.com/rails-testing-reloading-the-model/> <title>Rails Testing: Reload the Model | Kevin Jalbert</title> <meta name=description content="A beginner in Rails might find themselves testing a model and not seeing the attributes reflecting the changes they would expect to see. Read about why this problem happens and how you can resolve ..."/> <meta name=keywords content="rails, testing"/> <meta name=datePublished content="2021-07-31 00:00:00 UTC"/> <meta property="og:article:published_time" content="2021-07-31 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2021-07-31 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/rails-testing-reloading-the-model/"/> <meta property="og:url" content="https://kevinjalbert.com/rails-testing-reloading-the-model/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="A beginner in Rails might find themselves testing a model and not seeing the attributes reflecting the changes they would expect to see. Read about why this problem happens and how you can resolve it by reloading the model."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2021-07-31-rails-testing-reloading-the-model/reload-stapler.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Rails Testing: Reload the Model"/> <meta property="og:description" content="A beginner in Rails might find themselves testing a model and not seeing the attributes reflecting the changes they would expect to see. Read about why this problem happens and how you can resolve it by reloading the model."/> <meta property="og:image" content="https://kevinjalbert.com/images/2021-07-31-rails-testing-reloading-the-model/reload-stapler.jpg"/> <meta property="og:title" content="Rails Testing: Reload the Model"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Rails Testing: Reload the Model",
+       "keywords": "rails, testing",
+       "url": "https://kevinjalbert.com/rails-testing-reloading-the-model/",
+       "datePublished": "2021-07-31 00:00:00 UTC",
+       "dateModified": "2021-07-31 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/rails-testing-reloading-the-model/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> <script async src="/vendor/analytics/index.js"></script> <script async src="https://www.google-analytics.com/analytics.js"></script> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> <a href="/uses/">Uses</a> <a href="https://github.com/kevinjalbert/ama/blob/master/README.md">AMA</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Rails Testing: Reload the Model</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">July 31, 2021 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>1 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/rails-testing-reloading-the-model/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/rails/">rails</a> <a href="/tags/testing/">testing</a> </div> </div> </div> <img src=/images/2021-07-31-rails-testing-reloading-the-model/reload-stapler.jpg> <i><p>Photo of my stapler</p> </i> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> If you enjoy this, consider subscribing to my newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <p style="text-align: center">I aim to publish one article a month</p> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <p>Throughout my time using Rails, I&rsquo;ve had the pleasure of working with people who are new to Ruby on Rails. This post is a quick one that outlines a testing issue that comes up every now and then.</p> <p>To keep things short, let&rsquo;s jump right into the code!</p> <h2>The Setup</h2> <div class=highlight><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">Task</span> <span class="o">&lt;</span> <span class="no">ApplicationRecord</span><span class="p">;</span>
+  <span class="c1"># Has a bolean database column`archive`</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">ArchiverService</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span>
+    <span class="no">Task</span><span class="p">.</span><span class="nf">update_all</span><span class="p">(</span><span class="ss">archive: </span><span class="kp">true</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div> <p>We have an ActiveRecord model and a service class that updates a value on the model. This is very much a contrived example to illustrate the problem.</p> <div class=highlight><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s2">"test_helper"</span>
+
+<span class="k">class</span> <span class="nc">ArchiverServiceTest</span> <span class="o">&lt;</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="nb">test</span> <span class="s2">"archives task"</span> <span class="k">do</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="no">Task</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">archive: </span><span class="kp">false</span><span class="p">)</span>
+
+    <span class="no">ArchiverService</span><span class="p">.</span><span class="nf">call</span>
+
+    <span class="n">assert</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="nf">archive</span><span class="p">)</span> <span class="c1"># fails!</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div> <p>This test fails.</p> <h2>Reloading a Stale Model</h2> <p>The problem here is that the <code>task</code> object in the test isn&rsquo;t the same as the one being updated in the <code>ArchiverService</code>. When a model is instantiated, its attributes are cached. If a value is updated and persisted in the database, the changes aren&rsquo;t propagated to other instances of that model.</p> <p><strong>The solution here is to add in a <code>task.reload</code> after the <code>ArchiverService.call</code>, as we want the task&rsquo;s values to be <em>refreshed</em> with what the database has at that point</strong>. If you want to read more into the <code>#reload</code> method, you can look at its <a href="https://github.com/rails/rails/blob/v6.1.4/activerecord/lib/active_record/persistence.rb#L752-L814">docs and source</a>. It&rsquo;s worth noting that the documentation states the following:</p> <blockquote> <p>Reloads the record from the database.</p> <p>&hellip;</p> <p>Reloading is commonly used in test suites to test something is actually written to the database, or when some action modifies the corresponding row in the database but not the object in memory</p> </blockquote> <p>So be aware of this situation and recall that you do have access to <code>#reload</code> if you need to freshen up your model&rsquo;s attributes from the database. Rails even provide the ability to <code>#reload_association</code> if your model has them (<a href="https://guides.rubyonrails.org/v6.1.4/association_basics.html#methods-added-by-belongs-to-association">see docs here</a>).</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="container footer"> <div class="col-md-12 footer__social"> <a href="https://twitter.com/KevinJalbert">Twitter</a> <a href="https://github.com/kevinjalbert">GitHub</a> <a href="https://stackoverflow.com/users/583592/kevin-jalbert">Stack Overflow</a> </div> <div class="col-md-12 footer__copywrite"> Code licensed <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">MIT</a>, Content &copy; 2019 Kevin Jalbert </div> </div> </html> <script src="/javascripts/app.js"></script>

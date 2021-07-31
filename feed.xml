@@ -2,16 +2,73 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-06-25T20:00:00-04:00</updated>
+  <updated>2021-07-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Rails Testing: Reload the Model</title>
+    <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
+    <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
+    <updated>2021-07-31T19:06:20-04:00</updated>
+    <published>2021-07-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">A beginner in Rails might find themselves testing a model and not seeing the attributes reflecting the changes they would expect to see. Read about why this problem happens and how you can resolve it by reloading the model.</description>
+    <content type="html">&lt;p&gt;Throughout my time using Rails, I&amp;rsquo;ve had the pleasure of working with people who are new to Ruby on Rails. This post is a quick one that outlines a testing issue that comes up every now and then.&lt;/p&gt;
+
+&lt;p&gt;To keep things short, let&amp;rsquo;s jump right into the code!&lt;/p&gt;
+
+&lt;h2&gt;The Setup&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Task&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationRecord&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="c1"&gt;# Has a bolean database column`archive`&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ArchiverService&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;
+    &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;update_all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;archive: &lt;/span&gt;&lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We have an ActiveRecord model and a service class that updates a value on the model. This is very much a contrived example to illustrate the problem.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s2"&gt;"test_helper"&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ArchiverServiceTest&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveSupport&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;TestCase&lt;/span&gt;
+  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s2"&gt;"archives task"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;task&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;archive: &lt;/span&gt;&lt;span class="kp"&gt;false&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="no"&gt;ArchiverService&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;
+
+    &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;task&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;archive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# fails!&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This test fails.&lt;/p&gt;
+
+&lt;h2&gt;Reloading a Stale Model&lt;/h2&gt;
+
+&lt;p&gt;The problem here is that the &lt;code&gt;task&lt;/code&gt; object in the test isn&amp;rsquo;t the same as the one being updated in the &lt;code&gt;ArchiverService&lt;/code&gt;. When a model is instantiated, its attributes are cached. If a value is updated and persisted in the database, the changes aren&amp;rsquo;t propagated to other instances of that model.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The solution here is to add in a &lt;code&gt;task.reload&lt;/code&gt; after the &lt;code&gt;ArchiverService.call&lt;/code&gt;, as we want the task&amp;rsquo;s values to be &lt;em&gt;refreshed&lt;/em&gt; with what the database has at that point&lt;/strong&gt;. If you want to read more into the &lt;code&gt;#reload&lt;/code&gt; method, you can look at its &lt;a href="https://github.com/rails/rails/blob/v6.1.4/activerecord/lib/active_record/persistence.rb#L752-L814"&gt;docs and source&lt;/a&gt;. It&amp;rsquo;s worth noting that the documentation states the following:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Reloads the record from the database.&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Reloading is commonly used in test suites to test something is actually written to the database, or when some action modifies the corresponding row in the database but not the object in memory&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So be aware of this situation and recall that you do have access to &lt;code&gt;#reload&lt;/code&gt; if you need to freshen up your model&amp;rsquo;s attributes from the database. Rails even provide the ability to &lt;code&gt;#reload_association&lt;/code&gt; if your model has them (&lt;a href="https://guides.rubyonrails.org/v6.1.4/association_basics.html#methods-added-by-belongs-to-association"&gt;see docs here&lt;/a&gt;).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2021-06-26T21:50:03-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -64,7 +121,7 @@
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -113,7 +170,7 @@
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -190,7 +247,7 @@
     <title>How I Keep Active At Home</title>
     <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
     <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2021-03-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -219,7 +276,7 @@
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -303,7 +360,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -398,7 +455,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -454,7 +511,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -497,7 +554,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -557,7 +614,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Daily Review Using iOS Shortcuts and Scriptable</title>
     <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
     <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
+    <updated>2021-06-26T21:51:30-04:00</updated>
     <published>2020-09-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -668,150 +725,6 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 &lt;p&gt;If the above gif isn&amp;rsquo;t doing it for you, you can get a better sense of the whole thing by watching the following video I recorded.&lt;/p&gt;
 
 &lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/CjTzhPxfz8Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-</content>
-  </entry>
-  <entry>
-    <title>My Dam Broke - Revisiting Content Consumption</title>
-    <link rel="alternate" href="https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/"/>
-    <id>https://kevinjalbert.com/my-dam-broke-revisiting-content-consumption/</id>
-    <updated>2021-05-28T22:01:39-04:00</updated>
-    <published>2020-08-29T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">In this post I revisit the topic of content consumption, adding new criteria to my selection process. I also discuss using a new tool (spoiler...it's Notion) to hold the content.</description>
-    <content type="html">&lt;p&gt;I&amp;rsquo;ve previously talked about &lt;a href="/consuming-content-and-managing-the-flood"&gt;managing your content consumption&lt;/a&gt; using metaphors such as a dam, the flow of water, a reservoir, and a spillway. I highly recommend reading through if you are looking for some techniques to tame information overload. In case you don&amp;rsquo;t want to read the above article, the main point is to focus on high-quality sources and don&amp;rsquo;t consume everything.&lt;/p&gt;
-
-&lt;p&gt;Spoiler alert! Even though I wrote the above article, I have to revisit the topic as my metaphorical dam is broken. I&amp;rsquo;m finding myself facing the flood with 300+ articles in the reservoir. In this article, I will revisit content consumption management.&lt;/p&gt;
-
-&lt;h1&gt;System Check&lt;/h1&gt;
-
-&lt;p&gt;I took a look at my content consumption from a system&amp;rsquo;s perspective. There are four factors at play that determine the backlog of content to consume.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;The pace at which I can consume content from my reservoir&lt;/li&gt;
-&lt;li&gt;The flow of content from sources making it to my dam&lt;/li&gt;
-&lt;li&gt;The effectiveness of my dam (i.e., the filter)&lt;/li&gt;
-&lt;li&gt;The effective removal of content that is no longer valuable.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Improving the pace at which I can consume content is tricky as it depends a lot on the amount of free time I can devote to it. I decided to focus on the other three factors instead as a way to distil the content down to the most valuable.&lt;/p&gt;
-
-&lt;h2&gt;Reducing the Flow&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The flow of content from sources making it to my dam&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The &lt;em&gt;flow of water&lt;/em&gt; was the analogy I used in my dam metaphor for the rate of content coming in. This is tunable and can be controlled. I had advocated highly for the use of newsletters as they are narrow in focus and are filtered for good calibre pieces.&lt;/p&gt;
-
-&lt;p&gt;I want to keep tabs on where the good pieces of content are coming from. The importance and value of consumed content will change over time based on projects and interests. This means that I can remove specific content sources if they are underdelivering in value.&lt;/p&gt;
-
-&lt;p&gt;This is something I have done organically (i.e., &lt;em&gt;&amp;ldquo;I&amp;rsquo;ll unsubscribe from this newsletter as I don&amp;rsquo;t care about YYYY much anymore&amp;rdquo;&lt;/em&gt;), but I want to put more of an objective system in place. To do this, I want to track the volume and perceived value gain from my content sources. I&amp;rsquo;ll then routinely be able to revisit and see what is feeding into my content consumption pipeline and what is not.&lt;/p&gt;
-
-&lt;h2&gt;Effectiveness of Dam&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The effectiveness of my dam (i.e., the filter)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;My goal of consuming content is to extract information and turn that into knowledge, ultimately being able to use that to produce results. With that in mind, the following are three guiding principles I&amp;rsquo;ve decided to use before committing to consuming a piece of content:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Is the information valuable in the long-term?
-
-&lt;ul&gt;
-&lt;li&gt;Prioritizing long-term knowledge will lead to &lt;a href="https://fs.blog/2019/02/compounding-knowledge/"&gt;compounding knowledge&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Is the information relevant to immediate projects?
-
-&lt;ul&gt;
-&lt;li&gt;Short-term knowledge is needed for the current situation.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Is the information uniquely valuable?
-
-&lt;ul&gt;
-&lt;li&gt;There are diminishing returns from consuming more content on the same topic.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Overall, I want to maximize the effectiveness and efficiency of knowledge extraction. The first two principles I&amp;rsquo;m carrying over from the previous system of content consumption. The third principle is new and should help improve the effectiveness of my dam.&lt;/p&gt;
-
-&lt;p&gt;Essentially I want the content to make it through the dam filter if &lt;code&gt;(content is long-term || content is relevant) &amp;amp;&amp;amp; content is unique&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Either of the first two principles must be true for the content to be of any value. It is worth noting that having both being true is the best scenario &amp;ndash; the information is relevant and long-term knowledge. The relevancy principle is important to have as I want to make sure that I&amp;rsquo;m not losing short-term gains on the projects and problems I&amp;rsquo;m working on.&lt;/p&gt;
-
-&lt;h3&gt;Filtering Examples&lt;/h3&gt;
-
-&lt;p&gt;An example of something that would be filtered out is an article on &lt;em&gt;upgrading from Rails 5.x to 6.x&lt;/em&gt;. I wouldn&amp;rsquo;t consider this long-term knowledge as eventually, Rails will progress past these versions. There is no relevance for this article based on my current projects, and thus it should be filtered out. If afterwards I now have a project that would have benefited from this information, not all is lost as I would just &lt;em&gt;seek&lt;/em&gt; it, embracing &lt;em&gt;Just In Time&lt;/em&gt; learning.&lt;/p&gt;
-
-&lt;p&gt;Another example would be pieces of content around &lt;em&gt;empathy in code reviews&lt;/em&gt;. This is great long-term knowledge, as well as relevant to my work. The problem is, I&amp;rsquo;ve already consumed something like this and have extracted and internalized the knowledge. This fails the third principle of being uniquely valuable, and thus I would filter these out. If at a later date, I&amp;rsquo;m doing a presentation or article on empathy in code reviews, I would employ &lt;em&gt;Just In Time&lt;/em&gt; learning to find all relevant information.&lt;/p&gt;
-
-&lt;h2&gt;Effectiveness of Spillway&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The effective removal of content that is no longer valuable.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Right before consuming a piece of content from the reservoir, I&amp;rsquo;ll revisit the three principles. A piece of content may have lost relevancy, or is no longer going to provide unique value. This is a quick way of removing content.&lt;/p&gt;
-
-&lt;p&gt;With hopefully a smaller number of content sitting in the reservoir, this mechanism will be enough. In the event that the reservoir is overflowing, you can quickly sweep through everything and reevaluate. The key is to be ruthless, as important information will likely find its way back to you.&lt;/p&gt;
-
-&lt;h1&gt;Notion: The New System&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;ve previously used a mixture of applications to store consumable content. The main application I have used for articles is &lt;a href="https://www.instapaper.com"&gt;Instapaper&lt;/a&gt;. The new system demands more metadata and so I&amp;rsquo;ve made the switch to entirely use &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt;. I&amp;rsquo;ll continue to use separate applications for podcasts and books, but they&amp;rsquo;ll likely have &lt;em&gt;entries&lt;/em&gt; within Notion.&lt;/p&gt;
-
-&lt;h2&gt;The Reservoir&lt;/h2&gt;
-
-&lt;p&gt;Everything is in a single database within Notion, these are the following fields.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A default text field that holds the name of the piece of content.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Type&lt;/strong&gt; (e.g., article, video, podcast, book, twitter thread, etc&amp;hellip;)
-
-&lt;ul&gt;
-&lt;li&gt;A select field that specifies what medium the content resides in.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Origin&lt;/strong&gt; (e.g., XXXX Newsletter, XXXX Podcast, friend, etc&amp;hellip;)
-
-&lt;ul&gt;
-&lt;li&gt;A select field that specifies how I discovered the piece of content.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;URL&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A URL field that holds the link to the content, which in some cases might be blank depending on the content&amp;rsquo;s type.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Criteria&lt;/strong&gt; (Long-Term, Relevant, and Unique)
-
-&lt;ul&gt;
-&lt;li&gt;A multi-select field that indicates the criterion that holds true for the piece of content&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Value&lt;/strong&gt; (None, Low, Medium, and High)
-
-&lt;ul&gt;
-&lt;li&gt;A select field that indicates the value gained after consuming the piece of content.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Created At&lt;/strong&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A timestamp field of when the piece of content was added.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These fields address the three principles within the &lt;em&gt;Criteria&lt;/em&gt; field, as well as metadata on how to reduce the flow of content via the &lt;em&gt;Origin&lt;/em&gt; and &lt;em&gt;Value&lt;/em&gt; fields.&lt;/p&gt;
-
-&lt;p&gt;Within desktop usage, I make use of the &lt;a href="https://chrome.google.com/webstore/detail/save-to-notion/ldmmifpegigmeammaeckplhnjbbpccmm"&gt;Save to Notion&lt;/a&gt; extension as I can fill in more of the metadata from the browser. Within mobile usage, saving content takes another step as I have to go into Notion and add the metadata. For the most part, I try to make use of my desktop when adding content to the Notion database.&lt;/p&gt;
-
-&lt;h1&gt;Iterate and Evolve&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;ll keep making changes and iterate on my content consumption system, hopefully making it better each time. The goal is still to turn pieces of content into information that I can use as knowledge.&lt;/p&gt;
-
-&lt;p&gt;The next thing I&amp;rsquo;m planning to tackle is the actual consumption part of the system and having a process for knowledge retention.&lt;/p&gt;
 </content>
   </entry>
 </feed>

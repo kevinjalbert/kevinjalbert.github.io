@@ -171,7 +171,7 @@ By keeping a template that has mostly everything set up, I'm able to generate th
 
 # Get your Own Version!
 
-> [Click to get my Weekly Notion Template](https://www.notion.so/Week-Template-0a7ac4d03082417c929176b5ea1df07e)
+> [Click to get my Weekly Notion Template](https://kevinjalbert-shared-templates.notion.site/Week-Template-9d2dba2d4c164defb57cf8ff4299fc0c)
 
 Notion has the ability to [duplicate public pages into your own account](https://www.notion.so/Duplicate-public-pages-d8a461baeeb54d91b156ff5559192321#d8a461baeeb54d91b156ff5559192321). You can use that functionality along with the above link to get my template. It can be a bit overwhelming, but I've placed some annotations in the template to help you set it up. If you have any questions, feel free to leave a comment on this post. I'm planning to keep this public template static even though my own template will evolve over time — this is all for the purpose of this blog post.
 

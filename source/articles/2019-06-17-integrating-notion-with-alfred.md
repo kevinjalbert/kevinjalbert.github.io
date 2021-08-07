@@ -15,7 +15,7 @@ pull_image_attribution: 'My Notion Workflow in Alfred'
 
 Last month I wrote about [My Weekly Notion Setup](/my-weekly-notion-setup) and how I use it to help organize my life.
 
-> [Click to get my Weekly Notion Template](https://www.notion.so/Week-Template-0a7ac4d03082417c929176b5ea1df07e)
+> [Click to get my Weekly Notion Template](https://kevinjalbert-shared-templates.notion.site/Week-Template-9d2dba2d4c164defb57cf8ff4299fc0c)
 
 I like to use tools that are an extension of my hand and mind. If the tool does not bend to my will then I need to tailor it to do so. I've done this many times before, to which I normally share the end result (i.e., [how I synchronize my dotfiles](/synchronizing-my-dotfiles), [adding keyboard navigation to Todoist on MacOS](/todoist-with-keyboard-navigation-via-nativefier/), amongst other examples).
 

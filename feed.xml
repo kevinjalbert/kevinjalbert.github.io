@@ -2,16 +2,81 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-07-30T20:00:00-04:00</updated>
+  <updated>2021-08-28T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Stub Sleeps in Tests</title>
+    <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
+    <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
+    <updated>2021-08-29T22:25:22-04:00</updated>
+    <published>2021-08-28T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">A quick tip - when working with a code base that has sleep/delays in it, where you want to stub them out.</description>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m doing another short post here on testing code. I&amp;rsquo;ve observed that sometimes sleeps/delays find their way into production. A quick example of this would be for a retry loop (e.g., HTTP requests). When testing the code concerning these areas, you are taking on the duration of the sleep in your test suite which is slow and undesirable.&lt;/p&gt;
+
+&lt;p&gt;To combat the added delay in sleeps during tests, my recommendation is to stub/mock out the sleep method. Depending on the language, there are many ways to handle this. With Ruby using &lt;a href="https://github.com/seattlerb/minitest"&gt;Minitest&lt;/a&gt; and &lt;a href="https://github.com/freerange/mocha"&gt;Mocha&lt;/a&gt;, you would do the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Class that sleeps for five 1 second iterations, building an array of [0..4]&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SleepyObject&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;do_work&lt;/span&gt;
+    &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+    &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;
+      &lt;span class="nb"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;results&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Minitest and Mocha are needed for testing/stubbing&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'minitest/autorun'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'mocha'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'mocha/minitest'&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Test class&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SleepyObjectTest&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Minitest&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Test&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Takes 5 seconds to run&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_with_sleeps&lt;/span&gt;
+    &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SleepyObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;do_work&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Takes pretty much 0 seconds to run&lt;/span&gt;
+  &lt;span class="c1"&gt;# We are also asserting that five calls to `sleep` do happen&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_without_sleeps&lt;/span&gt;
+    &lt;span class="no"&gt;SleepyObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expects&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:sleep&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SleepyObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;do_work&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When we run the above code, we see the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Run options: -v --seed 14433
+
+# Running:
+
+SleepyObjectTest#test_with_sleeps = 5.02 s = .
+SleepyObjectTest#test_without_sleeps = 0.00 s = .
+
+Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
+
+2 runs, 3 assertions, 0 failures, 0 errors, 0 skips
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The tests using stubs execute quickly, and we still retain the ability to &lt;em&gt;assert&lt;/em&gt; that &lt;em&gt;sleeps&lt;/em&gt; are happening. This is a &lt;em&gt;win-win&lt;/em&gt; in my books.&lt;/p&gt;
+
+&lt;p&gt;It can be a bit difficult to &lt;em&gt;figure out&lt;/em&gt; what tests in your test suite that is affected by sleep durations. As the test creator, you&amp;rsquo;ll likely have a good idea of any sleep/delays in your test execution as you run them in isolation during development. I did find the following &lt;a href="https://dev.to/joeyschoblaska/make-your-specs-faster-with-sleep-study-1ff"&gt;article&lt;/a&gt; that presents a novel approach to identify which tests have sleeps in their execution path.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-28T09:09:08-04:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -68,7 +133,7 @@
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -121,7 +186,7 @@
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -170,7 +235,7 @@
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -247,7 +312,7 @@
     <title>How I Keep Active At Home</title>
     <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
     <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2021-03-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -276,7 +341,7 @@
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -360,7 +425,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -455,7 +520,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-08-06T21:59:12-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -511,7 +576,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -554,7 +619,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Guided Access on iOS - A Hidden Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
     <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
+    <updated>2021-08-06T22:00:30-04:00</updated>
     <published>2020-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -608,123 +673,6 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 &lt;p&gt;Guided Access is powerful and quick to enable/disable. It can really help when you have to hand your device over to someone without fearing what they might get into. As mobile devices are nearly full-fledged gaming devices as well, the usage in a gaming scenario can also prove useful.&lt;/p&gt;
 
 &lt;p&gt;Did you know about this iOS feature? Have you used it before, and if so in what capacity?&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Daily Review Using iOS Shortcuts and Scriptable</title>
-    <link rel="alternate" href="https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/"/>
-    <id>https://kevinjalbert.com/daily-review-using-ios-shortcuts-and-scriptable/</id>
-    <updated>2021-07-31T19:10:08-04:00</updated>
-    <published>2020-09-27T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read how I orchestrate my daily review that consists of multiple applications using iOS Shortcuts. I create a notification-based workflow as a workaround to Shortcut's time limit when switching between applications.</description>
-    <content type="html">&lt;p&gt;Doing daily and weekly reviews are generally considered a good habit, as it can help with organizing life and making sure you focus on the important things. Reviews are tailored to the individual and depend a lot on the individual&amp;rsquo;s goals and systems.&lt;/p&gt;
-
-&lt;h1&gt;My Frustrations Doing Daily Reviews&lt;/h1&gt;
-
-&lt;p&gt;Doing daily reviews for me has raised some frustrations:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;I have several steps in my daily review, which I haven&amp;rsquo;t properly formalized.&lt;/li&gt;
-&lt;li&gt;I sometimes don&amp;rsquo;t have a solid block of time to process each step of my review.&lt;/li&gt;
-&lt;li&gt;I like using my laptop that resides in my home office, which has caused me to delay/miss reviews if I cannot make time to get to my laptop.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Using my iPhone for Daily Reviews&lt;/h1&gt;
-
-&lt;p&gt;Upon looking at the frustrations, I came up with a better solution that uses my iPhone for my daily reviews. I always have my iPhone near me, and the individual steps of my review use applications that are web-based or within the Apple ecosystem. I&amp;rsquo;m giving up a physical keyboard by using my iPhone, but I&amp;rsquo;m willing to make that trade-off for accessibility.&lt;/p&gt;
-
-&lt;p&gt;When iOS 12 was released, it came with &lt;em&gt;Shortcuts&lt;/em&gt;. This was a new feature that allowed you to string together a bunch of tasks to create workflows. The Shortcuts functionality is my best bet in creating a formalized process that allows me to work through various applications as part of my daily review.&lt;/p&gt;
-
-&lt;h1&gt;iOS Shortcuts and its Limitations&lt;/h1&gt;
-
-&lt;p&gt;My strategy includes a &lt;em&gt;Review&lt;/em&gt; Shortcuts folder that contains the individual steps of my review process. I&amp;rsquo;ll have a single shortcut which then orchestrates my review using all those individual steps. I take advantage of the &lt;code&gt;Wait to return&lt;/code&gt; scripting action, which allows me to interact with an application (e.g., &lt;em&gt;Things&lt;/em&gt;) and then continue to the next step when I return to the Shortcuts application.&lt;/p&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-folder.png" style="width: 33%; height: 100%"/&gt;
-  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/review-shortcut.png" style="width: 33%; height: 100%"/&gt;
-  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/things-shortcut.png" style="width: 33%; height: 100%"/&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This worked out well when I was creating the workflow, but I hit a limitation in iOS Shortcuts. A running shortcut will only stay active for a short period of time when you are away from the Shortcuts application. From my experience, this is around 3 minutes. This means that if one step of my daily review takes longer than 3 minutes, the whole thing breaks down.&lt;/p&gt;
-
-&lt;h1&gt;Actionable Notifications via Scriptable&lt;/h1&gt;
-
-&lt;p&gt;To be honest, I was a bit disheartened with the time limitation in Shortcuts. I looked around for another solution. Instead of using the &lt;code&gt;Wait to return&lt;/code&gt; scripting action, I could use actionable notifications to open a URL that triggers the shortcut via the &lt;code&gt;shortcuts://run-shortcut?name=shortcutname&lt;/code&gt; URL scheme. Unfortunately, iOS Shortcuts does not have that capability when creating notifications as they can only show text.&lt;/p&gt;
-
-&lt;p&gt;I did some searching online and found &lt;a href="https://scriptable.app/"&gt;Scriptable&lt;/a&gt;, a powerful iOS automation application that uses JavaScript. With this, I could create notifications that, when interacted with, could open a specified URL.&lt;/p&gt;
-
-&lt;h2&gt;Putting it Together&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ll try my best to explain how I used iOS Shortcuts and Scriptables together to make everything work, as this just got a bit more complicated.&lt;/p&gt;
-
-&lt;p&gt;The &lt;em&gt;Daily Review&lt;/em&gt; shortcut grabs the text of each shortcut of my review process (within the &lt;em&gt;Review&lt;/em&gt; folder) and turns it into a single string separated by commas. This string looks like &lt;code&gt;Things,Journal,Habits,Drafts&lt;/code&gt; and we pass that into a Scriptable action.&lt;/p&gt;
-
-&lt;p&gt;Our individual steps of the review process are still fairly simple shortcuts, although now they take the &lt;em&gt;Shortcut Input&lt;/em&gt; and push that into the same Scriptable action as mentioned above.&lt;/p&gt;
-
-&lt;p&gt;It is worth noting that there are a few other small things happening in these shortcuts, but I&amp;rsquo;ve omitted them for the sake of brevity.&lt;/p&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/revised-review-shortcut.jpeg" style="width: 49%; height: 100%"/&gt;
-  &lt;img src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/revised-things-shortcut.png" style="width: 49%; height: 100%"/&gt;
-&lt;/div&gt;
-
-&lt;p&gt;My approach pushes all state of &lt;em&gt;where I am in the review process&lt;/em&gt; into the shortcut input, which is the string of shortcut steps to run. To see how we connect these shortcuts together, we&amp;rsquo;ll look at the Scriptable code that uses that string of shortcut steps.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="c1"&gt;// Variables used by Scriptable.&lt;/span&gt;
-&lt;span class="c1"&gt;// These must be at the very top of the file. Do not edit.&lt;/span&gt;
-&lt;span class="c1"&gt;// icon-color: deep-green; icon-glyph: user-md;&lt;/span&gt;
-&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="nx"&gt;createNotification&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;openURL&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;notification&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Notification&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-  &lt;span class="nx"&gt;notification&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;body&lt;/span&gt;
-  &lt;span class="nx"&gt;notification&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;openURL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;openURL&lt;/span&gt;
-  &lt;span class="nx"&gt;notification&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;schedule&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;shortcutParameter&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="dl"&gt;""&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createNotification&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-    &lt;span class="na"&gt;body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="s2"&gt;Done after this!&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="na"&gt;openURL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="s2"&gt;shortcuts://run-shortcut?name=Homescreen&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;
-  &lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;shortcuts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;shortcutParameter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="s2"&gt;,&lt;/span&gt;&lt;span class="dl"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;nextShortcut&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;shortcuts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-  &lt;span class="kd"&gt;const&lt;/span&gt; &lt;span class="nx"&gt;remainingShortcuts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;shortcuts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="s1"&gt;,&lt;/span&gt;&lt;span class="dl"&gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-  &lt;span class="k"&gt;await&lt;/span&gt; &lt;span class="nx"&gt;createNotification&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
-    &lt;span class="na"&gt;body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;`Next step is &lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nb"&gt;decodeURI&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;nextShortcut&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;&lt;span class="s2"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="na"&gt;openURL&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;`shortcuts://run-shortcut?name=&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;nextShortcut&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;amp;input=text&amp;amp;text=&lt;/span&gt;&lt;span class="p"&gt;${&lt;/span&gt;&lt;span class="nx"&gt;remainingShortcuts&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;`&lt;/span&gt;
-  &lt;span class="p"&gt;})&lt;/span&gt;
-
-  &lt;span class="nx"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setShortcutOutput&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;remainingShortcuts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nx"&gt;Script&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I&amp;rsquo;ll walk through key steps of what happens when we trigger the &lt;em&gt;Daily Review&lt;/em&gt; shortcut:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Grab all shortcuts from the &lt;em&gt;Review&lt;/em&gt; folder and combine them into a single string (e.g., &lt;code&gt;Things,Journal,Habits,Drafts&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;This string is passed as input to the Scriptable action.&lt;/li&gt;
-&lt;li&gt;The script identifies &lt;code&gt;nextShortcut = &amp;quot;Things&amp;quot;&lt;/code&gt; and &lt;code&gt;remainingShortcuts = &amp;quot;Journal,Habits,Drafts&amp;quot;&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;A notification is created that has the URL of &lt;code&gt;shortcuts://run-shortcut?name=Things&amp;amp;input=text&amp;amp;text=Journal,Habits,Drafts&lt;/code&gt; that says &amp;ldquo;Next step is Things&amp;rdquo;.&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;Daily Review&lt;/em&gt; Shortcut has finished running.&lt;/li&gt;
-&lt;li&gt;Tapping the notification will run the &lt;code&gt;Things&lt;/code&gt; shortcut and pass in the inputs of &lt;code&gt;Journal,Habits,Drafts&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;The Things application is opened, and the shortcut&amp;rsquo;s input is passed along to the same Scriptable action as before.&lt;/li&gt;
-&lt;li&gt;A new notification is created for the next step while removing that step from the string of remaining shortcuts.&lt;/li&gt;
-&lt;li&gt;Eventually all shortcuts are run using steps 6-8, and a &amp;ldquo;Done after this!&amp;rdquo; notification finally shows. This will open the user&amp;rsquo;s homescreen.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1&gt;Daily Review With No Time Limits&lt;/h1&gt;
-
-&lt;p&gt;This new approach using Scriptable along with Shortcuts, while complicated, allows me to circumvent the time limit of Shortcuts. The workflow is actually pretty nice as I can move along entirely following notifications as the triggers for the next steps. All the state of the whole process is encoded in the string of shortcuts that have to run. The Review folder approach also makes it easy to add a new step in my review process, should the need arise.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Demo" width="414" height="896" src="/images/2020-09-28-daily-review-using-ios-shortcuts-and-scriptable/demo.gif" /&gt;&lt;/p&gt;
-
-&lt;p&gt;If the above gif isn&amp;rsquo;t doing it for you, you can get a better sense of the whole thing by watching the following video I recorded.&lt;/p&gt;
-
-&lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/CjTzhPxfz8Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
 </content>
   </entry>
 </feed>

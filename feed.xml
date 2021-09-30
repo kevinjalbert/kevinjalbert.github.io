@@ -2,16 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-08-28T20:00:00-04:00</updated>
+  <updated>2021-09-28T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Document Storage: Migrating Evernote to Google Drive</title>
+    <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
+    <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
+    <updated>2021-09-29T22:31:56-04:00</updated>
+    <published>2021-09-28T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read about my document storage journey to understand the reasons why I'm moving from Evernote to Google Drive and ditching my Doxie Go for Genius Scan (a mobile scanner application). Included are steps for exporting out of Evernote and into Google Drive.</description>
+    <content type="html">&lt;p&gt;I only really embraced a document storage solution when I acquired a &lt;a href="https://www.getdoxie.com/"&gt;Doxie Go&lt;/a&gt; back in 2013. I was able to scan documents with &lt;a href="https://en.wikipedia.org/wiki/Optical_character_recognition"&gt;OCR&lt;/a&gt; so that I could search their contents. I even paired it with an &lt;a href="https://en.wikipedia.org/wiki/Eye-Fi"&gt;Eye-Fi SD card&lt;/a&gt; so that I could upload scans wirelessly to my Macbook Air. It was great. I embraced &lt;a href="https://evernote.com/"&gt;Evernote&lt;/a&gt; as my document storage solution, as it hit everything and was highly recommended.&lt;/p&gt;
+
+&lt;p&gt;The times have changed. My Doxie Go has lost its battery capacity and dies after a few scans (you cannot scan when it&amp;rsquo;s charging). The Eye-Fi company doesn&amp;rsquo;t exist anymore, and my SD card is useless (trust me I tried to make it work). Evernote&amp;rsquo;s software isn&amp;rsquo;t looking so great anymore, and there is wavering hope around the company. On the flip side, mobile phones and their applications have greatly advanced in the last 8 years.&lt;/p&gt;
+
+&lt;p&gt;I decided to switch from using my Doxie with Evernote to using &lt;a href="https://thegrizzlylabs.com/genius-scan/"&gt;Genius Scan&lt;/a&gt; with &lt;a href="https://drive.google.com/"&gt;Google Drive&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Why Genius Scan&lt;/h2&gt;
+
+&lt;p&gt;In my experimentation, Genius Scan performed exceedingly well against others with respect to the quality and speed of scans. In contrast to many other document scanning applications out there, you don&amp;rsquo;t need a subscription to unlock the extra functionality &amp;ndash; it&amp;rsquo;s a one-time purchase of approximately $10. You gain the ability to export automatically to a document storage solution of your choice &amp;ndash; I selected Google Drive.&lt;/p&gt;
+
+&lt;h2&gt;Why Google Drive&lt;/h2&gt;
+
+&lt;p&gt;There are a number of reasons for picking Google Drive over Evernote:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Storage isn&amp;rsquo;t a concern. You get 15 GB for free (which is a lot for documents), or you&amp;rsquo;re likly already paying for additional storage anyways.&lt;/li&gt;
+&lt;li&gt;Evernote now requires me to pay ($90/year) for a subscription to search text inside documents&lt;/li&gt;
+&lt;li&gt;Evernote has all these other features that it has accumulated over the years that I don&amp;rsquo;t utilize (feature bloat).&lt;/li&gt;
+&lt;li&gt;I share the account with my wife and so she&amp;rsquo;ll have easy access as well.&lt;/li&gt;
+&lt;li&gt;Google Drive search is fairly powerful (it will search the content even without OCR)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The only issue I have is that the Google Drive search results interface is lacking compared to Evernote. Evernote provides a view containing a snippet of the search results in the context of the file. Evernote also has a preview of the selected note when navigating notes. In Google Drive, you just see the file names of the matches, forcing you to individually preview each file until you find what you need. That being said, the amount of times I&amp;rsquo;ve needed that level of precision in searching is infrequent.&lt;/p&gt;
+
+&lt;h2&gt;Migrating to Google Drive&lt;/h2&gt;
+
+&lt;p&gt;I recently made the migration over to Google Drive &amp;ndash; overall, it wasn&amp;rsquo;t too bad. The following outlines the steps I took:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Select each notebook from Evernote containing documents. I had multiple notebooks which acted as categories (e.g., Receipts, Bills, Taxes, etc&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;Right-click and open the export modal. Export using the &amp;lsquo;Multiple web pages (.html)&amp;rsquo; file format.&lt;/li&gt;
+&lt;li&gt;Put these in a &lt;code&gt;Notebooks&lt;/code&gt; directory.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Put the following Ruby script (&lt;code&gt;transform.rb&lt;/code&gt;) in the same directory level as &lt;code&gt;Notebooks&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'fileutils'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'securerandom'&lt;/span&gt;
+
+&lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Notebooks/*"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Processing &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+  &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/*"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="c1"&gt;# Only interested in directories as they hold PDFs, .html files exist here&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;file?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="no"&gt;FileUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="k"&gt;next&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"=&amp;gt; Processing &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Getting each file, renaming it and moving it to notebook directory&lt;/span&gt;
+    &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/*"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="n"&gt;file_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;basename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;chomp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"files"&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="no"&gt;SecureRandom&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;alphanumeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;extname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;)].&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;
+      &lt;span class="no"&gt;FileUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;mv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SEPARATOR&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Cleaning up empty note directories&lt;/span&gt;
+    &lt;span class="no"&gt;FileUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rmdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;ruby transform.rb&lt;/code&gt;, which leaves only resources (e.g., PDFs, images) in their respected notebook directory. The resources are also named after the note in Evernote (using a random suffix in case multiple resources existed in a note).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Import the whole &lt;code&gt;Notebooks&lt;/code&gt; directory into Google Drive where you want it.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I&amp;rsquo;ll see how this new document storage solution works long-term, but I have high hopes. An added bonus with the mobile application approach is that it allows me (or my wife!) to scan stuff without needing to be in my home office.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2021-08-29T22:25:22-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -76,7 +152,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2021-08-28T09:09:08-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -133,7 +209,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -186,7 +262,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -235,7 +311,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -312,7 +388,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>How I Keep Active At Home</title>
     <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
     <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-03-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -341,7 +417,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -425,7 +501,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -520,7 +596,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Using URL Scheme Links in Notion</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
     <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2020-12-21T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -576,7 +652,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Custom Notion iOS Widget</title>
     <link rel="alternate" href="https://kevinjalbert.com/custom-notion-ios-widget/"/>
     <id>https://kevinjalbert.com/custom-notion-ios-widget/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
+    <updated>2021-08-29T22:27:04-04:00</updated>
     <published>2020-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -613,66 +689,6 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 &lt;p&gt;If you are more interested in the technicals or would like to set up your own widget, you can look at the &lt;a href="https://github.com/kevinjalbert/notion-toolbox/tree/master/ios_widget"&gt;&lt;code&gt;ios_widget&lt;/code&gt; tool&lt;/a&gt; within my &lt;a href="https://github.com/kevinjalbert/notion-toolbox"&gt;&lt;code&gt;notion-toolbox&lt;/code&gt; GitHub Repository&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s worth noting that there are plenty of rough edges in this implementation as of its initial release, and it does require a lot of setup investment. In addition, if/when Notion decides to up their widget game, my custom solution might become obsolete. There are also concerns surrounding the upcoming offical Notion API, as I&amp;rsquo;m currently using the unofficial one (which can, in theory, break without notice). I&amp;rsquo;ll be curious how I can adapt my widget to use the official API in the future.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Guided Access on iOS - A Hidden Gem</title>
-    <link rel="alternate" href="https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/"/>
-    <id>https://kevinjalbert.com/guided-access-on-ios-a-hidden-gem/</id>
-    <updated>2021-08-06T22:00:30-04:00</updated>
-    <published>2020-10-30T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Guided Access is a great feature in iOS that limits the device to only show a single application with customizable restrictions. The ease of enabling/disabling a Guided Access session, opens up a lot of easy use cases that you might want to try it.</description>
-    <content type="html">&lt;p&gt;This will be a short post that serves more as a reminder to iOS users that you have access to the &lt;em&gt;Guided Access&lt;/em&gt; feature. This is a feature that is tucked away under &lt;em&gt;Settings &amp;gt; Accessibility&lt;/em&gt;, although its uses might fall a bit out of the typical realm of &lt;em&gt;accessibility&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h1&gt;What does Guided Access do?&lt;/h1&gt;
-
-&lt;p&gt;To quote &lt;a href="https://support.apple.com/en-ca/HT202612"&gt;Apple&amp;rsquo;s Support page&lt;/a&gt; on Guided Access:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Guided Access limits your device to a single app and lets you control which features are available. You can turn on Guided Access when you let a child use your device, or when accidental gestures might distract you.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The main draw is that it allows you to lock down your device by allowing only a single application to run. This means that without the passcode (or your touch/face ID), people cannot navigate away from where you enabled Guided Access. You also have the ability to disable regions of the screen and various device features (e.g., touch, keyboard, buttons, motion). It&amp;rsquo;s worth noting that banner notifications no longer show up while in a session.&lt;/p&gt;
-
-&lt;p&gt;You can enter a Guided Access session with a triple-click of the side/home button, and you exit with a double-click (if you have touch/face ID enabled). No need for the passcode if it is you trying to exit.&lt;/p&gt;
-
-&lt;h1&gt;Where to use Guided Access?&lt;/h1&gt;
-
-&lt;p&gt;I&amp;rsquo;ve outlined some use cases here, but I&amp;rsquo;m certain that there are other creative uses that I&amp;rsquo;m missing.&lt;/p&gt;
-
-&lt;h2&gt;When handing your device over&lt;/h2&gt;
-
-&lt;p&gt;For those with children, this is a great feature to leverage when you hand your child your device. You can lock down the device to the point where you don&amp;rsquo;t have to fear them getting into things they shouldn&amp;rsquo;t. You can also set time limits if needed so that a passcode pops up, ending their fun.&lt;/p&gt;
-
-&lt;p&gt;In a similar capacity to using it with children, this feature is useful when handing your phone to another person to show them something specific on your device. For example, you can enable a session and disable the touch feature so they can only &lt;em&gt;look&lt;/em&gt; at what you have on the screen. There is also no chance of embarrassment/privacy concerns as banner notifications don&amp;rsquo;t show up when you are in a session.&lt;/p&gt;
-
-&lt;p&gt;In situations when you are using a device for surveys or as a kiosk to complete forms, Guided Access would work well. As a side note, there is a better way to handle this using the &lt;a href="https://support.apple.com/en-ca/guide/apple-configurator-2/cadbf9c172/mac"&gt;Single App Mode via the Apple Configurator&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;When gaming&lt;/h2&gt;
-
-&lt;p&gt;iOS doesn&amp;rsquo;t have a &lt;em&gt;gaming mode&lt;/em&gt;, unlike some Android phones. This would be a mode that disables notifications and some touch gestures. Well, Guided Access on iOS is pretty much that without being labelled as such. &lt;a href="https://www.reddit.com/r/ios/comments/jh8co3/pro_tip_if_you_turn_on_guided_access_gaming_gets"&gt;This Reddit post&lt;/a&gt; does a great job outlining the benefits of gaming in a Guided Access session. TL;DR:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;No notifications.&lt;/li&gt;
-&lt;li&gt;No accidental swipe gestures opening the notifications or control center.&lt;/li&gt;
-&lt;li&gt;No home bar indicator if you don&amp;rsquo;t have a home button.&lt;/li&gt;
-&lt;li&gt;No redirection if you touch an ad.&lt;/li&gt;
-&lt;li&gt;No accidental &lt;em&gt;Back Tap&lt;/em&gt; (if you have them set up).&lt;/li&gt;
-&lt;li&gt;Change/disable Auto-Lock&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I would like to add that you can still get notifications on your Apple Watch even when in a Guided Access session.&lt;/p&gt;
-
-&lt;p&gt;You can automate some of this if you plan to always play certain games in Guided Access by using an iOS Shortcut. You would create an &lt;em&gt;Automation&lt;/em&gt; that, when your game application, would start the Guided Access session automatically.&lt;/p&gt;
-
-&lt;h1&gt;Tl;DR&lt;/h1&gt;
-
-&lt;p&gt;Guided Access is powerful and quick to enable/disable. It can really help when you have to hand your device over to someone without fearing what they might get into. As mobile devices are nearly full-fledged gaming devices as well, the usage in a gaming scenario can also prove useful.&lt;/p&gt;
-
-&lt;p&gt;Did you know about this iOS feature? Have you used it before, and if so in what capacity?&lt;/p&gt;
 </content>
   </entry>
 </feed>

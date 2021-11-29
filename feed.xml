@@ -2,16 +2,80 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-10-27T20:00:00-04:00</updated>
+  <updated>2021-11-27T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Global Hotkeys using the Hyper Key</title>
+    <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
+    <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
+    <updated>2021-11-28T19:55:16-05:00</updated>
+    <published>2021-11-27T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Set up a hyper key and global hotkeys to quickly perform actions regardless of where you are. This will save you keystrokes and/or time spent moving the mouse cursor.</description>
+    <content type="html">&lt;p&gt;My keyboard sees a lot of use, and where possible I try not to reach for the mouse/trackpad. I find I can work more efficiently by keeping my hands on the keyboard, which is a great thing as a developer.&lt;/p&gt;
+
+&lt;p&gt;My primary usage of the hyper key is to open/hide applications with global hotkeys. The hyper key is great because no application expects you to hold all modifier keys at the same time, which sets it up perfectly for a global hotkey.&lt;/p&gt;
+
+&lt;h2&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;This does require a bit of setup to make it work, but the payoff is pretty nice as you&amp;rsquo;ll be saving keystrokes and/or mouse/trackpad movements.&lt;/p&gt;
+
+&lt;p&gt;This is tailored to a MacOS system&amp;hellip;although I wouldn&amp;rsquo;t be surprised if you could find alternatives for a Linux or Windows environment.&lt;/p&gt;
+
+&lt;h2&gt;The Hyper Key&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A Hyper Key is a magical key that automatically presses all the standard modifiers (ctrl+shift+cmd+opt).&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash; &lt;a href="https://docs.folivora.ai/docs/1004_hyper_key.html"&gt;BetterTouchTool&amp;rsquo;s documentation on the hyper key&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I first heard about the &lt;em&gt;hyper key&lt;/em&gt; from an &lt;a href="https://stevelosh.com/blog/2012/10/a-modern-space-cadet/#s14-hyper"&gt;article Steve Losh wrote&lt;/a&gt; which touched on the subject. This inspired me to look at how I could use this new modifier key.&lt;/p&gt;
+
+&lt;p&gt;I personally use Karabiner-Elements to enable a hyper key, but any of the following should do the trick.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://karabiner-elements.pqrs.org/"&gt;Karabiner-Elements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.folivora.ai/"&gt;BetterTouchTool&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hyperkey.app/"&gt;Hyperkey App&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://kalis.me/setup-hyper-key-hammerspoon-macos/"&gt;Hammerspoon&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Global Hotkeys in Alfred&lt;/h2&gt;
+
+&lt;p&gt;I use &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; extensively. I made a new workflow that has multiple hotkey triggers that use the hyper key in combination with a single character. This allows the hotkey triggers to perform an action.&lt;/p&gt;
+
+&lt;p&gt;The one thing that you &lt;em&gt;need&lt;/em&gt; to do is ensure that the trigger&amp;rsquo;s behaviour is set to &lt;em&gt;&amp;ldquo;Pass through modifier keys (Fastest)&amp;rdquo;&lt;/em&gt; (as illustrated in the following image), otherwise, there will be a slight delay in the action being performed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Alfred trigger config" width="1676" height="842" src="/images/2021-11-28-global-hotkeys-using-the-hyper-key/alfred-trigger-config.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have several combinations which open/hide various applications:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hyper + space&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://iterm2.com/"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hyper + o&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://obsidian.md/"&gt;Obsidian&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hyper + c&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hyper + s&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://sparkmailapp.com/"&gt;Spark&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hyper + b&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://www.google.com/chrome/"&gt;Google Chrome&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Global Hotkeys in other Applications&lt;/h2&gt;
+
+&lt;p&gt;Hyper key shortcuts work well to access other applications in a global context. I even use them to open the quick add modal for &lt;a href="https://goodtaskapp.com/"&gt;GoodTask&lt;/a&gt; via &lt;code&gt;hyper + &amp;#39;&lt;/code&gt;. Another example of where I use it is with &lt;a href="http://www.hammerspoon.org/"&gt;Hammerspoon&lt;/a&gt; via &lt;code&gt;hyper + \&lt;/code&gt; to open &lt;em&gt;&lt;a href="https://github.com/nathancahill/Anycomplete"&gt;anycomplete&lt;/a&gt;&lt;/em&gt; to help with spelling complicated words.&lt;/p&gt;
+
+&lt;p&gt;When you have the hyper key, anything can be globally reachable via a simple key combination!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2021-10-28T09:11:29-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -94,7 +158,7 @@
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -170,7 +234,7 @@
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -235,7 +299,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -292,7 +356,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -345,7 +409,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -394,7 +458,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -471,7 +535,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>How I Keep Active At Home</title>
     <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
     <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-03-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -500,7 +564,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -584,7 +648,7 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
     <title>Reflecting on Five Years of Monthly Blogging</title>
     <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
     <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
+    <updated>2021-10-28T09:13:45-04:00</updated>
     <published>2021-01-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -673,62 +737,6 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 &lt;p&gt;My current blogging set up is aging, and I would really like to improve it. I plan to look into using a more modern &lt;a href="https://jamstack.org/"&gt;Jamstack&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Thank you for reading my content over the past five years. I look forward to creating new content that sparks interest.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Using URL Scheme Links in Notion</title>
-    <link rel="alternate" href="https://kevinjalbert.com/using-url-scheme-links-in-notion/"/>
-    <id>https://kevinjalbert.com/using-url-scheme-links-in-notion/</id>
-    <updated>2021-09-29T22:34:36-04:00</updated>
-    <published>2020-12-21T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">URL Schemes provide powerful ways to integrate applications together in the Apple Ecosystem. Notion, unfortunately, doesn't allow these URL Scheme links, as they are not 'valid' URLs. We can work around this by using a URL shortener to do some redirection.</description>
-    <content type="html">&lt;h1&gt;Context &amp;ndash; the Integrations from Notion&lt;/h1&gt;
-
-&lt;p&gt;I want to have the ability to link from &lt;a href="https://www.notion.so/?r=6b8d609eb50943419db4d87c67fa558e"&gt;Notion [Referral]&lt;/a&gt; to other applications in the Apple ecosystem (e.g., &lt;a href="https://culturedcode.com/things/"&gt;Things&lt;/a&gt;). If the application itself doesn&amp;rsquo;t offer the integration, you can usually &lt;em&gt;hack&lt;/em&gt; something together using &lt;em&gt;URL Scheme links&lt;/em&gt; (also called &lt;a href="https://support.apple.com/en-ca/guide/shortcuts/apdcd7f20a6f/ios"&gt;&lt;em&gt;x-callback-url&lt;/em&gt;&lt;/a&gt;), which are defined by an application. For example, Things has an &lt;a href="https://culturedcode.com/things/support/articles/2803573/"&gt;excellent article&lt;/a&gt; on how you can use URL Scheme links to interface with it.&lt;/p&gt;
-
-&lt;h1&gt;Problem &amp;ndash; the Invalid URL&lt;/h1&gt;
-
-&lt;p&gt;Unfortunately, Notion doesn&amp;rsquo;t recognize URL Scheme links (e.g., show &lt;em&gt;today&lt;/em&gt; in Things using &lt;code&gt;things:///show?id=today&lt;/code&gt;) as valid URLs. Even if you try to edit an existing URL in Notion, it won&amp;rsquo;t work.&lt;/p&gt;
-
-&lt;p&gt;This has come up as an issue in the &lt;a href="https://www.reddit.com/r/Notion"&gt;Notion subreddit&lt;/a&gt; &lt;a href="https://www.reddit.com/r/Notion/comments/azfnef/urlscheme_plz/"&gt;numerous&lt;/a&gt; &lt;a href="https://www.reddit.com/r/Notion/comments/gcx4nw/links_to_other_apps_xcallbackurl/"&gt;times&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1&gt;Solution &amp;ndash; the URL Shortner&lt;/h1&gt;
-
-&lt;p&gt;By using a URL shortener service (in this case &lt;a href="https://tinyurl.com/"&gt;TinyURL&lt;/a&gt;), we can create valid URLs that Notion will let us use. These URLs will open the browser and the redirection will then trigger the URL Scheme.&lt;/p&gt;
-
-&lt;p&gt;For a full demo of how this all works, you can watch the following short video I recorded.&lt;/p&gt;
-
-&lt;iframe class="youtube-embed" src="https://www.youtube.com/embed/cQvTnq9m_gg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;p&gt;To make the generation of these TinyURLs easier, I created an &lt;a href="https://support.apple.com/en-ca/guide/shortcuts/welcome/ios"&gt;iOS Shortcut&lt;/a&gt; that simplifies it by using the TinyURL&amp;rsquo;s API. You can grab the shortcut &lt;a href="https://www.icloud.com/shortcuts/ab01776c15a442938fe18f1e5f786586"&gt;here&lt;/a&gt;, or just recreate it yourself using the following template:&lt;/p&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2020-12-22-using-url-scheme-links-in-notion/shortcut.jpeg" style="width: 49%; height: 100%"/&gt;
-&lt;/div&gt;
-
-&lt;h1&gt;Future &amp;ndash; the Endless Possibilities&lt;/h1&gt;
-
-&lt;p&gt;I do hope that Notion eventually &lt;em&gt;allows&lt;/em&gt; for URL Scheme links to be used without any URL redirection needed. For the time being, however, this workaround does the trick.&lt;/p&gt;
-
-&lt;p&gt;With iOS Shortcuts, there are countless possibilities available to you. You can initiate &lt;em&gt;anything&lt;/em&gt; from a URL link in Notion now.&lt;/p&gt;
-
-&lt;p&gt;Imagine using this technique in Notion databases &amp;ndash; having a URL column that does something on your device when you open it.&lt;/p&gt;
-
-&lt;p&gt;Creating a crude integration starting from Notion leading into another iOS Applications is entirely doable, for example:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Open Things to specific project pages&lt;/li&gt;
-&lt;li&gt;Link to an external artifact (e.g., Email from &lt;a href="https://sparkmailapp.com/"&gt;Spark&lt;/a&gt;, Note from &lt;a href="https://bear.app/"&gt;Bear&lt;/a&gt;, etc&amp;hellip;)&lt;/li&gt;
-&lt;li&gt;A &lt;a href="/daily-review-using-ios-shortcuts-and-scriptable"&gt;Shortcut that kicks off a daily review&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;A Shortcut that fires off an HTTP request that triggers an external API.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Each application provides its own URL Scheme, although this &lt;a href="http://x-callback-url.com/apps/"&gt;site&lt;/a&gt; does a decent job cataloging URL Schemes of popular applications.&lt;/p&gt;
-
-&lt;p&gt;The possibilities are truly endless.&lt;/p&gt;
 </content>
   </entry>
 </feed>

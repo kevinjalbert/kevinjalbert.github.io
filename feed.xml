@@ -2,16 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2021-11-27T19:00:00-05:00</updated>
+  <updated>2021-12-29T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Steam Remote Play is Amazing</title>
+    <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
+    <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
+    <updated>2021-12-30T20:39:21-05:00</updated>
+    <published>2021-12-29T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">If you have a gaming PC and are not taking advantage of Steam Remote Play, then you are missing out on some comfy gaming. Read about what Steam Remote Play is if you aren't familiar with it, as well as some additional tips to make the most of it.</description>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m keeping this post fairly short due to the holiday season (I also just moved houses at the end of November, so it has been a bit hectic the last month). This post can be seen more as an informative tip for gamers who use &lt;a href="https://store.steampowered.com/"&gt;Steam&lt;/a&gt;, which they might not know about.&lt;/p&gt;
+
+&lt;h2&gt;Steam Remote Play&lt;/h2&gt;
+
+&lt;p&gt;If you do any form of PC gaming, you likely know about Steam. It&amp;rsquo;s a great service that has been around for a while. Fun fact &amp;ndash; I found out that my Steam account is 17 years old! Steam has a wide selection of games, and over the years many new features have been added. I want to talk about one such feature &amp;ndash; &lt;a href="https://store.steampowered.com/remoteplay"&gt;Steam Remote Play&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Steam Remote Play blew my mind when I first tried it out. It lets you stream a game from a  system running Steam to a compatible client (e.g., an iPhone/iPad, Apple TV, etc.). The inputs and outputs work seamlessly and you are able to fully experience the game without being confined to where your gaming PC is located.&lt;/p&gt;
+
+&lt;p&gt;I personally use the &lt;a href="https://apps.apple.com/us/app/steam-link/id1246969117"&gt;Steam Link&lt;/a&gt; app on my iPhone and Apple TV. Apple&amp;rsquo;s ecosystem can use Bluetooth controllers (e.g., Xbox Controller) as an input, so this allows me to play games from a comfy couch like a console gamer. For those times that I need a keyboard or mouse, Steam Remote Play can also stream to another Steam Desktop client on my MacBook.&lt;/p&gt;
+
+&lt;h2&gt;Tips&lt;/h2&gt;
+
+&lt;p&gt;The following are a couple of tips that I&amp;rsquo;ve found useful during my time using Steam Remote Play.&lt;/p&gt;
+
+&lt;h3&gt;Wired Network Connection&lt;/h3&gt;
+
+&lt;p&gt;The best thing you can do to improve your experience with Steam Remote Play is a strong LAN connection between the gaming PC and the clients you want to play on. A bad network connection increases input lag and graphical artifacts (pixelated look). It took a bit of work, but I was able to get a direct-wired ethernet connection from my router between my Apple TV and my gaming PC. The connection is such that I can&amp;rsquo;t tell whether I&amp;rsquo;m streaming or playing locally.&lt;/p&gt;
+
+&lt;h3&gt;Wake-on-LAN&lt;/h3&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t want to keep my gaming PC on all the time from a power consumption perspective. I only use it when I want to play games, however, it resides in another room different from where I&amp;rsquo;m playing.&lt;/p&gt;
+
+&lt;p&gt;I take advantage of &lt;a href="https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/wake-on-lan-feature"&gt;&lt;em&gt;Wake-on-LAN&lt;/em&gt;&lt;/a&gt; in Windows. This allows the Steam Link app to send a &lt;em&gt;wake-up&lt;/em&gt; packet when it tries to connect to the gaming PC, which powers on the PC for me on-demand. The finishing touch here is that I set a 10 minute &lt;a href="https://support.microsoft.com/en-us/windows/how-to-adjust-power-and-sleep-settings-in-windows-26f623b5-4fcc-4194-863d-b824e5ea7679"&gt;sleep timer in Windows&lt;/a&gt;, which makes it so when you exit a game and stop streaming the PC will go to sleep.&lt;/p&gt;
+
+&lt;h3&gt;Non-Steam Games&lt;/h3&gt;
+
+&lt;p&gt;I also found out you can add &lt;a href="https://help.steampowered.com/en/faqs/view/4B8B-9697-2338-40EC"&gt;Non-Steam games&lt;/a&gt;, which still work via Steam Remote Play. This opens up a lot of opportunities as Steam is essentially opening/closing an executable. You could have games from another store (e.g., &lt;a href="https://www.[epicgames.com/store"&gt;Epic Games&lt;/a&gt;), stand-alone games, or even ROMs if you are into that (via &lt;a href="https://steamgriddb.github.io/steam-rom-manager/"&gt;Steam ROM Manager&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h3&gt;Dedicated Controller&lt;/h3&gt;
+
+&lt;p&gt;The whole point of this setup is to increase comfort when playing games by not being tied to a desk (assuming the game can be played with a controller). Having a dedicated controller just lowers the friction of &lt;em&gt;getting into a game&lt;/em&gt;. With my Apple TV setup, I just turn the Xbox Controller and Apple TV on, start up Steam Link and I&amp;rsquo;m playing within a minute or less.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2021-11-28T19:55:16-05:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -75,7 +118,7 @@
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -158,7 +201,7 @@
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -234,7 +277,7 @@
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -299,7 +342,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -356,7 +399,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -409,7 +452,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -458,7 +501,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -535,7 +578,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>How I Keep Active At Home</title>
     <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
     <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-03-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -564,7 +607,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Wrapping Shell Commands and Keep the Original Name</title>
     <link rel="alternate" href="https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/"/>
     <id>https://kevinjalbert.com/wrapping-shell-commands-and-keep-the-original-name/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
+    <updated>2021-11-28T19:57:33-05:00</updated>
     <published>2021-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -643,100 +686,5 @@ functions[example]&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'
 
   return $exit_code'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Reflecting on Five Years of Monthly Blogging</title>
-    <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/"/>
-    <id>https://kevinjalbert.com/reflecting-on-five-years-of-monthly-blogging/</id>
-    <updated>2021-10-28T09:13:45-04:00</updated>
-    <published>2021-01-29T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">In 2016, I made a New Year's resolution to blog about something of substance every month. In this post, I'll reflect on this five-year journey.</description>
-    <content type="html">&lt;p&gt;Just over five years ago, I decided to dive into the technical blogging sphere. Since then, I have consistently produced a blog post every month. There are a couple of reasons why I blog and why I wanted to keep the monthly cadence:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Sharing Knowledge&lt;/li&gt;
-&lt;li&gt;Improving my Writing&lt;/li&gt;
-&lt;li&gt;Online Presence&lt;/li&gt;
-&lt;li&gt;Recognition&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Over the last five years, I&amp;rsquo;ve:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Published 63 blog posts.&lt;/li&gt;
-&lt;li&gt;Wrote 53,017 words (includes a bit of markup here and there).&lt;/li&gt;
-&lt;li&gt;Created content that would take 263 minutes to read (assuming 180 words per minute).&lt;/li&gt;
-&lt;li&gt;Reached 78,121 people with my writing.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In this post, I want to reflect on this journey &amp;ndash; goals, challenges, rewards.&lt;/p&gt;
-
-&lt;h1&gt;Challenges with Blogging&lt;/h1&gt;
-
-&lt;h2&gt;Time Commitment&lt;/h2&gt;
-
-&lt;p&gt;This is my biggest struggle with blogging. I procrastinate until the last possible moment and usually post within the last few days of the month.&lt;/p&gt;
-
-&lt;p&gt;The time commitment for each blog post varies depending on its content. The technical ones normally require a lot of upfront work (building the project and writing the code), while the non-technical posts are typically shorter to write.&lt;/p&gt;
-
-&lt;p&gt;Overall, I try to work on the posts in the evenings, but it sometimes bleeds into the weekend. Having a family makes it a bit challenging, but not impossible as my wife is a rockstar. A post can be &lt;em&gt;chipped away&lt;/em&gt; at instead of just writing the whole thing in one go, which is something I want to do more consistently.&lt;/p&gt;
-
-&lt;h2&gt;Blogging Platform&lt;/h2&gt;
-
-&lt;p&gt;I built my blog using &lt;a href="https://middlemanapp.com/"&gt;Middleman&lt;/a&gt;. If you&amp;rsquo;re interested, you can look at the &lt;a href="https://github.com/kevinjalbert/kevinjalbert.github.io"&gt;GitHub repository for the website&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Early on, I put a decent amount of work into making the site. It still serves its purpose but isn&amp;rsquo;t aging well. I almost always hit some local development issue when I spin it up as the technology stack/dependencies are old.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m torn &amp;ndash; I want a simple platform for writing, but I want customization capabilities. I&amp;rsquo;ll likely move to a new platform in the future, but it&amp;rsquo;s such a daunting task. I&amp;rsquo;ll also plan to investigate using an off-the-shelf solution for blogging. The idea is to spend less time on the platform and more time on creating content.&lt;/p&gt;
-
-&lt;h2&gt;Driving Traffic&lt;/h2&gt;
-
-&lt;p&gt;Getting traffic to my website is something I don&amp;rsquo;t really enjoy, and for the most part, I really depend on organic traffic and just the general SEO (Search Engine Optimization) that my website provides.&lt;/p&gt;
-
-&lt;p&gt;At one point, I decided to add a newsletter (which has just surpassed 100 subscribers). I&amp;rsquo;m currently using &lt;a href="https://mailchimp.com/"&gt;Mailchimp&lt;/a&gt; as it has an option to consume an RSS feed that pushes emails out to subscribers.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve also done some posting here and there on &lt;a href="https://www.reddit.com/"&gt;Reddit&lt;/a&gt;. When the subreddit matches the blog post topic it can drive some traffic. I saw this best when I was writing Notion related posts.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve cross-posted a few times on &lt;a href="https://dev.to/kevinjalbert"&gt;Dev.to&lt;/a&gt; and &lt;a href="https://medium.com/@kevinjalbert"&gt;Medium&lt;/a&gt;, but haven&amp;rsquo;t done so in a while. I&amp;rsquo;m still not 100% sure about the measurable benefits of cross-posting and whether it&amp;rsquo;s worth the time.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve occasionally promoted my posts on social media. Similar to the above point, do the benefits outweigh the time invested. I have seen some traction when tagging companies or topics to widen the reach.&lt;/p&gt;
-
-&lt;h1&gt;Rewards of Blogging&lt;/h1&gt;
-
-&lt;h2&gt;Reaching Many&lt;/h2&gt;
-
-&lt;p&gt;The following image is a snapshot of the five years in Google Analytics. I take pride that so many people have seen my content. The growth is a nice nod as well in keeping the monthly cadence up.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Blog stats" width="1912" height="1318" src="/images/2021-01-30-reflecting-on-five-years-of-monthly-blogging/blog-stats.png" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Following Referrals&lt;/h2&gt;
-
-&lt;p&gt;It is nice to see &lt;em&gt;where&lt;/em&gt; my content is reaching, and the following image shows how users are finding my content from a referral perspective. When drilling into specifics, it&amp;rsquo;s rewarding to see one of my blog posts ending up in a &lt;a href="https://github.com/chatwoot/chatwoot/pull/1134#issue-466028793"&gt;GitHub issue&lt;/a&gt;, &lt;a href="https://stackoverflow.com/questions/7298088/def-block-in-rake-task"&gt;StackOverflow answer&lt;/a&gt;, or &lt;a href="https://tshaped.io/zapier-and-notion/"&gt;blog post&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Blog referrals" width="1958" height="1728" src="/images/2021-01-30-reflecting-on-five-years-of-monthly-blogging/blog-referrals.png" /&gt;&lt;/p&gt;
-
-&lt;h2&gt;Ability to Refer to own Posts&lt;/h2&gt;
-
-&lt;p&gt;At times during my work, I am able to refer a colleague to a post of my own. I&amp;rsquo;ve had colleagues mention that they had found my posts when searching for a topic as well. I&amp;rsquo;ve even caught myself stumbling upon my own post when Googling.&lt;/p&gt;
-
-&lt;p&gt;By writing down some information as a post, I don&amp;rsquo;t have to reiterate it again if it is relevant &amp;ndash; I can simply link to it.&lt;/p&gt;
-
-&lt;h1&gt;The Future&lt;/h1&gt;
-
-&lt;p&gt;I see myself continuing with my monthly blog post for the foreseeable future. It&amp;rsquo;s worth my time investment.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ve recently made posts that have a YouTube video embedded in them. Normally these are for demos from a side project. I&amp;rsquo;ll likely continue these tactics, and experiment how I can incorporate them into a variety of other post topics. &lt;a href="https://www.youtube.com/channel/UCFWPd8rky_tD4B4Qqq99i4Q"&gt;My YouTube channel&lt;/a&gt; is very much in its infancy, and the quality of the videos could use some improvement.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Youtube stats" width="1384" height="874" src="/images/2021-01-30-reflecting-on-five-years-of-monthly-blogging/youtube-stats.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;As mentioned in the challenges section, I have dabbled in other services and platforms to broadcast my content. I would like to further explore this as it has the potential to drive more traffic to my content and improve the SEO.&lt;/p&gt;
-
-&lt;p&gt;My current blogging set up is aging, and I would really like to improve it. I plan to look into using a more modern &lt;a href="https://jamstack.org/"&gt;Jamstack&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Thank you for reading my content over the past five years. I look forward to creating new content that sparks interest.&lt;/p&gt;
-</content>
   </entry>
 </feed>

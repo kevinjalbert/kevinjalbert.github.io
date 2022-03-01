@@ -14,10 +14,16 @@
 
 ### Toubleshooting
 
+To install `bower`: `npm install -g bower`
+
 From personal experience, there have been some issues getting `libv8` and `therubyracer` dependencies working together:
 
   - https://stackoverflow.com/a/29705230/583592
   - https://gist.github.com/fernandoaleman/868b64cd60ab2d51ab24e7bf384da1ca#gistcomment-3152734
+
+The following also did it for me:
+  - brew install v8@3.15
+  - gem install libv8 -v '3.16.14.19' -- --with-system-v8
 
 ## Show your support
 

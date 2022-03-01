@@ -2,16 +2,92 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-01-30T19:00:00-05:00</updated>
+  <updated>2022-02-27T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Releasing github_contributions Ruby Gem</title>
+    <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
+    <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
+    <updated>2022-02-28T23:21:16-05:00</updated>
+    <published>2022-02-27T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">A post about releasing my new Ruby gem github_contributions! This is a tool that I've been using to track my GitHub contributions.</description>
+    <content type="html">&lt;p&gt;This post is more of an announcement of my new &lt;a href="https://rubygems.org/gems/github_contributions"&gt;Ruby gem &lt;code&gt;github_contributions&lt;/code&gt;&lt;/a&gt;. It is a tool that I&amp;rsquo;ve been using to track my GitHub contributions. I&amp;rsquo;ve put the contents of the &lt;a href="https://github.com/kevinjalbert/github_contributions"&gt;README.md from the repository&lt;/a&gt; here as it does a good job describing the tool.&lt;/p&gt;
+
+&lt;h2&gt;GitHub Contributions&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ever wanted to know where you (or someone else) are making contributions on GitHub?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Your GitHub profile shows you the &lt;a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-graphs-on-your-profile/viewing-contributions-on-your-profile#contributions-calendar"&gt;Contributions Calendar&lt;/a&gt; and &lt;a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-graphs-on-your-profile/viewing-contributions-on-your-profile#contribution-activity"&gt;Contribution activity&lt;/a&gt;, which both provide great visualizations and details covering contributions of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;creating/closing issues&lt;/li&gt;
+&lt;li&gt;creating/closing/merging/reviewing pull requests&lt;/li&gt;
+&lt;li&gt;creating repositories&lt;/li&gt;
+&lt;li&gt;authoring commits on the main branch of repositories&lt;/li&gt;
+&lt;li&gt;starting/answering discussions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I personally wanted to track comments on issues and pull requests as I felt they were a good indication of contributions. It sometimes isn&amp;rsquo;t uncommon for a lot of discussions to happen on issues or even a pull request.&lt;/p&gt;
+
+&lt;p&gt;I am a fan of &lt;a href="https://obsidian.md/"&gt;Obsidian&lt;/a&gt; right now to track my day at work. Recording these contributions in GitHub makes it simple to recall what I did in previous days/weeks. This is even more important if you have a &lt;a href="https://jvns.ca/blog/brag-documents/"&gt;&lt;em&gt;BragDoc&lt;/em&gt;&lt;/a&gt;. As Obsidian uses Markdown, that is the primary format that this tool is built for.&lt;/p&gt;
+
+&lt;h3&gt;Install&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;gem &lt;span class="nb"&gt;install &lt;/span&gt;github_contributions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You need a GitHub Personal Access Token in your ENVs as &lt;code&gt;GITHUB_ACCESS_TOKEN&lt;/code&gt; for this gem to work.&lt;/p&gt;
+
+&lt;h3&gt;Usage&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Show me contributions for 'kevinjalbert' for today&lt;/span&gt;
+github_contributions &lt;span class="nt"&gt;-a&lt;/span&gt; &lt;span class="s2"&gt;"kevinjalbert"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Show me contributions for 'kevinjalbert' for today only in the 'shopify' org&lt;/span&gt;
+github_contributions &lt;span class="nt"&gt;-a&lt;/span&gt; &lt;span class="s2"&gt;"kevinjalbert"&lt;/span&gt; &lt;span class="nt"&gt;-o&lt;/span&gt; &lt;span class="s2"&gt;"shopify"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Show me contributions for 'kevinjalbert' in the last week&lt;/span&gt;
+github_contributions &lt;span class="nt"&gt;-a&lt;/span&gt; &lt;span class="s2"&gt;"kevinjalbert"&lt;/span&gt; &lt;span class="nt"&gt;-s&lt;/span&gt; &lt;span class="s2"&gt;"last week"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Show me contributions for 'kevinjalbert' for the week before last&lt;/span&gt;
+github_contributions &lt;span class="nt"&gt;-a&lt;/span&gt; &lt;span class="s2"&gt;"kevinjalbert"&lt;/span&gt; &lt;span class="nt"&gt;-s&lt;/span&gt; &lt;span class="s2"&gt;"two weeks ago"&lt;/span&gt; &lt;span class="nt"&gt;-e&lt;/span&gt; &lt;span class="s2"&gt;"one week ago"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Show me contributions for 'kevinjalbert' for only yesterday&lt;/span&gt;
+github_contributions &lt;span class="nt"&gt;-a&lt;/span&gt; &lt;span class="s2"&gt;"kevinjalbert"&lt;/span&gt; &lt;span class="nt"&gt;-s&lt;/span&gt; &lt;span class="s2"&gt;"yesterday"&lt;/span&gt; &lt;span class="nt"&gt;-e&lt;/span&gt; &lt;span class="s2"&gt;"yesterday"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Help&lt;/span&gt;
+github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Contributions are grouped by their pull request or issue in order of creation time. This ends up producing a rather detailed list of where contributions were made in the specified time frame. Links are present to easily allow you to jump directly to the contribution. Everything is displayed in Markdown, ready to be copy/pasted where desired. The following is an example of what the output looks like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/avajs/ava/issues/2978"&gt;Support function in &lt;code&gt;message&lt;/code&gt; expectation in &lt;code&gt;t.throws&lt;/code&gt; / &lt;code&gt;t.throwsAsync&lt;/code&gt;&lt;/a&gt; by &lt;a href="https://github.com/sindresorhus"&gt;sindresorhus&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/avajs/ava/issues/2978"&gt;Issue Opened at 2022-02-26 08:42:19 UTC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/avajs/ava/issues/2978#issuecomment-1051842838"&gt;IssueComment Created at 2022-02-26 08:43:12 UTC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sindresorhus/string-width/pull/40"&gt;Use &lt;code&gt;for..of&lt;/code&gt; loop&lt;/a&gt; by &lt;a href="https://github.com/fisker"&gt;fisker&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/sindresorhus/string-width/pull/40#discussion_r815662489"&gt;PullRequestReviewComment Created at 2022-02-28 08:18:52 UTC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sindresorhus/string-width/pull/40#pullrequestreview-894766255"&gt;PullRequestReview Created at 2022-02-28 08:18:52 UTC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sindresorhus/string-width/pull/40"&gt;PullRequest Closed at 2022-02-28 08:20:12 UTC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sindresorhus/string-width/pull/40#issuecomment-1054001902"&gt;IssueComment Created at 2022-02-28 08:20:16 UTC&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-01-31T22:00:03-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -93,7 +169,7 @@
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-01-31T21:55:02-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -136,7 +212,7 @@
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -200,7 +276,7 @@
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -283,7 +359,7 @@
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -359,7 +435,7 @@
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -424,7 +500,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -481,7 +557,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -534,7 +610,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -583,7 +659,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>AppleScript that Mirrors iPhone to QuickTime</title>
     <link rel="alternate" href="https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/"/>
     <id>https://kevinjalbert.com/applescript-that-mirrors-iphone-to-quicktime/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
+    <updated>2022-02-28T21:48:59-05:00</updated>
     <published>2021-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -654,35 +730,6 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
 &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;openDeviceMenu&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This function for opening the menu is explicitly telling it to ignore the application responses (i.e., don&amp;rsquo;t wait for feedback). A manual delay of a second is injected to give time for the menu to open up. It also kills the &lt;code&gt;System Events&lt;/code&gt;, which ends up forcing the script to continue execution to future actions. I&amp;rsquo;ll be honest, I&amp;rsquo;m not 100% on the specifics but it worked &amp;ndash; the menu opens and the selections are made in just over a second now.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>How I Keep Active At Home</title>
-    <link rel="alternate" href="https://kevinjalbert.com/how-i-keep-active-at-home/"/>
-    <id>https://kevinjalbert.com/how-i-keep-active-at-home/</id>
-    <updated>2021-12-30T20:44:13-05:00</updated>
-    <published>2021-03-28T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">If you're not one to exercise but you like to play games or watch shows/movies, make it a point to not sit still. Get a stationary bike, an inexpensive treadmill, or other types of exercise equipment and bundle what you want to do with physical activity.</description>
-    <content type="html">&lt;p&gt;At this point in my life, I live a pretty sedentary lifestyle. I&amp;rsquo;ve been working remotely for just over two years and so I&amp;rsquo;ve lost the &lt;em&gt;walk&lt;/em&gt; my old commute would provide me. The commute walk amounted to about 30 minutes of brisk walking each day. I&amp;rsquo;m not one to go to a gym for a workout, and I&amp;rsquo;m satisfied with at-home exercises. I have two young kids and it can be challenging to find time to exercise.&lt;/p&gt;
-
-&lt;p&gt;I picked up an inexpensive folding &lt;a href="https://www.amazon.ca/gp/product/B007595TKU"&gt;exercise bike&lt;/a&gt; to keep in my office a few years back to help with at-home exercising (cardio). I didn&amp;rsquo;t use it all that much until I started working remotely. The bike helped keep my Apple Watch &lt;em&gt;rings&lt;/em&gt; happy.&lt;/p&gt;
-
-&lt;p&gt;I had also discovered the joy of playing video games while cycling. As the exercise bike was light enough, I could drag it outside my office to where the video game consoles were. I also would sometimes just raise my desk into its standing position and play something on Steam.&lt;/p&gt;
-
-&lt;p&gt;I mostly play Action/Adventure and RPG games and these tend to work out well for me while cycling. Playing video games while biking can be a bit challenging at times, depending on what the game&amp;rsquo;s task is. I sometimes find myself slowing down for &lt;em&gt;tricky&lt;/em&gt; platforming, even completely stopping to complete a difficult boss battle.&lt;/p&gt;
-
-&lt;p&gt;In addition to playing video games, I will mix it up by watching videos. I generally stay to YouTube in which I&amp;rsquo;ll watch some videos on technical content (i.e., conference talks), or videos on random stuff. I have, on occasion, exercised through a movie, however that usually means splitting the &lt;em&gt;movie experience&lt;/em&gt; over multiple sessions.&lt;/p&gt;
-
-&lt;p&gt;I normally end up doing 30-45 minutes of cycling a day (depending on how sad my Apple rings are at the end of the day) while watching/playing something, and it is enough to work up a bit of sweat. I aim to keep my pace within a set range - nothing too intense, just enough to get the heart pumping faster than normal.&lt;/p&gt;
-
-&lt;p&gt;I recently purchased a &lt;a href="https://www.amazon.ca/gp/product/B08423CNCR"&gt;treadmill&lt;/a&gt; as well that I&amp;rsquo;ve tried gaming with. I personally found it much harder than being on a stationary bicycle. You cannot easily slow down for those &lt;em&gt;harder&lt;/em&gt; moments in a game (think flying off the back of the treadmill), and I found that my stride was a lot more clumsy. Watching a video while on a treadmill is better though, as you don&amp;rsquo;t have to work the controller and perform input commands.&lt;/p&gt;
-
-&lt;p&gt;This approach works for me and allows me to combine two things together - I can exercise and play at the same time.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; If you&amp;rsquo;re not one to exercise but you like to play games or watch shows/movies, make it a point to not sit still. Get a stationary bike, an inexpensive treadmill, or other types of exercise equipment and bundle what you want to do with physical activity.&lt;/p&gt;
 </content>
   </entry>
 </feed>

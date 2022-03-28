@@ -23,6 +23,10 @@ body {
       word-wrap: break-word;
     }
   }
+
+  details {
+    cursor: pointer;
+  }
 }
 
 .container {

@@ -11,7 +11,7 @@
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-03-27T21:16:54-04:00</updated>
+    <updated>2022-03-28T21:07:28-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -49,7 +49,7 @@
 
 &lt;p&gt;The following is the dump of the AppleScript I&amp;rsquo;m using. It has some guards in place to ensure that it only works when your focus is in Google Chrome and the current tab is a Google Doc (or Sheet/Slide).&lt;/p&gt;
 
-&lt;p&gt;The fonts will toggle between Ariel and Roboto Mono (although easy enough to modify to your own preference). The Font &lt;em&gt;selector&lt;/em&gt; works for me&amp;hellip; however Google could change it at anytime, breaking this flow.&lt;/p&gt;
+&lt;p&gt;The fonts will toggle between Arial and Roboto Mono (although easy enough to modify to your own preference). The Font &lt;em&gt;selector&lt;/em&gt; works for me&amp;hellip; however Google could change it at anytime, breaking this flow.&lt;/p&gt;
 
 &lt;p&gt;This code can then be put into a global hotkey (using something like &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; or &lt;a href="https://www.raycast.com/"&gt;Raycast&lt;/a&gt;).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight applescript"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Check to make sure we are focused on Google Chrome&lt;/span&gt;&lt;span class="w"&gt;
@@ -73,8 +73,7 @@
 &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
 
 &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Google Chrome"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;active&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;tab&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;front&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;window&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fontFamily&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;execute&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;javascript&lt;/span&gt;&lt;span class="w"&gt;
-  &lt;/span&gt;&lt;span class="s2"&gt;"document.querySelector('#docs-font-family &amp;gt; div &amp;gt; div &amp;gt; div.goog-toolbar-menu-button-caption.goog-inline-block').innerHTML;"&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;active&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;tab&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;front&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;window&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fontFamily&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;execute&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;javascript&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"document.querySelector('#docs-font-family &amp;gt; div &amp;gt; div &amp;gt; div.goog-toolbar-menu-button-caption.goog-inline-block').innerHTML;"&lt;/span&gt;&lt;span class="w"&gt;
 
     &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fontFamily&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;missing value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
         &lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"No Font Found"&lt;/span&gt;&lt;span class="w"&gt;
@@ -102,7 +101,7 @@
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -178,7 +177,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -260,7 +259,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -303,7 +302,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -367,7 +366,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -450,7 +449,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -526,7 +525,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -591,7 +590,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -648,7 +647,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -701,7 +700,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Keep a macOS Application Running using cron</title>
     <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
     <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2022-02-28T23:32:24-05:00</updated>
+    <updated>2022-03-27T21:21:29-04:00</updated>
     <published>2021-05-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

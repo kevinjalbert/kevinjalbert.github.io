@@ -41,7 +41,7 @@ Use a global hotkey [Hyper](/global-hotkeys-using-the-hyper-key/)+C to automate 
 
 The following is the dump of the AppleScript I'm using. It has some guards in place to ensure that it only works when your focus is in Google Chrome and the current tab is a Google Doc (or Sheet/Slide).
 
-The fonts will toggle between Ariel and Roboto Mono (although easy enough to modify to your own preference). The Font _selector_ works for me... however Google could change it at anytime, breaking this flow.
+The fonts will toggle between Arial and Roboto Mono (although easy enough to modify to your own preference). The Font _selector_ works for me... however Google could change it at anytime, breaking this flow.
 
 This code can then be put into a global hotkey (using something like [Alfred](https://www.alfredapp.com/) or [Raycast](https://www.raycast.com/)).
 
@@ -67,8 +67,7 @@ tell application "Google Chrome"
 end tell
 
 tell application "Google Chrome"
-	tell active tab of front window to set fontFamily to execute javascript
-  "document.querySelector('#docs-font-family > div > div > div.goog-toolbar-menu-button-caption.goog-inline-block').innerHTML;"
+	tell active tab of front window to set fontFamily to execute javascript "document.querySelector('#docs-font-family > div > div > div.goog-toolbar-menu-button-caption.goog-inline-block').innerHTML;"
 
 	if fontFamily is missing value then
 		log "No Font Found"

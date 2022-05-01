@@ -31,6 +31,9 @@
     <loc>https://kevinjalbert.com/graphql-persisted-queries-with-http-caching-part-3/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/respect-http-caching/</loc>
   </url>
   <url>
@@ -304,6 +307,15 @@
     <loc>https://kevinjalbert.com/tags/http-caching/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/docker/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/development/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/nginx/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/http/</loc>
   </url>
   <url>
@@ -365,9 +377,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/rspec/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/docker/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/mental-health/</loc>
@@ -467,9 +476,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/sidekiq/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/development/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/pronto/</loc>

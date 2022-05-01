@@ -1,0 +1,77 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <script>addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});</script> <link rel=canonical href=https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/> <title>Access Local Docker Containers by Domain Names instead of Ports | Kevin Jalbert</title> <meta name=description content="Read how to use domain names instead for your containers during development. You'll have an easier time remembering the container names instead of their ports."/> <meta name=keywords content="docker, development, nginx"/> <meta name=datePublished content="2022-04-30 00:00:00 UTC"/> <meta property="og:article:published_time" content="2022-04-30 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2022-04-30 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/> <meta property="og:url" content="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="Read how to use domain names instead for your containers during development. You'll have an easier time remembering the container names instead of their ports."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/shipping-container-house.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Access Local Docker Containers by Domain Names instead of Ports"/> <meta property="og:description" content="Read how to use domain names instead for your containers during development. You'll have an easier time remembering the container names instead of their ports."/> <meta property="og:image" content="https://kevinjalbert.com/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/shipping-container-house.jpg"/> <meta property="og:title" content="Access Local Docker Containers by Domain Names instead of Ports"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Access Local Docker Containers by Domain Names instead of Ports",
+       "keywords": "docker, development, nginx",
+       "url": "https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/",
+       "datePublished": "2022-04-30 00:00:00 UTC",
+       "dateModified": "2022-04-30 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> <script async src="/vendor/analytics/index.js"></script> <script async src="https://www.google-analytics.com/analytics.js"></script> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> <a href="/uses/">Uses</a> <a href="https://github.com/kevinjalbert/ama/blob/master/README.md">AMA</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Access Local Docker Containers by Domain Names instead of Ports</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">April 30, 2022 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>2 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/development/">development</a> <a href="/tags/docker/">docker</a> <a href="/tags/nginx/">nginx</a> </div> </div> </div> <img src=/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/shipping-container-house.jpg> <i><p><a href="https://flickr.com/photos/glamourschatz/6045962800" title="Jones-Glotfelty Shipping Container House, Flagstaff AZ">Jones-Glotfelty Shipping Container House, Flagstaff AZ</a> by <a href="https://flickr.com/people/glamourschatz">Glamour Schatz</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY</a></p> </i> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> If you enjoy this, consider subscribing to my newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <p style="text-align: center">I aim to publish one article a month</p> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <h2>Avoiding Ports when Accessing Local Docker Containers</h2> <p>When using <a href="https://www.docker.com/">Docker</a> during development, you&rsquo;ll expose your application on localhost. Typically, you simply forward the exposed port from the application to the host machine. This allows you to access it via <code>localhost:8080</code> (based on whatever port you specified in the configuration).</p> <p>I like to have nice <em>vanity</em> URLs for my local applications like <code>whoami-one.localhost</code> and avoid using ports. I&rsquo;ll demonstrate an easy way to get them using <a href="https://github.com/nginx-proxy/nginx-proxy"><code>nginxproxy/nginx-proxy</code></a>.</p> <div style="display: flex"> <img src="/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/with-port.png" style="width: 49%; height: 80%"/> <img src="/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/with-domain-name.png" style="width: 49%; height: 80%"/> </div> <p>It can be error-prone remembering what port corresponds to what application during development.</p> <h2>The Setup</h2> <p>I&rsquo;m using <a href="https://docs.docker.com/compose/">Docker Compose</a>, but in theory, you can do this with just <code>docker</code> commands as well.</p> <p>The core of the solution involves using <code>nginxproxy/nginx-proxy</code>, which generates reverse proxy configurations for <a href="https://www.nginx.com/">nginx</a> (and reloads it) when containers are started/stopped.</p> <p>In the following snippet, you&rsquo;ll see how I&rsquo;m specifying two services: <code>nginx-proxy</code> and <code>whoami-one</code>. The <code>whoami-one</code> service is just for demonstration purposes, but ideally is an application you are developing. The <code>VIRTUAL_HOST</code> environment variable specifies the domain name that you will use to reach that service.</p> <div class=highlight><pre class="highlight yaml"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx-proxy</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginxproxy/nginx-proxy</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">80:80'</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/var/run/docker.sock:/tmp/docker.sock:ro</span>
+
+  <span class="na">whoami-one</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">containous/whoami</span>
+    <span class="na">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">VIRTUAL_HOST=whoami-one.localhost</span>
+</code></pre></div> <p>Now go and visit <code>whoami-one.localhost</code> and you should see it all work!</p> <p><em>Note: I&rsquo;ve used <a href="https://en.wikipedia.org/wiki/.localhost"><code>localhost</code> as the Top-Level-Domain (TLD)</a> as it is reserved and avoids conflicts. I also use Chrome as my browser, which I believe automatically directs <code>.localhost</code> domains to localhost &ndash; otherwise you&rsquo;d have to do a bit more work to get that TLD to work.</em></p> <h2>Multiple Services and Projects</h2> <p>One issue with the above solution is that it doesn&rsquo;t work <em>across</em> services between different projects. Each <code>docker compose</code> sets up a default network that includes the name of the current directory. We can instead specify a consistent docker network to work around this limitation.</p> <p>First, we&rsquo;ll specify just the <code>nginx-proxy</code> container, but with a <em>default named</em> network. This makes it so all containers on this network can communicate.</p> <div class=highlight><pre class="highlight yaml"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">nginx-proxy</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">nginxproxy/nginx-proxy</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">80:80'</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/var/run/docker.sock:/tmp/docker.sock:ro</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">local-network</span>
+</code></pre></div> <p>Now, we can make a new <code>whoami</code> project (in a different directory) belonging to the same network that we defined for the <code>nginx-proxy</code>. This allows the two containers to see each other and we can visit <code>whoami.localhost</code> with no problems</p> <div class=highlight><pre class="highlight yaml"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">whoami</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">containous/whoami</span>
+    <span class="na">environment</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">VIRTUAL_HOST=whoami.localhost</span>
+
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">local-network</span>
+</code></pre></div> <p>Overall, I enjoy using this to help differentiate local Docker containers using domain names instead of ports.</p> <h2>Other Resources</h2> <ul> <li>There are plenty of other options that <a href="https://github.com/nginx-proxy/nginx-proxy"><code>nginx-proxy</code></a> has, like SSL support.</li> <li>This also isn&rsquo;t a unique solution, as <a href="https://github.com/traefik/traefik">Traefik</a> can also be used in a similar fashion.</li> <li>A throwback to an older project I made is <a href="/docker-compose-dns-consistency-dcdc/">Docker Compose DNS Consistency (DCDC)</a>, which provides consistent DNS resolution for services (not only for HTTP) internal and external to the Docker network.</li> </ul> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="container footer"> <div class="col-md-12 footer__social"> <a href="https://twitter.com/KevinJalbert">Twitter</a> <a href="https://github.com/kevinjalbert">GitHub</a> <a href="https://stackoverflow.com/users/583592/kevin-jalbert">Stack Overflow</a> </div> <div class="col-md-12 footer__copywrite"> Code licensed <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">MIT</a>, Content &copy; 2019 Kevin Jalbert </div> </div> </html> <script src="/javascripts/app.js"></script>

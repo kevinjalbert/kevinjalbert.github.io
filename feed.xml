@@ -2,16 +2,108 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-03-26T20:00:00-04:00</updated>
+  <updated>2022-04-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Access Local Docker Containers by Domain Names instead of Ports</title>
+    <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
+    <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
+    <updated>2022-04-30T21:46:48-04:00</updated>
+    <published>2022-04-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read how to use domain names instead for your containers during development. You'll have an easier time remembering the container names instead of their ports.</description>
+    <content type="html">&lt;h2&gt;Avoiding Ports when Accessing Local Docker Containers&lt;/h2&gt;
+
+&lt;p&gt;When using &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt; during development, you&amp;rsquo;ll expose your application on localhost. Typically, you simply forward the exposed port from the application to the host machine. This allows you to access it via &lt;code&gt;localhost:8080&lt;/code&gt; (based on whatever port you specified in the configuration).&lt;/p&gt;
+
+&lt;p&gt;I like to have nice &lt;em&gt;vanity&lt;/em&gt; URLs for my local applications like &lt;code&gt;whoami-one.localhost&lt;/code&gt; and avoid using ports. I&amp;rsquo;ll demonstrate an easy way to get them using &lt;a href="https://github.com/nginx-proxy/nginx-proxy"&gt;&lt;code&gt;nginxproxy/nginx-proxy&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/with-port.png" style="width: 49%; height: 80%"/&gt;
+  &lt;img src="/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/with-domain-name.png" style="width: 49%; height: 80%"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It can be error-prone remembering what port corresponds to what application during development.&lt;/p&gt;
+
+&lt;h2&gt;The Setup&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;m using &lt;a href="https://docs.docker.com/compose/"&gt;Docker Compose&lt;/a&gt;, but in theory, you can do this with just &lt;code&gt;docker&lt;/code&gt; commands as well.&lt;/p&gt;
+
+&lt;p&gt;The core of the solution involves using &lt;code&gt;nginxproxy/nginx-proxy&lt;/code&gt;, which generates reverse proxy configurations for &lt;a href="https://www.nginx.com/"&gt;nginx&lt;/a&gt; (and reloads it) when containers are started/stopped.&lt;/p&gt;
+
+&lt;p&gt;In the following snippet, you&amp;rsquo;ll see how I&amp;rsquo;m specifying two services: &lt;code&gt;nginx-proxy&lt;/code&gt; and &lt;code&gt;whoami-one&lt;/code&gt;. The &lt;code&gt;whoami-one&lt;/code&gt; service is just for demonstration purposes, but ideally is an application you are developing. The &lt;code&gt;VIRTUAL_HOST&lt;/code&gt; environment variable specifies the domain name that you will use to reach that service.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;3'&lt;/span&gt;
+
+&lt;span class="na"&gt;services&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;nginx-proxy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;nginxproxy/nginx-proxy&lt;/span&gt;
+    &lt;span class="na"&gt;ports&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;80:80'&lt;/span&gt;
+    &lt;span class="na"&gt;volumes&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;/var/run/docker.sock:/tmp/docker.sock:ro&lt;/span&gt;
+
+  &lt;span class="na"&gt;whoami-one&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;containous/whoami&lt;/span&gt;
+    &lt;span class="na"&gt;environment&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;VIRTUAL_HOST=whoami-one.localhost&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now go and visit &lt;code&gt;whoami-one.localhost&lt;/code&gt; and you should see it all work!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I&amp;rsquo;ve used &lt;a href="https://en.wikipedia.org/wiki/.localhost"&gt;&lt;code&gt;localhost&lt;/code&gt; as the Top-Level-Domain (TLD)&lt;/a&gt; as it is reserved and avoids conflicts. I also use Chrome as my browser, which I believe automatically directs &lt;code&gt;.localhost&lt;/code&gt; domains to localhost &amp;ndash; otherwise you&amp;rsquo;d have to do a bit more work to get that TLD to work.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2&gt;Multiple Services and Projects&lt;/h2&gt;
+
+&lt;p&gt;One issue with the above solution is that it doesn&amp;rsquo;t work &lt;em&gt;across&lt;/em&gt; services between different projects. Each &lt;code&gt;docker compose&lt;/code&gt; sets up a default network that includes the name of the current directory. We can instead specify a consistent docker network to work around this limitation.&lt;/p&gt;
+
+&lt;p&gt;First, we&amp;rsquo;ll specify just the &lt;code&gt;nginx-proxy&lt;/code&gt; container, but with a &lt;em&gt;default named&lt;/em&gt; network. This makes it so all containers on this network can communicate.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;3'&lt;/span&gt;
+
+&lt;span class="na"&gt;services&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;nginx-proxy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;nginxproxy/nginx-proxy&lt;/span&gt;
+    &lt;span class="na"&gt;ports&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;80:80'&lt;/span&gt;
+    &lt;span class="na"&gt;volumes&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;/var/run/docker.sock:/tmp/docker.sock:ro&lt;/span&gt;
+
+&lt;span class="na"&gt;networks&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;default&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;local-network&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, we can make a new &lt;code&gt;whoami&lt;/code&gt; project (in a different directory) belonging to the same network that we defined for the &lt;code&gt;nginx-proxy&lt;/code&gt;. This allows the two containers to see each other and we can visit &lt;code&gt;whoami.localhost&lt;/code&gt; with no problems&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;3'&lt;/span&gt;
+
+&lt;span class="na"&gt;services&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;whoami&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;containous/whoami&lt;/span&gt;
+    &lt;span class="na"&gt;environment&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;VIRTUAL_HOST=whoami.localhost&lt;/span&gt;
+
+&lt;span class="na"&gt;networks&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;default&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;local-network&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Overall, I enjoy using this to help differentiate local Docker containers using domain names instead of ports.&lt;/p&gt;
+
+&lt;h2&gt;Other Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are plenty of other options that &lt;a href="https://github.com/nginx-proxy/nginx-proxy"&gt;&lt;code&gt;nginx-proxy&lt;/code&gt;&lt;/a&gt; has, like SSL support.&lt;/li&gt;
+&lt;li&gt;This also isn&amp;rsquo;t a unique solution, as &lt;a href="https://github.com/traefik/traefik"&gt;Traefik&lt;/a&gt; can also be used in a similar fashion.&lt;/li&gt;
+&lt;li&gt;A throwback to an older project I made is &lt;a href="/docker-compose-dns-consistency-dcdc/"&gt;Docker Compose DNS Consistency (DCDC)&lt;/a&gt;, which provides consistent DNS resolution for services (not only for HTTP) internal and external to the Docker network.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-03-28T21:07:28-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -101,7 +193,7 @@
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -177,7 +269,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -259,7 +351,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -302,7 +394,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -366,7 +458,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -449,7 +541,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -525,7 +617,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -590,7 +682,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -647,7 +739,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Embrace Active Support without Rails</title>
     <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
     <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
+    <updated>2022-03-28T21:22:29-04:00</updated>
     <published>2021-06-25T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -694,55 +786,6 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
 &lt;p&gt;If you are developing a Ruby gem, it would be best to not &lt;em&gt;force&lt;/em&gt; Active Support as a dependency without good reasons. If you absolutely need it, go for it &amp;ndash; ultimately it&amp;rsquo;s your call as the maintainer. Now if your gem is inherently tied to Rails, then it&amp;rsquo;s all good to include it.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Opinion: Avoid Active Support unless you absolutely need parts of it, or if the gem is intended to be used in a Rails project&lt;/strong&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Keep a macOS Application Running using cron</title>
-    <link rel="alternate" href="https://kevinjalbert.com/keep-a-macos-application-running-using-cron/"/>
-    <id>https://kevinjalbert.com/keep-a-macos-application-running-using-cron/</id>
-    <updated>2022-03-27T21:21:29-04:00</updated>
-    <published>2021-05-27T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read how I use cron to keep the RescueTime Application running. I was frustrated at RescueTime crashing and not recording data for a whole week.</description>
-    <content type="html">&lt;p&gt;I have used &lt;a href="https://www.rescuetime.com/ref/31263"&gt;RescueTime (Referral Link)&lt;/a&gt; for many years at this point. It always disappoints me when I get the email saying that no data was recorded in RescueTime for the last week (see image above article title). For reasons unannounced to me, the macOS menu bar application had stopped running. I use the &lt;a href="https://www.macbartender.com/"&gt;Bartender for macOS&lt;/a&gt; to hide certain menu bar applications (as they offer little visual value) &amp;ndash; RescueTime is hidden from my view and I never noticed it wasn&amp;rsquo;t running.&lt;/p&gt;
-
-&lt;p&gt;I needed a way to ensure that the application was kept running if it crashed.&lt;/p&gt;
-
-&lt;h2&gt;Launch Application in Background using &lt;code&gt;cron&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;I know of &lt;code&gt;cron&lt;/code&gt; and how it can run scripts periodically &amp;ndash; I figured this would be the tool to save me here.&lt;/p&gt;
-
-&lt;p&gt;I quickly put together the following (add this using &lt;code&gt;crontab -e&lt;/code&gt;):&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;*/5 * * * * open --hide --background /Applications/RescueTime.app
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Using &lt;a href="https://crontab.guru/#*/5_*_*_*_*"&gt;crontab.guru&lt;/a&gt; we can see that this will run the &lt;code&gt;open&lt;/code&gt; for ResuceTime command every 5 minutes. The &lt;code&gt;--hide&lt;/code&gt; and &lt;code&gt;--background&lt;/code&gt; ensure that the application doesn&amp;rsquo;t open in an obtrusive manner (i.e., think applications with a GUI).&lt;/p&gt;
-
-&lt;p&gt;This worked for me &amp;ndash; it opened RescueTime if it was closed out. I even tested this with other applications and it &lt;em&gt;mostly&lt;/em&gt; worked as expected. The &lt;em&gt;hide and background&lt;/em&gt; flags didn&amp;rsquo;t work for some applications (e.g., Evernote always appears in the forefront for whatever reason).&lt;/p&gt;
-
-&lt;p&gt;Done deal then right? Wrong. I noticed every now and then a keystroke or two wouldn&amp;rsquo;t register. When I looked at the time it was always on the minute the &lt;code&gt;cron&lt;/code&gt; would trigger&amp;hellip; If I had to take a guess, the &lt;code&gt;open&lt;/code&gt; was causing focus to switch briefly and would interrupt keystrokes on the current application I was in.&lt;/p&gt;
-
-&lt;p&gt;I could decrease the frequency that the command would run or&amp;hellip;&lt;/p&gt;
-
-&lt;h2&gt;Only &lt;code&gt;open&lt;/code&gt; if Application isn&amp;rsquo;t Running&lt;/h2&gt;
-
-&lt;p&gt;My next approach was to only &lt;em&gt;open&lt;/em&gt; the application if it wasn&amp;rsquo;t already running. This will prevent the &lt;code&gt;open&lt;/code&gt; from triggering multiple times during the day.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Scroll to see full command (it is one line due to fitting in the crontab)
-*/5 * * * * app=Rescuetime; ps aux | grep -v grep | grep -ci $app &amp;gt; /dev/null || open --hide --background /Applications/$app.app
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If we break this down:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;app=Rescuetime;&lt;/code&gt; sets a variable of what application we&amp;rsquo;re trying to keep open.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ps aux | grep -v grep | grep -ci $app &amp;gt; /dev/null&lt;/code&gt; lists all running processes, excluding the &lt;code&gt;grep&lt;/code&gt; process, and finally counting the found lines while &lt;code&gt;grep&lt;/code&gt;ing for the application&amp;rsquo;s name. This ends up being a 0 or 1. The STDOUT output is directed to the void so that it doesn&amp;rsquo;t create new &lt;code&gt;mail&lt;/code&gt; entries.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;||&lt;/code&gt; will conditionally run the next statement if the previous was falsey (i.e., no application was found running)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;open --hide --background /Applications/$app.app&lt;/code&gt; opens the specified application&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Now this works as expected! I no longer have to worry about RescueTime not running. I might do this for other menubar applications that I like to have active, but are hidden.&lt;/p&gt;
-
-&lt;p&gt;I haven&amp;rsquo;t tried this on Linux but I suspect you could do something similar (assuming there is an equivalent to &lt;code&gt;open&lt;/code&gt;).&lt;/p&gt;
 </content>
   </entry>
 </feed>

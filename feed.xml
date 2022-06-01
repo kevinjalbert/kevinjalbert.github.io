@@ -2,16 +2,76 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-04-29T20:00:00-04:00</updated>
+  <updated>2022-05-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Improvised Portable Smart Speaker</title>
+    <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
+    <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
+    <updated>2022-05-31T22:41:47-04:00</updated>
+    <published>2022-05-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read about my improvised solution that lets me enjoy having a smart speaker outside on my backyard patio for family and friends to enjoy.</description>
+    <content type="html">&lt;p&gt;This is a quick post, but I feel that it&amp;rsquo;s worth sharing. This &lt;em&gt;hack&lt;/em&gt; might be super obvious, but it didn&amp;rsquo;t come to me until after searching for more &lt;em&gt;conventional&lt;/em&gt; options.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;TL;DR Connect a USB battery bank to a Google Home Mini and take it outside with you (assuming you have Wifi coverage outside).&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;Music in the Backyard&lt;/h2&gt;
+
+&lt;p&gt;At my house, the kids (2 and 5) like playing out in the backyard. We have a patio with seating under a gazebo, so it is overall quite blissful. The only thing missing is some light music to enjoy.&lt;/p&gt;
+
+&lt;p&gt;There are plenty of options to get music into the backyard:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Phones&lt;/li&gt;
+&lt;li&gt;Portable Bluetooth speakers&lt;/li&gt;
+&lt;li&gt;Speakers under the eaves of the roof&lt;/li&gt;
+&lt;li&gt;And likely many other options&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In our house, we&amp;rsquo;ve gotten pretty used to having many smart speakers (namely Google Home Minis) for music and other random things (timers, weather, questions, etc&amp;hellip;). I had my sights on bringing that technology outside to the backyard patio.&lt;/p&gt;
+
+&lt;h2&gt;Getting Google Assistant Outside&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;To note, if I had used another company smart speaker then this might have gone a different path, but ultimately this approach would still work.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted to get Google Assistant outside, as that was the key part of the smart speaker &amp;ndash; responding to voice commands. We&amp;rsquo;re a household of Apple products, except for Google with respect to our house automation aspect. Using our phones wasn&amp;rsquo;t ideal to drive this system &amp;ndash; we&amp;rsquo;d need a dedicated product.&lt;/p&gt;
+
+&lt;p&gt;Looking around led me to the &lt;a href="https://ca.jbl.com/voice-activated-speaker/"&gt;JBL Link series of Voice-Activated Speakers&lt;/a&gt;, which looked perfect&amp;hellip; except for the price ($200+).&lt;/p&gt;
+
+&lt;p&gt;I then realized I had the product in front of me the whole time &amp;ndash; the Google Home Mini.&lt;/p&gt;
+
+&lt;p&gt;The only problem is powering it outside and ensuring it gets a Wifi signal.&lt;/p&gt;
+
+&lt;h2&gt;Power and Wifi&lt;/h2&gt;
+
+&lt;p&gt;I ensured that my backyard patio would get sufficient Wifi (I have a mesh network) so that connectivity was done.&lt;/p&gt;
+
+&lt;p&gt;It looks like it might be possible to use a mobile hotspot to make this work as well, but it looked more involved (I was seeing two phones are needed). Fortunately, I just didn&amp;rsquo;t need to do that.&lt;/p&gt;
+
+&lt;p&gt;Powering was pretty simple as well&amp;hellip; I just pulled out one of my many USB battery banks. I then connected it to the Google Home Mini with a USB micro cable (to note &amp;ndash; the 1st Generation of Google Home Minis use USB micro, while the 2nd Generations use a barrel-style connection). Simple solution and I get enough power for my usage. In the worse case, I just get a second battery bank. I also considered just using an outdoor outlet, but for my house, it wasn&amp;rsquo;t positioned in a good location, and then the likelihood of it being forgotten outside increases.&lt;/p&gt;
+
+&lt;h2&gt;Results&lt;/h2&gt;
+
+&lt;p&gt;Overall, I&amp;rsquo;m quite pleased with the solution even though it looks fairly hacky. I keep the USB cable and battery bank next to the Google Home Mini closest to the patio, making it easy to unplug and move outside as needed.&lt;/p&gt;
+
+&lt;p&gt;There are third-party products that seamlessly add this portability to your smart speaker, but it was just another thing to buy (and the availability wasn&amp;rsquo;t there in Canada).&lt;/p&gt;
+
+&lt;p&gt;One concern I have is with respect to weather resistance (i.e., rain or splashes of water from the kids), but it&amp;rsquo;s something that I&amp;rsquo;m willing to gamble with for how much it costs ;).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-04-30T21:46:48-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -103,7 +163,7 @@
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -193,7 +253,7 @@
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -269,7 +329,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -351,7 +411,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -394,7 +454,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -458,7 +518,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -541,7 +601,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -617,7 +677,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Stub Sleeps in Tests</title>
     <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
     <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2021-08-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -682,7 +742,7 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
     <title>Rails Testing: Reload the Model</title>
     <link rel="alternate" href="https://kevinjalbert.com/rails-testing-reloading-the-model/"/>
     <id>https://kevinjalbert.com/rails-testing-reloading-the-model/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
+    <updated>2022-05-31T22:41:47-04:00</updated>
     <published>2021-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -733,59 +793,6 @@ Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
 &lt;/blockquote&gt;
 
 &lt;p&gt;So be aware of this situation and recall that you do have access to &lt;code&gt;#reload&lt;/code&gt; if you need to freshen up your model&amp;rsquo;s attributes from the database. Rails even provide the ability to &lt;code&gt;#reload_association&lt;/code&gt; if your model has them (&lt;a href="https://guides.rubyonrails.org/v6.1.4/association_basics.html#methods-added-by-belongs-to-association"&gt;see docs here&lt;/a&gt;).&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Embrace Active Support without Rails</title>
-    <link rel="alternate" href="https://kevinjalbert.com/embrace-active-support-without-rails/"/>
-    <id>https://kevinjalbert.com/embrace-active-support-without-rails/</id>
-    <updated>2022-03-28T21:22:29-04:00</updated>
-    <published>2021-06-25T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read my opinion on using Active Support without Rails in Ruby-only projects. I think the benefits outweigh the cost. Active Support is a Ruby on Rails component that primarily extends the Ruby language providing, a richer experience to developers.</description>
-    <content type="html">&lt;h2&gt;What is Active Support&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Active Support is the Ruby on Rails component responsible for providing Ruby language extensions, utilities, and other transversal stuff.&lt;/p&gt;
-
-&lt;p&gt;It offers a richer bottom-line at the language level, targeted both at the development of Rails applications and at the development of Ruby on Rails itself.&lt;/p&gt;
-
-&lt;p&gt;&amp;ndash; &lt;a href="https://guides.rubyonrails.org/active_support_core_extensions.html"&gt;RailsGuides&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As a developer using Ruby, it is highly likely that you are using Rails in some projects. During your journey, you&amp;rsquo;ve likely touched aspects of Active Support without knowing it. Ruby, as a language, allows you to &lt;em&gt;redefine&lt;/em&gt; classes easily, almost to a fault. Active Support does exactly this.&lt;/p&gt;
-
-&lt;p&gt;Active Support does &lt;em&gt;a lot&lt;/em&gt; under the hood by modifying core Ruby classes. These core extensions provide more capabilities through new methods. If you are using Rails, Active Support is already there as a dependency. If you spend enough time on a Rails project, you&amp;rsquo;ll reach for these methods from Active Support.&lt;/p&gt;
-
-&lt;h2&gt;Active Support Without Rails&lt;/h2&gt;
-
-&lt;p&gt;The following are my opinions on when to use Active Support without Rails.&lt;/p&gt;
-
-&lt;h3&gt;Projects&lt;/h3&gt;
-
-&lt;p&gt;In Ruby-only projects, you likely already require some gems, and at this point including Active Support just adds another dependency to the project. With Active Support, your project gains all those convenience methods you are used to.&lt;/p&gt;
-
-&lt;p&gt;The reality of the situation is that you are unlikely to use &lt;em&gt;all&lt;/em&gt; the features of Active Support. Yes, this dependency is a large one, although if you want you can be &lt;a href="https://guides.rubyonrails.org/active_support_core_extensions.html#how-to-load-core-extensions"&gt;selective in loading only parts of Active Support&lt;/a&gt;. If you need to optimize your project (i.e., no dependencies for portability, or optimized code for performance), you might be using the wrong language. Active Support does lazy-load parts of itself, so it might not even be as &lt;em&gt;heavy&lt;/em&gt; as you think.&lt;/p&gt;
-
-&lt;p&gt;In my Ruby projects I dislike reaching for something I&amp;rsquo;d typically use in a Rails project only to find out I don&amp;rsquo;t have access to it (i.e., &lt;code&gt;10.days.ago&lt;/code&gt;). Could I take an approach that doesn&amp;rsquo;t require Active Support? Sure, but at what cost (i.e., time/complexity)? I love Ruby for its expressiveness and ease at &lt;em&gt;getting things done&lt;/em&gt;. Active Support helps me do that better and faster.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Opinion: Embrace Active Support and add it to your project&amp;rsquo;s dependencies&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3&gt;Scripts&lt;/h3&gt;
-
-&lt;p&gt;Small Ruby scripts are unique in the sense that they don&amp;rsquo;t always have dependencies. Requiring that first gem in a script can feel &lt;em&gt;wrong&lt;/em&gt;, although in my experience it&amp;rsquo;s worth it. The boost in productivity that a gem provides when you are trying to script something together is immense.&lt;/p&gt;
-
-&lt;p&gt;Dealing with dependencies for scripts is a small inconvenience, as running a script without the required gems usually presents a clear error that is quickly remedied.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Opinion: Embrace Active Support if you already require gems for your script or if you want methods that Active Support offers&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3&gt;Gems&lt;/h3&gt;
-
-&lt;p&gt;If you are developing a Ruby gem, it would be best to not &lt;em&gt;force&lt;/em&gt; Active Support as a dependency without good reasons. If you absolutely need it, go for it &amp;ndash; ultimately it&amp;rsquo;s your call as the maintainer. Now if your gem is inherently tied to Rails, then it&amp;rsquo;s all good to include it.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Opinion: Avoid Active Support unless you absolutely need parts of it, or if the gem is intended to be used in a Rails project&lt;/strong&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -1,0 +1,160 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <script>addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});</script> <link rel=canonical href=https://kevinjalbert.com/digging-through-git-history-for-removed-text/> <title>Digging through Git History for Removed Text | Kevin Jalbert</title> <meta name=description content="The text you are looking for isn't in the current revision anymore, and so you'll have to dig through the Git history somehow, looking for when it was removed/introduced. Read about how I approache..."/> <meta name=keywords content="git, tool"/> <meta name=datePublished content="2022-07-31 00:00:00 UTC"/> <meta property="og:article:published_time" content="2022-07-31 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2022-07-31 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/> <meta property="og:url" content="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="The text you are looking for isn't in the current revision anymore, and so you'll have to dig through the Git history somehow, looking for when it was removed/introduced. Read about how I approached this from a CLI perspective, using a script to simplify these searches for me."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2022-07-31-digging-through-git-history-for-removed-text/digger.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Digging through Git History for Removed Text"/> <meta property="og:description" content="The text you are looking for isn't in the current revision anymore, and so you'll have to dig through the Git history somehow, looking for when it was removed/introduced. Read about how I approached this from a CLI perspective, using a script to simplify these searches for me."/> <meta property="og:image" content="https://kevinjalbert.com/images/2022-07-31-digging-through-git-history-for-removed-text/digger.jpg"/> <meta property="og:title" content="Digging through Git History for Removed Text"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Digging through Git History for Removed Text",
+       "keywords": "git, tool",
+       "url": "https://kevinjalbert.com/digging-through-git-history-for-removed-text/",
+       "datePublished": "2022-07-31 00:00:00 UTC",
+       "dateModified": "2022-07-31 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/digging-through-git-history-for-removed-text/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> <script async src="/vendor/analytics/index.js"></script> <script async src="https://www.google-analytics.com/analytics.js"></script> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> <a href="/uses/">Uses</a> <a href="https://github.com/kevinjalbert/ama/blob/master/README.md">AMA</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Digging through Git History for Removed Text</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">July 31, 2022 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>1 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/git/">git</a> <a href="/tags/tool/">tool</a> </div> </div> </div> <img src=/images/2022-07-31-digging-through-git-history-for-removed-text/digger.jpg> <i><p><a href="https://flickr.com/photos/26344495@N05/50516511398" title="Close up of a modern excavator bucket digging a hole in the ground">Close up of a modern excavator bucket digging a hole in the ground</a> by <a href="https://flickr.com/people/26344495@N05">Ivan Radic</a> is licensed under <a href="https://creativecommons.org/licenses/by/2.0/">CC BY</a></p> </i> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> If you enjoy this, consider subscribing to my newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <p style="text-align: center">I aim to publish one article a month</p> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <h1>Deleted files in Git</h1> <p>Git keeps a history of practically <em>everything</em> for your repository. I cannot state how powerful a tool it is, and has helped me immensely as I try to understand the <em>why</em> of some code.</p> <p>There are times when I&rsquo;ve tried to <em>find</em> something that doesn&rsquo;t exist in the current revision but was in a previous version. I&rsquo;ve always struggled with this, and I wanted a <em>simpler</em> and (hopefully) <em>quicker</em> way to conduct this search.</p> <p>I decided to script my way to a solution that I feel happy about for now.</p> <h1>Let&rsquo;s go Digging</h1> <p>This script ends up doing the following to search through Git history for matching text:</p> <ol> <li>Search for any commits with any &lsquo;additions/removals&rsquo; of the search query.</li> <li>For each commit, get the list of files that contain the search query.</li> <li>For each file, <code>grep</code> the <code>git</code> patch and print the lines that match the search query (with the match highlighted).</li> </ol> <p>A lot of the <code>git</code> commands are leveraging the <code>--pickaxe-regex -S&lt;query&gt;</code> flags to search changes with regex powers:</p> <div class=highlight><pre class="highlight plaintext"><code>-S&lt;string&gt;
+  Look for differences that change the number of occurrences of the specified string (i.e. addition/deletion) in a file.
+
+--pickaxe-regex
+  Treat the &lt;string&gt; given to -S as an extended POSIX regular expression to match.
+</code></pre></div> <p>This would allow for the search query to leverage regular expressions. The following is an example of looking through my <a href="https://github.com/kevinjalbert/dotfiles">dotfiles repo</a> for <code>zgen</code> (which is something I don&rsquo;t use anymore).</p> <div class=highlight><pre class="highlight plaintext"><code>❯ git dig "\szgen"
+Searching for any commits with any 'additions/removals'
+  Matching regex: "\szgen"
+
+commit bd5dc58e9f94b7b62013a1378fbe7d101ccc70ec
+Author: Kevin Jalbert &lt;kevin.j.jalbert@gmail.com&gt;
+Date:   Fri Jan 6 17:42:44 2017 -0500
+
+    Update zsh.rake to install zplug instead of zgen
+
+FILE -&gt; tasks/zsh.rake
+-  desc "Install zgen"
+-    section "Installing zgen"
+
+# Plus a few more commits
+</code></pre></div> <h2>The git-dig Script</h2> <p>This <a href="https://gist.github.com/kevinjalbert/b390e2d22efa1c55a46c52d1f7ff3cde">GitHub Gist</a> will be the canonical reference of the <code>git-dig</code> script (and will see updates as needed).</p> <div class=highlight><pre class="highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
+
+<span class="nb">require</span> <span class="s1">'optparse'</span>
+<span class="nb">require</span> <span class="s1">'open3'</span>
+
+<span class="k">def</span> <span class="nf">files_with_search_query</span><span class="p">(</span><span class="n">sha</span><span class="p">,</span> <span class="n">search_query</span><span class="p">)</span>
+  <span class="sb">`git show --format="" --name-only </span><span class="si">#{</span><span class="n">sha</span><span class="si">}</span><span class="sb"> -i --pickaxe-regex -S </span><span class="si">#{</span><span class="n">search_query</span><span class="si">}</span><span class="sb">`</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">grep_over_file</span><span class="p">(</span><span class="n">sha</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">search_query</span><span class="p">)</span>
+  <span class="n">git_show_cmd</span> <span class="o">=</span> <span class="s2">"git show --format='' -p </span><span class="si">#{</span><span class="n">sha</span><span class="si">}</span><span class="s2"> -- '</span><span class="si">#{</span><span class="n">file</span><span class="si">}</span><span class="s2">'"</span>
+  <span class="n">grep_cmd</span> <span class="o">=</span> <span class="s2">"grep -i --color=always -E </span><span class="si">#{</span><span class="n">search_query</span><span class="si">}</span><span class="s2">"</span>
+  <span class="sb">`</span><span class="si">#{</span><span class="n">git_show_cmd</span><span class="si">}</span><span class="sb"> | </span><span class="si">#{</span><span class="n">grep_cmd</span><span class="si">}</span><span class="sb">`</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">git_pickaxe_search</span><span class="p">(</span><span class="n">search_query</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+  <span class="n">git_log_cmd</span> <span class="o">=</span> <span class="s2">"git log --no-merges --format=%h"</span>
+  <span class="n">git_log_cmd</span> <span class="o">+=</span> <span class="s2">" --after=</span><span class="se">\"</span><span class="si">#{</span><span class="n">options</span><span class="p">[</span><span class="ss">:after</span><span class="p">]</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="ss">:after</span><span class="p">]</span>
+  <span class="n">git_log_cmd</span> <span class="o">+=</span> <span class="s2">" --before=</span><span class="se">\"</span><span class="si">#{</span><span class="n">options</span><span class="p">[</span><span class="ss">:before</span><span class="p">]</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span> <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="ss">:before</span><span class="p">]</span>
+  <span class="n">git_log_cmd</span> <span class="o">+=</span> <span class="s2">" -i --pickaxe-regex -S </span><span class="si">#{</span><span class="n">search_query</span><span class="si">}</span><span class="s2">"</span>
+
+  <span class="no">Open3</span><span class="p">.</span><span class="nf">popen3</span><span class="p">(</span><span class="n">git_log_cmd</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">thread</span><span class="o">|</span>
+    <span class="k">yield</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">git_commit_info</span><span class="p">(</span><span class="n">sha</span><span class="p">)</span>
+  <span class="sb">`git show --no-patch </span><span class="si">#{</span><span class="n">sha</span><span class="si">}</span><span class="sb">`</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">find_root_dir</span>
+  <span class="n">current_dir</span> <span class="o">=</span> <span class="no">Dir</span><span class="p">.</span><span class="nf">pwd</span>
+
+  <span class="k">until</span> <span class="no">Dir</span><span class="p">.</span><span class="nf">exist?</span><span class="p">([</span><span class="n">current_dir</span><span class="p">,</span> <span class="s2">".git"</span><span class="p">].</span><span class="nf">join</span><span class="p">(</span><span class="no">File</span><span class="o">::</span><span class="no">SEPARATOR</span><span class="p">))</span> <span class="k">do</span>
+    <span class="n">parent_dir</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">current_dir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">parent_dir</span> <span class="o">==</span> <span class="n">current_dir</span>
+      <span class="nb">puts</span> <span class="s2">"No .git repo found in path (or parent paths)."</span>
+      <span class="nb">exit</span>
+    <span class="k">end</span>
+
+    <span class="n">current_dir</span> <span class="o">=</span> <span class="n">parent_dir</span>
+  <span class="k">end</span>
+
+  <span class="n">current_dir</span>
+<span class="k">end</span>
+
+<span class="c1"># Handle options</span>
+<span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="no">OptionParser</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">opts</span><span class="o">|</span>
+  <span class="n">opts</span><span class="p">.</span><span class="nf">banner</span> <span class="o">=</span> <span class="s2">"Usage: git-dig [options] [regex query]"</span>
+
+  <span class="n">opts</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="s2">"--after=DATE"</span><span class="p">,</span> <span class="s2">"Only searches commits more recent than the specific date."</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">v</span><span class="o">|</span>
+    <span class="n">options</span><span class="p">[</span><span class="ss">:after</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+  <span class="k">end</span>
+
+  <span class="n">opts</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="s2">"--before=DATE"</span><span class="p">,</span> <span class="s2">"Only searches commits older recent than the specific date."</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">v</span><span class="o">|</span>
+    <span class="n">options</span><span class="p">[</span><span class="ss">:before</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+  <span class="k">end</span>
+
+  <span class="n">opts</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="s2">"-h"</span><span class="p">,</span> <span class="s2">"--help"</span><span class="p">,</span> <span class="s2">"Prints this help"</span><span class="p">)</span> <span class="k">do</span>
+    <span class="nb">puts</span> <span class="n">opts</span>
+    <span class="nb">exit</span>
+  <span class="k">end</span>
+<span class="k">end</span><span class="p">.</span><span class="nf">parse!</span>
+
+<span class="c1"># Get search query</span>
+<span class="n">search_query</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\"</span><span class="si">#{</span><span class="no">ARGV</span><span class="p">.</span><span class="nf">first</span><span class="si">}</span><span class="se">\"</span><span class="s2">"</span>
+<span class="k">if</span> <span class="n">search_query</span> <span class="o">==</span> <span class="s1">'""'</span> <span class="c1"># empty search as it would just be a pair of quotes</span>
+  <span class="nb">puts</span> <span class="s2">"You need to pass a search term as input."</span>
+  <span class="nb">exit</span>
+<span class="k">end</span>
+
+<span class="nb">puts</span> <span class="s2">"Searching for any commits with any 'additions/removals'"</span>
+<span class="nb">puts</span> <span class="s2">"  Matching regex: </span><span class="si">#{</span><span class="n">search_query</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="ss">:after</span><span class="p">]</span> <span class="o">||</span> <span class="n">options</span><span class="p">[</span><span class="ss">:before</span><span class="p">]</span>
+  <span class="nb">puts</span> <span class="s2">"  With search options: </span><span class="si">#{</span><span class="n">options</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="nb">puts</span> <span class="s2">""</span>
+
+<span class="c1"># Get SHAs of all commits which had some 'addition/removal' of the search term</span>
+<span class="n">git_pickaxe_search</span><span class="p">(</span><span class="n">search_query</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">stdout</span><span class="o">|</span>
+  <span class="k">while</span> <span class="n">line</span> <span class="o">=</span> <span class="n">stdout</span><span class="p">.</span><span class="nf">gets</span>
+    <span class="nb">exit</span> <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">nil?</span>
+
+    <span class="n">sha</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">strip</span>
+
+    <span class="nb">puts</span> <span class="n">git_commit_info</span><span class="p">(</span><span class="n">sha</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="s2">""</span>
+
+    <span class="c1"># Print diff of files which have search term</span>
+    <span class="n">files_with_search_query</span><span class="p">(</span><span class="n">sha</span><span class="p">,</span> <span class="n">search_query</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+      <span class="nb">puts</span> <span class="s2">"FILE -&gt; </span><span class="si">#{</span><span class="n">file</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="n">grep_over_file</span><span class="p">(</span><span class="n">sha</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">search_query</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="s2">""</span>
+    <span class="k">end</span>
+
+    <span class="nb">puts</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">80</span>
+    <span class="nb">puts</span> <span class="s2">""</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div> <h1>Alternative Solutions</h1> <p>To note, most Git GUIs have some search functionality in place which can satisfy the majority of this. Using the Git CLI is still a nice thing to be able to leverage though, which is why I went this route.</p> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="container footer"> <div class="col-md-12 footer__social"> <a href="https://twitter.com/KevinJalbert">Twitter</a> <a href="https://github.com/kevinjalbert">GitHub</a> <a href="https://stackoverflow.com/users/583592/kevin-jalbert">Stack Overflow</a> </div> <div class="col-md-12 footer__copywrite"> Code licensed <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">MIT</a>, Content &copy; 2019 Kevin Jalbert </div> </div> </html> <script src="/javascripts/app.js"></script>

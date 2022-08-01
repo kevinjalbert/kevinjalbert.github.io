@@ -2,16 +2,178 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-06-27T20:00:00-04:00</updated>
+  <updated>2022-07-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Digging through Git History for Removed Text</title>
+    <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
+    <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
+    <updated>2022-07-31T23:49:17-04:00</updated>
+    <published>2022-07-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">The text you are looking for isn't in the current revision anymore, and so you'll have to dig through the Git history somehow, looking for when it was removed/introduced. Read about how I approached this from a CLI perspective, using a script to simplify these searches for me.</description>
+    <content type="html">&lt;h1&gt;Deleted files in Git&lt;/h1&gt;
+
+&lt;p&gt;Git keeps a history of practically &lt;em&gt;everything&lt;/em&gt; for your repository. I cannot state how powerful a tool it is, and has helped me immensely as I try to understand the &lt;em&gt;why&lt;/em&gt; of some code.&lt;/p&gt;
+
+&lt;p&gt;There are times when I&amp;rsquo;ve tried to &lt;em&gt;find&lt;/em&gt; something that doesn&amp;rsquo;t exist in the current revision but was in a previous version. I&amp;rsquo;ve always struggled with this, and I wanted a &lt;em&gt;simpler&lt;/em&gt; and (hopefully) &lt;em&gt;quicker&lt;/em&gt; way to conduct this search.&lt;/p&gt;
+
+&lt;p&gt;I decided to script my way to a solution that I feel happy about for now.&lt;/p&gt;
+
+&lt;h1&gt;Let&amp;rsquo;s go Digging&lt;/h1&gt;
+
+&lt;p&gt;This script ends up doing the following to search through Git history for matching text:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Search for any commits with any &amp;lsquo;additions/removals&amp;rsquo; of the search query.&lt;/li&gt;
+&lt;li&gt;For each commit, get the list of files that contain the search query.&lt;/li&gt;
+&lt;li&gt;For each file, &lt;code&gt;grep&lt;/code&gt; the &lt;code&gt;git&lt;/code&gt; patch and print the lines that match the search query (with the match highlighted).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A lot of the &lt;code&gt;git&lt;/code&gt; commands are leveraging the &lt;code&gt;--pickaxe-regex -S&amp;lt;query&amp;gt;&lt;/code&gt; flags to search changes with regex powers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;-S&amp;lt;string&amp;gt;
+  Look for differences that change the number of occurrences of the specified string (i.e. addition/deletion) in a file.
+
+--pickaxe-regex
+  Treat the &amp;lt;string&amp;gt; given to -S as an extended POSIX regular expression to match.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This would allow for the search query to leverage regular expressions. The following is an example of looking through my &lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;dotfiles repo&lt;/a&gt; for &lt;code&gt;zgen&lt;/code&gt; (which is something I don&amp;rsquo;t use anymore).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;❯ git dig "\szgen"
+Searching for any commits with any 'additions/removals'
+  Matching regex: "\szgen"
+
+commit bd5dc58e9f94b7b62013a1378fbe7d101ccc70ec
+Author: Kevin Jalbert &amp;lt;kevin.j.jalbert@gmail.com&amp;gt;
+Date:   Fri Jan 6 17:42:44 2017 -0500
+
+    Update zsh.rake to install zplug instead of zgen
+
+FILE -&amp;gt; tasks/zsh.rake
+-  desc "Install zgen"
+-    section "Installing zgen"
+
+# Plus a few more commits
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;The git-dig Script&lt;/h2&gt;
+
+&lt;p&gt;This &lt;a href="https://gist.github.com/kevinjalbert/b390e2d22efa1c55a46c52d1f7ff3cde"&gt;GitHub Gist&lt;/a&gt; will be the canonical reference of the &lt;code&gt;git-dig&lt;/code&gt; script (and will see updates as needed).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#!/usr/bin/env ruby&lt;/span&gt;
+
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'optparse'&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'open3'&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;files_with_search_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="sb"&gt;`git show --format="" --name-only &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt; -i --pickaxe-regex -S &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;grep_over_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;git_show_cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"git show --format='' -p &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; -- '&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;'"&lt;/span&gt;
+  &lt;span class="n"&gt;grep_cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"grep -i --color=always -E &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;git_show_cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt; | &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;grep_cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;git_pickaxe_search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"git log --no-merges --format=%h"&lt;/span&gt;
+  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;" --after=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;" --before=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;" -i --pickaxe-regex -S &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+  &lt;span class="no"&gt;Open3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;popen3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;git_log_cmd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;thread&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="k"&gt;yield&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;git_commit_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="sb"&gt;`git show --no-patch &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find_root_dir&lt;/span&gt;
+  &lt;span class="n"&gt;current_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;pwd&lt;/span&gt;
+
+  &lt;span class="k"&gt;until&lt;/span&gt; &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;exist?&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;current_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;".git"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SEPARATOR&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;parent_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dirname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_dir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;parent_dir&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;current_dir&lt;/span&gt;
+      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"No .git repo found in path (or parent paths)."&lt;/span&gt;
+      &lt;span class="nb"&gt;exit&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="n"&gt;current_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parent_dir&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;current_dir&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Handle options&lt;/span&gt;
+&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;span class="no"&gt;OptionParser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;banner&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Usage: git-dig [options] [regex query]"&lt;/span&gt;
+
+  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"--after=DATE"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Only searches commits more recent than the specific date."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"--before=DATE"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Only searches commits older recent than the specific date."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+    &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"-h"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"--help"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Prints this help"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;opts&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse!&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Get search query&lt;/span&gt;
+&lt;span class="n"&gt;search_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;ARGV&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'""'&lt;/span&gt; &lt;span class="c1"&gt;# empty search as it would just be a pair of quotes&lt;/span&gt;
+  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"You need to pass a search term as input."&lt;/span&gt;
+  &lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Searching for any commits with any 'additions/removals'"&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"  Matching regex: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"  With search options: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Get SHAs of all commits which had some 'addition/removal' of the search term&lt;/span&gt;
+&lt;span class="n"&gt;git_pickaxe_search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;gets&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt;
+
+    &lt;span class="n"&gt;sha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;
+
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;git_commit_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Print diff of files which have search term&lt;/span&gt;
+    &lt;span class="n"&gt;files_with_search_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"FILE -&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;grep_over_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+    &lt;span class="k"&gt;end&lt;/span&gt;
+
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"-"&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1&gt;Alternative Solutions&lt;/h1&gt;
+
+&lt;p&gt;To note, most Git GUIs have some search functionality in place which can satisfy the majority of this. Using the Git CLI is still a nice thing to be able to leverage though, which is why I went this route.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2022-06-28T16:25:59-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -177,7 +339,7 @@
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2022-06-28T16:28:10-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -237,7 +399,7 @@
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -329,7 +491,7 @@
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -419,7 +581,7 @@
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -495,7 +657,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -577,7 +739,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -620,7 +782,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -684,7 +846,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -767,7 +929,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Document Storage: Migrating Evernote to Google Drive</title>
     <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
     <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
+    <updated>2022-06-28T16:32:05-04:00</updated>
     <published>2021-09-28T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -837,71 +999,6 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;I&amp;rsquo;ll see how this new document storage solution works long-term, but I have high hopes. An added bonus with the mobile application approach is that it allows me (or my wife!) to scan stuff without needing to be in my home office.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Stub Sleeps in Tests</title>
-    <link rel="alternate" href="https://kevinjalbert.com/stub-sleeps-in-tests/"/>
-    <id>https://kevinjalbert.com/stub-sleeps-in-tests/</id>
-    <updated>2022-05-31T22:42:13-04:00</updated>
-    <published>2021-08-28T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">A quick tip - when working with a code base that has sleep/delays in it, where you want to stub them out.</description>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m doing another short post here on testing code. I&amp;rsquo;ve observed that sometimes sleeps/delays find their way into production. A quick example of this would be for a retry loop (e.g., HTTP requests). When testing the code concerning these areas, you are taking on the duration of the sleep in your test suite which is slow and undesirable.&lt;/p&gt;
-
-&lt;p&gt;To combat the added delay in sleeps during tests, my recommendation is to stub/mock out the sleep method. Depending on the language, there are many ways to handle this. With Ruby using &lt;a href="https://github.com/seattlerb/minitest"&gt;Minitest&lt;/a&gt; and &lt;a href="https://github.com/freerange/mocha"&gt;Mocha&lt;/a&gt;, you would do the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Class that sleeps for five 1 second iterations, building an array of [0..4]&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SleepyObject&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;do_work&lt;/span&gt;
-    &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-    &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;
-      &lt;span class="nb"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;results&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Minitest and Mocha are needed for testing/stubbing&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'minitest/autorun'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'mocha'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'mocha/minitest'&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Test class&lt;/span&gt;
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SleepyObjectTest&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Minitest&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Test&lt;/span&gt;
-
-  &lt;span class="c1"&gt;# Takes 5 seconds to run&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_with_sleeps&lt;/span&gt;
-    &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SleepyObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;do_work&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="c1"&gt;# Takes pretty much 0 seconds to run&lt;/span&gt;
-  &lt;span class="c1"&gt;# We are also asserting that five calls to `sleep` do happen&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_without_sleeps&lt;/span&gt;
-    &lt;span class="no"&gt;SleepyObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;expects&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:sleep&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;times&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;assert&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;SleepyObject&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;do_work&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;When we run the above code, we see the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Run options: -v --seed 14433
-
-# Running:
-
-SleepyObjectTest#test_with_sleeps = 5.02 s = .
-SleepyObjectTest#test_without_sleeps = 0.00 s = .
-
-Finished in 5.018095s, 0.3986 runs/s, 0.5978 assertions/s.
-
-2 runs, 3 assertions, 0 failures, 0 errors, 0 skips
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The tests using stubs execute quickly, and we still retain the ability to &lt;em&gt;assert&lt;/em&gt; that &lt;em&gt;sleeps&lt;/em&gt; are happening. This is a &lt;em&gt;win-win&lt;/em&gt; in my books.&lt;/p&gt;
-
-&lt;p&gt;It can be a bit difficult to &lt;em&gt;figure out&lt;/em&gt; what tests in your test suite that is affected by sleep durations. As the test creator, you&amp;rsquo;ll likely have a good idea of any sleep/delays in your test execution as you run them in isolation during development. I did find the following &lt;a href="https://dev.to/joeyschoblaska/make-your-specs-faster-with-sleep-study-1ff"&gt;article&lt;/a&gt; that presents a novel approach to identify which tests have sleeps in their execution path.&lt;/p&gt;
 </content>
   </entry>
 </feed>

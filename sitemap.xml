@@ -124,6 +124,9 @@
     <loc>https://kevinjalbert.com/learn-more-about-yourself-using-personality-types/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/git-bisect-only-the-current-branch/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/no-excuses-verifying-rspec-test-doubles/</loc>
   </url>
   <url>
@@ -398,6 +401,9 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/tool/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/git-bisect/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/code-review/</loc>

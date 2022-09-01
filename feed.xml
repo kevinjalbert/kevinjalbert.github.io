@@ -2,16 +2,153 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-07-30T20:00:00-04:00</updated>
+  <updated>2022-08-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Git Bisect: Only the Current Branch</title>
+    <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
+    <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
+    <updated>2022-08-31T23:34:34-04:00</updated>
+    <published>2022-08-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">When working with branches, often you are focusing on a specific part of the codebase. Sometimes, a commit in a string of commits can cause failures elsewhere. Check out my script on bisecting the current branch and catch the commit that introduced the error.</description>
+    <content type="html">&lt;h1&gt;Git Bisect&amp;rsquo;s Usefulness&lt;/h1&gt;
+
+&lt;p&gt;Imagine that at some point you&amp;rsquo;ve discovered that a bug/failure is present and you aren&amp;rsquo;t exactly sure when it was introduced. This is when &lt;code&gt;git bisect&lt;/code&gt; comes into the picture. With a little bit of setup, it helps binary search through changes to uncover the commit that introduced the issue.&lt;/p&gt;
+
+&lt;p&gt;There are a bunch of tips/tricks and usages of git bisect, but I&amp;rsquo;ll leave that to the &lt;a href="https://git-scm.com/docs/git-bisect"&gt;official documentation&lt;/a&gt; and possibly future posts (it is a very useful tool to be familiar with).&lt;/p&gt;
+
+&lt;h1&gt;Working on a Feature Branch&lt;/h1&gt;
+
+&lt;p&gt;I almost always make changes using feature branches (i.e., branching off of &lt;code&gt;main&lt;/code&gt; and eventually merging the branch back into &lt;code&gt;main&lt;/code&gt;). In projects that have large test suites (where you wouldn&amp;rsquo;t want to run the whole thing frequently), I only run the tests of files I&amp;rsquo;m working in. There is a small chance that I might &lt;em&gt;break&lt;/em&gt; something in a part of the codebase that I wasn&amp;rsquo;t running the tests for, but it can happen. I tend to commit often while working, so to figure out what broke, I have to find which commit is responsible for the issue.&lt;/p&gt;
+
+&lt;h2&gt;Manual Way&lt;/h2&gt;
+
+&lt;p&gt;The following is how I would approach this using &lt;code&gt;git bisect&lt;/code&gt;. The general idea is to only bisect the commits that exist on the feature branch.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# While on the feature branch that I've been working on&lt;/span&gt;
+
+&lt;span class="c"&gt;# Start bisect&lt;/span&gt;
+git bisect start
+
+&lt;span class="c"&gt;# Find SHA of where the branch diverged from main&lt;/span&gt;
+
+&lt;span class="c"&gt;# Mark that commit as 'good', as everything prior would have been okay&lt;/span&gt;
+git bisect good &amp;lt;branching-sha&amp;gt;
+
+&lt;span class="c"&gt;# Mark the current branch's SHA as 'bad' since something is broken now&lt;/span&gt;
+git bisect bad HEAD
+
+&lt;span class="c"&gt;# Run the script/test command to bisect and find the error commit&lt;/span&gt;
+git bisect run &amp;lt;script/test-command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When I&amp;rsquo;m done inspecting the identified commit, then I can &lt;code&gt;git bisect reset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Automated Way&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve made a script that ends up automating the commands and the finding of the SHA. This makes it so I can use a single command and achieve the same results as the manual way:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# While on the feature branch that I've been working on&lt;/span&gt;
+
+&lt;span class="c"&gt;# Use bisect-branch passing the target branch I diverged from and the&lt;/span&gt;
+&lt;span class="c"&gt;# script/test command to bisect and find the error commit&lt;/span&gt;
+git bisect-branch &lt;span class="nt"&gt;-b&lt;/span&gt; main &amp;lt;script/test-command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When I&amp;rsquo;m done inspecting the identified commit, then I can &lt;code&gt;git bisect reset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1&gt;The git-bisect-branch Script&lt;/h1&gt;
+
+&lt;p&gt;This &lt;a href="https://gist.github.com/kevinjalbert/3f0e7efe6ed0f411b7ae77b88e00a520"&gt;GitHub Gist&lt;/a&gt; will be the canonical reference of the &lt;code&gt;git-branch-bisect&lt;/code&gt; script (and will see updates as needed).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;#!/usr/bin/env bash&lt;/span&gt;
+&lt;span class="k"&gt;while &lt;/span&gt;&lt;span class="nb"&gt;getopts&lt;/span&gt; &lt;span class="s1"&gt;'b:dh'&lt;/span&gt; OPTION&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do
+  case&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$OPTION&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="k"&gt;in
+    &lt;/span&gt;b&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="nv"&gt;divergent_branch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$OPTARG&lt;/span&gt;
+      &lt;span class="p"&gt;;;&lt;/span&gt;
+    d&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="nv"&gt;debug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+      &lt;span class="p"&gt;;;&lt;/span&gt;
+    h&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"This is a script that performs a git-bisect over all commits from the current branch's HEAD to where the branch diverged from the supplied branch."&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"script usage: git-bisect-branch [-b branch] [-d] [-h] run_command"&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&amp;amp;2
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"example: git-bisect-branch -d -b main ruby test.rb"&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Arguments:"&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;" - Use '-b' to specify the branch from which your current branch has diverged, this should typically be 'main'/'master'."&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;" - Use '-d' to debug internal variables and see the verbose output of git commands."&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;" - Use '-h' to see this message."&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;" - The remainder of the command is interpreted as the run_command, that will be running at each bisect step."&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"If this script is on your PATH, you will be able to use it like 'git bisect-branch'."&lt;/span&gt;
+      &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+      &lt;span class="nb"&gt;exit &lt;/span&gt;1
+      &lt;span class="p"&gt;;;&lt;/span&gt;
+  &lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;span class="k"&gt;done
+&lt;/span&gt;&lt;span class="nb"&gt;shift&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;&lt;span class="nv"&gt;$OPTIND&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="nv"&gt;run_command&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$*&lt;/span&gt;
+&lt;span class="nv"&gt;current_branch&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;git branch &lt;span class="nt"&gt;--show-current&lt;/span&gt;&lt;span class="si"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;current_branch_sha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span class="si"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nt"&gt;-z&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$divergent_branch&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;then
+  &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"No branch argument supplied. Should be the 'main/master' branch name"&lt;/span&gt;
+  &lt;span class="nb"&gt;exit
+&lt;/span&gt;&lt;span class="k"&gt;fi
+
+if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nt"&gt;-z&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$run_command&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;then
+  &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"No run_command argument supplied. Should be the command you will use to run tests for each bisect step"&lt;/span&gt;
+  &lt;span class="nb"&gt;exit
+&lt;/span&gt;&lt;span class="k"&gt;fi
+
+&lt;/span&gt;&lt;span class="nv"&gt;branching_sha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;git merge-base &lt;span class="nv"&gt;$divergent_branch&lt;/span&gt; &lt;span class="nv"&gt;$current_branch&lt;/span&gt;&lt;span class="si"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Starting bisect of commits on '&lt;/span&gt;&lt;span class="nv"&gt;$current_branch&lt;/span&gt;&lt;span class="s2"&gt;' branch (&lt;/span&gt;&lt;span class="nv"&gt;$current_branch_sha&lt;/span&gt;&lt;span class="s2"&gt;) since branching from '&lt;/span&gt;&lt;span class="nv"&gt;$divergent_branch&lt;/span&gt;&lt;span class="s2"&gt;' branch (&lt;/span&gt;&lt;span class="nv"&gt;$branching_sha&lt;/span&gt;&lt;span class="s2"&gt;)"&lt;/span&gt;
+
+print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;'%.s─'&lt;/span&gt; &lt;span class="si"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;seq &lt;/span&gt;1 &lt;span class="si"&gt;$(&lt;/span&gt;tput cols&lt;span class="si"&gt;))&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nt"&gt;-n&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$debug&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;
+  &lt;span class="k"&gt;then
+
+  &lt;/span&gt;print_hline
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"run_command: &lt;/span&gt;&lt;span class="nv"&gt;$run_command&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"current_branch: &lt;/span&gt;&lt;span class="nv"&gt;$current_branch&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"current_branch_sha: &lt;/span&gt;&lt;span class="nv"&gt;$current_branch_sha&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"divergent_branch: &lt;/span&gt;&lt;span class="nv"&gt;$divergent_branch&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"branching_sha: &lt;/span&gt;&lt;span class="nv"&gt;$branching_sha&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+  print_hline
+
+  git bisect start
+  git bisect good &lt;span class="nv"&gt;$branching_sha&lt;/span&gt;
+  git bisect bad &lt;span class="nv"&gt;$current_branch_sha&lt;/span&gt;
+
+  git bisect run &lt;span class="nv"&gt;$run_command&lt;/span&gt;
+  &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
+  print_hline
+&lt;span class="k"&gt;else
+  &lt;/span&gt;git bisect start &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; /dev/null
+  git bisect good &lt;span class="nv"&gt;$branching_sha&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; /dev/null
+  git bisect bad &lt;span class="nv"&gt;$current_branch_sha&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; /dev/null
+  git bisect run &lt;span class="nv"&gt;$run_command&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; /dev/null
+&lt;span class="k"&gt;fi
+
+&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Don't forget to 'git bisect reset'"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+  </entry>
+  <entry>
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2022-07-31T23:49:17-04:00</updated>
+    <updated>2022-08-31T23:20:46-04:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -173,7 +310,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -339,7 +476,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -399,7 +536,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -491,7 +628,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -581,7 +718,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -657,7 +794,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -739,7 +876,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -782,7 +919,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -846,7 +983,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
     <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
     <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
+    <updated>2022-07-31T23:50:41-04:00</updated>
     <published>2021-10-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -923,82 +1060,6 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;At this point, we both have each other as a complication on our Apple Watches for quick high-throughput communication.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Document Storage: Migrating Evernote to Google Drive</title>
-    <link rel="alternate" href="https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/"/>
-    <id>https://kevinjalbert.com/document-storage-migrating-evernote-to-google-drive/</id>
-    <updated>2022-06-28T16:32:05-04:00</updated>
-    <published>2021-09-28T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read about my document storage journey to understand the reasons why I'm moving from Evernote to Google Drive and ditching my Doxie Go for Genius Scan (a mobile scanner application). Included are steps for exporting out of Evernote and into Google Drive.</description>
-    <content type="html">&lt;p&gt;I only really embraced a document storage solution when I acquired a &lt;a href="https://www.getdoxie.com/"&gt;Doxie Go&lt;/a&gt; back in 2013. I was able to scan documents with &lt;a href="https://en.wikipedia.org/wiki/Optical_character_recognition"&gt;OCR&lt;/a&gt; so that I could search their contents. I even paired it with an &lt;a href="https://en.wikipedia.org/wiki/Eye-Fi"&gt;Eye-Fi SD card&lt;/a&gt; so that I could upload scans wirelessly to my Macbook Air. It was great. I embraced &lt;a href="https://evernote.com/"&gt;Evernote&lt;/a&gt; as my document storage solution, as it hit everything and was highly recommended.&lt;/p&gt;
-
-&lt;p&gt;The times have changed. My Doxie Go has lost its battery capacity and dies after a few scans (you cannot scan when it&amp;rsquo;s charging). The Eye-Fi company doesn&amp;rsquo;t exist anymore, and my SD card is useless (trust me I tried to make it work). Evernote&amp;rsquo;s software isn&amp;rsquo;t looking so great anymore, and there is wavering hope around the company. On the flip side, mobile phones and their applications have greatly advanced in the last 8 years.&lt;/p&gt;
-
-&lt;p&gt;I decided to switch from using my Doxie with Evernote to using &lt;a href="https://thegrizzlylabs.com/genius-scan/"&gt;Genius Scan&lt;/a&gt; with &lt;a href="https://drive.google.com/"&gt;Google Drive&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;Why Genius Scan&lt;/h2&gt;
-
-&lt;p&gt;In my experimentation, Genius Scan performed exceedingly well against others with respect to the quality and speed of scans. In contrast to many other document scanning applications out there, you don&amp;rsquo;t need a subscription to unlock the extra functionality &amp;ndash; it&amp;rsquo;s a one-time purchase of approximately $10. You gain the ability to export automatically to a document storage solution of your choice &amp;ndash; I selected Google Drive.&lt;/p&gt;
-
-&lt;h2&gt;Why Google Drive&lt;/h2&gt;
-
-&lt;p&gt;There are a number of reasons for picking Google Drive over Evernote:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Storage isn&amp;rsquo;t a concern. You get 15 GB for free (which is a lot for documents), or you&amp;rsquo;re likly already paying for additional storage anyways.&lt;/li&gt;
-&lt;li&gt;Evernote now requires me to pay ($90/year) for a subscription to search text inside documents&lt;/li&gt;
-&lt;li&gt;Evernote has all these other features that it has accumulated over the years that I don&amp;rsquo;t utilize (feature bloat).&lt;/li&gt;
-&lt;li&gt;I share the account with my wife and so she&amp;rsquo;ll have easy access as well.&lt;/li&gt;
-&lt;li&gt;Google Drive search is fairly powerful (it will search the content even without OCR)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The only issue I have is that the Google Drive search results interface is lacking compared to Evernote. Evernote provides a view containing a snippet of the search results in the context of the file. Evernote also has a preview of the selected note when navigating notes. In Google Drive, you just see the file names of the matches, forcing you to individually preview each file until you find what you need. That being said, the amount of times I&amp;rsquo;ve needed that level of precision in searching is infrequent.&lt;/p&gt;
-
-&lt;h2&gt;Migrating to Google Drive&lt;/h2&gt;
-
-&lt;p&gt;I recently made the migration over to Google Drive &amp;ndash; overall, it wasn&amp;rsquo;t too bad. The following outlines the steps I took:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Select each notebook from Evernote containing documents. I had multiple notebooks which acted as categories (e.g., Receipts, Bills, Taxes, etc&amp;hellip;).&lt;/li&gt;
-&lt;li&gt;Right-click and open the export modal. Export using the &amp;lsquo;Multiple web pages (.html)&amp;rsquo; file format.&lt;/li&gt;
-&lt;li&gt;Put these in a &lt;code&gt;Notebooks&lt;/code&gt; directory.&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Put the following Ruby script (&lt;code&gt;transform.rb&lt;/code&gt;) in the same directory level as &lt;code&gt;Notebooks&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'fileutils'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'securerandom'&lt;/span&gt;
-
-&lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Notebooks/*"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Processing &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-
-  &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/*"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="c1"&gt;# Only interested in directories as they hold PDFs, .html files exist here&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;file?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="no"&gt;FileUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="k"&gt;next&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"=&amp;gt; Processing &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Getting each file, renaming it and moving it to notebook directory&lt;/span&gt;
-    &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;glob&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/*"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="n"&gt;file_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;basename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;chomp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"files"&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="no"&gt;SecureRandom&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;alphanumeric&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;extname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;)].&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;
-      &lt;span class="no"&gt;FileUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;mv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;notebook&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SEPARATOR&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Cleaning up empty note directories&lt;/span&gt;
-    &lt;span class="no"&gt;FileUtils&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;rmdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;note&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Run &lt;code&gt;ruby transform.rb&lt;/code&gt;, which leaves only resources (e.g., PDFs, images) in their respected notebook directory. The resources are also named after the note in Evernote (using a random suffix in case multiple resources existed in a note).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Import the whole &lt;code&gt;Notebooks&lt;/code&gt; directory into Google Drive where you want it.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I&amp;rsquo;ll see how this new document storage solution works long-term, but I have high hopes. An added bonus with the mobile application approach is that it allows me (or my wife!) to scan stuff without needing to be in my home office.&lt;/p&gt;
 </content>
   </entry>
 </feed>

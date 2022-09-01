@@ -1,0 +1,139 @@
+<!DOCTYPE html> <html lang=en> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content='IE=edge;chrome=1'/> <meta name=viewport content="width=device-width, initial-scale=1"> <script>addEventListener('error', window.__e=function f(e){f.q=f.q||[];f.q.push(e)});</script> <link rel=canonical href=https://kevinjalbert.com/git-bisect-only-the-current-branch/> <title>Git Bisect: Only the Current Branch | Kevin Jalbert</title> <meta name=description content="When working with branches, often you are focusing on a specific part of the codebase. Sometimes, a commit in a string of commits can cause failures elsewhere. Check out my script on bisecting the ..."/> <meta name=keywords content="git, git bisect, tool"/> <meta name=datePublished content="2022-08-31 00:00:00 UTC"/> <meta property="og:article:published_time" content="2022-08-31 00:00:00 UTC"/> <meta name=author content="Kevin Jalbert"/> <meta property="og:article:author" content="2022-08-31 00:00:00 UTC"/> <meta name=url content="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/> <meta property="og:url" content="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/> <meta name=site content="Kevin Jalbert"/> <meta property="og:site_name" content="Kevin Jalbert"/> <meta name="twitter:card" content=summary_large_image /> <meta name="twitter:creator" content="@kevinjalbert"/> <meta name="twitter:description" content="When working with branches, often you are focusing on a specific part of the codebase. Sometimes, a commit in a string of commits can cause failures elsewhere. Check out my script on bisecting the current branch and catch the commit that introduced the error."/> <meta name="twitter:image:src" content="https://kevinjalbert.com/images/2022-08-31-git-bisect-only-the-current-branch/broken-chain.jpg"/> <meta name="twitter:site" content="Kevin Jalbert"/> <meta name="twitter:title" content="Git Bisect: Only the Current Branch"/> <meta property="og:description" content="When working with branches, often you are focusing on a specific part of the codebase. Sometimes, a commit in a string of commits can cause failures elsewhere. Check out my script on bisecting the current branch and catch the commit that introduced the error."/> <meta property="og:image" content="https://kevinjalbert.com/images/2022-08-31-git-bisect-only-the-current-branch/broken-chain.jpg"/> <meta property="og:title" content="Git Bisect: Only the Current Branch"/> <script type="application/ld+json">
+    {
+       "@context": "http://schema.org",
+       "@type": "BlogPosting",
+       "headline": "Git Bisect: Only the Current Branch",
+       "keywords": "git, git bisect, tool",
+       "url": "https://kevinjalbert.com/git-bisect-only-the-current-branch/",
+       "datePublished": "2022-08-31 00:00:00 UTC",
+       "dateModified": "2022-08-31 00:00:00 UTC",
+       "author": {
+         "@type": "Person",
+         "name": "Kevin Jalbert",
+         "sameAs": [
+           "https://twitter.com/kevinjalbert",
+           "https://github.com/kevinjalbert",
+           "https://keybase.io/kevinjalbert",
+           "https://reddit.com/user/kevinjalbert"
+         ]
+       },
+       "mainEntityOfPage": {
+          "@type": "WebPage",
+         "@id": "https://kevinjalbert.com/git-bisect-only-the-current-branch/"
+       }
+    }
+  </script> <link href="/stylesheets/app.css" rel=stylesheet /> <link rel=alternate type="application/atom+xml" title="Articles | Kevin Jalbert" href="/feed.xml"/> <script async src="/vendor/analytics/index.js"></script> <script async src="https://www.google-analytics.com/analytics.js"></script> </head> <div class=container> <div class=header> <div class="col-xs-12 col-sm-7 navigation"> <a class=banner href="/">Kevin Jalbert</a> <a href="/about/">About</a> <a href="/now/">Now</a> <a href="/uses/">Uses</a> <a href="https://github.com/kevinjalbert/ama/blob/master/README.md">AMA</a> </div> <div class="col-xs-12 col-sm-5 search-component"> <input placeholder=Search class="search ui-autocomplete-input ui-corner-all" autocomplete=on> </div> </div> </div> <body> <div class="container content article"> <div class=row> <div class=col-md-12> <h1 class=article__title><p>Git Bisect: Only the Current Branch</p> </h1> <div class="row article__meta-info"> <div class="col-xs-4 col-md-4"> <div class="article__date entry-date">August 31, 2022 </div> </div> <div class="col-xs-4 col-md-4"> <div class=article__read-time>1 min read</div> </div> <div class="col-xs-4 col-md-4"> <div class=article__comments> <a href="https://kevinjalbert.com/git-bisect-only-the-current-branch/#disqus_thread">0 Comments</a> </div> </div> </div> <div class="row article__meta-tags"> <div class="col-xs-12 col-md-12"> <div class=article__tags> <a href="/tags/git/">git</a> <a href="/tags/git-bisect/">git bisect</a> <a href="/tags/tool/">tool</a> </div> </div> </div> <img src=/images/2022-08-31-git-bisect-only-the-current-branch/broken-chain.jpg> <i><p><a href="https://flickr.com/photos/hernanpc/7115374283" title="Las cadenas se cortan por el eslabón mas débil / Chains break by the weakest link">Las cadenas se cortan por el eslabón mas débil / Chains break by the weakest link</a> by <a href="https://flickr.com/people/hernanpc">hernanpba</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA</a></p> </i> <div class=article__separator></div> <div class=newsletter__form> <div class="panel panel-default"> <div class=panel-heading> <h4 class="panel-title accordion-toggle collapsed" data-toggle=collapse data-parent="#accordion" href="#newsletterFormCollapse"> If you enjoy this, consider subscribing to my newsletter </h4> </div> <div id=newsletterFormCollapse class="panel-collapse collapse"> <div class=panel-body> <p style="text-align: center">I aim to publish one article a month</p> <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel=stylesheet> <style>
+              #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+              /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+                 We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+        </style> <div id=mc_embed_signup> <form action="//kevinjalbert.us14.list-manage.com/subscribe/post?u=fe02783eec556cfc2893fe174&amp;id=aecd14f8e6" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class=validate target=_blank novalidate> <div id=mc_embed_signup_scroll> <input type=email value="" name=EMAIL class=email id=mce-EMAIL placeholder="E-mail address" required> <div style="position: absolute; left: -5000px;" aria-hidden=true><input name=b_fe02783eec556cfc2893fe174_aecd14f8e6 tabindex=-1 value=""></div> <div class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></div> </div> </form> </div> </div> </div> </div> </div> <h1>Git Bisect&rsquo;s Usefulness</h1> <p>Imagine that at some point you&rsquo;ve discovered that a bug/failure is present and you aren&rsquo;t exactly sure when it was introduced. This is when <code>git bisect</code> comes into the picture. With a little bit of setup, it helps binary search through changes to uncover the commit that introduced the issue.</p> <p>There are a bunch of tips/tricks and usages of git bisect, but I&rsquo;ll leave that to the <a href="https://git-scm.com/docs/git-bisect">official documentation</a> and possibly future posts (it is a very useful tool to be familiar with).</p> <h1>Working on a Feature Branch</h1> <p>I almost always make changes using feature branches (i.e., branching off of <code>main</code> and eventually merging the branch back into <code>main</code>). In projects that have large test suites (where you wouldn&rsquo;t want to run the whole thing frequently), I only run the tests of files I&rsquo;m working in. There is a small chance that I might <em>break</em> something in a part of the codebase that I wasn&rsquo;t running the tests for, but it can happen. I tend to commit often while working, so to figure out what broke, I have to find which commit is responsible for the issue.</p> <h2>Manual Way</h2> <p>The following is how I would approach this using <code>git bisect</code>. The general idea is to only bisect the commits that exist on the feature branch.</p> <div class=highlight><pre class="highlight shell"><code><span class="c"># While on the feature branch that I've been working on</span>
+
+<span class="c"># Start bisect</span>
+git bisect start
+
+<span class="c"># Find SHA of where the branch diverged from main</span>
+
+<span class="c"># Mark that commit as 'good', as everything prior would have been okay</span>
+git bisect good &lt;branching-sha&gt;
+
+<span class="c"># Mark the current branch's SHA as 'bad' since something is broken now</span>
+git bisect bad HEAD
+
+<span class="c"># Run the script/test command to bisect and find the error commit</span>
+git bisect run &lt;script/test-command&gt;
+</code></pre></div> <p>When I&rsquo;m done inspecting the identified commit, then I can <code>git bisect reset</code>.</p> <h2>Automated Way</h2> <p>I&rsquo;ve made a script that ends up automating the commands and the finding of the SHA. This makes it so I can use a single command and achieve the same results as the manual way:</p> <div class=highlight><pre class="highlight shell"><code><span class="c"># While on the feature branch that I've been working on</span>
+
+<span class="c"># Use bisect-branch passing the target branch I diverged from and the</span>
+<span class="c"># script/test command to bisect and find the error commit</span>
+git bisect-branch <span class="nt">-b</span> main &lt;script/test-command&gt;
+</code></pre></div> <p>When I&rsquo;m done inspecting the identified commit, then I can <code>git bisect reset</code>.</p> <h1>The git-bisect-branch Script</h1> <p>This <a href="https://gist.github.com/kevinjalbert/3f0e7efe6ed0f411b7ae77b88e00a520">GitHub Gist</a> will be the canonical reference of the <code>git-branch-bisect</code> script (and will see updates as needed).</p> <div class=highlight><pre class="highlight shell"><code><span class="c">#!/usr/bin/env bash</span>
+<span class="k">while </span><span class="nb">getopts</span> <span class="s1">'b:dh'</span> OPTION<span class="p">;</span> <span class="k">do
+  case</span> <span class="s2">"</span><span class="nv">$OPTION</span><span class="s2">"</span> <span class="k">in
+    </span>b<span class="p">)</span>
+      <span class="nv">divergent_branch</span><span class="o">=</span><span class="nv">$OPTARG</span>
+      <span class="p">;;</span>
+    d<span class="p">)</span>
+      <span class="nv">debug</span><span class="o">=</span><span class="nb">true</span>
+      <span class="p">;;</span>
+    h<span class="p">)</span>
+      <span class="nb">echo</span> <span class="s2">"This is a script that performs a git-bisect over all commits from the current branch's HEAD to where the branch diverged from the supplied branch."</span>
+      <span class="nb">echo</span> <span class="s2">""</span>
+      <span class="nb">echo</span> <span class="s2">"script usage: git-bisect-branch [-b branch] [-d] [-h] run_command"</span> <span class="o">&gt;</span>&amp;2
+      <span class="nb">echo</span> <span class="s2">""</span>
+      <span class="nb">echo</span> <span class="s2">"example: git-bisect-branch -d -b main ruby test.rb"</span>
+      <span class="nb">echo</span> <span class="s2">""</span>
+      <span class="nb">echo</span> <span class="s2">"Arguments:"</span>
+      <span class="nb">echo</span> <span class="s2">" - Use '-b' to specify the branch from which your current branch has diverged, this should typically be 'main'/'master'."</span>
+      <span class="nb">echo</span> <span class="s2">" - Use '-d' to debug internal variables and see the verbose output of git commands."</span>
+      <span class="nb">echo</span> <span class="s2">" - Use '-h' to see this message."</span>
+      <span class="nb">echo</span> <span class="s2">" - The remainder of the command is interpreted as the run_command, that will be running at each bisect step."</span>
+      <span class="nb">echo</span> <span class="s2">""</span>
+      <span class="nb">echo</span> <span class="s2">"If this script is on your PATH, you will be able to use it like 'git bisect-branch'."</span>
+      <span class="nb">echo</span> <span class="s2">""</span>
+      <span class="nb">exit </span>1
+      <span class="p">;;</span>
+  <span class="k">esac</span>
+<span class="k">done
+</span><span class="nb">shift</span> <span class="s2">"</span><span class="k">$((</span><span class="nv">$OPTIND</span> <span class="o">-</span><span class="m">1</span><span class="k">))</span><span class="s2">"</span>
+
+<span class="nv">run_command</span><span class="o">=</span><span class="nv">$*</span>
+<span class="nv">current_branch</span><span class="o">=</span><span class="si">$(</span>git branch <span class="nt">--show-current</span><span class="si">)</span>
+<span class="nv">current_branch_sha</span><span class="o">=</span><span class="si">$(</span>git rev-parse HEAD<span class="si">)</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$divergent_branch</span><span class="s2">"</span> <span class="o">]</span>
+  <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"No branch argument supplied. Should be the 'main/master' branch name"</span>
+  <span class="nb">exit
+</span><span class="k">fi
+
+if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$run_command</span><span class="s2">"</span> <span class="o">]</span>
+  <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"No run_command argument supplied. Should be the command you will use to run tests for each bisect step"</span>
+  <span class="nb">exit
+</span><span class="k">fi
+
+</span><span class="nv">branching_sha</span><span class="o">=</span><span class="si">$(</span>git merge-base <span class="nv">$divergent_branch</span> <span class="nv">$current_branch</span><span class="si">)</span>
+
+<span class="nb">echo</span> <span class="s2">"Starting bisect of commits on '</span><span class="nv">$current_branch</span><span class="s2">' branch (</span><span class="nv">$current_branch_sha</span><span class="s2">) since branching from '</span><span class="nv">$divergent_branch</span><span class="s2">' branch (</span><span class="nv">$branching_sha</span><span class="s2">)"</span>
+
+print_hline <span class="o">()</span> <span class="o">{</span>
+  <span class="nb">printf</span> <span class="s1">'%.s─'</span> <span class="si">$(</span><span class="nb">seq </span>1 <span class="si">$(</span>tput cols<span class="si">))</span>
+<span class="o">}</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$debug</span><span class="s2">"</span> <span class="o">]</span>
+  <span class="k">then
+
+  </span>print_hline
+  <span class="nb">echo</span> <span class="s2">"run_command: </span><span class="nv">$run_command</span><span class="s2">"</span>
+  <span class="nb">echo</span> <span class="s2">"current_branch: </span><span class="nv">$current_branch</span><span class="s2">"</span>
+  <span class="nb">echo</span> <span class="s2">"current_branch_sha: </span><span class="nv">$current_branch_sha</span><span class="s2">"</span>
+  <span class="nb">echo</span> <span class="s2">"divergent_branch: </span><span class="nv">$divergent_branch</span><span class="s2">"</span>
+  <span class="nb">echo</span> <span class="s2">"branching_sha: </span><span class="nv">$branching_sha</span><span class="s2">"</span>
+  print_hline
+
+  git bisect start
+  git bisect good <span class="nv">$branching_sha</span>
+  git bisect bad <span class="nv">$current_branch_sha</span>
+
+  git bisect run <span class="nv">$run_command</span>
+  <span class="nb">echo</span> <span class="s2">""</span>
+  print_hline
+<span class="k">else
+  </span>git bisect start <span class="o">&gt;</span> /dev/null
+  git bisect good <span class="nv">$branching_sha</span> <span class="o">&gt;</span> /dev/null
+  git bisect bad <span class="nv">$current_branch_sha</span> <span class="o">&gt;</span> /dev/null
+  git bisect run <span class="nv">$run_command</span> <span class="o">&gt;</span> /dev/null
+<span class="k">fi
+
+</span><span class="nb">echo</span> <span class="s2">"Don't forget to 'git bisect reset'"</span>
+</code></pre></div> <div class=article__comments-button><button type=button class="btn btn-default show-comments">Click to Disqus</button></div> <div id=disqus_thread></div> </div> </div> </div> <script>
+//<![CDATA[
+    var disqus_shortname = 'kevinjalbert';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+//]]>
+</script> </body> <div class="container footer"> <div class="col-md-12 footer__social"> <a href="https://twitter.com/KevinJalbert">Twitter</a> <a href="https://github.com/kevinjalbert">GitHub</a> <a href="https://stackoverflow.com/users/583592/kevin-jalbert">Stack Overflow</a> </div> <div class="col-md-12 footer__copywrite"> Code licensed <a href="https://github.com/kevinjalbert/kevinjalbert.github.io/blob/real-master/LICENSE">MIT</a>, Content &copy; 2019 Kevin Jalbert </div> </div> </html> <script src="/javascripts/app.js"></script>

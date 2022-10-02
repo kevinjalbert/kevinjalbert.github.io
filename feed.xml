@@ -2,16 +2,142 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-08-30T20:00:00-04:00</updated>
+  <updated>2022-09-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Quantified Self: Measure What you Want to Manage</title>
+    <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
+    <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
+    <updated>2022-10-01T21:28:35-04:00</updated>
+    <published>2022-09-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read about my journey in manual/passive data collection (in the manner of Quantified Self), and why I'm stopping measuring some things. Be intentional and measure what you want to be managed, the act of measuring isn't always free.</description>
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;What gets measured gets managed&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash; Typically associated with Peter Drucker, &lt;a href="https://medium.com/centre-for-public-impact/what-gets-measured-gets-managed-its-wrong-and-drucker-never-said-it-fe95886d3df6"&gt;although seems like V.F. Ridgway&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1&gt;Tracking Things&lt;/h1&gt;
+
+&lt;p&gt;I like measuring things and keeping track of data points. In a way, you could say I resonated with the &lt;a href="https://en.wikipedia.org/wiki/Quantified_self"&gt;Quantified self&lt;/a&gt; movement.&lt;/p&gt;
+
+&lt;p&gt;I really jumped into it when I received my own laptop at University and discovered &lt;a href="https://whatpulse.org/"&gt;WhatPulse&lt;/a&gt;, an application to track keyboard/mouse usage. Growing up I played a lot of video games where character progression is always about making numbers go up. With that in mind, it&amp;rsquo;s easy to see why I would gravitate towards something like WhatPulse.&lt;/p&gt;
+
+&lt;h1&gt;So Much Data!&lt;/h1&gt;
+
+&lt;p&gt;Over the years I added more things that I decided to &lt;em&gt;tracked&lt;/em&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Productivity on the Computer via &lt;a href="https://www.rescuetime.com/ref/31263"&gt;RescueTime (Referral Link)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Steps, Heart Rate, Sleep, etc.. via a &lt;a href="https://www.fitbit.com"&gt;Fitbit&lt;/a&gt; then eventually &lt;a href="https://www.apple.com/watch/"&gt;Apple Watch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fluid intake via &lt;a href="https://waterminder.com/"&gt;WaterMinder&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Food intake via &lt;a href="https://www.loseit.com/"&gt;Lose It!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GPS location via &lt;a href="https://www.bigpaua.com/arcapp/"&gt;Arc&lt;/a&gt; (iOS only)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;So even with all this data, what do I do with it? Well, not much&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To further illustrate this, I&amp;rsquo;ll break down what I track, the reason I started, and its usage right now.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fluid Data
+
+&lt;ul&gt;
+&lt;li&gt;Reason: Wanted to know if I was drinking enough.&lt;/li&gt;
+&lt;li&gt;Usage: My average has been pretty steady for the last year. I pretty much always have the same drinks each day as I work from home.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Food Data
+
+&lt;ul&gt;
+&lt;li&gt;Reason: Wanted to know my calorie and weight and how they change&lt;/li&gt;
+&lt;li&gt;Usage: I&amp;rsquo;ve basically been the same weight (plus/minus 10 pounds) for all my adult life.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;GPS Data
+
+&lt;ul&gt;
+&lt;li&gt;Reason: The app seemed super cool! I could keep track of where I&amp;rsquo;ve been.&lt;/li&gt;
+&lt;li&gt;Usage: I just keep collecting data, granted with COVID and moving to work from home there is less travel.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Productivity Data
+
+&lt;ul&gt;
+&lt;li&gt;Reason: Wanted to improve my productivity when I&amp;rsquo;m on my computer.&lt;/li&gt;
+&lt;li&gt;Usage: It &lt;em&gt;nudges&lt;/em&gt; me with reminders on how much time I spend on my computer in various applications/activities. Granted&amp;hellip; I don&amp;rsquo;t think it is helping that much.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Step, Heart Rate, Sleep Data
+
+&lt;ul&gt;
+&lt;li&gt;Reason: Good health indicators I wanted to keep track of. It also comes for free with the Apple Watch.&lt;/li&gt;
+&lt;li&gt;Usage: I look at these quite often as it&amp;rsquo;s always on my wrist and phone via Apple&amp;rsquo;s ecosystem and their Health data.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As we can see, not a lot of usage coming from the data. Most things are consistent, habitual, not a problem, or not providing any tangible value.&lt;/p&gt;
+
+&lt;h1&gt;Existential Crisis&lt;/h1&gt;
+
+&lt;p&gt;There have been a few moments that made me question &lt;strong&gt;&lt;em&gt;&amp;ldquo;why am I doing this?&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;, and ultimately should I stop tracking something? Moments like data loss (i.e., I had lost several years of GPS data by accident), or moving to different platforms (Fitbit to Apple Watch). It&amp;rsquo;s been hard to stop collecting as I see it as a data trove in a hoarding sense.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve recently come to terms that the act of &lt;em&gt;measuring&lt;/em&gt; is in a way causing me some anxiety and inconvenience. The following are just two examples:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I must ensure Arc is running to capture GPS data points before leaving the house.&lt;/li&gt;
+&lt;li&gt;I keep mental notes at times to backfill foods/drinks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ultimately, it boils down to the mental burden of tracking and ensuring things are being captured correctly.&lt;/p&gt;
+
+&lt;p&gt;Not everything is free in measuring data. Either you are paying for a service/storage/tools, the time, the cognitive burden (with manual tracking), or even resources on a device (i.e., running the GPS on a phone).&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;final straw which broke the camel&amp;rsquo;s back&lt;/em&gt; is that Arc no longer has a free tier, and is now a subscription (or a hefty lifetime purchase).&lt;/p&gt;
+
+&lt;p&gt;So&amp;hellip; this goes back to &lt;em&gt;&amp;ldquo;Why am I doing this?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2&gt;The Power of Correlations and Trends&lt;/h2&gt;
+
+&lt;p&gt;The counter-argument to keep tracking is to identify correlations and deviations in the data. This is the goal of the Quantified Self, and I would say the ultimate benefit; to identify when things might be slipping and need a course correction.&lt;/p&gt;
+
+&lt;p&gt;Being able to synthesize all the data and pull out trends and correlations (like &lt;a href="https://exist.io/"&gt;Exist&lt;/a&gt; does &amp;ndash; but costs a subscription) looks powerful. But I&amp;rsquo;ll be honest, I never gave understanding correlations a solid shot. I was always thinking of trying to build my own tool (but yeah&amp;hellip; that never happened).&lt;/p&gt;
+
+&lt;p&gt;The critical measurements around health are &lt;em&gt;pretty&lt;/em&gt; easy to identify though as you can typically &lt;em&gt;see/feel&lt;/em&gt; the changes (even if they are happening slowly).&lt;/p&gt;
+
+&lt;p&gt;As it stands, where I am in my life right now, the extra effort in measuring, curating, and consuming &lt;em&gt;all&lt;/em&gt; the data is not worth the small short- or medium-term gains for me.&lt;/p&gt;
+
+&lt;h1&gt;Moving Forward&lt;/h1&gt;
+
+&lt;p&gt;All in all, this isn&amp;rsquo;t to say I&amp;rsquo;m abandoning all my data collection. I&amp;rsquo;m just going to be more selective, and intentional by thinking about the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Prefer passive measurements with no/low data loss issues.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Measure what I want to manage.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Re-evaluate periodically what I&amp;rsquo;m measuring and ask if it is still useful.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I can now simplify what I collect right now and boil it down to the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Health metrics via Apple Watch&lt;/li&gt;
+&lt;li&gt;Computer productivity via ResuceTime&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both of these require no effort on my part as these are &lt;em&gt;always&lt;/em&gt; collected without any manual intervention.&lt;/p&gt;
+
+&lt;p&gt;This means I can free myself of Lose It! (Food), WaterMinder (Fluid), and Arc (GPS). These all took a toll on me for &lt;em&gt;no reason&lt;/em&gt; as I wasn&amp;rsquo;t currently benefiting from their results. I was measuring stuff I didn&amp;rsquo;t really care about or didn&amp;rsquo;t need to care about anymore. Initially, measuring these things played their part, but it is time to move forward.&lt;/p&gt;
+
+&lt;p&gt;If I need to manage something and I can measure it, you can bet I will at least for the short-term.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2022-08-31T23:34:34-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -148,7 +274,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2022-08-31T23:20:46-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -310,7 +436,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -476,7 +602,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -536,7 +662,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -628,7 +754,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -718,7 +844,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -794,7 +920,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -876,7 +1002,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -919,7 +1045,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Global Hotkeys using the Hyper Key</title>
     <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
     <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
+    <updated>2022-10-01T21:28:35-04:00</updated>
     <published>2021-11-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -977,89 +1103,6 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
 &lt;p&gt;Hyper key shortcuts work well to access other applications in a global context. I even use them to open the quick add modal for &lt;a href="https://goodtaskapp.com/"&gt;GoodTask&lt;/a&gt; via &lt;code&gt;hyper + &amp;#39;&lt;/code&gt;. Another example of where I use it is with &lt;a href="http://www.hammerspoon.org/"&gt;Hammerspoon&lt;/a&gt; via &lt;code&gt;hyper + \&lt;/code&gt; to open &lt;em&gt;&lt;a href="https://github.com/nathancahill/Anycomplete"&gt;anycomplete&lt;/a&gt;&lt;/em&gt; to help with spelling complicated words.&lt;/p&gt;
 
 &lt;p&gt;When you have the hyper key, anything can be globally reachable via a simple key combination!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Apple Watch's Walkie Talkie...? Nah, Just Call Me</title>
-    <link rel="alternate" href="https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/"/>
-    <id>https://kevinjalbert.com/apple-watchs-walkie-talkie-nah-just-call-me/</id>
-    <updated>2022-07-31T23:50:41-04:00</updated>
-    <published>2021-10-27T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">I tried Apple Watch's Walkie Talkie feature and found it pretty much useless compared to just calling someone. Read to find out the reasons behind my opinion, and why calling on the Apple Watch is just better overall.</description>
-    <content type="html">&lt;p&gt;The first thing to note &amp;ndash; this post is purely my opinion on Apple Watch&amp;rsquo;s &lt;a href="https://support.apple.com/en-us/HT208917"&gt;Walkie Talkie&lt;/a&gt; feature based on my usage. While I feel that this can generalize to the broader public, I&amp;rsquo;m sure there are plenty of people who appreciate this feature.&lt;/p&gt;
-
-&lt;p&gt;This feature debuted in watchOS 5 (released Sept 2018). I&amp;rsquo;m a little late to the party in terms of talking about it, but it&amp;rsquo;s only recently that I&amp;rsquo;ve formed strong opinions on it.&lt;/p&gt;
-
-&lt;h2&gt;Communication at Home&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve used the Walkie Talkie feature occasionally with my wife over the years, mostly as a novel thing to try. With the whole &lt;em&gt;working from home&lt;/em&gt; and just being at home with our young children (ages 2 and 5) our ability to communicate within the house is more important than before.&lt;/p&gt;
-
-&lt;p&gt;We would often message each other via Facebook Messenger (our preferred chat application) if it wasn&amp;rsquo;t urgent. This works well as the Apple Watch would allow us to dictate a message back, or the preferred &lt;em&gt;thumbs up&lt;/em&gt; acknowledgment. In times when we&amp;rsquo;d want a little more throughput in our communication, we&amp;rsquo;d turn to &lt;a href="https://support.apple.com/en-ca/HT204380"&gt;FaceTime on our iPhone&lt;/a&gt;. At times though, we wouldn&amp;rsquo;t have our iPhones within reach and we would answer the call on our Apple Watch. This realization eventually led us to just leverage the Apple Watch for our high-throughput communication at home.&lt;/p&gt;
-
-&lt;h2&gt;Gripes with Walkie Talkie&lt;/h2&gt;
-
-&lt;p&gt;We experimented with using the Walkie Talkie application at first and came up with the following issues:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Initial communication is interruptive, and hard to block due to the nature of Walkie Talkie.
-
-&lt;ul&gt;
-&lt;li&gt;There is an &lt;em&gt;on/off&lt;/em&gt; status, and you will receive a notification if someone tries to reach you. It could be easily missed.&lt;/li&gt;
-&lt;li&gt;The initial beep doesn&amp;rsquo;t give you a lot of time to prepare for the incoming voice. When your watch is open you can &lt;em&gt;palm your watch&lt;/em&gt; to end the conversation though. If the watch is not active, you have to tap to activate then palm to mute, so it is possible for some of the initial voice messages to come through (hopefully not at an undesirable time).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;push to talk&lt;/em&gt; aspect of the application is nice for a quick one-shot message, but not so much if a longer conversation is needed.
-
-&lt;ul&gt;
-&lt;li&gt;You need to keep a hand free to push/release the application&amp;rsquo;s button.&lt;/li&gt;
-&lt;li&gt;Can be tiresome if you need to communicate multiple sentences.&lt;/li&gt;
-&lt;li&gt;Can be tricky to coordinate the &lt;em&gt;one talking at a time&lt;/em&gt; restriction.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s dependant on both parties having their watch on their person (unlocked and not in &lt;em&gt;Do not Disturb&lt;/em&gt;).
-
-&lt;ul&gt;
-&lt;li&gt;Sometimes we remove our watches throughout the day (i.e., charging).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;It&amp;rsquo;s a bit cumbersome to quickly communicate with an individual.
-
-&lt;ul&gt;
-&lt;li&gt;Open the Walkie Talkie application, find a person, press the person, check if the person is online, push to talk. You could use &lt;a href="https://www.apple.com/ca/siri/"&gt;Siri&lt;/a&gt; to &amp;ldquo;Walkie Talkie &amp;lt;person_name&amp;gt;&amp;rdquo; to immediately jump to the part where it checks if the person is online.&lt;/li&gt;
-&lt;li&gt;Separate from an individual&amp;rsquo;s contact card (on the iPhone&amp;rsquo;s contacts)&lt;/li&gt;
-&lt;li&gt;The Walkie Talkie &lt;a href="https://developer.apple.com/design/human-interface-guidelines/watchos/overview/complications/"&gt;complication&lt;/a&gt; on the watch only opens the application &amp;ndash; you still need to find the person (however it might be cached on the right person if you recently used it).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Occasionally seeing the Walkie Talkie&amp;rsquo;s status icon on the top of the watch&amp;rsquo;s screen was just annoying.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Just Call Me&lt;/h2&gt;
-
-&lt;p&gt;We found that the shortcomings of the Walkie Talkie application quickly led us to just &lt;em&gt;calling&lt;/em&gt; each other using the Apple Watch itself. We&amp;rsquo;d have the option of using FaceTime Audio or even just calling via our talk mobile plan. Overall, calling each other addressed many of the shortcomings of Walkie Talkie:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;You would receive an incoming call notification on the watch, allowing you to take the call or not.
-
-&lt;ul&gt;
-&lt;li&gt;No awkward moments if a call comes through when you are not in the right situation to take the call.&lt;/li&gt;
-&lt;li&gt;The idea of calling sets the expectation that a conversation is needed. If you cannot take the call, then you are able to shoot back a quick message of acknowledgment.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;You can carry a conversation and still have both hands free (no need to push to talk).&lt;/li&gt;
-&lt;li&gt;If you aren&amp;rsquo;t wearing the watch, the call will still come through on your iPhone.
-
-&lt;ul&gt;
-&lt;li&gt;This is a huge benefit for us, as it is frustrating to try and use Walkie Talkie and find out the person is unavailable.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;The watch&amp;rsquo;s complication for a Contact is superior to the Walkie Talkie&amp;rsquo;s complication, as one tap takes you directly to the contact.
-
-&lt;ul&gt;
-&lt;li&gt;You can tap the phone then FaceTime Audio to initiate it.&lt;/li&gt;
-&lt;li&gt;You have the option to use alternative means of communication as well from the complication (traditional voice plan or SMS).&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;You can use Siri to place a call for you completely hands-free using &amp;ldquo;Call &amp;lt;person_name&amp;gt;&amp;rdquo;.&lt;/li&gt;
-&lt;li&gt;Fluid conversations happen are possible because there is no push to talk.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;At this point, we both have each other as a complication on our Apple Watches for quick high-throughput communication.&lt;/p&gt;
 </content>
   </entry>
 </feed>

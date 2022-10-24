@@ -12,6 +12,8 @@ pull_image: "/images/2022-06-28-import-raindrop-io-highlights-into-readwise/outp
 pull_image_attribution: 'The output of the import script. Generated with [Carbon.now.sh](https://carbon.now.sh/).'
 ---
 
+> **UPDATE** [Readwise now officially supports Raindrop.io!](https://readwise.io/changelog/raindrop-integration) I wholeheartedly recommend using the official integration over my version.
+
 # Raindrop.io
 
 I've recently discovered [Raindrop.io](https://raindrop.io/) as a bookmarking/highlighting service. It has been refreshing to use as it exudes polish. The browser extension is nice as it indicates if you've bookmarked the page already, shows you highlights on the page, and allows you to highlight the content of the page. The iOS client is also great and does everything I need. The cherry-on-top is that the _free_ plan is very capable and has unlimited highlights per article.

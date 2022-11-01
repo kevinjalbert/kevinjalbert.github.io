@@ -2,16 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-09-29T20:00:00-04:00</updated>
+  <updated>2022-10-30T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>iOS Shortcuts: Actionable Notifications</title>
+    <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
+    <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
+    <updated>2022-10-31T23:16:24-04:00</updated>
+    <published>2022-10-30T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Sometimes, you need a notification to do something when you tap on it like opening an app or running a shortcut. Unfortunately, the native 'Show Notification' in iOS Shortcuts is non-actionable and therefore lacking. Read about how to take advantage of actionable notifications in iOS Shortcuts.</description>
+    <content type="html">&lt;h1&gt;Simple Notifications&lt;/h1&gt;
+
+&lt;p&gt;The native &lt;em&gt;&amp;lsquo;Show Notification&amp;rsquo;&lt;/em&gt; in &lt;a href="https://support.apple.com/en-ca/guide/shortcuts/welcome/ios"&gt;iOS Shortcuts&lt;/a&gt; produces a non-actionable notification. It doesn&amp;rsquo;t allow for any customization to &lt;em&gt;open&lt;/em&gt; anything, so it is purely a notification to show you information.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Native notification" width="828" height="478" src="/images/2022-10-31-ios-shortcuts-actionable-notifications/native-notification.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;There might be times when you need more customization and power with your notifications. This is where we can take advantage of third-party actions from different Apps.&lt;/p&gt;
+
+&lt;h1&gt;Powerful Notifications&lt;/h1&gt;
+
+&lt;p&gt;On the left, we have &lt;a href="https://www.pushcut.io/"&gt;Pushcut&lt;/a&gt;, a free option that lets you customize three actionable notifications from within their application before you have to pay for a monthly subscription (or a hefty one-time cost &amp;ndash; $55 USD). On the right, we have &lt;a href="https://toolboxpro.app/"&gt;Toolbox Pro&lt;/a&gt; which has their &amp;#39;Show Notification&amp;rsquo; action locked behind a $6 USD one-time in-app purchase.&lt;/p&gt;
+
+&lt;div style="display: flex"&gt;
+  &lt;img src="/images/2022-10-31-ios-shortcuts-actionable-notifications/pushcut-notification.jpeg" style="width: 49%; height: 49%"/&gt;
+  &lt;img src="/images/2022-10-31-ios-shortcuts-actionable-notifications/toolboxpro-notification.jpeg" style="width: 49%; height: 49%"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I personally have used Toolbox Pro a lot in the past in my shortcuts. I&amp;rsquo;ve recently stumbled upon Pushcut and seem like a good option as well (especially if you have any usage of their other triggers/server features).&lt;/p&gt;
+
+&lt;p&gt;To note, these aren&amp;rsquo;t the only two applications that allow for these powerful notifications. If you look around I&amp;rsquo;m sure there are many others that might better suit your needs.&lt;/p&gt;
+
+&lt;h1&gt;Actionable Notifications&lt;/h1&gt;
+
+&lt;p&gt;The beauty of actionable notifications is that they can open URLs. URLs then let you take advantage of URL Schemes. I&amp;rsquo;m going to pull some quotes from a &lt;a href="/using-url-scheme-links-in-notion"&gt;previous article&lt;/a&gt; I wrote that describes them:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;URL Scheme links&lt;/em&gt; (also called &lt;a href="https://support.apple.com/en-ca/guide/shortcuts/apdcd7f20a6f/ios"&gt;&lt;em&gt;x-callback-url&lt;/em&gt;&lt;/a&gt;), which are defined by an application. For example, Things has an &lt;a href="https://culturedcode.com/things/support/articles/2803573/"&gt;excellent article&lt;/a&gt; on how you can use URL Scheme links to interface with it.&lt;/p&gt;
+
+&lt;p&gt;Each application provides its own URL Scheme, although this &lt;a href="http://x-callback-url.com/apps/"&gt;site&lt;/a&gt; does a decent job cataloging URL Schemes of popular applications.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This makes it so you can &lt;em&gt;tap&lt;/em&gt; on a notification and have it &lt;em&gt;open&lt;/em&gt; an application. An example of this can be seen below, where I go from a notification to the &lt;a href="https://www.openplanetsoftware.com/just-press-record/"&gt;Just Press Record&lt;/a&gt; application:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Actionable notification" width="320" height="693" src="/images/2022-10-31-ios-shortcuts-actionable-notifications/actionable-notification.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt;To go even further, you can have the URL Scheme trigger other iOS Shortcuts using &lt;code&gt;shortcuts://run-shortcut?name=shortcutname&lt;/code&gt;!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -137,7 +185,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -274,7 +322,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -436,7 +484,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2022-10-24T13:34:22-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -606,7 +654,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -666,7 +714,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -758,7 +806,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -848,7 +896,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -924,7 +972,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1006,7 +1054,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Steam Remote Play is Amazing</title>
     <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
     <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
+    <updated>2022-10-24T13:36:59-04:00</updated>
     <published>2021-12-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1043,70 +1091,6 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
 &lt;h3&gt;Dedicated Controller&lt;/h3&gt;
 
 &lt;p&gt;The whole point of this setup is to increase comfort when playing games by not being tied to a desk (assuming the game can be played with a controller). Having a dedicated controller just lowers the friction of &lt;em&gt;getting into a game&lt;/em&gt;. With my Apple TV setup, I just turn the Xbox Controller and Apple TV on, start up Steam Link and I&amp;rsquo;m playing within a minute or less.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Global Hotkeys using the Hyper Key</title>
-    <link rel="alternate" href="https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/"/>
-    <id>https://kevinjalbert.com/global-hotkeys-using-the-hyper-key/</id>
-    <updated>2022-10-01T21:30:04-04:00</updated>
-    <published>2021-11-27T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Set up a hyper key and global hotkeys to quickly perform actions regardless of where you are. This will save you keystrokes and/or time spent moving the mouse cursor.</description>
-    <content type="html">&lt;p&gt;My keyboard sees a lot of use, and where possible I try not to reach for the mouse/trackpad. I find I can work more efficiently by keeping my hands on the keyboard, which is a great thing as a developer.&lt;/p&gt;
-
-&lt;p&gt;My primary usage of the hyper key is to open/hide applications with global hotkeys. The hyper key is great because no application expects you to hold all modifier keys at the same time, which sets it up perfectly for a global hotkey.&lt;/p&gt;
-
-&lt;h2&gt;Setup&lt;/h2&gt;
-
-&lt;p&gt;This does require a bit of setup to make it work, but the payoff is pretty nice as you&amp;rsquo;ll be saving keystrokes and/or mouse/trackpad movements.&lt;/p&gt;
-
-&lt;p&gt;This is tailored to a MacOS system&amp;hellip;although I wouldn&amp;rsquo;t be surprised if you could find alternatives for a Linux or Windows environment.&lt;/p&gt;
-
-&lt;h2&gt;The Hyper Key&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;A Hyper Key is a magical key that automatically presses all the standard modifiers (ctrl+shift+cmd+opt).&lt;/p&gt;
-
-&lt;p&gt;&amp;ndash; &lt;a href="https://docs.folivora.ai/docs/1004_hyper_key.html"&gt;BetterTouchTool&amp;rsquo;s documentation on the hyper key&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I first heard about the &lt;em&gt;hyper key&lt;/em&gt; from an &lt;a href="https://stevelosh.com/blog/2012/10/a-modern-space-cadet/#s14-hyper"&gt;article Steve Losh wrote&lt;/a&gt; which touched on the subject. This inspired me to look at how I could use this new modifier key.&lt;/p&gt;
-
-&lt;p&gt;I personally use Karabiner-Elements to enable a hyper key, but any of the following should do the trick.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://karabiner-elements.pqrs.org/"&gt;Karabiner-Elements&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.folivora.ai/"&gt;BetterTouchTool&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://hyperkey.app/"&gt;Hyperkey App&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://kalis.me/setup-hyper-key-hammerspoon-macos/"&gt;Hammerspoon&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Global Hotkeys in Alfred&lt;/h2&gt;
-
-&lt;p&gt;I use &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; extensively. I made a new workflow that has multiple hotkey triggers that use the hyper key in combination with a single character. This allows the hotkey triggers to perform an action.&lt;/p&gt;
-
-&lt;p&gt;The one thing that you &lt;em&gt;need&lt;/em&gt; to do is ensure that the trigger&amp;rsquo;s behaviour is set to &lt;em&gt;&amp;ldquo;Pass through modifier keys (Fastest)&amp;rdquo;&lt;/em&gt; (as illustrated in the following image), otherwise, there will be a slight delay in the action being performed.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="Alfred trigger config" width="1676" height="842" src="/images/2021-11-28-global-hotkeys-using-the-hyper-key/alfred-trigger-config.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;I have several combinations which open/hide various applications:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;hyper + space&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://iterm2.com/"&gt;iTerm2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hyper + o&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://obsidian.md/"&gt;Obsidian&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hyper + c&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://code.visualstudio.com/"&gt;VS Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hyper + s&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://sparkmailapp.com/"&gt;Spark&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;hyper + b&lt;/code&gt; &amp;ndash; Opens &lt;a href="https://www.google.com/chrome/"&gt;Google Chrome&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Global Hotkeys in other Applications&lt;/h2&gt;
-
-&lt;p&gt;Hyper key shortcuts work well to access other applications in a global context. I even use them to open the quick add modal for &lt;a href="https://goodtaskapp.com/"&gt;GoodTask&lt;/a&gt; via &lt;code&gt;hyper + &amp;#39;&lt;/code&gt;. Another example of where I use it is with &lt;a href="http://www.hammerspoon.org/"&gt;Hammerspoon&lt;/a&gt; via &lt;code&gt;hyper + \&lt;/code&gt; to open &lt;em&gt;&lt;a href="https://github.com/nathancahill/Anycomplete"&gt;anycomplete&lt;/a&gt;&lt;/em&gt; to help with spelling complicated words.&lt;/p&gt;
-
-&lt;p&gt;When you have the hyper key, anything can be globally reachable via a simple key combination!&lt;/p&gt;
 </content>
   </entry>
 </feed>

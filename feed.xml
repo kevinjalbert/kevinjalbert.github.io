@@ -2,16 +2,116 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2022-10-30T20:00:00-04:00</updated>
+  <updated>2022-11-29T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Getting Non-HomeKit Devices Working in HomeKit</title>
+    <link rel="alternate" href="https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/"/>
+    <id>https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/</id>
+    <updated>2022-11-30T21:44:19-05:00</updated>
+    <published>2022-11-29T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read about how I got my non-HomeKit devices working in HomeKit using Homebridge. This makes it easy to use Siri (via an Apple Watch) to control my smart devices.</description>
+    <content type="html">&lt;h2&gt;Google Home as my Hub&lt;/h2&gt;
+
+&lt;p&gt;All my smart home devices end up connecting via &lt;a href="https://home.google.com/welcome/"&gt;Google Home&lt;/a&gt;. It was an easy entry point at the time via the inexpensive Google Home devices, and it turned out that voice activation was the &lt;em&gt;key&lt;/em&gt; to usability.&lt;/p&gt;
+
+&lt;p&gt;Even being an Apple household, we never got into &lt;a href="https://www.apple.com/ca/home-app/accessories/"&gt;HomeKit&lt;/a&gt;. I figured that switching to HomePods was a bit too costly&amp;hellip; and also some of my smart devices didn&amp;rsquo;t connect to HomeKit.&lt;/p&gt;
+
+&lt;h2&gt;Apple Watch and HomeKit&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve recently connected a smart switch for the lamp in my youngest son&amp;rsquo;s room. When my wife puts him down she&amp;rsquo;ll be laying with him, and wants an easy way to turn his lamp off (as it is across the room), I know&amp;hellip; first-world problems. If she has her phone she can use that, but often she just has her Apple Watch.&lt;/p&gt;
+
+&lt;p&gt;I looked around, and it seemed to like controlling devices via HomeKit would be an ideal solution, and &lt;a href="https://support.apple.com/en-ca/guide/watch/apddad023a05/watchos"&gt;with WatchOS it is possible&lt;/a&gt;. Now to connect my non-HomeKit devices somehow&amp;hellip;&lt;/p&gt;
+
+&lt;h1&gt;Exploring Homebridge&lt;/h1&gt;
+
+&lt;p&gt;A quick investigation led me to &lt;a href="https://homebridge.io/"&gt;Homebridge&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Homebridge allows you to integrate with smart home devices that do not natively support HomeKit. There are over 2,000 Homebridge plugins supporting thousands of different smart accessories.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;With my &lt;em&gt;recently new&lt;/em&gt; &lt;a href="https://unraid.net/"&gt;Unraid server&lt;/a&gt;, I was able to spin up a &lt;a href="https://github.com/oznu/docker-homebridge"&gt;Homebridge Docker container&lt;/a&gt; and had the majority of my devices working quickly!&lt;/p&gt;
+
+&lt;h2&gt;Tweaks and Cameras&lt;/h2&gt;
+
+&lt;p&gt;Homebridge lets you install plugins to then act as the bridge between said devices and HomeKit.&lt;/p&gt;
+
+&lt;p&gt;As of now, I&amp;rsquo;m currently using the following plugins:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/plasticrake/homebridge-tplink-smarthome"&gt;Homebridge TPLink Smarthome&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;My &lt;a href="https://www.kasasmart.com"&gt;Kasa&lt;/a&gt; outlets/switches/lights.&lt;/li&gt;
+&lt;li&gt;Worked out of the box and just auto-discovered existing devices on the network.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/dkerr64/homebridge-yolink"&gt;Homebridge YoLink&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;My &lt;a href="https://shop.yosmart.com/"&gt;YoLink&lt;/a&gt; door/water/motion sensors.&lt;/li&gt;
+&lt;li&gt;Worked out of the box after inputting the required credentials.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Brandawg93/homebridge-nest-cam"&gt;Homebridge Nest Cam&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;My &lt;a href="https://store.google.com/ca/product/nest_doorbell"&gt;Nest Hello Doorbell&lt;/a&gt; (older model)
+
+&lt;ul&gt;
+&lt;li&gt;After getting past the authentication (as I haven&amp;rsquo;t migrated my Nest account to Google) this worked. The one &lt;em&gt;addition&lt;/em&gt; I did in the &lt;code&gt;config.json&lt;/code&gt; was specifying &lt;code&gt;&amp;quot;ffmpegCodec&amp;quot;: &amp;quot;copy&amp;quot;&lt;/code&gt; to avoid encoding the stream on my server (fewer resources).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/Sunoo/homebridge-camera-ffmpeg"&gt;Homebridge Camera FFmpeg&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;My &lt;a href="https://www.wyze.com/"&gt;Wyze Cameras&lt;/a&gt; to keep an eye on the kids at night&lt;/li&gt;
+&lt;li&gt;This one was a bit more involved&amp;hellip;
+
+&lt;ul&gt;
+&lt;li&gt;I used &lt;a href="https://github.com/mrlt8/docker-wyze-bridge"&gt;&lt;code&gt;docker-wyze-bridge&lt;/code&gt;&lt;/a&gt; to first expose an RTSP (Real Time Streaming Protocol) stream for the Wyze cameras.&lt;/li&gt;
+&lt;li&gt;I then was able to specify the RTSP and Snapshot URLs in the &lt;code&gt;homebridge-camera-ffmpeg&lt;/code&gt; settings.&lt;/li&gt;
+&lt;li&gt;The last thing was to specify &lt;code&gt;copy&lt;/code&gt; under &lt;code&gt;Advanced &amp;gt; Video Codec&lt;/code&gt;, again to avoid encoding.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;The Aftermath&lt;/h1&gt;
+
+&lt;p&gt;After all was said and done, everything works as expected. We&amp;rsquo;re able to use our non-HomeKit devices in HomeKit and leverage it on our Apple Devices.&lt;/p&gt;
+
+&lt;h2&gt;Benefits&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Smart devices are exposed in HomeKit.&lt;/li&gt;
+&lt;li&gt;Better iOS/WatchOS/macOS integration due to &lt;code&gt;Home&lt;/code&gt; app.&lt;/li&gt;
+&lt;li&gt;Siri&amp;rsquo;s capabilities are so nice given I use an iPhone and Apple Watch.&lt;/li&gt;
+&lt;li&gt;The Google Home application continues to function as a Hub.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Frustrations&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Smart device names when changed on the source application don&amp;rsquo;t reflect in HomeKit.&lt;/li&gt;
+&lt;li&gt;If the Homebridge service has an issue then nothing works via HomeKit.&lt;/li&gt;
+&lt;li&gt;Another place to put automations (granted options are nice, but having automations spread across different systems is harder to keep track of.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;I did stumble across &lt;a href="https://www.home-assistant.io/"&gt;Home Assistant&lt;/a&gt;, which looks like an even more powerful automation system. This might be something I poke around with, as there is also a &lt;a href="https://www.home-assistant.io/integrations/homekit/"&gt;HomeKit Integration&lt;/a&gt; for this (amongst many others). One thing at a time though, too much change can be hard to cope with.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>iOS Shortcuts: Actionable Notifications</title>
     <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
     <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
-    <updated>2022-10-31T23:16:24-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -59,7 +159,7 @@
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -185,7 +285,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -322,7 +422,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -484,7 +584,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -654,7 +754,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -714,7 +814,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -806,7 +906,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Quickly Toggle Fonts in Google Docs</title>
     <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
     <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -896,7 +996,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Releasing github_contributions Ruby Gem</title>
     <link rel="alternate" href="https://kevinjalbert.com/releasing-github-contributions-ruby-gem/"/>
     <id>https://kevinjalbert.com/releasing-github-contributions-ruby-gem/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-02-27T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -972,7 +1072,7 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
     <title>Gamifying my Son's Physiotherapy</title>
     <link rel="alternate" href="https://kevinjalbert.com/gamifying-my-sons-physiotherapy/"/>
     <id>https://kevinjalbert.com/gamifying-my-sons-physiotherapy/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
+    <updated>2022-10-31T23:17:05-04:00</updated>
     <published>2022-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1048,49 +1148,6 @@ github_contributions &lt;span class="nt"&gt;-h&lt;/span&gt;
 &lt;p&gt;As we&amp;rsquo;re working on reading, a lot of the direction and usage is completely guided by us, the parents. I am curious to see how this plays out when he can read more.&lt;/p&gt;
 
 &lt;p&gt;One last thing for anyone who wants to let their child have their own account, Habitica has a policy for those under 13. It requires their &lt;a href="https://habitica.fandom.com/wiki/Children_Using_Habitica"&gt;parent or guardian to provide permission&lt;/a&gt; and makes it so the public social aspects get locked down.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Steam Remote Play is Amazing</title>
-    <link rel="alternate" href="https://kevinjalbert.com/steam-remote-play-is-amazing/"/>
-    <id>https://kevinjalbert.com/steam-remote-play-is-amazing/</id>
-    <updated>2022-10-24T13:36:59-04:00</updated>
-    <published>2021-12-29T19:00:00-05:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">If you have a gaming PC and are not taking advantage of Steam Remote Play, then you are missing out on some comfy gaming. Read about what Steam Remote Play is if you aren't familiar with it, as well as some additional tips to make the most of it.</description>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m keeping this post fairly short due to the holiday season (I also just moved houses at the end of November, so it has been a bit hectic the last month). This post can be seen more as an informative tip for gamers who use &lt;a href="https://store.steampowered.com/"&gt;Steam&lt;/a&gt;, which they might not know about.&lt;/p&gt;
-
-&lt;h2&gt;Steam Remote Play&lt;/h2&gt;
-
-&lt;p&gt;If you do any form of PC gaming, you likely know about Steam. It&amp;rsquo;s a great service that has been around for a while. Fun fact &amp;ndash; I found out that my Steam account is 17 years old! Steam has a wide selection of games, and over the years many new features have been added. I want to talk about one such feature &amp;ndash; &lt;a href="https://store.steampowered.com/remoteplay"&gt;Steam Remote Play&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Steam Remote Play blew my mind when I first tried it out. It lets you stream a game from a  system running Steam to a compatible client (e.g., an iPhone/iPad, Apple TV, etc.). The inputs and outputs work seamlessly and you are able to fully experience the game without being confined to where your gaming PC is located.&lt;/p&gt;
-
-&lt;p&gt;I personally use the &lt;a href="https://apps.apple.com/us/app/steam-link/id1246969117"&gt;Steam Link&lt;/a&gt; app on my iPhone and Apple TV. Apple&amp;rsquo;s ecosystem can use Bluetooth controllers (e.g., Xbox Controller) as an input, so this allows me to play games from a comfy couch like a console gamer. For those times that I need a keyboard or mouse, Steam Remote Play can also stream to another Steam Desktop client on my MacBook.&lt;/p&gt;
-
-&lt;h2&gt;Tips&lt;/h2&gt;
-
-&lt;p&gt;The following are a couple of tips that I&amp;rsquo;ve found useful during my time using Steam Remote Play.&lt;/p&gt;
-
-&lt;h3&gt;Wired Network Connection&lt;/h3&gt;
-
-&lt;p&gt;The best thing you can do to improve your experience with Steam Remote Play is a strong LAN connection between the gaming PC and the clients you want to play on. A bad network connection increases input lag and graphical artifacts (pixelated look). It took a bit of work, but I was able to get a direct-wired ethernet connection from my router between my Apple TV and my gaming PC. The connection is such that I can&amp;rsquo;t tell whether I&amp;rsquo;m streaming or playing locally.&lt;/p&gt;
-
-&lt;h3&gt;Wake-on-LAN&lt;/h3&gt;
-
-&lt;p&gt;I didn&amp;rsquo;t want to keep my gaming PC on all the time from a power consumption perspective. I only use it when I want to play games, however, it resides in another room different from where I&amp;rsquo;m playing.&lt;/p&gt;
-
-&lt;p&gt;I take advantage of &lt;a href="https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/wake-on-lan-feature"&gt;&lt;em&gt;Wake-on-LAN&lt;/em&gt;&lt;/a&gt; in Windows. This allows the Steam Link app to send a &lt;em&gt;wake-up&lt;/em&gt; packet when it tries to connect to the gaming PC, which powers on the PC for me on-demand. The finishing touch here is that I set a 10 minute &lt;a href="https://support.microsoft.com/en-us/windows/how-to-adjust-power-and-sleep-settings-in-windows-26f623b5-4fcc-4194-863d-b824e5ea7679"&gt;sleep timer in Windows&lt;/a&gt;, which makes it so when you exit a game and stop streaming the PC will go to sleep.&lt;/p&gt;
-
-&lt;h3&gt;Non-Steam Games&lt;/h3&gt;
-
-&lt;p&gt;I also found out you can add &lt;a href="https://help.steampowered.com/en/faqs/view/4B8B-9697-2338-40EC"&gt;Non-Steam games&lt;/a&gt;, which still work via Steam Remote Play. This opens up a lot of opportunities as Steam is essentially opening/closing an executable. You could have games from another store (e.g., &lt;a href="https://www.[epicgames.com/store"&gt;Epic Games&lt;/a&gt;), stand-alone games, or even ROMs if you are into that (via &lt;a href="https://steamgriddb.github.io/steam-rom-manager/"&gt;Steam ROM Manager&lt;/a&gt;).&lt;/p&gt;
-
-&lt;h3&gt;Dedicated Controller&lt;/h3&gt;
-
-&lt;p&gt;The whole point of this setup is to increase comfort when playing games by not being tied to a desk (assuming the game can be played with a controller). Having a dedicated controller just lowers the friction of &lt;em&gt;getting into a game&lt;/em&gt;. With my Apple TV setup, I just turn the Xbox Controller and Apple TV on, start up Steam Link and I&amp;rsquo;m playing within a minute or less.&lt;/p&gt;
 </content>
   </entry>
 </feed>

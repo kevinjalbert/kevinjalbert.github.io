@@ -79,6 +79,9 @@
     <loc>https://kevinjalbert.com/rails-activestorage-configuration-for-minio/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/sync-twitter-following-to-a-list/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/share-your-bag-of-tricks/</loc>
   </url>
   <url>
@@ -382,6 +385,12 @@
     <loc>https://kevinjalbert.com/tags/minio/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/twitter/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/tool/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/mentorship/</loc>
   </url>
   <url>
@@ -410,9 +419,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/remote-working/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/tool/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/git-bisect/</loc>

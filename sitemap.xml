@@ -61,6 +61,9 @@
     <loc>https://kevinjalbert.com/stub-sleeps-in-tests/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/embrace-active-support-without-rails/</loc>
   </url>
   <url>
@@ -370,6 +373,15 @@
     <loc>https://kevinjalbert.com/tags/ruby/</loc>
   </url>
   <url>
+    <loc>https://kevinjalbert.com/tags/ios/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/apple/</loc>
+  </url>
+  <url>
+    <loc>https://kevinjalbert.com/tags/google/</loc>
+  </url>
+  <url>
     <loc>https://kevinjalbert.com/tags/database/</loc>
   </url>
   <url>
@@ -434,9 +446,6 @@
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/quantified-self/</loc>
-  </url>
-  <url>
-    <loc>https://kevinjalbert.com/tags/ios/</loc>
   </url>
   <url>
     <loc>https://kevinjalbert.com/tags/shell/</loc>

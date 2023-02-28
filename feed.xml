@@ -2,16 +2,45 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2023-01-30T19:00:00-05:00</updated>
+  <updated>2023-02-26T19:00:00-05:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Making AirPlay work with Chromecast Devices</title>
+    <link rel="alternate" href="https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/"/>
+    <id>https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/</id>
+    <updated>2023-02-27T22:14:48-05:00</updated>
+    <published>2023-02-26T19:00:00-05:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read about how I got my Chromecast devices (i.e., Google Nest Minis) to work with AirPlay and play audio streams.</description>
+    <content type="html">&lt;p&gt;This is another quick post in which I want to share and praise a new tool/service I&amp;rsquo;ve been using.&lt;/p&gt;
+
+&lt;p&gt;Continuing from my &lt;a href="/getting-non-homekit-devices-working-in-homekit"&gt;previous efforts to get non-apple devices to work with Homekit&lt;/a&gt;, I decided to make my Google Nest/Home speakers work with AirPlay.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m leveraging the open-source project &lt;a href="https://github.com/philippe44/AirConnect"&gt;philippe44/AirConnect&lt;/a&gt; to accomplish this feat. The README file is filled with information that I highly recommend at least skimming. The quick TL;DR on what this does, straight out of the README, is:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;AirConnect can run on any machine that has access to your local network.&lt;/p&gt;
+
+&lt;p&gt;It does not need to be on your main computer.&lt;/p&gt;
+
+&lt;p&gt;It will detect UPnP/Sonos/Chromecast players, create as many virtual AirPlay devices as needed, and act as a bridge/proxy between AirPlay clients (iPhone, iPad, iTunes, MacOS, AirFoil &amp;hellip;) and the real UPnP/Sonos/Chromecast players.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I run AirConnect from my &lt;a href="https://unraid.net/"&gt;Unraid server&lt;/a&gt; (using this docker container &lt;a href="https://github.com/1activegeek/docker-airconnect"&gt;&lt;code&gt;1activegeek/docker-airconnect&lt;/code&gt;&lt;/a&gt;) and it was pretty much a &lt;em&gt;painless&lt;/em&gt; addition for me. I was quickly able to see new devices appear as compatible AirPlay devices.&lt;/p&gt;
+
+&lt;p&gt;There is a &lt;a href="https://github.com/philippe44/AirConnect#delay-when-switching-track-or-source"&gt;known limitation with AirConnect&lt;/a&gt;, which is that there are a few seconds of delay when switching tracks. Overall, it doesn&amp;rsquo;t bother me too much but it is worth knowing about.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Sync Twitter Following to a List</title>
     <link rel="alternate" href="https://kevinjalbert.com/sync-twitter-following-to-a-list/"/>
     <id>https://kevinjalbert.com/sync-twitter-following-to-a-list/</id>
-    <updated>2023-01-31T22:30:58-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2023-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -97,7 +126,7 @@
     <title>Turning a Webpage into a Basic iOS App</title>
     <link rel="alternate" href="https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/"/>
     <id>https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/</id>
-    <updated>2023-01-31T22:21:21-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-12-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -130,7 +159,7 @@
     <title>Getting Non-HomeKit Devices Working in HomeKit</title>
     <link rel="alternate" href="https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/"/>
     <id>https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -230,7 +259,7 @@
     <title>iOS Shortcuts: Actionable Notifications</title>
     <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
     <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -278,7 +307,7 @@
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -404,7 +433,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -541,7 +570,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -703,7 +732,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -873,7 +902,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -933,7 +962,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Access Local Docker Containers by Domain Names instead of Ports</title>
     <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
     <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
+    <updated>2023-01-31T22:32:14-05:00</updated>
     <published>2022-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -1020,95 +1049,5 @@ FILE -&amp;gt; tasks/zsh.rake
 &lt;li&gt;A throwback to an older project I made is &lt;a href="/docker-compose-dns-consistency-dcdc/"&gt;Docker Compose DNS Consistency (DCDC)&lt;/a&gt;, which provides consistent DNS resolution for services (not only for HTTP) internal and external to the Docker network.&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-  </entry>
-  <entry>
-    <title>Quickly Toggle Fonts in Google Docs</title>
-    <link rel="alternate" href="https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/"/>
-    <id>https://kevinjalbert.com/quickly-toggle-fonts-in-google-docs/</id>
-    <updated>2022-12-31T22:17:59-05:00</updated>
-    <published>2022-03-26T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">If you use two fonts in Google Docs often (i.e., like using mono fonts for code keywords) then read my approach to toggling between two fonts quickly using AppleScript on MacOS.</description>
-    <content type="html">&lt;p&gt;I spend a fair amount working in technical documents within &lt;a href="https://www.google.ca/docs/about/"&gt;Google Docs&lt;/a&gt; at work. Due to the content of these documents, there will be parts of them that visually resonate with a monospaced font (i.e., name of a class/module/method). Unfortunately, Google Docs does not natively support &lt;a href="https://daringfireball.net/projects/markdown/"&gt;Markdown&lt;/a&gt; for &lt;code&gt;code spans&lt;/code&gt; by surrounding text with backtick quotes.&lt;/p&gt;
-
-&lt;h2&gt;Ways to Toggle Fonts in Google Docs&lt;/h2&gt;
-
-&lt;h3&gt;Option 1 – Using the Mouse&lt;/h3&gt;
-
-&lt;p&gt;Mouse to the Font select and pick one
-&lt;details&gt;
-  &lt;summary&gt;&lt;strong&gt;→ Click to see GIF ←&lt;/strong&gt;&lt;/summary&gt;
-&lt;img alt="Toggle font mouse" width="1320" height="710" src="/images/2022-03-27-quickly-toggle-fonts-in-google-docs/toggle-font-mouse.gif" /&gt;
-&lt;/details&gt;&lt;/p&gt;
-
-&lt;h3&gt;Option 2 – Keyboard using the Menu Search&lt;/h3&gt;
-
-&lt;p&gt;Use the menu search option via the keyboard Option+/ (or Alt+/) and type the font name, then push enter
-&lt;details&gt;
-  &lt;summary&gt;&lt;strong&gt;→ Click to see GIF ←&lt;/strong&gt;&lt;/summary&gt;
-&lt;img alt="Toggle font keyboard menu" width="1320" height="710" src="/images/2022-03-27-quickly-toggle-fonts-in-google-docs/toggle-font-keyboard-menu.gif" /&gt;
-&lt;/details&gt;&lt;/p&gt;
-
-&lt;h3&gt;Option 3 - Global Hotkey Triggering AppleScript&lt;/h3&gt;
-
-&lt;p&gt;Use a global hotkey &lt;a href="/global-hotkeys-using-the-hyper-key/"&gt;Hyper&lt;/a&gt;+C to automate Option 2 (and let you toggle between two fonts)
-&lt;details&gt;
-  &lt;summary&gt;&lt;strong&gt;→ Click to see GIF ←&lt;/strong&gt;&lt;/summary&gt;
-&lt;img alt="Toggle font keyboard applescript" width="1320" height="710" src="/images/2022-03-27-quickly-toggle-fonts-in-google-docs/toggle-font-keyboard-applescript.gif" /&gt;
-&lt;/details&gt;&lt;/p&gt;
-
-&lt;h2&gt;The AppleScript Code&lt;/h2&gt;
-
-&lt;p&gt;The following is the dump of the AppleScript I&amp;rsquo;m using. It has some guards in place to ensure that it only works when your focus is in Google Chrome and the current tab is a Google Doc (or Sheet/Slide).&lt;/p&gt;
-
-&lt;p&gt;The fonts will toggle between Arial and Roboto Mono (although easy enough to modify to your own preference). The Font &lt;em&gt;selector&lt;/em&gt; works for me&amp;hellip; however Google could change it at anytime, breaking this flow.&lt;/p&gt;
-
-&lt;p&gt;This code can then be put into a global hotkey (using something like &lt;a href="https://www.alfredapp.com/"&gt;Alfred&lt;/a&gt; or &lt;a href="https://www.raycast.com/"&gt;Raycast&lt;/a&gt;).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight applescript"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Check to make sure we are focused on Google Chrome&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"System Events"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;activeApp&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;first&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;process&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;whose&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;frontmost&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="w"&gt;
-
-    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Google Chrome"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;is not&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;activeApp&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Google Chrome isn't active application"&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nb"&gt;return&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-
-&lt;/span&gt;&lt;span class="c1"&gt;# Check to make sure we are in a https://docs.google.com/&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Google Chrome"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;activeURL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;URL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;active&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;tab&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;first&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;window&lt;/span&gt;&lt;span class="w"&gt;
-
-    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;activeURL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;does not contain&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://docs.google.com/"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"URL is not under https://docs.google.com"&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nb"&gt;return&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-
-&lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Google Chrome"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;active&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;tab&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;front&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="na"&gt;window&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fontFamily&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;execute&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;javascript&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"document.querySelector('#docs-font-family &amp;gt; div &amp;gt; div &amp;gt; div.goog-toolbar-menu-button-caption.goog-inline-block').innerHTML;"&lt;/span&gt;&lt;span class="w"&gt;
-
-    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fontFamily&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;missing value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"No Font Found"&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nb"&gt;return&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-
-&lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;application&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"System Events"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nb"&gt;delay&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nv"&gt;keystroke&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;option&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;down&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nb"&gt;delay&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="w"&gt;
-
-    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;fontFamily&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Roboto Mono"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nv"&gt;keystroke&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Arial"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt;
-        &lt;/span&gt;&lt;span class="nv"&gt;keystroke&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Roboto Mono"&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt;
-
-    &lt;/span&gt;&lt;span class="nb"&gt;delay&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="w"&gt;
-    &lt;/span&gt;&lt;span class="nv"&gt;keystroke&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;return&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;tell&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
 </feed>

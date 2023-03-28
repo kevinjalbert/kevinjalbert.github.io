@@ -2,16 +2,77 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2023-02-26T19:00:00-05:00</updated>
+  <updated>2023-03-26T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Sharing Plex with Common Media Sense age-restrictions</title>
+    <link rel="alternate" href="https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/"/>
+    <id>https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/</id>
+    <updated>2023-03-27T21:34:49-04:00</updated>
+    <published>2023-03-26T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Read how I've organized and shared my Plex media library for my kids. I've restricted the library to age-appropriate content using Common Sense Media and labels. The process is automated with the flexibility for manual overrides.</description>
+    <content type="html">&lt;p&gt;I have a &lt;a href="https://www.plex.tv/"&gt;Plex&lt;/a&gt; server which houses media for our household. With kids, I want to ensure that they don&amp;rsquo;t have access to age-inappropriate movies and shows. I&amp;rsquo;ve taken a rather automated approach that leverages &lt;a href="https://metamanager.wiki/"&gt;Plex Meta Manager&lt;/a&gt;, but still provides the flexibility for manual override as needed.&lt;/p&gt;
+
+&lt;h2&gt;Common Media Sense Age Rating&lt;/h2&gt;
+
+&lt;p&gt;The complexity around the (different) &lt;a href="https://en.wikipedia.org/wiki/Motion_picture_content_rating_system"&gt;Motion Picture Content Rating Systems&lt;/a&gt; is fairly evident. Even with a selected system (i.e., &lt;a href="https://en.wikipedia.org/wiki/Canadian_motion_picture_rating_system"&gt;Canada&amp;rsquo;s&lt;/a&gt;) the ratings are still ambiguous on what might be appropriate for a certain age.&lt;/p&gt;
+
+&lt;p&gt;I decided to leverage the &lt;a href="https://www.commonsensemedia.org/"&gt;Common Sense Media&lt;/a&gt; age rating for Movies, TV Shows, and Anime. This provides a more succinct age rating. To note, age appropriateness of media varies based on the child, so it doesn&amp;rsquo;t hurt to double-check and manually override as needed.&lt;/p&gt;
+
+&lt;h2&gt;Automated Age Ratings using Plex Meta Manager&lt;/h2&gt;
+
+&lt;p&gt;I use Plex Meta Manager to do the following tasks on a daily schedule:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Add the Common Sense Media age rating on each item in the Library using the &lt;a href="https://metamanager.wiki/en/latest/config/operations.html#mass-content-rating-update"&gt;Mass Content Rating Update operation&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Add an overlay (on the poster art) with the Common Sense Media age rating for each item in the Library using the &lt;a href="https://metamanager.wiki/en/latest/defaults/overlays/commonsense.html#commonsense-age-rating-overlay"&gt;CommonSense Age Rating Overlay&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following is a slimmed-down snippet of my &lt;code&gt;config.yml&lt;/code&gt; that adds the Common Sense Media age rating and displays it on the poster art. As you&amp;rsquo;ll see in the example image, there are a lot of other Plex Meta Manager configurations in place to display ratings.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;libraries&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;Shows&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;library_name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;⭐ Shows&lt;/span&gt;
+    &lt;span class="na"&gt;overlay_path&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="na"&gt;pmm&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;commonsense&lt;/span&gt;
+    &lt;span class="na"&gt;operations&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="na"&gt;mass_content_rating_update&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;mdb_commonsense&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img alt="Example overlay rating" width="2184" height="936" src="/images/2023-03-27-sharing-plex-with-common-media-sense-age-restrictions/example-overlay-rating.jpeg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;In some cases, there might not be a Common Sense Media age rating available. When this scenario occurs, I just look around and make the best-educated guess (or I just be overly cautious), and set it manually in Plex.&lt;/p&gt;
+
+&lt;h2&gt;Manual Override using Labels&lt;/h2&gt;
+
+&lt;p&gt;If needed, you can add a special &lt;em&gt;Sharing -&amp;gt; Labels&lt;/em&gt; on a media item to either include or exclude it from the Kid&amp;rsquo;s account, regardless of the Common Sense Media age rating. The labels that I&amp;rsquo;ve chosen are &lt;code&gt;Override:Kids&lt;/code&gt; for including, and &lt;code&gt;Override:Adult&lt;/code&gt; for excluding.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Override labels" width="1428" height="566" src="/images/2023-03-27-sharing-plex-with-common-media-sense-age-restrictions/override-labels.png" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Profile Restriction&lt;/h2&gt;
+
+&lt;p&gt;The final piece of the puzzle is putting the actual restrictions on the Kid&amp;rsquo;s account in Plex. As we can see in this setup, the account will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Allow any media that has a Common Sense Media age of 1-7&lt;/li&gt;
+&lt;li&gt;Allow any media that has the manual &lt;em&gt;Sharing -&amp;gt; Label&lt;/em&gt; of &lt;code&gt;Override:Kids&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Disallow any media that has the manual &lt;em&gt;Sharing -&amp;gt; Label&lt;/em&gt; of &lt;code&gt;Override:Adults&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img alt="Kids restrictions" width="1750" height="1114" src="/images/2023-03-27-sharing-plex-with-common-media-sense-age-restrictions/kids-restrictions.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;I can add new age ranges as my kids grow up, and I can even introduce individualized profiles as required. I like having the flexibility to manually override age ratings for those times when we&amp;rsquo;ve watched the content as a family.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Making AirPlay work with Chromecast Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/"/>
     <id>https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/</id>
-    <updated>2023-02-27T22:14:48-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2023-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -40,7 +101,7 @@
     <title>Sync Twitter Following to a List</title>
     <link rel="alternate" href="https://kevinjalbert.com/sync-twitter-following-to-a-list/"/>
     <id>https://kevinjalbert.com/sync-twitter-following-to-a-list/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2023-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -126,7 +187,7 @@
     <title>Turning a Webpage into a Basic iOS App</title>
     <link rel="alternate" href="https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/"/>
     <id>https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-12-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -159,7 +220,7 @@
     <title>Getting Non-HomeKit Devices Working in HomeKit</title>
     <link rel="alternate" href="https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/"/>
     <id>https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -259,7 +320,7 @@
     <title>iOS Shortcuts: Actionable Notifications</title>
     <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
     <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -307,7 +368,7 @@
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -433,7 +494,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -570,7 +631,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -732,7 +793,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -902,7 +963,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Improvised Portable Smart Speaker</title>
     <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
     <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
+    <updated>2023-02-27T22:15:32-05:00</updated>
     <published>2022-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -956,98 +1017,6 @@ FILE -&amp;gt; tasks/zsh.rake
 &lt;p&gt;There are third-party products that seamlessly add this portability to your smart speaker, but it was just another thing to buy (and the availability wasn&amp;rsquo;t there in Canada).&lt;/p&gt;
 
 &lt;p&gt;One concern I have is with respect to weather resistance (i.e., rain or splashes of water from the kids), but it&amp;rsquo;s something that I&amp;rsquo;m willing to gamble with for how much it costs ;).&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Access Local Docker Containers by Domain Names instead of Ports</title>
-    <link rel="alternate" href="https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/"/>
-    <id>https://kevinjalbert.com/access-local-docker-containers-by-domain-names-instead-of-ports/</id>
-    <updated>2023-01-31T22:32:14-05:00</updated>
-    <published>2022-04-29T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read how to use domain names instead for your containers during development. You'll have an easier time remembering the container names instead of their ports.</description>
-    <content type="html">&lt;h2&gt;Avoiding Ports when Accessing Local Docker Containers&lt;/h2&gt;
-
-&lt;p&gt;When using &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt; during development, you&amp;rsquo;ll expose your application on localhost. Typically, you simply forward the exposed port from the application to the host machine. This allows you to access it via &lt;code&gt;localhost:8080&lt;/code&gt; (based on whatever port you specified in the configuration).&lt;/p&gt;
-
-&lt;p&gt;I like to have nice &lt;em&gt;vanity&lt;/em&gt; URLs for my local applications like &lt;code&gt;whoami-one.localhost&lt;/code&gt; and avoid using ports. I&amp;rsquo;ll demonstrate an easy way to get them using &lt;a href="https://github.com/nginx-proxy/nginx-proxy"&gt;&lt;code&gt;nginxproxy/nginx-proxy&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div style="display: flex"&gt;
-  &lt;img src="/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/with-port.png" style="width: 49%; height: 80%"/&gt;
-  &lt;img src="/images/2022-04-30-access-local-docker-containers-by-domain-names-instead-of-ports/with-domain-name.png" style="width: 49%; height: 80%"/&gt;
-&lt;/div&gt;
-
-&lt;p&gt;It can be error-prone remembering what port corresponds to what application during development.&lt;/p&gt;
-
-&lt;h2&gt;The Setup&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;m using &lt;a href="https://docs.docker.com/compose/"&gt;Docker Compose&lt;/a&gt;, but in theory, you can do this with just &lt;code&gt;docker&lt;/code&gt; commands as well.&lt;/p&gt;
-
-&lt;p&gt;The core of the solution involves using &lt;code&gt;nginxproxy/nginx-proxy&lt;/code&gt;, which generates reverse proxy configurations for &lt;a href="https://www.nginx.com/"&gt;nginx&lt;/a&gt; (and reloads it) when containers are started/stopped.&lt;/p&gt;
-
-&lt;p&gt;In the following snippet, you&amp;rsquo;ll see how I&amp;rsquo;m specifying two services: &lt;code&gt;nginx-proxy&lt;/code&gt; and &lt;code&gt;whoami-one&lt;/code&gt;. The &lt;code&gt;whoami-one&lt;/code&gt; service is just for demonstration purposes, but ideally is an application you are developing. The &lt;code&gt;VIRTUAL_HOST&lt;/code&gt; environment variable specifies the domain name that you will use to reach that service.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;3'&lt;/span&gt;
-
-&lt;span class="na"&gt;services&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;nginx-proxy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;nginxproxy/nginx-proxy&lt;/span&gt;
-    &lt;span class="na"&gt;ports&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;80:80'&lt;/span&gt;
-    &lt;span class="na"&gt;volumes&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;/var/run/docker.sock:/tmp/docker.sock:ro&lt;/span&gt;
-
-  &lt;span class="na"&gt;whoami-one&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;containous/whoami&lt;/span&gt;
-    &lt;span class="na"&gt;environment&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;VIRTUAL_HOST=whoami-one.localhost&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now go and visit &lt;code&gt;whoami-one.localhost&lt;/code&gt; and you should see it all work!&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: I&amp;rsquo;ve used &lt;a href="https://en.wikipedia.org/wiki/.localhost"&gt;&lt;code&gt;localhost&lt;/code&gt; as the Top-Level-Domain (TLD)&lt;/a&gt; as it is reserved and avoids conflicts. I also use Chrome as my browser, which I believe automatically directs &lt;code&gt;.localhost&lt;/code&gt; domains to localhost &amp;ndash; otherwise you&amp;rsquo;d have to do a bit more work to get that TLD to work.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2&gt;Multiple Services and Projects&lt;/h2&gt;
-
-&lt;p&gt;One issue with the above solution is that it doesn&amp;rsquo;t work &lt;em&gt;across&lt;/em&gt; services between different projects. Each &lt;code&gt;docker compose&lt;/code&gt; sets up a default network that includes the name of the current directory. We can instead specify a consistent docker network to work around this limitation.&lt;/p&gt;
-
-&lt;p&gt;First, we&amp;rsquo;ll specify just the &lt;code&gt;nginx-proxy&lt;/code&gt; container, but with a &lt;em&gt;default named&lt;/em&gt; network. This makes it so all containers on this network can communicate.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;3'&lt;/span&gt;
-
-&lt;span class="na"&gt;services&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;nginx-proxy&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;nginxproxy/nginx-proxy&lt;/span&gt;
-    &lt;span class="na"&gt;ports&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;80:80'&lt;/span&gt;
-    &lt;span class="na"&gt;volumes&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;/var/run/docker.sock:/tmp/docker.sock:ro&lt;/span&gt;
-
-&lt;span class="na"&gt;networks&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;default&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;local-network&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now, we can make a new &lt;code&gt;whoami&lt;/code&gt; project (in a different directory) belonging to the same network that we defined for the &lt;code&gt;nginx-proxy&lt;/code&gt;. This allows the two containers to see each other and we can visit &lt;code&gt;whoami.localhost&lt;/code&gt; with no problems&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;version&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;3'&lt;/span&gt;
-
-&lt;span class="na"&gt;services&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;whoami&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;image&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;containous/whoami&lt;/span&gt;
-    &lt;span class="na"&gt;environment&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;VIRTUAL_HOST=whoami.localhost&lt;/span&gt;
-
-&lt;span class="na"&gt;networks&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-  &lt;span class="na"&gt;default&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;local-network&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Overall, I enjoy using this to help differentiate local Docker containers using domain names instead of ports.&lt;/p&gt;
-
-&lt;h2&gt;Other Resources&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;There are plenty of other options that &lt;a href="https://github.com/nginx-proxy/nginx-proxy"&gt;&lt;code&gt;nginx-proxy&lt;/code&gt;&lt;/a&gt; has, like SSL support.&lt;/li&gt;
-&lt;li&gt;This also isn&amp;rsquo;t a unique solution, as &lt;a href="https://github.com/traefik/traefik"&gt;Traefik&lt;/a&gt; can also be used in a similar fashion.&lt;/li&gt;
-&lt;li&gt;A throwback to an older project I made is &lt;a href="/docker-compose-dns-consistency-dcdc/"&gt;Docker Compose DNS Consistency (DCDC)&lt;/a&gt;, which provides consistent DNS resolution for services (not only for HTTP) internal and external to the Docker network.&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

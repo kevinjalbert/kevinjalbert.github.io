@@ -90,3 +90,9 @@ tell application "System Events"
 	keystroke return
 end tell
 ```
+
+## Let Chrome Know You Will Do This
+
+According to [Information for Third-party Applications on Mac](https://sites.google.com/a/chromium.org/dev/developers/applescript?visit_id=638164763442473572-1986603841&p=applescript&rd=1) "in order to protect users from injection of unwanted content" Chrome would prevent this type of manipulation by default.
+
+In order to get this working you'll need to tell Chrome to "Allow JavaScript from Apple Events" which is an option under View > Developer.

@@ -2,16 +2,49 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2023-03-26T20:00:00-04:00</updated>
+  <updated>2023-04-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Using Excalidraw's Embedded Scene Feature for Collaborative Diagramming</title>
+    <link rel="alternate" href="https://kevinjalbert.com/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming/"/>
+    <id>https://kevinjalbert.com/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming/</id>
+    <updated>2023-04-30T20:59:38-04:00</updated>
+    <published>2023-04-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Learn about Excalidraw's embedded scene feature, which allows you to save diagrams as PNG or SVG files while retaining the ability to modify them within Excalidraw. In this post, we'll explore how the embedded scene feature works, its benefits, and some potential gotchas to watch out for.</description>
+    <content type="html">&lt;p&gt;As a software developer, creating and modifying diagrams is an essential part of the job. &lt;a href="https://excalidraw.com/"&gt;Excalidraw&lt;/a&gt; is a diagramming tool that offers flexibility, speed, and collaborative features for both personal and work scenarios.&lt;/p&gt;
+
+&lt;p&gt;But what sets Excalidraw apart is its &lt;a href="https://twitter.com/excalidraw/status/1316001446043750400"&gt;embedded scene feature&lt;/a&gt;, which started out as an &lt;a href="https://github.com/excalidraw/excalidraw/issues/414"&gt;idea captured in a GitHub Issue&lt;/a&gt;. This feature allows diagrams to be saved as artifacts like PNG or SVG files while retaining the ability to modify them within Excalidraw. When exporting a PNG or SVG, the Excalidraw scene data is embedded inside the file artifact. This means that you can open the file in Excalidraw and continue modifying the diagram.&lt;/p&gt;
+
+&lt;h2&gt;Benefits of Embedded Scene&lt;/h2&gt;
+
+&lt;p&gt;The embedded scene feature simplifies the process of modifying diagrams by eliminating the need for separate image and JSON data files. This is particularly useful in collaborative settings, as the file can be under version control. The file can be easily committed to a Git repository and viewed in rendered documentation sites.&lt;/p&gt;
+
+&lt;p&gt;Another added bonus is the availability of the &lt;a href="https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor"&gt;Excalidraw extension for VS Code&lt;/a&gt;. This enables modification of the file within the IDE editor, allowing for easy in-place changes to architecture and flow diagrams.&lt;/p&gt;
+
+&lt;h2&gt;Potential Challenges&lt;/h2&gt;
+
+&lt;p&gt;There are a few challenges to keep in mind when working with the embedded scene feature. If the file with the embedded scene data is compressed or minified, the scene data is lost. This means that files committed to a repository should not be compressed or minified so they can continue to be editable.&lt;/p&gt;
+
+&lt;h2&gt;Comparison to Other Diagramming Tools&lt;/h2&gt;
+
+&lt;p&gt;Excalidraw offers a simpler and more straightforward approach to diagramming when compared to other tools like &lt;a href="https://mermaid.js.org/"&gt;Mermaid&lt;/a&gt; or markup-related tools (in my opinion). While tools like &lt;a href="https://miro.com/"&gt;Miro&lt;/a&gt; or &lt;a href="https://www.figma.com/"&gt;Figma&lt;/a&gt; offer powerful collaboration features, they don&amp;rsquo;t integrate well into a repository setting. Excalidraw&amp;rsquo;s embedded scene feature keeps diagrams close to the code, simplifying the modification process.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Excalidraw&amp;rsquo;s embedded scene feature streamlines the creation and modification of diagrams. Its simplicity and integration with repositories make it a great tool for software developers. While there are potential challenges to consider, the benefits of the embedded scene feature outweigh them. Whether working solo or in a team, Excalidraw can make diagramming more enjoyable and efficient.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Sharing Plex with Common Media Sense age-restrictions</title>
     <link rel="alternate" href="https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/"/>
     <id>https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2023-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -72,7 +105,7 @@
     <title>Making AirPlay work with Chromecast Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/"/>
     <id>https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2023-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -101,7 +134,7 @@
     <title>Sync Twitter Following to a List</title>
     <link rel="alternate" href="https://kevinjalbert.com/sync-twitter-following-to-a-list/"/>
     <id>https://kevinjalbert.com/sync-twitter-following-to-a-list/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2023-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -187,7 +220,7 @@
     <title>Turning a Webpage into a Basic iOS App</title>
     <link rel="alternate" href="https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/"/>
     <id>https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-12-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -220,7 +253,7 @@
     <title>Getting Non-HomeKit Devices Working in HomeKit</title>
     <link rel="alternate" href="https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/"/>
     <id>https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -320,7 +353,7 @@
     <title>iOS Shortcuts: Actionable Notifications</title>
     <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
     <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -368,7 +401,7 @@
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -494,7 +527,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -631,7 +664,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -793,7 +826,7 @@ FILE -&amp;gt; tasks/zsh.rake
     <title>Import Raindrop.io Highlights into Readwise</title>
     <link rel="alternate" href="https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/"/>
     <id>https://kevinjalbert.com/import-raindrop-io-highlights-into-readwise/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
+    <updated>2023-04-07T15:06:27-04:00</updated>
     <published>2022-06-27T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -958,65 +991,5 @@ FILE -&amp;gt; tasks/zsh.rake
   &lt;span class="n"&gt;page&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Improvised Portable Smart Speaker</title>
-    <link rel="alternate" href="https://kevinjalbert.com/improvised-portable-smart-speaker/"/>
-    <id>https://kevinjalbert.com/improvised-portable-smart-speaker/</id>
-    <updated>2023-03-27T21:36:43-04:00</updated>
-    <published>2022-05-30T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">Read about my improvised solution that lets me enjoy having a smart speaker outside on my backyard patio for family and friends to enjoy.</description>
-    <content type="html">&lt;p&gt;This is a quick post, but I feel that it&amp;rsquo;s worth sharing. This &lt;em&gt;hack&lt;/em&gt; might be super obvious, but it didn&amp;rsquo;t come to me until after searching for more &lt;em&gt;conventional&lt;/em&gt; options.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;TL;DR Connect a USB battery bank to a Google Home Mini and take it outside with you (assuming you have Wifi coverage outside).&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2&gt;Music in the Backyard&lt;/h2&gt;
-
-&lt;p&gt;At my house, the kids (2 and 5) like playing out in the backyard. We have a patio with seating under a gazebo, so it is overall quite blissful. The only thing missing is some light music to enjoy.&lt;/p&gt;
-
-&lt;p&gt;There are plenty of options to get music into the backyard:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Phones&lt;/li&gt;
-&lt;li&gt;Portable Bluetooth speakers&lt;/li&gt;
-&lt;li&gt;Speakers under the eaves of the roof&lt;/li&gt;
-&lt;li&gt;And likely many other options&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In our house, we&amp;rsquo;ve gotten pretty used to having many smart speakers (namely Google Home Minis) for music and other random things (timers, weather, questions, etc&amp;hellip;). I had my sights on bringing that technology outside to the backyard patio.&lt;/p&gt;
-
-&lt;h2&gt;Getting Google Assistant Outside&lt;/h2&gt;
-
-&lt;p&gt;&lt;em&gt;To note, if I had used another company smart speaker then this might have gone a different path, but ultimately this approach would still work.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I wanted to get Google Assistant outside, as that was the key part of the smart speaker &amp;ndash; responding to voice commands. We&amp;rsquo;re a household of Apple products, except for Google with respect to our house automation aspect. Using our phones wasn&amp;rsquo;t ideal to drive this system &amp;ndash; we&amp;rsquo;d need a dedicated product.&lt;/p&gt;
-
-&lt;p&gt;Looking around led me to the &lt;a href="https://ca.jbl.com/voice-activated-speaker/"&gt;JBL Link series of Voice-Activated Speakers&lt;/a&gt;, which looked perfect&amp;hellip; except for the price ($200+).&lt;/p&gt;
-
-&lt;p&gt;I then realized I had the product in front of me the whole time &amp;ndash; the Google Home Mini.&lt;/p&gt;
-
-&lt;p&gt;The only problem is powering it outside and ensuring it gets a Wifi signal.&lt;/p&gt;
-
-&lt;h2&gt;Power and Wifi&lt;/h2&gt;
-
-&lt;p&gt;I ensured that my backyard patio would get sufficient Wifi (I have a mesh network) so that connectivity was done.&lt;/p&gt;
-
-&lt;p&gt;It looks like it might be possible to use a mobile hotspot to make this work as well, but it looked more involved (I was seeing two phones are needed). Fortunately, I just didn&amp;rsquo;t need to do that.&lt;/p&gt;
-
-&lt;p&gt;Powering was pretty simple as well&amp;hellip; I just pulled out one of my many USB battery banks. I then connected it to the Google Home Mini with a USB micro cable (to note &amp;ndash; the 1st Generation of Google Home Minis use USB micro, while the 2nd Generations use a barrel-style connection). Simple solution and I get enough power for my usage. In the worse case, I just get a second battery bank. I also considered just using an outdoor outlet, but for my house, it wasn&amp;rsquo;t positioned in a good location, and then the likelihood of it being forgotten outside increases.&lt;/p&gt;
-
-&lt;h2&gt;Results&lt;/h2&gt;
-
-&lt;p&gt;Overall, I&amp;rsquo;m quite pleased with the solution even though it looks fairly hacky. I keep the USB cable and battery bank next to the Google Home Mini closest to the patio, making it easy to unplug and move outside as needed.&lt;/p&gt;
-
-&lt;p&gt;There are third-party products that seamlessly add this portability to your smart speaker, but it was just another thing to buy (and the availability wasn&amp;rsquo;t there in Canada).&lt;/p&gt;
-
-&lt;p&gt;One concern I have is with respect to weather resistance (i.e., rain or splashes of water from the kids), but it&amp;rsquo;s something that I&amp;rsquo;m willing to gamble with for how much it costs ;).&lt;/p&gt;
-</content>
   </entry>
 </feed>

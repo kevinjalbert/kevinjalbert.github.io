@@ -11,15 +11,13 @@
     <title>Using ChatGPT and Whisper: A New Approach to Blog Writing</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-chatgpt-and-whisper-a-new-approach-to-blog-writing/"/>
     <id>https://kevinjalbert.com/using-chatgpt-and-whisper-a-new-approach-to-blog-writing/</id>
-    <updated>2023-05-31T23:56:25-04:00</updated>
+    <updated>2023-06-01T00:01:57-04:00</updated>
     <published>2023-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
     </author>
     <description type="html">This article explores the use of ChatGPT and Whisper for blog writing. Learn the importance of grounding the model to ensure accuracy and avoid false information. I leverage Whisper's speech recognition system to provide text on the topic. By utilizing ChatGPT and making minor adjustments, read how I successfully generate a blog post.</description>
-    <content type="html">&lt;h1&gt;Using ChatGPT and Whisper: A New Approach to Blog Writing&lt;/h1&gt;
-
-&lt;p&gt;For my previous &lt;a href="/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming"&gt;blog article on Excalidraw&amp;rsquo;s embedded scene&lt;/a&gt;, I wrote the post with the assistance of ChatGPT and Whisper. Today, I wanted to share more about how I approached this process and discuss the concept of grounding the model. Additionally, I&amp;rsquo;ll touch on the use of the Whisper model for accurate transcriptions. Let&amp;rsquo;s dive in!&lt;/p&gt;
+    <content type="html">&lt;p&gt;For my previous &lt;a href="/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming"&gt;blog article on Excalidraw&amp;rsquo;s embedded scene&lt;/a&gt;, I wrote the post with the assistance of ChatGPT and Whisper. Today, I wanted to share more about how I approached this process and discuss the concept of grounding the model. Additionally, I&amp;rsquo;ll touch on the use of the Whisper model for accurate transcriptions. Let&amp;rsquo;s dive in!&lt;/p&gt;
 
 &lt;h2&gt;Using ChatGPT to Create Blog Posts&lt;/h2&gt;
 
@@ -75,7 +73,7 @@
 
 &lt;p&gt;At this point, most everything is done.&lt;/p&gt;
 
-&lt;p&gt;Naturally, I still exercised caution and double-checked the output produced by ChatGPT. However, I found that approximately 95% to 99% of the blog post was composed by ChatGPT, with only minor adjustments or clarifications from my side.&lt;/p&gt;
+&lt;p&gt;Naturally, I still exercised caution and double-checked the output produced by ChatGPT. However, 95% of the blog post was composed by ChatGPT, with only minor adjustments or clarifications from my side.&lt;/p&gt;
 
 &lt;h2&gt;The Pitfalls of Non-grounded Writing&lt;/h2&gt;
 
@@ -96,7 +94,7 @@
     <title>Using Excalidraw's Embedded Scene Feature for Collaborative Diagramming</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming/"/>
     <id>https://kevinjalbert.com/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming/</id>
-    <updated>2023-05-31T22:42:21-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2023-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -129,7 +127,7 @@
     <title>Sharing Plex with Common Media Sense age-restrictions</title>
     <link rel="alternate" href="https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/"/>
     <id>https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/</id>
-    <updated>2023-05-31T22:42:15-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2023-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -190,7 +188,7 @@
     <title>Making AirPlay work with Chromecast Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/"/>
     <id>https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2023-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -219,7 +217,7 @@
     <title>Sync Twitter Following to a List</title>
     <link rel="alternate" href="https://kevinjalbert.com/sync-twitter-following-to-a-list/"/>
     <id>https://kevinjalbert.com/sync-twitter-following-to-a-list/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2023-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -305,7 +303,7 @@
     <title>Turning a Webpage into a Basic iOS App</title>
     <link rel="alternate" href="https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/"/>
     <id>https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2022-12-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -338,7 +336,7 @@
     <title>Getting Non-HomeKit Devices Working in HomeKit</title>
     <link rel="alternate" href="https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/"/>
     <id>https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2022-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -438,7 +436,7 @@
     <title>iOS Shortcuts: Actionable Notifications</title>
     <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
     <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2022-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -486,7 +484,7 @@
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -612,7 +610,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -749,7 +747,7 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
     <title>Digging through Git History for Removed Text</title>
     <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
     <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2023-04-30T21:02:19-04:00</updated>
+    <updated>2023-05-31T23:58:11-04:00</updated>
     <published>2022-07-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>

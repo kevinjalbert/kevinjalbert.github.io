@@ -13,8 +13,6 @@ pull_image: "/images/2023-05-31-using-chatgpt-and-whisper-a-new-approach-to-blog
 pull_image_attribution: 'An AI-generated image (using [BlueWillow](https://www.bluewillow.ai/)) with the prompt "A robot typing on a computer, simple design"'
 ---
 
-# Using ChatGPT and Whisper: A New Approach to Blog Writing
-
 For my previous [blog article on Excalidraw's embedded scene](/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming), I wrote the post with the assistance of ChatGPT and Whisper. Today, I wanted to share more about how I approached this process and discuss the concept of grounding the model. Additionally, I'll touch on the use of the Whisper model for accurate transcriptions. Let's dive in!
 
 ## Using ChatGPT to Create Blog Posts
@@ -61,7 +59,7 @@ Turns out that was too long.
 
 At this point, most everything is done.
 
-Naturally, I still exercised caution and double-checked the output produced by ChatGPT. However, I found that approximately 95% to 99% of the blog post was composed by ChatGPT, with only minor adjustments or clarifications from my side.
+Naturally, I still exercised caution and double-checked the output produced by ChatGPT. However, 95% of the blog post was composed by ChatGPT, with only minor adjustments or clarifications from my side.
 
 ## The Pitfalls of Non-grounded Writing
 

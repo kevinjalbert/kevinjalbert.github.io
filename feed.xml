@@ -2,16 +2,57 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Kevin Jalbert</title>
   <link href="https://kevinjalbert.com"/>
-  <updated>2023-05-30T20:00:00-04:00</updated>
+  <updated>2023-06-29T20:00:00-04:00</updated>
   <author>
     <name>Kevin Jalbert</name>
   </author>
   <id>https://kevinjalbert.com</id>
   <entry>
+    <title>Reflecting on the Future of My Website</title>
+    <link rel="alternate" href="https://kevinjalbert.com/reflecting-on-the-future-of-my-website/"/>
+    <id>https://kevinjalbert.com/reflecting-on-the-future-of-my-website/</id>
+    <updated>2023-06-30T23:42:53-04:00</updated>
+    <published>2023-06-29T20:00:00-04:00</published>
+    <author>
+      <name>Kevin Jalbert</name>
+    </author>
+    <description type="html">Join me as I reflect on my website and contemplate the path forward. In this brief teaser, get a glimpse of the upcoming changes as I re-evaluate my writing cadence, explore innovative content creation methods, and consider a much-needed redesign.</description>
+    <content type="html">&lt;p&gt;In this reflective piece, I want to share my thoughts on the future of my website and the goals I have in mind.&lt;/p&gt;
+
+&lt;h2&gt;Re-evaluating the Monthly Cadence&lt;/h2&gt;
+
+&lt;p&gt;When I started my website, I needed the monthly cadence of publishing to motivate me and generate content. But now, with a substantial archive, I no longer feel the same pressure. Finishing articles on the last day of the month is a clear sign that the monthly cadence has become burdensome.&lt;/p&gt;
+
+&lt;p&gt;To embrace a more intentional approach, I&amp;rsquo;m letting go of the rigid schedule. This change will allow me to focus on topics that genuinely captivate me or hold significant value. By writing from a place of passion and authenticity, I aim to produce higher-quality articles that make an impact.&lt;/p&gt;
+
+&lt;h2&gt;Exploring Natural Voice and AI Technologies&lt;/h2&gt;
+
+&lt;p&gt;By embracing natural voice and AI technologies, I&amp;rsquo;m reshaping the way I create content. Through verbal expression and advanced transcription tools like &lt;a href="https://openai.com/research/whisper"&gt;Whisper&lt;/a&gt;, I capture the essence of my ideas effortlessly. Leveraging &lt;a href="https://en.wikipedia.org/wiki/Large_language_model"&gt;Large Language Models (LLM)&lt;/a&gt; such as &lt;a href="https://openai.com/product/chatgpt"&gt;ChatGPT&lt;/a&gt;, I maintain authenticity while reducing writing friction. An example of this AI-assisted writing process can be found in my &lt;a href="/using-chatgpt-and-whisper-a-new-approach-to-blog-writing"&gt;previous article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This exploration is not solely focused on speed; it holds immense potential for elevating quality. By viewing AI as a co-writer and proofreader, I aim to enhance the overall caliber of my content.&lt;/p&gt;
+
+&lt;h2&gt;Redesigning and Simplifying the Website&lt;/h2&gt;
+
+&lt;p&gt;My website&amp;rsquo;s current technology stack has become outdated and occasionally frustrating to work with. To address this, I&amp;rsquo;m looking to simplify the website by either adopting an off-the-shelf solution or redesigning it using newer technologies.&lt;/p&gt;
+
+&lt;p&gt;Static site generation still appeals to me, as my website does not require dynamic functionality. I presently use Ruby with a dated version of &lt;a href="https://middlemanapp.com/"&gt;Middleman&lt;/a&gt;. I&amp;rsquo;m considering more modern options like the &lt;a href="https://jamstack.org/"&gt;Jamstack&lt;/a&gt;, React-based approaches, or comprehensive full-service alternatives.&lt;/p&gt;
+
+&lt;h2&gt;Revitalizing Neglected Pages&lt;/h2&gt;
+
+&lt;p&gt;Within my website, I have neglected certain pages that require attention and updates. The &lt;a href="/now"&gt;&amp;ldquo;Now&amp;rdquo; page&lt;/a&gt;, originally intended to reflect my current activities, has become more of an &amp;ldquo;About&amp;rdquo; page due to my failure to update it regularly. Similarly, the &lt;a href="/uses"&gt;&amp;ldquo;Uses&amp;rdquo; page&lt;/a&gt;, which showcases the tools and products I employ, has remained mostly stagnant since its creation, while my tools have changed. I aim to revamp these pages and maintain them with a regular cadence of updates to ensure their usefulness and relevance.&lt;/p&gt;
+
+&lt;h2&gt;Looking Forward to the Future&lt;/h2&gt;
+
+&lt;p&gt;This reflection on the future of my website marks a significant turning point in my ideas and approach. While I cannot determine an exact timeline for these changes, they are on the horizon. If you are a regular reader, I extend my gratitude for your support. I hope that the forthcoming iterations of my website will bring you increased enjoyment and value. Stay tuned for the exciting developments that lie ahead!&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for being part of this journey.&lt;/em&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <title>Using ChatGPT and Whisper: A New Approach to Blog Writing</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-chatgpt-and-whisper-a-new-approach-to-blog-writing/"/>
     <id>https://kevinjalbert.com/using-chatgpt-and-whisper-a-new-approach-to-blog-writing/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2023-05-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -94,7 +135,7 @@
     <title>Using Excalidraw's Embedded Scene Feature for Collaborative Diagramming</title>
     <link rel="alternate" href="https://kevinjalbert.com/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming/"/>
     <id>https://kevinjalbert.com/using-excalidraws-embedded-scene-feature-for-collaborative-diagramming/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2023-04-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -127,7 +168,7 @@
     <title>Sharing Plex with Common Media Sense age-restrictions</title>
     <link rel="alternate" href="https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/"/>
     <id>https://kevinjalbert.com/sharing-plex-with-common-media-sense-age-restrictions/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2023-03-26T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -188,7 +229,7 @@
     <title>Making AirPlay work with Chromecast Devices</title>
     <link rel="alternate" href="https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/"/>
     <id>https://kevinjalbert.com/making-airplay-work-with-chromecast-devices/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2023-02-26T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -217,7 +258,7 @@
     <title>Sync Twitter Following to a List</title>
     <link rel="alternate" href="https://kevinjalbert.com/sync-twitter-following-to-a-list/"/>
     <id>https://kevinjalbert.com/sync-twitter-following-to-a-list/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2023-01-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -303,7 +344,7 @@
     <title>Turning a Webpage into a Basic iOS App</title>
     <link rel="alternate" href="https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/"/>
     <id>https://kevinjalbert.com/turning-a-webpage-into-a-basic-ios-app/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2022-12-30T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -336,7 +377,7 @@
     <title>Getting Non-HomeKit Devices Working in HomeKit</title>
     <link rel="alternate" href="https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/"/>
     <id>https://kevinjalbert.com/getting-non-homekit-devices-working-in-homekit/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2022-11-29T19:00:00-05:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -436,7 +477,7 @@
     <title>iOS Shortcuts: Actionable Notifications</title>
     <link rel="alternate" href="https://kevinjalbert.com/ios-shortcuts-actionable-notifications/"/>
     <id>https://kevinjalbert.com/ios-shortcuts-actionable-notifications/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2022-10-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -484,7 +525,7 @@
     <title>Quantified Self: Measure What you Want to Manage</title>
     <link rel="alternate" href="https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/"/>
     <id>https://kevinjalbert.com/quantified-self-measure-what-you-want-to-manage/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2022-09-29T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -610,7 +651,7 @@
     <title>Git Bisect: Only the Current Branch</title>
     <link rel="alternate" href="https://kevinjalbert.com/git-bisect-only-the-current-branch/"/>
     <id>https://kevinjalbert.com/git-bisect-only-the-current-branch/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
+    <updated>2023-06-28T22:56:17-04:00</updated>
     <published>2022-08-30T20:00:00-04:00</published>
     <author>
       <name>Kevin Jalbert</name>
@@ -742,167 +783,5 @@ print_hline &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/sp
 
 &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"Don't forget to 'git bisect reset'"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>Digging through Git History for Removed Text</title>
-    <link rel="alternate" href="https://kevinjalbert.com/digging-through-git-history-for-removed-text/"/>
-    <id>https://kevinjalbert.com/digging-through-git-history-for-removed-text/</id>
-    <updated>2023-06-01T00:03:15-04:00</updated>
-    <published>2022-07-30T20:00:00-04:00</published>
-    <author>
-      <name>Kevin Jalbert</name>
-    </author>
-    <description type="html">The text you are looking for isn't in the current revision anymore, and so you'll have to dig through the Git history somehow, looking for when it was removed/introduced. Read about how I approached this from a CLI perspective, using a script to simplify these searches for me.</description>
-    <content type="html">&lt;h1&gt;Deleted files in Git&lt;/h1&gt;
-
-&lt;p&gt;Git keeps a history of practically &lt;em&gt;everything&lt;/em&gt; for your repository. I cannot state how powerful a tool it is, and has helped me immensely as I try to understand the &lt;em&gt;why&lt;/em&gt; of some code.&lt;/p&gt;
-
-&lt;p&gt;There are times when I&amp;rsquo;ve tried to &lt;em&gt;find&lt;/em&gt; something that doesn&amp;rsquo;t exist in the current revision but was in a previous version. I&amp;rsquo;ve always struggled with this, and I wanted a &lt;em&gt;simpler&lt;/em&gt; and (hopefully) &lt;em&gt;quicker&lt;/em&gt; way to conduct this search.&lt;/p&gt;
-
-&lt;p&gt;I decided to script my way to a solution that I feel happy about for now.&lt;/p&gt;
-
-&lt;h1&gt;Let&amp;rsquo;s go Digging&lt;/h1&gt;
-
-&lt;p&gt;This script ends up doing the following to search through Git history for matching text:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Search for any commits with any &amp;lsquo;additions/removals&amp;rsquo; of the search query.&lt;/li&gt;
-&lt;li&gt;For each commit, get the list of files that contain the search query.&lt;/li&gt;
-&lt;li&gt;For each file, &lt;code&gt;grep&lt;/code&gt; the &lt;code&gt;git&lt;/code&gt; patch and print the lines that match the search query (with the match highlighted).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;A lot of the &lt;code&gt;git&lt;/code&gt; commands are leveraging the &lt;code&gt;--pickaxe-regex -S&amp;lt;query&amp;gt;&lt;/code&gt; flags to search changes with regex powers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;-S&amp;lt;string&amp;gt;
-  Look for differences that change the number of occurrences of the specified string (i.e. addition/deletion) in a file.
-
---pickaxe-regex
-  Treat the &amp;lt;string&amp;gt; given to -S as an extended POSIX regular expression to match.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This would allow for the search query to leverage regular expressions. The following is an example of looking through my &lt;a href="https://github.com/kevinjalbert/dotfiles"&gt;dotfiles repo&lt;/a&gt; for &lt;code&gt;zgen&lt;/code&gt; (which is something I don&amp;rsquo;t use anymore).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;❯ git dig "\szgen"
-Searching for any commits with any 'additions/removals'
-  Matching regex: "\szgen"
-
-commit bd5dc58e9f94b7b62013a1378fbe7d101ccc70ec
-Author: Kevin Jalbert &amp;lt;kevin.j.jalbert@gmail.com&amp;gt;
-Date:   Fri Jan 6 17:42:44 2017 -0500
-
-    Update zsh.rake to install zplug instead of zgen
-
-FILE -&amp;gt; tasks/zsh.rake
--  desc "Install zgen"
--    section "Installing zgen"
-
-# Plus a few more commits
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;The git-dig Script&lt;/h2&gt;
-
-&lt;p&gt;This &lt;a href="https://gist.github.com/kevinjalbert/b390e2d22efa1c55a46c52d1f7ff3cde"&gt;GitHub Gist&lt;/a&gt; will be the canonical reference of the &lt;code&gt;git-dig&lt;/code&gt; script (and will see updates as needed).&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#!/usr/bin/env ruby&lt;/span&gt;
-
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'optparse'&lt;/span&gt;
-&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'open3'&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;files_with_search_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="sb"&gt;`git show --format="" --name-only &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt; -i --pickaxe-regex -S &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;grep_over_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;git_show_cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"git show --format='' -p &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; -- '&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;'"&lt;/span&gt;
-  &lt;span class="n"&gt;grep_cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"grep -i --color=always -E &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-  &lt;span class="sb"&gt;`&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;git_show_cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt; | &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;grep_cmd&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;git_pickaxe_search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"git log --no-merges --format=%h"&lt;/span&gt;
-  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;" --after=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;" --before=&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="n"&gt;git_log_cmd&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;" -i --pickaxe-regex -S &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-
-  &lt;span class="no"&gt;Open3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;popen3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;git_log_cmd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;stdin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stderr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;thread&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="k"&gt;yield&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;git_commit_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="sb"&gt;`git show --no-patch &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find_root_dir&lt;/span&gt;
-  &lt;span class="n"&gt;current_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;pwd&lt;/span&gt;
-
-  &lt;span class="k"&gt;until&lt;/span&gt; &lt;span class="no"&gt;Dir&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;exist?&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;current_dir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;".git"&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;SEPARATOR&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;parent_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;dirname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_dir&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;parent_dir&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;current_dir&lt;/span&gt;
-      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"No .git repo found in path (or parent paths)."&lt;/span&gt;
-      &lt;span class="nb"&gt;exit&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;current_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parent_dir&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;current_dir&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Handle options&lt;/span&gt;
-&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-&lt;span class="no"&gt;OptionParser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;banner&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Usage: git-dig [options] [regex query]"&lt;/span&gt;
-
-  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"--after=DATE"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Only searches commits more recent than the specific date."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"--before=DATE"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Only searches commits older recent than the specific date."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-    &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="n"&gt;opts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"-h"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"--help"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"Prints this help"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;opts&lt;/span&gt;
-    &lt;span class="nb"&gt;exit&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse!&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Get search query&lt;/span&gt;
-&lt;span class="n"&gt;search_query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;ARGV&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="se"&gt;\"&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'""'&lt;/span&gt; &lt;span class="c1"&gt;# empty search as it would just be a pair of quotes&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"You need to pass a search term as input."&lt;/span&gt;
-  &lt;span class="nb"&gt;exit&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-
-&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Searching for any commits with any 'additions/removals'"&lt;/span&gt;
-&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"  Matching regex: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:after&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:before&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-  &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"  With search options: &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Get SHAs of all commits which had some 'addition/removal' of the search term&lt;/span&gt;
-&lt;span class="n"&gt;git_pickaxe_search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;gets&lt;/span&gt;
-    &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;nil?&lt;/span&gt;
-
-    &lt;span class="n"&gt;sha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;
-
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;git_commit_info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
-
-    &lt;span class="c1"&gt;# Print diff of files which have search term&lt;/span&gt;
-    &lt;span class="n"&gt;files_with_search_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
-      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"FILE -&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="n"&gt;grep_over_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;search_query&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-      &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"-"&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Alternative Solutions&lt;/h1&gt;
-
-&lt;p&gt;To note, most Git GUIs have some search functionality in place which can satisfy the majority of this. Using the Git CLI is still a nice thing to be able to leverage though, which is why I went this route.&lt;/p&gt;
-</content>
   </entry>
 </feed>
